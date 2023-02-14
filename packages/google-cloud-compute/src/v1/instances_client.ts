@@ -1267,7 +1267,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Instance]{@link google.cloud.compute.v1.Instance}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Instance | Instance}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1358,7 +1358,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstancesGetEffectiveFirewallsResponse]{@link google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse | InstancesGetEffectiveFirewallsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1465,7 +1465,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GuestAttributes]{@link google.cloud.compute.v1.GuestAttributes}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.GuestAttributes | GuestAttributes}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1570,7 +1570,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Policy | Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1667,7 +1667,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Screenshot]{@link google.cloud.compute.v1.Screenshot}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Screenshot | Screenshot}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1768,7 +1768,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SerialPortOutput]{@link google.cloud.compute.v1.SerialPortOutput}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.SerialPortOutput | SerialPortOutput}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1871,7 +1871,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ShieldedInstanceIdentity]{@link google.cloud.compute.v1.ShieldedInstanceIdentity}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.ShieldedInstanceIdentity | ShieldedInstanceIdentity}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2461,7 +2461,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SendDiagnosticInterruptInstanceResponse]{@link google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse | SendDiagnosticInterruptInstanceResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2824,7 +2824,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Policy | Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -4657,7 +4657,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.compute.v1.TestPermissionsResponse | TestPermissionsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -5406,7 +5406,7 @@ export class InstancesClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   as tuple [string, [InstancesScopedList]{@link google.cloud.compute.v1.InstancesScopedList}]. The API will be called under the hood as needed, once per the page,
+   *   as tuple [string, {@link google.cloud.compute.v1.InstancesScopedList | InstancesScopedList}]. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5461,7 +5461,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Instance]{@link google.cloud.compute.v1.Instance}.
+   *   The first element of the array is Array of {@link google.cloud.compute.v1.Instance | Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5560,7 +5560,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Instance]{@link google.cloud.compute.v1.Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.compute.v1.Instance | Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
@@ -5617,7 +5617,7 @@ export class InstancesClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Instance]{@link google.cloud.compute.v1.Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.compute.v1.Instance | Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5671,7 +5671,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Reference]{@link google.cloud.compute.v1.Reference}.
+   *   The first element of the array is Array of {@link google.cloud.compute.v1.Reference | Reference}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5775,7 +5775,7 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Reference]{@link google.cloud.compute.v1.Reference} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.compute.v1.Reference | Reference} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReferrersAsync()`
@@ -5835,7 +5835,7 @@ export class InstancesClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Reference]{@link google.cloud.compute.v1.Reference}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.compute.v1.Reference | Reference}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)

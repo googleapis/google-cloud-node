@@ -446,7 +446,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.EntryGroup | EntryGroup}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -539,7 +539,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.EntryGroup | EntryGroup}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -641,7 +641,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.EntryGroup | EntryGroup}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -739,7 +739,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -851,7 +851,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Entry | Entry}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -971,7 +971,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Entry | Entry}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1065,7 +1065,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1150,7 +1150,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Entry | Entry}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1274,7 +1274,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Entry | Entry}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1361,7 +1361,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntryOverview]{@link google.cloud.datacatalog.v1.EntryOverview}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.EntryOverview | EntryOverview}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1464,7 +1464,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Contacts]{@link google.cloud.datacatalog.v1.Contacts}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Contacts | Contacts}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1575,7 +1575,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplate]{@link google.cloud.datacatalog.v1.TagTemplate}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplate | TagTemplate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1666,7 +1666,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplate]{@link google.cloud.datacatalog.v1.TagTemplate}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplate | TagTemplate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1775,7 +1775,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplate]{@link google.cloud.datacatalog.v1.TagTemplate}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplate | TagTemplate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1874,7 +1874,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1981,7 +1981,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplateField | TagTemplateField}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2108,7 +2108,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplateField | TagTemplateField}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2215,7 +2215,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplateField | TagTemplateField}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2320,7 +2320,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagTemplateField]{@link google.cloud.datacatalog.v1.TagTemplateField}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.TagTemplateField | TagTemplateField}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2430,7 +2430,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2550,7 +2550,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tag]{@link google.cloud.datacatalog.v1.Tag}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Tag | Tag}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2642,7 +2642,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tag]{@link google.cloud.datacatalog.v1.Tag}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Tag | Tag}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2727,7 +2727,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2813,7 +2813,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [StarEntryResponse]{@link google.cloud.datacatalog.v1.StarEntryResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.StarEntryResponse | StarEntryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2899,7 +2899,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UnstarEntryResponse]{@link google.cloud.datacatalog.v1.UnstarEntryResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.UnstarEntryResponse | UnstarEntryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3012,7 +3012,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3119,7 +3119,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3221,7 +3221,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3361,7 +3361,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult}.
+   *   The first element of the array is Array of {@link google.cloud.datacatalog.v1.SearchCatalogResult | SearchCatalogResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3493,7 +3493,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datacatalog.v1.SearchCatalogResult | SearchCatalogResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchCatalogAsync()`
@@ -3575,7 +3575,7 @@ export class DataCatalogClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [SearchCatalogResult]{@link google.cloud.datacatalog.v1.SearchCatalogResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResult | SearchCatalogResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3620,7 +3620,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}.
+   *   The first element of the array is Array of {@link google.cloud.datacatalog.v1.EntryGroup | EntryGroup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3724,7 +3724,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datacatalog.v1.EntryGroup | EntryGroup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntryGroupsAsync()`
@@ -3778,7 +3778,7 @@ export class DataCatalogClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [EntryGroup]{@link google.cloud.datacatalog.v1.EntryGroup}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datacatalog.v1.EntryGroup | EntryGroup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3835,7 +3835,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Entry]{@link google.cloud.datacatalog.v1.Entry}.
+   *   The first element of the array is Array of {@link google.cloud.datacatalog.v1.Entry | Entry}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3943,7 +3943,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Entry]{@link google.cloud.datacatalog.v1.Entry} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datacatalog.v1.Entry | Entry} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntriesAsync()`
@@ -4001,7 +4001,7 @@ export class DataCatalogClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Entry]{@link google.cloud.datacatalog.v1.Entry}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datacatalog.v1.Entry | Entry}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4051,7 +4051,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Tag]{@link google.cloud.datacatalog.v1.Tag}.
+   *   The first element of the array is Array of {@link google.cloud.datacatalog.v1.Tag | Tag}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4148,7 +4148,7 @@ export class DataCatalogClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Tag]{@link google.cloud.datacatalog.v1.Tag} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datacatalog.v1.Tag | Tag} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTagsAsync()`
@@ -4201,7 +4201,7 @@ export class DataCatalogClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Tag]{@link google.cloud.datacatalog.v1.Tag}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datacatalog.v1.Tag | Tag}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
