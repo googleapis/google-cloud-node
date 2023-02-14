@@ -34,7 +34,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Mapsplatformdatasets library
-  const {MapsPlatformDatasetsV1AlphaClient} = require('@google-cloud/mapsplatformdatasets').v1alpha;
+  const {MapsPlatformDatasetsV1AlphaClient} = require('@googlemaps/maps-platform-datasets').v1alpha;
 
   // Instantiates a client
   const mapsplatformdatasetsClient = new MapsPlatformDatasetsV1AlphaClient();
