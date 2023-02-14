@@ -29,8 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for this CertificateAuthority google.cloud.security.privateca.v1.CertificateAuthority  in the
-   *  format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
+   *  Required. The resource name for this
+   *  CertificateAuthority google.cloud.security.privateca.v1.CertificateAuthority 
+   *  in the format `projects/* /locations/* /caPools/* /certificateAuthorities/*`.
    */
   // const name = 'abc123'
 
