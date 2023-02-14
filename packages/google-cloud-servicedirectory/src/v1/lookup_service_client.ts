@@ -354,7 +354,7 @@ export class LookupServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ResolveServiceResponse]{@link google.cloud.servicedirectory.v1.ResolveServiceResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.servicedirectory.v1.ResolveServiceResponse | ResolveServiceResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
