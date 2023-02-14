@@ -29,18 +29,21 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the CaPool google.cloud.security.privateca.v1.CaPool  associated with the
-   *  CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority, in the format
-   *  `projects/* /locations/* /caPools/*`.
+   *  Required. The resource name of the
+   *  CaPool google.cloud.security.privateca.v1.CaPool  associated with the
+   *  CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority,
+   *  in the format `projects/* /locations/* /caPools/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Limit on the number of CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority  to
-   *  include in the response.
-   *  Further CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority  can subsequently be
-   *  obtained by including the
-   *  ListCertificateAuthoritiesResponse.next_page_token google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token  in a subsequent
-   *  request. If unspecified, the server will pick an appropriate default.
+   *  Optional. Limit on the number of
+   *  CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority 
+   *  to include in the response. Further
+   *  CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority 
+   *  can subsequently be obtained by including the
+   *  ListCertificateAuthoritiesResponse.next_page_token google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token 
+   *  in a subsequent request. If unspecified, the server will pick an
+   *  appropriate default.
    */
   // const pageSize = 1234
   /**
