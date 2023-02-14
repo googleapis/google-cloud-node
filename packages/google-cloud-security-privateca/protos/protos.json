@@ -753,6 +753,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "nameConstraints": {
+                              "type": "NameConstraints",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "additionalExtensions": {
                               "rule": "repeated",
                               "type": "X509Extension",
@@ -792,6 +799,54 @@
                                     "(google.api.field_behavior)": "OPTIONAL",
                                     "proto3_optional": true
                                   }
+                                }
+                              }
+                            },
+                            "NameConstraints": {
+                              "fields": {
+                                "critical": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "permittedDnsNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "excludedDnsNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "permittedIpRanges": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "excludedIpRanges": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "permittedEmailAddresses": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "excludedEmailAddresses": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 7
+                                },
+                                "permittedUris": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 8
+                                },
+                                "excludedUris": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 9
                                 }
                               }
                             }
@@ -1251,7 +1306,8 @@
                                 "EXTENDED_KEY_USAGE": 2,
                                 "CA_OPTIONS": 3,
                                 "POLICY_IDS": 4,
-                                "AIA_OCSP_SERVERS": 5
+                                "AIA_OCSP_SERVERS": 5,
+                                "NAME_CONSTRAINTS": 6
                               }
                             }
                           }

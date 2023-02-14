@@ -29,8 +29,10 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name google.cloud.security.privateca.v1.CertificateAuthority.name  of the CertificateAuthority google.cloud.security.privateca.v1.CertificateAuthority  to
-   *  get.
+   *  Required. The
+   *  name google.cloud.security.privateca.v1.CertificateAuthority.name  of the
+   *  CertificateAuthority google.cloud.security.privateca.v1.CertificateAuthority 
+   *  to get.
    */
   // const name = 'abc123'
 
