@@ -72,3 +72,8 @@ const GrafeasClient = v1.GrafeasClient;
 type GrafeasClient = v1.GrafeasClient;""",
         '\nconst GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
         'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;')
+
+s.replace('packages/google-devtools-containeranalysis/src/v1/index.ts',
+        r"""
+export {GrafeasClient} from './grafeas_client';""",
+        '\n')
