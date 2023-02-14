@@ -420,7 +420,7 @@ export class RoutesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ComputeRoutesResponse]{@link google.maps.routing.v2.ComputeRoutesResponse}.
+   *   The first element of the array is an object representing {@link google.maps.routing.v2.ComputeRoutesResponse | ComputeRoutesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -565,7 +565,7 @@ export class RoutesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits [RouteMatrixElement]{@link google.maps.routing.v2.RouteMatrixElement} on 'data' event.
+   *   An object stream which emits {@link google.maps.routing.v2.RouteMatrixElement | RouteMatrixElement} on 'data' event.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
    *   for more details and examples.
