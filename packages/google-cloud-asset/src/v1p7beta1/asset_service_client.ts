@@ -560,20 +560,18 @@ export class AssetServiceClient {
    * @param {string} request.name - The name of the operation resource.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    * ```
@@ -617,11 +615,11 @@ export class AssetServiceClient {
    *   resources in a page.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    *   details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
    *
    * @example
    * ```
@@ -652,8 +650,8 @@ export class AssetServiceClient {
    * @param {string} request.name - The name of the operation resource to be cancelled.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    * details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
@@ -695,9 +693,9 @@ export class AssetServiceClient {
    * @param {string} request.name - The name of the operation resource to be deleted.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
    * @return {Promise} - The promise which resolves when API call finishes.

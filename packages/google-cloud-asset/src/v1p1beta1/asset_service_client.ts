@@ -367,7 +367,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [StandardResourceMetadata]{@link google.cloud.asset.v1p1beta1.StandardResourceMetadata}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata | StandardResourceMetadata}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -488,7 +488,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [StandardResourceMetadata]{@link google.cloud.asset.v1p1beta1.StandardResourceMetadata} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata | StandardResourceMetadata} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllResourcesAsync()`
@@ -559,7 +559,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [StandardResourceMetadata]{@link google.cloud.asset.v1p1beta1.StandardResourceMetadata}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1p1beta1.StandardResourceMetadata | StandardResourceMetadata}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -625,7 +625,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [IamPolicySearchResult]{@link google.cloud.asset.v1p1beta1.IamPolicySearchResult}.
+   *   The first element of the array is Array of {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult | IamPolicySearchResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -741,7 +741,7 @@ export class AssetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [IamPolicySearchResult]{@link google.cloud.asset.v1p1beta1.IamPolicySearchResult} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult | IamPolicySearchResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllIamPoliciesAsync()`
@@ -807,7 +807,7 @@ export class AssetServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [IamPolicySearchResult]{@link google.cloud.asset.v1p1beta1.IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.asset.v1p1beta1.IamPolicySearchResult | IamPolicySearchResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
