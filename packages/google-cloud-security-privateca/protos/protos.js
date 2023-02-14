@@ -5631,6 +5631,7 @@
                              * @property {google.cloud.security.privateca.v1.X509Parameters.ICaOptions|null} [caOptions] X509Parameters caOptions
                              * @property {Array.<google.cloud.security.privateca.v1.IObjectId>|null} [policyIds] X509Parameters policyIds
                              * @property {Array.<string>|null} [aiaOcspServers] X509Parameters aiaOcspServers
+                             * @property {google.cloud.security.privateca.v1.X509Parameters.INameConstraints|null} [nameConstraints] X509Parameters nameConstraints
                              * @property {Array.<google.cloud.security.privateca.v1.IX509Extension>|null} [additionalExtensions] X509Parameters additionalExtensions
                              */
     
@@ -5685,6 +5686,14 @@
                             X509Parameters.prototype.aiaOcspServers = $util.emptyArray;
     
                             /**
+                             * X509Parameters nameConstraints.
+                             * @member {google.cloud.security.privateca.v1.X509Parameters.INameConstraints|null|undefined} nameConstraints
+                             * @memberof google.cloud.security.privateca.v1.X509Parameters
+                             * @instance
+                             */
+                            X509Parameters.prototype.nameConstraints = null;
+    
+                            /**
                              * X509Parameters additionalExtensions.
                              * @member {Array.<google.cloud.security.privateca.v1.IX509Extension>} additionalExtensions
                              * @memberof google.cloud.security.privateca.v1.X509Parameters
@@ -5729,6 +5738,8 @@
                                 if (message.additionalExtensions != null && message.additionalExtensions.length)
                                     for (var i = 0; i < message.additionalExtensions.length; ++i)
                                         $root.google.cloud.security.privateca.v1.X509Extension.encode(message.additionalExtensions[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.nameConstraints != null && Object.hasOwnProperty.call(message, "nameConstraints"))
+                                    $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints.encode(message.nameConstraints, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -5781,6 +5792,10 @@
                                             if (!(message.aiaOcspServers && message.aiaOcspServers.length))
                                                 message.aiaOcspServers = [];
                                             message.aiaOcspServers.push(reader.string());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.nameConstraints = $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 5: {
@@ -5850,6 +5865,11 @@
                                         if (!$util.isString(message.aiaOcspServers[i]))
                                             return "aiaOcspServers: string[] expected";
                                 }
+                                if (message.nameConstraints != null && message.hasOwnProperty("nameConstraints")) {
+                                    var error = $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints.verify(message.nameConstraints);
+                                    if (error)
+                                        return "nameConstraints." + error;
+                                }
                                 if (message.additionalExtensions != null && message.hasOwnProperty("additionalExtensions")) {
                                     if (!Array.isArray(message.additionalExtensions))
                                         return "additionalExtensions: array expected";
@@ -5901,6 +5921,11 @@
                                     for (var i = 0; i < object.aiaOcspServers.length; ++i)
                                         message.aiaOcspServers[i] = String(object.aiaOcspServers[i]);
                                 }
+                                if (object.nameConstraints != null) {
+                                    if (typeof object.nameConstraints !== "object")
+                                        throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.nameConstraints: object expected");
+                                    message.nameConstraints = $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints.fromObject(object.nameConstraints);
+                                }
                                 if (object.additionalExtensions) {
                                     if (!Array.isArray(object.additionalExtensions))
                                         throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.additionalExtensions: array expected");
@@ -5935,6 +5960,7 @@
                                 if (options.defaults) {
                                     object.keyUsage = null;
                                     object.caOptions = null;
+                                    object.nameConstraints = null;
                                 }
                                 if (message.keyUsage != null && message.hasOwnProperty("keyUsage"))
                                     object.keyUsage = $root.google.cloud.security.privateca.v1.KeyUsage.toObject(message.keyUsage, options);
@@ -5955,6 +5981,8 @@
                                     for (var j = 0; j < message.additionalExtensions.length; ++j)
                                         object.additionalExtensions[j] = $root.google.cloud.security.privateca.v1.X509Extension.toObject(message.additionalExtensions[j], options);
                                 }
+                                if (message.nameConstraints != null && message.hasOwnProperty("nameConstraints"))
+                                    object.nameConstraints = $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints.toObject(message.nameConstraints, options);
                                 return object;
                             };
     
@@ -6241,6 +6269,523 @@
                                 };
     
                                 return CaOptions;
+                            })();
+    
+                            X509Parameters.NameConstraints = (function() {
+    
+                                /**
+                                 * Properties of a NameConstraints.
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters
+                                 * @interface INameConstraints
+                                 * @property {boolean|null} [critical] NameConstraints critical
+                                 * @property {Array.<string>|null} [permittedDnsNames] NameConstraints permittedDnsNames
+                                 * @property {Array.<string>|null} [excludedDnsNames] NameConstraints excludedDnsNames
+                                 * @property {Array.<string>|null} [permittedIpRanges] NameConstraints permittedIpRanges
+                                 * @property {Array.<string>|null} [excludedIpRanges] NameConstraints excludedIpRanges
+                                 * @property {Array.<string>|null} [permittedEmailAddresses] NameConstraints permittedEmailAddresses
+                                 * @property {Array.<string>|null} [excludedEmailAddresses] NameConstraints excludedEmailAddresses
+                                 * @property {Array.<string>|null} [permittedUris] NameConstraints permittedUris
+                                 * @property {Array.<string>|null} [excludedUris] NameConstraints excludedUris
+                                 */
+    
+                                /**
+                                 * Constructs a new NameConstraints.
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters
+                                 * @classdesc Represents a NameConstraints.
+                                 * @implements INameConstraints
+                                 * @constructor
+                                 * @param {google.cloud.security.privateca.v1.X509Parameters.INameConstraints=} [properties] Properties to set
+                                 */
+                                function NameConstraints(properties) {
+                                    this.permittedDnsNames = [];
+                                    this.excludedDnsNames = [];
+                                    this.permittedIpRanges = [];
+                                    this.excludedIpRanges = [];
+                                    this.permittedEmailAddresses = [];
+                                    this.excludedEmailAddresses = [];
+                                    this.permittedUris = [];
+                                    this.excludedUris = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NameConstraints critical.
+                                 * @member {boolean} critical
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.critical = false;
+    
+                                /**
+                                 * NameConstraints permittedDnsNames.
+                                 * @member {Array.<string>} permittedDnsNames
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.permittedDnsNames = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints excludedDnsNames.
+                                 * @member {Array.<string>} excludedDnsNames
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.excludedDnsNames = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints permittedIpRanges.
+                                 * @member {Array.<string>} permittedIpRanges
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.permittedIpRanges = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints excludedIpRanges.
+                                 * @member {Array.<string>} excludedIpRanges
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.excludedIpRanges = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints permittedEmailAddresses.
+                                 * @member {Array.<string>} permittedEmailAddresses
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.permittedEmailAddresses = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints excludedEmailAddresses.
+                                 * @member {Array.<string>} excludedEmailAddresses
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.excludedEmailAddresses = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints permittedUris.
+                                 * @member {Array.<string>} permittedUris
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.permittedUris = $util.emptyArray;
+    
+                                /**
+                                 * NameConstraints excludedUris.
+                                 * @member {Array.<string>} excludedUris
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 */
+                                NameConstraints.prototype.excludedUris = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new NameConstraints instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.X509Parameters.INameConstraints=} [properties] Properties to set
+                                 * @returns {google.cloud.security.privateca.v1.X509Parameters.NameConstraints} NameConstraints instance
+                                 */
+                                NameConstraints.create = function create(properties) {
+                                    return new NameConstraints(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NameConstraints message. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.NameConstraints.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.X509Parameters.INameConstraints} message NameConstraints message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NameConstraints.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.critical != null && Object.hasOwnProperty.call(message, "critical"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.critical);
+                                    if (message.permittedDnsNames != null && message.permittedDnsNames.length)
+                                        for (var i = 0; i < message.permittedDnsNames.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.permittedDnsNames[i]);
+                                    if (message.excludedDnsNames != null && message.excludedDnsNames.length)
+                                        for (var i = 0; i < message.excludedDnsNames.length; ++i)
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.excludedDnsNames[i]);
+                                    if (message.permittedIpRanges != null && message.permittedIpRanges.length)
+                                        for (var i = 0; i < message.permittedIpRanges.length; ++i)
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.permittedIpRanges[i]);
+                                    if (message.excludedIpRanges != null && message.excludedIpRanges.length)
+                                        for (var i = 0; i < message.excludedIpRanges.length; ++i)
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.excludedIpRanges[i]);
+                                    if (message.permittedEmailAddresses != null && message.permittedEmailAddresses.length)
+                                        for (var i = 0; i < message.permittedEmailAddresses.length; ++i)
+                                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.permittedEmailAddresses[i]);
+                                    if (message.excludedEmailAddresses != null && message.excludedEmailAddresses.length)
+                                        for (var i = 0; i < message.excludedEmailAddresses.length; ++i)
+                                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.excludedEmailAddresses[i]);
+                                    if (message.permittedUris != null && message.permittedUris.length)
+                                        for (var i = 0; i < message.permittedUris.length; ++i)
+                                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.permittedUris[i]);
+                                    if (message.excludedUris != null && message.excludedUris.length)
+                                        for (var i = 0; i < message.excludedUris.length; ++i)
+                                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.excludedUris[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NameConstraints message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.NameConstraints.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.X509Parameters.INameConstraints} message NameConstraints message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NameConstraints.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NameConstraints message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.security.privateca.v1.X509Parameters.NameConstraints} NameConstraints
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NameConstraints.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.critical = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.permittedDnsNames && message.permittedDnsNames.length))
+                                                    message.permittedDnsNames = [];
+                                                message.permittedDnsNames.push(reader.string());
+                                                break;
+                                            }
+                                        case 3: {
+                                                if (!(message.excludedDnsNames && message.excludedDnsNames.length))
+                                                    message.excludedDnsNames = [];
+                                                message.excludedDnsNames.push(reader.string());
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.permittedIpRanges && message.permittedIpRanges.length))
+                                                    message.permittedIpRanges = [];
+                                                message.permittedIpRanges.push(reader.string());
+                                                break;
+                                            }
+                                        case 5: {
+                                                if (!(message.excludedIpRanges && message.excludedIpRanges.length))
+                                                    message.excludedIpRanges = [];
+                                                message.excludedIpRanges.push(reader.string());
+                                                break;
+                                            }
+                                        case 6: {
+                                                if (!(message.permittedEmailAddresses && message.permittedEmailAddresses.length))
+                                                    message.permittedEmailAddresses = [];
+                                                message.permittedEmailAddresses.push(reader.string());
+                                                break;
+                                            }
+                                        case 7: {
+                                                if (!(message.excludedEmailAddresses && message.excludedEmailAddresses.length))
+                                                    message.excludedEmailAddresses = [];
+                                                message.excludedEmailAddresses.push(reader.string());
+                                                break;
+                                            }
+                                        case 8: {
+                                                if (!(message.permittedUris && message.permittedUris.length))
+                                                    message.permittedUris = [];
+                                                message.permittedUris.push(reader.string());
+                                                break;
+                                            }
+                                        case 9: {
+                                                if (!(message.excludedUris && message.excludedUris.length))
+                                                    message.excludedUris = [];
+                                                message.excludedUris.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NameConstraints message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.security.privateca.v1.X509Parameters.NameConstraints} NameConstraints
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NameConstraints.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NameConstraints message.
+                                 * @function verify
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NameConstraints.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.critical != null && message.hasOwnProperty("critical"))
+                                        if (typeof message.critical !== "boolean")
+                                            return "critical: boolean expected";
+                                    if (message.permittedDnsNames != null && message.hasOwnProperty("permittedDnsNames")) {
+                                        if (!Array.isArray(message.permittedDnsNames))
+                                            return "permittedDnsNames: array expected";
+                                        for (var i = 0; i < message.permittedDnsNames.length; ++i)
+                                            if (!$util.isString(message.permittedDnsNames[i]))
+                                                return "permittedDnsNames: string[] expected";
+                                    }
+                                    if (message.excludedDnsNames != null && message.hasOwnProperty("excludedDnsNames")) {
+                                        if (!Array.isArray(message.excludedDnsNames))
+                                            return "excludedDnsNames: array expected";
+                                        for (var i = 0; i < message.excludedDnsNames.length; ++i)
+                                            if (!$util.isString(message.excludedDnsNames[i]))
+                                                return "excludedDnsNames: string[] expected";
+                                    }
+                                    if (message.permittedIpRanges != null && message.hasOwnProperty("permittedIpRanges")) {
+                                        if (!Array.isArray(message.permittedIpRanges))
+                                            return "permittedIpRanges: array expected";
+                                        for (var i = 0; i < message.permittedIpRanges.length; ++i)
+                                            if (!$util.isString(message.permittedIpRanges[i]))
+                                                return "permittedIpRanges: string[] expected";
+                                    }
+                                    if (message.excludedIpRanges != null && message.hasOwnProperty("excludedIpRanges")) {
+                                        if (!Array.isArray(message.excludedIpRanges))
+                                            return "excludedIpRanges: array expected";
+                                        for (var i = 0; i < message.excludedIpRanges.length; ++i)
+                                            if (!$util.isString(message.excludedIpRanges[i]))
+                                                return "excludedIpRanges: string[] expected";
+                                    }
+                                    if (message.permittedEmailAddresses != null && message.hasOwnProperty("permittedEmailAddresses")) {
+                                        if (!Array.isArray(message.permittedEmailAddresses))
+                                            return "permittedEmailAddresses: array expected";
+                                        for (var i = 0; i < message.permittedEmailAddresses.length; ++i)
+                                            if (!$util.isString(message.permittedEmailAddresses[i]))
+                                                return "permittedEmailAddresses: string[] expected";
+                                    }
+                                    if (message.excludedEmailAddresses != null && message.hasOwnProperty("excludedEmailAddresses")) {
+                                        if (!Array.isArray(message.excludedEmailAddresses))
+                                            return "excludedEmailAddresses: array expected";
+                                        for (var i = 0; i < message.excludedEmailAddresses.length; ++i)
+                                            if (!$util.isString(message.excludedEmailAddresses[i]))
+                                                return "excludedEmailAddresses: string[] expected";
+                                    }
+                                    if (message.permittedUris != null && message.hasOwnProperty("permittedUris")) {
+                                        if (!Array.isArray(message.permittedUris))
+                                            return "permittedUris: array expected";
+                                        for (var i = 0; i < message.permittedUris.length; ++i)
+                                            if (!$util.isString(message.permittedUris[i]))
+                                                return "permittedUris: string[] expected";
+                                    }
+                                    if (message.excludedUris != null && message.hasOwnProperty("excludedUris")) {
+                                        if (!Array.isArray(message.excludedUris))
+                                            return "excludedUris: array expected";
+                                        for (var i = 0; i < message.excludedUris.length; ++i)
+                                            if (!$util.isString(message.excludedUris[i]))
+                                                return "excludedUris: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NameConstraints message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.security.privateca.v1.X509Parameters.NameConstraints} NameConstraints
+                                 */
+                                NameConstraints.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints)
+                                        return object;
+                                    var message = new $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints();
+                                    if (object.critical != null)
+                                        message.critical = Boolean(object.critical);
+                                    if (object.permittedDnsNames) {
+                                        if (!Array.isArray(object.permittedDnsNames))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.permittedDnsNames: array expected");
+                                        message.permittedDnsNames = [];
+                                        for (var i = 0; i < object.permittedDnsNames.length; ++i)
+                                            message.permittedDnsNames[i] = String(object.permittedDnsNames[i]);
+                                    }
+                                    if (object.excludedDnsNames) {
+                                        if (!Array.isArray(object.excludedDnsNames))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.excludedDnsNames: array expected");
+                                        message.excludedDnsNames = [];
+                                        for (var i = 0; i < object.excludedDnsNames.length; ++i)
+                                            message.excludedDnsNames[i] = String(object.excludedDnsNames[i]);
+                                    }
+                                    if (object.permittedIpRanges) {
+                                        if (!Array.isArray(object.permittedIpRanges))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.permittedIpRanges: array expected");
+                                        message.permittedIpRanges = [];
+                                        for (var i = 0; i < object.permittedIpRanges.length; ++i)
+                                            message.permittedIpRanges[i] = String(object.permittedIpRanges[i]);
+                                    }
+                                    if (object.excludedIpRanges) {
+                                        if (!Array.isArray(object.excludedIpRanges))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.excludedIpRanges: array expected");
+                                        message.excludedIpRanges = [];
+                                        for (var i = 0; i < object.excludedIpRanges.length; ++i)
+                                            message.excludedIpRanges[i] = String(object.excludedIpRanges[i]);
+                                    }
+                                    if (object.permittedEmailAddresses) {
+                                        if (!Array.isArray(object.permittedEmailAddresses))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.permittedEmailAddresses: array expected");
+                                        message.permittedEmailAddresses = [];
+                                        for (var i = 0; i < object.permittedEmailAddresses.length; ++i)
+                                            message.permittedEmailAddresses[i] = String(object.permittedEmailAddresses[i]);
+                                    }
+                                    if (object.excludedEmailAddresses) {
+                                        if (!Array.isArray(object.excludedEmailAddresses))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.excludedEmailAddresses: array expected");
+                                        message.excludedEmailAddresses = [];
+                                        for (var i = 0; i < object.excludedEmailAddresses.length; ++i)
+                                            message.excludedEmailAddresses[i] = String(object.excludedEmailAddresses[i]);
+                                    }
+                                    if (object.permittedUris) {
+                                        if (!Array.isArray(object.permittedUris))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.permittedUris: array expected");
+                                        message.permittedUris = [];
+                                        for (var i = 0; i < object.permittedUris.length; ++i)
+                                            message.permittedUris[i] = String(object.permittedUris[i]);
+                                    }
+                                    if (object.excludedUris) {
+                                        if (!Array.isArray(object.excludedUris))
+                                            throw TypeError(".google.cloud.security.privateca.v1.X509Parameters.NameConstraints.excludedUris: array expected");
+                                        message.excludedUris = [];
+                                        for (var i = 0; i < object.excludedUris.length; ++i)
+                                            message.excludedUris[i] = String(object.excludedUris[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NameConstraints message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.X509Parameters.NameConstraints} message NameConstraints
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NameConstraints.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults) {
+                                        object.permittedDnsNames = [];
+                                        object.excludedDnsNames = [];
+                                        object.permittedIpRanges = [];
+                                        object.excludedIpRanges = [];
+                                        object.permittedEmailAddresses = [];
+                                        object.excludedEmailAddresses = [];
+                                        object.permittedUris = [];
+                                        object.excludedUris = [];
+                                    }
+                                    if (options.defaults)
+                                        object.critical = false;
+                                    if (message.critical != null && message.hasOwnProperty("critical"))
+                                        object.critical = message.critical;
+                                    if (message.permittedDnsNames && message.permittedDnsNames.length) {
+                                        object.permittedDnsNames = [];
+                                        for (var j = 0; j < message.permittedDnsNames.length; ++j)
+                                            object.permittedDnsNames[j] = message.permittedDnsNames[j];
+                                    }
+                                    if (message.excludedDnsNames && message.excludedDnsNames.length) {
+                                        object.excludedDnsNames = [];
+                                        for (var j = 0; j < message.excludedDnsNames.length; ++j)
+                                            object.excludedDnsNames[j] = message.excludedDnsNames[j];
+                                    }
+                                    if (message.permittedIpRanges && message.permittedIpRanges.length) {
+                                        object.permittedIpRanges = [];
+                                        for (var j = 0; j < message.permittedIpRanges.length; ++j)
+                                            object.permittedIpRanges[j] = message.permittedIpRanges[j];
+                                    }
+                                    if (message.excludedIpRanges && message.excludedIpRanges.length) {
+                                        object.excludedIpRanges = [];
+                                        for (var j = 0; j < message.excludedIpRanges.length; ++j)
+                                            object.excludedIpRanges[j] = message.excludedIpRanges[j];
+                                    }
+                                    if (message.permittedEmailAddresses && message.permittedEmailAddresses.length) {
+                                        object.permittedEmailAddresses = [];
+                                        for (var j = 0; j < message.permittedEmailAddresses.length; ++j)
+                                            object.permittedEmailAddresses[j] = message.permittedEmailAddresses[j];
+                                    }
+                                    if (message.excludedEmailAddresses && message.excludedEmailAddresses.length) {
+                                        object.excludedEmailAddresses = [];
+                                        for (var j = 0; j < message.excludedEmailAddresses.length; ++j)
+                                            object.excludedEmailAddresses[j] = message.excludedEmailAddresses[j];
+                                    }
+                                    if (message.permittedUris && message.permittedUris.length) {
+                                        object.permittedUris = [];
+                                        for (var j = 0; j < message.permittedUris.length; ++j)
+                                            object.permittedUris[j] = message.permittedUris[j];
+                                    }
+                                    if (message.excludedUris && message.excludedUris.length) {
+                                        object.excludedUris = [];
+                                        for (var j = 0; j < message.excludedUris.length; ++j)
+                                            object.excludedUris[j] = message.excludedUris[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NameConstraints to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NameConstraints.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NameConstraints
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.NameConstraints
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NameConstraints.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.security.privateca.v1.X509Parameters.NameConstraints";
+                                };
+    
+                                return NameConstraints;
                             })();
     
                             return X509Parameters;
@@ -11360,6 +11905,7 @@
                                         case 3:
                                         case 4:
                                         case 5:
+                                        case 6:
                                             break;
                                         }
                                 }
@@ -11421,6 +11967,10 @@
                                         case "AIA_OCSP_SERVERS":
                                         case 5:
                                             message.knownExtensions[i] = 5;
+                                            break;
+                                        case "NAME_CONSTRAINTS":
+                                        case 6:
+                                            message.knownExtensions[i] = 6;
                                             break;
                                         }
                                 }
@@ -11503,6 +12053,7 @@
                              * @property {number} CA_OPTIONS=3 CA_OPTIONS value
                              * @property {number} POLICY_IDS=4 POLICY_IDS value
                              * @property {number} AIA_OCSP_SERVERS=5 AIA_OCSP_SERVERS value
+                             * @property {number} NAME_CONSTRAINTS=6 NAME_CONSTRAINTS value
                              */
                             CertificateExtensionConstraints.KnownCertificateExtension = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -11512,6 +12063,7 @@
                                 values[valuesById[3] = "CA_OPTIONS"] = 3;
                                 values[valuesById[4] = "POLICY_IDS"] = 4;
                                 values[valuesById[5] = "AIA_OCSP_SERVERS"] = 5;
+                                values[valuesById[6] = "NAME_CONSTRAINTS"] = 6;
                                 return values;
                             })();
     
