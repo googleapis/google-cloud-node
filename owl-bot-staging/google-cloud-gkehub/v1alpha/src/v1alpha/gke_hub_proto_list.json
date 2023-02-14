@@ -1,0 +1,9 @@
+[
+  "../../protos/google/cloud/gkehub/v1alpha/cloudauditlogging/cloudauditlogging.proto",
+  "../../protos/google/cloud/gkehub/v1alpha/configmanagement/configmanagement.proto",
+  "../../protos/google/cloud/gkehub/v1alpha/feature.proto",
+  "../../protos/google/cloud/gkehub/v1alpha/metering/metering.proto",
+  "../../protos/google/cloud/gkehub/v1alpha/multiclusteringress/multiclusteringress.proto",
+  "../../protos/google/cloud/gkehub/v1alpha/service.proto",
+  "../../protos/google/cloud/gkehub/v1alpha/servicemesh/servicemesh.proto"
+]
