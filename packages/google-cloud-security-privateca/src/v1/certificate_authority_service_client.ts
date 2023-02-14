@@ -766,7 +766,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1.Certificate}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.Certificate | Certificate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -865,7 +865,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1.Certificate}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.Certificate | Certificate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -982,7 +982,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1.Certificate}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.Certificate | Certificate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1098,7 +1098,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Certificate]{@link google.cloud.security.privateca.v1.Certificate}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.Certificate | Certificate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1207,7 +1207,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [FetchCertificateAuthorityCsrResponse]{@link google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse | FetchCertificateAuthorityCsrResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1312,7 +1312,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CertificateAuthority]{@link google.cloud.security.privateca.v1.CertificateAuthority}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.CertificateAuthority | CertificateAuthority}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1414,7 +1414,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CaPool]{@link google.cloud.security.privateca.v1.CaPool}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.CaPool | CaPool}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1525,7 +1525,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [FetchCaCertsResponse]{@link google.cloud.security.privateca.v1.FetchCaCertsResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.FetchCaCertsResponse | FetchCaCertsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1627,7 +1627,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CertificateRevocationList]{@link google.cloud.security.privateca.v1.CertificateRevocationList}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.CertificateRevocationList | CertificateRevocationList}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1732,7 +1732,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CertificateTemplate]{@link google.cloud.security.privateca.v1.CertificateTemplate}.
+   *   The first element of the array is an object representing {@link google.cloud.security.privateca.v1.CertificateTemplate | CertificateTemplate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -4120,7 +4120,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Certificate]{@link google.cloud.security.privateca.v1.Certificate}.
+   *   The first element of the array is Array of {@link google.cloud.security.privateca.v1.Certificate | Certificate}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4236,7 +4236,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Certificate]{@link google.cloud.security.privateca.v1.Certificate} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.security.privateca.v1.Certificate | Certificate} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCertificatesAsync()`
@@ -4302,7 +4302,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Certificate]{@link google.cloud.security.privateca.v1.Certificate}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.security.privateca.v1.Certificate | Certificate}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4361,7 +4361,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CertificateAuthority]{@link google.cloud.security.privateca.v1.CertificateAuthority}.
+   *   The first element of the array is Array of {@link google.cloud.security.privateca.v1.CertificateAuthority | CertificateAuthority}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4478,7 +4478,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [CertificateAuthority]{@link google.cloud.security.privateca.v1.CertificateAuthority} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.security.privateca.v1.CertificateAuthority | CertificateAuthority} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCertificateAuthoritiesAsync()`
@@ -4541,7 +4541,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [CertificateAuthority]{@link google.cloud.security.privateca.v1.CertificateAuthority}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.security.privateca.v1.CertificateAuthority | CertificateAuthority}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4597,7 +4597,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CaPool]{@link google.cloud.security.privateca.v1.CaPool}.
+   *   The first element of the array is Array of {@link google.cloud.security.privateca.v1.CaPool | CaPool}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4708,7 +4708,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [CaPool]{@link google.cloud.security.privateca.v1.CaPool} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.security.privateca.v1.CaPool | CaPool} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCaPoolsAsync()`
@@ -4769,7 +4769,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [CaPool]{@link google.cloud.security.privateca.v1.CaPool}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.security.privateca.v1.CaPool | CaPool}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4827,7 +4827,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CertificateRevocationList]{@link google.cloud.security.privateca.v1.CertificateRevocationList}.
+   *   The first element of the array is Array of {@link google.cloud.security.privateca.v1.CertificateRevocationList | CertificateRevocationList}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4943,7 +4943,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [CertificateRevocationList]{@link google.cloud.security.privateca.v1.CertificateRevocationList} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.security.privateca.v1.CertificateRevocationList | CertificateRevocationList} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCertificateRevocationListsAsync()`
@@ -5006,7 +5006,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [CertificateRevocationList]{@link google.cloud.security.privateca.v1.CertificateRevocationList}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.security.privateca.v1.CertificateRevocationList | CertificateRevocationList}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5065,7 +5065,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CertificateTemplate]{@link google.cloud.security.privateca.v1.CertificateTemplate}.
+   *   The first element of the array is Array of {@link google.cloud.security.privateca.v1.CertificateTemplate | CertificateTemplate}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5181,7 +5181,7 @@ export class CertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [CertificateTemplate]{@link google.cloud.security.privateca.v1.CertificateTemplate} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.security.privateca.v1.CertificateTemplate | CertificateTemplate} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCertificateTemplatesAsync()`
@@ -5243,7 +5243,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [CertificateTemplate]{@link google.cloud.security.privateca.v1.CertificateTemplate}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.security.privateca.v1.CertificateTemplate | CertificateTemplate}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5285,16 +5285,16 @@ export class CertificateAuthorityServiceClient {
    *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
    *   `GetIamPolicy`. This field is only used by Cloud IAM.
    *
-   *   This object should have the same structure as [GetPolicyOptions]{@link google.iam.v1.GetPolicyOptions}
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
@@ -5336,13 +5336,13 @@ export class CertificateAuthorityServiceClient {
    *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
@@ -5384,13 +5384,13 @@ export class CertificateAuthorityServiceClient {
    *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    */
@@ -5420,9 +5420,9 @@ export class CertificateAuthorityServiceClient {
    * @param {string} request.name
    *   Resource name for the location.
    * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -5472,7 +5472,7 @@ export class CertificateAuthorityServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5501,20 +5501,18 @@ export class CertificateAuthorityServiceClient {
    * @param {string} request.name - The name of the operation resource.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    * ```
@@ -5558,11 +5556,11 @@ export class CertificateAuthorityServiceClient {
    *   resources in a page.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    *   details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
    *
    * @example
    * ```
@@ -5593,8 +5591,8 @@ export class CertificateAuthorityServiceClient {
    * @param {string} request.name - The name of the operation resource to be cancelled.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    * details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
@@ -5636,9 +5634,9 @@ export class CertificateAuthorityServiceClient {
    * @param {string} request.name - The name of the operation resource to be deleted.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
    * @return {Promise} - The promise which resolves when API call finishes.
