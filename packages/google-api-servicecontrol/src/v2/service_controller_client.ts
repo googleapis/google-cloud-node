@@ -359,7 +359,7 @@ export class ServiceControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CheckResponse]{@link google.api.servicecontrol.v2.CheckResponse}.
+   *   The first element of the array is an object representing {@link google.api.servicecontrol.v2.CheckResponse | CheckResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -472,7 +472,7 @@ export class ServiceControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReportResponse]{@link google.api.servicecontrol.v2.ReportResponse}.
+   *   The first element of the array is an object representing {@link google.api.servicecontrol.v2.ReportResponse | ReportResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
