@@ -530,7 +530,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Conversation]{@link google.cloud.dialogflow.v2.Conversation}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -623,7 +623,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Conversation]{@link google.cloud.dialogflow.v2.Conversation}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -717,7 +717,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Conversation]{@link google.cloud.dialogflow.v2.Conversation}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -829,7 +829,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SuggestConversationSummaryResponse]{@link google.cloud.dialogflow.v2.SuggestConversationSummaryResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.SuggestConversationSummaryResponse | SuggestConversationSummaryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -955,7 +955,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Conversation]{@link google.cloud.dialogflow.v2.Conversation}.
+   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1073,7 +1073,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Conversation]{@link google.cloud.dialogflow.v2.Conversation} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConversationsAsync()`
@@ -1141,7 +1141,7 @@ export class ConversationsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Conversation]{@link google.cloud.dialogflow.v2.Conversation}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.dialogflow.v2.Conversation | Conversation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1200,7 +1200,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Message]{@link google.cloud.dialogflow.v2.Message}.
+   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.Message | Message}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1310,7 +1310,7 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Message]{@link google.cloud.dialogflow.v2.Message} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.Message | Message} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMessagesAsync()`
@@ -1370,7 +1370,7 @@ export class ConversationsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Message]{@link google.cloud.dialogflow.v2.Message}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.dialogflow.v2.Message | Message}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1407,9 +1407,9 @@ export class ConversationsClient {
    * @param {string} request.name
    *   Resource name for the location.
    * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1459,7 +1459,7 @@ export class ConversationsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
