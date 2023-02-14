@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -103,22 +96,14 @@ export class ExecutionsClient {
    *     const client = new ExecutionsClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ExecutionsClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -141,7 +126,7 @@ export class ExecutionsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,7 +140,10 @@ export class ExecutionsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -163,7 +151,7 @@ export class ExecutionsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else if (opts.fallback === 'rest' ) {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -188,20 +176,14 @@ export class ExecutionsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listExecutions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'executions'
-      ),
+      listExecutions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'executions')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.workflows.executions.v1beta.Executions',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.workflows.executions.v1beta.Executions', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,41 +214,32 @@ export class ExecutionsClient {
     // Put together the "service stub" for
     // google.cloud.workflows.executions.v1beta.Executions.
     this.executionsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.workflows.executions.v1beta.Executions'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.workflows.executions.v1beta
-            .Executions,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.workflows.executions.v1beta.Executions') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.workflows.executions.v1beta.Executions,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const executionsStubMethods = [
-      'listExecutions',
-      'createExecution',
-      'getExecution',
-      'cancelExecution',
-    ];
+    const executionsStubMethods =
+        ['listExecutions', 'createExecution', 'getExecution', 'cancelExecution'];
     for (const methodName of executionsStubMethods) {
       const callPromise = this.executionsStub.then(
-        (stub) =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -311,7 +284,9 @@ export class ExecutionsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -320,9 +295,8 @@ export class ExecutionsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -333,469 +307,374 @@ export class ExecutionsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a new execution using the latest revision of the given workflow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the workflow for which an execution should be created.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   *   The latest revision of the workflow will be used.
-   * @param {google.cloud.workflows.executions.v1beta.Execution} request.execution
-   *   Required. Execution to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Execution]{@link google.cloud.workflows.executions.v1beta.Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/executions.create_execution.js</caption>
-   * region_tag:workflowexecutions_v1beta_generated_Executions_CreateExecution_async
-   */
+/**
+ * Creates a new execution using the latest revision of the given workflow.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the workflow for which an execution should be created.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ *   The latest revision of the workflow will be used.
+ * @param {google.cloud.workflows.executions.v1beta.Execution} request.execution
+ *   Required. Execution to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.workflows.executions.v1beta.Execution | Execution}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/executions.create_execution.js</caption>
+ * region_tag:workflowexecutions_v1beta_generated_Executions_CreateExecution_async
+ */
   createExecution(
-    request?: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      (
-        | protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution,
+        protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest|undefined, {}|undefined
+      ]>;
   createExecution(
-    request: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createExecution(
-    request: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
-    callback: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createExecution(
-    request?: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.workflows.executions.v1beta.IExecution,
-          | protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      (
-        | protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createExecution(
+      request: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
+      callback: Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createExecution(
+      request?: protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution,
+        protos.google.cloud.workflows.executions.v1beta.ICreateExecutionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.createExecution(request, options, callback);
   }
-  /**
-   * Returns an execution of the given name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the execution to be retrieved.
-   *   Format:
-   *   projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
-   * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned execution.
-   *   The API will default to the FULL view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Execution]{@link google.cloud.workflows.executions.v1beta.Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/executions.get_execution.js</caption>
-   * region_tag:workflowexecutions_v1beta_generated_Executions_GetExecution_async
-   */
+/**
+ * Returns an execution of the given name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the execution to be retrieved.
+ *   Format:
+ *   projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
+ * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
+ *   Optional. A view defining which fields should be filled in the returned execution.
+ *   The API will default to the FULL view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.workflows.executions.v1beta.Execution | Execution}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/executions.get_execution.js</caption>
+ * region_tag:workflowexecutions_v1beta_generated_Executions_GetExecution_async
+ */
   getExecution(
-    request?: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      (
-        | protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution,
+        protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest|undefined, {}|undefined
+      ]>;
   getExecution(
-    request: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getExecution(
-    request: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
-    callback: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getExecution(
-    request?: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.workflows.executions.v1beta.IExecution,
-          | protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      (
-        | protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getExecution(
+      request: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
+      callback: Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getExecution(
+      request?: protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution,
+        protos.google.cloud.workflows.executions.v1beta.IGetExecutionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.getExecution(request, options, callback);
   }
-  /**
-   * Cancels an execution of the given name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the execution to be cancelled.
-   *   Format:
-   *   projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Execution]{@link google.cloud.workflows.executions.v1beta.Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/executions.cancel_execution.js</caption>
-   * region_tag:workflowexecutions_v1beta_generated_Executions_CancelExecution_async
-   */
+/**
+ * Cancels an execution of the given name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the execution to be cancelled.
+ *   Format:
+ *   projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.workflows.executions.v1beta.Execution | Execution}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/executions.cancel_execution.js</caption>
+ * region_tag:workflowexecutions_v1beta_generated_Executions_CancelExecution_async
+ */
   cancelExecution(
-    request?: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      (
-        | protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution,
+        protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest|undefined, {}|undefined
+      ]>;
   cancelExecution(
-    request: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelExecution(
-    request: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
-    callback: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelExecution(
-    request?: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.workflows.executions.v1beta.IExecution,
-          | protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      | protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution,
-      (
-        | protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelExecution(
+      request: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
+      callback: Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelExecution(
+      request?: protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.workflows.executions.v1beta.IExecution,
+          protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution,
+        protos.google.cloud.workflows.executions.v1beta.ICancelExecutionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.cancelExecution(request, options, callback);
   }
 
-  /**
-   * Returns a list of executions which belong to the workflow with
-   * the given name. The method returns executions of all workflow
-   * revisions. Returned executions are ordered by their start time (newest
-   * first).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the workflow for which the executions should be listed.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {number} request.pageSize
-   *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
-   *   BASIC and 100 for FULL. The default value used if the field is not
-   *   specified is 100, regardless of the selected view. Values greater than
-   *   the max value will be coerced down to it.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListExecutions` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListExecutions` must
-   *   match the call that provided the page token.
-   * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Execution]{@link google.cloud.workflows.executions.v1beta.Execution}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listExecutionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+ /**
+ * Returns a list of executions which belong to the workflow with
+ * the given name. The method returns executions of all workflow
+ * revisions. Returned executions are ordered by their start time (newest
+ * first).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the workflow for which the executions should be listed.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {number} request.pageSize
+ *   Maximum number of executions to return per call.
+ *   Max supported value depends on the selected Execution view: it's 10000 for
+ *   BASIC and 100 for FULL. The default value used if the field is not
+ *   specified is 100, regardless of the selected view. Values greater than
+ *   the max value will be coerced down to it.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListExecutions` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListExecutions` must
+ *   match the call that provided the page token.
+ * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
+ *   Optional. A view defining which fields should be filled in the returned executions.
+ *   The API will default to the BASIC view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link google.cloud.workflows.executions.v1beta.Execution | Execution}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listExecutionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listExecutions(
-    request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution[],
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest | null,
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
-    ]
-  >;
+      request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution[],
+        protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest|null,
+        protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
+      ]>;
   listExecutions(
-    request: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-      | protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.executions.v1beta.IExecution
-    >
-  ): void;
-  listExecutions(
-    request: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-      | protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.executions.v1beta.IExecution
-    >
-  ): void;
-  listExecutions(
-    request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-          | protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.workflows.executions.v1beta.IExecution
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-      | protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.executions.v1beta.IExecution
-    >
-  ): Promise<
-    [
-      protos.google.cloud.workflows.executions.v1beta.IExecution[],
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest | null,
-      protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
-    ]
-  > | void {
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.workflows.executions.v1beta.IExecution>): void;
+  listExecutions(
+      request: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.workflows.executions.v1beta.IExecution>): void;
+  listExecutions(
+      request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.workflows.executions.v1beta.IExecution>,
+      callback?: PaginationCallback<
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+          protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse|null|undefined,
+          protos.google.cloud.workflows.executions.v1beta.IExecution>):
+      Promise<[
+        protos.google.cloud.workflows.executions.v1beta.IExecution[],
+        protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest|null,
+        protos.google.cloud.workflows.executions.v1beta.IListExecutionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.listExecutions(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the workflow for which the executions should be listed.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {number} request.pageSize
-   *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
-   *   BASIC and 100 for FULL. The default value used if the field is not
-   *   specified is 100, regardless of the selected view. Values greater than
-   *   the max value will be coerced down to it.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListExecutions` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListExecutions` must
-   *   match the call that provided the page token.
-   * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Execution]{@link google.cloud.workflows.executions.v1beta.Execution} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listExecutionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the workflow for which the executions should be listed.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {number} request.pageSize
+ *   Maximum number of executions to return per call.
+ *   Max supported value depends on the selected Execution view: it's 10000 for
+ *   BASIC and 100 for FULL. The default value used if the field is not
+ *   specified is 100, regardless of the selected view. Values greater than
+ *   the max value will be coerced down to it.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListExecutions` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListExecutions` must
+ *   match the call that provided the page token.
+ * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
+ *   Optional. A view defining which fields should be filled in the returned executions.
+ *   The API will default to the BASIC view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link google.cloud.workflows.executions.v1beta.Execution | Execution} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listExecutionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listExecutionsStream(
-    request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -806,55 +685,56 @@ export class ExecutionsClient {
     );
   }
 
-  /**
-   * Equivalent to `listExecutions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the workflow for which the executions should be listed.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {number} request.pageSize
-   *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
-   *   BASIC and 100 for FULL. The default value used if the field is not
-   *   specified is 100, regardless of the selected view. Values greater than
-   *   the max value will be coerced down to it.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListExecutions` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListExecutions` must
-   *   match the call that provided the page token.
-   * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Execution]{@link google.cloud.workflows.executions.v1beta.Execution}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/executions.list_executions.js</caption>
-   * region_tag:workflowexecutions_v1beta_generated_Executions_ListExecutions_async
-   */
+/**
+ * Equivalent to `listExecutions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the workflow for which the executions should be listed.
+ *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+ * @param {number} request.pageSize
+ *   Maximum number of executions to return per call.
+ *   Max supported value depends on the selected Execution view: it's 10000 for
+ *   BASIC and 100 for FULL. The default value used if the field is not
+ *   specified is 100, regardless of the selected view. Values greater than
+ *   the max value will be coerced down to it.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListExecutions` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListExecutions` must
+ *   match the call that provided the page token.
+ * @param {google.cloud.workflows.executions.v1beta.ExecutionView} [request.view]
+ *   Optional. A view defining which fields should be filled in the returned executions.
+ *   The API will default to the BASIC view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link google.cloud.workflows.executions.v1beta.Execution | Execution}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/executions.list_executions.js</caption>
+ * region_tag:workflowexecutions_v1beta_generated_Executions_ListExecutions_async
+ */
   listExecutionsAsync(
-    request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.workflows.executions.v1beta.IExecution> {
+      request?: protos.google.cloud.workflows.executions.v1beta.IListExecutionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.workflows.executions.v1beta.IExecution>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -877,12 +757,7 @@ export class ExecutionsClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(
-    project: string,
-    location: string,
-    workflow: string,
-    execution: string
-  ) {
+  executionPath(project:string,location:string,workflow:string,execution:string) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -899,8 +774,7 @@ export class ExecutionsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .project;
+    return this.pathTemplates.executionPathTemplate.match(executionName).project;
   }
 
   /**
@@ -911,8 +785,7 @@ export class ExecutionsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .location;
+    return this.pathTemplates.executionPathTemplate.match(executionName).location;
   }
 
   /**
@@ -923,8 +796,7 @@ export class ExecutionsClient {
    * @returns {string} A string representing the workflow.
    */
   matchWorkflowFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .workflow;
+    return this.pathTemplates.executionPathTemplate.match(executionName).workflow;
   }
 
   /**
@@ -935,8 +807,7 @@ export class ExecutionsClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
   }
 
   /**
@@ -947,7 +818,7 @@ export class ExecutionsClient {
    * @param {string} workflow
    * @returns {string} Resource name string.
    */
-  workflowPath(project: string, location: string, workflow: string) {
+  workflowPath(project:string,location:string,workflow:string) {
     return this.pathTemplates.workflowPathTemplate.render({
       project: project,
       location: location,
@@ -996,7 +867,7 @@ export class ExecutionsClient {
    */
   close(): Promise<void> {
     if (this.executionsStub && !this._terminated) {
-      return this.executionsStub.then((stub) => {
+      return this.executionsStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

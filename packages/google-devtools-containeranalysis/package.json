@@ -33,15 +33,12 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "@google-cloud/grafeas": "^4.2.1",
-    "google-gax": "^3.5.6"
+    "google-gax": "^3.5.7"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",

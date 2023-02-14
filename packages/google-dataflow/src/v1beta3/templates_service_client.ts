@@ -336,7 +336,7 @@ export class TemplatesServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Job]{@link google.dataflow.v1beta3.Job}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Job | Job}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -444,7 +444,7 @@ export class TemplatesServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LaunchTemplateResponse]{@link google.dataflow.v1beta3.LaunchTemplateResponse}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.LaunchTemplateResponse | LaunchTemplateResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -540,7 +540,7 @@ export class TemplatesServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GetTemplateResponse]{@link google.dataflow.v1beta3.GetTemplateResponse}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.GetTemplateResponse | GetTemplateResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
