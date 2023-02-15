@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.5.0...dialogflow-v5.5.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3987](https://github.com/googleapis/google-cloud-node/issues/3987)) ([07043a6](https://github.com/googleapis/google-cloud-node/commit/07043a629545ad418f33f90f9f96147a136e1728))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.4.0...dialogflow-v5.5.0) (2023-01-28)
 
 
