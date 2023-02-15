@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.1.0...os-login-v4.1.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3988](https://github.com/googleapis/google-cloud-node/issues/3988)) ([f2134ed](https://github.com/googleapis/google-cloud-node/commit/f2134ed5f166a3bb7dd0bed556700f0b0fd9756a))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.0.4...os-login-v4.1.0) (2022-12-16)
 
 

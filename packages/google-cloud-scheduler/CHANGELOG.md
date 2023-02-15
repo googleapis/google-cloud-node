@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/scheduler-v3.2.0...scheduler-v3.2.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3989](https://github.com/googleapis/google-cloud-node/issues/3989)) ([95399f7](https://github.com/googleapis/google-cloud-node/commit/95399f731547b06cde5ed0914d89c59fdc9fd968))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/scheduler-v3.1.0...scheduler-v3.2.0) (2023-01-28)
 
 

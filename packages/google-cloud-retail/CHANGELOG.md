@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/retail-v2.3.0...retail-v2.3.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3989](https://github.com/googleapis/google-cloud-node/issues/3989)) ([95399f7](https://github.com/googleapis/google-cloud-node/commit/95399f731547b06cde5ed0914d89c59fdc9fd968))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/retail-v2.2.0...retail-v2.3.0) (2022-12-21)
 
 
