@@ -1,0 +1,215 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.devtools.cloudbuild.v1",
+  "libraryPackage": "@google-cloud/cloudbuild",
+  "services": {
+    "CloudBuild": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudBuildClient",
+          "rpcs": {
+            "GetBuild": {
+              "methods": [
+                "getBuild"
+              ]
+            },
+            "CancelBuild": {
+              "methods": [
+                "cancelBuild"
+              ]
+            },
+            "CreateBuildTrigger": {
+              "methods": [
+                "createBuildTrigger"
+              ]
+            },
+            "GetBuildTrigger": {
+              "methods": [
+                "getBuildTrigger"
+              ]
+            },
+            "DeleteBuildTrigger": {
+              "methods": [
+                "deleteBuildTrigger"
+              ]
+            },
+            "UpdateBuildTrigger": {
+              "methods": [
+                "updateBuildTrigger"
+              ]
+            },
+            "ReceiveTriggerWebhook": {
+              "methods": [
+                "receiveTriggerWebhook"
+              ]
+            },
+            "GetWorkerPool": {
+              "methods": [
+                "getWorkerPool"
+              ]
+            },
+            "CreateBuild": {
+              "methods": [
+                "createBuild"
+              ]
+            },
+            "RetryBuild": {
+              "methods": [
+                "retryBuild"
+              ]
+            },
+            "ApproveBuild": {
+              "methods": [
+                "approveBuild"
+              ]
+            },
+            "RunBuildTrigger": {
+              "methods": [
+                "runBuildTrigger"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
+            "ListBuilds": {
+              "methods": [
+                "listBuilds",
+                "listBuildsStream",
+                "listBuildsAsync"
+              ]
+            },
+            "ListBuildTriggers": {
+              "methods": [
+                "listBuildTriggers",
+                "listBuildTriggersStream",
+                "listBuildTriggersAsync"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudBuildClient",
+          "rpcs": {
+            "GetBuild": {
+              "methods": [
+                "getBuild"
+              ]
+            },
+            "CancelBuild": {
+              "methods": [
+                "cancelBuild"
+              ]
+            },
+            "CreateBuildTrigger": {
+              "methods": [
+                "createBuildTrigger"
+              ]
+            },
+            "GetBuildTrigger": {
+              "methods": [
+                "getBuildTrigger"
+              ]
+            },
+            "DeleteBuildTrigger": {
+              "methods": [
+                "deleteBuildTrigger"
+              ]
+            },
+            "UpdateBuildTrigger": {
+              "methods": [
+                "updateBuildTrigger"
+              ]
+            },
+            "ReceiveTriggerWebhook": {
+              "methods": [
+                "receiveTriggerWebhook"
+              ]
+            },
+            "GetWorkerPool": {
+              "methods": [
+                "getWorkerPool"
+              ]
+            },
+            "CreateBuild": {
+              "methods": [
+                "createBuild"
+              ]
+            },
+            "RetryBuild": {
+              "methods": [
+                "retryBuild"
+              ]
+            },
+            "ApproveBuild": {
+              "methods": [
+                "approveBuild"
+              ]
+            },
+            "RunBuildTrigger": {
+              "methods": [
+                "runBuildTrigger"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
+            "ListBuilds": {
+              "methods": [
+                "listBuilds",
+                "listBuildsStream",
+                "listBuildsAsync"
+              ]
+            },
+            "ListBuildTriggers": {
+              "methods": [
+                "listBuildTriggers",
+                "listBuildTriggersStream",
+                "listBuildTriggersAsync"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
