@@ -326,7 +326,7 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeSentimentResponse]{@link google.cloud.language.v1.AnalyzeSentimentResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeSentimentResponse | AnalyzeSentimentResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -417,7 +417,7 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeEntitiesResponse]{@link google.cloud.language.v1.AnalyzeEntitiesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeEntitiesResponse | AnalyzeEntitiesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -507,7 +507,7 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeEntitySentimentResponse]{@link google.cloud.language.v1.AnalyzeEntitySentimentResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeEntitySentimentResponse | AnalyzeEntitySentimentResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -608,7 +608,7 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeSyntaxResponse]{@link google.cloud.language.v1.AnalyzeSyntaxResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnalyzeSyntaxResponse | AnalyzeSyntaxResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -692,7 +692,7 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ClassifyTextResponse]{@link google.cloud.language.v1.ClassifyTextResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.ClassifyTextResponse | ClassifyTextResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -778,7 +778,7 @@ export class LanguageServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotateTextResponse]{@link google.cloud.language.v1.AnnotateTextResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.language.v1.AnnotateTextResponse | AnnotateTextResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

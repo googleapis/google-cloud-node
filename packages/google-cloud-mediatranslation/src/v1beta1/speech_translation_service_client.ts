@@ -335,8 +335,8 @@ export class SpeechTranslationServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing [StreamingTranslateSpeechRequest]{@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest} for write() method, and
-   *   will emit objects representing [StreamingTranslateSpeechResponse]{@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResponse} on 'data' event asynchronously.
+   *   representing {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest | StreamingTranslateSpeechRequest} for write() method, and
+   *   will emit objects representing {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResponse | StreamingTranslateSpeechResponse} on 'data' event asynchronously.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
