@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.9.3](https://github.com/googleapis/nodejs-storage/compare/v6.9.2...v6.9.3) (2023-02-15)
+
+
+### Bug Fixes
+
+* Reduce memory footprint of deleteFiles by utilizing getFilesStream and using smaller queue of promises ([#2147](https://github.com/googleapis/nodejs-storage/issues/2147)) ([f792f25](https://github.com/googleapis/nodejs-storage/commit/f792f25e3fd38003056f649eaa638a782290cbac))
+
 ## [6.9.2](https://github.com/googleapis/nodejs-storage/compare/v6.9.1...v6.9.2) (2023-02-06)
 
 
