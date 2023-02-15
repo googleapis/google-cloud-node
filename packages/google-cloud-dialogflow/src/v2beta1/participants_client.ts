@@ -511,7 +511,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2beta1.Participant}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Participant | Participant}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -610,7 +610,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2beta1.Participant}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Participant | Participant}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -703,7 +703,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2beta1.Participant}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.Participant | Participant}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -864,7 +864,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeContentResponse]{@link google.cloud.dialogflow.v2beta1.AnalyzeContentResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.AnalyzeContentResponse | AnalyzeContentResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -978,7 +978,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SuggestArticlesResponse]{@link google.cloud.dialogflow.v2beta1.SuggestArticlesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.SuggestArticlesResponse | SuggestArticlesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1090,7 +1090,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SuggestFaqAnswersResponse]{@link google.cloud.dialogflow.v2beta1.SuggestFaqAnswersResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.SuggestFaqAnswersResponse | SuggestFaqAnswersResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1204,7 +1204,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SuggestSmartRepliesResponse]{@link google.cloud.dialogflow.v2beta1.SuggestSmartRepliesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.SuggestSmartRepliesResponse | SuggestSmartRepliesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1327,7 +1327,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CompileSuggestionResponse]{@link google.cloud.dialogflow.v2beta1.CompileSuggestionResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.CompileSuggestionResponse | CompileSuggestionResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1442,8 +1442,8 @@ export class ParticipantsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing [StreamingAnalyzeContentRequest]{@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest} for write() method, and
-   *   will emit objects representing [StreamingAnalyzeContentResponse]{@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse} on 'data' event asynchronously.
+   *   representing {@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest | StreamingAnalyzeContentRequest} for write() method, and
+   *   will emit objects representing {@link google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentResponse | StreamingAnalyzeContentResponse} on 'data' event asynchronously.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
@@ -1472,7 +1472,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Participant]{@link google.cloud.dialogflow.v2beta1.Participant}.
+   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2beta1.Participant | Participant}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1573,7 +1573,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Participant]{@link google.cloud.dialogflow.v2beta1.Participant} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2beta1.Participant | Participant} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listParticipantsAsync()`
@@ -1624,7 +1624,7 @@ export class ParticipantsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Participant]{@link google.cloud.dialogflow.v2beta1.Participant}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.dialogflow.v2beta1.Participant | Participant}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1698,7 +1698,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Suggestion]{@link google.cloud.dialogflow.v2beta1.Suggestion}.
+   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2beta1.Suggestion | Suggestion}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1814,7 +1814,7 @@ export class ParticipantsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Suggestion]{@link google.cloud.dialogflow.v2beta1.Suggestion} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2beta1.Suggestion | Suggestion} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSuggestionsAsync()`
@@ -1880,7 +1880,7 @@ export class ParticipantsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Suggestion]{@link google.cloud.dialogflow.v2beta1.Suggestion}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.dialogflow.v2beta1.Suggestion | Suggestion}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1923,9 +1923,9 @@ export class ParticipantsClient {
    * @param {string} request.name
    *   Resource name for the location.
    * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1975,7 +1975,7 @@ export class ParticipantsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)

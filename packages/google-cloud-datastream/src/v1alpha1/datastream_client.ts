@@ -585,7 +585,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ConnectionProfile]{@link google.cloud.datastream.v1alpha1.ConnectionProfile}.
+   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -699,7 +699,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DiscoverConnectionProfileResponse]{@link google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse | DiscoverConnectionProfileResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -800,7 +800,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Stream]{@link google.cloud.datastream.v1alpha1.Stream}.
+   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.Stream | Stream}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -891,7 +891,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PrivateConnection]{@link google.cloud.datastream.v1alpha1.PrivateConnection}.
+   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -988,7 +988,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Route]{@link google.cloud.datastream.v1alpha1.Route}.
+   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.Route | Route}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2815,7 +2815,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ConnectionProfile]{@link google.cloud.datastream.v1alpha1.ConnectionProfile}.
+   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2927,7 +2927,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ConnectionProfile]{@link google.cloud.datastream.v1alpha1.ConnectionProfile} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConnectionProfilesAsync()`
@@ -2985,7 +2985,7 @@ export class DatastreamClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ConnectionProfile]{@link google.cloud.datastream.v1alpha1.ConnectionProfile}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3038,7 +3038,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Stream]{@link google.cloud.datastream.v1alpha1.Stream}.
+   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.Stream | Stream}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3146,7 +3146,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Stream]{@link google.cloud.datastream.v1alpha1.Stream} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.Stream | Stream} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listStreamsAsync()`
@@ -3204,7 +3204,7 @@ export class DatastreamClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Stream]{@link google.cloud.datastream.v1alpha1.Stream}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datastream.v1alpha1.Stream | Stream}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3457,7 +3457,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [PrivateConnection]{@link google.cloud.datastream.v1alpha1.PrivateConnection}.
+   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3571,7 +3571,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [PrivateConnection]{@link google.cloud.datastream.v1alpha1.PrivateConnection} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPrivateConnectionsAsync()`
@@ -3631,7 +3631,7 @@ export class DatastreamClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [PrivateConnection]{@link google.cloud.datastream.v1alpha1.PrivateConnection}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3687,7 +3687,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Route]{@link google.cloud.datastream.v1alpha1.Route}.
+   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.Route | Route}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3797,7 +3797,7 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Route]{@link google.cloud.datastream.v1alpha1.Route} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.Route | Route} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRoutesAsync()`
@@ -3857,7 +3857,7 @@ export class DatastreamClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Route]{@link google.cloud.datastream.v1alpha1.Route}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datastream.v1alpha1.Route | Route}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
