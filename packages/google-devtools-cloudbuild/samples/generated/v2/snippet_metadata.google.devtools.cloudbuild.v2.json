@@ -13,7 +13,7 @@
     "snippets": [
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_CreateConnection_async",
-            "title": "CloudBuild createConnection Sample",
+            "title": "RepositoryManager createConnection Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Connection.",
             "canonical": true,
@@ -61,7 +61,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_GetConnection_async",
-            "title": "CloudBuild getConnection Sample",
+            "title": "RepositoryManager getConnection Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single connection.",
             "canonical": true,
@@ -101,7 +101,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_ListConnections_async",
-            "title": "CloudBuild listConnections Sample",
+            "title": "RepositoryManager listConnections Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Connections in a given project and location.",
             "canonical": true,
@@ -149,7 +149,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async",
-            "title": "CloudBuild updateConnection Sample",
+            "title": "RepositoryManager updateConnection Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a single connection.",
             "canonical": true,
@@ -201,7 +201,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async",
-            "title": "CloudBuild deleteConnection Sample",
+            "title": "RepositoryManager deleteConnection Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single connection.",
             "canonical": true,
@@ -249,7 +249,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_CreateRepository_async",
-            "title": "CloudBuild createRepository Sample",
+            "title": "RepositoryManager createRepository Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Repository.",
             "canonical": true,
@@ -297,7 +297,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async",
-            "title": "CloudBuild batchCreateRepositories Sample",
+            "title": "RepositoryManager batchCreateRepositories Sample",
             "origin": "API_DEFINITION",
             "description": " Creates multiple repositories inside a connection.",
             "canonical": true,
@@ -341,7 +341,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_GetRepository_async",
-            "title": "CloudBuild getRepository Sample",
+            "title": "RepositoryManager getRepository Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single repository.",
             "canonical": true,
@@ -381,7 +381,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_ListRepositories_async",
-            "title": "CloudBuild listRepositories Sample",
+            "title": "RepositoryManager listRepositories Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Repositories in a given connection.",
             "canonical": true,
@@ -433,7 +433,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async",
-            "title": "CloudBuild deleteRepository Sample",
+            "title": "RepositoryManager deleteRepository Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single repository.",
             "canonical": true,
@@ -481,7 +481,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchReadWriteToken_async",
-            "title": "CloudBuild fetchReadWriteToken Sample",
+            "title": "RepositoryManager fetchReadWriteToken Sample",
             "origin": "API_DEFINITION",
             "description": " Fetches read/write token of a given repository.",
             "canonical": true,
@@ -521,7 +521,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchReadToken_async",
-            "title": "CloudBuild fetchReadToken Sample",
+            "title": "RepositoryManager fetchReadToken Sample",
             "origin": "API_DEFINITION",
             "description": " Fetches read token of a given repository.",
             "canonical": true,
@@ -561,7 +561,7 @@
         },
         {
             "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchLinkableRepositories_async",
-            "title": "CloudBuild fetchLinkableRepositories Sample",
+            "title": "RepositoryManager fetchLinkableRepositories Sample",
             "origin": "API_DEFINITION",
             "description": " FetchLinkableRepositories get repositories from SCM that are accessible and could be added to the connection.",
             "canonical": true,

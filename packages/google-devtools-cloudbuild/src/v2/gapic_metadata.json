@@ -5,18 +5,6 @@
   "protoPackage": "google.devtools.cloudbuild.v2",
   "libraryPackage": "@google-cloud/cloudbuild",
   "services": {
-    "CloudBuild": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "CloudBuildClient",
-          "rpcs": {}
-        },
-        "grpc-fallback": {
-          "libraryClient": "CloudBuildClient",
-          "rpcs": {}
-        }
-      }
-    },
     "RepositoryManager": {
       "clients": {
         "grpc": {

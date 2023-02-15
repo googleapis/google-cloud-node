@@ -2441,12 +2441,6 @@
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
                   },
                   "nested": {
-                    "CloudBuild": {
-                      "options": {
-                        "(google.api.default_host)": "cloudbuild.googleapis.com"
-                      },
-                      "methods": {}
-                    },
                     "OperationMetadata": {
                       "fields": {
                         "createTime": {

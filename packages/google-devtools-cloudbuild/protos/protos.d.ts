@@ -8342,27 +8342,6 @@ export namespace google {
             /** Namespace v2. */
             namespace v2 {
 
-                /** Represents a CloudBuild */
-                class CloudBuild extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new CloudBuild service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new CloudBuild service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudBuild;
-                }
-
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
 

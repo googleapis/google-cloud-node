@@ -21487,41 +21487,6 @@
                      */
                     var v2 = {};
     
-                    v2.CloudBuild = (function() {
-    
-                        /**
-                         * Constructs a new CloudBuild service.
-                         * @memberof google.devtools.cloudbuild.v2
-                         * @classdesc Represents a CloudBuild
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function CloudBuild(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (CloudBuild.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudBuild;
-    
-                        /**
-                         * Creates new CloudBuild service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.devtools.cloudbuild.v2.CloudBuild
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {CloudBuild} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        CloudBuild.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        return CloudBuild;
-                    })();
-    
                     v2.OperationMetadata = (function() {
     
                         /**
