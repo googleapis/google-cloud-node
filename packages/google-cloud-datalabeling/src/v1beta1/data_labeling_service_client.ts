@@ -547,7 +547,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Dataset]{@link google.cloud.datalabeling.v1beta1.Dataset}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.Dataset | Dataset}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -645,7 +645,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Dataset]{@link google.cloud.datalabeling.v1beta1.Dataset}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.Dataset | Dataset}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -737,7 +737,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -836,7 +836,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DataItem]{@link google.cloud.datalabeling.v1beta1.DataItem}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.DataItem | DataItem}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -929,7 +929,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotatedDataset]{@link google.cloud.datalabeling.v1beta1.AnnotatedDataset}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.AnnotatedDataset | AnnotatedDataset}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1028,7 +1028,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1135,7 +1135,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Example]{@link google.cloud.datalabeling.v1beta1.Example}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.Example | Example}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1231,7 +1231,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotationSpecSet]{@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet | AnnotationSpecSet}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1333,7 +1333,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotationSpecSet]{@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet | AnnotationSpecSet}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1431,7 +1431,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1533,7 +1533,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Instruction]{@link google.cloud.datalabeling.v1beta1.Instruction}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.Instruction | Instruction}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1631,7 +1631,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1731,7 +1731,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.Evaluation | Evaluation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1831,7 +1831,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.EvaluationJob | EvaluationJob}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1943,7 +1943,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.EvaluationJob | EvaluationJob}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2042,7 +2042,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The first element of the array is an object representing {@link google.cloud.datalabeling.v1beta1.EvaluationJob | EvaluationJob}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2142,7 +2142,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2242,7 +2242,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2341,7 +2341,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3364,7 +3364,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Dataset]{@link google.cloud.datalabeling.v1beta1.Dataset}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.Dataset | Dataset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3470,7 +3470,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Dataset]{@link google.cloud.datalabeling.v1beta1.Dataset} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.Dataset | Dataset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDatasetsAsync()`
@@ -3526,7 +3526,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Dataset]{@link google.cloud.datalabeling.v1beta1.Dataset}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.Dataset | Dataset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3578,7 +3578,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [DataItem]{@link google.cloud.datalabeling.v1beta1.DataItem}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.DataItem | DataItem}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3684,7 +3684,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [DataItem]{@link google.cloud.datalabeling.v1beta1.DataItem} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.DataItem | DataItem} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDataItemsAsync()`
@@ -3740,7 +3740,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [DataItem]{@link google.cloud.datalabeling.v1beta1.DataItem}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.DataItem | DataItem}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3791,7 +3791,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AnnotatedDataset]{@link google.cloud.datalabeling.v1beta1.AnnotatedDataset}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.AnnotatedDataset | AnnotatedDataset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3897,7 +3897,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AnnotatedDataset]{@link google.cloud.datalabeling.v1beta1.AnnotatedDataset} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.AnnotatedDataset | AnnotatedDataset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAnnotatedDatasetsAsync()`
@@ -3953,7 +3953,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AnnotatedDataset]{@link google.cloud.datalabeling.v1beta1.AnnotatedDataset}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.AnnotatedDataset | AnnotatedDataset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4006,7 +4006,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Example]{@link google.cloud.datalabeling.v1beta1.Example}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.Example | Example}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4114,7 +4114,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Example]{@link google.cloud.datalabeling.v1beta1.Example} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.Example | Example} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listExamplesAsync()`
@@ -4172,7 +4172,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Example]{@link google.cloud.datalabeling.v1beta1.Example}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.Example | Example}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4223,7 +4223,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AnnotationSpecSet]{@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet | AnnotationSpecSet}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4333,7 +4333,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AnnotationSpecSet]{@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet | AnnotationSpecSet} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAnnotationSpecSetsAsync()`
@@ -4389,7 +4389,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AnnotationSpecSet]{@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.AnnotationSpecSet | AnnotationSpecSet}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4440,7 +4440,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Instruction]{@link google.cloud.datalabeling.v1beta1.Instruction}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.Instruction | Instruction}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4546,7 +4546,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Instruction]{@link google.cloud.datalabeling.v1beta1.Instruction} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.Instruction | Instruction} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstructionsAsync()`
@@ -4602,7 +4602,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Instruction]{@link google.cloud.datalabeling.v1beta1.Instruction}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.Instruction | Instruction}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4685,7 +4685,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.Evaluation | Evaluation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4823,7 +4823,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.Evaluation | Evaluation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchEvaluationsAsync()`
@@ -4911,7 +4911,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.Evaluation | Evaluation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4966,7 +4966,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison | ExampleComparison}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5078,7 +5078,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison | ExampleComparison} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchExampleComparisonsAsync()`
@@ -5136,7 +5136,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison | ExampleComparison}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5195,7 +5195,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The first element of the array is Array of {@link google.cloud.datalabeling.v1beta1.EvaluationJob | EvaluationJob}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5308,7 +5308,7 @@ export class DataLabelingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datalabeling.v1beta1.EvaluationJob | EvaluationJob} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEvaluationJobsAsync()`
@@ -5371,7 +5371,7 @@ export class DataLabelingServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datalabeling.v1beta1.EvaluationJob | EvaluationJob}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
