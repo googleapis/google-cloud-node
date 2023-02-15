@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v2.2.0...area120-tables-v2.2.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3985](https://github.com/googleapis/google-cloud-node/issues/3985)) ([fb2a6fd](https://github.com/googleapis/google-cloud-node/commit/fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v2.1.3...area120-tables-v2.2.0) (2023-01-28)
 
 
