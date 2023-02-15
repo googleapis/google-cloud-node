@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v2.2.0...artifact-registry-v2.2.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3990](https://github.com/googleapis/google-cloud-node/issues/3990)) ([878c55d](https://github.com/googleapis/google-cloud-node/commit/878c55d62af7e41e8d5050b081e4b79202b1b9cc))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v2.1.0...artifact-registry-v2.2.0) (2023-02-09)
 
 

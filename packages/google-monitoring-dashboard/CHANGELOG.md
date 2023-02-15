@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.1](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.9.0...monitoring-dashboards-v2.9.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3991](https://github.com/googleapis/google-cloud-node/issues/3991)) ([c6326d9](https://github.com/googleapis/google-cloud-node/commit/c6326d90abb9b649b25052e4afe7b3eb0f65bcb4))
+
 ## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.8.0...monitoring-dashboards-v2.9.0) (2023-01-28)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/addressvalidation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": " client for Node.js",
   "repository": {
     "type": "git",
