@@ -514,7 +514,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Instance]{@link google.cloud.datafusion.v1beta1.Instance}.
+   *   The first element of the array is an object representing {@link google.cloud.datafusion.v1beta1.Instance | Instance}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -605,7 +605,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RemoveIamPolicyResponse]{@link google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse | RemoveIamPolicyResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -704,7 +704,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AddDnsPeeringResponse]{@link google.cloud.datafusion.v1beta1.AddDnsPeeringResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datafusion.v1beta1.AddDnsPeeringResponse | AddDnsPeeringResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -797,7 +797,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RemoveDnsPeeringResponse]{@link google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse | RemoveDnsPeeringResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1617,7 +1617,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Version]{@link google.cloud.datafusion.v1beta1.Version}.
+   *   The first element of the array is Array of {@link google.cloud.datafusion.v1beta1.Version | Version}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1721,7 +1721,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Version]{@link google.cloud.datafusion.v1beta1.Version} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datafusion.v1beta1.Version | Version} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAvailableVersionsAsync()`
@@ -1775,7 +1775,7 @@ export class DataFusionClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Version]{@link google.cloud.datafusion.v1beta1.Version}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datafusion.v1beta1.Version | Version}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1826,7 +1826,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Instance]{@link google.cloud.datafusion.v1beta1.Instance}.
+   *   The first element of the array is Array of {@link google.cloud.datafusion.v1beta1.Instance | Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1932,7 +1932,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Instance]{@link google.cloud.datafusion.v1beta1.Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datafusion.v1beta1.Instance | Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
@@ -1988,7 +1988,7 @@ export class DataFusionClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Instance]{@link google.cloud.datafusion.v1beta1.Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datafusion.v1beta1.Instance | Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2037,7 +2037,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace}.
+   *   The first element of the array is Array of {@link google.cloud.datafusion.v1beta1.Namespace | Namespace}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2141,7 +2141,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datafusion.v1beta1.Namespace | Namespace} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNamespacesAsync()`
@@ -2195,7 +2195,7 @@ export class DataFusionClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datafusion.v1beta1.Namespace | Namespace}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2239,7 +2239,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering}.
+   *   The first element of the array is Array of {@link google.cloud.datafusion.v1beta1.DnsPeering | DnsPeering}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2338,7 +2338,7 @@ export class DataFusionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.datafusion.v1beta1.DnsPeering | DnsPeering} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDnsPeeringsAsync()`
@@ -2387,7 +2387,7 @@ export class DataFusionClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.datafusion.v1beta1.DnsPeering | DnsPeering}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)

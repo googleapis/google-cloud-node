@@ -418,7 +418,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Reservation]{@link google.cloud.bigquery.reservation.v1.Reservation}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.Reservation | Reservation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -516,7 +516,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Reservation]{@link google.cloud.bigquery.reservation.v1.Reservation}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.Reservation | Reservation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -616,7 +616,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -715,7 +715,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Reservation]{@link google.cloud.bigquery.reservation.v1.Reservation}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.Reservation | Reservation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -824,7 +824,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -926,7 +926,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1030,7 +1030,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1139,7 +1139,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1250,7 +1250,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SplitCapacityCommitmentResponse]{@link google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse | SplitCapacityCommitmentResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1364,7 +1364,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1507,7 +1507,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1619,7 +1619,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1725,7 +1725,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1826,7 +1826,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1924,7 +1924,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BiReservation]{@link google.cloud.bigquery.reservation.v1.BiReservation}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.BiReservation | BiReservation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2030,7 +2030,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BiReservation]{@link google.cloud.bigquery.reservation.v1.BiReservation}.
+   *   The first element of the array is an object representing {@link google.cloud.bigquery.reservation.v1.BiReservation | BiReservation}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2133,7 +2133,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Reservation]{@link google.cloud.bigquery.reservation.v1.Reservation}.
+   *   The first element of the array is Array of {@link google.cloud.bigquery.reservation.v1.Reservation | Reservation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2232,7 +2232,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Reservation]{@link google.cloud.bigquery.reservation.v1.Reservation} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.bigquery.reservation.v1.Reservation | Reservation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReservationsAsync()`
@@ -2281,7 +2281,7 @@ export class ReservationServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Reservation]{@link google.cloud.bigquery.reservation.v1.Reservation}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.bigquery.reservation.v1.Reservation | Reservation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2325,7 +2325,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment}.
+   *   The first element of the array is Array of {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2428,7 +2428,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCapacityCommitmentsAsync()`
@@ -2477,7 +2477,7 @@ export class ReservationServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [CapacityCommitment]{@link google.cloud.bigquery.reservation.v1.CapacityCommitment}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.bigquery.reservation.v1.CapacityCommitment | CapacityCommitment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2546,7 +2546,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The first element of the array is Array of {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2650,7 +2650,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAssignmentsAsync()`
@@ -2704,7 +2704,7 @@ export class ReservationServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2779,7 +2779,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The first element of the array is Array of {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2893,7 +2893,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAssignmentsAsync()`
@@ -2957,7 +2957,7 @@ export class ReservationServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -3035,7 +3035,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The first element of the array is Array of {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -3143,7 +3143,7 @@ export class ReservationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchAllAssignmentsAsync()`
@@ -3201,7 +3201,7 @@ export class ReservationServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.bigquery.reservation.v1.Assignment | Assignment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
