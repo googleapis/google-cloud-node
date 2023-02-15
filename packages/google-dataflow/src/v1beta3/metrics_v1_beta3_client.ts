@@ -356,7 +356,7 @@ export class MetricsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [JobMetrics]{@link google.dataflow.v1beta3.JobMetrics}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.JobMetrics | JobMetrics}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -460,7 +460,7 @@ export class MetricsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [StageSummary]{@link google.dataflow.v1beta3.StageSummary}.
+   *   The first element of the array is Array of {@link google.dataflow.v1beta3.StageSummary | StageSummary}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -568,7 +568,7 @@ export class MetricsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [StageSummary]{@link google.dataflow.v1beta3.StageSummary} on 'data' event.
+   *   An object stream which emits an object representing {@link google.dataflow.v1beta3.StageSummary | StageSummary} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `getJobExecutionDetailsAsync()`
@@ -628,7 +628,7 @@ export class MetricsV1Beta3Client {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [StageSummary]{@link google.dataflow.v1beta3.StageSummary}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.dataflow.v1beta3.StageSummary | StageSummary}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -692,7 +692,7 @@ export class MetricsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [WorkerDetails]{@link google.dataflow.v1beta3.WorkerDetails}.
+   *   The first element of the array is Array of {@link google.dataflow.v1beta3.WorkerDetails | WorkerDetails}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -807,7 +807,7 @@ export class MetricsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [WorkerDetails]{@link google.dataflow.v1beta3.WorkerDetails} on 'data' event.
+   *   An object stream which emits an object representing {@link google.dataflow.v1beta3.WorkerDetails | WorkerDetails} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `getStageExecutionDetailsAsync()`
@@ -874,7 +874,7 @@ export class MetricsV1Beta3Client {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [WorkerDetails]{@link google.dataflow.v1beta3.WorkerDetails}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.dataflow.v1beta3.WorkerDetails | WorkerDetails}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)

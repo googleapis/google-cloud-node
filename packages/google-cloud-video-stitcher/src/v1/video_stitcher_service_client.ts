@@ -416,7 +416,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CdnKey]{@link google.cloud.video.stitcher.v1.CdnKey}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.CdnKey | CdnKey}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -508,7 +508,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CdnKey]{@link google.cloud.video.stitcher.v1.CdnKey}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.CdnKey | CdnKey}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -600,7 +600,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -696,7 +696,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CdnKey]{@link google.cloud.video.stitcher.v1.CdnKey}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.CdnKey | CdnKey}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -791,7 +791,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [VodSession]{@link google.cloud.video.stitcher.v1.VodSession}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.VodSession | VodSession}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -890,7 +890,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [VodSession]{@link google.cloud.video.stitcher.v1.VodSession}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.VodSession | VodSession}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -982,7 +982,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [VodStitchDetail]{@link google.cloud.video.stitcher.v1.VodStitchDetail}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.VodStitchDetail | VodStitchDetail}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1080,7 +1080,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [VodAdTagDetail]{@link google.cloud.video.stitcher.v1.VodAdTagDetail}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.VodAdTagDetail | VodAdTagDetail}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1178,7 +1178,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LiveAdTagDetail]{@link google.cloud.video.stitcher.v1.LiveAdTagDetail}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.LiveAdTagDetail | LiveAdTagDetail}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1283,7 +1283,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Slate]{@link google.cloud.video.stitcher.v1.Slate}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.Slate | Slate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1375,7 +1375,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Slate]{@link google.cloud.video.stitcher.v1.Slate}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.Slate | Slate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1462,7 +1462,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Slate]{@link google.cloud.video.stitcher.v1.Slate}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.Slate | Slate}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1554,7 +1554,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1648,7 +1648,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LiveSession]{@link google.cloud.video.stitcher.v1.LiveSession}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.LiveSession | LiveSession}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1746,7 +1746,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LiveSession]{@link google.cloud.video.stitcher.v1.LiveSession}.
+   *   The first element of the array is an object representing {@link google.cloud.video.stitcher.v1.LiveSession | LiveSession}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1848,7 +1848,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CdnKey]{@link google.cloud.video.stitcher.v1.CdnKey}.
+   *   The first element of the array is Array of {@link google.cloud.video.stitcher.v1.CdnKey | CdnKey}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1952,7 +1952,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [CdnKey]{@link google.cloud.video.stitcher.v1.CdnKey} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.video.stitcher.v1.CdnKey | CdnKey} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCdnKeysAsync()`
@@ -2006,7 +2006,7 @@ export class VideoStitcherServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [CdnKey]{@link google.cloud.video.stitcher.v1.CdnKey}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.video.stitcher.v1.CdnKey | CdnKey}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2051,7 +2051,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [VodStitchDetail]{@link google.cloud.video.stitcher.v1.VodStitchDetail}.
+   *   The first element of the array is Array of {@link google.cloud.video.stitcher.v1.VodStitchDetail | VodStitchDetail}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2150,7 +2150,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [VodStitchDetail]{@link google.cloud.video.stitcher.v1.VodStitchDetail} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.video.stitcher.v1.VodStitchDetail | VodStitchDetail} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVodStitchDetailsAsync()`
@@ -2199,7 +2199,7 @@ export class VideoStitcherServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [VodStitchDetail]{@link google.cloud.video.stitcher.v1.VodStitchDetail}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.video.stitcher.v1.VodStitchDetail | VodStitchDetail}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2243,7 +2243,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [VodAdTagDetail]{@link google.cloud.video.stitcher.v1.VodAdTagDetail}.
+   *   The first element of the array is Array of {@link google.cloud.video.stitcher.v1.VodAdTagDetail | VodAdTagDetail}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2342,7 +2342,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [VodAdTagDetail]{@link google.cloud.video.stitcher.v1.VodAdTagDetail} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.video.stitcher.v1.VodAdTagDetail | VodAdTagDetail} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVodAdTagDetailsAsync()`
@@ -2391,7 +2391,7 @@ export class VideoStitcherServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [VodAdTagDetail]{@link google.cloud.video.stitcher.v1.VodAdTagDetail}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.video.stitcher.v1.VodAdTagDetail | VodAdTagDetail}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2435,7 +2435,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [LiveAdTagDetail]{@link google.cloud.video.stitcher.v1.LiveAdTagDetail}.
+   *   The first element of the array is Array of {@link google.cloud.video.stitcher.v1.LiveAdTagDetail | LiveAdTagDetail}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2534,7 +2534,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [LiveAdTagDetail]{@link google.cloud.video.stitcher.v1.LiveAdTagDetail} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.video.stitcher.v1.LiveAdTagDetail | LiveAdTagDetail} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listLiveAdTagDetailsAsync()`
@@ -2583,7 +2583,7 @@ export class VideoStitcherServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [LiveAdTagDetail]{@link google.cloud.video.stitcher.v1.LiveAdTagDetail}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.video.stitcher.v1.LiveAdTagDetail | LiveAdTagDetail}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2631,7 +2631,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Slate]{@link google.cloud.video.stitcher.v1.Slate}.
+   *   The first element of the array is Array of {@link google.cloud.video.stitcher.v1.Slate | Slate}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2734,7 +2734,7 @@ export class VideoStitcherServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Slate]{@link google.cloud.video.stitcher.v1.Slate} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.video.stitcher.v1.Slate | Slate} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSlatesAsync()`
@@ -2787,7 +2787,7 @@ export class VideoStitcherServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Slate]{@link google.cloud.video.stitcher.v1.Slate}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.video.stitcher.v1.Slate | Slate}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
