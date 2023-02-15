@@ -2028,6 +2028,7 @@ class Bucket extends ServiceObject {
     }
 
     const MAX_PARALLEL_LIMIT = 10;
+    const MAX_QUEUE_SIZE = 1000;
     const errors = [] as Error[];
 
     const deleteFile = (file: File) => {
@@ -2039,15 +2040,32 @@ class Bucket extends ServiceObject {
       });
     };
 
-    this.getFiles(query)
-      .then(([files]) => {
+    (async () => {
+      try {
+        let promises = [];
         const limit = pLimit(MAX_PARALLEL_LIMIT);
-        const promises = files!.map(file => {
-          return limit(() => deleteFile(file));
-        });
-        return Promise.all(promises);
-      })
-      .then(() => callback!(errors.length > 0 ? errors : null), callback!);
+        const filesStream = this.getFilesStream(query);
+
+        for await (const curFile of filesStream) {
+          if (promises.length >= MAX_QUEUE_SIZE) {
+            await Promise.all(promises);
+            promises = [];
+          }
+          promises.push(
+            limit(() => deleteFile(curFile)).catch(e => {
+              filesStream.destroy();
+              throw e;
+            })
+          );
+        }
+
+        await Promise.all(promises);
+        callback!(errors.length > 0 ? errors : null);
+      } catch (e) {
+        callback!(e as Error);
+        return;
+      }
+    })();
   }
 
   deleteLabels(labels?: string | string[]): Promise<DeleteLabelsResponse>;
