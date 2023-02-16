@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,6 +48,13 @@ function main(projectId) {
    *  Datastore.BeginTransaction google.datastore.v1.Datastore.BeginTransaction.
    */
   // const transaction = 'Buffer.from('string')'
+  /**
+   *  Options for beginning a new transaction for this request.
+   *  The transaction is committed when the request completes. If specified,
+   *  TransactionOptions.mode google.datastore.v1.TransactionOptions  must be
+   *  TransactionOptions.ReadWrite google.datastore.v1.TransactionOptions.ReadWrite.
+   */
+  // const singleUseTransaction = {}
   /**
    *  The mutations to perform.
    *  When mode is `TRANSACTIONAL`, mutations affecting a single entity are

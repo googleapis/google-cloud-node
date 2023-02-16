@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START datastore_v1_generated_DatastoreAdmin_CreateIndex_async]
+function main(projectId) {
+  // [START datastore_v1_generated_Datastore_RunAggregationQuery_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,34 +29,54 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Project ID against which to make the request.
+   *  Required. The ID of the project against which to make the request.
    */
   // const projectId = 'abc123'
   /**
-   *  The index to create. The name and state fields are output only and will be
-   *  ignored. Single property indexes cannot be created or deleted.
+   *  The ID of the database against which to make the request.
+   *  '(default)' is not allowed; please use empty string '' to refer the default
+   *  database.
    */
-  // const index = {}
+  // const databaseId = 'abc123'
+  /**
+   *  Entities are partitioned into subsets, identified by a partition ID.
+   *  Queries are scoped to a single partition.
+   *  This partition ID is normalized with the standard default context
+   *  partition ID.
+   */
+  // const partitionId = {}
+  /**
+   *  The options for this query.
+   */
+  // const readOptions = {}
+  /**
+   *  The query to run.
+   */
+  // const aggregationQuery = {}
+  /**
+   *  The GQL query to run. This query must be an aggregation query.
+   */
+  // const gqlQuery = {}
 
-  // Imports the Admin library
-  const {DatastoreAdminClient} = require('@google-cloud/datastore-admin').v1;
+  // Imports the Datastore library
+  const {DatastoreClient} = require('@google-cloud/datastore').v1;
 
   // Instantiates a client
-  const adminClient = new DatastoreAdminClient();
+  const datastoreClient = new DatastoreClient();
 
-  async function callCreateIndex() {
+  async function callRunAggregationQuery() {
     // Construct request
     const request = {
+      projectId,
     };
 
     // Run request
-    const [operation] = await adminClient.createIndex(request);
-    const [response] = await operation.promise();
+    const response = await datastoreClient.runAggregationQuery(request);
     console.log(response);
   }
 
-  callCreateIndex();
-  // [END datastore_v1_generated_DatastoreAdmin_CreateIndex_async]
+  callRunAggregationQuery();
+  // [END datastore_v1_generated_Datastore_RunAggregationQuery_async]
 }
 
 process.on('unhandledRejection', err => {

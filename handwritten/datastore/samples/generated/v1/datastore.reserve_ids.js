@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ function main(projectId, keys) {
    */
   // const databaseId = 'abc123'
   /**
-   *  Required. A list of keys with complete key paths whose numeric IDs should not be
-   *  auto-allocated.
+   *  Required. A list of keys with complete key paths whose numeric IDs should
+   *  not be auto-allocated.
    */
   // const keys = 1234
 
