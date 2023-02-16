@@ -124,6 +124,66 @@
       }
     },
     {
+      "regionTag": "datastore_v1_generated_Datastore_RunAggregationQuery_async",
+      "title": "datastore runAggregationQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Runs an aggregation query.",
+      "canonical": true,
+      "file": "datastore.run_aggregation_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunAggregationQuery",
+        "fullName": "google.datastore.v1.Datastore.RunAggregationQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "partition_id",
+            "type": ".google.datastore.v1.PartitionId"
+          },
+          {
+            "name": "read_options",
+            "type": ".google.datastore.v1.ReadOptions"
+          },
+          {
+            "name": "aggregation_query",
+            "type": ".google.datastore.v1.AggregationQuery"
+          },
+          {
+            "name": "gql_query",
+            "type": ".google.datastore.v1.GqlQuery"
+          }
+        ],
+        "resultType": ".google.datastore.v1.RunAggregationQueryResponse",
+        "client": {
+          "shortName": "DatastoreClient",
+          "fullName": "google.datastore.v1.DatastoreClient"
+        },
+        "method": {
+          "shortName": "RunAggregationQuery",
+          "fullName": "google.datastore.v1.Datastore.RunAggregationQuery",
+          "service": {
+            "shortName": "Datastore",
+            "fullName": "google.datastore.v1.Datastore"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "datastore_v1_generated_Datastore_BeginTransaction_async",
       "title": "datastore beginTransaction Sample",
       "origin": "API_DEFINITION",
@@ -182,7 +242,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 89,
           "type": "FULL"
         }
       ],
@@ -206,6 +266,10 @@
           {
             "name": "transaction",
             "type": "TYPE_BYTES"
+          },
+          {
+            "name": "single_use_transaction",
+            "type": ".google.datastore.v1.TransactionOptions"
           },
           {
             "name": "mutations",

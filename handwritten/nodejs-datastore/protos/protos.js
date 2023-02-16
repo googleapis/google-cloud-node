@@ -8794,6 +8794,7 @@
                      * @interface IEntityResult
                      * @property {google.datastore.v1.IEntity|null} [entity] EntityResult entity
                      * @property {number|Long|null} [version] EntityResult version
+                     * @property {google.protobuf.ITimestamp|null} [createTime] EntityResult createTime
                      * @property {google.protobuf.ITimestamp|null} [updateTime] EntityResult updateTime
                      * @property {Uint8Array|null} [cursor] EntityResult cursor
                      */
@@ -8828,6 +8829,14 @@
                      * @instance
                      */
                     EntityResult.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * EntityResult createTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     */
+                    EntityResult.prototype.createTime = null;
     
                     /**
                      * EntityResult updateTime.
@@ -8877,6 +8886,8 @@
                             writer.uint32(/* id 4, wireType 0 =*/32).int64(message.version);
                         if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                             $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -8917,6 +8928,10 @@
                                 }
                             case 4: {
                                     message.version = reader.int64();
+                                    break;
+                                }
+                            case 6: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 5: {
@@ -8970,6 +8985,11 @@
                         if (message.version != null && message.hasOwnProperty("version"))
                             if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
                                 return "version: integer|Long expected";
+                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            if (error)
+                                return "createTime." + error;
+                        }
                         if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
                             if (error)
@@ -9007,6 +9027,11 @@
                                 message.version = object.version;
                             else if (typeof object.version === "object")
                                 message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
+                        if (object.createTime != null) {
+                            if (typeof object.createTime !== "object")
+                                throw TypeError(".google.datastore.v1.EntityResult.createTime: object expected");
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                        }
                         if (object.updateTime != null) {
                             if (typeof object.updateTime !== "object")
                                 throw TypeError(".google.datastore.v1.EntityResult.updateTime: object expected");
@@ -9048,6 +9073,7 @@
                             } else
                                 object.version = options.longs === String ? "0" : 0;
                             object.updateTime = null;
+                            object.createTime = null;
                         }
                         if (message.entity != null && message.hasOwnProperty("entity"))
                             object.entity = $root.google.datastore.v1.Entity.toObject(message.entity, options);
@@ -9060,6 +9086,8 @@
                                 object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
                         if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                             object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                         return object;
                     };
     
@@ -11647,6 +11675,7 @@
                                 return "op: enum value expected";
                             case 0:
                             case 1:
+                            case 2:
                                 break;
                             }
                         if (message.filters != null && message.hasOwnProperty("filters")) {
@@ -11687,6 +11716,10 @@
                         case "AND":
                         case 1:
                             message.op = 1;
+                            break;
+                        case "OR":
+                        case 2:
+                            message.op = 2;
                             break;
                         }
                         if (object.filters) {
@@ -11761,11 +11794,13 @@
                      * @enum {number}
                      * @property {number} OPERATOR_UNSPECIFIED=0 OPERATOR_UNSPECIFIED value
                      * @property {number} AND=1 AND value
+                     * @property {number} OR=2 OR value
                      */
                     CompositeFilter.Operator = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "OPERATOR_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "AND"] = 1;
+                        values[valuesById[2] = "OR"] = 2;
                         return values;
                     })();
     
@@ -18428,6 +18463,7 @@
                      * @interface IMutationResult
                      * @property {google.datastore.v1.IKey|null} [key] MutationResult key
                      * @property {number|Long|null} [version] MutationResult version
+                     * @property {google.protobuf.ITimestamp|null} [createTime] MutationResult createTime
                      * @property {google.protobuf.ITimestamp|null} [updateTime] MutationResult updateTime
                      * @property {boolean|null} [conflictDetected] MutationResult conflictDetected
                      */
@@ -18462,6 +18498,14 @@
                      * @instance
                      */
                     MutationResult.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * MutationResult createTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                     * @memberof google.datastore.v1.MutationResult
+                     * @instance
+                     */
+                    MutationResult.prototype.createTime = null;
     
                     /**
                      * MutationResult updateTime.
@@ -18511,6 +18555,8 @@
                             writer.uint32(/* id 5, wireType 0 =*/40).bool(message.conflictDetected);
                         if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                             $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         return writer;
                     };
     
@@ -18551,6 +18597,10 @@
                                 }
                             case 4: {
                                     message.version = reader.int64();
+                                    break;
+                                }
+                            case 7: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 6: {
@@ -18604,6 +18654,11 @@
                         if (message.version != null && message.hasOwnProperty("version"))
                             if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
                                 return "version: integer|Long expected";
+                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            if (error)
+                                return "createTime." + error;
+                        }
                         if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
                             if (error)
@@ -18641,6 +18696,11 @@
                                 message.version = object.version;
                             else if (typeof object.version === "object")
                                 message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
+                        if (object.createTime != null) {
+                            if (typeof object.createTime !== "object")
+                                throw TypeError(".google.datastore.v1.MutationResult.createTime: object expected");
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                        }
                         if (object.updateTime != null) {
                             if (typeof object.updateTime !== "object")
                                 throw TypeError(".google.datastore.v1.MutationResult.updateTime: object expected");
@@ -18673,6 +18733,7 @@
                                 object.version = options.longs === String ? "0" : 0;
                             object.conflictDetected = false;
                             object.updateTime = null;
+                            object.createTime = null;
                         }
                         if (message.key != null && message.hasOwnProperty("key"))
                             object.key = $root.google.datastore.v1.Key.toObject(message.key, options);
@@ -18685,6 +18746,8 @@
                             object.conflictDetected = message.conflictDetected;
                         if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                             object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                         return object;
                     };
     

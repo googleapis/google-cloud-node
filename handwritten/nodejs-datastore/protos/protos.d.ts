@@ -3444,6 +3444,9 @@ export namespace google {
                 /** EntityResult version */
                 version?: (number|Long|string|null);
 
+                /** EntityResult createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
                 /** EntityResult updateTime */
                 updateTime?: (google.protobuf.ITimestamp|null);
 
@@ -3465,6 +3468,9 @@ export namespace google {
 
                 /** EntityResult version. */
                 public version: (number|Long|string);
+
+                /** EntityResult createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
 
                 /** EntityResult updateTime. */
                 public updateTime?: (google.protobuf.ITimestamp|null);
@@ -4639,7 +4645,8 @@ export namespace google {
                 /** Operator enum. */
                 enum Operator {
                     OPERATOR_UNSPECIFIED = 0,
-                    AND = 1
+                    AND = 1,
+                    OR = 2
                 }
             }
 
@@ -7250,6 +7257,9 @@ export namespace google {
                 /** MutationResult version */
                 version?: (number|Long|string|null);
 
+                /** MutationResult createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
                 /** MutationResult updateTime */
                 updateTime?: (google.protobuf.ITimestamp|null);
 
@@ -7271,6 +7281,9 @@ export namespace google {
 
                 /** MutationResult version. */
                 public version: (number|Long|string);
+
+                /** MutationResult createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
 
                 /** MutationResult updateTime. */
                 public updateTime?: (google.protobuf.ITimestamp|null);
