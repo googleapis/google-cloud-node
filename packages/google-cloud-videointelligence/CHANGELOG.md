@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v4.2.0...video-intelligence-v4.2.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3990](https://github.com/googleapis/google-cloud-node/issues/3990)) ([878c55d](https://github.com/googleapis/google-cloud-node/commit/878c55d62af7e41e8d5050b081e4b79202b1b9cc))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v4.1.1...video-intelligence-v4.2.0) (2023-01-28)
 
 

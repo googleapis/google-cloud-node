@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.2](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v2.3.1...network-connectivity-v2.3.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3988](https://github.com/googleapis/google-cloud-node/issues/3988)) ([f2134ed](https://github.com/googleapis/google-cloud-node/commit/f2134ed5f166a3bb7dd0bed556700f0b0fd9756a))
+
 ## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v2.3.0...network-connectivity-v2.3.1) (2023-02-02)
 
 

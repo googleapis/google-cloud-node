@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/access-context-manager",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "accesscontextmanager client for Node.js",
   "repository": {
     "type": "git",

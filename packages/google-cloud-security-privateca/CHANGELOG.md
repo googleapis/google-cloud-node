@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v4.2.0...security-private-ca-v4.3.0) (2023-02-15)
+
+
+### Features
+
+* [security] add X.509 Name Constraints support ([1bbe8cd](https://github.com/googleapis/google-cloud-node/commit/1bbe8cd9edfddefbe517b12c8f3ac3e4437fdaec))
+
+
+### Bug Fixes
+
+* [security] changing format of the jsdoc links ([#3984](https://github.com/googleapis/google-cloud-node/issues/3984)) ([1bbe8cd](https://github.com/googleapis/google-cloud-node/commit/1bbe8cd9edfddefbe517b12c8f3ac3e4437fdaec))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v4.1.2...security-private-ca-v4.2.0) (2023-01-28)
 
 

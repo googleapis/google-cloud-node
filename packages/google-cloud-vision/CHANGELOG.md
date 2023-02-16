@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [3.1.2](https://github.com/googleapis/google-cloud-node/compare/vision-v3.1.1...vision-v3.1.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3990](https://github.com/googleapis/google-cloud-node/issues/3990)) ([878c55d](https://github.com/googleapis/google-cloud-node/commit/878c55d62af7e41e8d5050b081e4b79202b1b9cc))
+
 ## [3.1.1](https://github.com/googleapis/google-cloud-node/compare/vision-v3.1.0...vision-v3.1.1) (2023-01-28)
 
 

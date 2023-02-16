@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/google-cloud-node/compare/notebooks-v2.1.2...notebooks-v2.1.3) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3988](https://github.com/googleapis/google-cloud-node/issues/3988)) ([f2134ed](https://github.com/googleapis/google-cloud-node/commit/f2134ed5f166a3bb7dd0bed556700f0b0fd9756a))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-notebooks/compare/v2.1.1...v2.1.2) (2022-11-11)
 
 

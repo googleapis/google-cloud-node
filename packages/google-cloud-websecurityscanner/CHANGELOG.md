@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.4](https://github.com/googleapis/google-cloud-node/compare/web-security-scanner-v2.1.3...web-security-scanner-v2.1.4) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3990](https://github.com/googleapis/google-cloud-node/issues/3990)) ([878c55d](https://github.com/googleapis/google-cloud-node/commit/878c55d62af7e41e8d5050b081e4b79202b1b9cc))
+
 ## [2.1.3](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.1.2...v2.1.3) (2022-11-10)
 
 
