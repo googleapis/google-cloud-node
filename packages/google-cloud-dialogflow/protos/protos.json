@@ -5758,6 +5758,10 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 4
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 5
                         }
                       }
                     },
@@ -7274,6 +7278,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "dialogflow.googleapis.com/CXSecuritySettings"
                           }
+                        },
+                        "ttsConfig": {
+                          "type": "SynthesizeSpeechConfig",
+                          "id": 18
                         }
                       }
                     },

@@ -18815,6 +18815,9 @@ export namespace google {
 
                     /** SuggestConversationSummaryRequest contextSize */
                     contextSize?: (number|null);
+
+                    /** SuggestConversationSummaryRequest assistQueryParams */
+                    assistQueryParams?: (google.cloud.dialogflow.v2.IAssistQueryParameters|null);
                 }
 
                 /** Represents a SuggestConversationSummaryRequest. */
@@ -18834,6 +18837,9 @@ export namespace google {
 
                     /** SuggestConversationSummaryRequest contextSize. */
                     public contextSize: number;
+
+                    /** SuggestConversationSummaryRequest assistQueryParams. */
+                    public assistQueryParams?: (google.cloud.dialogflow.v2.IAssistQueryParameters|null);
 
                     /**
                      * Creates a new SuggestConversationSummaryRequest instance using the specified properties.
@@ -24155,6 +24161,9 @@ export namespace google {
 
                     /** ConversationProfile securitySettings */
                     securitySettings?: (string|null);
+
+                    /** ConversationProfile ttsConfig */
+                    ttsConfig?: (google.cloud.dialogflow.v2.ISynthesizeSpeechConfig|null);
                 }
 
                 /** Represents a ConversationProfile. */
@@ -24207,6 +24216,9 @@ export namespace google {
 
                     /** ConversationProfile securitySettings. */
                     public securitySettings: string;
+
+                    /** ConversationProfile ttsConfig. */
+                    public ttsConfig?: (google.cloud.dialogflow.v2.ISynthesizeSpeechConfig|null);
 
                     /**
                      * Creates a new ConversationProfile instance using the specified properties.
