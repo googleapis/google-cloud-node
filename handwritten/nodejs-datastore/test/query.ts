@@ -163,6 +163,16 @@ describe('Query', () => {
       assert.strictEqual(filter.op, '=');
       assert.strictEqual(filter.val, 'Stephen');
     });
+    it('should accept null as value', () => {
+      assert.strictEqual(
+        new Query(['kind1']).filter('status', null).filters.pop()?.val,
+        null
+      );
+      assert.strictEqual(
+        new Query(['kind1']).filter('status', '=', null).filters.pop()?.val,
+        null
+      );
+    });
   });
 
   describe('hasAncestor', () => {

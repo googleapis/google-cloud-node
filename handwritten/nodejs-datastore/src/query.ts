@@ -201,9 +201,13 @@ class Query {
    * const keyQuery = query.filter('__key__', key);
    * ```
    */
-  filter(property: string, value: {}): Query;
-  filter(property: string, operator: Operator, value: {}): Query;
-  filter(property: string, operatorOrValue: Operator, value?: {}): Query {
+  filter(property: string, value: {} | null): Query;
+  filter(property: string, operator: Operator, value: {} | null): Query;
+  filter(
+    property: string,
+    operatorOrValue: Operator,
+    value?: {} | null
+  ): Query {
     let operator = operatorOrValue as Operator;
     if (arguments.length === 2) {
       value = operatorOrValue as {};
