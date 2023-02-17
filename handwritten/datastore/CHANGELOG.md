@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.3.1](https://github.com/googleapis/nodejs-datastore/compare/v7.3.0...v7.3.1) (2023-02-17)
+
+
+### Bug Fixes
+
+* **deps:** Roll back dependency @google-cloud/datastore to ^7.2.0 ([#1069](https://github.com/googleapis/nodejs-datastore/issues/1069)) ([1677c53](https://github.com/googleapis/nodejs-datastore/commit/1677c53b612799a90c455636ac19e081ff3730b3))
+
 ## [7.3.0](https://github.com/googleapis/nodejs-datastore/compare/v7.2.0...v7.3.0) (2023-02-16)
 
 
