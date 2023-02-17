@@ -4,13 +4,14 @@
   "product_documentation": "{{productDocumentation}}",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/{{name}}/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "beta",
+  "release_level": "preview",
   "language": "{{language}}",
   "repo": "googleapis/{{monoRepoName}}",
   "distribution_name": "{{distributionName}}",
   "api_id": "{{hostName}}",
   "default_version": "{{version}}",
   "requires_billing": true,
-  "library_type": "GAPIC_AUTO"
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "{{name}}"
 }
 
