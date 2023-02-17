@@ -182,6 +182,9 @@ export class AnalyticsAdminServiceClient {
       accountPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}'
       ),
+      accountAccessBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/accessBindings/{access_binding}'
+      ),
       accountSummaryPathTemplate: new this._gaxModule.PathTemplate(
         'accountSummaries/{account_summary}'
       ),
@@ -243,6 +246,9 @@ export class AnalyticsAdminServiceClient {
       ),
       propertyPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}'
+      ),
+      propertyAccessBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/accessBindings/{access_binding}'
       ),
       propertyUserLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/userLinks/{user_link}'
@@ -341,6 +347,16 @@ export class AnalyticsAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'searchAds_360Links'
+      ),
+      listAccessBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'accessBindings'
+      ),
+      listExpandedDataSets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'expandedDataSets'
       ),
       listBigQueryLinks: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -484,6 +500,20 @@ export class AnalyticsAdminServiceClient {
       'getAttributionSettings',
       'updateAttributionSettings',
       'runAccessReport',
+      'createAccessBinding',
+      'getAccessBinding',
+      'updateAccessBinding',
+      'deleteAccessBinding',
+      'listAccessBindings',
+      'batchCreateAccessBindings',
+      'batchGetAccessBindings',
+      'batchUpdateAccessBindings',
+      'batchDeleteAccessBindings',
+      'getExpandedDataSet',
+      'listExpandedDataSets',
+      'createExpandedDataSet',
+      'updateExpandedDataSet',
+      'deleteExpandedDataSet',
       'setAutomatedGa4ConfigurationOptOut',
       'fetchAutomatedGa4ConfigurationOptOut',
       'getBigQueryLink',
@@ -782,8 +812,8 @@ export class AnalyticsAdminServiceClient {
    *   The account's `name` field is used to identify the account.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The list of fields to be updated. Field names must be in snake
-   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
-   *   replace the entire entity, use one path with the string "*" to match all
+   *   case (for example, "field_to_update"). Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match all
    *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -878,7 +908,7 @@ export class AnalyticsAdminServiceClient {
    *   The account to create.
    * @param {string} request.redirectUri
    *   Redirect URI where the user will be sent after accepting Terms of Service.
-   *   Must be configured in Developers Console as a Redirect URI
+   *   Must be configured in Developers Console as a Redirect URI.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3265,7 +3295,8 @@ export class AnalyticsAdminServiceClient {
    * Acknowledges the terms of user data collection for the specified property.
    *
    * This acknowledgement must be completed (either in the Google Analytics UI
-   * or via this API) before MeasurementProtocolSecret resources may be created.
+   * or through this API) before MeasurementProtocolSecret resources may be
+   * created.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -7235,7 +7266,7 @@ export class AnalyticsAdminServiceClient {
    *   included in the response rows for both date ranges. Requests are allowed up
    *   to 2 date ranges.
    * @param {google.analytics.admin.v1alpha.AccessFilterExpression} request.dimensionFilter
-   *   Dimension filters allow you to restrict report response to specific
+   *   Dimension filters let you restrict report response to specific
    *   dimension values which match the filter. For example, filtering on access
    *   records of a single user. To learn more, see [Fundamentals of Dimension
    *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
@@ -7361,6 +7392,1241 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.runAccessReport(request, options, callback);
+  }
+  /**
+   * Creates an access binding on an account or property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {google.analytics.admin.v1alpha.AccessBinding} request.accessBinding
+   *   Required. The access binding to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_access_binding.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAccessBinding_async
+   */
+  createAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createAccessBinding(request, options, callback);
+  }
+  /**
+   * Gets information about an access binding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the access binding to retrieve.
+   *   Formats:
+   *   - accounts/{account}/accessBindings/{accessBinding}
+   *   - properties/{property}/accessBindings/{accessBinding}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_access_binding.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAccessBinding_async
+   */
+  getAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getAccessBinding(request, options, callback);
+  }
+  /**
+   * Updates an access binding on an account or property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.AccessBinding} request.accessBinding
+   *   Required. The access binding to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_access_binding.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAccessBinding_async
+   */
+  updateAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IAccessBinding,
+          | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'access_binding.name': request.accessBinding!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateAccessBinding(request, options, callback);
+  }
+  /**
+   * Deletes an access binding on an account or property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Formats:
+   *   - accounts/{account}/accessBindings/{accessBinding}
+   *   - properties/{property}/accessBindings/{accessBinding}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_access_binding.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteAccessBinding_async
+   */
+  deleteAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAccessBinding(
+    request: protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAccessBinding(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteAccessBindingRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteAccessBinding(request, options, callback);
+  }
+  /**
+   * Creates information about multiple access bindings to an account or
+   * property.
+   *
+   * This method is transactional. If any AccessBinding cannot be created, none
+   * of the AccessBindings will be created.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account or property that owns the access bindings. The parent
+   *   field in the CreateAccessBindingRequest messages must either be empty or
+   *   match this field. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {number[]} request.requests
+   *   Required. The requests specifying the access bindings to create.
+   *   A maximum of 1000 access bindings can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchCreateAccessBindingsResponse | BatchCreateAccessBindingsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_create_access_bindings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchCreateAccessBindings_async
+   */
+  batchCreateAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchCreateAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+          | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchCreateAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCreateAccessBindings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets information about multiple access bindings to an account or property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account or property that owns the access bindings. The parent
+   *   of all provided values for the 'names' field must match this field.
+   *   Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {string[]} request.names
+   *   Required. The names of the access bindings to retrieve.
+   *   A maximum of 1000 access bindings can be retrieved in a batch.
+   *   Formats:
+   *   - accounts/{account}/accessBindings/{accessBinding}
+   *   - properties/{property}/accessBindings/{accessBinding}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchGetAccessBindingsResponse | BatchGetAccessBindingsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_get_access_bindings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchGetAccessBindings_async
+   */
+  batchGetAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchGetAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchGetAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchGetAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+          | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchGetAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchGetAccessBindings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates information about multiple access bindings to an account or
+   * property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account or property that owns the access bindings. The parent
+   *   field in the UpdateAccessBindingRequest messages must either be empty or
+   *   match this field. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {number[]} request.requests
+   *   Required. The requests specifying the access bindings to update.
+   *   A maximum of 1000 access bindings can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.BatchUpdateAccessBindingsResponse | BatchUpdateAccessBindingsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_update_access_bindings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchUpdateAccessBindings_async
+   */
+  batchUpdateAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchUpdateAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+          | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+      | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchUpdateAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchUpdateAccessBindings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes information about multiple users' links to an account or property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account or property that owns the access bindings. The parent
+   *   field in the DeleteAccessBindingRequest messages must either be empty or
+   *   match this field. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {number[]} request.requests
+   *   Required. The requests specifying the access bindings to delete.
+   *   A maximum of 1000 access bindings can be deleted in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.batch_delete_access_bindings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_BatchDeleteAccessBindings_async
+   */
+  batchDeleteAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchDeleteAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IBatchDeleteAccessBindingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchDeleteAccessBindings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Lookup for a single ExpandedDataSet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Audience to get.
+   *   Example format: properties/1234/expandedDataSets/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_expanded_data_set.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetExpandedDataSet_async
+   */
+  getExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getExpandedDataSet(request, options, callback);
+  }
+  /**
+   * Creates a ExpandedDataSet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.ExpandedDataSet} request.expandedDataSet
+   *   Required. The ExpandedDataSet to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_expanded_data_set.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateExpandedDataSet_async
+   */
+  createExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createExpandedDataSet(request, options, callback);
+  }
+  /**
+   * Updates a ExpandedDataSet on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.ExpandedDataSet} request.expandedDataSet
+   *   Required. The ExpandedDataSet to update.
+   *   The resource's `name` field is used to identify the ExpandedDataSet to be
+   *   updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_expanded_data_set.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateExpandedDataSet_async
+   */
+  updateExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+          | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'expanded_data_set.name': request.expandedDataSet!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateExpandedDataSet(request, options, callback);
+  }
+  /**
+   * Deletes a ExpandedDataSet on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Example format: properties/1234/expandedDataSets/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_expanded_data_set.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteExpandedDataSet_async
+   */
+  deleteExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExpandedDataSet(
+    request: protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExpandedDataSet(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteExpandedDataSetRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteExpandedDataSet(request, options, callback);
   }
   /**
    * Sets the opt out status for the automated GA4 setup process for a UA
@@ -11323,6 +12589,426 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ISearchAds360Link>;
   }
   /**
+   * Lists all access bindings on an account or property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {number} request.pageSize
+   *   The maximum number of access bindings to return.
+   *   The service may return fewer than this value.
+   *   If unspecified, at most 200 access bindings will be returned.
+   *   The maximum value is 500; values above 500 will be coerced to 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAccessBindings` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListAccessBindings` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAccessBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding[],
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+    ]
+  >;
+  listAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+      | protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAccessBinding
+    >
+  ): void;
+  listAccessBindings(
+    request: protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+      | protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAccessBinding
+    >
+  ): void;
+  listAccessBindings(
+    request?: protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+          | protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IAccessBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+      | protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IAccessBinding
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IAccessBinding[],
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListAccessBindingsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAccessBindings(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {number} request.pageSize
+   *   The maximum number of access bindings to return.
+   *   The service may return fewer than this value.
+   *   If unspecified, at most 200 access bindings will be returned.
+   *   The maximum value is 500; values above 500 will be coerced to 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAccessBindings` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListAccessBindings` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAccessBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAccessBindingsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAccessBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAccessBindings.createStream(
+      this.innerApiCalls.listAccessBindings as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAccessBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Formats:
+   *   - accounts/{account}
+   *   - properties/{property}
+   * @param {number} request.pageSize
+   *   The maximum number of access bindings to return.
+   *   The service may return fewer than this value.
+   *   If unspecified, at most 200 access bindings will be returned.
+   *   The maximum value is 500; values above 500 will be coerced to 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListAccessBindings` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListAccessBindings` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.analytics.admin.v1alpha.AccessBinding | AccessBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_access_bindings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAccessBindings_async
+   */
+  listAccessBindingsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListAccessBindingsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IAccessBinding> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAccessBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAccessBindings.asyncIterate(
+      this.innerApiCalls['listAccessBindings'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccessBinding>;
+  }
+  /**
+   * Lists ExpandedDataSets on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExpandedDataSets` call. Provide
+   *   this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListExpandedDataSet`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExpandedDataSetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listExpandedDataSets(
+    request?: protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet[],
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+    ]
+  >;
+  listExpandedDataSets(
+    request: protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+      | protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet
+    >
+  ): void;
+  listExpandedDataSets(
+    request: protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+      | protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet
+    >
+  ): void;
+  listExpandedDataSets(
+    request?: protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+          | protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IExpandedDataSet
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+      | protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IExpandedDataSet[],
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListExpandedDataSetsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listExpandedDataSets(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExpandedDataSets` call. Provide
+   *   this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListExpandedDataSet`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExpandedDataSetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listExpandedDataSetsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExpandedDataSets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExpandedDataSets.createStream(
+      this.innerApiCalls.listExpandedDataSets as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listExpandedDataSets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExpandedDataSets` call. Provide
+   *   this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListExpandedDataSet`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.analytics.admin.v1alpha.ExpandedDataSet | ExpandedDataSet}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_expanded_data_sets.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListExpandedDataSets_async
+   */
+  listExpandedDataSetsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListExpandedDataSetsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IExpandedDataSet> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExpandedDataSets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExpandedDataSets.asyncIterate(
+      this.innerApiCalls['listExpandedDataSets'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IExpandedDataSet>;
+  }
+  /**
    * Lists BigQuery Links on a property.
    *
    * @param {Object} request
@@ -11560,6 +13246,48 @@ export class AnalyticsAdminServiceClient {
    */
   matchAccountFromAccountName(accountName: string) {
     return this.pathTemplates.accountPathTemplate.match(accountName).account;
+  }
+
+  /**
+   * Return a fully-qualified accountAccessBinding resource name string.
+   *
+   * @param {string} account
+   * @param {string} access_binding
+   * @returns {string} Resource name string.
+   */
+  accountAccessBindingPath(account: string, accessBinding: string) {
+    return this.pathTemplates.accountAccessBindingPathTemplate.render({
+      account: account,
+      access_binding: accessBinding,
+    });
+  }
+
+  /**
+   * Parse the account from AccountAccessBinding resource.
+   *
+   * @param {string} accountAccessBindingName
+   *   A fully-qualified path representing account_access_binding resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAccountAccessBindingName(accountAccessBindingName: string) {
+    return this.pathTemplates.accountAccessBindingPathTemplate.match(
+      accountAccessBindingName
+    ).account;
+  }
+
+  /**
+   * Parse the access_binding from AccountAccessBinding resource.
+   *
+   * @param {string} accountAccessBindingName
+   *   A fully-qualified path representing account_access_binding resource.
+   * @returns {string} A string representing the access_binding.
+   */
+  matchAccessBindingFromAccountAccessBindingName(
+    accountAccessBindingName: string
+  ) {
+    return this.pathTemplates.accountAccessBindingPathTemplate.match(
+      accountAccessBindingName
+    ).access_binding;
   }
 
   /**
@@ -12257,6 +13985,50 @@ export class AnalyticsAdminServiceClient {
    */
   matchPropertyFromPropertyName(propertyName: string) {
     return this.pathTemplates.propertyPathTemplate.match(propertyName).property;
+  }
+
+  /**
+   * Return a fully-qualified propertyAccessBinding resource name string.
+   *
+   * @param {string} property
+   * @param {string} access_binding
+   * @returns {string} Resource name string.
+   */
+  propertyAccessBindingPath(property: string, accessBinding: string) {
+    return this.pathTemplates.propertyAccessBindingPathTemplate.render({
+      property: property,
+      access_binding: accessBinding,
+    });
+  }
+
+  /**
+   * Parse the property from PropertyAccessBinding resource.
+   *
+   * @param {string} propertyAccessBindingName
+   *   A fully-qualified path representing property_access_binding resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromPropertyAccessBindingName(
+    propertyAccessBindingName: string
+  ) {
+    return this.pathTemplates.propertyAccessBindingPathTemplate.match(
+      propertyAccessBindingName
+    ).property;
+  }
+
+  /**
+   * Parse the access_binding from PropertyAccessBinding resource.
+   *
+   * @param {string} propertyAccessBindingName
+   *   A fully-qualified path representing property_access_binding resource.
+   * @returns {string} A string representing the access_binding.
+   */
+  matchAccessBindingFromPropertyAccessBindingName(
+    propertyAccessBindingName: string
+  ) {
+    return this.pathTemplates.propertyAccessBindingPathTemplate.match(
+      propertyAccessBindingName
+    ).access_binding;
   }
 
   /**
