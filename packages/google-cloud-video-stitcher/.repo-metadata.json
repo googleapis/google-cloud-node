@@ -4,12 +4,13 @@
   "product_documentation": "https://cloud.google.com/video-stitcher/",
   "client_documentation": "https://googleapis.dev/nodejs/videostitcher/latest/",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "beta",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "codeowner_team": "@googleapis/cloud-media-team",
   "distribution_name": "@google-cloud/video-stitcher",
   "api_id": "stitcher.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
 }

@@ -1,5 +1,5 @@
 {
-  "name": "filestore",
+  "name": "file",
   "api_shortname": "filestore",
   "name_pretty": "Filestore",
   "product_documentation": "https://cloud.google.com/filestore/",
