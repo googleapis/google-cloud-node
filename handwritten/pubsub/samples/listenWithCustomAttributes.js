@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2020-2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
+'use strict';
+
 /**
  * This application demonstrates how to perform basic operations on
  * subscriptions with the Google Cloud Pub/Sub API.
@@ -20,61 +24,57 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-'use strict';
-
 // sample-metadata:
 //   title: Listen For Messages With Custom Attributes
 //   description: Demonstrates how to receive and process custom attributes on messages.
 //   usage: node listenWithCustomAttributes.js <subscription-name-or-id> [timeout-in-seconds]
+
+// [START pubsub_subscriber_async_pull_custom_attributes]
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
+// const timeout = 60;
+
+// Imports the Google Cloud client library
+const {PubSub} = require('@google-cloud/pubsub');
+
+// Creates a client; cache this for further use
+const pubSubClient = new PubSub();
+
+async function listenWithCustomAttributes(subscriptionNameOrId, timeout) {
+  // References an existing subscription, e.g. "my-subscription"
+  const subscription = pubSubClient.subscription(subscriptionNameOrId);
+
+  // Create an event handler to handle messages
+  const messageHandler = message => {
+    console.log(
+      `Received message: id ${message.id}, data ${
+        message.data
+      }, attributes: ${JSON.stringify(message.attributes)}`
+    );
+
+    // "Ack" (acknowledge receipt of) the message
+    message.ack();
+  };
+
+  // Wait a while for the subscription to run. (Part of the sample only.)
+  subscription.on('message', messageHandler);
+  setTimeout(() => {
+    subscription.removeListener('message', messageHandler);
+  }, timeout * 1000);
+}
+// [END pubsub_subscriber_async_pull_custom_attributes]
 
 async function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
   timeout = 60
 ) {
   timeout = Number(timeout);
-
-  // [START pubsub_subscriber_async_pull_custom_attributes]
-  /**
-   * TODO(developer): Uncomment these variables before running the sample.
-   */
-  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
-  // const timeout = 60;
-
-  // Imports the Google Cloud client library
-  const {PubSub} = require('@google-cloud/pubsub');
-
-  // Creates a client; cache this for further use
-  const pubSubClient = new PubSub();
-
-  async function listenWithCustomAttributes() {
-    // References an existing subscription, e.g. "my-subscription"
-    const subscription = pubSubClient.subscription(subscriptionNameOrId);
-
-    // Create an event handler to handle messages
-    const messageHandler = message => {
-      console.log(
-        `Received message: id ${message.id}, data ${
-          message.data
-        }, attributes: ${JSON.stringify(message.attributes)}`
-      );
-
-      // "Ack" (acknowledge receipt of) the message
-      message.ack();
-    };
-
-    // Listen for new messages until timeout is hit
-    subscription.on('message', messageHandler);
-    setTimeout(() => {
-      subscription.removeListener('message', messageHandler);
-    }, timeout * 1000);
-  }
-
-  listenWithCustomAttributes();
-  // [END pubsub_subscriber_async_pull_custom_attributes]
+  listenWithCustomAttributes(subscriptionNameOrId, timeout).catch(err => {
+    console.error(err.message);
+    process.exitCode = 1;
+  });
 }
 
-process.on('unhandledRejection', err => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
 main(...process.argv.slice(2));

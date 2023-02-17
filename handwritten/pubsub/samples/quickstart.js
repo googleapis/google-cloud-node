@@ -1,4 +1,4 @@
-// Copyright 2017 Google LLC
+// Copyright 2017-2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
 'use strict';
 
 // sample-metadata:
@@ -51,7 +53,7 @@ async function quickstart(
   });
 
   // Send a message to the topic
-  topic.publish(Buffer.from('Test message!'));
+  topic.publishMessage({data: Buffer.from('Test message!')});
 }
 // [END pubsub_quickstart_create_topic]
 

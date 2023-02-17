@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2020-2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
+'use strict';
+
 /**
  * This application demonstrates how to perform basic operations on
  * subscriptions with the Google Cloud Pub/Sub API.
@@ -20,52 +24,63 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-'use strict';
-
 // sample-metadata:
 //   title: Create Subscription With Dead Letter Policy
 //   description: Creates a new subscription With Dead Letter Policy.
 //   usage: node createSubscriptionWithDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id> <dead-letter-topic-name-or-id>
+
+// [START pubsub_dead_letter_create_subscription]
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+// const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
+// const deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID';
+
+// Imports the Google Cloud client library
+const {PubSub} = require('@google-cloud/pubsub');
+
+// Creates a client; cache this for further use
+const pubSubClient = new PubSub();
+
+async function createSubscriptionWithDeadLetterPolicy(
+  topicNameOrId,
+  subscriptionNameOrId,
+  deadLetterTopicNameOrId
+) {
+  // Creates a new subscription
+  const options = {
+    deadLetterPolicy: {
+      deadLetterTopic: pubSubClient.topic(deadLetterTopicNameOrId).name,
+      maxDeliveryAttempts: 10,
+    },
+  };
+  await pubSubClient
+    .topic(topicNameOrId)
+    .createSubscription(subscriptionNameOrId, options);
+  console.log(
+    `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`
+  );
+
+  console.log(
+    'To process dead letter messages, remember to add a subscription to your dead letter topic.'
+  );
+}
+// [END pubsub_dead_letter_create_subscription]
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
   deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID'
 ) {
-  // [START pubsub_dead_letter_create_subscription]
-  /**
-   * TODO(developer): Uncomment these variables before running the sample.
-   */
-  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
-  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
-  // const deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID';
-
-  // Imports the Google Cloud client library
-  const {PubSub} = require('@google-cloud/pubsub');
-
-  // Creates a client; cache this for further use
-  const pubSubClient = new PubSub();
-
-  async function createSubscriptionWithDeadLetterPolicy() {
-    // Creates a new subscription
-    await pubSubClient
-      .topic(topicNameOrId)
-      .createSubscription(subscriptionNameOrId, {
-        deadLetterPolicy: {
-          deadLetterTopic: pubSubClient.topic(deadLetterTopicNameOrId).name,
-          maxDeliveryAttempts: 10,
-        },
-      });
-    console.log(
-      `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`
-    );
-    console.log(
-      'To process dead letter messages, remember to add a subscription to your dead letter topic.'
-    );
-  }
-
-  createSubscriptionWithDeadLetterPolicy().catch(console.error);
-  // [END pubsub_dead_letter_create_subscription]
+  createSubscriptionWithDeadLetterPolicy(
+    topicNameOrId,
+    subscriptionNameOrId,
+    deadLetterTopicNameOrId
+  ).catch(err => {
+    console.error(err.message);
+    process.exitCode = 1;
+  });
 }
 
 main(...process.argv.slice(2));

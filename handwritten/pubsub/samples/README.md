@@ -71,6 +71,7 @@ guides.
   * [Test Subscription Permissions](#test-subscription-permissions)
   * [Test Topic Permissions](#test-topic-permissions)
   * [Update Dead Letter Policy](#update-dead-letter-policy)
+  * [Validate a schema definition](#validate-a-schema-definition)
 
 ## Before you begin
 
@@ -1049,6 +1050,25 @@ __Usage:__
 
 
 `node updateDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id>`
+
+
+-----
+
+
+
+
+### Validate a schema definition
+
+Validates an Avro-based schema definition before creation (or other use).
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/validateSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/validateSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node validateSchema.js <schema-text>`
 
 
 

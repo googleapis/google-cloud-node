@@ -1,4 +1,4 @@
-// Copyright 2019-2020 Google LLC
+// Copyright 2019-2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
+'use strict';
+
 /**
  * This application demonstrates how to perform basic operations on
  * subscriptions with the Google Cloud Pub/Sub API.
@@ -20,30 +24,28 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-'use strict';
-
 // sample-metadata:
 //   title: List Subscriptions
 //   description: Lists all subscriptions in the current project.
 //   usage: node listSubscriptions.js
 
+// [START pubsub_list_subscriptions]
+// Imports the Google Cloud client library
+const {PubSub} = require('@google-cloud/pubsub');
+
+// Creates a client; cache this for further use
+const pubSubClient = new PubSub();
+
+async function listSubscriptions() {
+  // Lists all subscriptions in the current project
+  const [subscriptions] = await pubSubClient.getSubscriptions();
+  console.log('Subscriptions:');
+  subscriptions.forEach(subscription => console.log(subscription.name));
+}
+// [END pubsub_list_subscriptions]
+
 function main() {
-  // [START pubsub_list_subscriptions]
-  // Imports the Google Cloud client library
-  const {PubSub} = require('@google-cloud/pubsub');
-
-  // Creates a client; cache this for further use
-  const pubSubClient = new PubSub();
-
-  async function listSubscriptions() {
-    // Lists all subscriptions in the current project
-    const [subscriptions] = await pubSubClient.getSubscriptions();
-    console.log('Subscriptions:');
-    subscriptions.forEach(subscription => console.log(subscription.name));
-  }
-
   listSubscriptions().catch(console.error);
-  // [END pubsub_list_subscriptions]
 }
 
-main(...process.argv.slice(2));
+main();

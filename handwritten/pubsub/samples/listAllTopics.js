@@ -1,4 +1,4 @@
-// Copyright 2019-2020 Google LLC
+// Copyright 2019-2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
+'use strict';
+
 /**
  * This sample demonstrates how to perform basic operations on topics with
  * the Google Cloud Pub/Sub API.
@@ -20,30 +24,31 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-'use strict';
-
 // sample-metadata:
 //   title: List All Topics
 //   description: Lists all topics in the current project.
 //   usage: node listAllTopics.js
 
+// [START pubsub_list_topics]
+// Imports the Google Cloud client library
+const {PubSub} = require('@google-cloud/pubsub');
+
+// Creates a client; cache this for further use
+const pubSubClient = new PubSub();
+
+async function listAllTopics() {
+  // Lists all topics in the current project
+  const [topics] = await pubSubClient.getTopics();
+  console.log('Topics:');
+  topics.forEach(topic => console.log(topic.name));
+}
+// [END pubsub_list_topics]
+
 function main() {
-  // [START pubsub_list_topics]
-  // Imports the Google Cloud client library
-  const {PubSub} = require('@google-cloud/pubsub');
-
-  // Creates a client; cache this for further use
-  const pubSubClient = new PubSub();
-
-  async function listAllTopics() {
-    // Lists all topics in the current project
-    const [topics] = await pubSubClient.getTopics();
-    console.log('Topics:');
-    topics.forEach(topic => console.log(topic.name));
-  }
-
-  listAllTopics().catch(console.error);
-  // [END pubsub_list_topics]
+  listAllTopics().catch(err => {
+    console.error(err.message);
+    process.exitCode = 1;
+  });
 }
 
-main(...process.argv.slice(2));
+main();

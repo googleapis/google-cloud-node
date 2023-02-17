@@ -1,4 +1,4 @@
-// Copyright 2019-2020 Google LLC
+// Copyright 2019-2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
+'use strict';
+
 /**
  * This sample demonstrates how to create subscriptions with the
  * Google Cloud Pub/Sub API.
@@ -20,40 +24,41 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-'use strict';
-
 // sample-metadata:
 //   title: Create Subscription
 //   description: Creates a new subscription.
 //   usage: node createSubscription.js <topic-name-or-id> <subscription-name-or-id>
 
+// [START pubsub_create_pull_subscription]
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
+// const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
+
+// Imports the Google Cloud client library
+const {PubSub} = require('@google-cloud/pubsub');
+
+// Creates a client; cache this for further use
+const pubSubClient = new PubSub();
+
+async function createSubscription(topicNameOrId, subscriptionNameOrId) {
+  // Creates a new subscription
+  await pubSubClient
+    .topic(topicNameOrId)
+    .createSubscription(subscriptionNameOrId);
+  console.log(`Subscription ${subscriptionNameOrId} created.`);
+}
+// [END pubsub_create_pull_subscription]
+
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
-  // [START pubsub_create_pull_subscription]
-  /**
-   * TODO(developer): Uncomment these variables before running the sample.
-   */
-  // const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
-  // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
-
-  // Imports the Google Cloud client library
-  const {PubSub} = require('@google-cloud/pubsub');
-
-  // Creates a client; cache this for further use
-  const pubSubClient = new PubSub();
-
-  async function createSubscription() {
-    // Creates a new subscription
-    await pubSubClient
-      .topic(topicNameOrId)
-      .createSubscription(subscriptionNameOrId);
-    console.log(`Subscription ${subscriptionNameOrId} created.`);
-  }
-
-  createSubscription().catch(console.error);
-  // [END pubsub_create_pull_subscription]
+  createSubscription(topicNameOrId, subscriptionNameOrId).catch(err => {
+    console.error(err.message);
+    process.exitCode = 1;
+  });
 }
 
 main(...process.argv.slice(2));
