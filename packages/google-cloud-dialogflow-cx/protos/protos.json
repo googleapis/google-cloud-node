@@ -7577,6 +7577,10 @@
                       "nested": {
                         "AdvancedSettings": {
                           "fields": {
+                            "audioExportGcsDestination": {
+                              "type": "GcsDestination",
+                              "id": 2
+                            },
                             "loggingSettings": {
                               "type": "LoggingSettings",
                               "id": 6
@@ -7593,6 +7597,17 @@
                                   "type": "bool",
                                   "id": 3
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "GcsDestination": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
@@ -7870,6 +7885,10 @@
                             "advancedSettings": {
                               "type": "AdvancedSettings",
                               "id": 22
+                            },
+                            "textToSpeechSettings": {
+                              "type": "TextToSpeechSettings",
+                              "id": 31
                             }
                           }
                         },
@@ -8114,6 +8133,165 @@
                               "rule": "repeated",
                               "type": "FlowValidationResult",
                               "id": 2
+                            }
+                          }
+                        },
+                        "AudioEncoding": {
+                          "values": {
+                            "AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "AUDIO_ENCODING_LINEAR_16": 1,
+                            "AUDIO_ENCODING_FLAC": 2,
+                            "AUDIO_ENCODING_MULAW": 3,
+                            "AUDIO_ENCODING_AMR": 4,
+                            "AUDIO_ENCODING_AMR_WB": 5,
+                            "AUDIO_ENCODING_OGG_OPUS": 6,
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                          }
+                        },
+                        "SpeechModelVariant": {
+                          "values": {
+                            "SPEECH_MODEL_VARIANT_UNSPECIFIED": 0,
+                            "USE_BEST_AVAILABLE": 1,
+                            "USE_STANDARD": 2,
+                            "USE_ENHANCED": 3
+                          }
+                        },
+                        "SpeechWordInfo": {
+                          "fields": {
+                            "word": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "startOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "endOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "confidence": {
+                              "type": "float",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "InputAudioConfig": {
+                          "fields": {
+                            "audioEncoding": {
+                              "type": "AudioEncoding",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "sampleRateHertz": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "enableWordInfo": {
+                              "type": "bool",
+                              "id": 13
+                            },
+                            "phraseHints": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "model": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "modelVariant": {
+                              "type": "SpeechModelVariant",
+                              "id": 10
+                            },
+                            "singleUtterance": {
+                              "type": "bool",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "SsmlVoiceGender": {
+                          "values": {
+                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                            "SSML_VOICE_GENDER_MALE": 1,
+                            "SSML_VOICE_GENDER_FEMALE": 2,
+                            "SSML_VOICE_GENDER_NEUTRAL": 3
+                          }
+                        },
+                        "VoiceSelectionParams": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "ssmlGender": {
+                              "type": "SsmlVoiceGender",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SynthesizeSpeechConfig": {
+                          "fields": {
+                            "speakingRate": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "pitch": {
+                              "type": "double",
+                              "id": 2
+                            },
+                            "volumeGainDb": {
+                              "type": "double",
+                              "id": 3
+                            },
+                            "effectsProfileId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5
+                            },
+                            "voice": {
+                              "type": "VoiceSelectionParams",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "OutputAudioEncoding": {
+                          "values": {
+                            "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
+                            "OUTPUT_AUDIO_ENCODING_MP3": 2,
+                            "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
+                            "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
+                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                          }
+                        },
+                        "OutputAudioConfig": {
+                          "fields": {
+                            "audioEncoding": {
+                              "type": "OutputAudioEncoding",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "sampleRateHertz": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "synthesizeSpeechConfig": {
+                              "type": "SynthesizeSpeechConfig",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "TextToSpeechSettings": {
+                          "fields": {
+                            "synthesizeSpeechConfigs": {
+                              "keyType": "string",
+                              "type": "SynthesizeSpeechConfig",
+                              "id": 1
                             }
                           }
                         },
@@ -9467,156 +9645,6 @@
                             }
                           }
                         },
-                        "AudioEncoding": {
-                          "values": {
-                            "AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "AUDIO_ENCODING_LINEAR_16": 1,
-                            "AUDIO_ENCODING_FLAC": 2,
-                            "AUDIO_ENCODING_MULAW": 3,
-                            "AUDIO_ENCODING_AMR": 4,
-                            "AUDIO_ENCODING_AMR_WB": 5,
-                            "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
-                          }
-                        },
-                        "SpeechModelVariant": {
-                          "values": {
-                            "SPEECH_MODEL_VARIANT_UNSPECIFIED": 0,
-                            "USE_BEST_AVAILABLE": 1,
-                            "USE_STANDARD": 2,
-                            "USE_ENHANCED": 3
-                          }
-                        },
-                        "SpeechWordInfo": {
-                          "fields": {
-                            "word": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "startOffset": {
-                              "type": "google.protobuf.Duration",
-                              "id": 1
-                            },
-                            "endOffset": {
-                              "type": "google.protobuf.Duration",
-                              "id": 2
-                            },
-                            "confidence": {
-                              "type": "float",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "InputAudioConfig": {
-                          "fields": {
-                            "audioEncoding": {
-                              "type": "AudioEncoding",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "sampleRateHertz": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "enableWordInfo": {
-                              "type": "bool",
-                              "id": 13
-                            },
-                            "phraseHints": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 4
-                            },
-                            "model": {
-                              "type": "string",
-                              "id": 7
-                            },
-                            "modelVariant": {
-                              "type": "SpeechModelVariant",
-                              "id": 10
-                            },
-                            "singleUtterance": {
-                              "type": "bool",
-                              "id": 8
-                            }
-                          }
-                        },
-                        "SsmlVoiceGender": {
-                          "values": {
-                            "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                            "SSML_VOICE_GENDER_MALE": 1,
-                            "SSML_VOICE_GENDER_FEMALE": 2,
-                            "SSML_VOICE_GENDER_NEUTRAL": 3
-                          }
-                        },
-                        "VoiceSelectionParams": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "ssmlGender": {
-                              "type": "SsmlVoiceGender",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "SynthesizeSpeechConfig": {
-                          "fields": {
-                            "speakingRate": {
-                              "type": "double",
-                              "id": 1
-                            },
-                            "pitch": {
-                              "type": "double",
-                              "id": 2
-                            },
-                            "volumeGainDb": {
-                              "type": "double",
-                              "id": 3
-                            },
-                            "effectsProfileId": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 5
-                            },
-                            "voice": {
-                              "type": "VoiceSelectionParams",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "OutputAudioEncoding": {
-                          "values": {
-                            "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
-                            "OUTPUT_AUDIO_ENCODING_MP3": 2,
-                            "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
-                            "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
-                            "OUTPUT_AUDIO_ENCODING_MULAW": 5
-                          }
-                        },
-                        "OutputAudioConfig": {
-                          "fields": {
-                            "audioEncoding": {
-                              "type": "OutputAudioEncoding",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "sampleRateHertz": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "synthesizeSpeechConfig": {
-                              "type": "SynthesizeSpeechConfig",
-                              "id": 3
-                            }
-                          }
-                        },
                         "Changelogs": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -10432,10 +10460,7 @@
                             "versionConfigs": {
                               "rule": "repeated",
                               "type": "VersionConfig",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 6
                             },
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",

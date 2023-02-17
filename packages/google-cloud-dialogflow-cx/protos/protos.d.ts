@@ -29923,6 +29923,9 @@ export namespace google {
                     /** Properties of an AdvancedSettings. */
                     interface IAdvancedSettings {
 
+                        /** AdvancedSettings audioExportGcsDestination */
+                        audioExportGcsDestination?: (google.cloud.dialogflow.cx.v3beta1.IGcsDestination|null);
+
                         /** AdvancedSettings loggingSettings */
                         loggingSettings?: (google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings|null);
                     }
@@ -29935,6 +29938,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings);
+
+                        /** AdvancedSettings audioExportGcsDestination. */
+                        public audioExportGcsDestination?: (google.cloud.dialogflow.cx.v3beta1.IGcsDestination|null);
 
                         /** AdvancedSettings loggingSettings. */
                         public loggingSettings?: (google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings|null);
@@ -30121,6 +30127,103 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** Properties of a GcsDestination. */
+                    interface IGcsDestination {
+
+                        /** GcsDestination uri */
+                        uri?: (string|null);
+                    }
+
+                    /** Represents a GcsDestination. */
+                    class GcsDestination implements IGcsDestination {
+
+                        /**
+                         * Constructs a new GcsDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IGcsDestination);
+
+                        /** GcsDestination uri. */
+                        public uri: string;
+
+                        /**
+                         * Creates a new GcsDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsDestination instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IGcsDestination): google.cloud.dialogflow.cx.v3beta1.GcsDestination;
+
+                        /**
+                         * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.GcsDestination;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.GcsDestination;
+
+                        /**
+                         * Verifies a GcsDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.GcsDestination;
+
+                        /**
+                         * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                         * @param message GcsDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Represents an Agents */
@@ -30477,6 +30580,9 @@ export namespace google {
 
                         /** Agent advancedSettings */
                         advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
+
+                        /** Agent textToSpeechSettings */
+                        textToSpeechSettings?: (google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings|null);
                     }
 
                     /** Represents an Agent. */
@@ -30529,6 +30635,9 @@ export namespace google {
 
                         /** Agent advancedSettings. */
                         public advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
+
+                        /** Agent textToSpeechSettings. */
+                        public textToSpeechSettings?: (google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings|null);
 
                         /**
                          * Creates a new Agent instance using the specified properties.
@@ -31882,6 +31991,722 @@ export namespace google {
 
                         /**
                          * Gets the default type url for AgentValidationResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                    }
+
+                    /** SpeechModelVariant enum. */
+                    enum SpeechModelVariant {
+                        SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
+                        USE_BEST_AVAILABLE = 1,
+                        USE_STANDARD = 2,
+                        USE_ENHANCED = 3
+                    }
+
+                    /** Properties of a SpeechWordInfo. */
+                    interface ISpeechWordInfo {
+
+                        /** SpeechWordInfo word */
+                        word?: (string|null);
+
+                        /** SpeechWordInfo startOffset */
+                        startOffset?: (google.protobuf.IDuration|null);
+
+                        /** SpeechWordInfo endOffset */
+                        endOffset?: (google.protobuf.IDuration|null);
+
+                        /** SpeechWordInfo confidence */
+                        confidence?: (number|null);
+                    }
+
+                    /** Represents a SpeechWordInfo. */
+                    class SpeechWordInfo implements ISpeechWordInfo {
+
+                        /**
+                         * Constructs a new SpeechWordInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo);
+
+                        /** SpeechWordInfo word. */
+                        public word: string;
+
+                        /** SpeechWordInfo startOffset. */
+                        public startOffset?: (google.protobuf.IDuration|null);
+
+                        /** SpeechWordInfo endOffset. */
+                        public endOffset?: (google.protobuf.IDuration|null);
+
+                        /** SpeechWordInfo confidence. */
+                        public confidence: number;
+
+                        /**
+                         * Creates a new SpeechWordInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpeechWordInfo instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
+
+                        /**
+                         * Encodes the specified SpeechWordInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo.verify|verify} messages.
+                         * @param message SpeechWordInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpeechWordInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo.verify|verify} messages.
+                         * @param message SpeechWordInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpeechWordInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpeechWordInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
+
+                        /**
+                         * Decodes a SpeechWordInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpeechWordInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
+
+                        /**
+                         * Verifies a SpeechWordInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpeechWordInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpeechWordInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
+
+                        /**
+                         * Creates a plain object from a SpeechWordInfo message. Also converts values to other types if specified.
+                         * @param message SpeechWordInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpeechWordInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpeechWordInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InputAudioConfig. */
+                    interface IInputAudioConfig {
+
+                        /** InputAudioConfig audioEncoding */
+                        audioEncoding?: (google.cloud.dialogflow.cx.v3beta1.AudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.AudioEncoding|null);
+
+                        /** InputAudioConfig sampleRateHertz */
+                        sampleRateHertz?: (number|null);
+
+                        /** InputAudioConfig enableWordInfo */
+                        enableWordInfo?: (boolean|null);
+
+                        /** InputAudioConfig phraseHints */
+                        phraseHints?: (string[]|null);
+
+                        /** InputAudioConfig model */
+                        model?: (string|null);
+
+                        /** InputAudioConfig modelVariant */
+                        modelVariant?: (google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant|keyof typeof google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant|null);
+
+                        /** InputAudioConfig singleUtterance */
+                        singleUtterance?: (boolean|null);
+                    }
+
+                    /** Represents an InputAudioConfig. */
+                    class InputAudioConfig implements IInputAudioConfig {
+
+                        /**
+                         * Constructs a new InputAudioConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig);
+
+                        /** InputAudioConfig audioEncoding. */
+                        public audioEncoding: (google.cloud.dialogflow.cx.v3beta1.AudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.AudioEncoding);
+
+                        /** InputAudioConfig sampleRateHertz. */
+                        public sampleRateHertz: number;
+
+                        /** InputAudioConfig enableWordInfo. */
+                        public enableWordInfo: boolean;
+
+                        /** InputAudioConfig phraseHints. */
+                        public phraseHints: string[];
+
+                        /** InputAudioConfig model. */
+                        public model: string;
+
+                        /** InputAudioConfig modelVariant. */
+                        public modelVariant: (google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant|keyof typeof google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant);
+
+                        /** InputAudioConfig singleUtterance. */
+                        public singleUtterance: boolean;
+
+                        /**
+                         * Creates a new InputAudioConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputAudioConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
+
+                        /**
+                         * Encodes the specified InputAudioConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.InputAudioConfig.verify|verify} messages.
+                         * @param message InputAudioConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputAudioConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.InputAudioConfig.verify|verify} messages.
+                         * @param message InputAudioConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputAudioConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputAudioConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
+
+                        /**
+                         * Decodes an InputAudioConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputAudioConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
+
+                        /**
+                         * Verifies an InputAudioConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputAudioConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputAudioConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
+
+                        /**
+                         * Creates a plain object from an InputAudioConfig message. Also converts values to other types if specified.
+                         * @param message InputAudioConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.InputAudioConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputAudioConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputAudioConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** SsmlVoiceGender enum. */
+                    enum SsmlVoiceGender {
+                        SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                        SSML_VOICE_GENDER_MALE = 1,
+                        SSML_VOICE_GENDER_FEMALE = 2,
+                        SSML_VOICE_GENDER_NEUTRAL = 3
+                    }
+
+                    /** Properties of a VoiceSelectionParams. */
+                    interface IVoiceSelectionParams {
+
+                        /** VoiceSelectionParams name */
+                        name?: (string|null);
+
+                        /** VoiceSelectionParams ssmlGender */
+                        ssmlGender?: (google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender|null);
+                    }
+
+                    /** Represents a VoiceSelectionParams. */
+                    class VoiceSelectionParams implements IVoiceSelectionParams {
+
+                        /**
+                         * Constructs a new VoiceSelectionParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams);
+
+                        /** VoiceSelectionParams name. */
+                        public name: string;
+
+                        /** VoiceSelectionParams ssmlGender. */
+                        public ssmlGender: (google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender);
+
+                        /**
+                         * Creates a new VoiceSelectionParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VoiceSelectionParams instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
+
+                        /**
+                         * Encodes the specified VoiceSelectionParams message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams.verify|verify} messages.
+                         * @param message VoiceSelectionParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VoiceSelectionParams message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams.verify|verify} messages.
+                         * @param message VoiceSelectionParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VoiceSelectionParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VoiceSelectionParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
+
+                        /**
+                         * Decodes a VoiceSelectionParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VoiceSelectionParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
+
+                        /**
+                         * Verifies a VoiceSelectionParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VoiceSelectionParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VoiceSelectionParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
+
+                        /**
+                         * Creates a plain object from a VoiceSelectionParams message. Also converts values to other types if specified.
+                         * @param message VoiceSelectionParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VoiceSelectionParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VoiceSelectionParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SynthesizeSpeechConfig. */
+                    interface ISynthesizeSpeechConfig {
+
+                        /** SynthesizeSpeechConfig speakingRate */
+                        speakingRate?: (number|null);
+
+                        /** SynthesizeSpeechConfig pitch */
+                        pitch?: (number|null);
+
+                        /** SynthesizeSpeechConfig volumeGainDb */
+                        volumeGainDb?: (number|null);
+
+                        /** SynthesizeSpeechConfig effectsProfileId */
+                        effectsProfileId?: (string[]|null);
+
+                        /** SynthesizeSpeechConfig voice */
+                        voice?: (google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams|null);
+                    }
+
+                    /** Represents a SynthesizeSpeechConfig. */
+                    class SynthesizeSpeechConfig implements ISynthesizeSpeechConfig {
+
+                        /**
+                         * Constructs a new SynthesizeSpeechConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig);
+
+                        /** SynthesizeSpeechConfig speakingRate. */
+                        public speakingRate: number;
+
+                        /** SynthesizeSpeechConfig pitch. */
+                        public pitch: number;
+
+                        /** SynthesizeSpeechConfig volumeGainDb. */
+                        public volumeGainDb: number;
+
+                        /** SynthesizeSpeechConfig effectsProfileId. */
+                        public effectsProfileId: string[];
+
+                        /** SynthesizeSpeechConfig voice. */
+                        public voice?: (google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams|null);
+
+                        /**
+                         * Creates a new SynthesizeSpeechConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SynthesizeSpeechConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
+
+                        /**
+                         * Encodes the specified SynthesizeSpeechConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig.verify|verify} messages.
+                         * @param message SynthesizeSpeechConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SynthesizeSpeechConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig.verify|verify} messages.
+                         * @param message SynthesizeSpeechConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SynthesizeSpeechConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SynthesizeSpeechConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
+
+                        /**
+                         * Decodes a SynthesizeSpeechConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SynthesizeSpeechConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
+
+                        /**
+                         * Verifies a SynthesizeSpeechConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SynthesizeSpeechConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SynthesizeSpeechConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
+
+                        /**
+                         * Creates a plain object from a SynthesizeSpeechConfig message. Also converts values to other types if specified.
+                         * @param message SynthesizeSpeechConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SynthesizeSpeechConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SynthesizeSpeechConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** OutputAudioEncoding enum. */
+                    enum OutputAudioEncoding {
+                        OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
+                        OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
+                        OUTPUT_AUDIO_ENCODING_MP3 = 2,
+                        OUTPUT_AUDIO_ENCODING_MP3_64_KBPS = 4,
+                        OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3,
+                        OUTPUT_AUDIO_ENCODING_MULAW = 5
+                    }
+
+                    /** Properties of an OutputAudioConfig. */
+                    interface IOutputAudioConfig {
+
+                        /** OutputAudioConfig audioEncoding */
+                        audioEncoding?: (google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding|null);
+
+                        /** OutputAudioConfig sampleRateHertz */
+                        sampleRateHertz?: (number|null);
+
+                        /** OutputAudioConfig synthesizeSpeechConfig */
+                        synthesizeSpeechConfig?: (google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig|null);
+                    }
+
+                    /** Represents an OutputAudioConfig. */
+                    class OutputAudioConfig implements IOutputAudioConfig {
+
+                        /**
+                         * Constructs a new OutputAudioConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig);
+
+                        /** OutputAudioConfig audioEncoding. */
+                        public audioEncoding: (google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding);
+
+                        /** OutputAudioConfig sampleRateHertz. */
+                        public sampleRateHertz: number;
+
+                        /** OutputAudioConfig synthesizeSpeechConfig. */
+                        public synthesizeSpeechConfig?: (google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig|null);
+
+                        /**
+                         * Creates a new OutputAudioConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OutputAudioConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
+
+                        /**
+                         * Encodes the specified OutputAudioConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig.verify|verify} messages.
+                         * @param message OutputAudioConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OutputAudioConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig.verify|verify} messages.
+                         * @param message OutputAudioConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OutputAudioConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OutputAudioConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
+
+                        /**
+                         * Decodes an OutputAudioConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OutputAudioConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
+
+                        /**
+                         * Verifies an OutputAudioConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OutputAudioConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OutputAudioConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
+
+                        /**
+                         * Creates a plain object from an OutputAudioConfig message. Also converts values to other types if specified.
+                         * @param message OutputAudioConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OutputAudioConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OutputAudioConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TextToSpeechSettings. */
+                    interface ITextToSpeechSettings {
+
+                        /** TextToSpeechSettings synthesizeSpeechConfigs */
+                        synthesizeSpeechConfigs?: ({ [k: string]: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig }|null);
+                    }
+
+                    /** Represents a TextToSpeechSettings. */
+                    class TextToSpeechSettings implements ITextToSpeechSettings {
+
+                        /**
+                         * Constructs a new TextToSpeechSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings);
+
+                        /** TextToSpeechSettings synthesizeSpeechConfigs. */
+                        public synthesizeSpeechConfigs: { [k: string]: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig };
+
+                        /**
+                         * Creates a new TextToSpeechSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextToSpeechSettings instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings): google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings;
+
+                        /**
+                         * Encodes the specified TextToSpeechSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings.verify|verify} messages.
+                         * @param message TextToSpeechSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextToSpeechSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings.verify|verify} messages.
+                         * @param message TextToSpeechSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ITextToSpeechSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextToSpeechSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextToSpeechSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings;
+
+                        /**
+                         * Decodes a TextToSpeechSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextToSpeechSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings;
+
+                        /**
+                         * Verifies a TextToSpeechSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextToSpeechSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextToSpeechSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings;
+
+                        /**
+                         * Creates a plain object from a TextToSpeechSettings message. Also converts values to other types if specified.
+                         * @param message TextToSpeechSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.TextToSpeechSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextToSpeechSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextToSpeechSettings
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -37236,625 +38061,6 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ResourceName
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                    }
-
-                    /** SpeechModelVariant enum. */
-                    enum SpeechModelVariant {
-                        SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
-                        USE_BEST_AVAILABLE = 1,
-                        USE_STANDARD = 2,
-                        USE_ENHANCED = 3
-                    }
-
-                    /** Properties of a SpeechWordInfo. */
-                    interface ISpeechWordInfo {
-
-                        /** SpeechWordInfo word */
-                        word?: (string|null);
-
-                        /** SpeechWordInfo startOffset */
-                        startOffset?: (google.protobuf.IDuration|null);
-
-                        /** SpeechWordInfo endOffset */
-                        endOffset?: (google.protobuf.IDuration|null);
-
-                        /** SpeechWordInfo confidence */
-                        confidence?: (number|null);
-                    }
-
-                    /** Represents a SpeechWordInfo. */
-                    class SpeechWordInfo implements ISpeechWordInfo {
-
-                        /**
-                         * Constructs a new SpeechWordInfo.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo);
-
-                        /** SpeechWordInfo word. */
-                        public word: string;
-
-                        /** SpeechWordInfo startOffset. */
-                        public startOffset?: (google.protobuf.IDuration|null);
-
-                        /** SpeechWordInfo endOffset. */
-                        public endOffset?: (google.protobuf.IDuration|null);
-
-                        /** SpeechWordInfo confidence. */
-                        public confidence: number;
-
-                        /**
-                         * Creates a new SpeechWordInfo instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SpeechWordInfo instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
-
-                        /**
-                         * Encodes the specified SpeechWordInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo.verify|verify} messages.
-                         * @param message SpeechWordInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SpeechWordInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo.verify|verify} messages.
-                         * @param message SpeechWordInfo message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISpeechWordInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SpeechWordInfo message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SpeechWordInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
-
-                        /**
-                         * Decodes a SpeechWordInfo message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SpeechWordInfo
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
-
-                        /**
-                         * Verifies a SpeechWordInfo message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SpeechWordInfo message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SpeechWordInfo
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo;
-
-                        /**
-                         * Creates a plain object from a SpeechWordInfo message. Also converts values to other types if specified.
-                         * @param message SpeechWordInfo
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SpeechWordInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SpeechWordInfo to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SpeechWordInfo
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of an InputAudioConfig. */
-                    interface IInputAudioConfig {
-
-                        /** InputAudioConfig audioEncoding */
-                        audioEncoding?: (google.cloud.dialogflow.cx.v3beta1.AudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.AudioEncoding|null);
-
-                        /** InputAudioConfig sampleRateHertz */
-                        sampleRateHertz?: (number|null);
-
-                        /** InputAudioConfig enableWordInfo */
-                        enableWordInfo?: (boolean|null);
-
-                        /** InputAudioConfig phraseHints */
-                        phraseHints?: (string[]|null);
-
-                        /** InputAudioConfig model */
-                        model?: (string|null);
-
-                        /** InputAudioConfig modelVariant */
-                        modelVariant?: (google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant|keyof typeof google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant|null);
-
-                        /** InputAudioConfig singleUtterance */
-                        singleUtterance?: (boolean|null);
-                    }
-
-                    /** Represents an InputAudioConfig. */
-                    class InputAudioConfig implements IInputAudioConfig {
-
-                        /**
-                         * Constructs a new InputAudioConfig.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig);
-
-                        /** InputAudioConfig audioEncoding. */
-                        public audioEncoding: (google.cloud.dialogflow.cx.v3beta1.AudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.AudioEncoding);
-
-                        /** InputAudioConfig sampleRateHertz. */
-                        public sampleRateHertz: number;
-
-                        /** InputAudioConfig enableWordInfo. */
-                        public enableWordInfo: boolean;
-
-                        /** InputAudioConfig phraseHints. */
-                        public phraseHints: string[];
-
-                        /** InputAudioConfig model. */
-                        public model: string;
-
-                        /** InputAudioConfig modelVariant. */
-                        public modelVariant: (google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant|keyof typeof google.cloud.dialogflow.cx.v3beta1.SpeechModelVariant);
-
-                        /** InputAudioConfig singleUtterance. */
-                        public singleUtterance: boolean;
-
-                        /**
-                         * Creates a new InputAudioConfig instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns InputAudioConfig instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
-
-                        /**
-                         * Encodes the specified InputAudioConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.InputAudioConfig.verify|verify} messages.
-                         * @param message InputAudioConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified InputAudioConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.InputAudioConfig.verify|verify} messages.
-                         * @param message InputAudioConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IInputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an InputAudioConfig message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns InputAudioConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
-
-                        /**
-                         * Decodes an InputAudioConfig message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns InputAudioConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
-
-                        /**
-                         * Verifies an InputAudioConfig message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an InputAudioConfig message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns InputAudioConfig
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.InputAudioConfig;
-
-                        /**
-                         * Creates a plain object from an InputAudioConfig message. Also converts values to other types if specified.
-                         * @param message InputAudioConfig
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.InputAudioConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this InputAudioConfig to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for InputAudioConfig
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** SsmlVoiceGender enum. */
-                    enum SsmlVoiceGender {
-                        SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                        SSML_VOICE_GENDER_MALE = 1,
-                        SSML_VOICE_GENDER_FEMALE = 2,
-                        SSML_VOICE_GENDER_NEUTRAL = 3
-                    }
-
-                    /** Properties of a VoiceSelectionParams. */
-                    interface IVoiceSelectionParams {
-
-                        /** VoiceSelectionParams name */
-                        name?: (string|null);
-
-                        /** VoiceSelectionParams ssmlGender */
-                        ssmlGender?: (google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender|null);
-                    }
-
-                    /** Represents a VoiceSelectionParams. */
-                    class VoiceSelectionParams implements IVoiceSelectionParams {
-
-                        /**
-                         * Constructs a new VoiceSelectionParams.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams);
-
-                        /** VoiceSelectionParams name. */
-                        public name: string;
-
-                        /** VoiceSelectionParams ssmlGender. */
-                        public ssmlGender: (google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.cx.v3beta1.SsmlVoiceGender);
-
-                        /**
-                         * Creates a new VoiceSelectionParams instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns VoiceSelectionParams instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
-
-                        /**
-                         * Encodes the specified VoiceSelectionParams message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams.verify|verify} messages.
-                         * @param message VoiceSelectionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified VoiceSelectionParams message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams.verify|verify} messages.
-                         * @param message VoiceSelectionParams message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a VoiceSelectionParams message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns VoiceSelectionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
-
-                        /**
-                         * Decodes a VoiceSelectionParams message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns VoiceSelectionParams
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
-
-                        /**
-                         * Verifies a VoiceSelectionParams message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a VoiceSelectionParams message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns VoiceSelectionParams
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams;
-
-                        /**
-                         * Creates a plain object from a VoiceSelectionParams message. Also converts values to other types if specified.
-                         * @param message VoiceSelectionParams
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.VoiceSelectionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this VoiceSelectionParams to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for VoiceSelectionParams
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a SynthesizeSpeechConfig. */
-                    interface ISynthesizeSpeechConfig {
-
-                        /** SynthesizeSpeechConfig speakingRate */
-                        speakingRate?: (number|null);
-
-                        /** SynthesizeSpeechConfig pitch */
-                        pitch?: (number|null);
-
-                        /** SynthesizeSpeechConfig volumeGainDb */
-                        volumeGainDb?: (number|null);
-
-                        /** SynthesizeSpeechConfig effectsProfileId */
-                        effectsProfileId?: (string[]|null);
-
-                        /** SynthesizeSpeechConfig voice */
-                        voice?: (google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams|null);
-                    }
-
-                    /** Represents a SynthesizeSpeechConfig. */
-                    class SynthesizeSpeechConfig implements ISynthesizeSpeechConfig {
-
-                        /**
-                         * Constructs a new SynthesizeSpeechConfig.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig);
-
-                        /** SynthesizeSpeechConfig speakingRate. */
-                        public speakingRate: number;
-
-                        /** SynthesizeSpeechConfig pitch. */
-                        public pitch: number;
-
-                        /** SynthesizeSpeechConfig volumeGainDb. */
-                        public volumeGainDb: number;
-
-                        /** SynthesizeSpeechConfig effectsProfileId. */
-                        public effectsProfileId: string[];
-
-                        /** SynthesizeSpeechConfig voice. */
-                        public voice?: (google.cloud.dialogflow.cx.v3beta1.IVoiceSelectionParams|null);
-
-                        /**
-                         * Creates a new SynthesizeSpeechConfig instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SynthesizeSpeechConfig instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
-
-                        /**
-                         * Encodes the specified SynthesizeSpeechConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig.verify|verify} messages.
-                         * @param message SynthesizeSpeechConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SynthesizeSpeechConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig.verify|verify} messages.
-                         * @param message SynthesizeSpeechConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SynthesizeSpeechConfig message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SynthesizeSpeechConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
-
-                        /**
-                         * Decodes a SynthesizeSpeechConfig message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SynthesizeSpeechConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
-
-                        /**
-                         * Verifies a SynthesizeSpeechConfig message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SynthesizeSpeechConfig message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SynthesizeSpeechConfig
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig;
-
-                        /**
-                         * Creates a plain object from a SynthesizeSpeechConfig message. Also converts values to other types if specified.
-                         * @param message SynthesizeSpeechConfig
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SynthesizeSpeechConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SynthesizeSpeechConfig to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SynthesizeSpeechConfig
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** OutputAudioEncoding enum. */
-                    enum OutputAudioEncoding {
-                        OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
-                        OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
-                        OUTPUT_AUDIO_ENCODING_MP3 = 2,
-                        OUTPUT_AUDIO_ENCODING_MP3_64_KBPS = 4,
-                        OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3,
-                        OUTPUT_AUDIO_ENCODING_MULAW = 5
-                    }
-
-                    /** Properties of an OutputAudioConfig. */
-                    interface IOutputAudioConfig {
-
-                        /** OutputAudioConfig audioEncoding */
-                        audioEncoding?: (google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding|null);
-
-                        /** OutputAudioConfig sampleRateHertz */
-                        sampleRateHertz?: (number|null);
-
-                        /** OutputAudioConfig synthesizeSpeechConfig */
-                        synthesizeSpeechConfig?: (google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig|null);
-                    }
-
-                    /** Represents an OutputAudioConfig. */
-                    class OutputAudioConfig implements IOutputAudioConfig {
-
-                        /**
-                         * Constructs a new OutputAudioConfig.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig);
-
-                        /** OutputAudioConfig audioEncoding. */
-                        public audioEncoding: (google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.cx.v3beta1.OutputAudioEncoding);
-
-                        /** OutputAudioConfig sampleRateHertz. */
-                        public sampleRateHertz: number;
-
-                        /** OutputAudioConfig synthesizeSpeechConfig. */
-                        public synthesizeSpeechConfig?: (google.cloud.dialogflow.cx.v3beta1.ISynthesizeSpeechConfig|null);
-
-                        /**
-                         * Creates a new OutputAudioConfig instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns OutputAudioConfig instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
-
-                        /**
-                         * Encodes the specified OutputAudioConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig.verify|verify} messages.
-                         * @param message OutputAudioConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified OutputAudioConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig.verify|verify} messages.
-                         * @param message OutputAudioConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an OutputAudioConfig message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns OutputAudioConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
-
-                        /**
-                         * Decodes an OutputAudioConfig message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns OutputAudioConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
-
-                        /**
-                         * Verifies an OutputAudioConfig message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an OutputAudioConfig message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns OutputAudioConfig
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig;
-
-                        /**
-                         * Creates a plain object from an OutputAudioConfig message. Also converts values to other types if specified.
-                         * @param message OutputAudioConfig
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this OutputAudioConfig to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for OutputAudioConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
