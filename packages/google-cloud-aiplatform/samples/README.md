@@ -314,6 +314,8 @@
   * [Job_service.resume_model_deployment_monitoring_job](#job_service.resume_model_deployment_monitoring_job)
   * [Job_service.search_model_deployment_monitoring_stats_anomalies](#job_service.search_model_deployment_monitoring_stats_anomalies)
   * [Job_service.update_model_deployment_monitoring_job](#job_service.update_model_deployment_monitoring_job)
+  * [Match_service.find_neighbors](#match_service.find_neighbors)
+  * [Match_service.read_index_datapoints](#match_service.read_index_datapoints)
   * [Metadata_service.add_context_artifacts_and_executions](#metadata_service.add_context_artifacts_and_executions)
   * [Metadata_service.add_context_children](#metadata_service.add_context_children)
   * [Metadata_service.add_execution_events](#metadata_service.add_execution_events)
@@ -5572,6 +5574,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/job_service.update_model_deployment_monitoring_job.js`
+
+
+-----
+
+
+
+
+### Match_service.find_neighbors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.find_neighbors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.find_neighbors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.find_neighbors.js`
+
+
+-----
+
+
+
+
+### Match_service.read_index_datapoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/match_service.read_index_datapoints.js`
 
 
 -----
