@@ -4609,6 +4609,9 @@
                          * @property {string|null} [model] TranslateDocumentRequest model
                          * @property {google.cloud.translation.v3.ITranslateTextGlossaryConfig|null} [glossaryConfig] TranslateDocumentRequest glossaryConfig
                          * @property {Object.<string,string>|null} [labels] TranslateDocumentRequest labels
+                         * @property {string|null} [customizedAttribution] TranslateDocumentRequest customizedAttribution
+                         * @property {boolean|null} [isTranslateNativePdfOnly] TranslateDocumentRequest isTranslateNativePdfOnly
+                         * @property {boolean|null} [enableShadowRemovalNativePdf] TranslateDocumentRequest enableShadowRemovalNativePdf
                          */
     
                         /**
@@ -4692,6 +4695,30 @@
                         TranslateDocumentRequest.prototype.labels = $util.emptyObject;
     
                         /**
+                         * TranslateDocumentRequest customizedAttribution.
+                         * @member {string} customizedAttribution
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.customizedAttribution = "";
+    
+                        /**
+                         * TranslateDocumentRequest isTranslateNativePdfOnly.
+                         * @member {boolean} isTranslateNativePdfOnly
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.isTranslateNativePdfOnly = false;
+    
+                        /**
+                         * TranslateDocumentRequest enableShadowRemovalNativePdf.
+                         * @member {boolean} enableShadowRemovalNativePdf
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.enableShadowRemovalNativePdf = false;
+    
+                        /**
                          * Creates a new TranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3.TranslateDocumentRequest
@@ -4732,6 +4759,12 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.customizedAttribution != null && Object.hasOwnProperty.call(message, "customizedAttribution"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.customizedAttribution);
+                            if (message.isTranslateNativePdfOnly != null && Object.hasOwnProperty.call(message, "isTranslateNativePdfOnly"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isTranslateNativePdfOnly);
+                            if (message.enableShadowRemovalNativePdf != null && Object.hasOwnProperty.call(message, "enableShadowRemovalNativePdf"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableShadowRemovalNativePdf);
                             return writer;
                         };
     
@@ -4817,6 +4850,18 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.customizedAttribution = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.isTranslateNativePdfOnly = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.enableShadowRemovalNativePdf = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4887,6 +4932,15 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                if (!$util.isString(message.customizedAttribution))
+                                    return "customizedAttribution: string expected";
+                            if (message.isTranslateNativePdfOnly != null && message.hasOwnProperty("isTranslateNativePdfOnly"))
+                                if (typeof message.isTranslateNativePdfOnly !== "boolean")
+                                    return "isTranslateNativePdfOnly: boolean expected";
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                if (typeof message.enableShadowRemovalNativePdf !== "boolean")
+                                    return "enableShadowRemovalNativePdf: boolean expected";
                             return null;
                         };
     
@@ -4932,6 +4986,12 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.customizedAttribution != null)
+                                message.customizedAttribution = String(object.customizedAttribution);
+                            if (object.isTranslateNativePdfOnly != null)
+                                message.isTranslateNativePdfOnly = Boolean(object.isTranslateNativePdfOnly);
+                            if (object.enableShadowRemovalNativePdf != null)
+                                message.enableShadowRemovalNativePdf = Boolean(object.enableShadowRemovalNativePdf);
                             return message;
                         };
     
@@ -4958,6 +5018,9 @@
                                 object.documentOutputConfig = null;
                                 object.model = "";
                                 object.glossaryConfig = null;
+                                object.customizedAttribution = "";
+                                object.isTranslateNativePdfOnly = false;
+                                object.enableShadowRemovalNativePdf = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4979,6 +5042,12 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                object.customizedAttribution = message.customizedAttribution;
+                            if (message.isTranslateNativePdfOnly != null && message.hasOwnProperty("isTranslateNativePdfOnly"))
+                                object.isTranslateNativePdfOnly = message.isTranslateNativePdfOnly;
+                            if (message.enableShadowRemovalNativePdf != null && message.hasOwnProperty("enableShadowRemovalNativePdf"))
+                                object.enableShadowRemovalNativePdf = message.enableShadowRemovalNativePdf;
                             return object;
                         };
     
@@ -7082,6 +7151,7 @@
                          * @property {number|null} [entryCount] Glossary entryCount
                          * @property {google.protobuf.ITimestamp|null} [submitTime] Glossary submitTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] Glossary endTime
+                         * @property {string|null} [displayName] Glossary displayName
                          */
     
                         /**
@@ -7155,6 +7225,14 @@
                          */
                         Glossary.prototype.endTime = null;
     
+                        /**
+                         * Glossary displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.translation.v3.Glossary
+                         * @instance
+                         */
+                        Glossary.prototype.displayName = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -7207,6 +7285,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.submitTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                 $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.displayName);
                             return writer;
                         };
     
@@ -7267,6 +7347,10 @@
                                     }
                                 case 8: {
                                         message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.displayName = reader.string();
                                         break;
                                     }
                                 default:
@@ -7344,6 +7428,9 @@
                                 if (error)
                                     return "endTime." + error;
                             }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
                             return null;
                         };
     
@@ -7388,6 +7475,8 @@
                                     throw TypeError(".google.cloud.translation.v3.Glossary.endTime: object expected");
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
                             return message;
                         };
     
@@ -7410,6 +7499,7 @@
                                 object.entryCount = 0;
                                 object.submitTime = null;
                                 object.endTime = null;
+                                object.displayName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7431,6 +7521,8 @@
                                 object.submitTime = $root.google.protobuf.Timestamp.toObject(message.submitTime, options);
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
                             return object;
                         };
     
@@ -9974,6 +10066,7 @@
                          * @property {Object.<string,string>|null} [models] BatchTranslateDocumentRequest models
                          * @property {Object.<string,google.cloud.translation.v3.ITranslateTextGlossaryConfig>|null} [glossaries] BatchTranslateDocumentRequest glossaries
                          * @property {Object.<string,string>|null} [formatConversions] BatchTranslateDocumentRequest formatConversions
+                         * @property {string|null} [customizedAttribution] BatchTranslateDocumentRequest customizedAttribution
                          */
     
                         /**
@@ -10061,6 +10154,14 @@
                         BatchTranslateDocumentRequest.prototype.formatConversions = $util.emptyObject;
     
                         /**
+                         * BatchTranslateDocumentRequest customizedAttribution.
+                         * @member {string} customizedAttribution
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.customizedAttribution = "";
+    
+                        /**
                          * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
@@ -10107,6 +10208,8 @@
                             if (message.formatConversions != null && Object.hasOwnProperty.call(message, "formatConversions"))
                                 for (var keys = Object.keys(message.formatConversions), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.formatConversions[keys[i]]).ldelim();
+                            if (message.customizedAttribution != null && Object.hasOwnProperty.call(message, "customizedAttribution"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.customizedAttribution);
                             return writer;
                         };
     
@@ -10234,6 +10337,10 @@
                                         message.formatConversions[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.customizedAttribution = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10322,6 +10429,9 @@
                                     if (!$util.isString(message.formatConversions[key[i]]))
                                         return "formatConversions: string{k:string} expected";
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                if (!$util.isString(message.customizedAttribution))
+                                    return "customizedAttribution: string expected";
                             return null;
                         };
     
@@ -10387,6 +10497,8 @@
                                 for (var keys = Object.keys(object.formatConversions), i = 0; i < keys.length; ++i)
                                     message.formatConversions[keys[i]] = String(object.formatConversions[keys[i]]);
                             }
+                            if (object.customizedAttribution != null)
+                                message.customizedAttribution = String(object.customizedAttribution);
                             return message;
                         };
     
@@ -10416,6 +10528,7 @@
                                 object.parent = "";
                                 object.sourceLanguageCode = "";
                                 object.outputConfig = null;
+                                object.customizedAttribution = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -10449,6 +10562,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.formatConversions[keys2[j]] = message.formatConversions[keys2[j]];
                             }
+                            if (message.customizedAttribution != null && message.hasOwnProperty("customizedAttribution"))
+                                object.customizedAttribution = message.customizedAttribution;
                             return object;
                         };
     
