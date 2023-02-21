@@ -1558,12 +1558,6 @@ export namespace google {
 
                     /** ListBatchesRequest pageToken */
                     pageToken?: (string|null);
-
-                    /** ListBatchesRequest filter */
-                    filter?: (string|null);
-
-                    /** ListBatchesRequest orderBy */
-                    orderBy?: (string|null);
                 }
 
                 /** Represents a ListBatchesRequest. */
@@ -1583,12 +1577,6 @@ export namespace google {
 
                     /** ListBatchesRequest pageToken. */
                     public pageToken: string;
-
-                    /** ListBatchesRequest filter. */
-                    public filter: string;
-
-                    /** ListBatchesRequest orderBy. */
-                    public orderBy: string;
 
                     /**
                      * Creates a new ListBatchesRequest instance using the specified properties.
@@ -2066,17 +2054,6 @@ export namespace google {
 
                 namespace Batch {
 
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        PENDING = 1,
-                        RUNNING = 2,
-                        CANCELLING = 3,
-                        CANCELLED = 4,
-                        SUCCEEDED = 5,
-                        FAILED = 6
-                    }
-
                     /** Properties of a StateHistory. */
                     interface IStateHistory {
 
@@ -2184,6 +2161,17 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        RUNNING = 2,
+                        CANCELLING = 3,
+                        CANCELLED = 4,
+                        SUCCEEDED = 5,
+                        FAILED = 6
                     }
                 }
 
@@ -2897,12 +2885,6 @@ export namespace google {
 
                     /** ExecutionConfig kmsKey */
                     kmsKey?: (string|null);
-
-                    /** ExecutionConfig ttl */
-                    ttl?: (google.protobuf.IDuration|null);
-
-                    /** ExecutionConfig stagingBucket */
-                    stagingBucket?: (string|null);
                 }
 
                 /** Represents an ExecutionConfig. */
@@ -2928,12 +2910,6 @@ export namespace google {
 
                     /** ExecutionConfig kmsKey. */
                     public kmsKey: string;
-
-                    /** ExecutionConfig ttl. */
-                    public ttl?: (google.protobuf.IDuration|null);
-
-                    /** ExecutionConfig stagingBucket. */
-                    public stagingBucket: string;
 
                     /** ExecutionConfig network. */
                     public network?: ("networkUri"|"subnetworkUri");
@@ -3227,12 +3203,6 @@ export namespace google {
 
                     /** RuntimeInfo diagnosticOutputUri */
                     diagnosticOutputUri?: (string|null);
-
-                    /** RuntimeInfo approximateUsage */
-                    approximateUsage?: (google.cloud.dataproc.v1.IUsageMetrics|null);
-
-                    /** RuntimeInfo currentUsage */
-                    currentUsage?: (google.cloud.dataproc.v1.IUsageSnapshot|null);
                 }
 
                 /** Represents a RuntimeInfo. */
@@ -3252,12 +3222,6 @@ export namespace google {
 
                     /** RuntimeInfo diagnosticOutputUri. */
                     public diagnosticOutputUri: string;
-
-                    /** RuntimeInfo approximateUsage. */
-                    public approximateUsage?: (google.cloud.dataproc.v1.IUsageMetrics|null);
-
-                    /** RuntimeInfo currentUsage. */
-                    public currentUsage?: (google.cloud.dataproc.v1.IUsageSnapshot|null);
 
                     /**
                      * Creates a new RuntimeInfo instance using the specified properties.
@@ -3331,218 +3295,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RuntimeInfo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a UsageMetrics. */
-                interface IUsageMetrics {
-
-                    /** UsageMetrics milliDcuSeconds */
-                    milliDcuSeconds?: (number|Long|string|null);
-
-                    /** UsageMetrics shuffleStorageGbSeconds */
-                    shuffleStorageGbSeconds?: (number|Long|string|null);
-                }
-
-                /** Represents a UsageMetrics. */
-                class UsageMetrics implements IUsageMetrics {
-
-                    /**
-                     * Constructs a new UsageMetrics.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataproc.v1.IUsageMetrics);
-
-                    /** UsageMetrics milliDcuSeconds. */
-                    public milliDcuSeconds: (number|Long|string);
-
-                    /** UsageMetrics shuffleStorageGbSeconds. */
-                    public shuffleStorageGbSeconds: (number|Long|string);
-
-                    /**
-                     * Creates a new UsageMetrics instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UsageMetrics instance
-                     */
-                    public static create(properties?: google.cloud.dataproc.v1.IUsageMetrics): google.cloud.dataproc.v1.UsageMetrics;
-
-                    /**
-                     * Encodes the specified UsageMetrics message. Does not implicitly {@link google.cloud.dataproc.v1.UsageMetrics.verify|verify} messages.
-                     * @param message UsageMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataproc.v1.IUsageMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UsageMetrics message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.UsageMetrics.verify|verify} messages.
-                     * @param message UsageMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataproc.v1.IUsageMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a UsageMetrics message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UsageMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.UsageMetrics;
-
-                    /**
-                     * Decodes a UsageMetrics message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UsageMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.UsageMetrics;
-
-                    /**
-                     * Verifies a UsageMetrics message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a UsageMetrics message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UsageMetrics
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.UsageMetrics;
-
-                    /**
-                     * Creates a plain object from a UsageMetrics message. Also converts values to other types if specified.
-                     * @param message UsageMetrics
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataproc.v1.UsageMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UsageMetrics to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for UsageMetrics
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a UsageSnapshot. */
-                interface IUsageSnapshot {
-
-                    /** UsageSnapshot milliDcu */
-                    milliDcu?: (number|Long|string|null);
-
-                    /** UsageSnapshot shuffleStorageGb */
-                    shuffleStorageGb?: (number|Long|string|null);
-
-                    /** UsageSnapshot snapshotTime */
-                    snapshotTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a UsageSnapshot. */
-                class UsageSnapshot implements IUsageSnapshot {
-
-                    /**
-                     * Constructs a new UsageSnapshot.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataproc.v1.IUsageSnapshot);
-
-                    /** UsageSnapshot milliDcu. */
-                    public milliDcu: (number|Long|string);
-
-                    /** UsageSnapshot shuffleStorageGb. */
-                    public shuffleStorageGb: (number|Long|string);
-
-                    /** UsageSnapshot snapshotTime. */
-                    public snapshotTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new UsageSnapshot instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UsageSnapshot instance
-                     */
-                    public static create(properties?: google.cloud.dataproc.v1.IUsageSnapshot): google.cloud.dataproc.v1.UsageSnapshot;
-
-                    /**
-                     * Encodes the specified UsageSnapshot message. Does not implicitly {@link google.cloud.dataproc.v1.UsageSnapshot.verify|verify} messages.
-                     * @param message UsageSnapshot message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataproc.v1.IUsageSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UsageSnapshot message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.UsageSnapshot.verify|verify} messages.
-                     * @param message UsageSnapshot message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataproc.v1.IUsageSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a UsageSnapshot message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UsageSnapshot
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.UsageSnapshot;
-
-                    /**
-                     * Decodes a UsageSnapshot message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UsageSnapshot
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.UsageSnapshot;
-
-                    /**
-                     * Verifies a UsageSnapshot message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a UsageSnapshot message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UsageSnapshot
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.UsageSnapshot;
-
-                    /**
-                     * Creates a plain object from a UsageSnapshot message. Also converts values to other types if specified.
-                     * @param message UsageSnapshot
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataproc.v1.UsageSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UsageSnapshot to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for UsageSnapshot
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4105,23 +3857,17 @@ export namespace google {
                         /** GkeNodeConfig machineType */
                         machineType?: (string|null);
 
-                        /** GkeNodeConfig localSsdCount */
-                        localSsdCount?: (number|null);
-
                         /** GkeNodeConfig preemptible */
                         preemptible?: (boolean|null);
+
+                        /** GkeNodeConfig localSsdCount */
+                        localSsdCount?: (number|null);
 
                         /** GkeNodeConfig accelerators */
                         accelerators?: (google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig[]|null);
 
                         /** GkeNodeConfig minCpuPlatform */
                         minCpuPlatform?: (string|null);
-
-                        /** GkeNodeConfig bootDiskKmsKey */
-                        bootDiskKmsKey?: (string|null);
-
-                        /** GkeNodeConfig spot */
-                        spot?: (boolean|null);
                     }
 
                     /** Represents a GkeNodeConfig. */
@@ -4136,23 +3882,17 @@ export namespace google {
                         /** GkeNodeConfig machineType. */
                         public machineType: string;
 
-                        /** GkeNodeConfig localSsdCount. */
-                        public localSsdCount: number;
-
                         /** GkeNodeConfig preemptible. */
                         public preemptible: boolean;
+
+                        /** GkeNodeConfig localSsdCount. */
+                        public localSsdCount: number;
 
                         /** GkeNodeConfig accelerators. */
                         public accelerators: google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig[];
 
                         /** GkeNodeConfig minCpuPlatform. */
                         public minCpuPlatform: string;
-
-                        /** GkeNodeConfig bootDiskKmsKey. */
-                        public bootDiskKmsKey: string;
-
-                        /** GkeNodeConfig spot. */
-                        public spot: boolean;
 
                         /**
                          * Creates a new GkeNodeConfig instance using the specified properties.
@@ -4240,9 +3980,6 @@ export namespace google {
 
                         /** GkeNodePoolAcceleratorConfig acceleratorType */
                         acceleratorType?: (string|null);
-
-                        /** GkeNodePoolAcceleratorConfig gpuPartitionSize */
-                        gpuPartitionSize?: (string|null);
                     }
 
                     /** Represents a GkeNodePoolAcceleratorConfig. */
@@ -4259,9 +3996,6 @@ export namespace google {
 
                         /** GkeNodePoolAcceleratorConfig acceleratorType. */
                         public acceleratorType: string;
-
-                        /** GkeNodePoolAcceleratorConfig gpuPartitionSize. */
-                        public gpuPartitionSize: string;
 
                         /**
                          * Creates a new GkeNodePoolAcceleratorConfig instance using the specified properties.
@@ -4454,10 +4188,8 @@ export namespace google {
                     FLINK = 14,
                     HBASE = 11,
                     HIVE_WEBHCAT = 3,
-                    HUDI = 18,
                     JUPYTER = 1,
                     PRESTO = 6,
-                    TRINO = 17,
                     RANGER = 12,
                     SOLR = 10,
                     ZEPPELIN = 4,
@@ -5569,7 +5301,7 @@ export namespace google {
                     public subnetworkUri: string;
 
                     /** GceClusterConfig internalIpOnly. */
-                    public internalIpOnly?: (boolean|null);
+                    public internalIpOnly: boolean;
 
                     /** GceClusterConfig privateIpv6GoogleAccess. */
                     public privateIpv6GoogleAccess: (google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess|keyof typeof google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess);
@@ -5597,9 +5329,6 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig. */
                     public confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
-
-                    /** GceClusterConfig _internalIpOnly. */
-                    public _internalIpOnly?: "internalIpOnly";
 
                     /**
                      * Creates a new GceClusterConfig instance using the specified properties.
@@ -5810,22 +5539,13 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.IShieldedInstanceConfig);
 
                     /** ShieldedInstanceConfig enableSecureBoot. */
-                    public enableSecureBoot?: (boolean|null);
+                    public enableSecureBoot: boolean;
 
                     /** ShieldedInstanceConfig enableVtpm. */
-                    public enableVtpm?: (boolean|null);
+                    public enableVtpm: boolean;
 
                     /** ShieldedInstanceConfig enableIntegrityMonitoring. */
-                    public enableIntegrityMonitoring?: (boolean|null);
-
-                    /** ShieldedInstanceConfig _enableSecureBoot. */
-                    public _enableSecureBoot?: "enableSecureBoot";
-
-                    /** ShieldedInstanceConfig _enableVtpm. */
-                    public _enableVtpm?: "enableVtpm";
-
-                    /** ShieldedInstanceConfig _enableIntegrityMonitoring. */
-                    public _enableIntegrityMonitoring?: "enableIntegrityMonitoring";
+                    public enableIntegrityMonitoring: boolean;
 
                     /**
                      * Creates a new ShieldedInstanceConfig instance using the specified properties.
@@ -7659,109 +7379,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a ClusterMetrics. */
-                interface IClusterMetrics {
-
-                    /** ClusterMetrics hdfsMetrics */
-                    hdfsMetrics?: ({ [k: string]: (number|Long|string) }|null);
-
-                    /** ClusterMetrics yarnMetrics */
-                    yarnMetrics?: ({ [k: string]: (number|Long|string) }|null);
-                }
-
-                /** Represents a ClusterMetrics. */
-                class ClusterMetrics implements IClusterMetrics {
-
-                    /**
-                     * Constructs a new ClusterMetrics.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataproc.v1.IClusterMetrics);
-
-                    /** ClusterMetrics hdfsMetrics. */
-                    public hdfsMetrics: { [k: string]: (number|Long|string) };
-
-                    /** ClusterMetrics yarnMetrics. */
-                    public yarnMetrics: { [k: string]: (number|Long|string) };
-
-                    /**
-                     * Creates a new ClusterMetrics instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ClusterMetrics instance
-                     */
-                    public static create(properties?: google.cloud.dataproc.v1.IClusterMetrics): google.cloud.dataproc.v1.ClusterMetrics;
-
-                    /**
-                     * Encodes the specified ClusterMetrics message. Does not implicitly {@link google.cloud.dataproc.v1.ClusterMetrics.verify|verify} messages.
-                     * @param message ClusterMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataproc.v1.IClusterMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ClusterMetrics message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ClusterMetrics.verify|verify} messages.
-                     * @param message ClusterMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataproc.v1.IClusterMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ClusterMetrics message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ClusterMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ClusterMetrics;
-
-                    /**
-                     * Decodes a ClusterMetrics message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ClusterMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ClusterMetrics;
-
-                    /**
-                     * Verifies a ClusterMetrics message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ClusterMetrics message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ClusterMetrics
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ClusterMetrics;
-
-                    /**
-                     * Creates a plain object from a ClusterMetrics message. Also converts values to other types if specified.
-                     * @param message ClusterMetrics
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataproc.v1.ClusterMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ClusterMetrics to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ClusterMetrics
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a DataprocMetricConfig. */
                 interface IDataprocMetricConfig {
 
@@ -7869,8 +7486,7 @@ export namespace google {
                         SPARK = 3,
                         YARN = 4,
                         SPARK_HISTORY_SERVER = 5,
-                        HIVESERVER2 = 6,
-                        HIVEMETASTORE = 7
+                        HIVESERVER2 = 6
                     }
 
                     /** Properties of a Metric. */
@@ -7975,6 +7591,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a ClusterMetrics. */
+                interface IClusterMetrics {
+
+                    /** ClusterMetrics hdfsMetrics */
+                    hdfsMetrics?: ({ [k: string]: (number|Long|string) }|null);
+
+                    /** ClusterMetrics yarnMetrics */
+                    yarnMetrics?: ({ [k: string]: (number|Long|string) }|null);
+                }
+
+                /** Represents a ClusterMetrics. */
+                class ClusterMetrics implements IClusterMetrics {
+
+                    /**
+                     * Constructs a new ClusterMetrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IClusterMetrics);
+
+                    /** ClusterMetrics hdfsMetrics. */
+                    public hdfsMetrics: { [k: string]: (number|Long|string) };
+
+                    /** ClusterMetrics yarnMetrics. */
+                    public yarnMetrics: { [k: string]: (number|Long|string) };
+
+                    /**
+                     * Creates a new ClusterMetrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClusterMetrics instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IClusterMetrics): google.cloud.dataproc.v1.ClusterMetrics;
+
+                    /**
+                     * Encodes the specified ClusterMetrics message. Does not implicitly {@link google.cloud.dataproc.v1.ClusterMetrics.verify|verify} messages.
+                     * @param message ClusterMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IClusterMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClusterMetrics message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ClusterMetrics.verify|verify} messages.
+                     * @param message ClusterMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IClusterMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClusterMetrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClusterMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ClusterMetrics;
+
+                    /**
+                     * Decodes a ClusterMetrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClusterMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ClusterMetrics;
+
+                    /**
+                     * Verifies a ClusterMetrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClusterMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClusterMetrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ClusterMetrics;
+
+                    /**
+                     * Creates a plain object from a ClusterMetrics message. Also converts values to other types if specified.
+                     * @param message ClusterMetrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ClusterMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClusterMetrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClusterMetrics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateClusterRequest. */
@@ -10716,142 +10435,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a TrinoJob. */
-                interface ITrinoJob {
-
-                    /** TrinoJob queryFileUri */
-                    queryFileUri?: (string|null);
-
-                    /** TrinoJob queryList */
-                    queryList?: (google.cloud.dataproc.v1.IQueryList|null);
-
-                    /** TrinoJob continueOnFailure */
-                    continueOnFailure?: (boolean|null);
-
-                    /** TrinoJob outputFormat */
-                    outputFormat?: (string|null);
-
-                    /** TrinoJob clientTags */
-                    clientTags?: (string[]|null);
-
-                    /** TrinoJob properties */
-                    properties?: ({ [k: string]: string }|null);
-
-                    /** TrinoJob loggingConfig */
-                    loggingConfig?: (google.cloud.dataproc.v1.ILoggingConfig|null);
-                }
-
-                /** Represents a TrinoJob. */
-                class TrinoJob implements ITrinoJob {
-
-                    /**
-                     * Constructs a new TrinoJob.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataproc.v1.ITrinoJob);
-
-                    /** TrinoJob queryFileUri. */
-                    public queryFileUri?: (string|null);
-
-                    /** TrinoJob queryList. */
-                    public queryList?: (google.cloud.dataproc.v1.IQueryList|null);
-
-                    /** TrinoJob continueOnFailure. */
-                    public continueOnFailure: boolean;
-
-                    /** TrinoJob outputFormat. */
-                    public outputFormat: string;
-
-                    /** TrinoJob clientTags. */
-                    public clientTags: string[];
-
-                    /** TrinoJob properties. */
-                    public properties: { [k: string]: string };
-
-                    /** TrinoJob loggingConfig. */
-                    public loggingConfig?: (google.cloud.dataproc.v1.ILoggingConfig|null);
-
-                    /** TrinoJob queries. */
-                    public queries?: ("queryFileUri"|"queryList");
-
-                    /**
-                     * Creates a new TrinoJob instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TrinoJob instance
-                     */
-                    public static create(properties?: google.cloud.dataproc.v1.ITrinoJob): google.cloud.dataproc.v1.TrinoJob;
-
-                    /**
-                     * Encodes the specified TrinoJob message. Does not implicitly {@link google.cloud.dataproc.v1.TrinoJob.verify|verify} messages.
-                     * @param message TrinoJob message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataproc.v1.ITrinoJob, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TrinoJob message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.TrinoJob.verify|verify} messages.
-                     * @param message TrinoJob message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataproc.v1.ITrinoJob, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TrinoJob message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TrinoJob
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.TrinoJob;
-
-                    /**
-                     * Decodes a TrinoJob message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TrinoJob
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.TrinoJob;
-
-                    /**
-                     * Verifies a TrinoJob message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TrinoJob message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TrinoJob
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.TrinoJob;
-
-                    /**
-                     * Creates a plain object from a TrinoJob message. Also converts values to other types if specified.
-                     * @param message TrinoJob
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataproc.v1.TrinoJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TrinoJob to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for TrinoJob
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a JobPlacement. */
                 interface IJobPlacement {
 
@@ -11368,9 +10951,6 @@ export namespace google {
                     /** Job prestoJob */
                     prestoJob?: (google.cloud.dataproc.v1.IPrestoJob|null);
 
-                    /** Job trinoJob */
-                    trinoJob?: (google.cloud.dataproc.v1.ITrinoJob|null);
-
                     /** Job status */
                     status?: (google.cloud.dataproc.v1.IJobStatus|null);
 
@@ -11441,9 +11021,6 @@ export namespace google {
                     /** Job prestoJob. */
                     public prestoJob?: (google.cloud.dataproc.v1.IPrestoJob|null);
 
-                    /** Job trinoJob. */
-                    public trinoJob?: (google.cloud.dataproc.v1.ITrinoJob|null);
-
                     /** Job status. */
                     public status?: (google.cloud.dataproc.v1.IJobStatus|null);
 
@@ -11475,7 +11052,7 @@ export namespace google {
                     public driverSchedulingConfig?: (google.cloud.dataproc.v1.IDriverSchedulingConfig|null);
 
                     /** Job typeJob. */
-                    public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|"trinoJob");
+                    public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
 
                     /**
                      * Creates a new Job instance using the specified properties.
@@ -13399,9 +12976,6 @@ export namespace google {
 
                     /** ClusterOperationMetadata warnings */
                     warnings?: (string[]|null);
-
-                    /** ClusterOperationMetadata childOperationIds */
-                    childOperationIds?: (string[]|null);
                 }
 
                 /** Represents a ClusterOperationMetadata. */
@@ -13436,9 +13010,6 @@ export namespace google {
 
                     /** ClusterOperationMetadata warnings. */
                     public warnings: string[];
-
-                    /** ClusterOperationMetadata childOperationIds. */
-                    public childOperationIds: string[];
 
                     /**
                      * Creates a new ClusterOperationMetadata instance using the specified properties.
@@ -20432,109 +20003,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of an Any. */
         interface IAny {
 
@@ -20632,6 +20100,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

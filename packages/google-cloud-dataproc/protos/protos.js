@@ -3464,8 +3464,6 @@
                          * @property {string|null} [parent] ListBatchesRequest parent
                          * @property {number|null} [pageSize] ListBatchesRequest pageSize
                          * @property {string|null} [pageToken] ListBatchesRequest pageToken
-                         * @property {string|null} [filter] ListBatchesRequest filter
-                         * @property {string|null} [orderBy] ListBatchesRequest orderBy
                          */
     
                         /**
@@ -3508,22 +3506,6 @@
                         ListBatchesRequest.prototype.pageToken = "";
     
                         /**
-                         * ListBatchesRequest filter.
-                         * @member {string} filter
-                         * @memberof google.cloud.dataproc.v1.ListBatchesRequest
-                         * @instance
-                         */
-                        ListBatchesRequest.prototype.filter = "";
-    
-                        /**
-                         * ListBatchesRequest orderBy.
-                         * @member {string} orderBy
-                         * @memberof google.cloud.dataproc.v1.ListBatchesRequest
-                         * @instance
-                         */
-                        ListBatchesRequest.prototype.orderBy = "";
-    
-                        /**
                          * Creates a new ListBatchesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ListBatchesRequest
@@ -3553,10 +3535,6 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
-                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
                             return writer;
                         };
     
@@ -3603,14 +3581,6 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
-                                case 4: {
-                                        message.filter = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.orderBy = reader.string();
-                                        break;
-                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3655,12 +3625,6 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
-                            if (message.filter != null && message.hasOwnProperty("filter"))
-                                if (!$util.isString(message.filter))
-                                    return "filter: string expected";
-                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
-                                if (!$util.isString(message.orderBy))
-                                    return "orderBy: string expected";
                             return null;
                         };
     
@@ -3682,10 +3646,6 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
-                            if (object.filter != null)
-                                message.filter = String(object.filter);
-                            if (object.orderBy != null)
-                                message.orderBy = String(object.orderBy);
                             return message;
                         };
     
@@ -3706,8 +3666,6 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
-                                object.filter = "";
-                                object.orderBy = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -3715,10 +3673,6 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
-                            if (message.filter != null && message.hasOwnProperty("filter"))
-                                object.filter = message.filter;
-                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
-                                object.orderBy = message.orderBy;
                             return object;
                         };
     
@@ -4959,30 +4913,6 @@
                             return typeUrlPrefix + "/google.cloud.dataproc.v1.Batch";
                         };
     
-                        /**
-                         * State enum.
-                         * @name google.cloud.dataproc.v1.Batch.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} PENDING=1 PENDING value
-                         * @property {number} RUNNING=2 RUNNING value
-                         * @property {number} CANCELLING=3 CANCELLING value
-                         * @property {number} CANCELLED=4 CANCELLED value
-                         * @property {number} SUCCEEDED=5 SUCCEEDED value
-                         * @property {number} FAILED=6 FAILED value
-                         */
-                        Batch.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "PENDING"] = 1;
-                            values[valuesById[2] = "RUNNING"] = 2;
-                            values[valuesById[3] = "CANCELLING"] = 3;
-                            values[valuesById[4] = "CANCELLED"] = 4;
-                            values[valuesById[5] = "SUCCEEDED"] = 5;
-                            values[valuesById[6] = "FAILED"] = 6;
-                            return values;
-                        })();
-    
                         Batch.StateHistory = (function() {
     
                             /**
@@ -5280,6 +5210,30 @@
                             };
     
                             return StateHistory;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.dataproc.v1.Batch.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING=1 PENDING value
+                         * @property {number} RUNNING=2 RUNNING value
+                         * @property {number} CANCELLING=3 CANCELLING value
+                         * @property {number} CANCELLED=4 CANCELLED value
+                         * @property {number} SUCCEEDED=5 SUCCEEDED value
+                         * @property {number} FAILED=6 FAILED value
+                         */
+                        Batch.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING"] = 1;
+                            values[valuesById[2] = "RUNNING"] = 2;
+                            values[valuesById[3] = "CANCELLING"] = 3;
+                            values[valuesById[4] = "CANCELLED"] = 4;
+                            values[valuesById[5] = "SUCCEEDED"] = 5;
+                            values[valuesById[6] = "FAILED"] = 6;
+                            return values;
                         })();
     
                         return Batch;
@@ -7251,8 +7205,6 @@
                          * @property {string|null} [subnetworkUri] ExecutionConfig subnetworkUri
                          * @property {Array.<string>|null} [networkTags] ExecutionConfig networkTags
                          * @property {string|null} [kmsKey] ExecutionConfig kmsKey
-                         * @property {google.protobuf.IDuration|null} [ttl] ExecutionConfig ttl
-                         * @property {string|null} [stagingBucket] ExecutionConfig stagingBucket
                          */
     
                         /**
@@ -7311,22 +7263,6 @@
                          */
                         ExecutionConfig.prototype.kmsKey = "";
     
-                        /**
-                         * ExecutionConfig ttl.
-                         * @member {google.protobuf.IDuration|null|undefined} ttl
-                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
-                         * @instance
-                         */
-                        ExecutionConfig.prototype.ttl = null;
-    
-                        /**
-                         * ExecutionConfig stagingBucket.
-                         * @member {string} stagingBucket
-                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
-                         * @instance
-                         */
-                        ExecutionConfig.prototype.stagingBucket = "";
-    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -7376,10 +7312,6 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.networkTags[i]);
                             if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.kmsKey);
-                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
-                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                            if (message.stagingBucket != null && Object.hasOwnProperty.call(message, "stagingBucket"))
-                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.stagingBucket);
                             return writer;
                         };
     
@@ -7434,14 +7366,6 @@
                                     }
                                 case 7: {
                                         message.kmsKey = reader.string();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 10: {
-                                        message.stagingBucket = reader.string();
                                         break;
                                     }
                                 default:
@@ -7505,14 +7429,6 @@
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 if (!$util.isString(message.kmsKey))
                                     return "kmsKey: string expected";
-                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
-                                var error = $root.google.protobuf.Duration.verify(message.ttl);
-                                if (error)
-                                    return "ttl." + error;
-                            }
-                            if (message.stagingBucket != null && message.hasOwnProperty("stagingBucket"))
-                                if (!$util.isString(message.stagingBucket))
-                                    return "stagingBucket: string expected";
                             return null;
                         };
     
@@ -7543,13 +7459,6 @@
                             }
                             if (object.kmsKey != null)
                                 message.kmsKey = String(object.kmsKey);
-                            if (object.ttl != null) {
-                                if (typeof object.ttl !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.ExecutionConfig.ttl: object expected");
-                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
-                            }
-                            if (object.stagingBucket != null)
-                                message.stagingBucket = String(object.stagingBucket);
                             return message;
                         };
     
@@ -7571,8 +7480,6 @@
                             if (options.defaults) {
                                 object.serviceAccount = "";
                                 object.kmsKey = "";
-                                object.ttl = null;
-                                object.stagingBucket = "";
                             }
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
@@ -7593,10 +7500,6 @@
                             }
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
-                            if (message.ttl != null && message.hasOwnProperty("ttl"))
-                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
-                            if (message.stagingBucket != null && message.hasOwnProperty("stagingBucket"))
-                                object.stagingBucket = message.stagingBucket;
                             return object;
                         };
     
@@ -8073,8 +7976,6 @@
                          * @property {Object.<string,string>|null} [endpoints] RuntimeInfo endpoints
                          * @property {string|null} [outputUri] RuntimeInfo outputUri
                          * @property {string|null} [diagnosticOutputUri] RuntimeInfo diagnosticOutputUri
-                         * @property {google.cloud.dataproc.v1.IUsageMetrics|null} [approximateUsage] RuntimeInfo approximateUsage
-                         * @property {google.cloud.dataproc.v1.IUsageSnapshot|null} [currentUsage] RuntimeInfo currentUsage
                          */
     
                         /**
@@ -8118,22 +8019,6 @@
                         RuntimeInfo.prototype.diagnosticOutputUri = "";
     
                         /**
-                         * RuntimeInfo approximateUsage.
-                         * @member {google.cloud.dataproc.v1.IUsageMetrics|null|undefined} approximateUsage
-                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
-                         * @instance
-                         */
-                        RuntimeInfo.prototype.approximateUsage = null;
-    
-                        /**
-                         * RuntimeInfo currentUsage.
-                         * @member {google.cloud.dataproc.v1.IUsageSnapshot|null|undefined} currentUsage
-                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
-                         * @instance
-                         */
-                        RuntimeInfo.prototype.currentUsage = null;
-    
-                        /**
                          * Creates a new RuntimeInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.RuntimeInfo
@@ -8164,10 +8049,6 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.outputUri);
                             if (message.diagnosticOutputUri != null && Object.hasOwnProperty.call(message, "diagnosticOutputUri"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.diagnosticOutputUri);
-                            if (message.approximateUsage != null && Object.hasOwnProperty.call(message, "approximateUsage"))
-                                $root.google.cloud.dataproc.v1.UsageMetrics.encode(message.approximateUsage, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            if (message.currentUsage != null && Object.hasOwnProperty.call(message, "currentUsage"))
-                                $root.google.cloud.dataproc.v1.UsageSnapshot.encode(message.currentUsage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -8233,14 +8114,6 @@
                                         message.diagnosticOutputUri = reader.string();
                                         break;
                                     }
-                                case 6: {
-                                        message.approximateUsage = $root.google.cloud.dataproc.v1.UsageMetrics.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 7: {
-                                        message.currentUsage = $root.google.cloud.dataproc.v1.UsageSnapshot.decode(reader, reader.uint32());
-                                        break;
-                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8290,16 +8163,6 @@
                             if (message.diagnosticOutputUri != null && message.hasOwnProperty("diagnosticOutputUri"))
                                 if (!$util.isString(message.diagnosticOutputUri))
                                     return "diagnosticOutputUri: string expected";
-                            if (message.approximateUsage != null && message.hasOwnProperty("approximateUsage")) {
-                                var error = $root.google.cloud.dataproc.v1.UsageMetrics.verify(message.approximateUsage);
-                                if (error)
-                                    return "approximateUsage." + error;
-                            }
-                            if (message.currentUsage != null && message.hasOwnProperty("currentUsage")) {
-                                var error = $root.google.cloud.dataproc.v1.UsageSnapshot.verify(message.currentUsage);
-                                if (error)
-                                    return "currentUsage." + error;
-                            }
                             return null;
                         };
     
@@ -8326,16 +8189,6 @@
                                 message.outputUri = String(object.outputUri);
                             if (object.diagnosticOutputUri != null)
                                 message.diagnosticOutputUri = String(object.diagnosticOutputUri);
-                            if (object.approximateUsage != null) {
-                                if (typeof object.approximateUsage !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.RuntimeInfo.approximateUsage: object expected");
-                                message.approximateUsage = $root.google.cloud.dataproc.v1.UsageMetrics.fromObject(object.approximateUsage);
-                            }
-                            if (object.currentUsage != null) {
-                                if (typeof object.currentUsage !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.RuntimeInfo.currentUsage: object expected");
-                                message.currentUsage = $root.google.cloud.dataproc.v1.UsageSnapshot.fromObject(object.currentUsage);
-                            }
                             return message;
                         };
     
@@ -8357,8 +8210,6 @@
                             if (options.defaults) {
                                 object.outputUri = "";
                                 object.diagnosticOutputUri = "";
-                                object.approximateUsage = null;
-                                object.currentUsage = null;
                             }
                             var keys2;
                             if (message.endpoints && (keys2 = Object.keys(message.endpoints)).length) {
@@ -8370,10 +8221,6 @@
                                 object.outputUri = message.outputUri;
                             if (message.diagnosticOutputUri != null && message.hasOwnProperty("diagnosticOutputUri"))
                                 object.diagnosticOutputUri = message.diagnosticOutputUri;
-                            if (message.approximateUsage != null && message.hasOwnProperty("approximateUsage"))
-                                object.approximateUsage = $root.google.cloud.dataproc.v1.UsageMetrics.toObject(message.approximateUsage, options);
-                            if (message.currentUsage != null && message.hasOwnProperty("currentUsage"))
-                                object.currentUsage = $root.google.cloud.dataproc.v1.UsageSnapshot.toObject(message.currentUsage, options);
                             return object;
                         };
     
@@ -8404,544 +8251,6 @@
                         };
     
                         return RuntimeInfo;
-                    })();
-    
-                    v1.UsageMetrics = (function() {
-    
-                        /**
-                         * Properties of a UsageMetrics.
-                         * @memberof google.cloud.dataproc.v1
-                         * @interface IUsageMetrics
-                         * @property {number|Long|null} [milliDcuSeconds] UsageMetrics milliDcuSeconds
-                         * @property {number|Long|null} [shuffleStorageGbSeconds] UsageMetrics shuffleStorageGbSeconds
-                         */
-    
-                        /**
-                         * Constructs a new UsageMetrics.
-                         * @memberof google.cloud.dataproc.v1
-                         * @classdesc Represents a UsageMetrics.
-                         * @implements IUsageMetrics
-                         * @constructor
-                         * @param {google.cloud.dataproc.v1.IUsageMetrics=} [properties] Properties to set
-                         */
-                        function UsageMetrics(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UsageMetrics milliDcuSeconds.
-                         * @member {number|Long} milliDcuSeconds
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @instance
-                         */
-                        UsageMetrics.prototype.milliDcuSeconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * UsageMetrics shuffleStorageGbSeconds.
-                         * @member {number|Long} shuffleStorageGbSeconds
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @instance
-                         */
-                        UsageMetrics.prototype.shuffleStorageGbSeconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * Creates a new UsageMetrics instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IUsageMetrics=} [properties] Properties to set
-                         * @returns {google.cloud.dataproc.v1.UsageMetrics} UsageMetrics instance
-                         */
-                        UsageMetrics.create = function create(properties) {
-                            return new UsageMetrics(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UsageMetrics message. Does not implicitly {@link google.cloud.dataproc.v1.UsageMetrics.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IUsageMetrics} message UsageMetrics message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UsageMetrics.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.milliDcuSeconds != null && Object.hasOwnProperty.call(message, "milliDcuSeconds"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.milliDcuSeconds);
-                            if (message.shuffleStorageGbSeconds != null && Object.hasOwnProperty.call(message, "shuffleStorageGbSeconds"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.shuffleStorageGbSeconds);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UsageMetrics message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.UsageMetrics.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IUsageMetrics} message UsageMetrics message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UsageMetrics.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a UsageMetrics message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.dataproc.v1.UsageMetrics} UsageMetrics
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UsageMetrics.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.UsageMetrics();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.milliDcuSeconds = reader.int64();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.shuffleStorageGbSeconds = reader.int64();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a UsageMetrics message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.dataproc.v1.UsageMetrics} UsageMetrics
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UsageMetrics.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a UsageMetrics message.
-                         * @function verify
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UsageMetrics.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.milliDcuSeconds != null && message.hasOwnProperty("milliDcuSeconds"))
-                                if (!$util.isInteger(message.milliDcuSeconds) && !(message.milliDcuSeconds && $util.isInteger(message.milliDcuSeconds.low) && $util.isInteger(message.milliDcuSeconds.high)))
-                                    return "milliDcuSeconds: integer|Long expected";
-                            if (message.shuffleStorageGbSeconds != null && message.hasOwnProperty("shuffleStorageGbSeconds"))
-                                if (!$util.isInteger(message.shuffleStorageGbSeconds) && !(message.shuffleStorageGbSeconds && $util.isInteger(message.shuffleStorageGbSeconds.low) && $util.isInteger(message.shuffleStorageGbSeconds.high)))
-                                    return "shuffleStorageGbSeconds: integer|Long expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a UsageMetrics message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.dataproc.v1.UsageMetrics} UsageMetrics
-                         */
-                        UsageMetrics.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.dataproc.v1.UsageMetrics)
-                                return object;
-                            var message = new $root.google.cloud.dataproc.v1.UsageMetrics();
-                            if (object.milliDcuSeconds != null)
-                                if ($util.Long)
-                                    (message.milliDcuSeconds = $util.Long.fromValue(object.milliDcuSeconds)).unsigned = false;
-                                else if (typeof object.milliDcuSeconds === "string")
-                                    message.milliDcuSeconds = parseInt(object.milliDcuSeconds, 10);
-                                else if (typeof object.milliDcuSeconds === "number")
-                                    message.milliDcuSeconds = object.milliDcuSeconds;
-                                else if (typeof object.milliDcuSeconds === "object")
-                                    message.milliDcuSeconds = new $util.LongBits(object.milliDcuSeconds.low >>> 0, object.milliDcuSeconds.high >>> 0).toNumber();
-                            if (object.shuffleStorageGbSeconds != null)
-                                if ($util.Long)
-                                    (message.shuffleStorageGbSeconds = $util.Long.fromValue(object.shuffleStorageGbSeconds)).unsigned = false;
-                                else if (typeof object.shuffleStorageGbSeconds === "string")
-                                    message.shuffleStorageGbSeconds = parseInt(object.shuffleStorageGbSeconds, 10);
-                                else if (typeof object.shuffleStorageGbSeconds === "number")
-                                    message.shuffleStorageGbSeconds = object.shuffleStorageGbSeconds;
-                                else if (typeof object.shuffleStorageGbSeconds === "object")
-                                    message.shuffleStorageGbSeconds = new $util.LongBits(object.shuffleStorageGbSeconds.low >>> 0, object.shuffleStorageGbSeconds.high >>> 0).toNumber();
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a UsageMetrics message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {google.cloud.dataproc.v1.UsageMetrics} message UsageMetrics
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UsageMetrics.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.milliDcuSeconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.milliDcuSeconds = options.longs === String ? "0" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.shuffleStorageGbSeconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.shuffleStorageGbSeconds = options.longs === String ? "0" : 0;
-                            }
-                            if (message.milliDcuSeconds != null && message.hasOwnProperty("milliDcuSeconds"))
-                                if (typeof message.milliDcuSeconds === "number")
-                                    object.milliDcuSeconds = options.longs === String ? String(message.milliDcuSeconds) : message.milliDcuSeconds;
-                                else
-                                    object.milliDcuSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.milliDcuSeconds) : options.longs === Number ? new $util.LongBits(message.milliDcuSeconds.low >>> 0, message.milliDcuSeconds.high >>> 0).toNumber() : message.milliDcuSeconds;
-                            if (message.shuffleStorageGbSeconds != null && message.hasOwnProperty("shuffleStorageGbSeconds"))
-                                if (typeof message.shuffleStorageGbSeconds === "number")
-                                    object.shuffleStorageGbSeconds = options.longs === String ? String(message.shuffleStorageGbSeconds) : message.shuffleStorageGbSeconds;
-                                else
-                                    object.shuffleStorageGbSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.shuffleStorageGbSeconds) : options.longs === Number ? new $util.LongBits(message.shuffleStorageGbSeconds.low >>> 0, message.shuffleStorageGbSeconds.high >>> 0).toNumber() : message.shuffleStorageGbSeconds;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UsageMetrics to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UsageMetrics.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UsageMetrics
-                         * @function getTypeUrl
-                         * @memberof google.cloud.dataproc.v1.UsageMetrics
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UsageMetrics.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.dataproc.v1.UsageMetrics";
-                        };
-    
-                        return UsageMetrics;
-                    })();
-    
-                    v1.UsageSnapshot = (function() {
-    
-                        /**
-                         * Properties of a UsageSnapshot.
-                         * @memberof google.cloud.dataproc.v1
-                         * @interface IUsageSnapshot
-                         * @property {number|Long|null} [milliDcu] UsageSnapshot milliDcu
-                         * @property {number|Long|null} [shuffleStorageGb] UsageSnapshot shuffleStorageGb
-                         * @property {google.protobuf.ITimestamp|null} [snapshotTime] UsageSnapshot snapshotTime
-                         */
-    
-                        /**
-                         * Constructs a new UsageSnapshot.
-                         * @memberof google.cloud.dataproc.v1
-                         * @classdesc Represents a UsageSnapshot.
-                         * @implements IUsageSnapshot
-                         * @constructor
-                         * @param {google.cloud.dataproc.v1.IUsageSnapshot=} [properties] Properties to set
-                         */
-                        function UsageSnapshot(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UsageSnapshot milliDcu.
-                         * @member {number|Long} milliDcu
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @instance
-                         */
-                        UsageSnapshot.prototype.milliDcu = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * UsageSnapshot shuffleStorageGb.
-                         * @member {number|Long} shuffleStorageGb
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @instance
-                         */
-                        UsageSnapshot.prototype.shuffleStorageGb = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * UsageSnapshot snapshotTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} snapshotTime
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @instance
-                         */
-                        UsageSnapshot.prototype.snapshotTime = null;
-    
-                        /**
-                         * Creates a new UsageSnapshot instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IUsageSnapshot=} [properties] Properties to set
-                         * @returns {google.cloud.dataproc.v1.UsageSnapshot} UsageSnapshot instance
-                         */
-                        UsageSnapshot.create = function create(properties) {
-                            return new UsageSnapshot(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UsageSnapshot message. Does not implicitly {@link google.cloud.dataproc.v1.UsageSnapshot.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IUsageSnapshot} message UsageSnapshot message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UsageSnapshot.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.milliDcu != null && Object.hasOwnProperty.call(message, "milliDcu"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.milliDcu);
-                            if (message.shuffleStorageGb != null && Object.hasOwnProperty.call(message, "shuffleStorageGb"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.shuffleStorageGb);
-                            if (message.snapshotTime != null && Object.hasOwnProperty.call(message, "snapshotTime"))
-                                $root.google.protobuf.Timestamp.encode(message.snapshotTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UsageSnapshot message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.UsageSnapshot.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IUsageSnapshot} message UsageSnapshot message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UsageSnapshot.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a UsageSnapshot message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.dataproc.v1.UsageSnapshot} UsageSnapshot
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UsageSnapshot.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.UsageSnapshot();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.milliDcu = reader.int64();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.shuffleStorageGb = reader.int64();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.snapshotTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a UsageSnapshot message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.dataproc.v1.UsageSnapshot} UsageSnapshot
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UsageSnapshot.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a UsageSnapshot message.
-                         * @function verify
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UsageSnapshot.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.milliDcu != null && message.hasOwnProperty("milliDcu"))
-                                if (!$util.isInteger(message.milliDcu) && !(message.milliDcu && $util.isInteger(message.milliDcu.low) && $util.isInteger(message.milliDcu.high)))
-                                    return "milliDcu: integer|Long expected";
-                            if (message.shuffleStorageGb != null && message.hasOwnProperty("shuffleStorageGb"))
-                                if (!$util.isInteger(message.shuffleStorageGb) && !(message.shuffleStorageGb && $util.isInteger(message.shuffleStorageGb.low) && $util.isInteger(message.shuffleStorageGb.high)))
-                                    return "shuffleStorageGb: integer|Long expected";
-                            if (message.snapshotTime != null && message.hasOwnProperty("snapshotTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.snapshotTime);
-                                if (error)
-                                    return "snapshotTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a UsageSnapshot message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.dataproc.v1.UsageSnapshot} UsageSnapshot
-                         */
-                        UsageSnapshot.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.dataproc.v1.UsageSnapshot)
-                                return object;
-                            var message = new $root.google.cloud.dataproc.v1.UsageSnapshot();
-                            if (object.milliDcu != null)
-                                if ($util.Long)
-                                    (message.milliDcu = $util.Long.fromValue(object.milliDcu)).unsigned = false;
-                                else if (typeof object.milliDcu === "string")
-                                    message.milliDcu = parseInt(object.milliDcu, 10);
-                                else if (typeof object.milliDcu === "number")
-                                    message.milliDcu = object.milliDcu;
-                                else if (typeof object.milliDcu === "object")
-                                    message.milliDcu = new $util.LongBits(object.milliDcu.low >>> 0, object.milliDcu.high >>> 0).toNumber();
-                            if (object.shuffleStorageGb != null)
-                                if ($util.Long)
-                                    (message.shuffleStorageGb = $util.Long.fromValue(object.shuffleStorageGb)).unsigned = false;
-                                else if (typeof object.shuffleStorageGb === "string")
-                                    message.shuffleStorageGb = parseInt(object.shuffleStorageGb, 10);
-                                else if (typeof object.shuffleStorageGb === "number")
-                                    message.shuffleStorageGb = object.shuffleStorageGb;
-                                else if (typeof object.shuffleStorageGb === "object")
-                                    message.shuffleStorageGb = new $util.LongBits(object.shuffleStorageGb.low >>> 0, object.shuffleStorageGb.high >>> 0).toNumber();
-                            if (object.snapshotTime != null) {
-                                if (typeof object.snapshotTime !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.UsageSnapshot.snapshotTime: object expected");
-                                message.snapshotTime = $root.google.protobuf.Timestamp.fromObject(object.snapshotTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a UsageSnapshot message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {google.cloud.dataproc.v1.UsageSnapshot} message UsageSnapshot
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UsageSnapshot.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.milliDcu = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.milliDcu = options.longs === String ? "0" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.shuffleStorageGb = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.shuffleStorageGb = options.longs === String ? "0" : 0;
-                                object.snapshotTime = null;
-                            }
-                            if (message.milliDcu != null && message.hasOwnProperty("milliDcu"))
-                                if (typeof message.milliDcu === "number")
-                                    object.milliDcu = options.longs === String ? String(message.milliDcu) : message.milliDcu;
-                                else
-                                    object.milliDcu = options.longs === String ? $util.Long.prototype.toString.call(message.milliDcu) : options.longs === Number ? new $util.LongBits(message.milliDcu.low >>> 0, message.milliDcu.high >>> 0).toNumber() : message.milliDcu;
-                            if (message.shuffleStorageGb != null && message.hasOwnProperty("shuffleStorageGb"))
-                                if (typeof message.shuffleStorageGb === "number")
-                                    object.shuffleStorageGb = options.longs === String ? String(message.shuffleStorageGb) : message.shuffleStorageGb;
-                                else
-                                    object.shuffleStorageGb = options.longs === String ? $util.Long.prototype.toString.call(message.shuffleStorageGb) : options.longs === Number ? new $util.LongBits(message.shuffleStorageGb.low >>> 0, message.shuffleStorageGb.high >>> 0).toNumber() : message.shuffleStorageGb;
-                            if (message.snapshotTime != null && message.hasOwnProperty("snapshotTime"))
-                                object.snapshotTime = $root.google.protobuf.Timestamp.toObject(message.snapshotTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UsageSnapshot to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UsageSnapshot.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for UsageSnapshot
-                         * @function getTypeUrl
-                         * @memberof google.cloud.dataproc.v1.UsageSnapshot
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        UsageSnapshot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.dataproc.v1.UsageSnapshot";
-                        };
-    
-                        return UsageSnapshot;
                     })();
     
                     v1.GkeClusterConfig = (function() {
@@ -10383,12 +9692,10 @@
                              * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig
                              * @interface IGkeNodeConfig
                              * @property {string|null} [machineType] GkeNodeConfig machineType
-                             * @property {number|null} [localSsdCount] GkeNodeConfig localSsdCount
                              * @property {boolean|null} [preemptible] GkeNodeConfig preemptible
+                             * @property {number|null} [localSsdCount] GkeNodeConfig localSsdCount
                              * @property {Array.<google.cloud.dataproc.v1.GkeNodePoolConfig.IGkeNodePoolAcceleratorConfig>|null} [accelerators] GkeNodeConfig accelerators
                              * @property {string|null} [minCpuPlatform] GkeNodeConfig minCpuPlatform
-                             * @property {string|null} [bootDiskKmsKey] GkeNodeConfig bootDiskKmsKey
-                             * @property {boolean|null} [spot] GkeNodeConfig spot
                              */
     
                             /**
@@ -10416,20 +9723,20 @@
                             GkeNodeConfig.prototype.machineType = "";
     
                             /**
-                             * GkeNodeConfig localSsdCount.
-                             * @member {number} localSsdCount
-                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
-                             * @instance
-                             */
-                            GkeNodeConfig.prototype.localSsdCount = 0;
-    
-                            /**
                              * GkeNodeConfig preemptible.
                              * @member {boolean} preemptible
                              * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
                              * @instance
                              */
                             GkeNodeConfig.prototype.preemptible = false;
+    
+                            /**
+                             * GkeNodeConfig localSsdCount.
+                             * @member {number} localSsdCount
+                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
+                             * @instance
+                             */
+                            GkeNodeConfig.prototype.localSsdCount = 0;
     
                             /**
                              * GkeNodeConfig accelerators.
@@ -10446,22 +9753,6 @@
                              * @instance
                              */
                             GkeNodeConfig.prototype.minCpuPlatform = "";
-    
-                            /**
-                             * GkeNodeConfig bootDiskKmsKey.
-                             * @member {string} bootDiskKmsKey
-                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
-                             * @instance
-                             */
-                            GkeNodeConfig.prototype.bootDiskKmsKey = "";
-    
-                            /**
-                             * GkeNodeConfig spot.
-                             * @member {boolean} spot
-                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig
-                             * @instance
-                             */
-                            GkeNodeConfig.prototype.spot = false;
     
                             /**
                              * Creates a new GkeNodeConfig instance using the specified properties.
@@ -10498,10 +9789,6 @@
                                         $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig.encode(message.accelerators[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 if (message.minCpuPlatform != null && Object.hasOwnProperty.call(message, "minCpuPlatform"))
                                     writer.uint32(/* id 13, wireType 2 =*/106).string(message.minCpuPlatform);
-                                if (message.bootDiskKmsKey != null && Object.hasOwnProperty.call(message, "bootDiskKmsKey"))
-                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.bootDiskKmsKey);
-                                if (message.spot != null && Object.hasOwnProperty.call(message, "spot"))
-                                    writer.uint32(/* id 32, wireType 0 =*/256).bool(message.spot);
                                 return writer;
                             };
     
@@ -10540,12 +9827,12 @@
                                             message.machineType = reader.string();
                                             break;
                                         }
-                                    case 7: {
-                                            message.localSsdCount = reader.int32();
-                                            break;
-                                        }
                                     case 10: {
                                             message.preemptible = reader.bool();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.localSsdCount = reader.int32();
                                             break;
                                         }
                                     case 11: {
@@ -10556,14 +9843,6 @@
                                         }
                                     case 13: {
                                             message.minCpuPlatform = reader.string();
-                                            break;
-                                        }
-                                    case 23: {
-                                            message.bootDiskKmsKey = reader.string();
-                                            break;
-                                        }
-                                    case 32: {
-                                            message.spot = reader.bool();
                                             break;
                                         }
                                     default:
@@ -10604,12 +9883,12 @@
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     if (!$util.isString(message.machineType))
                                         return "machineType: string expected";
-                                if (message.localSsdCount != null && message.hasOwnProperty("localSsdCount"))
-                                    if (!$util.isInteger(message.localSsdCount))
-                                        return "localSsdCount: integer expected";
                                 if (message.preemptible != null && message.hasOwnProperty("preemptible"))
                                     if (typeof message.preemptible !== "boolean")
                                         return "preemptible: boolean expected";
+                                if (message.localSsdCount != null && message.hasOwnProperty("localSsdCount"))
+                                    if (!$util.isInteger(message.localSsdCount))
+                                        return "localSsdCount: integer expected";
                                 if (message.accelerators != null && message.hasOwnProperty("accelerators")) {
                                     if (!Array.isArray(message.accelerators))
                                         return "accelerators: array expected";
@@ -10622,12 +9901,6 @@
                                 if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                     if (!$util.isString(message.minCpuPlatform))
                                         return "minCpuPlatform: string expected";
-                                if (message.bootDiskKmsKey != null && message.hasOwnProperty("bootDiskKmsKey"))
-                                    if (!$util.isString(message.bootDiskKmsKey))
-                                        return "bootDiskKmsKey: string expected";
-                                if (message.spot != null && message.hasOwnProperty("spot"))
-                                    if (typeof message.spot !== "boolean")
-                                        return "spot: boolean expected";
                                 return null;
                             };
     
@@ -10645,10 +9918,10 @@
                                 var message = new $root.google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig();
                                 if (object.machineType != null)
                                     message.machineType = String(object.machineType);
-                                if (object.localSsdCount != null)
-                                    message.localSsdCount = object.localSsdCount | 0;
                                 if (object.preemptible != null)
                                     message.preemptible = Boolean(object.preemptible);
+                                if (object.localSsdCount != null)
+                                    message.localSsdCount = object.localSsdCount | 0;
                                 if (object.accelerators) {
                                     if (!Array.isArray(object.accelerators))
                                         throw TypeError(".google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.accelerators: array expected");
@@ -10661,10 +9934,6 @@
                                 }
                                 if (object.minCpuPlatform != null)
                                     message.minCpuPlatform = String(object.minCpuPlatform);
-                                if (object.bootDiskKmsKey != null)
-                                    message.bootDiskKmsKey = String(object.bootDiskKmsKey);
-                                if (object.spot != null)
-                                    message.spot = Boolean(object.spot);
                                 return message;
                             };
     
@@ -10688,8 +9957,6 @@
                                     object.localSsdCount = 0;
                                     object.preemptible = false;
                                     object.minCpuPlatform = "";
-                                    object.bootDiskKmsKey = "";
-                                    object.spot = false;
                                 }
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     object.machineType = message.machineType;
@@ -10704,10 +9971,6 @@
                                 }
                                 if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                     object.minCpuPlatform = message.minCpuPlatform;
-                                if (message.bootDiskKmsKey != null && message.hasOwnProperty("bootDiskKmsKey"))
-                                    object.bootDiskKmsKey = message.bootDiskKmsKey;
-                                if (message.spot != null && message.hasOwnProperty("spot"))
-                                    object.spot = message.spot;
                                 return object;
                             };
     
@@ -10748,7 +10011,6 @@
                              * @interface IGkeNodePoolAcceleratorConfig
                              * @property {number|Long|null} [acceleratorCount] GkeNodePoolAcceleratorConfig acceleratorCount
                              * @property {string|null} [acceleratorType] GkeNodePoolAcceleratorConfig acceleratorType
-                             * @property {string|null} [gpuPartitionSize] GkeNodePoolAcceleratorConfig gpuPartitionSize
                              */
     
                             /**
@@ -10783,14 +10045,6 @@
                             GkeNodePoolAcceleratorConfig.prototype.acceleratorType = "";
     
                             /**
-                             * GkeNodePoolAcceleratorConfig gpuPartitionSize.
-                             * @member {string} gpuPartitionSize
-                             * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
-                             * @instance
-                             */
-                            GkeNodePoolAcceleratorConfig.prototype.gpuPartitionSize = "";
-    
-                            /**
                              * Creates a new GkeNodePoolAcceleratorConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig
@@ -10818,8 +10072,6 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int64(message.acceleratorCount);
                                 if (message.acceleratorType != null && Object.hasOwnProperty.call(message, "acceleratorType"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.acceleratorType);
-                                if (message.gpuPartitionSize != null && Object.hasOwnProperty.call(message, "gpuPartitionSize"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.gpuPartitionSize);
                                 return writer;
                             };
     
@@ -10860,10 +10112,6 @@
                                         }
                                     case 2: {
                                             message.acceleratorType = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.gpuPartitionSize = reader.string();
                                             break;
                                         }
                                     default:
@@ -10907,9 +10155,6 @@
                                 if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                                     if (!$util.isString(message.acceleratorType))
                                         return "acceleratorType: string expected";
-                                if (message.gpuPartitionSize != null && message.hasOwnProperty("gpuPartitionSize"))
-                                    if (!$util.isString(message.gpuPartitionSize))
-                                        return "gpuPartitionSize: string expected";
                                 return null;
                             };
     
@@ -10936,8 +10181,6 @@
                                         message.acceleratorCount = new $util.LongBits(object.acceleratorCount.low >>> 0, object.acceleratorCount.high >>> 0).toNumber();
                                 if (object.acceleratorType != null)
                                     message.acceleratorType = String(object.acceleratorType);
-                                if (object.gpuPartitionSize != null)
-                                    message.gpuPartitionSize = String(object.gpuPartitionSize);
                                 return message;
                             };
     
@@ -10961,7 +10204,6 @@
                                     } else
                                         object.acceleratorCount = options.longs === String ? "0" : 0;
                                     object.acceleratorType = "";
-                                    object.gpuPartitionSize = "";
                                 }
                                 if (message.acceleratorCount != null && message.hasOwnProperty("acceleratorCount"))
                                     if (typeof message.acceleratorCount === "number")
@@ -10970,8 +10212,6 @@
                                         object.acceleratorCount = options.longs === String ? $util.Long.prototype.toString.call(message.acceleratorCount) : options.longs === Number ? new $util.LongBits(message.acceleratorCount.low >>> 0, message.acceleratorCount.high >>> 0).toNumber() : message.acceleratorCount;
                                 if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                                     object.acceleratorType = message.acceleratorType;
-                                if (message.gpuPartitionSize != null && message.hasOwnProperty("gpuPartitionSize"))
-                                    object.gpuPartitionSize = message.gpuPartitionSize;
                                 return object;
                             };
     
@@ -11245,10 +10485,8 @@
                      * @property {number} FLINK=14 FLINK value
                      * @property {number} HBASE=11 HBASE value
                      * @property {number} HIVE_WEBHCAT=3 HIVE_WEBHCAT value
-                     * @property {number} HUDI=18 HUDI value
                      * @property {number} JUPYTER=1 JUPYTER value
                      * @property {number} PRESTO=6 PRESTO value
-                     * @property {number} TRINO=17 TRINO value
                      * @property {number} RANGER=12 RANGER value
                      * @property {number} SOLR=10 SOLR value
                      * @property {number} ZEPPELIN=4 ZEPPELIN value
@@ -11263,10 +10501,8 @@
                         values[valuesById[14] = "FLINK"] = 14;
                         values[valuesById[11] = "HBASE"] = 11;
                         values[valuesById[3] = "HIVE_WEBHCAT"] = 3;
-                        values[valuesById[18] = "HUDI"] = 18;
                         values[valuesById[1] = "JUPYTER"] = 1;
                         values[valuesById[6] = "PRESTO"] = 6;
-                        values[valuesById[17] = "TRINO"] = 17;
                         values[valuesById[12] = "RANGER"] = 12;
                         values[valuesById[10] = "SOLR"] = 10;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
@@ -13958,11 +13194,11 @@
     
                         /**
                          * GceClusterConfig internalIpOnly.
-                         * @member {boolean|null|undefined} internalIpOnly
+                         * @member {boolean} internalIpOnly
                          * @memberof google.cloud.dataproc.v1.GceClusterConfig
                          * @instance
                          */
-                        GceClusterConfig.prototype.internalIpOnly = null;
+                        GceClusterConfig.prototype.internalIpOnly = false;
     
                         /**
                          * GceClusterConfig privateIpv6GoogleAccess.
@@ -14035,20 +13271,6 @@
                          * @instance
                          */
                         GceClusterConfig.prototype.confidentialInstanceConfig = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * GceClusterConfig _internalIpOnly.
-                         * @member {"internalIpOnly"|undefined} _internalIpOnly
-                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
-                         * @instance
-                         */
-                        Object.defineProperty(GceClusterConfig.prototype, "_internalIpOnly", {
-                            get: $util.oneOfGetter($oneOfFields = ["internalIpOnly"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
     
                         /**
                          * Creates a new GceClusterConfig instance using the specified properties.
@@ -14247,7 +13469,6 @@
                         GceClusterConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            var properties = {};
                             if (message.zoneUri != null && message.hasOwnProperty("zoneUri"))
                                 if (!$util.isString(message.zoneUri))
                                     return "zoneUri: string expected";
@@ -14257,11 +13478,9 @@
                             if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri"))
                                 if (!$util.isString(message.subnetworkUri))
                                     return "subnetworkUri: string expected";
-                            if (message.internalIpOnly != null && message.hasOwnProperty("internalIpOnly")) {
-                                properties._internalIpOnly = 1;
+                            if (message.internalIpOnly != null && message.hasOwnProperty("internalIpOnly"))
                                 if (typeof message.internalIpOnly !== "boolean")
                                     return "internalIpOnly: boolean expected";
-                            }
                             if (message.privateIpv6GoogleAccess != null && message.hasOwnProperty("privateIpv6GoogleAccess"))
                                 switch (message.privateIpv6GoogleAccess) {
                                 default:
@@ -14433,6 +13652,7 @@
                                 object.zoneUri = "";
                                 object.networkUri = "";
                                 object.subnetworkUri = "";
+                                object.internalIpOnly = false;
                                 object.serviceAccount = "";
                                 object.reservationAffinity = null;
                                 object.privateIpv6GoogleAccess = options.enums === String ? "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" : 0;
@@ -14462,11 +13682,8 @@
                             }
                             if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri"))
                                 object.subnetworkUri = message.subnetworkUri;
-                            if (message.internalIpOnly != null && message.hasOwnProperty("internalIpOnly")) {
+                            if (message.internalIpOnly != null && message.hasOwnProperty("internalIpOnly"))
                                 object.internalIpOnly = message.internalIpOnly;
-                                if (options.oneofs)
-                                    object._internalIpOnly = "internalIpOnly";
-                            }
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
                             if (message.reservationAffinity != null && message.hasOwnProperty("reservationAffinity"))
@@ -14760,63 +13977,27 @@
     
                         /**
                          * ShieldedInstanceConfig enableSecureBoot.
-                         * @member {boolean|null|undefined} enableSecureBoot
+                         * @member {boolean} enableSecureBoot
                          * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
                          * @instance
                          */
-                        ShieldedInstanceConfig.prototype.enableSecureBoot = null;
+                        ShieldedInstanceConfig.prototype.enableSecureBoot = false;
     
                         /**
                          * ShieldedInstanceConfig enableVtpm.
-                         * @member {boolean|null|undefined} enableVtpm
+                         * @member {boolean} enableVtpm
                          * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
                          * @instance
                          */
-                        ShieldedInstanceConfig.prototype.enableVtpm = null;
+                        ShieldedInstanceConfig.prototype.enableVtpm = false;
     
                         /**
                          * ShieldedInstanceConfig enableIntegrityMonitoring.
-                         * @member {boolean|null|undefined} enableIntegrityMonitoring
+                         * @member {boolean} enableIntegrityMonitoring
                          * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
                          * @instance
                          */
-                        ShieldedInstanceConfig.prototype.enableIntegrityMonitoring = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * ShieldedInstanceConfig _enableSecureBoot.
-                         * @member {"enableSecureBoot"|undefined} _enableSecureBoot
-                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
-                         * @instance
-                         */
-                        Object.defineProperty(ShieldedInstanceConfig.prototype, "_enableSecureBoot", {
-                            get: $util.oneOfGetter($oneOfFields = ["enableSecureBoot"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * ShieldedInstanceConfig _enableVtpm.
-                         * @member {"enableVtpm"|undefined} _enableVtpm
-                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
-                         * @instance
-                         */
-                        Object.defineProperty(ShieldedInstanceConfig.prototype, "_enableVtpm", {
-                            get: $util.oneOfGetter($oneOfFields = ["enableVtpm"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * ShieldedInstanceConfig _enableIntegrityMonitoring.
-                         * @member {"enableIntegrityMonitoring"|undefined} _enableIntegrityMonitoring
-                         * @memberof google.cloud.dataproc.v1.ShieldedInstanceConfig
-                         * @instance
-                         */
-                        Object.defineProperty(ShieldedInstanceConfig.prototype, "_enableIntegrityMonitoring", {
-                            get: $util.oneOfGetter($oneOfFields = ["enableIntegrityMonitoring"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
+                        ShieldedInstanceConfig.prototype.enableIntegrityMonitoring = false;
     
                         /**
                          * Creates a new ShieldedInstanceConfig instance using the specified properties.
@@ -14929,22 +14110,15 @@
                         ShieldedInstanceConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            var properties = {};
-                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot")) {
-                                properties._enableSecureBoot = 1;
+                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
                                 if (typeof message.enableSecureBoot !== "boolean")
                                     return "enableSecureBoot: boolean expected";
-                            }
-                            if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm")) {
-                                properties._enableVtpm = 1;
+                            if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm"))
                                 if (typeof message.enableVtpm !== "boolean")
                                     return "enableVtpm: boolean expected";
-                            }
-                            if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring")) {
-                                properties._enableIntegrityMonitoring = 1;
+                            if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
                                 if (typeof message.enableIntegrityMonitoring !== "boolean")
                                     return "enableIntegrityMonitoring: boolean expected";
-                            }
                             return null;
                         };
     
@@ -14982,21 +14156,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot")) {
+                            if (options.defaults) {
+                                object.enableSecureBoot = false;
+                                object.enableVtpm = false;
+                                object.enableIntegrityMonitoring = false;
+                            }
+                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
                                 object.enableSecureBoot = message.enableSecureBoot;
-                                if (options.oneofs)
-                                    object._enableSecureBoot = "enableSecureBoot";
-                            }
-                            if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm")) {
+                            if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm"))
                                 object.enableVtpm = message.enableVtpm;
-                                if (options.oneofs)
-                                    object._enableVtpm = "enableVtpm";
-                            }
-                            if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring")) {
+                            if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
                                 object.enableIntegrityMonitoring = message.enableIntegrityMonitoring;
-                                if (options.oneofs)
-                                    object._enableIntegrityMonitoring = "enableIntegrityMonitoring";
-                            }
                             return object;
                         };
     
@@ -18929,10 +18099,8 @@
                                     case 14:
                                     case 11:
                                     case 3:
-                                    case 18:
                                     case 1:
                                     case 6:
-                                    case 17:
                                     case 12:
                                     case 10:
                                     case 4:
@@ -19003,10 +18171,6 @@
                                     case 3:
                                         message.optionalComponents[i] = 3;
                                         break;
-                                    case "HUDI":
-                                    case 18:
-                                        message.optionalComponents[i] = 18;
-                                        break;
                                     case "JUPYTER":
                                     case 1:
                                         message.optionalComponents[i] = 1;
@@ -19014,10 +18178,6 @@
                                     case "PRESTO":
                                     case 6:
                                         message.optionalComponents[i] = 6;
-                                        break;
-                                    case "TRINO":
-                                    case 17:
-                                        message.optionalComponents[i] = 17;
                                         break;
                                     case "RANGER":
                                     case 12:
@@ -19627,6 +18787,541 @@
                         return MetastoreConfig;
                     })();
     
+                    v1.DataprocMetricConfig = (function() {
+    
+                        /**
+                         * Properties of a DataprocMetricConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IDataprocMetricConfig
+                         * @property {Array.<google.cloud.dataproc.v1.DataprocMetricConfig.IMetric>|null} [metrics] DataprocMetricConfig metrics
+                         */
+    
+                        /**
+                         * Constructs a new DataprocMetricConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a DataprocMetricConfig.
+                         * @implements IDataprocMetricConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig=} [properties] Properties to set
+                         */
+                        function DataprocMetricConfig(properties) {
+                            this.metrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataprocMetricConfig metrics.
+                         * @member {Array.<google.cloud.dataproc.v1.DataprocMetricConfig.IMetric>} metrics
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @instance
+                         */
+                        DataprocMetricConfig.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DataprocMetricConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig instance
+                         */
+                        DataprocMetricConfig.create = function create(properties) {
+                            return new DataprocMetricConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataprocMetricConfig message. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig} message DataprocMetricConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataprocMetricConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.encode(message.metrics[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataprocMetricConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig} message DataprocMetricConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataprocMetricConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataprocMetricConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataprocMetricConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataprocMetricConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataprocMetricConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataprocMetricConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataprocMetricConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataprocMetricConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
+                         */
+                        DataprocMetricConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.DataprocMetricConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig();
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.metrics: object expected");
+                                    message.metrics[i] = $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataprocMetricConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.DataprocMetricConfig} message DataprocMetricConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataprocMetricConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.metrics = [];
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.toObject(message.metrics[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataprocMetricConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataprocMetricConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataprocMetricConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataprocMetricConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.DataprocMetricConfig";
+                        };
+    
+                        /**
+                         * MetricSource enum.
+                         * @name google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource
+                         * @enum {number}
+                         * @property {number} METRIC_SOURCE_UNSPECIFIED=0 METRIC_SOURCE_UNSPECIFIED value
+                         * @property {number} MONITORING_AGENT_DEFAULTS=1 MONITORING_AGENT_DEFAULTS value
+                         * @property {number} HDFS=2 HDFS value
+                         * @property {number} SPARK=3 SPARK value
+                         * @property {number} YARN=4 YARN value
+                         * @property {number} SPARK_HISTORY_SERVER=5 SPARK_HISTORY_SERVER value
+                         * @property {number} HIVESERVER2=6 HIVESERVER2 value
+                         */
+                        DataprocMetricConfig.MetricSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METRIC_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MONITORING_AGENT_DEFAULTS"] = 1;
+                            values[valuesById[2] = "HDFS"] = 2;
+                            values[valuesById[3] = "SPARK"] = 3;
+                            values[valuesById[4] = "YARN"] = 4;
+                            values[valuesById[5] = "SPARK_HISTORY_SERVER"] = 5;
+                            values[valuesById[6] = "HIVESERVER2"] = 6;
+                            return values;
+                        })();
+    
+                        DataprocMetricConfig.Metric = (function() {
+    
+                            /**
+                             * Properties of a Metric.
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                             * @interface IMetric
+                             * @property {google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource|null} [metricSource] Metric metricSource
+                             * @property {Array.<string>|null} [metricOverrides] Metric metricOverrides
+                             */
+    
+                            /**
+                             * Constructs a new Metric.
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                             * @classdesc Represents a Metric.
+                             * @implements IMetric
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric=} [properties] Properties to set
+                             */
+                            function Metric(properties) {
+                                this.metricOverrides = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Metric metricSource.
+                             * @member {google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource} metricSource
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @instance
+                             */
+                            Metric.prototype.metricSource = 0;
+    
+                            /**
+                             * Metric metricOverrides.
+                             * @member {Array.<string>} metricOverrides
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @instance
+                             */
+                            Metric.prototype.metricOverrides = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Metric instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric instance
+                             */
+                            Metric.create = function create(properties) {
+                                return new Metric(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Metric message. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric} message Metric message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Metric.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.metricSource != null && Object.hasOwnProperty.call(message, "metricSource"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.metricSource);
+                                if (message.metricOverrides != null && message.metricOverrides.length)
+                                    for (var i = 0; i < message.metricOverrides.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metricOverrides[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric} message Metric message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Metric.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Metric message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Metric.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.metricSource = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.metricOverrides && message.metricOverrides.length))
+                                                message.metricOverrides = [];
+                                            message.metricOverrides.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Metric message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Metric.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Metric message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Metric.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.metricSource != null && message.hasOwnProperty("metricSource"))
+                                    switch (message.metricSource) {
+                                    default:
+                                        return "metricSource: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                                if (message.metricOverrides != null && message.hasOwnProperty("metricOverrides")) {
+                                    if (!Array.isArray(message.metricOverrides))
+                                        return "metricOverrides: array expected";
+                                    for (var i = 0; i < message.metricOverrides.length; ++i)
+                                        if (!$util.isString(message.metricOverrides[i]))
+                                            return "metricOverrides: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric
+                             */
+                            Metric.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric();
+                                switch (object.metricSource) {
+                                default:
+                                    if (typeof object.metricSource === "number") {
+                                        message.metricSource = object.metricSource;
+                                        break;
+                                    }
+                                    break;
+                                case "METRIC_SOURCE_UNSPECIFIED":
+                                case 0:
+                                    message.metricSource = 0;
+                                    break;
+                                case "MONITORING_AGENT_DEFAULTS":
+                                case 1:
+                                    message.metricSource = 1;
+                                    break;
+                                case "HDFS":
+                                case 2:
+                                    message.metricSource = 2;
+                                    break;
+                                case "SPARK":
+                                case 3:
+                                    message.metricSource = 3;
+                                    break;
+                                case "YARN":
+                                case 4:
+                                    message.metricSource = 4;
+                                    break;
+                                case "SPARK_HISTORY_SERVER":
+                                case 5:
+                                    message.metricSource = 5;
+                                    break;
+                                case "HIVESERVER2":
+                                case 6:
+                                    message.metricSource = 6;
+                                    break;
+                                }
+                                if (object.metricOverrides) {
+                                    if (!Array.isArray(object.metricOverrides))
+                                        throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.Metric.metricOverrides: array expected");
+                                    message.metricOverrides = [];
+                                    for (var i = 0; i < object.metricOverrides.length; ++i)
+                                        message.metricOverrides[i] = String(object.metricOverrides[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Metric message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} message Metric
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Metric.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.metricOverrides = [];
+                                if (options.defaults)
+                                    object.metricSource = options.enums === String ? "METRIC_SOURCE_UNSPECIFIED" : 0;
+                                if (message.metricSource != null && message.hasOwnProperty("metricSource"))
+                                    object.metricSource = options.enums === String ? $root.google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource[message.metricSource] === undefined ? message.metricSource : $root.google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource[message.metricSource] : message.metricSource;
+                                if (message.metricOverrides && message.metricOverrides.length) {
+                                    object.metricOverrides = [];
+                                    for (var j = 0; j < message.metricOverrides.length; ++j)
+                                        object.metricOverrides[j] = message.metricOverrides[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Metric to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Metric.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Metric
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Metric.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataproc.v1.DataprocMetricConfig.Metric";
+                            };
+    
+                            return Metric;
+                        })();
+    
+                        return DataprocMetricConfig;
+                    })();
+    
                     v1.ClusterMetrics = (function() {
     
                         /**
@@ -19941,548 +19636,6 @@
                         };
     
                         return ClusterMetrics;
-                    })();
-    
-                    v1.DataprocMetricConfig = (function() {
-    
-                        /**
-                         * Properties of a DataprocMetricConfig.
-                         * @memberof google.cloud.dataproc.v1
-                         * @interface IDataprocMetricConfig
-                         * @property {Array.<google.cloud.dataproc.v1.DataprocMetricConfig.IMetric>|null} [metrics] DataprocMetricConfig metrics
-                         */
-    
-                        /**
-                         * Constructs a new DataprocMetricConfig.
-                         * @memberof google.cloud.dataproc.v1
-                         * @classdesc Represents a DataprocMetricConfig.
-                         * @implements IDataprocMetricConfig
-                         * @constructor
-                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig=} [properties] Properties to set
-                         */
-                        function DataprocMetricConfig(properties) {
-                            this.metrics = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DataprocMetricConfig metrics.
-                         * @member {Array.<google.cloud.dataproc.v1.DataprocMetricConfig.IMetric>} metrics
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @instance
-                         */
-                        DataprocMetricConfig.prototype.metrics = $util.emptyArray;
-    
-                        /**
-                         * Creates a new DataprocMetricConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig=} [properties] Properties to set
-                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig instance
-                         */
-                        DataprocMetricConfig.create = function create(properties) {
-                            return new DataprocMetricConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DataprocMetricConfig message. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig} message DataprocMetricConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DataprocMetricConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.metrics != null && message.metrics.length)
-                                for (var i = 0; i < message.metrics.length; ++i)
-                                    $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.encode(message.metrics[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DataprocMetricConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig} message DataprocMetricConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DataprocMetricConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DataprocMetricConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DataprocMetricConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.metrics && message.metrics.length))
-                                            message.metrics = [];
-                                        message.metrics.push($root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DataprocMetricConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DataprocMetricConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DataprocMetricConfig message.
-                         * @function verify
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DataprocMetricConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
-                                if (!Array.isArray(message.metrics))
-                                    return "metrics: array expected";
-                                for (var i = 0; i < message.metrics.length; ++i) {
-                                    var error = $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify(message.metrics[i]);
-                                    if (error)
-                                        return "metrics." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DataprocMetricConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
-                         */
-                        DataprocMetricConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.dataproc.v1.DataprocMetricConfig)
-                                return object;
-                            var message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig();
-                            if (object.metrics) {
-                                if (!Array.isArray(object.metrics))
-                                    throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.metrics: array expected");
-                                message.metrics = [];
-                                for (var i = 0; i < object.metrics.length; ++i) {
-                                    if (typeof object.metrics[i] !== "object")
-                                        throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.metrics: object expected");
-                                    message.metrics[i] = $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.fromObject(object.metrics[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DataprocMetricConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {google.cloud.dataproc.v1.DataprocMetricConfig} message DataprocMetricConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DataprocMetricConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.metrics = [];
-                            if (message.metrics && message.metrics.length) {
-                                object.metrics = [];
-                                for (var j = 0; j < message.metrics.length; ++j)
-                                    object.metrics[j] = $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric.toObject(message.metrics[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DataprocMetricConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DataprocMetricConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DataprocMetricConfig
-                         * @function getTypeUrl
-                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DataprocMetricConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.dataproc.v1.DataprocMetricConfig";
-                        };
-    
-                        /**
-                         * MetricSource enum.
-                         * @name google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource
-                         * @enum {number}
-                         * @property {number} METRIC_SOURCE_UNSPECIFIED=0 METRIC_SOURCE_UNSPECIFIED value
-                         * @property {number} MONITORING_AGENT_DEFAULTS=1 MONITORING_AGENT_DEFAULTS value
-                         * @property {number} HDFS=2 HDFS value
-                         * @property {number} SPARK=3 SPARK value
-                         * @property {number} YARN=4 YARN value
-                         * @property {number} SPARK_HISTORY_SERVER=5 SPARK_HISTORY_SERVER value
-                         * @property {number} HIVESERVER2=6 HIVESERVER2 value
-                         * @property {number} HIVEMETASTORE=7 HIVEMETASTORE value
-                         */
-                        DataprocMetricConfig.MetricSource = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "METRIC_SOURCE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "MONITORING_AGENT_DEFAULTS"] = 1;
-                            values[valuesById[2] = "HDFS"] = 2;
-                            values[valuesById[3] = "SPARK"] = 3;
-                            values[valuesById[4] = "YARN"] = 4;
-                            values[valuesById[5] = "SPARK_HISTORY_SERVER"] = 5;
-                            values[valuesById[6] = "HIVESERVER2"] = 6;
-                            values[valuesById[7] = "HIVEMETASTORE"] = 7;
-                            return values;
-                        })();
-    
-                        DataprocMetricConfig.Metric = (function() {
-    
-                            /**
-                             * Properties of a Metric.
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                             * @interface IMetric
-                             * @property {google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource|null} [metricSource] Metric metricSource
-                             * @property {Array.<string>|null} [metricOverrides] Metric metricOverrides
-                             */
-    
-                            /**
-                             * Constructs a new Metric.
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
-                             * @classdesc Represents a Metric.
-                             * @implements IMetric
-                             * @constructor
-                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric=} [properties] Properties to set
-                             */
-                            function Metric(properties) {
-                                this.metricOverrides = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Metric metricSource.
-                             * @member {google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource} metricSource
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @instance
-                             */
-                            Metric.prototype.metricSource = 0;
-    
-                            /**
-                             * Metric metricOverrides.
-                             * @member {Array.<string>} metricOverrides
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @instance
-                             */
-                            Metric.prototype.metricOverrides = $util.emptyArray;
-    
-                            /**
-                             * Creates a new Metric instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric=} [properties] Properties to set
-                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric instance
-                             */
-                            Metric.create = function create(properties) {
-                                return new Metric(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Metric message. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric} message Metric message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Metric.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.metricSource != null && Object.hasOwnProperty.call(message, "metricSource"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.metricSource);
-                                if (message.metricOverrides != null && message.metricOverrides.length)
-                                    for (var i = 0; i < message.metricOverrides.length; ++i)
-                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metricOverrides[i]);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.IMetric} message Metric message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Metric.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Metric message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Metric.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.metricSource = reader.int32();
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.metricOverrides && message.metricOverrides.length))
-                                                message.metricOverrides = [];
-                                            message.metricOverrides.push(reader.string());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Metric message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Metric.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Metric message.
-                             * @function verify
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Metric.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.metricSource != null && message.hasOwnProperty("metricSource"))
-                                    switch (message.metricSource) {
-                                    default:
-                                        return "metricSource: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                    case 5:
-                                    case 6:
-                                    case 7:
-                                        break;
-                                    }
-                                if (message.metricOverrides != null && message.hasOwnProperty("metricOverrides")) {
-                                    if (!Array.isArray(message.metricOverrides))
-                                        return "metricOverrides: array expected";
-                                    for (var i = 0; i < message.metricOverrides.length; ++i)
-                                        if (!$util.isString(message.metricOverrides[i]))
-                                            return "metricOverrides: string[] expected";
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Metric message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} Metric
-                             */
-                            Metric.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric)
-                                    return object;
-                                var message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig.Metric();
-                                switch (object.metricSource) {
-                                default:
-                                    if (typeof object.metricSource === "number") {
-                                        message.metricSource = object.metricSource;
-                                        break;
-                                    }
-                                    break;
-                                case "METRIC_SOURCE_UNSPECIFIED":
-                                case 0:
-                                    message.metricSource = 0;
-                                    break;
-                                case "MONITORING_AGENT_DEFAULTS":
-                                case 1:
-                                    message.metricSource = 1;
-                                    break;
-                                case "HDFS":
-                                case 2:
-                                    message.metricSource = 2;
-                                    break;
-                                case "SPARK":
-                                case 3:
-                                    message.metricSource = 3;
-                                    break;
-                                case "YARN":
-                                case 4:
-                                    message.metricSource = 4;
-                                    break;
-                                case "SPARK_HISTORY_SERVER":
-                                case 5:
-                                    message.metricSource = 5;
-                                    break;
-                                case "HIVESERVER2":
-                                case 6:
-                                    message.metricSource = 6;
-                                    break;
-                                case "HIVEMETASTORE":
-                                case 7:
-                                    message.metricSource = 7;
-                                    break;
-                                }
-                                if (object.metricOverrides) {
-                                    if (!Array.isArray(object.metricOverrides))
-                                        throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.Metric.metricOverrides: array expected");
-                                    message.metricOverrides = [];
-                                    for (var i = 0; i < object.metricOverrides.length; ++i)
-                                        message.metricOverrides[i] = String(object.metricOverrides[i]);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Metric message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {google.cloud.dataproc.v1.DataprocMetricConfig.Metric} message Metric
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Metric.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.metricOverrides = [];
-                                if (options.defaults)
-                                    object.metricSource = options.enums === String ? "METRIC_SOURCE_UNSPECIFIED" : 0;
-                                if (message.metricSource != null && message.hasOwnProperty("metricSource"))
-                                    object.metricSource = options.enums === String ? $root.google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource[message.metricSource] === undefined ? message.metricSource : $root.google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource[message.metricSource] : message.metricSource;
-                                if (message.metricOverrides && message.metricOverrides.length) {
-                                    object.metricOverrides = [];
-                                    for (var j = 0; j < message.metricOverrides.length; ++j)
-                                        object.metricOverrides[j] = message.metricOverrides[j];
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Metric to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Metric.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Metric
-                             * @function getTypeUrl
-                             * @memberof google.cloud.dataproc.v1.DataprocMetricConfig.Metric
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Metric.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.dataproc.v1.DataprocMetricConfig.Metric";
-                            };
-    
-                            return Metric;
-                        })();
-    
-                        return DataprocMetricConfig;
                     })();
     
                     v1.CreateClusterRequest = (function() {
@@ -28088,437 +27241,6 @@
                         return PrestoJob;
                     })();
     
-                    v1.TrinoJob = (function() {
-    
-                        /**
-                         * Properties of a TrinoJob.
-                         * @memberof google.cloud.dataproc.v1
-                         * @interface ITrinoJob
-                         * @property {string|null} [queryFileUri] TrinoJob queryFileUri
-                         * @property {google.cloud.dataproc.v1.IQueryList|null} [queryList] TrinoJob queryList
-                         * @property {boolean|null} [continueOnFailure] TrinoJob continueOnFailure
-                         * @property {string|null} [outputFormat] TrinoJob outputFormat
-                         * @property {Array.<string>|null} [clientTags] TrinoJob clientTags
-                         * @property {Object.<string,string>|null} [properties] TrinoJob properties
-                         * @property {google.cloud.dataproc.v1.ILoggingConfig|null} [loggingConfig] TrinoJob loggingConfig
-                         */
-    
-                        /**
-                         * Constructs a new TrinoJob.
-                         * @memberof google.cloud.dataproc.v1
-                         * @classdesc Represents a TrinoJob.
-                         * @implements ITrinoJob
-                         * @constructor
-                         * @param {google.cloud.dataproc.v1.ITrinoJob=} [properties] Properties to set
-                         */
-                        function TrinoJob(properties) {
-                            this.clientTags = [];
-                            this.properties = {};
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * TrinoJob queryFileUri.
-                         * @member {string|null|undefined} queryFileUri
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.queryFileUri = null;
-    
-                        /**
-                         * TrinoJob queryList.
-                         * @member {google.cloud.dataproc.v1.IQueryList|null|undefined} queryList
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.queryList = null;
-    
-                        /**
-                         * TrinoJob continueOnFailure.
-                         * @member {boolean} continueOnFailure
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.continueOnFailure = false;
-    
-                        /**
-                         * TrinoJob outputFormat.
-                         * @member {string} outputFormat
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.outputFormat = "";
-    
-                        /**
-                         * TrinoJob clientTags.
-                         * @member {Array.<string>} clientTags
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.clientTags = $util.emptyArray;
-    
-                        /**
-                         * TrinoJob properties.
-                         * @member {Object.<string,string>} properties
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.properties = $util.emptyObject;
-    
-                        /**
-                         * TrinoJob loggingConfig.
-                         * @member {google.cloud.dataproc.v1.ILoggingConfig|null|undefined} loggingConfig
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        TrinoJob.prototype.loggingConfig = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * TrinoJob queries.
-                         * @member {"queryFileUri"|"queryList"|undefined} queries
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         */
-                        Object.defineProperty(TrinoJob.prototype, "queries", {
-                            get: $util.oneOfGetter($oneOfFields = ["queryFileUri", "queryList"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new TrinoJob instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {google.cloud.dataproc.v1.ITrinoJob=} [properties] Properties to set
-                         * @returns {google.cloud.dataproc.v1.TrinoJob} TrinoJob instance
-                         */
-                        TrinoJob.create = function create(properties) {
-                            return new TrinoJob(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified TrinoJob message. Does not implicitly {@link google.cloud.dataproc.v1.TrinoJob.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {google.cloud.dataproc.v1.ITrinoJob} message TrinoJob message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TrinoJob.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.queryFileUri != null && Object.hasOwnProperty.call(message, "queryFileUri"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryFileUri);
-                            if (message.queryList != null && Object.hasOwnProperty.call(message, "queryList"))
-                                $root.google.cloud.dataproc.v1.QueryList.encode(message.queryList, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.continueOnFailure != null && Object.hasOwnProperty.call(message, "continueOnFailure"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.continueOnFailure);
-                            if (message.outputFormat != null && Object.hasOwnProperty.call(message, "outputFormat"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.outputFormat);
-                            if (message.clientTags != null && message.clientTags.length)
-                                for (var i = 0; i < message.clientTags.length; ++i)
-                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.clientTags[i]);
-                            if (message.properties != null && Object.hasOwnProperty.call(message, "properties"))
-                                for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i)
-                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.properties[keys[i]]).ldelim();
-                            if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
-                                $root.google.cloud.dataproc.v1.LoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified TrinoJob message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.TrinoJob.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {google.cloud.dataproc.v1.ITrinoJob} message TrinoJob message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TrinoJob.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a TrinoJob message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.dataproc.v1.TrinoJob} TrinoJob
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TrinoJob.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.TrinoJob(), key, value;
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.queryFileUri = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.queryList = $root.google.cloud.dataproc.v1.QueryList.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.continueOnFailure = reader.bool();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.outputFormat = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.clientTags && message.clientTags.length))
-                                            message.clientTags = [];
-                                        message.clientTags.push(reader.string());
-                                        break;
-                                    }
-                                case 6: {
-                                        if (message.properties === $util.emptyObject)
-                                            message.properties = {};
-                                        var end2 = reader.uint32() + reader.pos;
-                                        key = "";
-                                        value = "";
-                                        while (reader.pos < end2) {
-                                            var tag2 = reader.uint32();
-                                            switch (tag2 >>> 3) {
-                                            case 1:
-                                                key = reader.string();
-                                                break;
-                                            case 2:
-                                                value = reader.string();
-                                                break;
-                                            default:
-                                                reader.skipType(tag2 & 7);
-                                                break;
-                                            }
-                                        }
-                                        message.properties[key] = value;
-                                        break;
-                                    }
-                                case 7: {
-                                        message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a TrinoJob message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.dataproc.v1.TrinoJob} TrinoJob
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TrinoJob.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a TrinoJob message.
-                         * @function verify
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        TrinoJob.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.queryFileUri != null && message.hasOwnProperty("queryFileUri")) {
-                                properties.queries = 1;
-                                if (!$util.isString(message.queryFileUri))
-                                    return "queryFileUri: string expected";
-                            }
-                            if (message.queryList != null && message.hasOwnProperty("queryList")) {
-                                if (properties.queries === 1)
-                                    return "queries: multiple values";
-                                properties.queries = 1;
-                                {
-                                    var error = $root.google.cloud.dataproc.v1.QueryList.verify(message.queryList);
-                                    if (error)
-                                        return "queryList." + error;
-                                }
-                            }
-                            if (message.continueOnFailure != null && message.hasOwnProperty("continueOnFailure"))
-                                if (typeof message.continueOnFailure !== "boolean")
-                                    return "continueOnFailure: boolean expected";
-                            if (message.outputFormat != null && message.hasOwnProperty("outputFormat"))
-                                if (!$util.isString(message.outputFormat))
-                                    return "outputFormat: string expected";
-                            if (message.clientTags != null && message.hasOwnProperty("clientTags")) {
-                                if (!Array.isArray(message.clientTags))
-                                    return "clientTags: array expected";
-                                for (var i = 0; i < message.clientTags.length; ++i)
-                                    if (!$util.isString(message.clientTags[i]))
-                                        return "clientTags: string[] expected";
-                            }
-                            if (message.properties != null && message.hasOwnProperty("properties")) {
-                                if (!$util.isObject(message.properties))
-                                    return "properties: object expected";
-                                var key = Object.keys(message.properties);
-                                for (var i = 0; i < key.length; ++i)
-                                    if (!$util.isString(message.properties[key[i]]))
-                                        return "properties: string{k:string} expected";
-                            }
-                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
-                                var error = $root.google.cloud.dataproc.v1.LoggingConfig.verify(message.loggingConfig);
-                                if (error)
-                                    return "loggingConfig." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a TrinoJob message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.dataproc.v1.TrinoJob} TrinoJob
-                         */
-                        TrinoJob.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.dataproc.v1.TrinoJob)
-                                return object;
-                            var message = new $root.google.cloud.dataproc.v1.TrinoJob();
-                            if (object.queryFileUri != null)
-                                message.queryFileUri = String(object.queryFileUri);
-                            if (object.queryList != null) {
-                                if (typeof object.queryList !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.TrinoJob.queryList: object expected");
-                                message.queryList = $root.google.cloud.dataproc.v1.QueryList.fromObject(object.queryList);
-                            }
-                            if (object.continueOnFailure != null)
-                                message.continueOnFailure = Boolean(object.continueOnFailure);
-                            if (object.outputFormat != null)
-                                message.outputFormat = String(object.outputFormat);
-                            if (object.clientTags) {
-                                if (!Array.isArray(object.clientTags))
-                                    throw TypeError(".google.cloud.dataproc.v1.TrinoJob.clientTags: array expected");
-                                message.clientTags = [];
-                                for (var i = 0; i < object.clientTags.length; ++i)
-                                    message.clientTags[i] = String(object.clientTags[i]);
-                            }
-                            if (object.properties) {
-                                if (typeof object.properties !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.TrinoJob.properties: object expected");
-                                message.properties = {};
-                                for (var keys = Object.keys(object.properties), i = 0; i < keys.length; ++i)
-                                    message.properties[keys[i]] = String(object.properties[keys[i]]);
-                            }
-                            if (object.loggingConfig != null) {
-                                if (typeof object.loggingConfig !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.TrinoJob.loggingConfig: object expected");
-                                message.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.fromObject(object.loggingConfig);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a TrinoJob message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {google.cloud.dataproc.v1.TrinoJob} message TrinoJob
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        TrinoJob.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.clientTags = [];
-                            if (options.objects || options.defaults)
-                                object.properties = {};
-                            if (options.defaults) {
-                                object.continueOnFailure = false;
-                                object.outputFormat = "";
-                                object.loggingConfig = null;
-                            }
-                            if (message.queryFileUri != null && message.hasOwnProperty("queryFileUri")) {
-                                object.queryFileUri = message.queryFileUri;
-                                if (options.oneofs)
-                                    object.queries = "queryFileUri";
-                            }
-                            if (message.queryList != null && message.hasOwnProperty("queryList")) {
-                                object.queryList = $root.google.cloud.dataproc.v1.QueryList.toObject(message.queryList, options);
-                                if (options.oneofs)
-                                    object.queries = "queryList";
-                            }
-                            if (message.continueOnFailure != null && message.hasOwnProperty("continueOnFailure"))
-                                object.continueOnFailure = message.continueOnFailure;
-                            if (message.outputFormat != null && message.hasOwnProperty("outputFormat"))
-                                object.outputFormat = message.outputFormat;
-                            if (message.clientTags && message.clientTags.length) {
-                                object.clientTags = [];
-                                for (var j = 0; j < message.clientTags.length; ++j)
-                                    object.clientTags[j] = message.clientTags[j];
-                            }
-                            var keys2;
-                            if (message.properties && (keys2 = Object.keys(message.properties)).length) {
-                                object.properties = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.properties[keys2[j]] = message.properties[keys2[j]];
-                            }
-                            if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
-                                object.loggingConfig = $root.google.cloud.dataproc.v1.LoggingConfig.toObject(message.loggingConfig, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this TrinoJob to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        TrinoJob.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for TrinoJob
-                         * @function getTypeUrl
-                         * @memberof google.cloud.dataproc.v1.TrinoJob
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        TrinoJob.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.dataproc.v1.TrinoJob";
-                        };
-    
-                        return TrinoJob;
-                    })();
-    
                     v1.JobPlacement = (function() {
     
                         /**
@@ -29817,7 +28539,6 @@
                          * @property {google.cloud.dataproc.v1.ISparkRJob|null} [sparkRJob] Job sparkRJob
                          * @property {google.cloud.dataproc.v1.ISparkSqlJob|null} [sparkSqlJob] Job sparkSqlJob
                          * @property {google.cloud.dataproc.v1.IPrestoJob|null} [prestoJob] Job prestoJob
-                         * @property {google.cloud.dataproc.v1.ITrinoJob|null} [trinoJob] Job trinoJob
                          * @property {google.cloud.dataproc.v1.IJobStatus|null} [status] Job status
                          * @property {Array.<google.cloud.dataproc.v1.IJobStatus>|null} [statusHistory] Job statusHistory
                          * @property {Array.<google.cloud.dataproc.v1.IYarnApplication>|null} [yarnApplications] Job yarnApplications
@@ -29929,14 +28650,6 @@
                         Job.prototype.prestoJob = null;
     
                         /**
-                         * Job trinoJob.
-                         * @member {google.cloud.dataproc.v1.ITrinoJob|null|undefined} trinoJob
-                         * @memberof google.cloud.dataproc.v1.Job
-                         * @instance
-                         */
-                        Job.prototype.trinoJob = null;
-    
-                        /**
                          * Job status.
                          * @member {google.cloud.dataproc.v1.IJobStatus|null|undefined} status
                          * @memberof google.cloud.dataproc.v1.Job
@@ -30021,12 +28734,12 @@
     
                         /**
                          * Job typeJob.
-                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|"trinoJob"|undefined} typeJob
+                         * @member {"hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|undefined} typeJob
                          * @memberof google.cloud.dataproc.v1.Job
                          * @instance
                          */
                         Object.defineProperty(Job.prototype, "typeJob", {
-                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkRJob", "sparkSqlJob", "prestoJob", "trinoJob"]),
+                            get: $util.oneOfGetter($oneOfFields = ["hadoopJob", "sparkJob", "pysparkJob", "hiveJob", "pigJob", "sparkRJob", "sparkSqlJob", "prestoJob"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -30097,8 +28810,6 @@
                                 writer.uint32(/* id 24, wireType 0 =*/192).bool(message.done);
                             if (message.driverSchedulingConfig != null && Object.hasOwnProperty.call(message, "driverSchedulingConfig"))
                                 $root.google.cloud.dataproc.v1.DriverSchedulingConfig.encode(message.driverSchedulingConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
-                            if (message.trinoJob != null && Object.hasOwnProperty.call(message, "trinoJob"))
-                                $root.google.cloud.dataproc.v1.TrinoJob.encode(message.trinoJob, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -30171,10 +28882,6 @@
                                     }
                                 case 23: {
                                         message.prestoJob = $root.google.cloud.dataproc.v1.PrestoJob.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 28: {
-                                        message.trinoJob = $root.google.cloud.dataproc.v1.TrinoJob.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -30364,16 +29071,6 @@
                                         return "prestoJob." + error;
                                 }
                             }
-                            if (message.trinoJob != null && message.hasOwnProperty("trinoJob")) {
-                                if (properties.typeJob === 1)
-                                    return "typeJob: multiple values";
-                                properties.typeJob = 1;
-                                {
-                                    var error = $root.google.cloud.dataproc.v1.TrinoJob.verify(message.trinoJob);
-                                    if (error)
-                                        return "trinoJob." + error;
-                                }
-                            }
                             if (message.status != null && message.hasOwnProperty("status")) {
                                 var error = $root.google.cloud.dataproc.v1.JobStatus.verify(message.status);
                                 if (error)
@@ -30491,11 +29188,6 @@
                                 if (typeof object.prestoJob !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.Job.prestoJob: object expected");
                                 message.prestoJob = $root.google.cloud.dataproc.v1.PrestoJob.fromObject(object.prestoJob);
-                            }
-                            if (object.trinoJob != null) {
-                                if (typeof object.trinoJob !== "object")
-                                    throw TypeError(".google.cloud.dataproc.v1.Job.trinoJob: object expected");
-                                message.trinoJob = $root.google.cloud.dataproc.v1.TrinoJob.fromObject(object.trinoJob);
                             }
                             if (object.status != null) {
                                 if (typeof object.status !== "object")
@@ -30654,11 +29346,6 @@
                                 object.done = message.done;
                             if (message.driverSchedulingConfig != null && message.hasOwnProperty("driverSchedulingConfig"))
                                 object.driverSchedulingConfig = $root.google.cloud.dataproc.v1.DriverSchedulingConfig.toObject(message.driverSchedulingConfig, options);
-                            if (message.trinoJob != null && message.hasOwnProperty("trinoJob")) {
-                                object.trinoJob = $root.google.cloud.dataproc.v1.TrinoJob.toObject(message.trinoJob, options);
-                                if (options.oneofs)
-                                    object.typeJob = "trinoJob";
-                            }
                             return object;
                         };
     
@@ -35085,7 +33772,6 @@
                          * @property {string|null} [description] ClusterOperationMetadata description
                          * @property {Object.<string,string>|null} [labels] ClusterOperationMetadata labels
                          * @property {Array.<string>|null} [warnings] ClusterOperationMetadata warnings
-                         * @property {Array.<string>|null} [childOperationIds] ClusterOperationMetadata childOperationIds
                          */
     
                         /**
@@ -35100,7 +33786,6 @@
                             this.statusHistory = [];
                             this.labels = {};
                             this.warnings = [];
-                            this.childOperationIds = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -35172,14 +33857,6 @@
                         ClusterOperationMetadata.prototype.warnings = $util.emptyArray;
     
                         /**
-                         * ClusterOperationMetadata childOperationIds.
-                         * @member {Array.<string>} childOperationIds
-                         * @memberof google.cloud.dataproc.v1.ClusterOperationMetadata
-                         * @instance
-                         */
-                        ClusterOperationMetadata.prototype.childOperationIds = $util.emptyArray;
-    
-                        /**
                          * Creates a new ClusterOperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ClusterOperationMetadata
@@ -35222,9 +33899,6 @@
                             if (message.warnings != null && message.warnings.length)
                                 for (var i = 0; i < message.warnings.length; ++i)
                                     writer.uint32(/* id 14, wireType 2 =*/114).string(message.warnings[i]);
-                            if (message.childOperationIds != null && message.childOperationIds.length)
-                                for (var i = 0; i < message.childOperationIds.length; ++i)
-                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.childOperationIds[i]);
                             return writer;
                         };
     
@@ -35314,12 +33988,6 @@
                                         message.warnings.push(reader.string());
                                         break;
                                     }
-                                case 15: {
-                                        if (!(message.childOperationIds && message.childOperationIds.length))
-                                            message.childOperationIds = [];
-                                        message.childOperationIds.push(reader.string());
-                                        break;
-                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -35396,13 +34064,6 @@
                                     if (!$util.isString(message.warnings[i]))
                                         return "warnings: string[] expected";
                             }
-                            if (message.childOperationIds != null && message.hasOwnProperty("childOperationIds")) {
-                                if (!Array.isArray(message.childOperationIds))
-                                    return "childOperationIds: array expected";
-                                for (var i = 0; i < message.childOperationIds.length; ++i)
-                                    if (!$util.isString(message.childOperationIds[i]))
-                                        return "childOperationIds: string[] expected";
-                            }
                             return null;
                         };
     
@@ -35455,13 +34116,6 @@
                                 for (var i = 0; i < object.warnings.length; ++i)
                                     message.warnings[i] = String(object.warnings[i]);
                             }
-                            if (object.childOperationIds) {
-                                if (!Array.isArray(object.childOperationIds))
-                                    throw TypeError(".google.cloud.dataproc.v1.ClusterOperationMetadata.childOperationIds: array expected");
-                                message.childOperationIds = [];
-                                for (var i = 0; i < object.childOperationIds.length; ++i)
-                                    message.childOperationIds[i] = String(object.childOperationIds[i]);
-                            }
                             return message;
                         };
     
@@ -35481,7 +34135,6 @@
                             if (options.arrays || options.defaults) {
                                 object.statusHistory = [];
                                 object.warnings = [];
-                                object.childOperationIds = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -35517,11 +34170,6 @@
                                 object.warnings = [];
                                 for (var j = 0; j < message.warnings.length; ++j)
                                     object.warnings[j] = message.warnings[j];
-                            }
-                            if (message.childOperationIds && message.childOperationIds.length) {
-                                object.childOperationIds = [];
-                                for (var j = 0; j < message.childOperationIds.length; ++j)
-                                    object.childOperationIds[j] = message.childOperationIds[j];
                             }
                             return object;
                         };
@@ -54214,6 +52862,242 @@
                 return Empty;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -54453,242 +53337,6 @@
                 };
     
                 return Timestamp;
-            })();
-    
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type_url = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.value = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Any
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Any";
-                };
-    
-                return Any;
             })();
     
             protobuf.FieldMask = (function() {

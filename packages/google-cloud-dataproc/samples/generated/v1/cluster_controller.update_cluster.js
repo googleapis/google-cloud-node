@@ -46,7 +46,7 @@ function main(projectId, region, clusterName, cluster, updateMask) {
    */
   // const cluster = {}
   /**
-   *  Optional. Timeout for graceful YARN decommissioning. Graceful
+   *  Optional. Timeout for graceful YARN decomissioning. Graceful
    *  decommissioning allows removing nodes from the cluster without
    *  interrupting jobs in progress. Timeout specifies how long to wait for jobs
    *  in progress to finish before forcefully removing nodes (and potentially
