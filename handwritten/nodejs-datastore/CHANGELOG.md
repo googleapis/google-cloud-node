@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.3.2](https://github.com/googleapis/nodejs-datastore/compare/v7.3.1...v7.3.2) (2023-02-17)
+
+
+### Bug Fixes
+
+* Allow filtering null values ([#1067](https://github.com/googleapis/nodejs-datastore/issues/1067)) ([b89fa21](https://github.com/googleapis/nodejs-datastore/commit/b89fa211b366ec3e24ea5b2c8deeb90c695aa0df))
+
 ## [7.3.1](https://github.com/googleapis/nodejs-datastore/compare/v7.3.0...v7.3.1) (2023-02-17)
 
 
