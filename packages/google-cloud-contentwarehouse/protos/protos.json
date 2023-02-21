@@ -3365,7 +3365,10 @@
                           "fields": {
                             "revision": {
                               "type": "int32",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "id": {
                               "type": "int32",
@@ -3405,10 +3408,22 @@
                               }
                             },
                             "OperationType": {
+                              "valuesOptions": {
+                                "EVAL_REQUESTED": {
+                                  "deprecated": true
+                                },
+                                "EVAL_APPROVED": {
+                                  "deprecated": true
+                                },
+                                "EVAL_SKIPPED": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "OPERATION_TYPE_UNSPECIFIED": 0,
                                 "ADD": 1,
                                 "REMOVE": 2,
+                                "UPDATE": 7,
                                 "REPLACE": 3,
                                 "EVAL_REQUESTED": 4,
                                 "EVAL_APPROVED": 5,
