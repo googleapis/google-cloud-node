@@ -3433,6 +3433,136 @@ describe('v1beta1.ClusterManagerClient', () => {
     });
   });
 
+  describe('getJSONWebKeys', () => {
+    it('invokes getJSONWebKeys without error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.GetJSONWebKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.GetJSONWebKeysResponse()
+      );
+      client.innerApiCalls.getJsonWebKeys = stubSimpleCall(expectedResponse);
+      const [response] = await client.getJSONWebKeys(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getJsonWebKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getJsonWebKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getJSONWebKeys without error using callback', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.GetJSONWebKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.GetJSONWebKeysResponse()
+      );
+      client.innerApiCalls.getJsonWebKeys =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getJSONWebKeys(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1beta1.IGetJSONWebKeysResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getJsonWebKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getJsonWebKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getJSONWebKeys with error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.GetJSONWebKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getJsonWebKeys = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getJSONWebKeys(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getJsonWebKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getJsonWebKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getJSONWebKeys with closed client', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.GetJSONWebKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getJSONWebKeys(request), expectedError);
+    });
+  });
+
   describe('listNodePools', () => {
     it('invokes listNodePools without error', async () => {
       const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
@@ -3620,136 +3750,6 @@ describe('v1beta1.ClusterManagerClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listNodePools(request), expectedError);
-    });
-  });
-
-  describe('getJSONWebKeys', () => {
-    it('invokes getJSONWebKeys without error', async () => {
-      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1beta1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1beta1.GetJSONWebKeysResponse()
-      );
-      client.innerApiCalls.getJsonWebKeys = stubSimpleCall(expectedResponse);
-      const [response] = await client.getJSONWebKeys(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJSONWebKeys without error using callback', async () => {
-      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1beta1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.container.v1beta1.GetJSONWebKeysResponse()
-      );
-      client.innerApiCalls.getJsonWebKeys =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getJSONWebKeys(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.container.v1beta1.IGetJSONWebKeysResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJSONWebKeys with error', async () => {
-      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1beta1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getJsonWebKeys = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getJSONWebKeys(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getJsonWebKeys as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getJSONWebKeys with closed client', async () => {
-      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.container.v1beta1.GetJSONWebKeysRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.container.v1beta1.GetJSONWebKeysRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getJSONWebKeys(request), expectedError);
     });
   });
 
