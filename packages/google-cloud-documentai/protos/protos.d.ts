@@ -4061,6 +4061,7 @@ export namespace google {
                             OPERATION_TYPE_UNSPECIFIED = 0,
                             ADD = 1,
                             REMOVE = 2,
+                            UPDATE = 7,
                             REPLACE = 3,
                             EVAL_REQUESTED = 4,
                             EVAL_APPROVED = 5,
@@ -5672,6 +5673,20 @@ export namespace google {
                     public getProcessor(request: google.cloud.documentai.v1.IGetProcessorRequest): Promise<google.cloud.documentai.v1.Processor>;
 
                     /**
+                     * Calls TrainProcessorVersion.
+                     * @param request TrainProcessorVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public trainProcessorVersion(request: google.cloud.documentai.v1.ITrainProcessorVersionRequest, callback: google.cloud.documentai.v1.DocumentProcessorService.TrainProcessorVersionCallback): void;
+
+                    /**
+                     * Calls TrainProcessorVersion.
+                     * @param request TrainProcessorVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public trainProcessorVersion(request: google.cloud.documentai.v1.ITrainProcessorVersionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GetProcessorVersion.
                      * @param request GetProcessorVersionRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ProcessorVersion
@@ -5824,6 +5839,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public reviewDocument(request: google.cloud.documentai.v1.IReviewDocumentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls EvaluateProcessorVersion.
+                     * @param request EvaluateProcessorVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public evaluateProcessorVersion(request: google.cloud.documentai.v1.IEvaluateProcessorVersionRequest, callback: google.cloud.documentai.v1.DocumentProcessorService.EvaluateProcessorVersionCallback): void;
+
+                    /**
+                     * Calls EvaluateProcessorVersion.
+                     * @param request EvaluateProcessorVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public evaluateProcessorVersion(request: google.cloud.documentai.v1.IEvaluateProcessorVersionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetEvaluation.
+                     * @param request GetEvaluationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Evaluation
+                     */
+                    public getEvaluation(request: google.cloud.documentai.v1.IGetEvaluationRequest, callback: google.cloud.documentai.v1.DocumentProcessorService.GetEvaluationCallback): void;
+
+                    /**
+                     * Calls GetEvaluation.
+                     * @param request GetEvaluationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEvaluation(request: google.cloud.documentai.v1.IGetEvaluationRequest): Promise<google.cloud.documentai.v1.Evaluation>;
+
+                    /**
+                     * Calls ListEvaluations.
+                     * @param request ListEvaluationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEvaluationsResponse
+                     */
+                    public listEvaluations(request: google.cloud.documentai.v1.IListEvaluationsRequest, callback: google.cloud.documentai.v1.DocumentProcessorService.ListEvaluationsCallback): void;
+
+                    /**
+                     * Calls ListEvaluations.
+                     * @param request ListEvaluationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEvaluations(request: google.cloud.documentai.v1.IListEvaluationsRequest): Promise<google.cloud.documentai.v1.ListEvaluationsResponse>;
                 }
 
                 namespace DocumentProcessorService {
@@ -5876,6 +5933,13 @@ export namespace google {
                      * @param [response] Processor
                      */
                     type GetProcessorCallback = (error: (Error|null), response?: google.cloud.documentai.v1.Processor) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|trainProcessorVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TrainProcessorVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|getProcessorVersion}.
@@ -5953,6 +6017,27 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ReviewDocumentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|evaluateProcessorVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type EvaluateProcessorVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|getEvaluation}.
+                     * @param error Error, if any
+                     * @param [response] Evaluation
+                     */
+                    type GetEvaluationCallback = (error: (Error|null), response?: google.cloud.documentai.v1.Evaluation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1.DocumentProcessorService|listEvaluations}.
+                     * @param error Error, if any
+                     * @param [response] ListEvaluationsResponse
+                     */
+                    type ListEvaluationsCallback = (error: (Error|null), response?: google.cloud.documentai.v1.ListEvaluationsResponse) => void;
                 }
 
                 /** Properties of a ProcessRequest. */
@@ -9802,6 +9887,557 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a TrainProcessorVersionRequest. */
+                interface ITrainProcessorVersionRequest {
+
+                    /** TrainProcessorVersionRequest parent */
+                    parent?: (string|null);
+
+                    /** TrainProcessorVersionRequest processorVersion */
+                    processorVersion?: (google.cloud.documentai.v1.IProcessorVersion|null);
+
+                    /** TrainProcessorVersionRequest documentSchema */
+                    documentSchema?: (google.cloud.documentai.v1.IDocumentSchema|null);
+
+                    /** TrainProcessorVersionRequest inputData */
+                    inputData?: (google.cloud.documentai.v1.TrainProcessorVersionRequest.IInputData|null);
+
+                    /** TrainProcessorVersionRequest baseProcessorVersion */
+                    baseProcessorVersion?: (string|null);
+                }
+
+                /** Represents a TrainProcessorVersionRequest. */
+                class TrainProcessorVersionRequest implements ITrainProcessorVersionRequest {
+
+                    /**
+                     * Constructs a new TrainProcessorVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.ITrainProcessorVersionRequest);
+
+                    /** TrainProcessorVersionRequest parent. */
+                    public parent: string;
+
+                    /** TrainProcessorVersionRequest processorVersion. */
+                    public processorVersion?: (google.cloud.documentai.v1.IProcessorVersion|null);
+
+                    /** TrainProcessorVersionRequest documentSchema. */
+                    public documentSchema?: (google.cloud.documentai.v1.IDocumentSchema|null);
+
+                    /** TrainProcessorVersionRequest inputData. */
+                    public inputData?: (google.cloud.documentai.v1.TrainProcessorVersionRequest.IInputData|null);
+
+                    /** TrainProcessorVersionRequest baseProcessorVersion. */
+                    public baseProcessorVersion: string;
+
+                    /**
+                     * Creates a new TrainProcessorVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrainProcessorVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.ITrainProcessorVersionRequest): google.cloud.documentai.v1.TrainProcessorVersionRequest;
+
+                    /**
+                     * Encodes the specified TrainProcessorVersionRequest message. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionRequest.verify|verify} messages.
+                     * @param message TrainProcessorVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.ITrainProcessorVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrainProcessorVersionRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionRequest.verify|verify} messages.
+                     * @param message TrainProcessorVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.ITrainProcessorVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrainProcessorVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrainProcessorVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.TrainProcessorVersionRequest;
+
+                    /**
+                     * Decodes a TrainProcessorVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrainProcessorVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.TrainProcessorVersionRequest;
+
+                    /**
+                     * Verifies a TrainProcessorVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrainProcessorVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrainProcessorVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.TrainProcessorVersionRequest;
+
+                    /**
+                     * Creates a plain object from a TrainProcessorVersionRequest message. Also converts values to other types if specified.
+                     * @param message TrainProcessorVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.TrainProcessorVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrainProcessorVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrainProcessorVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TrainProcessorVersionRequest {
+
+                    /** Properties of an InputData. */
+                    interface IInputData {
+
+                        /** InputData trainingDocuments */
+                        trainingDocuments?: (google.cloud.documentai.v1.IBatchDocumentsInputConfig|null);
+
+                        /** InputData testDocuments */
+                        testDocuments?: (google.cloud.documentai.v1.IBatchDocumentsInputConfig|null);
+                    }
+
+                    /** Represents an InputData. */
+                    class InputData implements IInputData {
+
+                        /**
+                         * Constructs a new InputData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.TrainProcessorVersionRequest.IInputData);
+
+                        /** InputData trainingDocuments. */
+                        public trainingDocuments?: (google.cloud.documentai.v1.IBatchDocumentsInputConfig|null);
+
+                        /** InputData testDocuments. */
+                        public testDocuments?: (google.cloud.documentai.v1.IBatchDocumentsInputConfig|null);
+
+                        /**
+                         * Creates a new InputData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputData instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.TrainProcessorVersionRequest.IInputData): google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData;
+
+                        /**
+                         * Encodes the specified InputData message. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData.verify|verify} messages.
+                         * @param message InputData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.TrainProcessorVersionRequest.IInputData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputData message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData.verify|verify} messages.
+                         * @param message InputData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.TrainProcessorVersionRequest.IInputData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData;
+
+                        /**
+                         * Decodes an InputData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData;
+
+                        /**
+                         * Verifies an InputData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData;
+
+                        /**
+                         * Creates a plain object from an InputData message. Also converts values to other types if specified.
+                         * @param message InputData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a TrainProcessorVersionResponse. */
+                interface ITrainProcessorVersionResponse {
+
+                    /** TrainProcessorVersionResponse processorVersion */
+                    processorVersion?: (string|null);
+                }
+
+                /** Represents a TrainProcessorVersionResponse. */
+                class TrainProcessorVersionResponse implements ITrainProcessorVersionResponse {
+
+                    /**
+                     * Constructs a new TrainProcessorVersionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.ITrainProcessorVersionResponse);
+
+                    /** TrainProcessorVersionResponse processorVersion. */
+                    public processorVersion: string;
+
+                    /**
+                     * Creates a new TrainProcessorVersionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrainProcessorVersionResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.ITrainProcessorVersionResponse): google.cloud.documentai.v1.TrainProcessorVersionResponse;
+
+                    /**
+                     * Encodes the specified TrainProcessorVersionResponse message. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionResponse.verify|verify} messages.
+                     * @param message TrainProcessorVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.ITrainProcessorVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrainProcessorVersionResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionResponse.verify|verify} messages.
+                     * @param message TrainProcessorVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.ITrainProcessorVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrainProcessorVersionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrainProcessorVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.TrainProcessorVersionResponse;
+
+                    /**
+                     * Decodes a TrainProcessorVersionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrainProcessorVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.TrainProcessorVersionResponse;
+
+                    /**
+                     * Verifies a TrainProcessorVersionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrainProcessorVersionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrainProcessorVersionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.TrainProcessorVersionResponse;
+
+                    /**
+                     * Creates a plain object from a TrainProcessorVersionResponse message. Also converts values to other types if specified.
+                     * @param message TrainProcessorVersionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.TrainProcessorVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrainProcessorVersionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrainProcessorVersionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TrainProcessorVersionMetadata. */
+                interface ITrainProcessorVersionMetadata {
+
+                    /** TrainProcessorVersionMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1.ICommonOperationMetadata|null);
+
+                    /** TrainProcessorVersionMetadata trainingDatasetValidation */
+                    trainingDatasetValidation?: (google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation|null);
+
+                    /** TrainProcessorVersionMetadata testDatasetValidation */
+                    testDatasetValidation?: (google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation|null);
+                }
+
+                /** Represents a TrainProcessorVersionMetadata. */
+                class TrainProcessorVersionMetadata implements ITrainProcessorVersionMetadata {
+
+                    /**
+                     * Constructs a new TrainProcessorVersionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.ITrainProcessorVersionMetadata);
+
+                    /** TrainProcessorVersionMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1.ICommonOperationMetadata|null);
+
+                    /** TrainProcessorVersionMetadata trainingDatasetValidation. */
+                    public trainingDatasetValidation?: (google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation|null);
+
+                    /** TrainProcessorVersionMetadata testDatasetValidation. */
+                    public testDatasetValidation?: (google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation|null);
+
+                    /**
+                     * Creates a new TrainProcessorVersionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrainProcessorVersionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.ITrainProcessorVersionMetadata): google.cloud.documentai.v1.TrainProcessorVersionMetadata;
+
+                    /**
+                     * Encodes the specified TrainProcessorVersionMetadata message. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionMetadata.verify|verify} messages.
+                     * @param message TrainProcessorVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.ITrainProcessorVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrainProcessorVersionMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionMetadata.verify|verify} messages.
+                     * @param message TrainProcessorVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.ITrainProcessorVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrainProcessorVersionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrainProcessorVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.TrainProcessorVersionMetadata;
+
+                    /**
+                     * Decodes a TrainProcessorVersionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrainProcessorVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.TrainProcessorVersionMetadata;
+
+                    /**
+                     * Verifies a TrainProcessorVersionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrainProcessorVersionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrainProcessorVersionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.TrainProcessorVersionMetadata;
+
+                    /**
+                     * Creates a plain object from a TrainProcessorVersionMetadata message. Also converts values to other types if specified.
+                     * @param message TrainProcessorVersionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.TrainProcessorVersionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrainProcessorVersionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrainProcessorVersionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TrainProcessorVersionMetadata {
+
+                    /** Properties of a DatasetValidation. */
+                    interface IDatasetValidation {
+
+                        /** DatasetValidation documentErrorCount */
+                        documentErrorCount?: (number|null);
+
+                        /** DatasetValidation datasetErrorCount */
+                        datasetErrorCount?: (number|null);
+
+                        /** DatasetValidation documentErrors */
+                        documentErrors?: (google.rpc.IStatus[]|null);
+
+                        /** DatasetValidation datasetErrors */
+                        datasetErrors?: (google.rpc.IStatus[]|null);
+                    }
+
+                    /** Represents a DatasetValidation. */
+                    class DatasetValidation implements IDatasetValidation {
+
+                        /**
+                         * Constructs a new DatasetValidation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation);
+
+                        /** DatasetValidation documentErrorCount. */
+                        public documentErrorCount: number;
+
+                        /** DatasetValidation datasetErrorCount. */
+                        public datasetErrorCount: number;
+
+                        /** DatasetValidation documentErrors. */
+                        public documentErrors: google.rpc.IStatus[];
+
+                        /** DatasetValidation datasetErrors. */
+                        public datasetErrors: google.rpc.IStatus[];
+
+                        /**
+                         * Creates a new DatasetValidation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DatasetValidation instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation): google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation;
+
+                        /**
+                         * Encodes the specified DatasetValidation message. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation.verify|verify} messages.
+                         * @param message DatasetValidation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DatasetValidation message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation.verify|verify} messages.
+                         * @param message DatasetValidation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.TrainProcessorVersionMetadata.IDatasetValidation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DatasetValidation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DatasetValidation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation;
+
+                        /**
+                         * Decodes a DatasetValidation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DatasetValidation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation;
+
+                        /**
+                         * Verifies a DatasetValidation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DatasetValidation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DatasetValidation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation;
+
+                        /**
+                         * Creates a plain object from a DatasetValidation message. Also converts values to other types if specified.
+                         * @param message DatasetValidation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.TrainProcessorVersionMetadata.DatasetValidation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DatasetValidation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DatasetValidation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a ReviewDocumentRequest. */
                 interface IReviewDocumentRequest {
 
@@ -10151,6 +10787,612 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReviewDocumentOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluateProcessorVersionRequest. */
+                interface IEvaluateProcessorVersionRequest {
+
+                    /** EvaluateProcessorVersionRequest processorVersion */
+                    processorVersion?: (string|null);
+
+                    /** EvaluateProcessorVersionRequest evaluationDocuments */
+                    evaluationDocuments?: (google.cloud.documentai.v1.IBatchDocumentsInputConfig|null);
+                }
+
+                /** Represents an EvaluateProcessorVersionRequest. */
+                class EvaluateProcessorVersionRequest implements IEvaluateProcessorVersionRequest {
+
+                    /**
+                     * Constructs a new EvaluateProcessorVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IEvaluateProcessorVersionRequest);
+
+                    /** EvaluateProcessorVersionRequest processorVersion. */
+                    public processorVersion: string;
+
+                    /** EvaluateProcessorVersionRequest evaluationDocuments. */
+                    public evaluationDocuments?: (google.cloud.documentai.v1.IBatchDocumentsInputConfig|null);
+
+                    /**
+                     * Creates a new EvaluateProcessorVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluateProcessorVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IEvaluateProcessorVersionRequest): google.cloud.documentai.v1.EvaluateProcessorVersionRequest;
+
+                    /**
+                     * Encodes the specified EvaluateProcessorVersionRequest message. Does not implicitly {@link google.cloud.documentai.v1.EvaluateProcessorVersionRequest.verify|verify} messages.
+                     * @param message EvaluateProcessorVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IEvaluateProcessorVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluateProcessorVersionRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.EvaluateProcessorVersionRequest.verify|verify} messages.
+                     * @param message EvaluateProcessorVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IEvaluateProcessorVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluateProcessorVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluateProcessorVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.EvaluateProcessorVersionRequest;
+
+                    /**
+                     * Decodes an EvaluateProcessorVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluateProcessorVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.EvaluateProcessorVersionRequest;
+
+                    /**
+                     * Verifies an EvaluateProcessorVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluateProcessorVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluateProcessorVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.EvaluateProcessorVersionRequest;
+
+                    /**
+                     * Creates a plain object from an EvaluateProcessorVersionRequest message. Also converts values to other types if specified.
+                     * @param message EvaluateProcessorVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.EvaluateProcessorVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluateProcessorVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluateProcessorVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluateProcessorVersionMetadata. */
+                interface IEvaluateProcessorVersionMetadata {
+
+                    /** EvaluateProcessorVersionMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1.ICommonOperationMetadata|null);
+                }
+
+                /** Represents an EvaluateProcessorVersionMetadata. */
+                class EvaluateProcessorVersionMetadata implements IEvaluateProcessorVersionMetadata {
+
+                    /**
+                     * Constructs a new EvaluateProcessorVersionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata);
+
+                    /** EvaluateProcessorVersionMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1.ICommonOperationMetadata|null);
+
+                    /**
+                     * Creates a new EvaluateProcessorVersionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluateProcessorVersionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata): google.cloud.documentai.v1.EvaluateProcessorVersionMetadata;
+
+                    /**
+                     * Encodes the specified EvaluateProcessorVersionMetadata message. Does not implicitly {@link google.cloud.documentai.v1.EvaluateProcessorVersionMetadata.verify|verify} messages.
+                     * @param message EvaluateProcessorVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluateProcessorVersionMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.EvaluateProcessorVersionMetadata.verify|verify} messages.
+                     * @param message EvaluateProcessorVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IEvaluateProcessorVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluateProcessorVersionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluateProcessorVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.EvaluateProcessorVersionMetadata;
+
+                    /**
+                     * Decodes an EvaluateProcessorVersionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluateProcessorVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.EvaluateProcessorVersionMetadata;
+
+                    /**
+                     * Verifies an EvaluateProcessorVersionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluateProcessorVersionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluateProcessorVersionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.EvaluateProcessorVersionMetadata;
+
+                    /**
+                     * Creates a plain object from an EvaluateProcessorVersionMetadata message. Also converts values to other types if specified.
+                     * @param message EvaluateProcessorVersionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.EvaluateProcessorVersionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluateProcessorVersionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluateProcessorVersionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluateProcessorVersionResponse. */
+                interface IEvaluateProcessorVersionResponse {
+
+                    /** EvaluateProcessorVersionResponse evaluation */
+                    evaluation?: (string|null);
+                }
+
+                /** Represents an EvaluateProcessorVersionResponse. */
+                class EvaluateProcessorVersionResponse implements IEvaluateProcessorVersionResponse {
+
+                    /**
+                     * Constructs a new EvaluateProcessorVersionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IEvaluateProcessorVersionResponse);
+
+                    /** EvaluateProcessorVersionResponse evaluation. */
+                    public evaluation: string;
+
+                    /**
+                     * Creates a new EvaluateProcessorVersionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluateProcessorVersionResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IEvaluateProcessorVersionResponse): google.cloud.documentai.v1.EvaluateProcessorVersionResponse;
+
+                    /**
+                     * Encodes the specified EvaluateProcessorVersionResponse message. Does not implicitly {@link google.cloud.documentai.v1.EvaluateProcessorVersionResponse.verify|verify} messages.
+                     * @param message EvaluateProcessorVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IEvaluateProcessorVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluateProcessorVersionResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.EvaluateProcessorVersionResponse.verify|verify} messages.
+                     * @param message EvaluateProcessorVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IEvaluateProcessorVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluateProcessorVersionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluateProcessorVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.EvaluateProcessorVersionResponse;
+
+                    /**
+                     * Decodes an EvaluateProcessorVersionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluateProcessorVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.EvaluateProcessorVersionResponse;
+
+                    /**
+                     * Verifies an EvaluateProcessorVersionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluateProcessorVersionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluateProcessorVersionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.EvaluateProcessorVersionResponse;
+
+                    /**
+                     * Creates a plain object from an EvaluateProcessorVersionResponse message. Also converts values to other types if specified.
+                     * @param message EvaluateProcessorVersionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.EvaluateProcessorVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluateProcessorVersionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluateProcessorVersionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetEvaluationRequest. */
+                interface IGetEvaluationRequest {
+
+                    /** GetEvaluationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEvaluationRequest. */
+                class GetEvaluationRequest implements IGetEvaluationRequest {
+
+                    /**
+                     * Constructs a new GetEvaluationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IGetEvaluationRequest);
+
+                    /** GetEvaluationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEvaluationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEvaluationRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IGetEvaluationRequest): google.cloud.documentai.v1.GetEvaluationRequest;
+
+                    /**
+                     * Encodes the specified GetEvaluationRequest message. Does not implicitly {@link google.cloud.documentai.v1.GetEvaluationRequest.verify|verify} messages.
+                     * @param message GetEvaluationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IGetEvaluationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEvaluationRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.GetEvaluationRequest.verify|verify} messages.
+                     * @param message GetEvaluationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IGetEvaluationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEvaluationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEvaluationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.GetEvaluationRequest;
+
+                    /**
+                     * Decodes a GetEvaluationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEvaluationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.GetEvaluationRequest;
+
+                    /**
+                     * Verifies a GetEvaluationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEvaluationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEvaluationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.GetEvaluationRequest;
+
+                    /**
+                     * Creates a plain object from a GetEvaluationRequest message. Also converts values to other types if specified.
+                     * @param message GetEvaluationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.GetEvaluationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEvaluationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEvaluationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEvaluationsRequest. */
+                interface IListEvaluationsRequest {
+
+                    /** ListEvaluationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEvaluationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEvaluationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListEvaluationsRequest. */
+                class ListEvaluationsRequest implements IListEvaluationsRequest {
+
+                    /**
+                     * Constructs a new ListEvaluationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IListEvaluationsRequest);
+
+                    /** ListEvaluationsRequest parent. */
+                    public parent: string;
+
+                    /** ListEvaluationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEvaluationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListEvaluationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEvaluationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IListEvaluationsRequest): google.cloud.documentai.v1.ListEvaluationsRequest;
+
+                    /**
+                     * Encodes the specified ListEvaluationsRequest message. Does not implicitly {@link google.cloud.documentai.v1.ListEvaluationsRequest.verify|verify} messages.
+                     * @param message ListEvaluationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IListEvaluationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEvaluationsRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ListEvaluationsRequest.verify|verify} messages.
+                     * @param message ListEvaluationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IListEvaluationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEvaluationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEvaluationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ListEvaluationsRequest;
+
+                    /**
+                     * Decodes a ListEvaluationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEvaluationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ListEvaluationsRequest;
+
+                    /**
+                     * Verifies a ListEvaluationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEvaluationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEvaluationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ListEvaluationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListEvaluationsRequest message. Also converts values to other types if specified.
+                     * @param message ListEvaluationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.ListEvaluationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEvaluationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEvaluationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEvaluationsResponse. */
+                interface IListEvaluationsResponse {
+
+                    /** ListEvaluationsResponse evaluations */
+                    evaluations?: (google.cloud.documentai.v1.IEvaluation[]|null);
+
+                    /** ListEvaluationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEvaluationsResponse. */
+                class ListEvaluationsResponse implements IListEvaluationsResponse {
+
+                    /**
+                     * Constructs a new ListEvaluationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IListEvaluationsResponse);
+
+                    /** ListEvaluationsResponse evaluations. */
+                    public evaluations: google.cloud.documentai.v1.IEvaluation[];
+
+                    /** ListEvaluationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEvaluationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEvaluationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IListEvaluationsResponse): google.cloud.documentai.v1.ListEvaluationsResponse;
+
+                    /**
+                     * Encodes the specified ListEvaluationsResponse message. Does not implicitly {@link google.cloud.documentai.v1.ListEvaluationsResponse.verify|verify} messages.
+                     * @param message ListEvaluationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IListEvaluationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEvaluationsResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ListEvaluationsResponse.verify|verify} messages.
+                     * @param message ListEvaluationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IListEvaluationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEvaluationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEvaluationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ListEvaluationsResponse;
+
+                    /**
+                     * Decodes a ListEvaluationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEvaluationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ListEvaluationsResponse;
+
+                    /**
+                     * Verifies a ListEvaluationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEvaluationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEvaluationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ListEvaluationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListEvaluationsResponse message. Also converts values to other types if specified.
+                     * @param message ListEvaluationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.ListEvaluationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEvaluationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEvaluationsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10735,6 +11977,774 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an EvaluationReference. */
+                interface IEvaluationReference {
+
+                    /** EvaluationReference operation */
+                    operation?: (string|null);
+
+                    /** EvaluationReference evaluation */
+                    evaluation?: (string|null);
+
+                    /** EvaluationReference aggregateMetrics */
+                    aggregateMetrics?: (google.cloud.documentai.v1.Evaluation.IMetrics|null);
+
+                    /** EvaluationReference aggregateMetricsExact */
+                    aggregateMetricsExact?: (google.cloud.documentai.v1.Evaluation.IMetrics|null);
+                }
+
+                /** Represents an EvaluationReference. */
+                class EvaluationReference implements IEvaluationReference {
+
+                    /**
+                     * Constructs a new EvaluationReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IEvaluationReference);
+
+                    /** EvaluationReference operation. */
+                    public operation: string;
+
+                    /** EvaluationReference evaluation. */
+                    public evaluation: string;
+
+                    /** EvaluationReference aggregateMetrics. */
+                    public aggregateMetrics?: (google.cloud.documentai.v1.Evaluation.IMetrics|null);
+
+                    /** EvaluationReference aggregateMetricsExact. */
+                    public aggregateMetricsExact?: (google.cloud.documentai.v1.Evaluation.IMetrics|null);
+
+                    /**
+                     * Creates a new EvaluationReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluationReference instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IEvaluationReference): google.cloud.documentai.v1.EvaluationReference;
+
+                    /**
+                     * Encodes the specified EvaluationReference message. Does not implicitly {@link google.cloud.documentai.v1.EvaluationReference.verify|verify} messages.
+                     * @param message EvaluationReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IEvaluationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluationReference message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.EvaluationReference.verify|verify} messages.
+                     * @param message EvaluationReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IEvaluationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluationReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluationReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.EvaluationReference;
+
+                    /**
+                     * Decodes an EvaluationReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluationReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.EvaluationReference;
+
+                    /**
+                     * Verifies an EvaluationReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluationReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluationReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.EvaluationReference;
+
+                    /**
+                     * Creates a plain object from an EvaluationReference message. Also converts values to other types if specified.
+                     * @param message EvaluationReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.EvaluationReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluationReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluationReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Evaluation. */
+                interface IEvaluation {
+
+                    /** Evaluation name */
+                    name?: (string|null);
+
+                    /** Evaluation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Evaluation documentCounters */
+                    documentCounters?: (google.cloud.documentai.v1.Evaluation.ICounters|null);
+
+                    /** Evaluation allEntitiesMetrics */
+                    allEntitiesMetrics?: (google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics|null);
+
+                    /** Evaluation entityMetrics */
+                    entityMetrics?: ({ [k: string]: google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics }|null);
+
+                    /** Evaluation kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** Evaluation kmsKeyVersionName */
+                    kmsKeyVersionName?: (string|null);
+                }
+
+                /** Represents an Evaluation. */
+                class Evaluation implements IEvaluation {
+
+                    /**
+                     * Constructs a new Evaluation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1.IEvaluation);
+
+                    /** Evaluation name. */
+                    public name: string;
+
+                    /** Evaluation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Evaluation documentCounters. */
+                    public documentCounters?: (google.cloud.documentai.v1.Evaluation.ICounters|null);
+
+                    /** Evaluation allEntitiesMetrics. */
+                    public allEntitiesMetrics?: (google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics|null);
+
+                    /** Evaluation entityMetrics. */
+                    public entityMetrics: { [k: string]: google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics };
+
+                    /** Evaluation kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** Evaluation kmsKeyVersionName. */
+                    public kmsKeyVersionName: string;
+
+                    /**
+                     * Creates a new Evaluation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Evaluation instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1.IEvaluation): google.cloud.documentai.v1.Evaluation;
+
+                    /**
+                     * Encodes the specified Evaluation message. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.verify|verify} messages.
+                     * @param message Evaluation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1.IEvaluation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Evaluation message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.verify|verify} messages.
+                     * @param message Evaluation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1.IEvaluation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Evaluation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Evaluation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Evaluation;
+
+                    /**
+                     * Decodes an Evaluation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Evaluation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Evaluation;
+
+                    /**
+                     * Verifies an Evaluation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Evaluation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Evaluation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Evaluation;
+
+                    /**
+                     * Creates a plain object from an Evaluation message. Also converts values to other types if specified.
+                     * @param message Evaluation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1.Evaluation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Evaluation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Evaluation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Evaluation {
+
+                    /** Properties of a Counters. */
+                    interface ICounters {
+
+                        /** Counters inputDocumentsCount */
+                        inputDocumentsCount?: (number|null);
+
+                        /** Counters invalidDocumentsCount */
+                        invalidDocumentsCount?: (number|null);
+
+                        /** Counters failedDocumentsCount */
+                        failedDocumentsCount?: (number|null);
+
+                        /** Counters evaluatedDocumentsCount */
+                        evaluatedDocumentsCount?: (number|null);
+                    }
+
+                    /** Represents a Counters. */
+                    class Counters implements ICounters {
+
+                        /**
+                         * Constructs a new Counters.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.Evaluation.ICounters);
+
+                        /** Counters inputDocumentsCount. */
+                        public inputDocumentsCount: number;
+
+                        /** Counters invalidDocumentsCount. */
+                        public invalidDocumentsCount: number;
+
+                        /** Counters failedDocumentsCount. */
+                        public failedDocumentsCount: number;
+
+                        /** Counters evaluatedDocumentsCount. */
+                        public evaluatedDocumentsCount: number;
+
+                        /**
+                         * Creates a new Counters instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Counters instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.Evaluation.ICounters): google.cloud.documentai.v1.Evaluation.Counters;
+
+                        /**
+                         * Encodes the specified Counters message. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.Counters.verify|verify} messages.
+                         * @param message Counters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.Evaluation.ICounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Counters message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.Counters.verify|verify} messages.
+                         * @param message Counters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.Evaluation.ICounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Counters message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Counters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Evaluation.Counters;
+
+                        /**
+                         * Decodes a Counters message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Counters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Evaluation.Counters;
+
+                        /**
+                         * Verifies a Counters message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Counters message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Counters
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Evaluation.Counters;
+
+                        /**
+                         * Creates a plain object from a Counters message. Also converts values to other types if specified.
+                         * @param message Counters
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.Evaluation.Counters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Counters to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Counters
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Metrics. */
+                    interface IMetrics {
+
+                        /** Metrics precision */
+                        precision?: (number|null);
+
+                        /** Metrics recall */
+                        recall?: (number|null);
+
+                        /** Metrics f1Score */
+                        f1Score?: (number|null);
+
+                        /** Metrics predictedOccurrencesCount */
+                        predictedOccurrencesCount?: (number|null);
+
+                        /** Metrics groundTruthOccurrencesCount */
+                        groundTruthOccurrencesCount?: (number|null);
+
+                        /** Metrics predictedDocumentCount */
+                        predictedDocumentCount?: (number|null);
+
+                        /** Metrics groundTruthDocumentCount */
+                        groundTruthDocumentCount?: (number|null);
+
+                        /** Metrics truePositivesCount */
+                        truePositivesCount?: (number|null);
+
+                        /** Metrics falsePositivesCount */
+                        falsePositivesCount?: (number|null);
+
+                        /** Metrics falseNegativesCount */
+                        falseNegativesCount?: (number|null);
+
+                        /** Metrics totalDocumentsCount */
+                        totalDocumentsCount?: (number|null);
+                    }
+
+                    /** Represents a Metrics. */
+                    class Metrics implements IMetrics {
+
+                        /**
+                         * Constructs a new Metrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.Evaluation.IMetrics);
+
+                        /** Metrics precision. */
+                        public precision: number;
+
+                        /** Metrics recall. */
+                        public recall: number;
+
+                        /** Metrics f1Score. */
+                        public f1Score: number;
+
+                        /** Metrics predictedOccurrencesCount. */
+                        public predictedOccurrencesCount: number;
+
+                        /** Metrics groundTruthOccurrencesCount. */
+                        public groundTruthOccurrencesCount: number;
+
+                        /** Metrics predictedDocumentCount. */
+                        public predictedDocumentCount: number;
+
+                        /** Metrics groundTruthDocumentCount. */
+                        public groundTruthDocumentCount: number;
+
+                        /** Metrics truePositivesCount. */
+                        public truePositivesCount: number;
+
+                        /** Metrics falsePositivesCount. */
+                        public falsePositivesCount: number;
+
+                        /** Metrics falseNegativesCount. */
+                        public falseNegativesCount: number;
+
+                        /** Metrics totalDocumentsCount. */
+                        public totalDocumentsCount: number;
+
+                        /**
+                         * Creates a new Metrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Metrics instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.Evaluation.IMetrics): google.cloud.documentai.v1.Evaluation.Metrics;
+
+                        /**
+                         * Encodes the specified Metrics message. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.Metrics.verify|verify} messages.
+                         * @param message Metrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.Evaluation.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Metrics message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.Metrics.verify|verify} messages.
+                         * @param message Metrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.Evaluation.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Metrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Metrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Evaluation.Metrics;
+
+                        /**
+                         * Decodes a Metrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Metrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Evaluation.Metrics;
+
+                        /**
+                         * Verifies a Metrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Metrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Metrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Evaluation.Metrics;
+
+                        /**
+                         * Creates a plain object from a Metrics message. Also converts values to other types if specified.
+                         * @param message Metrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.Evaluation.Metrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Metrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Metrics
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConfidenceLevelMetrics. */
+                    interface IConfidenceLevelMetrics {
+
+                        /** ConfidenceLevelMetrics confidenceLevel */
+                        confidenceLevel?: (number|null);
+
+                        /** ConfidenceLevelMetrics metrics */
+                        metrics?: (google.cloud.documentai.v1.Evaluation.IMetrics|null);
+                    }
+
+                    /** Represents a ConfidenceLevelMetrics. */
+                    class ConfidenceLevelMetrics implements IConfidenceLevelMetrics {
+
+                        /**
+                         * Constructs a new ConfidenceLevelMetrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics);
+
+                        /** ConfidenceLevelMetrics confidenceLevel. */
+                        public confidenceLevel: number;
+
+                        /** ConfidenceLevelMetrics metrics. */
+                        public metrics?: (google.cloud.documentai.v1.Evaluation.IMetrics|null);
+
+                        /**
+                         * Creates a new ConfidenceLevelMetrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConfidenceLevelMetrics instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics): google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics;
+
+                        /**
+                         * Encodes the specified ConfidenceLevelMetrics message. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics.verify|verify} messages.
+                         * @param message ConfidenceLevelMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConfidenceLevelMetrics message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics.verify|verify} messages.
+                         * @param message ConfidenceLevelMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConfidenceLevelMetrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConfidenceLevelMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics;
+
+                        /**
+                         * Decodes a ConfidenceLevelMetrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConfidenceLevelMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics;
+
+                        /**
+                         * Verifies a ConfidenceLevelMetrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConfidenceLevelMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConfidenceLevelMetrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics;
+
+                        /**
+                         * Creates a plain object from a ConfidenceLevelMetrics message. Also converts values to other types if specified.
+                         * @param message ConfidenceLevelMetrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConfidenceLevelMetrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConfidenceLevelMetrics
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MultiConfidenceMetrics. */
+                    interface IMultiConfidenceMetrics {
+
+                        /** MultiConfidenceMetrics confidenceLevelMetrics */
+                        confidenceLevelMetrics?: (google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics[]|null);
+
+                        /** MultiConfidenceMetrics confidenceLevelMetricsExact */
+                        confidenceLevelMetricsExact?: (google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics[]|null);
+
+                        /** MultiConfidenceMetrics auprc */
+                        auprc?: (number|null);
+
+                        /** MultiConfidenceMetrics estimatedCalibrationError */
+                        estimatedCalibrationError?: (number|null);
+
+                        /** MultiConfidenceMetrics auprcExact */
+                        auprcExact?: (number|null);
+
+                        /** MultiConfidenceMetrics estimatedCalibrationErrorExact */
+                        estimatedCalibrationErrorExact?: (number|null);
+
+                        /** MultiConfidenceMetrics metricsType */
+                        metricsType?: (google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics.MetricsType|keyof typeof google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics.MetricsType|null);
+                    }
+
+                    /** Represents a MultiConfidenceMetrics. */
+                    class MultiConfidenceMetrics implements IMultiConfidenceMetrics {
+
+                        /**
+                         * Constructs a new MultiConfidenceMetrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics);
+
+                        /** MultiConfidenceMetrics confidenceLevelMetrics. */
+                        public confidenceLevelMetrics: google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics[];
+
+                        /** MultiConfidenceMetrics confidenceLevelMetricsExact. */
+                        public confidenceLevelMetricsExact: google.cloud.documentai.v1.Evaluation.IConfidenceLevelMetrics[];
+
+                        /** MultiConfidenceMetrics auprc. */
+                        public auprc: number;
+
+                        /** MultiConfidenceMetrics estimatedCalibrationError. */
+                        public estimatedCalibrationError: number;
+
+                        /** MultiConfidenceMetrics auprcExact. */
+                        public auprcExact: number;
+
+                        /** MultiConfidenceMetrics estimatedCalibrationErrorExact. */
+                        public estimatedCalibrationErrorExact: number;
+
+                        /** MultiConfidenceMetrics metricsType. */
+                        public metricsType: (google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics.MetricsType|keyof typeof google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics.MetricsType);
+
+                        /**
+                         * Creates a new MultiConfidenceMetrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultiConfidenceMetrics instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics): google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics;
+
+                        /**
+                         * Encodes the specified MultiConfidenceMetrics message. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics.verify|verify} messages.
+                         * @param message MultiConfidenceMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultiConfidenceMetrics message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics.verify|verify} messages.
+                         * @param message MultiConfidenceMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.Evaluation.IMultiConfidenceMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultiConfidenceMetrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultiConfidenceMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics;
+
+                        /**
+                         * Decodes a MultiConfidenceMetrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultiConfidenceMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics;
+
+                        /**
+                         * Verifies a MultiConfidenceMetrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultiConfidenceMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultiConfidenceMetrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics;
+
+                        /**
+                         * Creates a plain object from a MultiConfidenceMetrics message. Also converts values to other types if specified.
+                         * @param message MultiConfidenceMetrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultiConfidenceMetrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultiConfidenceMetrics
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MultiConfidenceMetrics {
+
+                        /** MetricsType enum. */
+                        enum MetricsType {
+                            METRICS_TYPE_UNSPECIFIED = 0,
+                            AGGREGATE = 1
+                        }
+                    }
+                }
+
                 /** Properties of a CommonOperationMetadata. */
                 interface ICommonOperationMetadata {
 
@@ -10887,6 +12897,9 @@ export namespace google {
                     /** ProcessorVersion createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
+                    /** ProcessorVersion latestEvaluation */
+                    latestEvaluation?: (google.cloud.documentai.v1.IEvaluationReference|null);
+
                     /** ProcessorVersion kmsKeyName */
                     kmsKeyName?: (string|null);
 
@@ -10923,6 +12936,9 @@ export namespace google {
 
                     /** ProcessorVersion createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProcessorVersion latestEvaluation. */
+                    public latestEvaluation?: (google.cloud.documentai.v1.IEvaluationReference|null);
 
                     /** ProcessorVersion kmsKeyName. */
                     public kmsKeyName: string;
