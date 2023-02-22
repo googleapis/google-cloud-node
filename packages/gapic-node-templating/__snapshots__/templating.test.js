@@ -27,14 +27,15 @@ exports['tests for templates it should create the templates in the directory 2']
   "product_documentation": "https://cloud.google.com/kms",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "beta",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/kms",
   "api_id": "kms.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
-  "library_type": "GAPIC_AUTO"
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "kms"
 }
 
 
