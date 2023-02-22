@@ -96,7 +96,8 @@ npm install @google-cloud/advisorynotifications
 // const languageCode = 'abc123'
 
 // Imports the Advisorynotifications library
-const {AdvisoryNotificationsServiceClient} = require('@google-cloud/advisorynotifications').v1;
+const {AdvisoryNotificationsServiceClient} =
+  require('@google-cloud/advisorynotifications').v1;
 
 // Instantiates a client
 const advisorynotificationsClient = new AdvisoryNotificationsServiceClient();
@@ -108,9 +109,11 @@ async function callListNotifications() {
   };
 
   // Run request
-  const iterable = await advisorynotificationsClient.listNotificationsAsync(request);
+  const iterable = await advisorynotificationsClient.listNotificationsAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
