@@ -37147,6 +37147,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 7:
                                     case 3:
                                     case 4:
                                     case 5:
@@ -37200,6 +37201,10 @@
                                 case "REMOVE":
                                 case 2:
                                     message.type = 2;
+                                    break;
+                                case "UPDATE":
+                                case 7:
+                                    message.type = 7;
                                     break;
                                 case "REPLACE":
                                 case 3:
@@ -37538,6 +37543,7 @@
                              * @property {number} OPERATION_TYPE_UNSPECIFIED=0 OPERATION_TYPE_UNSPECIFIED value
                              * @property {number} ADD=1 ADD value
                              * @property {number} REMOVE=2 REMOVE value
+                             * @property {number} UPDATE=7 UPDATE value
                              * @property {number} REPLACE=3 REPLACE value
                              * @property {number} EVAL_REQUESTED=4 EVAL_REQUESTED value
                              * @property {number} EVAL_APPROVED=5 EVAL_APPROVED value
@@ -37548,6 +37554,7 @@
                                 values[valuesById[0] = "OPERATION_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "ADD"] = 1;
                                 values[valuesById[2] = "REMOVE"] = 2;
+                                values[valuesById[7] = "UPDATE"] = 7;
                                 values[valuesById[3] = "REPLACE"] = 3;
                                 values[valuesById[4] = "EVAL_REQUESTED"] = 4;
                                 values[valuesById[5] = "EVAL_APPROVED"] = 5;
