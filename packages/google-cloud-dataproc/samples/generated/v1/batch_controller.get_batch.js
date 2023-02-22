@@ -29,7 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the batch to retrieve.
+   *  Required. The fully qualified name of the batch to retrieve
+   *  in the format
+   *  "projects/PROJECT_ID/locations/DATAPROC_REGION/batches/BATCH_ID"
    */
   // const name = 'abc123'
 
