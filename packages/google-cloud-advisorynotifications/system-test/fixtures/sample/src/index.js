@@ -16,17 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AdvisoryNotificationsServiceClient} from '@google-cloud/advisorynotifications';
-
-// check that the client class type name can be used
-function doStuffWithAdvisoryNotificationsServiceClient(client: AdvisoryNotificationsServiceClient) {
-  client.close();
-}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const advisorynotifications = require('@google-cloud/advisorynotifications');
 
 function main() {
-  // check that the client instance can be created
-  const advisoryNotificationsServiceClient = new AdvisoryNotificationsServiceClient();
-  doStuffWithAdvisoryNotificationsServiceClient(advisoryNotificationsServiceClient);
+  const advisoryNotificationsServiceClient =
+    new advisorynotifications.AdvisoryNotificationsServiceClient();
 }
 
 main();

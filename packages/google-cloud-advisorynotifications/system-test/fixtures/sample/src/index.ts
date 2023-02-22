@@ -16,18 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-const config = {
-  "enable-source-maps": true,
-  "throw-deprecation": true,
-  "timeout": 10000
+import {AdvisoryNotificationsServiceClient} from '@google-cloud/advisorynotifications';
+
+// check that the client class type name can be used
+function doStuffWithAdvisoryNotificationsServiceClient(
+  client: AdvisoryNotificationsServiceClient
+) {
+  client.close();
 }
-if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
-  delete config['throw-deprecation'];
+
+function main() {
+  // check that the client instance can be created
+  const advisoryNotificationsServiceClient =
+    new AdvisoryNotificationsServiceClient();
+  doStuffWithAdvisoryNotificationsServiceClient(
+    advisoryNotificationsServiceClient
+  );
 }
-if (process.env.MOCHA_REPORTER) {
-  config.reporter = process.env.MOCHA_REPORTER;
-}
-if (process.env.MOCHA_REPORTER_OUTPUT) {
-  config['reporter-option'] = `output=${process.env.MOCHA_REPORTER_OUTPUT}`;
-}
-module.exports = config
+
+main();

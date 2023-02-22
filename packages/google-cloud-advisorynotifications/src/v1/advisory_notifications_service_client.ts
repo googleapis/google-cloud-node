@@ -18,7 +18,14 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -95,14 +102,23 @@ export class AdvisoryNotificationsServiceClient {
    *     const client = new AdvisoryNotificationsServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof AdvisoryNotificationsServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const staticMembers = this
+      .constructor as typeof AdvisoryNotificationsServiceClient;
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -128,7 +144,7 @@ export class AdvisoryNotificationsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -142,10 +158,7 @@ export class AdvisoryNotificationsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -153,7 +166,7 @@ export class AdvisoryNotificationsServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -181,14 +194,20 @@ export class AdvisoryNotificationsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listNotifications:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'notifications')
+      listNotifications: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'notifications'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.advisorynotifications.v1.AdvisoryNotificationsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.advisorynotifications.v1.AdvisoryNotificationsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -219,32 +238,39 @@ export class AdvisoryNotificationsServiceClient {
     // Put together the "service stub" for
     // google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.
     this.advisoryNotificationsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.advisorynotifications.v1.AdvisoryNotificationsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.advisorynotifications.v1.AdvisoryNotificationsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.advisorynotifications.v1.AdvisoryNotificationsService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.advisorynotifications.v1
+            .AdvisoryNotificationsService,
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const advisoryNotificationsServiceStubMethods =
-        ['listNotifications', 'getNotification'];
+    const advisoryNotificationsServiceStubMethods = [
+      'listNotifications',
+      'getNotification',
+    ];
     for (const methodName of advisoryNotificationsServiceStubMethods) {
       const callPromise = this.advisoryNotificationsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -289,9 +315,7 @@ export class AdvisoryNotificationsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -300,8 +324,9 @@ export class AdvisoryNotificationsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -312,232 +337,275 @@ export class AdvisoryNotificationsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a notification.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the notification to retrieve.
- *   Format:
- *   organizations/{organization}/locations/{location}/notifications/{notification}.
- * @param {string} request.languageCode
- *   ISO code for requested localization language. If unset, will be
- *   interpereted as "en". If the requested language is valid, but not supported
- *   for this notification, English will be returned with an "Not applicable"
- *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
- *   this RPC will throw an error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.advisorynotifications.v1.Notification | Notification}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/advisory_notifications_service.get_notification.js</caption>
- * region_tag:advisorynotifications_v1_generated_AdvisoryNotificationsService_GetNotification_async
- */
+  /**
+   * Gets a notification.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the notification to retrieve.
+   *   Format:
+   *   organizations/{organization}/locations/{location}/notifications/{notification}.
+   * @param {string} request.languageCode
+   *   ISO code for requested localization language. If unset, will be
+   *   interpereted as "en". If the requested language is valid, but not supported
+   *   for this notification, English will be returned with an "Not applicable"
+   *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
+   *   this RPC will throw an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.advisorynotifications.v1.Notification | Notification}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/advisory_notifications_service.get_notification.js</caption>
+   * region_tag:advisorynotifications_v1_generated_AdvisoryNotificationsService_GetNotification_async
+   */
   getNotification(
-      request?: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.advisorynotifications.v1.INotification,
-        protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.INotification,
+      (
+        | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   getNotification(
-      request: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.advisorynotifications.v1.INotification,
-          protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.advisorynotifications.v1.INotification,
+      | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNotification(
-      request: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
-      callback: Callback<
-          protos.google.cloud.advisorynotifications.v1.INotification,
-          protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
+    callback: Callback<
+      protos.google.cloud.advisorynotifications.v1.INotification,
+      | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNotification(
-      request?: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.advisorynotifications.v1.INotification,
-          protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.advisorynotifications.v1.INotification,
-          protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.advisorynotifications.v1.INotification,
-        protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.advisorynotifications.v1.INotification,
+      | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.INotification,
+      (
+        | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.getNotification(request, options, callback);
   }
 
- /**
- * Lists notifications under a given parent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of notifications.
- *   Must be of the form "organizations/{organization}/locations/{location}".
- * @param {number} request.pageSize
- *   The maximum number of notifications to return. The service may return
- *   fewer than this value. If unspecified or equal to 0, at most 50
- *   notifications will be returned. The maximum value is 50; values above 50
- *   will be coerced to 50.
- * @param {string} request.pageToken
- *   A page token returned from a previous request.
- *   When paginating, all other parameters provided in the request
- *   must match the call that returned the page token.
- * @param {google.cloud.advisorynotifications.v1.NotificationView} request.view
- *   Specifies which parts of the notification resource should be returned
- *   in the response.
- * @param {string} request.languageCode
- *   ISO code for requested localization language.  If unset, will be
- *   interpereted as "en". If the requested language is valid, but not supported
- *   for this notification, English will be returned with an "Not applicable"
- *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
- *   this RPC will throw an error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.cloud.advisorynotifications.v1.Notification | Notification}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNotificationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Lists notifications under a given parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of notifications.
+   *   Must be of the form "organizations/{organization}/locations/{location}".
+   * @param {number} request.pageSize
+   *   The maximum number of notifications to return. The service may return
+   *   fewer than this value. If unspecified or equal to 0, at most 50
+   *   notifications will be returned. The maximum value is 50; values above 50
+   *   will be coerced to 50.
+   * @param {string} request.pageToken
+   *   A page token returned from a previous request.
+   *   When paginating, all other parameters provided in the request
+   *   must match the call that returned the page token.
+   * @param {google.cloud.advisorynotifications.v1.NotificationView} request.view
+   *   Specifies which parts of the notification resource should be returned
+   *   in the response.
+   * @param {string} request.languageCode
+   *   ISO code for requested localization language.  If unset, will be
+   *   interpereted as "en". If the requested language is valid, but not supported
+   *   for this notification, English will be returned with an "Not applicable"
+   *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
+   *   this RPC will throw an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.advisorynotifications.v1.Notification | Notification}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNotificationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listNotifications(
-      request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.advisorynotifications.v1.INotification[],
-        protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest|null,
-        protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
-      ]>;
+    request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.INotification[],
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest | null,
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+    ]
+  >;
   listNotifications(
-      request: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse|null|undefined,
-          protos.google.cloud.advisorynotifications.v1.INotification>): void;
+    request: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+      | protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.advisorynotifications.v1.INotification
+    >
+  ): void;
   listNotifications(
-      request: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse|null|undefined,
-          protos.google.cloud.advisorynotifications.v1.INotification>): void;
+    request: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+      | protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.advisorynotifications.v1.INotification
+    >
+  ): void;
   listNotifications(
-      request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse|null|undefined,
-          protos.google.cloud.advisorynotifications.v1.INotification>,
-      callback?: PaginationCallback<
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-          protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse|null|undefined,
-          protos.google.cloud.advisorynotifications.v1.INotification>):
-      Promise<[
-        protos.google.cloud.advisorynotifications.v1.INotification[],
-        protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest|null,
-        protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
-      ]>|void {
+          | protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.advisorynotifications.v1.INotification
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+      | protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.advisorynotifications.v1.INotification
+    >
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.INotification[],
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest | null,
+      protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.listNotifications(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of notifications.
- *   Must be of the form "organizations/{organization}/locations/{location}".
- * @param {number} request.pageSize
- *   The maximum number of notifications to return. The service may return
- *   fewer than this value. If unspecified or equal to 0, at most 50
- *   notifications will be returned. The maximum value is 50; values above 50
- *   will be coerced to 50.
- * @param {string} request.pageToken
- *   A page token returned from a previous request.
- *   When paginating, all other parameters provided in the request
- *   must match the call that returned the page token.
- * @param {google.cloud.advisorynotifications.v1.NotificationView} request.view
- *   Specifies which parts of the notification resource should be returned
- *   in the response.
- * @param {string} request.languageCode
- *   ISO code for requested localization language.  If unset, will be
- *   interpereted as "en". If the requested language is valid, but not supported
- *   for this notification, English will be returned with an "Not applicable"
- *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
- *   this RPC will throw an error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link google.cloud.advisorynotifications.v1.Notification | Notification} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNotificationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of notifications.
+   *   Must be of the form "organizations/{organization}/locations/{location}".
+   * @param {number} request.pageSize
+   *   The maximum number of notifications to return. The service may return
+   *   fewer than this value. If unspecified or equal to 0, at most 50
+   *   notifications will be returned. The maximum value is 50; values above 50
+   *   will be coerced to 50.
+   * @param {string} request.pageToken
+   *   A page token returned from a previous request.
+   *   When paginating, all other parameters provided in the request
+   *   must match the call that returned the page token.
+   * @param {google.cloud.advisorynotifications.v1.NotificationView} request.view
+   *   Specifies which parts of the notification resource should be returned
+   *   in the response.
+   * @param {string} request.languageCode
+   *   ISO code for requested localization language.  If unset, will be
+   *   interpereted as "en". If the requested language is valid, but not supported
+   *   for this notification, English will be returned with an "Not applicable"
+   *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
+   *   this RPC will throw an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.advisorynotifications.v1.Notification | Notification} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNotificationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listNotificationsStream(
-      request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNotifications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -548,59 +616,58 @@ export class AdvisoryNotificationsServiceClient {
     );
   }
 
-/**
- * Equivalent to `listNotifications`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of notifications.
- *   Must be of the form "organizations/{organization}/locations/{location}".
- * @param {number} request.pageSize
- *   The maximum number of notifications to return. The service may return
- *   fewer than this value. If unspecified or equal to 0, at most 50
- *   notifications will be returned. The maximum value is 50; values above 50
- *   will be coerced to 50.
- * @param {string} request.pageToken
- *   A page token returned from a previous request.
- *   When paginating, all other parameters provided in the request
- *   must match the call that returned the page token.
- * @param {google.cloud.advisorynotifications.v1.NotificationView} request.view
- *   Specifies which parts of the notification resource should be returned
- *   in the response.
- * @param {string} request.languageCode
- *   ISO code for requested localization language.  If unset, will be
- *   interpereted as "en". If the requested language is valid, but not supported
- *   for this notification, English will be returned with an "Not applicable"
- *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
- *   this RPC will throw an error.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.cloud.advisorynotifications.v1.Notification | Notification}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/advisory_notifications_service.list_notifications.js</caption>
- * region_tag:advisorynotifications_v1_generated_AdvisoryNotificationsService_ListNotifications_async
- */
+  /**
+   * Equivalent to `listNotifications`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of notifications.
+   *   Must be of the form "organizations/{organization}/locations/{location}".
+   * @param {number} request.pageSize
+   *   The maximum number of notifications to return. The service may return
+   *   fewer than this value. If unspecified or equal to 0, at most 50
+   *   notifications will be returned. The maximum value is 50; values above 50
+   *   will be coerced to 50.
+   * @param {string} request.pageToken
+   *   A page token returned from a previous request.
+   *   When paginating, all other parameters provided in the request
+   *   must match the call that returned the page token.
+   * @param {google.cloud.advisorynotifications.v1.NotificationView} request.view
+   *   Specifies which parts of the notification resource should be returned
+   *   in the response.
+   * @param {string} request.languageCode
+   *   ISO code for requested localization language.  If unset, will be
+   *   interpereted as "en". If the requested language is valid, but not supported
+   *   for this notification, English will be returned with an "Not applicable"
+   *   LocalizationState. If the ISO code is invalid (i.e. not a real language),
+   *   this RPC will throw an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.advisorynotifications.v1.Notification | Notification}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/advisory_notifications_service.list_notifications.js</caption>
+   * region_tag:advisorynotifications_v1_generated_AdvisoryNotificationsService_ListNotifications_async
+   */
   listNotificationsAsync(
-      request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.advisorynotifications.v1.INotification>{
+    request?: protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.advisorynotifications.v1.INotification> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNotifications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -621,7 +688,7 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(organization:string,location:string) {
+  locationPath(organization: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       organization: organization,
       location: location,
@@ -636,7 +703,8 @@ export class AdvisoryNotificationsServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).organization;
+    return this.pathTemplates.locationPathTemplate.match(locationName)
+      .organization;
   }
 
   /**
@@ -658,7 +726,11 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} notification
    * @returns {string} Resource name string.
    */
-  notificationPath(organization:string,location:string,notification:string) {
+  notificationPath(
+    organization: string,
+    location: string,
+    notification: string
+  ) {
     return this.pathTemplates.notificationPathTemplate.render({
       organization: organization,
       location: location,
@@ -674,7 +746,8 @@ export class AdvisoryNotificationsServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromNotificationName(notificationName: string) {
-    return this.pathTemplates.notificationPathTemplate.match(notificationName).organization;
+    return this.pathTemplates.notificationPathTemplate.match(notificationName)
+      .organization;
   }
 
   /**
@@ -685,7 +758,8 @@ export class AdvisoryNotificationsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotificationName(notificationName: string) {
-    return this.pathTemplates.notificationPathTemplate.match(notificationName).location;
+    return this.pathTemplates.notificationPathTemplate.match(notificationName)
+      .location;
   }
 
   /**
@@ -696,7 +770,8 @@ export class AdvisoryNotificationsServiceClient {
    * @returns {string} A string representing the notification.
    */
   matchNotificationFromNotificationName(notificationName: string) {
-    return this.pathTemplates.notificationPathTemplate.match(notificationName).notification;
+    return this.pathTemplates.notificationPathTemplate.match(notificationName)
+      .notification;
   }
 
   /**
@@ -705,7 +780,7 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization:string) {
+  organizationPath(organization: string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -719,7 +794,8 @@ export class AdvisoryNotificationsServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
