@@ -454,20 +454,19 @@ export class TranslationServiceClient {
    *   The request object that will be sent.
    * @param {string[]} request.contents
    *   Required. The content of the input in string format.
-   *   We recommend the total content be less than 30k codepoints. The max length
-   *   of this field is 1024.
-   *   Use BatchTranslateText for larger text.
+   *   We recommend the total content be less than 30,000 codepoints. The max
+   *   length of this field is 1024. Use BatchTranslateText for larger text.
    * @param {string} [request.mimeType]
    *   Optional. The format of the source text, for example, "text/html",
    *    "text/plain". If left blank, the MIME type defaults to "text/html".
    * @param {string} [request.sourceLanguageCode]
-   *   Optional. The BCP-47 language code of the input text if
+   *   Optional. The ISO-639 language code of the input text if
    *   known, for example, "en-US" or "sr-Latn". Supported language codes are
    *   listed in Language Support. If the source language isn't specified, the API
    *   attempts to identify the source language automatically and returns the
    *   source language within the response.
    * @param {string} request.targetLanguageCode
-   *   Required. The BCP-47 language code to use for translation of the input
+   *   Required. The ISO-639 language code to use for translation of the input
    *   text, set to one of the language codes listed in Language Support.
    * @param {string} request.parent
    *   Required. Project or location to make a call. Must refer to a caller's
@@ -871,14 +870,14 @@ export class TranslationServiceClient {
    *   Models and glossaries must be within the same region (have the same
    *   location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.sourceLanguageCode]
-   *   Optional. The BCP-47 language code of the input document if known, for
+   *   Optional. The ISO-639 language code of the input document if known, for
    *   example, "en-US" or "sr-Latn". Supported language codes are listed in
    *   Language Support. If the source language isn't specified, the API attempts
    *   to identify the source language automatically and returns the source
    *   language within the response. Source language must be specified if the
    *   request contains a glossary or a custom model.
    * @param {string} request.targetLanguageCode
-   *   Required. The BCP-47 language code to use for translation of the input
+   *   Required. The ISO-639 language code to use for translation of the input
    *   document, set to one of the language codes listed in Language Support.
    * @param {google.cloud.translation.v3.DocumentInputConfig} request.documentInputConfig
    *   Required. Input configurations.
@@ -916,6 +915,19 @@ export class TranslationServiceClient {
    *
    *   See https://cloud.google.com/translate/docs/advanced/labels for more
    *   information.
+   * @param {string} [request.customizedAttribution]
+   *   Optional. This flag is to support user customized attribution.
+   *   If not provided, the default is `Machine Translated by Google`.
+   *   Customized attribution should follow rules in
+   *   https://cloud.google.com/translate/attribution#attribution_and_logos
+   * @param {boolean} [request.isTranslateNativePdfOnly]
+   *   Optional. If true, the page limit of online native pdf translation is 300
+   *   and only native pdf pages will be translated.
+   * @param {boolean} [request.enableShadowRemovalNativePdf]
+   *   Optional. If true, use the text removal to remove the shadow text on
+   *   background image for native pdf translation.
+   *   Shadow removal feature can only be enabled when
+   *   is_translate_native_pdf_only is false
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1303,11 +1315,11 @@ export class TranslationServiceClient {
    *   the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
    *   error is returned.
    * @param {string} request.sourceLanguageCode
-   *   Required. The BCP-47 language code of the input document if known, for
+   *   Required. The ISO-639 language code of the input document if known, for
    *   example, "en-US" or "sr-Latn". Supported language codes are listed in
-   *   Language Support (https://cloud.google.com/translate/docs/languages).
+   *   [Language Support](https://cloud.google.com/translate/docs/languages).
    * @param {string[]} request.targetLanguageCodes
-   *   Required. The BCP-47 language code to use for translation of the input
+   *   Required. The ISO-639 language code to use for translation of the input
    *   document. Specify up to 10 language codes here.
    * @param {number[]} request.inputConfigs
    *   Required. Input configurations.
@@ -1347,6 +1359,11 @@ export class TranslationServiceClient {
    *
    *   If nothing specified, output files will be in the same format as the
    *   original file.
+   * @param {string} [request.customizedAttribution]
+   *   Optional. This flag is to support user customized attribution.
+   *   If not provided, the default is `Machine Translated by Google`.
+   *   Customized attribution should follow rules in
+   *   https://cloud.google.com/translate/attribution#attribution_and_logos
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

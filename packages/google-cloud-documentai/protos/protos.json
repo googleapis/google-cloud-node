@@ -884,7 +884,10 @@
                           "fields": {
                             "revision": {
                               "type": "int32",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "id": {
                               "type": "int32",
@@ -924,10 +927,22 @@
                               }
                             },
                             "OperationType": {
+                              "valuesOptions": {
+                                "EVAL_REQUESTED": {
+                                  "deprecated": true
+                                },
+                                "EVAL_APPROVED": {
+                                  "deprecated": true
+                                },
+                                "EVAL_SKIPPED": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "OPERATION_TYPE_UNSPECIFIED": 0,
                                 "ADD": 1,
                                 "REMOVE": 2,
+                                "UPDATE": 7,
                                 "REPLACE": 3,
                                 "EVAL_REQUESTED": 4,
                                 "EVAL_APPROVED": 5,
@@ -1319,6 +1334,34 @@
                             }
                           ]
                         },
+                        "TrainProcessorVersion": {
+                          "requestType": "TrainProcessorVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/processors/*}/processorVersions:train",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,processor_version",
+                            "(google.longrunning.operation_info).response_type": "TrainProcessorVersionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "TrainProcessorVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/processors/*}/processorVersions:train",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,processor_version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "TrainProcessorVersionResponse",
+                                "metadata_type": "TrainProcessorVersionMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetProcessorVersion": {
                           "requestType": "GetProcessorVersionRequest",
                           "responseType": "ProcessorVersion",
@@ -1580,6 +1623,70 @@
                                 "response_type": "ReviewDocumentResponse",
                                 "metadata_type": "ReviewDocumentOperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "EvaluateProcessorVersion": {
+                          "requestType": "EvaluateProcessorVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{processor_version=projects/*/locations/*/processors/*/processorVersions/*}:evaluateProcessorVersion",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "processor_version",
+                            "(google.longrunning.operation_info).response_type": "EvaluateProcessorVersionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "EvaluateProcessorVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{processor_version=projects/*/locations/*/processors/*/processorVersions/*}:evaluateProcessorVersion",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "processor_version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "EvaluateProcessorVersionResponse",
+                                "metadata_type": "EvaluateProcessorVersionMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetEvaluation": {
+                          "requestType": "GetEvaluationRequest",
+                          "responseType": "Evaluation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*/evaluations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*/evaluations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListEvaluations": {
+                          "requestType": "ListEvaluationsRequest",
+                          "responseType": "ListEvaluationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/processors/*/processorVersions/*}/evaluations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/processors/*/processorVersions/*}/evaluations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -2083,6 +2190,108 @@
                         }
                       }
                     },
+                    "TrainProcessorVersionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                          }
+                        },
+                        "processorVersion": {
+                          "type": "ProcessorVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "documentSchema": {
+                          "type": "DocumentSchema",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inputData": {
+                          "type": "InputData",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "baseProcessorVersion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InputData": {
+                          "fields": {
+                            "trainingDocuments": {
+                              "type": "BatchDocumentsInputConfig",
+                              "id": 3
+                            },
+                            "testDocuments": {
+                              "type": "BatchDocumentsInputConfig",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TrainProcessorVersionResponse": {
+                      "fields": {
+                        "processorVersion": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TrainProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        },
+                        "trainingDatasetValidation": {
+                          "type": "DatasetValidation",
+                          "id": 2
+                        },
+                        "testDatasetValidation": {
+                          "type": "DatasetValidation",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "DatasetValidation": {
+                          "fields": {
+                            "documentErrorCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "datasetErrorCount": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "documentErrors": {
+                              "rule": "repeated",
+                              "type": "google.rpc.Status",
+                              "id": 1
+                            },
+                            "datasetErrors": {
+                              "rule": "repeated",
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "ReviewDocumentRequest": {
                       "oneofs": {
                         "source": {
@@ -2160,6 +2369,86 @@
                         "questionId": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "EvaluateProcessorVersionRequest": {
+                      "fields": {
+                        "processorVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        },
+                        "evaluationDocuments": {
+                          "type": "BatchDocumentsInputConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EvaluateProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "EvaluateProcessorVersionResponse": {
+                      "fields": {
+                        "evaluation": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEvaluationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Evaluation"
+                          }
+                        }
+                      }
+                    },
+                    "ListEvaluationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEvaluationsResponse": {
+                      "fields": {
+                        "evaluations": {
+                          "rule": "repeated",
+                          "type": "Evaluation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -2277,6 +2566,190 @@
                         }
                       }
                     },
+                    "EvaluationReference": {
+                      "fields": {
+                        "operation": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "evaluation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Evaluation"
+                          }
+                        },
+                        "aggregateMetrics": {
+                          "type": "Evaluation.Metrics",
+                          "id": 4
+                        },
+                        "aggregateMetricsExact": {
+                          "type": "Evaluation.Metrics",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "Evaluation": {
+                      "options": {
+                        "(google.api.resource).type": "documentai.googleapis.com/Evaluation",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}/evaluations/{evaluation}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "documentCounters": {
+                          "type": "Counters",
+                          "id": 5
+                        },
+                        "allEntitiesMetrics": {
+                          "type": "MultiConfidenceMetrics",
+                          "id": 3
+                        },
+                        "entityMetrics": {
+                          "keyType": "string",
+                          "type": "MultiConfidenceMetrics",
+                          "id": 4
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "kmsKeyVersionName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "Counters": {
+                          "fields": {
+                            "inputDocumentsCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "invalidDocumentsCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "failedDocumentsCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "evaluatedDocumentsCount": {
+                              "type": "int32",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "Metrics": {
+                          "fields": {
+                            "precision": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "recall": {
+                              "type": "float",
+                              "id": 2
+                            },
+                            "f1Score": {
+                              "type": "float",
+                              "id": 3
+                            },
+                            "predictedOccurrencesCount": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "groundTruthOccurrencesCount": {
+                              "type": "int32",
+                              "id": 5
+                            },
+                            "predictedDocumentCount": {
+                              "type": "int32",
+                              "id": 10
+                            },
+                            "groundTruthDocumentCount": {
+                              "type": "int32",
+                              "id": 11
+                            },
+                            "truePositivesCount": {
+                              "type": "int32",
+                              "id": 6
+                            },
+                            "falsePositivesCount": {
+                              "type": "int32",
+                              "id": 7
+                            },
+                            "falseNegativesCount": {
+                              "type": "int32",
+                              "id": 8
+                            },
+                            "totalDocumentsCount": {
+                              "type": "int32",
+                              "id": 9
+                            }
+                          }
+                        },
+                        "ConfidenceLevelMetrics": {
+                          "fields": {
+                            "confidenceLevel": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "metrics": {
+                              "type": "Metrics",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "MultiConfidenceMetrics": {
+                          "fields": {
+                            "confidenceLevelMetrics": {
+                              "rule": "repeated",
+                              "type": "ConfidenceLevelMetrics",
+                              "id": 1
+                            },
+                            "confidenceLevelMetricsExact": {
+                              "rule": "repeated",
+                              "type": "ConfidenceLevelMetrics",
+                              "id": 4
+                            },
+                            "auprc": {
+                              "type": "float",
+                              "id": 2
+                            },
+                            "estimatedCalibrationError": {
+                              "type": "float",
+                              "id": 3
+                            },
+                            "auprcExact": {
+                              "type": "float",
+                              "id": 5
+                            },
+                            "estimatedCalibrationErrorExact": {
+                              "type": "float",
+                              "id": 6
+                            },
+                            "metricsType": {
+                              "type": "MetricsType",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "MetricsType": {
+                              "values": {
+                                "METRICS_TYPE_UNSPECIFIED": 0,
+                                "AGGREGATE": 1
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "CommonOperationMetadata": {
                       "fields": {
                         "state": {
@@ -2338,6 +2811,10 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7
+                        },
+                        "latestEvaluation": {
+                          "type": "EvaluationReference",
+                          "id": 8
                         },
                         "kmsKeyName": {
                           "type": "string",

@@ -40,7 +40,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The BCP-47 language code of the input document if known, for
+   *  Optional. The ISO-639 language code of the input document if known, for
    *  example, "en-US" or "sr-Latn". Supported language codes are listed in
    *  Language Support. If the source language isn't specified, the API attempts
    *  to identify the source language automatically and returns the source
@@ -49,7 +49,7 @@ function main(parent, targetLanguageCode, documentInputConfig) {
    */
   // const sourceLanguageCode = 'abc123'
   /**
-   *  Required. The BCP-47 language code to use for translation of the input
+   *  Required. The ISO-639 language code to use for translation of the input
    *  document, set to one of the language codes listed in Language Support.
    */
   // const targetLanguageCode = 'abc123'
@@ -92,6 +92,25 @@ function main(parent, targetLanguageCode, documentInputConfig) {
    *  information.
    */
   // const labels = 1234
+  /**
+   *  Optional. This flag is to support user customized attribution.
+   *  If not provided, the default is `Machine Translated by Google`.
+   *  Customized attribution should follow rules in
+   *  https://cloud.google.com/translate/attribution#attribution_and_logos
+   */
+  // const customizedAttribution = 'abc123'
+  /**
+   *  Optional. If true, the page limit of online native pdf translation is 300
+   *  and only native pdf pages will be translated.
+   */
+  // const isTranslateNativePdfOnly = true
+  /**
+   *  Optional. If true, use the text removal to remove the shadow text on
+   *  background image for native pdf translation.
+   *  Shadow removal feature can only be enabled when
+   *  is_translate_native_pdf_only is false
+   */
+  // const enableShadowRemovalNativePdf = true
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;
