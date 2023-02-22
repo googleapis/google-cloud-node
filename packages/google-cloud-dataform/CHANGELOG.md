@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/nodejs-dataform/compare/v0.3.0...v0.4.0) (2023-02-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* change default version to v1beta1
+
+### Features
+
+* Change default version to v1beta1 ([34c9527](https://github.com/googleapis/nodejs-dataform/commit/34c9527e36d1e148480f33942a5d7745e320ecca))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-dataform/compare/v0.2.0...v0.3.0) (2023-02-09)
 
 
