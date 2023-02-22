@@ -251,8 +251,8 @@ export class ClusterManagerClient {
       'getOperation',
       'cancelOperation',
       'getServerConfig',
-      'listNodePools',
       'getJsonWebKeys',
+      'listNodePools',
       'getNodePool',
       'createNodePool',
       'deleteNodePool',
@@ -2263,6 +2263,95 @@ export class ClusterManagerClient {
     return this.innerApiCalls.getServerConfig(request, options, callback);
   }
   /**
+   * Gets the public component of the cluster signing keys in
+   * JSON Web Key format.
+   * This API is not yet intended for general use, and is not available for all
+   * clusters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The cluster (project, location, cluster name) to get keys for. Specified in
+   *   the format `projects/* /locations/* /clusters/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.container.v1beta1.GetJSONWebKeysResponse | GetJSONWebKeysResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_j_s_o_n_web_keys.js</caption>
+   * region_tag:container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async
+   */
+  getJSONWebKeys(
+    request?: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+      protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getJSONWebKeys(
+    request: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+      protos.google.container.v1beta1.IGetJSONWebKeysRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getJSONWebKeys(
+    request: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
+    callback: Callback<
+      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+      protos.google.container.v1beta1.IGetJSONWebKeysRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getJSONWebKeys(
+    request?: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+          | protos.google.container.v1beta1.IGetJSONWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+      protos.google.container.v1beta1.IGetJSONWebKeysRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+      protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getJsonWebKeys(request, options, callback);
+  }
+  /**
    * Lists the node pools for a cluster.
    *
    * @param {Object} request
@@ -2362,95 +2451,6 @@ export class ClusterManagerClient {
       });
     this.initialize();
     return this.innerApiCalls.listNodePools(request, options, callback);
-  }
-  /**
-   * Gets the public component of the cluster signing keys in
-   * JSON Web Key format.
-   * This API is not yet intended for general use, and is not available for all
-   * clusters.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The cluster (project, location, cluster name) to get keys for. Specified in
-   *   the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.GetJSONWebKeysResponse | GetJSONWebKeysResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_j_s_o_n_web_keys.js</caption>
-   * region_tag:container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async
-   */
-  getJSONWebKeys(
-    request?: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
-      protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getJSONWebKeys(
-    request: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
-      protos.google.container.v1beta1.IGetJSONWebKeysRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJSONWebKeys(
-    request: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
-    callback: Callback<
-      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
-      protos.google.container.v1beta1.IGetJSONWebKeysRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getJSONWebKeys(
-    request?: protos.google.container.v1beta1.IGetJSONWebKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.container.v1beta1.IGetJSONWebKeysResponse,
-          | protos.google.container.v1beta1.IGetJSONWebKeysRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
-      protos.google.container.v1beta1.IGetJSONWebKeysRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.container.v1beta1.IGetJSONWebKeysResponse,
-      protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getJsonWebKeys(request, options, callback);
   }
   /**
    * Retrieves the requested node pool.

@@ -19073,20 +19073,6 @@ export namespace google {
                 public getServerConfig(request: google.container.v1beta1.IGetServerConfigRequest): Promise<google.container.v1beta1.ServerConfig>;
 
                 /**
-                 * Calls ListNodePools.
-                 * @param request ListNodePoolsRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and ListNodePoolsResponse
-                 */
-                public listNodePools(request: google.container.v1beta1.IListNodePoolsRequest, callback: google.container.v1beta1.ClusterManager.ListNodePoolsCallback): void;
-
-                /**
-                 * Calls ListNodePools.
-                 * @param request ListNodePoolsRequest message or plain object
-                 * @returns Promise
-                 */
-                public listNodePools(request: google.container.v1beta1.IListNodePoolsRequest): Promise<google.container.v1beta1.ListNodePoolsResponse>;
-
-                /**
                  * Calls GetJSONWebKeys.
                  * @param request GetJSONWebKeysRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and GetJSONWebKeysResponse
@@ -19099,6 +19085,20 @@ export namespace google {
                  * @returns Promise
                  */
                 public getJSONWebKeys(request: google.container.v1beta1.IGetJSONWebKeysRequest): Promise<google.container.v1beta1.GetJSONWebKeysResponse>;
+
+                /**
+                 * Calls ListNodePools.
+                 * @param request ListNodePoolsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListNodePoolsResponse
+                 */
+                public listNodePools(request: google.container.v1beta1.IListNodePoolsRequest, callback: google.container.v1beta1.ClusterManager.ListNodePoolsCallback): void;
+
+                /**
+                 * Calls ListNodePools.
+                 * @param request ListNodePoolsRequest message or plain object
+                 * @returns Promise
+                 */
+                public listNodePools(request: google.container.v1beta1.IListNodePoolsRequest): Promise<google.container.v1beta1.ListNodePoolsResponse>;
 
                 /**
                  * Calls GetNodePool.
@@ -19433,18 +19433,18 @@ export namespace google {
                 type GetServerConfigCallback = (error: (Error|null), response?: google.container.v1beta1.ServerConfig) => void;
 
                 /**
-                 * Callback as used by {@link google.container.v1beta1.ClusterManager|listNodePools}.
-                 * @param error Error, if any
-                 * @param [response] ListNodePoolsResponse
-                 */
-                type ListNodePoolsCallback = (error: (Error|null), response?: google.container.v1beta1.ListNodePoolsResponse) => void;
-
-                /**
                  * Callback as used by {@link google.container.v1beta1.ClusterManager|getJSONWebKeys}.
                  * @param error Error, if any
                  * @param [response] GetJSONWebKeysResponse
                  */
                 type GetJSONWebKeysCallback = (error: (Error|null), response?: google.container.v1beta1.GetJSONWebKeysResponse) => void;
+
+                /**
+                 * Callback as used by {@link google.container.v1beta1.ClusterManager|listNodePools}.
+                 * @param error Error, if any
+                 * @param [response] ListNodePoolsResponse
+                 */
+                type ListNodePoolsCallback = (error: (Error|null), response?: google.container.v1beta1.ListNodePoolsResponse) => void;
 
                 /**
                  * Callback as used by {@link google.container.v1beta1.ClusterManager|getNodePool}.

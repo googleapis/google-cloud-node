@@ -15193,6 +15193,7 @@ export namespace google {
                             OPERATION_TYPE_UNSPECIFIED = 0,
                             ADD = 1,
                             REMOVE = 2,
+                            UPDATE = 7,
                             REPLACE = 3,
                             EVAL_REQUESTED = 4,
                             EVAL_APPROVED = 5,

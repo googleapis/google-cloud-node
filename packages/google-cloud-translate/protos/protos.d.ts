@@ -2009,6 +2009,15 @@ export namespace google {
 
                     /** TranslateDocumentRequest labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** TranslateDocumentRequest customizedAttribution */
+                    customizedAttribution?: (string|null);
+
+                    /** TranslateDocumentRequest isTranslateNativePdfOnly */
+                    isTranslateNativePdfOnly?: (boolean|null);
+
+                    /** TranslateDocumentRequest enableShadowRemovalNativePdf */
+                    enableShadowRemovalNativePdf?: (boolean|null);
                 }
 
                 /** Represents a TranslateDocumentRequest. */
@@ -2043,6 +2052,15 @@ export namespace google {
 
                     /** TranslateDocumentRequest labels. */
                     public labels: { [k: string]: string };
+
+                    /** TranslateDocumentRequest customizedAttribution. */
+                    public customizedAttribution: string;
+
+                    /** TranslateDocumentRequest isTranslateNativePdfOnly. */
+                    public isTranslateNativePdfOnly: boolean;
+
+                    /** TranslateDocumentRequest enableShadowRemovalNativePdf. */
+                    public enableShadowRemovalNativePdf: boolean;
 
                     /**
                      * Creates a new TranslateDocumentRequest instance using the specified properties.
@@ -2863,6 +2881,9 @@ export namespace google {
 
                     /** Glossary endTime */
                     endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Glossary displayName */
+                    displayName?: (string|null);
                 }
 
                 /** Represents a Glossary. */
@@ -2894,6 +2915,9 @@ export namespace google {
 
                     /** Glossary endTime. */
                     public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Glossary displayName. */
+                    public displayName: string;
 
                     /** Glossary languages. */
                     public languages?: ("languagePair"|"languageCodesSet");
@@ -4073,6 +4097,9 @@ export namespace google {
 
                     /** BatchTranslateDocumentRequest formatConversions */
                     formatConversions?: ({ [k: string]: string }|null);
+
+                    /** BatchTranslateDocumentRequest customizedAttribution */
+                    customizedAttribution?: (string|null);
                 }
 
                 /** Represents a BatchTranslateDocumentRequest. */
@@ -4107,6 +4134,9 @@ export namespace google {
 
                     /** BatchTranslateDocumentRequest formatConversions. */
                     public formatConversions: { [k: string]: string };
+
+                    /** BatchTranslateDocumentRequest customizedAttribution. */
+                    public customizedAttribution: string;
 
                     /**
                      * Creates a new BatchTranslateDocumentRequest instance using the specified properties.

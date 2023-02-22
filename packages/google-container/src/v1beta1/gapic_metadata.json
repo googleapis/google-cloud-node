@@ -95,14 +95,14 @@
                 "getServerConfig"
               ]
             },
-            "ListNodePools": {
-              "methods": [
-                "listNodePools"
-              ]
-            },
             "GetJSONWebKeys": {
               "methods": [
                 "getJSONWebKeys"
+              ]
+            },
+            "ListNodePools": {
+              "methods": [
+                "listNodePools"
               ]
             },
             "GetNodePool": {
@@ -272,14 +272,14 @@
                 "getServerConfig"
               ]
             },
-            "ListNodePools": {
-              "methods": [
-                "listNodePools"
-              ]
-            },
             "GetJSONWebKeys": {
               "methods": [
                 "getJSONWebKeys"
+              ]
+            },
+            "ListNodePools": {
+              "methods": [
+                "listNodePools"
               ]
             },
             "GetNodePool": {
