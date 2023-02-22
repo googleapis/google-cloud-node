@@ -19,8 +19,8 @@
 import * as v1alpha2 from './v1alpha2';
 import * as v1beta1 from './v1beta1';
 
-const DataformClient = v1alpha2.DataformClient;
-type DataformClient = v1alpha2.DataformClient;
+const DataformClient = v1beta1.DataformClient;
+type DataformClient = v1beta1.DataformClient;
 
 export {v1alpha2, v1beta1, DataformClient};
 export default {v1alpha2, v1beta1, DataformClient};

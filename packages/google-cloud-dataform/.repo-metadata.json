@@ -9,6 +9,6 @@
 	"repo": "googleapis/nodejs-dataform",
 	"distribution_name": "@google-cloud/dataform",
 	"api_id": "dataform.googleapis.com",
-	"default_version": "v1alpha2",
+	"default_version": "v1beta1",
 	"requires_billing": true
   }
