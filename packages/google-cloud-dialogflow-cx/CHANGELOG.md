@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.2.1...dialogflow-cx-v3.3.0) (2023-02-23)
+
+
+### Features
+
+* [dialogflow-cx] added gcs.proto. added support for GcsDestination and TextToSpeechSettings ([#3998](https://github.com/googleapis/google-cloud-node/issues/3998)) ([f98ece2](https://github.com/googleapis/google-cloud-node/commit/f98ece2ab73b44cdab04892f9b0e81ef18995390))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.2.0...dialogflow-cx-v3.2.1) (2023-02-15)
 
 

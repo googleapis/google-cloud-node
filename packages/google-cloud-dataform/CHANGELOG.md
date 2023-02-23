@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v0.4.0...dataform-v1.0.0) (2023-02-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* change default version to v1beta1 ([#36](https://github.com/googleapis/google-cloud-node/issues/36))
+
+### Features
+
+* Added Snooze API support ([eaf6c34](https://github.com/googleapis/google-cloud-node/commit/eaf6c343c401a132efc89fe21ec61664ae04fb8b))
+* Change default version to v1beta1 ([#36](https://github.com/googleapis/google-cloud-node/issues/36)) ([0bc0e90](https://github.com/googleapis/google-cloud-node/commit/0bc0e904fa8890c60e61176f7e48fcbb58def595))
+
 ## [0.4.0](https://github.com/googleapis/nodejs-dataform/compare/v0.3.0...v0.4.0) (2023-02-22)
 
 
