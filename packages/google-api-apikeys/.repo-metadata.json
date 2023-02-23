@@ -1,10 +1,11 @@
 {
+  "api_shortname": "apikeys",
   "name": "apikeys",
   "name_pretty": "API Keys API",
   "product_documentation": "cloud.google.com/api-keys/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apikeys/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "beta",
+  "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/apikeys",

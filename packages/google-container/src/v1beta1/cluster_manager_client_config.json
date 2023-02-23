@@ -105,13 +105,13 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "GetJSONWebKeys": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListNodePools": {
           "timeout_millis": 20000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "GetJSONWebKeys": {
-          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetNodePool": {
