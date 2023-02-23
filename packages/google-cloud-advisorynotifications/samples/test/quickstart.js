@@ -35,7 +35,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js organizations/google.com/locations/us-central1`,
+      'node ./quickstart.js organizations/google.com/locations/us-central1',
       {cwd}
     );
     assert(output !== null);
