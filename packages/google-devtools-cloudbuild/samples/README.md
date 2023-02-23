@@ -63,7 +63,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_build.approve_build
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.approve_build.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.approve_build.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.approve_build.js,samples/README.md)
 
@@ -80,7 +80,7 @@ __Usage:__
 
 ### Cloud_build.cancel_build
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.cancel_build.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.cancel_build.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.cancel_build.js,samples/README.md)
 
@@ -97,7 +97,7 @@ __Usage:__
 
 ### Cloud_build.create_build
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_build.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_build.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_build.js,samples/README.md)
 
@@ -114,7 +114,7 @@ __Usage:__
 
 ### Cloud_build.create_build_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_build_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_build_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_build_trigger.js,samples/README.md)
 
@@ -131,7 +131,7 @@ __Usage:__
 
 ### Cloud_build.create_worker_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_worker_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_worker_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.create_worker_pool.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Cloud_build.delete_build_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_build_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_build_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_build_trigger.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Cloud_build.delete_worker_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_worker_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_worker_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.delete_worker_pool.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Cloud_build.get_build
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Cloud_build.get_build_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_build_trigger.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Cloud_build.get_worker_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_worker_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_worker_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.get_worker_pool.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Cloud_build.list_build_triggers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_build_triggers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_build_triggers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_build_triggers.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Cloud_build.list_builds
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_builds.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_builds.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_builds.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Cloud_build.list_worker_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_worker_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_worker_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.list_worker_pools.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Cloud_build.receive_trigger_webhook
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.receive_trigger_webhook.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.receive_trigger_webhook.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.receive_trigger_webhook.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Cloud_build.retry_build
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.retry_build.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.retry_build.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.retry_build.js,samples/README.md)
 
@@ -318,7 +318,7 @@ __Usage:__
 
 ### Cloud_build.run_build_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.run_build_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.run_build_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.run_build_trigger.js,samples/README.md)
 
@@ -335,7 +335,7 @@ __Usage:__
 
 ### Cloud_build.update_build_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_build_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_build_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_build_trigger.js,samples/README.md)
 
@@ -352,7 +352,7 @@ __Usage:__
 
 ### Cloud_build.update_worker_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_worker_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_worker_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_worker_pool.js,samples/README.md)
 
@@ -369,7 +369,7 @@ __Usage:__
 
 ### Repository_manager.batch_create_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.batch_create_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.batch_create_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.batch_create_repositories.js,samples/README.md)
 
@@ -386,7 +386,7 @@ __Usage:__
 
 ### Repository_manager.create_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_connection.js,samples/README.md)
 
@@ -403,7 +403,7 @@ __Usage:__
 
 ### Repository_manager.create_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_repository.js,samples/README.md)
 
@@ -420,7 +420,7 @@ __Usage:__
 
 ### Repository_manager.delete_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.delete_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.delete_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.delete_connection.js,samples/README.md)
 
@@ -437,7 +437,7 @@ __Usage:__
 
 ### Repository_manager.delete_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.delete_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.delete_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.delete_repository.js,samples/README.md)
 
@@ -454,7 +454,7 @@ __Usage:__
 
 ### Repository_manager.fetch_linkable_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_linkable_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_linkable_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_linkable_repositories.js,samples/README.md)
 
@@ -471,7 +471,7 @@ __Usage:__
 
 ### Repository_manager.fetch_read_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_read_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_read_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_read_token.js,samples/README.md)
 
@@ -488,7 +488,7 @@ __Usage:__
 
 ### Repository_manager.fetch_read_write_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_read_write_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_read_write_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.fetch_read_write_token.js,samples/README.md)
 
@@ -505,7 +505,7 @@ __Usage:__
 
 ### Repository_manager.get_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.get_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.get_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.get_connection.js,samples/README.md)
 
@@ -522,7 +522,7 @@ __Usage:__
 
 ### Repository_manager.get_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.get_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.get_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.get_repository.js,samples/README.md)
 
@@ -539,7 +539,7 @@ __Usage:__
 
 ### Repository_manager.list_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_connections.js,samples/README.md)
 
@@ -556,7 +556,7 @@ __Usage:__
 
 ### Repository_manager.list_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_repositories.js,samples/README.md)
 
@@ -573,7 +573,7 @@ __Usage:__
 
 ### Repository_manager.update_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.update_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.update_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.update_connection.js,samples/README.md)
 
@@ -590,7 +590,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/quickstart.js,samples/README.md)
 
@@ -607,7 +607,7 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-cloudbuild/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/test/quickstart.test.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-cloudbuild/samples/test/quickstart.test.js,samples/README.md)
 
