@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.3.1...contentwarehouse-v0.4.0) (2023-02-22)
+
+
+### Features
+
+* [contentwarehouse] Added Training and Evaluation functions, request, responses and metadata to document_processor_service.proto ([#4009](https://github.com/googleapis/google-cloud-node/issues/4009)) ([904ac0c](https://github.com/googleapis/google-cloud-node/commit/904ac0cadd5b59c75309ac7766dad5da3080d105))
+
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.3.0...contentwarehouse-v0.3.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3986](https://github.com/googleapis/google-cloud-node/issues/3986)) ([20f493c](https://github.com/googleapis/google-cloud-node/commit/20f493c94f7d6626d932b2610e00cbdd5df55f22))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.2.0...contentwarehouse-v0.3.0) (2023-01-28)
 
 

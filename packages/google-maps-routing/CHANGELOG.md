@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/routing-v0.3.0...routing-v0.3.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3991](https://github.com/googleapis/google-cloud-node/issues/3991)) ([c6326d9](https://github.com/googleapis/google-cloud-node/commit/c6326d90abb9b649b25052e4afe7b3eb0f65bcb4))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.2.1...routing-v0.3.0) (2023-01-28)
 
 

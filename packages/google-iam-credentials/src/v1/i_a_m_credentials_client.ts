@@ -350,7 +350,7 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GenerateAccessTokenResponse]{@link google.iam.credentials.v1.GenerateAccessTokenResponse}.
+   *   The first element of the array is an object representing {@link google.iam.credentials.v1.GenerateAccessTokenResponse | GenerateAccessTokenResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -461,7 +461,7 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GenerateIdTokenResponse]{@link google.iam.credentials.v1.GenerateIdTokenResponse}.
+   *   The first element of the array is an object representing {@link google.iam.credentials.v1.GenerateIdTokenResponse | GenerateIdTokenResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -568,7 +568,7 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SignBlobResponse]{@link google.iam.credentials.v1.SignBlobResponse}.
+   *   The first element of the array is an object representing {@link google.iam.credentials.v1.SignBlobResponse | SignBlobResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -667,7 +667,7 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SignJwtResponse]{@link google.iam.credentials.v1.SignJwtResponse}.
+   *   The first element of the array is an object representing {@link google.iam.credentials.v1.SignJwtResponse | SignJwtResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

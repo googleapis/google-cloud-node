@@ -5,6 +5,2273 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b9c09e31a08a43bfa1049465aa7633c73ea91fc0",
+          "message": "[translate] Add supported fields in document translation request and refresh translation v3 GA service proto documentation",
+          "issues": [
+            "4007"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "b1cca3dc-fccb-4290-8bd8-4d9107df8f33",
+      "createTime": "2023-02-22T06:11:36.250Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f81218fe90fb0ead2487c3e321e258edbde74039",
+          "message": "[documentai] Added Training and Evaluation functions, request, responses and metadata to document_processor_service.proto",
+          "issues": [
+            "4008"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "1446e8f8-1d18-49b0-a0c5-1bd1f5b5bb93",
+      "createTime": "2023-02-22T06:11:36.249Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57c0441e11fe7c7f2b185bb8061c8be1a036be11",
+          "message": "[dialogflow] added support for AssistQueryParameters and SynthesizeSpeechConfig",
+          "issues": [
+            "3995"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "e970007f-4f35-4621-8bdf-d0ab72eda267",
+      "createTime": "2023-02-22T06:11:36.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "904ac0cadd5b59c75309ac7766dad5da3080d105",
+          "message": "[contentwarehouse] Added Training and Evaluation functions, request, responses and metadata to document_processor_service.proto",
+          "issues": [
+            "4009"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "093b1f50-c319-4241-a82e-3adf2ed3f1cb",
+      "createTime": "2023-02-22T06:11:36.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e2944f565b39ae151e11f938fb9dcbefd337880e",
+          "message": "Add match service in aiplatform v1beta1 match_service.proto",
+          "issues": [
+            "4002"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "52a207d6-c69c-437c-8b84-cb32466f2142",
+      "createTime": "2023-02-22T06:11:36.245Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "d58639aa-2978-4691-84d5-d6194d8a09bb",
+      "createTime": "2023-02-15T18:51:29.272Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "cdbea5b2-076c-4182-b139-ee6c228bf2b1",
+      "createTime": "2023-02-15T18:51:29.271Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "9c055daa-7a15-4080-9d6b-03c6ce7a167f",
+      "createTime": "2023-02-15T18:51:29.270Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "edd90abf-205f-4652-9e8d-058259388c15",
+      "createTime": "2023-02-15T18:51:29.269Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "5abb1500-1e81-4301-ad6a-69603e9fd198",
+      "createTime": "2023-02-15T18:51:29.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "4.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "79dd491d-126f-43ac-8393-9a268649832a",
+      "createTime": "2023-02-15T18:51:29.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "2.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "8641a9b6-1ab0-4dc9-b3df-9376f316fee5",
+      "createTime": "2023-02-15T18:51:29.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "4d29c5bb-76ef-49b9-aa2d-aa28ed44392c",
+      "createTime": "2023-02-15T18:51:29.265Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c6326d90abb9b649b25052e4afe7b3eb0f65bcb4",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3991"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "bf865773-29de-41c0-ad02-3771de26d222",
+      "createTime": "2023-02-15T18:51:29.264Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "0cbcd406-9050-4750-a968-c34b063b631e",
+      "createTime": "2023-02-15T18:51:29.263Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "89554d6c-343e-4b6d-9d32-a1d63a9e5b51",
+      "createTime": "2023-02-15T18:51:29.262Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "5add1f35-90c2-4942-948c-a051001d6728",
+      "createTime": "2023-02-15T18:51:29.259Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "4.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "9ec487d7-e231-4b63-b707-2bfb78cac404",
+      "createTime": "2023-02-15T18:51:29.258Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "ab80fbb3-aef1-48c5-b5ce-aa0d2def504a",
+      "createTime": "2023-02-15T18:51:29.257Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "258e0607-cad6-45fd-8afd-d5cd6c3dc32e",
+      "createTime": "2023-02-15T18:51:29.256Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "4.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "c96a951a-ebbc-4131-8a57-0e551ff2695b",
+      "createTime": "2023-02-15T18:51:29.255Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "3b0591c2-5bfa-4be0-8bca-a14f4c0fdd01",
+      "createTime": "2023-02-15T18:51:29.254Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "aff15929-19f0-4a4d-b7c5-b699fae77f04",
+      "createTime": "2023-02-15T18:51:29.253Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "9ba2c6d7-2207-49d1-8e23-547170e7fff2",
+      "createTime": "2023-02-15T18:51:29.252Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "f099b778-a7fb-4f08-b2a7-f14a6b8970d5",
+      "createTime": "2023-02-15T18:51:29.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "e197155e-862b-49f0-82a9-7b073591d930",
+      "createTime": "2023-02-15T18:51:29.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "a50f92e9-714d-4ed1-8296-2603b29c7811",
+      "createTime": "2023-02-15T18:51:29.247Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "3.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "4490e710-d562-4f0d-a529-e156108b228d",
+      "createTime": "2023-02-15T18:51:29.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "f689eaf6-b3f2-444c-88a4-390646e9488e",
+      "createTime": "2023-02-15T18:51:29.245Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "fd097e81-c384-48a8-8872-87775ba72c47",
+      "createTime": "2023-02-15T18:51:29.244Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "d347c73b-a34f-4f80-850a-9330ae05712f",
+      "createTime": "2023-02-15T18:51:29.243Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "601acaa7-ee46-43b1-9c6a-988e4bc738c6",
+      "createTime": "2023-02-15T18:51:29.242Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "12de1150-7722-4069-b2ed-751cabd8ec74",
+      "createTime": "2023-02-15T18:51:29.241Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "878c55d62af7e41e8d5050b081e4b79202b1b9cc",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3990"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "2428d585-f0f2-4893-98d4-08cada180d91",
+      "createTime": "2023-02-15T18:51:29.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "4895b531-075a-419a-b966-e350e49785da",
+      "createTime": "2023-02-15T18:51:29.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e20cbe6a-354a-4624-9990-002c62a05412",
+      "createTime": "2023-02-15T18:51:29.236Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "2113faa8-7d32-4b66-beff-8b7cfdf96270",
+      "createTime": "2023-02-15T18:51:29.233Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "850aef1e-5199-4355-8361-6da685b13cc6",
+      "createTime": "2023-02-15T18:51:29.232Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "90b0f4ca-3412-4d3d-8d1b-b96e56fe460b",
+      "createTime": "2023-02-15T18:51:29.231Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "4.0.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "6b660cd8-fe1d-45e3-9376-63b6b22596fc",
+      "createTime": "2023-02-15T18:51:29.230Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "f5629111-3c48-4439-b55c-3355539daa65",
+      "createTime": "2023-02-15T18:51:29.229Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "0.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "3dd82583-4606-4710-a70a-fa78ff041aaa",
+      "createTime": "2023-02-15T18:51:29.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1bbe8cd9edfddefbe517b12c8f3ac3e4437fdaec",
+          "message": "[security] changing format of the jsdoc links",
+          "issues": [
+            "3984"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1bbe8cd9edfddefbe517b12c8f3ac3e4437fdaec",
+          "message": "[security] add X.509 Name Constraints support",
+          "issues": []
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "9ffce334-51cf-4304-b19d-ba00dceded6c",
+      "createTime": "2023-02-15T18:51:29.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "3ecf333d-b84d-4f35-863a-e8c8ca768902",
+      "createTime": "2023-02-15T18:51:29.226Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "e610f639-91c3-46d1-9551-6377360a48c1",
+      "createTime": "2023-02-15T18:51:29.225Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "e998a419-eaf1-4c9c-9506-cb44bd0a5dc2",
+      "createTime": "2023-02-15T18:51:29.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "f83a5391-1424-4898-a4fa-febd49491848",
+      "createTime": "2023-02-15T18:51:29.222Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "2.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "43ec9623-dfc7-49b9-ade0-9a399b78b871",
+      "createTime": "2023-02-15T18:51:29.221Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "8429f1ef-053b-4d8c-a835-55cdcf13d2c5",
+      "createTime": "2023-02-15T18:51:29.220Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "26314780-2fb1-41d9-bffd-8a705e3a9410",
+      "createTime": "2023-02-15T18:51:29.219Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "5.0.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "9c19a51e-9726-4433-a011-0b8a418ea2ee",
+      "createTime": "2023-02-15T18:51:29.218Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "9fd8de55-3dda-4f91-8391-2d23af63532a",
+      "createTime": "2023-02-15T18:51:29.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "dd8408ad-1f80-4829-8c51-1e7719f1c628",
+      "createTime": "2023-02-15T18:51:29.216Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "2.0.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "1593558d-0d55-475c-aa24-42003ea14d93",
+      "createTime": "2023-02-15T18:51:29.215Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "95399f731547b06cde5ed0914d89c59fdc9fd968",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3989"
+          ]
+        }
+      ],
+      "version": "3.0.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "2d24e67d-365c-4b3c-a086-42bc01fb2124",
+      "createTime": "2023-02-15T18:51:29.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "2105d5c7-7cdd-4f30-968a-b295329cc60b",
+      "createTime": "2023-02-15T18:51:29.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "ef87c7ef-309b-4428-aea7-cd1472557c07",
+      "createTime": "2023-02-15T18:51:29.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "c7b3b143-d2fb-46d0-95d0-b7598d4a0869",
+      "createTime": "2023-02-15T18:51:29.207Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "34febcd8-48ff-4e89-b950-5d406d415111",
+      "createTime": "2023-02-15T18:51:29.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "f1a12bba-6e91-4459-a305-0f970aa2a87d",
+      "createTime": "2023-02-15T18:51:29.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "db381d67-f78f-4e1b-baae-2d23839f4453",
+      "createTime": "2023-02-15T18:51:29.203Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "1.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "eef5e705-b84a-46d0-b349-452bea809a3c",
+      "createTime": "2023-02-15T18:51:29.203Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "df2b64a7-fd39-4159-ac72-85125bba05dd",
+      "createTime": "2023-02-15T18:51:29.202Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "2c3cd98c-c1b3-4454-ac00-bbeb9a916667",
+      "createTime": "2023-02-15T18:51:29.201Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "f157b1d9-6950-4d9a-b0f2-39796a7c80f6",
+      "createTime": "2023-02-15T18:51:29.200Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "9403a633-f8f6-41e7-b510-77c8010c3b5f",
+      "createTime": "2023-02-15T18:51:29.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "f800f97f-36e4-46e6-a252-29562612abb0",
+      "createTime": "2023-02-15T18:51:29.198Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "71d95eb4-a4aa-40a3-902e-65ae145d2235",
+      "createTime": "2023-02-15T18:51:29.197Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "a19a9d39-d489-42bb-a273-319613e445ac",
+      "createTime": "2023-02-15T18:51:29.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "86a8ff0f-6723-4d2c-8153-98d413a9ef2d",
+      "createTime": "2023-02-15T18:51:29.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "89ac19a7-69cb-49f9-88e4-e68c80ec0729",
+      "createTime": "2023-02-15T18:51:29.195Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "54576e68-ab3d-4b76-95a4-75dd52555b60",
+      "createTime": "2023-02-15T18:51:29.194Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "b2c5276a-9da1-483c-a93e-3486d000ea70",
+      "createTime": "2023-02-15T18:51:29.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3988"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "7eeb301b-eba4-449e-970c-9028ef7dc2dd",
+      "createTime": "2023-02-15T18:51:29.191Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "92fafc11-8b55-4662-b023-50911eaece2d",
+      "createTime": "2023-02-15T18:51:29.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "f0926bfa-8f7b-45f2-9d1c-c597b6100ff3",
+      "createTime": "2023-02-15T18:51:29.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "c683ec22-eccf-4ad3-9195-6571dae73c5d",
+      "createTime": "2023-02-15T18:51:29.188Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "97da8a28-ae26-4f29-b542-9403f64a733f",
+      "createTime": "2023-02-15T18:51:29.188Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/game-servers",
+      "id": "23b5a677-02c1-4eee-a3bc-446040c12e03",
+      "createTime": "2023-02-15T18:51:29.187Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "adc832bb-9b45-4d45-a0f1-d06012824502",
+      "createTime": "2023-02-15T18:51:29.186Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "f919a4e0-509a-4cc2-ab09-2ff7f9d8820e",
+      "createTime": "2023-02-15T18:51:29.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "a12b4d42-abab-4780-812b-60c7d01558bb",
+      "createTime": "2023-02-15T18:51:29.185Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "2dbab852-9b20-4565-bf56-7d22d2a441a2",
+      "createTime": "2023-02-15T18:51:29.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "e856987e-cb65-4755-979f-cc1814dcbbef",
+      "createTime": "2023-02-15T18:51:29.183Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "59b836b0-aecd-480b-9865-395fc2c115d9",
+      "createTime": "2023-02-15T18:51:29.182Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "229c328d-06e6-4e01-98fd-6ddcced7849a",
+      "createTime": "2023-02-15T18:51:29.182Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "7e371c4d-1650-4938-ba1a-7979cbc523fd",
+      "createTime": "2023-02-15T18:51:29.179Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "1888b10d-d15d-4e52-94b8-baf436dd82a0",
+      "createTime": "2023-02-15T18:51:29.179Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "5.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "29c1a4eb-fbdc-4ad6-b56c-838be379ac57",
+      "createTime": "2023-02-15T18:51:29.178Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "f1f931c7-7c74-4c35-844f-8d30820de394",
+      "createTime": "2023-02-15T18:51:29.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "60296cdb-72d3-446f-a0c6-36b6676badf0",
+      "createTime": "2023-02-15T18:51:29.176Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "f19fc196-8162-4c26-944b-52500d64ab2f",
+      "createTime": "2023-02-15T18:51:29.176Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "71a87a6c-77bd-4dc3-aff1-6eea1669b497",
+      "createTime": "2023-02-15T18:51:29.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07043a629545ad418f33f90f9f96147a136e1728",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3987"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "ec43e661-b582-4791-9777-d389a59ea77b",
+      "createTime": "2023-02-15T18:51:29.174Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "21187550-e638-4c10-99fc-cc24009a581e",
+      "createTime": "2023-02-15T18:51:29.174Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "3d71cb36-34e9-4d28-bfd3-b34b9112a8f4",
+      "createTime": "2023-02-15T18:51:29.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "d7584b58-1e0f-430b-8c56-8e21df72a63f",
+      "createTime": "2023-02-15T18:51:29.172Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "3b125bcf-bd75-4466-b47d-2bd607c3c542",
+      "createTime": "2023-02-15T18:51:29.171Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "1d70e80b-53ca-43e5-b395-c428bea89f8b",
+      "createTime": "2023-02-15T18:51:29.170Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "3.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "7910bbf7-157c-49b9-ac22-78b201428038",
+      "createTime": "2023-02-15T18:51:29.170Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "7bc5e65d-17dc-4adf-862d-a3b5f22af9cd",
+      "createTime": "2023-02-15T18:51:29.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "63729762-e537-46bf-84d2-09862ba5f0bc",
+      "createTime": "2023-02-15T18:51:29.168Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "6558f452-b7ca-43a6-a074-5c6c190e62a7",
+      "createTime": "2023-02-15T18:51:29.166Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "f0089a45-00c0-4cb7-93bc-f207eaf42892",
+      "createTime": "2023-02-15T18:51:29.165Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "24390481-8894-4471-b808-1c0aa4b49adb",
+      "createTime": "2023-02-15T18:51:29.165Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "5b370906-e5b9-44ee-995f-5905ed1bdba6",
+      "createTime": "2023-02-15T18:51:29.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "4d5a5eab-c062-4792-a143-56dcd7993f46",
+      "createTime": "2023-02-15T18:51:29.163Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "d2e87566-a23a-4fcf-b9f7-923be252b327",
+      "createTime": "2023-02-15T18:51:29.163Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "3c72c63f-0152-4cc4-b7a7-ff4b25e914ee",
+      "createTime": "2023-02-15T18:51:29.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "bbe0e0c9-f611-4e0f-8a03-122a60a74bca",
+      "createTime": "2023-02-15T18:51:29.161Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "09f96430-fb94-459b-837c-7c8e7e012dee",
+      "createTime": "2023-02-15T18:51:29.160Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "82bc9c52-8115-4ec6-9415-84d899a3b5c5",
+      "createTime": "2023-02-15T18:51:29.160Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "20f493c94f7d6626d932b2610e00cbdd5df55f22",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3986"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "1c36e971-526d-49fc-a987-adc2354fc144",
+      "createTime": "2023-02-15T18:51:29.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "0d8b767b-7f41-495e-b793-2d93b83a6ad6",
+      "createTime": "2023-02-15T18:51:29.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "abede166-9e93-4c30-a7a9-09a548844209",
+      "createTime": "2023-02-15T18:51:29.158Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "cf3815c5-f6b9-4790-a23a-c894a5c2f21b",
+      "createTime": "2023-02-15T18:51:29.157Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "b0de2c4a-d439-41b4-916f-0a07b2c374dc",
+      "createTime": "2023-02-15T18:51:29.157Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "61d0da9d-05fd-4706-910d-df2b2b7ba35c",
+      "createTime": "2023-02-15T18:51:29.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "54420af1-cd77-47ad-88b4-b1f19c409f4b",
+      "createTime": "2023-02-15T18:51:29.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "3.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "9c1d186a-966c-4cff-9714-55de15604bc1",
+      "createTime": "2023-02-15T18:51:29.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "4.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "8737dbdf-4c45-4b8a-a557-a0047452fc67",
+      "createTime": "2023-02-15T18:51:29.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "dc1e6dd0-e7de-401f-9b79-1b9d007a368e",
+      "createTime": "2023-02-15T18:51:29.152Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "ff2c01b2-9731-43e0-a897-8ed0b32fcdb5",
+      "createTime": "2023-02-15T18:51:29.151Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "429ef3f1-fcca-4ac8-81fd-df557aac1558",
+      "createTime": "2023-02-15T18:51:29.151Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "f33bc1fa-dfac-42bc-beea-1e4c83c5ce23",
+      "createTime": "2023-02-15T18:51:29.150Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "b5c47e07-ed24-4516-9795-2de793310018",
+      "createTime": "2023-02-15T18:51:29.150Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "edcd40a0-e15a-46b2-b091-2ba79f9ea795",
+      "createTime": "2023-02-15T18:51:29.149Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "622fb406-6271-4154-a6c3-37d04a414715",
+      "createTime": "2023-02-15T18:51:29.148Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "1.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "12d6435b-6469-4f8e-924a-f78f99ff03e2",
+      "createTime": "2023-02-15T18:51:29.148Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "16b8a354-0351-4de9-968c-f0b4e0b2afd5",
+      "createTime": "2023-02-15T18:51:29.147Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "ea36ee05-70c4-4eef-92f7-1ddc19aed533",
+      "createTime": "2023-02-15T18:51:29.147Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "e51eb33a-f65b-4e58-b96d-2e403e411eee",
+      "createTime": "2023-02-15T18:51:29.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c",
+          "message": "[Many APIs] changing format of the jsdoc links",
+          "issues": [
+            "3985"
+          ]
+        }
+      ],
+      "version": "4.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "573e614c-aac3-402d-b1ac-c4fc4eb08721",
+      "createTime": "2023-02-15T18:51:29.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "4b97bb91894bfa56e5713e3f550a671e9f27c57c",
           "message": "Add initial files for google.cloud.gsuiteaddons.v1",
           "issues": [
@@ -1889,5 +4156,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-02-09T00:46:43.601Z"
+  "updateTime": "2023-02-22T06:11:36.250Z"
 }

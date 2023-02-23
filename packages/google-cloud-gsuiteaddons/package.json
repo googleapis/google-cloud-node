@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gsuiteaddons",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Google Workspace Add-ons API client for Node.js",
   "repository": {
     "type": "git",

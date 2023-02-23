@@ -1588,7 +1588,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tensorboard]{@link google.cloud.aiplatform.v1.Tensorboard}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1681,7 +1681,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReadTensorboardUsageResponse]{@link google.cloud.aiplatform.v1.ReadTensorboardUsageResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ReadTensorboardUsageResponse | ReadTensorboardUsageResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1788,7 +1788,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1.TensorboardExperiment}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1891,7 +1891,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1.TensorboardExperiment}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2001,7 +2001,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1.TensorboardExperiment}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2113,7 +2113,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1.TensorboardRun}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2217,7 +2217,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchCreateTensorboardRunsResponse]{@link google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchCreateTensorboardRunsResponse | BatchCreateTensorboardRunsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2320,7 +2320,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1.TensorboardRun}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2420,7 +2420,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1.TensorboardRun}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2526,7 +2526,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchCreateTensorboardTimeSeriesResponse]{@link google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchCreateTensorboardTimeSeriesResponse | BatchCreateTensorboardTimeSeriesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2637,7 +2637,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1.TensorboardTimeSeries}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2740,7 +2740,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1.TensorboardTimeSeries}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2851,7 +2851,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1.TensorboardTimeSeries}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2966,7 +2966,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataResponse | BatchReadTensorboardTimeSeriesDataResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3080,7 +3080,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.ReadTensorboardTimeSeriesDataResponse | ReadTensorboardTimeSeriesDataResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3186,7 +3186,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WriteTensorboardExperimentDataResponse]{@link google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.WriteTensorboardExperimentDataResponse | WriteTensorboardExperimentDataResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3296,7 +3296,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WriteTensorboardRunDataResponse]{@link google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.WriteTensorboardRunDataResponse | WriteTensorboardRunDataResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -3405,7 +3405,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits [ReadTensorboardBlobDataResponse]{@link google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse} on 'data' event.
+   *   An object stream which emits {@link google.cloud.aiplatform.v1.ReadTensorboardBlobDataResponse | ReadTensorboardBlobDataResponse} on 'data' event.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
    *   for more details and examples.
@@ -4315,7 +4315,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Tensorboard]{@link google.cloud.aiplatform.v1.Tensorboard}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4430,7 +4430,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Tensorboard]{@link google.cloud.aiplatform.v1.Tensorboard} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardsAsync()`
@@ -4495,7 +4495,7 @@ export class TensorboardServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Tensorboard]{@link google.cloud.aiplatform.v1.Tensorboard}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1.Tensorboard | Tensorboard}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4555,7 +4555,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TensorboardExperiment]{@link google.cloud.aiplatform.v1.TensorboardExperiment}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4674,7 +4674,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1.TensorboardExperiment} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardExperimentsAsync()`
@@ -4739,7 +4739,7 @@ export class TensorboardServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [TensorboardExperiment]{@link google.cloud.aiplatform.v1.TensorboardExperiment}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1.TensorboardExperiment | TensorboardExperiment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -4799,7 +4799,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TensorboardRun]{@link google.cloud.aiplatform.v1.TensorboardRun}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -4914,7 +4914,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1.TensorboardRun} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardRunsAsync()`
@@ -4979,7 +4979,7 @@ export class TensorboardServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [TensorboardRun]{@link google.cloud.aiplatform.v1.TensorboardRun}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1.TensorboardRun | TensorboardRun}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5039,7 +5039,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1.TensorboardTimeSeries}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5158,7 +5158,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1.TensorboardTimeSeries} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTensorboardTimeSeriesAsync()`
@@ -5223,7 +5223,7 @@ export class TensorboardServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1.TensorboardTimeSeries}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1.TensorboardTimeSeries | TensorboardTimeSeries}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5283,7 +5283,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TimeSeriesDataPoint]{@link google.cloud.aiplatform.v1.TimeSeriesDataPoint}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.TimeSeriesDataPoint | TimeSeriesDataPoint}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -5401,7 +5401,7 @@ export class TensorboardServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [TimeSeriesDataPoint]{@link google.cloud.aiplatform.v1.TimeSeriesDataPoint} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.TimeSeriesDataPoint | TimeSeriesDataPoint} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `exportTensorboardTimeSeriesDataAsync()`
@@ -5466,7 +5466,7 @@ export class TensorboardServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [TimeSeriesDataPoint]{@link google.cloud.aiplatform.v1.TimeSeriesDataPoint}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1.TimeSeriesDataPoint | TimeSeriesDataPoint}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5509,16 +5509,16 @@ export class TensorboardServiceClient {
    *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
    *   `GetIamPolicy`. This field is only used by Cloud IAM.
    *
-   *   This object should have the same structure as [GetPolicyOptions]{@link google.iam.v1.GetPolicyOptions}
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   getIamPolicy(
@@ -5560,13 +5560,13 @@ export class TensorboardServiceClient {
    *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
   setIamPolicy(
@@ -5608,13 +5608,13 @@ export class TensorboardServiceClient {
    *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    */
@@ -5644,9 +5644,9 @@ export class TensorboardServiceClient {
    * @param {string} request.name
    *   Resource name for the location.
    * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -5696,7 +5696,7 @@ export class TensorboardServiceClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -5725,20 +5725,18 @@ export class TensorboardServiceClient {
    * @param {string} request.name - The name of the operation resource.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
    * @param {function(?Error, ?Object)=} callback
    *   The function which will be called with the result of the API call.
    *
    *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
    * @return {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    * ```
@@ -5782,11 +5780,11 @@ export class TensorboardServiceClient {
    *   resources in a page.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    *   details.
    * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
    *
    * @example
    * ```
@@ -5817,8 +5815,8 @@ export class TensorboardServiceClient {
    * @param {string} request.name - The name of the operation resource to be cancelled.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
    * details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
@@ -5860,9 +5858,9 @@ export class TensorboardServiceClient {
    * @param {string} request.name - The name of the operation resource to be deleted.
    * @param {Object=} options
    *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
    * @param {function(?Error)=} callback
    *   The function which will be called with the result of the API call.
    * @return {Promise} - The promise which resolves when API call finishes.

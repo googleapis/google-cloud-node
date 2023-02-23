@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/googleapis/google-cloud-node/compare/resource-settings-v2.0.3...resource-settings-v2.0.4) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3989](https://github.com/googleapis/google-cloud-node/issues/3989)) ([95399f7](https://github.com/googleapis/google-cloud-node/commit/95399f731547b06cde5ed0914d89c59fdc9fd968))
+
 ## [2.0.3](https://github.com/googleapis/nodejs-resource-settings/compare/v2.0.2...v2.0.3) (2022-11-11)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.5](https://github.com/googleapis/google-cloud-node/compare/recommender-v5.0.4...recommender-v5.0.5) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3989](https://github.com/googleapis/google-cloud-node/issues/3989)) ([95399f7](https://github.com/googleapis/google-cloud-node/commit/95399f731547b06cde5ed0914d89c59fdc9fd968))
+
 ## [5.0.4](https://github.com/googleapis/google-cloud-node/compare/recommender-v5.0.3...recommender-v5.0.4) (2022-11-10)
 
 

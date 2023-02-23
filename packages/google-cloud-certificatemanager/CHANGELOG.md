@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v0.7.0...certificate-manager-v0.7.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3986](https://github.com/googleapis/google-cloud-node/issues/3986)) ([20f493c](https://github.com/googleapis/google-cloud-node/commit/20f493c94f7d6626d932b2610e00cbdd5df55f22))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v0.6.2...certificate-manager-v0.7.0) (2023-01-28)
 
 

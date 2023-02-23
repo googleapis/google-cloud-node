@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "4.7.0",
+        "version": "4.7.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1004,6 +1004,46 @@
             }
         },
         {
+            "regionTag": "container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async",
+            "title": "ClusterManager getJSONWebKeys Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.",
+            "canonical": true,
+            "file": "cluster_manager.get_j_s_o_n_web_keys.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetJSONWebKeys",
+                "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.container.v1beta1.GetJSONWebKeysResponse",
+                "client": {
+                    "shortName": "ClusterManagerClient",
+                    "fullName": "google.container.v1beta1.ClusterManagerClient"
+                },
+                "method": {
+                    "shortName": "GetJSONWebKeys",
+                    "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
+                    "service": {
+                        "shortName": "ClusterManager",
+                        "fullName": "google.container.v1beta1.ClusterManager"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "container_v1beta1_generated_ClusterManager_ListNodePools_async",
             "title": "ClusterManager listNodePools Sample",
             "origin": "API_DEFINITION",
@@ -1048,46 +1088,6 @@
                 "method": {
                     "shortName": "ListNodePools",
                     "fullName": "google.container.v1beta1.ClusterManager.ListNodePools",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async",
-            "title": "ClusterManager getJSONWebKeys Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.",
-            "canonical": true,
-            "file": "cluster_manager.get_j_s_o_n_web_keys.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetJSONWebKeys",
-                "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.GetJSONWebKeysResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "GetJSONWebKeys",
-                    "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
                     "service": {
                         "shortName": "ClusterManager",
                         "fullName": "google.container.v1beta1.ClusterManager"

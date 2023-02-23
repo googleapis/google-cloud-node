@@ -38,13 +38,13 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    */
   // const parent = 'abc123'
   /**
-   *  Required. The BCP-47 language code of the input document if known, for
+   *  Required. The ISO-639 language code of the input document if known, for
    *  example, "en-US" or "sr-Latn". Supported language codes are listed in
    *  Language Support (https://cloud.google.com/translate/docs/languages).
    */
   // const sourceLanguageCode = 'abc123'
   /**
-   *  Required. The BCP-47 language code to use for translation of the input
+   *  Required. The ISO-639 language code to use for translation of the input
    *  document. Specify up to 10 language codes here.
    */
   // const targetLanguageCodes = 'abc123'
@@ -89,6 +89,13 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  original file.
    */
   // const formatConversions = 1234
+  /**
+   *  Optional. This flag is to support user customized attribution.
+   *  If not provided, the default is `Machine Translated by Google`.
+   *  Customized attribution should follow rules in
+   *  https://cloud.google.com/translate/attribution#attribution_and_logos
+   */
+  // const customizedAttribution = 'abc123'
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;

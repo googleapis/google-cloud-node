@@ -334,7 +334,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Assessment]{@link google.cloud.recaptchaenterprise.v1beta1.Assessment}.
+   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1beta1.Assessment | Assessment}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -445,7 +445,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotateAssessmentResponse]{@link google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse | AnnotateAssessmentResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

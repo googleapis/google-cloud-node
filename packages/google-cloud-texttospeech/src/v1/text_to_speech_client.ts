@@ -330,7 +330,7 @@ export class TextToSpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListVoicesResponse]{@link google.cloud.texttospeech.v1.ListVoicesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.texttospeech.v1.ListVoicesResponse | ListVoicesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -416,7 +416,7 @@ export class TextToSpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SynthesizeSpeechResponse]{@link google.cloud.texttospeech.v1.SynthesizeSpeechResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.texttospeech.v1.SynthesizeSpeechResponse | SynthesizeSpeechResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

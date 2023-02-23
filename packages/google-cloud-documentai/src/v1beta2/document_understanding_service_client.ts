@@ -384,7 +384,7 @@ export class DocumentUnderstandingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Document]{@link google.cloud.documentai.v1beta2.Document}.
+   *   The first element of the array is an object representing {@link google.cloud.documentai.v1beta2.Document | Document}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

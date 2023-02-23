@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/kms-v3.3.0...kms-v3.3.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3988](https://github.com/googleapis/google-cloud-node/issues/3988)) ([f2134ed](https://github.com/googleapis/google-cloud-node/commit/f2134ed5f166a3bb7dd0bed556700f0b0fd9756a))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.2.0...kms-v3.3.0) (2023-01-28)
 
 

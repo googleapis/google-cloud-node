@@ -326,7 +326,7 @@ export class SnapshotsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Snapshot]{@link google.dataflow.v1beta3.Snapshot}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Snapshot | Snapshot}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -415,7 +415,7 @@ export class SnapshotsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DeleteSnapshotResponse]{@link google.dataflow.v1beta3.DeleteSnapshotResponse}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.DeleteSnapshotResponse | DeleteSnapshotResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -506,7 +506,7 @@ export class SnapshotsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListSnapshotsResponse]{@link google.dataflow.v1beta3.ListSnapshotsResponse}.
+   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.ListSnapshotsResponse | ListSnapshotsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

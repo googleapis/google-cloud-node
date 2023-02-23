@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/talent-v5.1.0...talent-v5.1.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3989](https://github.com/googleapis/google-cloud-node/issues/3989)) ([95399f7](https://github.com/googleapis/google-cloud-node/commit/95399f731547b06cde5ed0914d89c59fdc9fd968))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/talent-v5.0.1...talent-v5.1.0) (2023-01-28)
 
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.6.1...aiplatform-v2.7.0) (2023-02-22)
+
+
+### Features
+
+* Add match service in aiplatform v1beta1 match_service.proto ([#4002](https://github.com/googleapis/google-cloud-node/issues/4002)) ([e2944f5](https://github.com/googleapis/google-cloud-node/commit/e2944f565b39ae151e11f938fb9dcbefd337880e))
+
+## [2.6.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.6.0...aiplatform-v2.6.1) (2023-02-15)
+
+
+### Bug Fixes
+
+* [Many APIs] changing format of the jsdoc links ([#3985](https://github.com/googleapis/google-cloud-node/issues/3985)) ([fb2a6fd](https://github.com/googleapis/google-cloud-node/commit/fb2a6fdbd9dcf2ae91b3767629d71f0970d0712c))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.5.0...aiplatform-v2.6.0) (2023-02-09)
 
 

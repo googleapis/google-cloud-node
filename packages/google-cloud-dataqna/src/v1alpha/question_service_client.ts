@@ -349,7 +349,7 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Question]{@link google.cloud.dataqna.v1alpha.Question}.
+   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.Question | Question}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -443,7 +443,7 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Question]{@link google.cloud.dataqna.v1alpha.Question}.
+   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.Question | Question}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -537,7 +537,7 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Question]{@link google.cloud.dataqna.v1alpha.Question}.
+   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.Question | Question}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -630,7 +630,7 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UserFeedback]{@link google.cloud.dataqna.v1alpha.UserFeedback}.
+   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.UserFeedback | UserFeedback}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -727,7 +727,7 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UserFeedback]{@link google.cloud.dataqna.v1alpha.UserFeedback}.
+   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.UserFeedback | UserFeedback}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.

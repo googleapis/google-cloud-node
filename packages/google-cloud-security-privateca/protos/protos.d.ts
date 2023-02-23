@@ -1959,6 +1959,9 @@ export namespace google {
                         /** X509Parameters aiaOcspServers */
                         aiaOcspServers?: (string[]|null);
 
+                        /** X509Parameters nameConstraints */
+                        nameConstraints?: (google.cloud.security.privateca.v1.X509Parameters.INameConstraints|null);
+
                         /** X509Parameters additionalExtensions */
                         additionalExtensions?: (google.cloud.security.privateca.v1.IX509Extension[]|null);
                     }
@@ -1983,6 +1986,9 @@ export namespace google {
 
                         /** X509Parameters aiaOcspServers. */
                         public aiaOcspServers: string[];
+
+                        /** X509Parameters nameConstraints. */
+                        public nameConstraints?: (google.cloud.security.privateca.v1.X509Parameters.INameConstraints|null);
 
                         /** X509Parameters additionalExtensions. */
                         public additionalExtensions: google.cloud.security.privateca.v1.IX509Extension[];
@@ -2170,6 +2176,151 @@ export namespace google {
 
                             /**
                              * Gets the default type url for CaOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a NameConstraints. */
+                        interface INameConstraints {
+
+                            /** NameConstraints critical */
+                            critical?: (boolean|null);
+
+                            /** NameConstraints permittedDnsNames */
+                            permittedDnsNames?: (string[]|null);
+
+                            /** NameConstraints excludedDnsNames */
+                            excludedDnsNames?: (string[]|null);
+
+                            /** NameConstraints permittedIpRanges */
+                            permittedIpRanges?: (string[]|null);
+
+                            /** NameConstraints excludedIpRanges */
+                            excludedIpRanges?: (string[]|null);
+
+                            /** NameConstraints permittedEmailAddresses */
+                            permittedEmailAddresses?: (string[]|null);
+
+                            /** NameConstraints excludedEmailAddresses */
+                            excludedEmailAddresses?: (string[]|null);
+
+                            /** NameConstraints permittedUris */
+                            permittedUris?: (string[]|null);
+
+                            /** NameConstraints excludedUris */
+                            excludedUris?: (string[]|null);
+                        }
+
+                        /** Represents a NameConstraints. */
+                        class NameConstraints implements INameConstraints {
+
+                            /**
+                             * Constructs a new NameConstraints.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.X509Parameters.INameConstraints);
+
+                            /** NameConstraints critical. */
+                            public critical: boolean;
+
+                            /** NameConstraints permittedDnsNames. */
+                            public permittedDnsNames: string[];
+
+                            /** NameConstraints excludedDnsNames. */
+                            public excludedDnsNames: string[];
+
+                            /** NameConstraints permittedIpRanges. */
+                            public permittedIpRanges: string[];
+
+                            /** NameConstraints excludedIpRanges. */
+                            public excludedIpRanges: string[];
+
+                            /** NameConstraints permittedEmailAddresses. */
+                            public permittedEmailAddresses: string[];
+
+                            /** NameConstraints excludedEmailAddresses. */
+                            public excludedEmailAddresses: string[];
+
+                            /** NameConstraints permittedUris. */
+                            public permittedUris: string[];
+
+                            /** NameConstraints excludedUris. */
+                            public excludedUris: string[];
+
+                            /**
+                             * Creates a new NameConstraints instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NameConstraints instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.X509Parameters.INameConstraints): google.cloud.security.privateca.v1.X509Parameters.NameConstraints;
+
+                            /**
+                             * Encodes the specified NameConstraints message. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.NameConstraints.verify|verify} messages.
+                             * @param message NameConstraints message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.X509Parameters.INameConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NameConstraints message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.X509Parameters.NameConstraints.verify|verify} messages.
+                             * @param message NameConstraints message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.X509Parameters.INameConstraints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NameConstraints message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NameConstraints
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.X509Parameters.NameConstraints;
+
+                            /**
+                             * Decodes a NameConstraints message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NameConstraints
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.X509Parameters.NameConstraints;
+
+                            /**
+                             * Verifies a NameConstraints message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NameConstraints message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NameConstraints
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.X509Parameters.NameConstraints;
+
+                            /**
+                             * Creates a plain object from a NameConstraints message. Also converts values to other types if specified.
+                             * @param message NameConstraints
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.X509Parameters.NameConstraints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NameConstraints to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NameConstraints
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -4250,7 +4401,8 @@ export namespace google {
                             EXTENDED_KEY_USAGE = 2,
                             CA_OPTIONS = 3,
                             POLICY_IDS = 4,
-                            AIA_OCSP_SERVERS = 5
+                            AIA_OCSP_SERVERS = 5,
+                            NAME_CONSTRAINTS = 6
                         }
                     }
 

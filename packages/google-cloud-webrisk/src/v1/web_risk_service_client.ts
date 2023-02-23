@@ -344,7 +344,7 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ComputeThreatListDiffResponse]{@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse | ComputeThreatListDiffResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -437,7 +437,7 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SearchUrisResponse]{@link google.cloud.webrisk.v1.SearchUrisResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.SearchUrisResponse | SearchUrisResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -525,7 +525,7 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SearchHashesResponse]{@link google.cloud.webrisk.v1.SearchHashesResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.SearchHashesResponse | SearchHashesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -615,7 +615,7 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Submission]{@link google.cloud.webrisk.v1.Submission}.
+   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.Submission | Submission}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
