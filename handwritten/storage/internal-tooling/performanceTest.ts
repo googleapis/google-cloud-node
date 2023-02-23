@@ -22,6 +22,7 @@ import {
   convertToCSVFormat,
   convertToCloudMonitoringFormat,
   TestResult,
+  log,
 } from './performanceUtils';
 import {existsSync} from 'fs';
 import {writeFile} from 'fs/promises';
@@ -72,6 +73,10 @@ const argv = yargs(process.argv.slice(2))
     filename: {
       type: 'string',
     },
+    debug: {
+      type: 'boolean',
+      default: false,
+    },
   })
   .parseSync();
 
@@ -86,8 +91,9 @@ let iterationsRemaining = argv.iterations;
 function main() {
   let numThreads = argv.numthreads;
   if (numThreads > iterationsRemaining) {
-    console.log(
-      `${numThreads} is greater than number of iterations (${iterationsRemaining}). Using ${iterationsRemaining} threads instead.`
+    log(
+      `${numThreads} is greater than number of iterations (${iterationsRemaining}). Using ${iterationsRemaining} threads instead.`,
+      argv.debug
     );
     numThreads = iterationsRemaining;
   }
@@ -105,8 +111,9 @@ function main() {
  */
 function createWorker() {
   iterationsRemaining--;
-  console.log(
-    `Starting new iteration. Current iterations remaining: ${iterationsRemaining}`
+  log(
+    `Starting new iteration. Current iterations remaining: ${iterationsRemaining}`,
+    argv.debug
   );
   let testPath = '';
   if (argv.testtype === TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE) {
@@ -136,15 +143,14 @@ function createWorker() {
   });
 
   w.on('message', data => {
-    console.log('Successfully completed iteration.');
+    log('Successfully completed iteration.', argv.debug);
     recordResult(data);
     if (iterationsRemaining > 0) {
       createWorker();
     }
   });
   w.on('error', e => {
-    console.log('An error occurred.');
-    console.log(e);
+    log(e, true, true);
   });
 }
 
@@ -172,7 +178,7 @@ async function recordResult(results: TestResult[] | TestResult) {
           argv.filename,
           `${convertToCSVFormat(resultsToAppend)}\n`
         )
-      : console.log(convertToCSVFormat(resultsToAppend));
+      : log(convertToCSVFormat(resultsToAppend), true);
   } else if (argv.format === OUTPUT_FORMATS.CLOUD_MONITORING) {
     for await (const outputString of convertToCloudMonitoringFormat(
       resultsToAppend,
@@ -180,7 +186,7 @@ async function recordResult(results: TestResult[] | TestResult) {
     )) {
       argv.filename
         ? await appendFile(argv.filename, `${outputString}\n`)
-        : console.log(outputString);
+        : log(outputString, true);
     }
   }
 }

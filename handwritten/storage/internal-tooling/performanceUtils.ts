@@ -281,3 +281,20 @@ export function convertToCSVFormat(results: TestResult[]): string {
   const csv = results.map(result => Object.values(result));
   return csv.join('\n');
 }
+
+/**
+ * Logs the provided message if debugging is enabled.
+ *
+ * @param {string | error} messageOrError the message or error object to be printed utilizing console.debug.
+ * @param {boolean} shouldLog flag indicating whether or not the message should be logged to stdout or stderr.
+ * @param {boolean} isError if set to true and shouldLog is true, write the output to stderr instead of stdout.
+ */
+export function log(
+  messageOrError: string | Error,
+  shouldLog: boolean,
+  isError = false
+): void {
+  if (shouldLog) {
+    isError ? console.error(messageOrError) : console.log(messageOrError);
+  }
+}
