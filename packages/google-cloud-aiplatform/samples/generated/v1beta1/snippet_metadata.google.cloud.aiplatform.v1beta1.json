@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.6.0",
+        "version": "2.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -4615,6 +4615,106 @@
                     "service": {
                         "shortName": "JobService",
                         "fullName": "google.cloud.aiplatform.v1beta1.JobService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_MatchService_FindNeighbors_async",
+            "title": "DatasetService findNeighbors Sample",
+            "origin": "API_DEFINITION",
+            "description": " Finds the nearest neighbors of each vector within the request.",
+            "canonical": true,
+            "file": "match_service.find_neighbors.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FindNeighbors",
+                "fullName": "google.cloud.aiplatform.v1beta1.MatchService.FindNeighbors",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "index_endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployed_index_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "queries",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "return_full_datapoint",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.FindNeighborsResponse",
+                "client": {
+                    "shortName": "MatchServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.MatchServiceClient"
+                },
+                "method": {
+                    "shortName": "FindNeighbors",
+                    "fullName": "google.cloud.aiplatform.v1beta1.MatchService.FindNeighbors",
+                    "service": {
+                        "shortName": "MatchService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.MatchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_MatchService_ReadIndexDatapoints_async",
+            "title": "DatasetService readIndexDatapoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Reads the datapoints/vectors of the given IDs. A maximum of 1000 datapoints can be retrieved in a batch.",
+            "canonical": true,
+            "file": "match_service.read_index_datapoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadIndexDatapoints",
+                "fullName": "google.cloud.aiplatform.v1beta1.MatchService.ReadIndexDatapoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "index_endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployed_index_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ids",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse",
+                "client": {
+                    "shortName": "MatchServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.MatchServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadIndexDatapoints",
+                    "fullName": "google.cloud.aiplatform.v1beta1.MatchService.ReadIndexDatapoints",
+                    "service": {
+                        "shortName": "MatchService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.MatchService"
                     }
                 }
             }

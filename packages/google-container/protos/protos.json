@@ -5449,6 +5449,20 @@
                         }
                       ]
                     },
+                    "GetJSONWebKeys": {
+                      "requestType": "GetJSONWebKeysRequest",
+                      "responseType": "GetJSONWebKeysResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/clusters/*}/jwks"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1beta1/{parent=projects/*/locations/*/clusters/*}/jwks"
+                          }
+                        }
+                      ]
+                    },
                     "ListNodePools": {
                       "requestType": "ListNodePoolsRequest",
                       "responseType": "ListNodePoolsResponse",
@@ -5468,20 +5482,6 @@
                         },
                         {
                           "(google.api.method_signature)": "project_id,zone,cluster_id"
-                        }
-                      ]
-                    },
-                    "GetJSONWebKeys": {
-                      "requestType": "GetJSONWebKeysRequest",
-                      "responseType": "GetJSONWebKeysResponse",
-                      "options": {
-                        "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/clusters/*}/jwks"
-                      },
-                      "parsedOptions": [
-                        {
-                          "(google.api.http)": {
-                            "get": "/v1beta1/{parent=projects/*/locations/*/clusters/*}/jwks"
-                          }
                         }
                       ]
                     },
