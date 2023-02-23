@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v2 from './v2';
 
 const CloudBuildClient = v1.CloudBuildClient;
 type CloudBuildClient = v1.CloudBuildClient;
 
-export {v1, CloudBuildClient};
-export default {v1, CloudBuildClient};
+export {v1, v2, CloudBuildClient};
+export default {v1, v2, CloudBuildClient};
 import * as protos from '../protos/protos';
 export {protos};
