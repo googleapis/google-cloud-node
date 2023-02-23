@@ -423,6 +423,17 @@
                             "useParallelism": {
                               "type": "bool",
                               "id": 2
+                            },
+                            "useServerlessAnalytics": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "databaseRole": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
