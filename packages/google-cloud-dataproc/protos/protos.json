@@ -543,6 +543,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -710,6 +724,17 @@
                         }
                       },
                       "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "RUNNING": 2,
+                            "CANCELLING": 3,
+                            "CANCELLED": 4,
+                            "SUCCEEDED": 5,
+                            "FAILED": 6
+                          }
+                        },
                         "StateHistory": {
                           "fields": {
                             "state": {
@@ -733,17 +758,6 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "PENDING": 1,
-                            "RUNNING": 2,
-                            "CANCELLING": 3,
-                            "CANCELLED": 4,
-                            "SUCCEEDED": 5,
-                            "FAILED": 6
                           }
                         }
                       }
@@ -1008,6 +1022,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "stagingBucket": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1028,7 +1056,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
                           }
                         },
                         "sparkHistoryServerConfig": {
@@ -1063,6 +1092,63 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "approximateUsage": {
+                          "type": "UsageMetrics",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "currentUsage": {
+                          "type": "UsageSnapshot",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UsageMetrics": {
+                      "fields": {
+                        "milliDcuSeconds": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "shuffleStorageGbSeconds": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UsageSnapshot": {
+                      "fields": {
+                        "milliDcu": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "shuffleStorageGb": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "snapshotTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1072,7 +1158,8 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "container.googleapis.com/Cluster"
                           }
                         },
                         "nodePoolTarget": {
@@ -1152,7 +1239,7 @@
                           "type": "GkeNodePoolConfig",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         }
                       },
@@ -1203,16 +1290,16 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "preemptible": {
-                              "type": "bool",
-                              "id": 10,
+                            "localSsdCount": {
+                              "type": "int32",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "localSsdCount": {
-                              "type": "int32",
-                              "id": 7,
+                            "preemptible": {
+                              "type": "bool",
+                              "id": 10,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -1231,6 +1318,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "bootDiskKmsKey": {
+                              "type": "string",
+                              "id": 23,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "spot": {
+                              "type": "bool",
+                              "id": 32,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1243,6 +1344,10 @@
                             "acceleratorType": {
                               "type": "string",
                               "id": 2
+                            },
+                            "gpuPartitionSize": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -1269,8 +1374,10 @@
                         "FLINK": 14,
                         "HBASE": 11,
                         "HIVE_WEBHCAT": 3,
+                        "HUDI": 18,
                         "JUPYTER": 1,
                         "PRESTO": 6,
+                        "TRINO": 17,
                         "RANGER": 12,
                         "SOLR": 10,
                         "ZEPPELIN": 4,
@@ -1768,6 +1875,13 @@
                       }
                     },
                     "GceClusterConfig": {
+                      "oneofs": {
+                        "_internalIpOnly": {
+                          "oneof": [
+                            "internalIpOnly"
+                          ]
+                        }
+                      },
                       "fields": {
                         "zoneUri": {
                           "type": "string",
@@ -1794,7 +1908,8 @@
                           "type": "bool",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "privateIpv6GoogleAccess": {
@@ -1881,26 +1996,46 @@
                       }
                     },
                     "ShieldedInstanceConfig": {
+                      "oneofs": {
+                        "_enableSecureBoot": {
+                          "oneof": [
+                            "enableSecureBoot"
+                          ]
+                        },
+                        "_enableVtpm": {
+                          "oneof": [
+                            "enableVtpm"
+                          ]
+                        },
+                        "_enableIntegrityMonitoring": {
+                          "oneof": [
+                            "enableIntegrityMonitoring"
+                          ]
+                        }
+                      },
                       "fields": {
                         "enableSecureBoot": {
                           "type": "bool",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "enableVtpm": {
                           "type": "bool",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "enableIntegrityMonitoring": {
                           "type": "bool",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -2416,6 +2551,20 @@
                         }
                       }
                     },
+                    "ClusterMetrics": {
+                      "fields": {
+                        "hdfsMetrics": {
+                          "keyType": "string",
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "yarnMetrics": {
+                          "keyType": "string",
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
                     "DataprocMetricConfig": {
                       "fields": {
                         "metrics": {
@@ -2436,7 +2585,8 @@
                             "SPARK": 3,
                             "YARN": 4,
                             "SPARK_HISTORY_SERVER": 5,
-                            "HIVESERVER2": 6
+                            "HIVESERVER2": 6,
+                            "HIVEMETASTORE": 7
                           }
                         },
                         "Metric": {
@@ -2457,20 +2607,6 @@
                               }
                             }
                           }
-                        }
-                      }
-                    },
-                    "ClusterMetrics": {
-                      "fields": {
-                        "hdfsMetrics": {
-                          "keyType": "string",
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "yarnMetrics": {
-                          "keyType": "string",
-                          "type": "int64",
-                          "id": 2
                         }
                       }
                     },
@@ -3490,6 +3626,63 @@
                         }
                       }
                     },
+                    "TrinoJob": {
+                      "oneofs": {
+                        "queries": {
+                          "oneof": [
+                            "queryFileUri",
+                            "queryList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "queryFileUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "queryList": {
+                          "type": "QueryList",
+                          "id": 2
+                        },
+                        "continueOnFailure": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputFormat": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "loggingConfig": {
+                          "type": "LoggingConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "JobPlacement": {
                       "fields": {
                         "clusterName": {
@@ -3648,7 +3841,8 @@
                             "pigJob",
                             "sparkRJob",
                             "sparkSqlJob",
-                            "prestoJob"
+                            "prestoJob",
+                            "trinoJob"
                           ]
                         }
                       },
@@ -3719,6 +3913,13 @@
                         "prestoJob": {
                           "type": "PrestoJob",
                           "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trinoJob": {
+                          "type": "TrinoJob",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4397,6 +4598,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "childOperationIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -6533,18 +6742,6 @@
             "Empty": {
               "fields": {}
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -6553,6 +6750,18 @@
                 },
                 "nanos": {
                   "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
