@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.0.1...documentai-v7.1.0) (2023-02-22)
+
+
+### Features
+
+* [documentai] Added Training and Evaluation functions, request, responses and metadata to document_processor_service.proto ([#4008](https://github.com/googleapis/google-cloud-node/issues/4008)) ([f81218f](https://github.com/googleapis/google-cloud-node/commit/f81218fe90fb0ead2487c3e321e258edbde74039))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.0.0...documentai-v7.0.1) (2023-02-15)
 
 

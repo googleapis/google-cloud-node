@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-translation",
-        "version": "7.1.0",
+        "version": "7.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 118,
+                    "end": 117,
                     "type": "FULL"
                 }
             ],
@@ -194,7 +194,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 115,
+                    "end": 134,
                     "type": "FULL"
                 }
             ],
@@ -234,6 +234,18 @@
                     {
                         "name": "labels",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "customized_attribution",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "is_translate_native_pdf_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_shadow_removal_native_pdf",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.translation.v3.TranslateDocumentResponse",
@@ -330,7 +342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 115,
+                    "end": 122,
                     "type": "FULL"
                 }
             ],
@@ -370,6 +382,10 @@
                     {
                         "name": "format_conversions",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "customized_attribution",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

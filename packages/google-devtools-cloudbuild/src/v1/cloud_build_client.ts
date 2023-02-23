@@ -534,7 +534,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.Build | Build}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -626,7 +626,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.Build | Build}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -726,7 +726,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.BuildTrigger | BuildTrigger}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -831,7 +831,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.BuildTrigger | BuildTrigger}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -931,7 +931,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1036,7 +1036,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.BuildTrigger | BuildTrigger}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1145,7 +1145,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReceiveTriggerWebhookResponse]{@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse | ReceiveTriggerWebhookResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1245,7 +1245,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The first element of the array is an object representing {@link google.devtools.cloudbuild.v1.WorkerPool | WorkerPool}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -2414,7 +2414,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   The first element of the array is Array of {@link google.devtools.cloudbuild.v1.Build | Build}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2526,7 +2526,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Build]{@link google.devtools.cloudbuild.v1.Build} on 'data' event.
+   *   An object stream which emits an object representing {@link google.devtools.cloudbuild.v1.Build | Build} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBuildsAsync()`
@@ -2588,7 +2588,7 @@ export class CloudBuildClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Build]{@link google.devtools.cloudbuild.v1.Build}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.devtools.cloudbuild.v1.Build | Build}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2637,7 +2637,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The first element of the array is Array of {@link google.devtools.cloudbuild.v1.BuildTrigger | BuildTrigger}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2739,7 +2739,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger} on 'data' event.
+   *   An object stream which emits an object representing {@link google.devtools.cloudbuild.v1.BuildTrigger | BuildTrigger} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBuildTriggersAsync()`
@@ -2791,7 +2791,7 @@ export class CloudBuildClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.devtools.cloudbuild.v1.BuildTrigger | BuildTrigger}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2838,7 +2838,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The first element of the array is Array of {@link google.devtools.cloudbuild.v1.WorkerPool | WorkerPool}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2939,7 +2939,7 @@ export class CloudBuildClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool} on 'data' event.
+   *   An object stream which emits an object representing {@link google.devtools.cloudbuild.v1.WorkerPool | WorkerPool} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listWorkerPoolsAsync()`
@@ -2990,7 +2990,7 @@ export class CloudBuildClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.devtools.cloudbuild.v1.WorkerPool | WorkerPool}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)

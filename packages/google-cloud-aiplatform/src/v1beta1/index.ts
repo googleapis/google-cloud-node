@@ -24,6 +24,7 @@ export {FeaturestoreServiceClient} from './featurestore_service_client';
 export {IndexEndpointServiceClient} from './index_endpoint_service_client';
 export {IndexServiceClient} from './index_service_client';
 export {JobServiceClient} from './job_service_client';
+export {MatchServiceClient} from './match_service_client';
 export {MetadataServiceClient} from './metadata_service_client';
 export {MigrationServiceClient} from './migration_service_client';
 export {ModelServiceClient} from './model_service_client';
