@@ -14,6 +14,7 @@
                     "java_package": "com.google.cloudbuild.v1",
                     "objc_class_prefix": "GCB",
                     "ruby_package": "Google::Cloud::Build::V1",
+                    "php_namespace": "Google\\Cloud\\Build\\V1",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
                     "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
@@ -2421,6 +2422,1005 @@
                         "completeTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "v2": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.CloudBuild.V2",
+                    "go_package": "google.golang.org/genproto/googleapis/devtools/cloudbuild/v2;cloudbuild",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "RepositoryManagerProto",
+                    "java_package": "google.devtools.cloudbuild.v2",
+                    "objc_class_prefix": "GCB",
+                    "php_namespace": "Google\\Cloud\\Build\\V2",
+                    "ruby_package": "Google::Cloud::Build::V2",
+                    "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
+                  },
+                  "nested": {
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RunWorkflowCustomOperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pipelineRunId": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RepositoryManager": {
+                      "options": {
+                        "(google.api.default_host)": "cloudbuild.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateConnection": {
+                          "requestType": "CreateConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/connections",
+                            "(google.api.http).body": "connection",
+                            "(google.api.method_signature)": "parent,connection,connection_id",
+                            "(google.longrunning.operation_info).response_type": "Connection",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/connections",
+                                "body": "connection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,connection,connection_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Connection",
+                                "metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetConnection": {
+                          "requestType": "GetConnectionRequest",
+                          "responseType": "Connection",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/connections/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/connections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListConnections": {
+                          "requestType": "ListConnectionsRequest",
+                          "responseType": "ListConnectionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/connections",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/connections"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateConnection": {
+                          "requestType": "UpdateConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{connection.name=projects/*/locations/*/connections/*}",
+                            "(google.api.http).body": "connection",
+                            "(google.api.method_signature)": "connection,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Connection",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{connection.name=projects/*/locations/*/connections/*}",
+                                "body": "connection"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "connection,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Connection",
+                                "metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConnection": {
+                          "requestType": "DeleteConnectionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/connections/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/connections/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateRepository": {
+                          "requestType": "CreateRepositoryRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/connections/*}/repositories",
+                            "(google.api.http).body": "repository",
+                            "(google.api.method_signature)": "parent,repository,repository_id",
+                            "(google.longrunning.operation_info).response_type": "Repository",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/connections/*}/repositories",
+                                "body": "repository"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,repository,repository_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Repository",
+                                "metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "BatchCreateRepositories": {
+                          "requestType": "BatchCreateRepositoriesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/connections/*}/repositories:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests",
+                            "(google.longrunning.operation_info).response_type": "BatchCreateRepositoriesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/connections/*}/repositories:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchCreateRepositoriesResponse",
+                                "metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetRepository": {
+                          "requestType": "GetRepositoryRequest",
+                          "responseType": "Repository",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/connections/*/repositories/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/connections/*/repositories/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRepositories": {
+                          "requestType": "ListRepositoriesRequest",
+                          "responseType": "ListRepositoriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/connections/*}/repositories",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/connections/*}/repositories"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteRepository": {
+                          "requestType": "DeleteRepositoryRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/connections/*/repositories/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/connections/*/repositories/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.devtools.cloudbuild.v2.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchReadWriteToken": {
+                          "requestType": "FetchReadWriteTokenRequest",
+                          "responseType": "FetchReadWriteTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{repository=projects/*/locations/*/connections/*/repositories/*}:accessReadWriteToken",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "repository"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{repository=projects/*/locations/*/connections/*/repositories/*}:accessReadWriteToken",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "repository"
+                            }
+                          ]
+                        },
+                        "FetchReadToken": {
+                          "requestType": "FetchReadTokenRequest",
+                          "responseType": "FetchReadTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{repository=projects/*/locations/*/connections/*/repositories/*}:accessReadToken",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "repository"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{repository=projects/*/locations/*/connections/*/repositories/*}:accessReadToken",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "repository"
+                            }
+                          ]
+                        },
+                        "FetchLinkableRepositories": {
+                          "requestType": "FetchLinkableRepositoriesRequest",
+                          "responseType": "FetchLinkableRepositoriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{connection=projects/*/locations/*/connections/*}:fetchLinkableRepositories"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{connection=projects/*/locations/*/connections/*}:fetchLinkableRepositories"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Connection": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbuild.googleapis.com/Connection",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/connections/{connection}",
+                        "(google.api.resource).plural": "connections",
+                        "(google.api.resource).singular": "connection",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "oneofs": {
+                        "connectionConfig": {
+                          "oneof": [
+                            "githubConfig",
+                            "githubEnterpriseConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "githubConfig": {
+                          "type": "GitHubConfig",
+                          "id": 5
+                        },
+                        "githubEnterpriseConfig": {
+                          "type": "GitHubEnterpriseConfig",
+                          "id": 6
+                        },
+                        "installationState": {
+                          "type": "InstallationState",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 13
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 15
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 16
+                        }
+                      }
+                    },
+                    "InstallationState": {
+                      "fields": {
+                        "stage": {
+                          "type": "Stage",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "actionUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Stage": {
+                          "values": {
+                            "STAGE_UNSPECIFIED": 0,
+                            "PENDING_CREATE_APP": 1,
+                            "PENDING_USER_OAUTH": 2,
+                            "PENDING_INSTALL_APP": 3,
+                            "COMPLETE": 10
+                          }
+                        }
+                      }
+                    },
+                    "FetchLinkableRepositoriesRequest": {
+                      "fields": {
+                        "connection": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FetchLinkableRepositoriesResponse": {
+                      "fields": {
+                        "repositories": {
+                          "rule": "repeated",
+                          "type": "Repository",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GitHubConfig": {
+                      "fields": {
+                        "authorizerCredential": {
+                          "type": "OAuthCredential",
+                          "id": 1
+                        },
+                        "appInstallationId": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GitHubEnterpriseConfig": {
+                      "fields": {
+                        "hostUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "apiKey": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "appId": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "appSlug": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "privateKeySecretVersion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "webhookSecretSecretVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "appInstallationId": {
+                          "type": "int64",
+                          "id": 9
+                        },
+                        "serviceDirectoryConfig": {
+                          "type": "ServiceDirectoryConfig",
+                          "id": 10
+                        },
+                        "sslCa": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "serverVersion": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ServiceDirectoryConfig": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
+                          }
+                        }
+                      }
+                    },
+                    "Repository": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbuild.googleapis.com/Repository",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/connections/{connection}/repositories/{repository}",
+                        "(google.api.resource).plural": "repositories",
+                        "(google.api.resource).singular": "repository",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "remoteUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "OAuthCredential": {
+                      "fields": {
+                        "oauthTokenSecretVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "connection": {
+                          "type": "Connection",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "connectionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        }
+                      }
+                    },
+                    "ListConnectionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListConnectionsResponse": {
+                      "fields": {
+                        "connections": {
+                          "rule": "repeated",
+                          "type": "Connection",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateConnectionRequest": {
+                      "fields": {
+                        "connection": {
+                          "type": "Connection",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteConnectionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateRepositoryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "repository": {
+                          "type": "Repository",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "repositoryId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateRepositoriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Connection"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateRepositoryRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateRepositoriesResponse": {
+                      "fields": {
+                        "repositories": {
+                          "rule": "repeated",
+                          "type": "Repository",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetRepositoryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        }
+                      }
+                    },
+                    "ListRepositoriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListRepositoriesResponse": {
+                      "fields": {
+                        "repositories": {
+                          "rule": "repeated",
+                          "type": "Repository",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteRepositoryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FetchReadWriteTokenRequest": {
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        }
+                      }
+                    },
+                    "FetchReadTokenRequest": {
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        }
+                      }
+                    },
+                    "FetchReadTokenResponse": {
+                      "fields": {
+                        "token": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expirationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchReadWriteTokenResponse": {
+                      "fields": {
+                        "token": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expirationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
                         }
                       }
                     }
