@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.3.0...cloudbuild-v3.4.0) (2023-02-23)
+
+
+### Features
+
+* Expose v2 RepositoryManager for cloudbuild ([#4018](https://github.com/googleapis/google-cloud-node/issues/4018)) ([1cf6d18](https://github.com/googleapis/google-cloud-node/commit/1cf6d18d0d56afcc6d4f4425107aaf8d27c45709))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.2.0...cloudbuild-v3.3.0) (2023-01-28)
 
 
