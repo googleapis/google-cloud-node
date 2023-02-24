@@ -132,9 +132,6 @@
     "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/google-maps-mapsplatformdatasets": {},
-    "packages/google-cloud-datacatalog-lineage": {},
-    "packages/google-cloud-gsuiteaddons": {},
     "packages/google-cloud-advisorynotifications": {},
     "packages/typeless-sample-bot": {}
   },
