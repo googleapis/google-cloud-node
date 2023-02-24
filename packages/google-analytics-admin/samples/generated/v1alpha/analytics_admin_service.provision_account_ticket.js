@@ -34,7 +34,7 @@ function main() {
   // const account = {}
   /**
    *  Redirect URI where the user will be sent after accepting Terms of Service.
-   *  Must be configured in Developers Console as a Redirect URI
+   *  Must be configured in Developers Console as a Redirect URI.
    */
   // const redirectUri = 'abc123'
 

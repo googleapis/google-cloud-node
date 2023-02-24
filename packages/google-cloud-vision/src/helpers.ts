@@ -236,7 +236,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object[]} request.features An array of the specific annotation
    *     features being requested. This should take a form such as:
    *
@@ -393,7 +394,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -450,7 +452,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -507,7 +510,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -564,7 +568,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -621,7 +626,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -678,7 +684,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -735,7 +742,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -792,7 +800,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -849,7 +858,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -906,7 +916,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}
@@ -963,7 +974,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    * @param {function(?Error, ?object)} [callback] The function which will be
@@ -1019,7 +1031,8 @@ export function call(apiVersion: string) {
    *     If the key is `source`, the value should be another object containing
    *     `imageUri` or `filename` as a key and a string as a value.
    *
-   *     If the key is `content`, the value should be a Buffer.
+   *     If the key is `content`, the value should be base64 encoded text.
+   *     See {@link https://cloud.google.com/vision/docs/base64} for the details.
    * @param {object} [callOptions] Optional parameters. You can override the
    *     default settings for this call, e.g, timeout, retries, paginations,
    *     etc. See {@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions| gax.CallOptions}

@@ -10,7 +10,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/analytics/admin/v1alpha;admin",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ExpandedDataSetProto",
+                    "java_outer_classname": "ResourcesProto",
                     "java_package": "com.google.analytics.admin.v1alpha"
                   },
                   "nested": {
@@ -1941,6 +1941,302 @@
                             }
                           ]
                         },
+                        "CreateAccessBinding": {
+                          "requestType": "CreateAccessBindingRequest",
+                          "responseType": "AccessBinding",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/accessBindings",
+                            "(google.api.http).body": "access_binding",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/accessBindings",
+                            "(google.api.http).additional_bindings.body": "access_binding",
+                            "(google.api.method_signature)": "parent,access_binding"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/accessBindings",
+                                "body": "access_binding",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/accessBindings",
+                                  "body": "access_binding"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,access_binding"
+                            }
+                          ]
+                        },
+                        "GetAccessBinding": {
+                          "requestType": "GetAccessBindingRequest",
+                          "responseType": "AccessBinding",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=accounts/*/accessBindings/*}",
+                            "(google.api.http).additional_bindings.get": "/v1alpha/{name=properties/*/accessBindings/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=accounts/*/accessBindings/*}",
+                                "additional_bindings": {
+                                  "get": "/v1alpha/{name=properties/*/accessBindings/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateAccessBinding": {
+                          "requestType": "UpdateAccessBindingRequest",
+                          "responseType": "AccessBinding",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{access_binding.name=accounts/*/accessBindings/*}",
+                            "(google.api.http).body": "access_binding",
+                            "(google.api.http).additional_bindings.patch": "/v1alpha/{access_binding.name=properties/*/accessBindings/*}",
+                            "(google.api.http).additional_bindings.body": "access_binding",
+                            "(google.api.method_signature)": "access_binding"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{access_binding.name=accounts/*/accessBindings/*}",
+                                "body": "access_binding",
+                                "additional_bindings": {
+                                  "patch": "/v1alpha/{access_binding.name=properties/*/accessBindings/*}",
+                                  "body": "access_binding"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "access_binding"
+                            }
+                          ]
+                        },
+                        "DeleteAccessBinding": {
+                          "requestType": "DeleteAccessBindingRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=accounts/*/accessBindings/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1alpha/{name=properties/*/accessBindings/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=accounts/*/accessBindings/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1alpha/{name=properties/*/accessBindings/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAccessBindings": {
+                          "requestType": "ListAccessBindingsRequest",
+                          "responseType": "ListAccessBindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=accounts/*}/accessBindings",
+                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*}/accessBindings",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=accounts/*}/accessBindings",
+                                "additional_bindings": {
+                                  "get": "/v1alpha/{parent=properties/*}/accessBindings"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "BatchCreateAccessBindings": {
+                          "requestType": "BatchCreateAccessBindingsRequest",
+                          "responseType": "BatchCreateAccessBindingsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/accessBindings:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/accessBindings:batchCreate",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/accessBindings:batchCreate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/accessBindings:batchCreate",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "BatchGetAccessBindings": {
+                          "requestType": "BatchGetAccessBindingsRequest",
+                          "responseType": "BatchGetAccessBindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=accounts/*}/accessBindings:batchGet",
+                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*}/accessBindings:batchGet"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=accounts/*}/accessBindings:batchGet",
+                                "additional_bindings": {
+                                  "get": "/v1alpha/{parent=properties/*}/accessBindings:batchGet"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "BatchUpdateAccessBindings": {
+                          "requestType": "BatchUpdateAccessBindingsRequest",
+                          "responseType": "BatchUpdateAccessBindingsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/accessBindings:batchUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/accessBindings:batchUpdate",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/accessBindings:batchUpdate",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/accessBindings:batchUpdate",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "BatchDeleteAccessBindings": {
+                          "requestType": "BatchDeleteAccessBindingsRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/accessBindings:batchDelete",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/accessBindings:batchDelete",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=accounts/*}/accessBindings:batchDelete",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{parent=properties/*}/accessBindings:batchDelete",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "GetExpandedDataSet": {
+                          "requestType": "GetExpandedDataSetRequest",
+                          "responseType": "ExpandedDataSet",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/expandedDataSets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/expandedDataSets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListExpandedDataSets": {
+                          "requestType": "ListExpandedDataSetsRequest",
+                          "responseType": "ListExpandedDataSetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/expandedDataSets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/expandedDataSets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateExpandedDataSet": {
+                          "requestType": "CreateExpandedDataSetRequest",
+                          "responseType": "ExpandedDataSet",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/expandedDataSets",
+                            "(google.api.http).body": "expanded_data_set",
+                            "(google.api.method_signature)": "parent,expanded_data_set"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/expandedDataSets",
+                                "body": "expanded_data_set"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,expanded_data_set"
+                            }
+                          ]
+                        },
+                        "UpdateExpandedDataSet": {
+                          "requestType": "UpdateExpandedDataSetRequest",
+                          "responseType": "ExpandedDataSet",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{expanded_data_set.name=properties/*/expandedDataSets/*}",
+                            "(google.api.http).body": "expanded_data_set",
+                            "(google.api.method_signature)": "expanded_data_set,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{expanded_data_set.name=properties/*/expandedDataSets/*}",
+                                "body": "expanded_data_set"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "expanded_data_set,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteExpandedDataSet": {
+                          "requestType": "DeleteExpandedDataSetRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/expandedDataSets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/expandedDataSets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "SetAutomatedGa4ConfigurationOptOut": {
                           "requestType": "SetAutomatedGa4ConfigurationOptOutRequest",
                           "responseType": "SetAutomatedGa4ConfigurationOptOutResponse",
@@ -3725,6 +4021,295 @@
                         }
                       }
                     },
+                    "GetAccessBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetAccessBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetAccessBindingsResponse": {
+                      "fields": {
+                        "accessBindings": {
+                          "rule": "repeated",
+                          "type": "AccessBinding",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListAccessBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAccessBindingsResponse": {
+                      "fields": {
+                        "accessBindings": {
+                          "rule": "repeated",
+                          "type": "AccessBinding",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateAccessBindingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        },
+                        "accessBinding": {
+                          "type": "AccessBinding",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateAccessBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateAccessBindingRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateAccessBindingsResponse": {
+                      "fields": {
+                        "accessBindings": {
+                          "rule": "repeated",
+                          "type": "AccessBinding",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateAccessBindingRequest": {
+                      "fields": {
+                        "accessBinding": {
+                          "type": "AccessBinding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateAccessBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "UpdateAccessBindingRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateAccessBindingsResponse": {
+                      "fields": {
+                        "accessBindings": {
+                          "rule": "repeated",
+                          "type": "AccessBinding",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DeleteAccessBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeleteAccessBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/AccessBinding"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "DeleteAccessBindingRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateExpandedDataSetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ExpandedDataSet"
+                          }
+                        },
+                        "expandedDataSet": {
+                          "type": "ExpandedDataSet",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateExpandedDataSetRequest": {
+                      "fields": {
+                        "expandedDataSet": {
+                          "type": "ExpandedDataSet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteExpandedDataSetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ExpandedDataSet"
+                          }
+                        }
+                      }
+                    },
+                    "GetExpandedDataSetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ExpandedDataSet"
+                          }
+                        }
+                      }
+                    },
+                    "ListExpandedDataSetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ExpandedDataSet"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListExpandedDataSetsResponse": {
+                      "fields": {
+                        "expandedDataSets": {
+                          "rule": "repeated",
+                          "type": "ExpandedDataSet",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "SetAutomatedGa4ConfigurationOptOutRequest": {
                       "fields": {
                         "property": {
@@ -4263,6 +4848,181 @@
                             "AUDIENCE_EXCLUSION_DURATION_MODE_UNSPECIFIED": 0,
                             "EXCLUDE_TEMPORARILY": 1,
                             "EXCLUDE_PERMANENTLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ExpandedDataSetFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 2
+                        },
+                        "inListFilter": {
+                          "type": "InListFilter",
+                          "id": 3
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StringFilter": {
+                          "fields": {
+                            "matchType": {
+                              "type": "MatchType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MatchType": {
+                              "values": {
+                                "MATCH_TYPE_UNSPECIFIED": 0,
+                                "EXACT": 1,
+                                "CONTAINS": 2
+                              }
+                            }
+                          }
+                        },
+                        "InListFilter": {
+                          "fields": {
+                            "values": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExpandedDataSetFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "andGroup",
+                            "notExpression",
+                            "filter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "ExpandedDataSetFilterExpressionList",
+                          "id": 1
+                        },
+                        "notExpression": {
+                          "type": "ExpandedDataSetFilterExpression",
+                          "id": 2
+                        },
+                        "filter": {
+                          "type": "ExpandedDataSetFilter",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExpandedDataSetFilterExpressionList": {
+                      "fields": {
+                        "filterExpressions": {
+                          "rule": "repeated",
+                          "type": "ExpandedDataSetFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExpandedDataSet": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/ExpandedDataSet",
+                        "(google.api.resource).pattern": "properties/{property}/expandedDataSets/{expanded_data_set}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dimensionNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "metricNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dimensionFilterExpression": {
+                          "type": "ExpandedDataSetFilterExpression",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dataCollectionStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -5574,6 +6334,37 @@
                         }
                       }
                     },
+                    "AccessBinding": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/AccessBinding",
+                        "(google.api.resource).pattern": "properties/{property}/accessBindings/{access_binding}"
+                      },
+                      "oneofs": {
+                        "accessTarget": {
+                          "oneof": [
+                            "user"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "user": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "roles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "BigQueryLink": {
                       "options": {
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/BigQueryLink",
@@ -5622,181 +6413,6 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 8
-                        }
-                      }
-                    },
-                    "ExpandedDataSetFilter": {
-                      "oneofs": {
-                        "oneFilter": {
-                          "oneof": [
-                            "stringFilter",
-                            "inListFilter"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "stringFilter": {
-                          "type": "StringFilter",
-                          "id": 2
-                        },
-                        "inListFilter": {
-                          "type": "InListFilter",
-                          "id": 3
-                        },
-                        "fieldName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "StringFilter": {
-                          "fields": {
-                            "matchType": {
-                              "type": "MatchType",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "value": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "caseSensitive": {
-                              "type": "bool",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "MatchType": {
-                              "values": {
-                                "MATCH_TYPE_UNSPECIFIED": 0,
-                                "EXACT": 1,
-                                "CONTAINS": 2
-                              }
-                            }
-                          }
-                        },
-                        "InListFilter": {
-                          "fields": {
-                            "values": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "caseSensitive": {
-                              "type": "bool",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ExpandedDataSetFilterExpression": {
-                      "oneofs": {
-                        "expr": {
-                          "oneof": [
-                            "andGroup",
-                            "notExpression",
-                            "filter"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "andGroup": {
-                          "type": "ExpandedDataSetFilterExpressionList",
-                          "id": 1
-                        },
-                        "notExpression": {
-                          "type": "ExpandedDataSetFilterExpression",
-                          "id": 2
-                        },
-                        "filter": {
-                          "type": "ExpandedDataSetFilter",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ExpandedDataSetFilterExpressionList": {
-                      "fields": {
-                        "filterExpressions": {
-                          "rule": "repeated",
-                          "type": "ExpandedDataSetFilterExpression",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ExpandedDataSet": {
-                      "options": {
-                        "(google.api.resource).type": "analyticsadmin.googleapis.com/ExpandedDataSet",
-                        "(google.api.resource).pattern": "properties/{property}/expandedDataSets/{expanded_data_set}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "dimensionNames": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "metricNames": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "dimensionFilterExpression": {
-                          "type": "ExpandedDataSetFilterExpression",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "dataCollectionStartTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     }
