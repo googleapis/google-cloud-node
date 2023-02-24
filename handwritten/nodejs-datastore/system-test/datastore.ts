@@ -543,6 +543,19 @@ describe('Datastore', () => {
       await datastore.delete(personKey);
     });
 
+    it('should save with an empty buffer', async () => {
+      const key = datastore.key(['TEST']);
+      const result = await datastore.save({
+        key: key,
+        data: {
+          name: 'test',
+          blob: Buffer.from([]),
+        },
+      });
+      const mutationResult = result.pop()?.mutationResults?.pop();
+      assert.strictEqual(mutationResult?.key?.path?.pop()?.kind, 'TEST');
+    });
+
     describe('entity types', () => {
       it('should save and decode an int', async () => {
         const integerValue = 2015;
