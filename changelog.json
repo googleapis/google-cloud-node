@@ -5,6 +5,81 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "1cf6d18d0d56afcc6d4f4425107aaf8d27c45709",
+          "message": "Expose v2 RepositoryManager for cloudbuild",
+          "issues": [
+            "4018"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "0d413b14-cb7d-4d30-a18a-4b37f6a9d34c",
+      "createTime": "2023-02-23T20:30:56.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f98ece2ab73b44cdab04892f9b0e81ef18995390",
+          "message": "[dialogflow-cx] added gcs.proto. added support for GcsDestination and TextToSpeechSettings",
+          "issues": [
+            "3998"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "528cf1b3-bd62-44a2-b39e-5746b3ea1769",
+      "createTime": "2023-02-23T20:30:56.020Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c530beb09626986e4eaaec3066cb6b627dce6070",
+          "message": "[dataproc] add support for new Dataproc features",
+          "issues": [
+            "4000"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "03532a27-7e18-4a05-8afb-57ba958aac15",
+      "createTime": "2023-02-23T20:30:56.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bc0e904fa8890c60e61176f7e48fcbb58def595",
+          "message": "Change default version to v1beta1",
+          "issues": [
+            "36"
+          ],
+          "breakingChangeNote": "change default version to v1beta1 ([#36](https://github.com/googleapis/google-cloud-node/issues/36))"
+        },
+        {
+          "type": "feat",
+          "sha": "eaf6c343c401a132efc89fe21ec61664ae04fb8b",
+          "message": "Added Snooze API support",
+          "issues": []
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "f639ea51-ad62-4f59-91e6-fe45facdc576",
+      "createTime": "2023-02-23T20:30:56.014Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b9c09e31a08a43bfa1049465aa7633c73ea91fc0",
           "message": "[translate] Add supported fields in document translation request and refresh translation v3 GA service proto documentation",
           "issues": [
@@ -4156,5 +4231,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-02-22T06:11:36.250Z"
+  "updateTime": "2023-02-23T20:30:56.022Z"
 }

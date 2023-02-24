@@ -9,6 +9,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3beta1/experiment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/flow.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/fulfillment.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/gcs.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/intent.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/page.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/response_message.proto",
