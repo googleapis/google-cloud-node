@@ -14,14 +14,6 @@
 
 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
-const {describe, it, before} = require('mocha');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const cwd = path.join(__dirname, '..');
-
 describe('Quickstart', () => {
   //  Cannot run this test since we do not have these permissions on google org
   //  it('should run quickstart', async () => {
