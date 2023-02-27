@@ -1247,6 +1247,12 @@ export namespace google {
 
                         /** CloudSpannerProperties useParallelism */
                         useParallelism?: (boolean|null);
+
+                        /** CloudSpannerProperties useServerlessAnalytics */
+                        useServerlessAnalytics?: (boolean|null);
+
+                        /** CloudSpannerProperties databaseRole */
+                        databaseRole?: (string|null);
                     }
 
                     /** Represents a CloudSpannerProperties. */
@@ -1263,6 +1269,12 @@ export namespace google {
 
                         /** CloudSpannerProperties useParallelism. */
                         public useParallelism: boolean;
+
+                        /** CloudSpannerProperties useServerlessAnalytics. */
+                        public useServerlessAnalytics: boolean;
+
+                        /** CloudSpannerProperties databaseRole. */
+                        public databaseRole: string;
 
                         /**
                          * Creates a new CloudSpannerProperties instance using the specified properties.
