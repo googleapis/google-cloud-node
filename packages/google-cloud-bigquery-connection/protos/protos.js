@@ -2904,6 +2904,8 @@
                              * @interface ICloudSpannerProperties
                              * @property {string|null} [database] CloudSpannerProperties database
                              * @property {boolean|null} [useParallelism] CloudSpannerProperties useParallelism
+                             * @property {boolean|null} [useServerlessAnalytics] CloudSpannerProperties useServerlessAnalytics
+                             * @property {string|null} [databaseRole] CloudSpannerProperties databaseRole
                              */
     
                             /**
@@ -2938,6 +2940,22 @@
                             CloudSpannerProperties.prototype.useParallelism = false;
     
                             /**
+                             * CloudSpannerProperties useServerlessAnalytics.
+                             * @member {boolean} useServerlessAnalytics
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             */
+                            CloudSpannerProperties.prototype.useServerlessAnalytics = false;
+    
+                            /**
+                             * CloudSpannerProperties databaseRole.
+                             * @member {string} databaseRole
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             */
+                            CloudSpannerProperties.prototype.databaseRole = "";
+    
+                            /**
                              * Creates a new CloudSpannerProperties instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
@@ -2965,6 +2983,10 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
                                 if (message.useParallelism != null && Object.hasOwnProperty.call(message, "useParallelism"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useParallelism);
+                                if (message.useServerlessAnalytics != null && Object.hasOwnProperty.call(message, "useServerlessAnalytics"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.useServerlessAnalytics);
+                                if (message.databaseRole != null && Object.hasOwnProperty.call(message, "databaseRole"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.databaseRole);
                                 return writer;
                             };
     
@@ -3005,6 +3027,14 @@
                                         }
                                     case 2: {
                                             message.useParallelism = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.useServerlessAnalytics = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.databaseRole = reader.string();
                                             break;
                                         }
                                     default:
@@ -3048,6 +3078,12 @@
                                 if (message.useParallelism != null && message.hasOwnProperty("useParallelism"))
                                     if (typeof message.useParallelism !== "boolean")
                                         return "useParallelism: boolean expected";
+                                if (message.useServerlessAnalytics != null && message.hasOwnProperty("useServerlessAnalytics"))
+                                    if (typeof message.useServerlessAnalytics !== "boolean")
+                                        return "useServerlessAnalytics: boolean expected";
+                                if (message.databaseRole != null && message.hasOwnProperty("databaseRole"))
+                                    if (!$util.isString(message.databaseRole))
+                                        return "databaseRole: string expected";
                                 return null;
                             };
     
@@ -3067,6 +3103,10 @@
                                     message.database = String(object.database);
                                 if (object.useParallelism != null)
                                     message.useParallelism = Boolean(object.useParallelism);
+                                if (object.useServerlessAnalytics != null)
+                                    message.useServerlessAnalytics = Boolean(object.useServerlessAnalytics);
+                                if (object.databaseRole != null)
+                                    message.databaseRole = String(object.databaseRole);
                                 return message;
                             };
     
@@ -3086,11 +3126,17 @@
                                 if (options.defaults) {
                                     object.database = "";
                                     object.useParallelism = false;
+                                    object.useServerlessAnalytics = false;
+                                    object.databaseRole = "";
                                 }
                                 if (message.database != null && message.hasOwnProperty("database"))
                                     object.database = message.database;
                                 if (message.useParallelism != null && message.hasOwnProperty("useParallelism"))
                                     object.useParallelism = message.useParallelism;
+                                if (message.useServerlessAnalytics != null && message.hasOwnProperty("useServerlessAnalytics"))
+                                    object.useServerlessAnalytics = message.useServerlessAnalytics;
+                                if (message.databaseRole != null && message.hasOwnProperty("databaseRole"))
+                                    object.databaseRole = message.databaseRole;
                                 return object;
                             };
     
