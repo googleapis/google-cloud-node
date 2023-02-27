@@ -1191,6 +1191,8 @@
                          * @property {google.cloud.speech.v1.IRecognitionConfig|null} [config] StreamingRecognitionConfig config
                          * @property {boolean|null} [singleUtterance] StreamingRecognitionConfig singleUtterance
                          * @property {boolean|null} [interimResults] StreamingRecognitionConfig interimResults
+                         * @property {boolean|null} [enableVoiceActivityEvents] StreamingRecognitionConfig enableVoiceActivityEvents
+                         * @property {google.cloud.speech.v1.StreamingRecognitionConfig.IVoiceActivityTimeout|null} [voiceActivityTimeout] StreamingRecognitionConfig voiceActivityTimeout
                          */
     
                         /**
@@ -1233,6 +1235,22 @@
                         StreamingRecognitionConfig.prototype.interimResults = false;
     
                         /**
+                         * StreamingRecognitionConfig enableVoiceActivityEvents.
+                         * @member {boolean} enableVoiceActivityEvents
+                         * @memberof google.cloud.speech.v1.StreamingRecognitionConfig
+                         * @instance
+                         */
+                        StreamingRecognitionConfig.prototype.enableVoiceActivityEvents = false;
+    
+                        /**
+                         * StreamingRecognitionConfig voiceActivityTimeout.
+                         * @member {google.cloud.speech.v1.StreamingRecognitionConfig.IVoiceActivityTimeout|null|undefined} voiceActivityTimeout
+                         * @memberof google.cloud.speech.v1.StreamingRecognitionConfig
+                         * @instance
+                         */
+                        StreamingRecognitionConfig.prototype.voiceActivityTimeout = null;
+    
+                        /**
                          * Creates a new StreamingRecognitionConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.StreamingRecognitionConfig
@@ -1262,6 +1280,10 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.singleUtterance);
                             if (message.interimResults != null && Object.hasOwnProperty.call(message, "interimResults"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.interimResults);
+                            if (message.enableVoiceActivityEvents != null && Object.hasOwnProperty.call(message, "enableVoiceActivityEvents"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableVoiceActivityEvents);
+                            if (message.voiceActivityTimeout != null && Object.hasOwnProperty.call(message, "voiceActivityTimeout"))
+                                $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.encode(message.voiceActivityTimeout, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -1306,6 +1328,14 @@
                                     }
                                 case 3: {
                                         message.interimResults = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.enableVoiceActivityEvents = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.voiceActivityTimeout = $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1354,6 +1384,14 @@
                             if (message.interimResults != null && message.hasOwnProperty("interimResults"))
                                 if (typeof message.interimResults !== "boolean")
                                     return "interimResults: boolean expected";
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                if (typeof message.enableVoiceActivityEvents !== "boolean")
+                                    return "enableVoiceActivityEvents: boolean expected";
+                            if (message.voiceActivityTimeout != null && message.hasOwnProperty("voiceActivityTimeout")) {
+                                var error = $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.verify(message.voiceActivityTimeout);
+                                if (error)
+                                    return "voiceActivityTimeout." + error;
+                            }
                             return null;
                         };
     
@@ -1378,6 +1416,13 @@
                                 message.singleUtterance = Boolean(object.singleUtterance);
                             if (object.interimResults != null)
                                 message.interimResults = Boolean(object.interimResults);
+                            if (object.enableVoiceActivityEvents != null)
+                                message.enableVoiceActivityEvents = Boolean(object.enableVoiceActivityEvents);
+                            if (object.voiceActivityTimeout != null) {
+                                if (typeof object.voiceActivityTimeout !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.StreamingRecognitionConfig.voiceActivityTimeout: object expected");
+                                message.voiceActivityTimeout = $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.fromObject(object.voiceActivityTimeout);
+                            }
                             return message;
                         };
     
@@ -1398,6 +1443,8 @@
                                 object.config = null;
                                 object.singleUtterance = false;
                                 object.interimResults = false;
+                                object.enableVoiceActivityEvents = false;
+                                object.voiceActivityTimeout = null;
                             }
                             if (message.config != null && message.hasOwnProperty("config"))
                                 object.config = $root.google.cloud.speech.v1.RecognitionConfig.toObject(message.config, options);
@@ -1405,6 +1452,10 @@
                                 object.singleUtterance = message.singleUtterance;
                             if (message.interimResults != null && message.hasOwnProperty("interimResults"))
                                 object.interimResults = message.interimResults;
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                object.enableVoiceActivityEvents = message.enableVoiceActivityEvents;
+                            if (message.voiceActivityTimeout != null && message.hasOwnProperty("voiceActivityTimeout"))
+                                object.voiceActivityTimeout = $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.toObject(message.voiceActivityTimeout, options);
                             return object;
                         };
     
@@ -1433,6 +1484,243 @@
                             }
                             return typeUrlPrefix + "/google.cloud.speech.v1.StreamingRecognitionConfig";
                         };
+    
+                        StreamingRecognitionConfig.VoiceActivityTimeout = (function() {
+    
+                            /**
+                             * Properties of a VoiceActivityTimeout.
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig
+                             * @interface IVoiceActivityTimeout
+                             * @property {google.protobuf.IDuration|null} [speechStartTimeout] VoiceActivityTimeout speechStartTimeout
+                             * @property {google.protobuf.IDuration|null} [speechEndTimeout] VoiceActivityTimeout speechEndTimeout
+                             */
+    
+                            /**
+                             * Constructs a new VoiceActivityTimeout.
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig
+                             * @classdesc Represents a VoiceActivityTimeout.
+                             * @implements IVoiceActivityTimeout
+                             * @constructor
+                             * @param {google.cloud.speech.v1.StreamingRecognitionConfig.IVoiceActivityTimeout=} [properties] Properties to set
+                             */
+                            function VoiceActivityTimeout(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VoiceActivityTimeout speechStartTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} speechStartTimeout
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @instance
+                             */
+                            VoiceActivityTimeout.prototype.speechStartTimeout = null;
+    
+                            /**
+                             * VoiceActivityTimeout speechEndTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} speechEndTimeout
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @instance
+                             */
+                            VoiceActivityTimeout.prototype.speechEndTimeout = null;
+    
+                            /**
+                             * Creates a new VoiceActivityTimeout instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1.StreamingRecognitionConfig.IVoiceActivityTimeout=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout instance
+                             */
+                            VoiceActivityTimeout.create = function create(properties) {
+                                return new VoiceActivityTimeout(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VoiceActivityTimeout message. Does not implicitly {@link google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1.StreamingRecognitionConfig.IVoiceActivityTimeout} message VoiceActivityTimeout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VoiceActivityTimeout.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.speechStartTimeout != null && Object.hasOwnProperty.call(message, "speechStartTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.speechStartTimeout, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.speechEndTimeout != null && Object.hasOwnProperty.call(message, "speechEndTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.speechEndTimeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VoiceActivityTimeout message, length delimited. Does not implicitly {@link google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1.StreamingRecognitionConfig.IVoiceActivityTimeout} message VoiceActivityTimeout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VoiceActivityTimeout.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VoiceActivityTimeout message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VoiceActivityTimeout.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.speechStartTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.speechEndTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VoiceActivityTimeout message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VoiceActivityTimeout.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VoiceActivityTimeout message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VoiceActivityTimeout.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.speechStartTimeout != null && message.hasOwnProperty("speechStartTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.speechStartTimeout);
+                                    if (error)
+                                        return "speechStartTimeout." + error;
+                                }
+                                if (message.speechEndTimeout != null && message.hasOwnProperty("speechEndTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.speechEndTimeout);
+                                    if (error)
+                                        return "speechEndTimeout." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VoiceActivityTimeout message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout
+                             */
+                            VoiceActivityTimeout.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout();
+                                if (object.speechStartTimeout != null) {
+                                    if (typeof object.speechStartTimeout !== "object")
+                                        throw TypeError(".google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.speechStartTimeout: object expected");
+                                    message.speechStartTimeout = $root.google.protobuf.Duration.fromObject(object.speechStartTimeout);
+                                }
+                                if (object.speechEndTimeout != null) {
+                                    if (typeof object.speechEndTimeout !== "object")
+                                        throw TypeError(".google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout.speechEndTimeout: object expected");
+                                    message.speechEndTimeout = $root.google.protobuf.Duration.fromObject(object.speechEndTimeout);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VoiceActivityTimeout message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout} message VoiceActivityTimeout
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VoiceActivityTimeout.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.speechStartTimeout = null;
+                                    object.speechEndTimeout = null;
+                                }
+                                if (message.speechStartTimeout != null && message.hasOwnProperty("speechStartTimeout"))
+                                    object.speechStartTimeout = $root.google.protobuf.Duration.toObject(message.speechStartTimeout, options);
+                                if (message.speechEndTimeout != null && message.hasOwnProperty("speechEndTimeout"))
+                                    object.speechEndTimeout = $root.google.protobuf.Duration.toObject(message.speechEndTimeout, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VoiceActivityTimeout to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VoiceActivityTimeout.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VoiceActivityTimeout
+                             * @function getTypeUrl
+                             * @memberof google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VoiceActivityTimeout.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout";
+                            };
+    
+                            return VoiceActivityTimeout;
+                        })();
     
                         return StreamingRecognitionConfig;
                     })();
@@ -4558,6 +4846,7 @@
                          * @property {google.rpc.IStatus|null} [error] StreamingRecognizeResponse error
                          * @property {Array.<google.cloud.speech.v1.IStreamingRecognitionResult>|null} [results] StreamingRecognizeResponse results
                          * @property {google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType|null} [speechEventType] StreamingRecognizeResponse speechEventType
+                         * @property {google.protobuf.IDuration|null} [speechEventTime] StreamingRecognizeResponse speechEventTime
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] StreamingRecognizeResponse totalBilledTime
                          * @property {google.cloud.speech.v1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] StreamingRecognizeResponse speechAdaptationInfo
                          * @property {number|Long|null} [requestId] StreamingRecognizeResponse requestId
@@ -4602,6 +4891,14 @@
                          * @instance
                          */
                         StreamingRecognizeResponse.prototype.speechEventType = 0;
+    
+                        /**
+                         * StreamingRecognizeResponse speechEventTime.
+                         * @member {google.protobuf.IDuration|null|undefined} speechEventTime
+                         * @memberof google.cloud.speech.v1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.speechEventTime = null;
     
                         /**
                          * StreamingRecognizeResponse totalBilledTime.
@@ -4660,6 +4957,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.speechEventType);
                             if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.speechEventTime != null && Object.hasOwnProperty.call(message, "speechEventTime"))
+                                $root.google.protobuf.Duration.encode(message.speechEventTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
                                 $root.google.cloud.speech.v1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
@@ -4710,6 +5009,10 @@
                                     }
                                 case 4: {
                                         message.speechEventType = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.speechEventTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -4779,8 +5082,16 @@
                                     return "speechEventType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
+                            if (message.speechEventTime != null && message.hasOwnProperty("speechEventTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.speechEventTime);
+                                if (error)
+                                    return "speechEventTime." + error;
+                            }
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime")) {
                                 var error = $root.google.protobuf.Duration.verify(message.totalBilledTime);
                                 if (error)
@@ -4839,6 +5150,23 @@
                             case 1:
                                 message.speechEventType = 1;
                                 break;
+                            case "SPEECH_ACTIVITY_BEGIN":
+                            case 2:
+                                message.speechEventType = 2;
+                                break;
+                            case "SPEECH_ACTIVITY_END":
+                            case 3:
+                                message.speechEventType = 3;
+                                break;
+                            case "SPEECH_ACTIVITY_TIMEOUT":
+                            case 4:
+                                message.speechEventType = 4;
+                                break;
+                            }
+                            if (object.speechEventTime != null) {
+                                if (typeof object.speechEventTime !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.StreamingRecognizeResponse.speechEventTime: object expected");
+                                message.speechEventTime = $root.google.protobuf.Duration.fromObject(object.speechEventTime);
                             }
                             if (object.totalBilledTime != null) {
                                 if (typeof object.totalBilledTime !== "object")
@@ -4881,6 +5209,7 @@
                                 object.error = null;
                                 object.speechEventType = options.enums === String ? "SPEECH_EVENT_UNSPECIFIED" : 0;
                                 object.totalBilledTime = null;
+                                object.speechEventTime = null;
                                 object.speechAdaptationInfo = null;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
@@ -4899,6 +5228,8 @@
                                 object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
+                            if (message.speechEventTime != null && message.hasOwnProperty("speechEventTime"))
+                                object.speechEventTime = $root.google.protobuf.Duration.toObject(message.speechEventTime, options);
                             if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
                                 object.speechAdaptationInfo = $root.google.cloud.speech.v1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -4941,11 +5272,17 @@
                          * @enum {number}
                          * @property {number} SPEECH_EVENT_UNSPECIFIED=0 SPEECH_EVENT_UNSPECIFIED value
                          * @property {number} END_OF_SINGLE_UTTERANCE=1 END_OF_SINGLE_UTTERANCE value
+                         * @property {number} SPEECH_ACTIVITY_BEGIN=2 SPEECH_ACTIVITY_BEGIN value
+                         * @property {number} SPEECH_ACTIVITY_END=3 SPEECH_ACTIVITY_END value
+                         * @property {number} SPEECH_ACTIVITY_TIMEOUT=4 SPEECH_ACTIVITY_TIMEOUT value
                          */
                         StreamingRecognizeResponse.SpeechEventType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SPEECH_EVENT_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "END_OF_SINGLE_UTTERANCE"] = 1;
+                            values[valuesById[2] = "SPEECH_ACTIVITY_BEGIN"] = 2;
+                            values[valuesById[3] = "SPEECH_ACTIVITY_END"] = 3;
+                            values[valuesById[4] = "SPEECH_ACTIVITY_TIMEOUT"] = 4;
                             return values;
                         })();
     
@@ -12227,6 +12564,8 @@
                          * @property {google.cloud.speech.v1p1beta1.IRecognitionConfig|null} [config] StreamingRecognitionConfig config
                          * @property {boolean|null} [singleUtterance] StreamingRecognitionConfig singleUtterance
                          * @property {boolean|null} [interimResults] StreamingRecognitionConfig interimResults
+                         * @property {boolean|null} [enableVoiceActivityEvents] StreamingRecognitionConfig enableVoiceActivityEvents
+                         * @property {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.IVoiceActivityTimeout|null} [voiceActivityTimeout] StreamingRecognitionConfig voiceActivityTimeout
                          */
     
                         /**
@@ -12269,6 +12608,22 @@
                         StreamingRecognitionConfig.prototype.interimResults = false;
     
                         /**
+                         * StreamingRecognitionConfig enableVoiceActivityEvents.
+                         * @member {boolean} enableVoiceActivityEvents
+                         * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig
+                         * @instance
+                         */
+                        StreamingRecognitionConfig.prototype.enableVoiceActivityEvents = false;
+    
+                        /**
+                         * StreamingRecognitionConfig voiceActivityTimeout.
+                         * @member {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.IVoiceActivityTimeout|null|undefined} voiceActivityTimeout
+                         * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig
+                         * @instance
+                         */
+                        StreamingRecognitionConfig.prototype.voiceActivityTimeout = null;
+    
+                        /**
                          * Creates a new StreamingRecognitionConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig
@@ -12298,6 +12653,10 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.singleUtterance);
                             if (message.interimResults != null && Object.hasOwnProperty.call(message, "interimResults"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.interimResults);
+                            if (message.enableVoiceActivityEvents != null && Object.hasOwnProperty.call(message, "enableVoiceActivityEvents"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableVoiceActivityEvents);
+                            if (message.voiceActivityTimeout != null && Object.hasOwnProperty.call(message, "voiceActivityTimeout"))
+                                $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.encode(message.voiceActivityTimeout, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -12342,6 +12701,14 @@
                                     }
                                 case 3: {
                                         message.interimResults = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.enableVoiceActivityEvents = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.voiceActivityTimeout = $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -12390,6 +12757,14 @@
                             if (message.interimResults != null && message.hasOwnProperty("interimResults"))
                                 if (typeof message.interimResults !== "boolean")
                                     return "interimResults: boolean expected";
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                if (typeof message.enableVoiceActivityEvents !== "boolean")
+                                    return "enableVoiceActivityEvents: boolean expected";
+                            if (message.voiceActivityTimeout != null && message.hasOwnProperty("voiceActivityTimeout")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.verify(message.voiceActivityTimeout);
+                                if (error)
+                                    return "voiceActivityTimeout." + error;
+                            }
                             return null;
                         };
     
@@ -12414,6 +12789,13 @@
                                 message.singleUtterance = Boolean(object.singleUtterance);
                             if (object.interimResults != null)
                                 message.interimResults = Boolean(object.interimResults);
+                            if (object.enableVoiceActivityEvents != null)
+                                message.enableVoiceActivityEvents = Boolean(object.enableVoiceActivityEvents);
+                            if (object.voiceActivityTimeout != null) {
+                                if (typeof object.voiceActivityTimeout !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.voiceActivityTimeout: object expected");
+                                message.voiceActivityTimeout = $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.fromObject(object.voiceActivityTimeout);
+                            }
                             return message;
                         };
     
@@ -12434,6 +12816,8 @@
                                 object.config = null;
                                 object.singleUtterance = false;
                                 object.interimResults = false;
+                                object.enableVoiceActivityEvents = false;
+                                object.voiceActivityTimeout = null;
                             }
                             if (message.config != null && message.hasOwnProperty("config"))
                                 object.config = $root.google.cloud.speech.v1p1beta1.RecognitionConfig.toObject(message.config, options);
@@ -12441,6 +12825,10 @@
                                 object.singleUtterance = message.singleUtterance;
                             if (message.interimResults != null && message.hasOwnProperty("interimResults"))
                                 object.interimResults = message.interimResults;
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                object.enableVoiceActivityEvents = message.enableVoiceActivityEvents;
+                            if (message.voiceActivityTimeout != null && message.hasOwnProperty("voiceActivityTimeout"))
+                                object.voiceActivityTimeout = $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.toObject(message.voiceActivityTimeout, options);
                             return object;
                         };
     
@@ -12469,6 +12857,243 @@
                             }
                             return typeUrlPrefix + "/google.cloud.speech.v1p1beta1.StreamingRecognitionConfig";
                         };
+    
+                        StreamingRecognitionConfig.VoiceActivityTimeout = (function() {
+    
+                            /**
+                             * Properties of a VoiceActivityTimeout.
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig
+                             * @interface IVoiceActivityTimeout
+                             * @property {google.protobuf.IDuration|null} [speechStartTimeout] VoiceActivityTimeout speechStartTimeout
+                             * @property {google.protobuf.IDuration|null} [speechEndTimeout] VoiceActivityTimeout speechEndTimeout
+                             */
+    
+                            /**
+                             * Constructs a new VoiceActivityTimeout.
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig
+                             * @classdesc Represents a VoiceActivityTimeout.
+                             * @implements IVoiceActivityTimeout
+                             * @constructor
+                             * @param {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.IVoiceActivityTimeout=} [properties] Properties to set
+                             */
+                            function VoiceActivityTimeout(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VoiceActivityTimeout speechStartTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} speechStartTimeout
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @instance
+                             */
+                            VoiceActivityTimeout.prototype.speechStartTimeout = null;
+    
+                            /**
+                             * VoiceActivityTimeout speechEndTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} speechEndTimeout
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @instance
+                             */
+                            VoiceActivityTimeout.prototype.speechEndTimeout = null;
+    
+                            /**
+                             * Creates a new VoiceActivityTimeout instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.IVoiceActivityTimeout=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout instance
+                             */
+                            VoiceActivityTimeout.create = function create(properties) {
+                                return new VoiceActivityTimeout(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VoiceActivityTimeout message. Does not implicitly {@link google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.IVoiceActivityTimeout} message VoiceActivityTimeout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VoiceActivityTimeout.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.speechStartTimeout != null && Object.hasOwnProperty.call(message, "speechStartTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.speechStartTimeout, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.speechEndTimeout != null && Object.hasOwnProperty.call(message, "speechEndTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.speechEndTimeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VoiceActivityTimeout message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.IVoiceActivityTimeout} message VoiceActivityTimeout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VoiceActivityTimeout.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VoiceActivityTimeout message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VoiceActivityTimeout.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.speechStartTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.speechEndTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VoiceActivityTimeout message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VoiceActivityTimeout.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VoiceActivityTimeout message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VoiceActivityTimeout.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.speechStartTimeout != null && message.hasOwnProperty("speechStartTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.speechStartTimeout);
+                                    if (error)
+                                        return "speechStartTimeout." + error;
+                                }
+                                if (message.speechEndTimeout != null && message.hasOwnProperty("speechEndTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.speechEndTimeout);
+                                    if (error)
+                                        return "speechEndTimeout." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VoiceActivityTimeout message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout} VoiceActivityTimeout
+                             */
+                            VoiceActivityTimeout.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout();
+                                if (object.speechStartTimeout != null) {
+                                    if (typeof object.speechStartTimeout !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.speechStartTimeout: object expected");
+                                    message.speechStartTimeout = $root.google.protobuf.Duration.fromObject(object.speechStartTimeout);
+                                }
+                                if (object.speechEndTimeout != null) {
+                                    if (typeof object.speechEndTimeout !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout.speechEndTimeout: object expected");
+                                    message.speechEndTimeout = $root.google.protobuf.Duration.fromObject(object.speechEndTimeout);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VoiceActivityTimeout message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout} message VoiceActivityTimeout
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VoiceActivityTimeout.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.speechStartTimeout = null;
+                                    object.speechEndTimeout = null;
+                                }
+                                if (message.speechStartTimeout != null && message.hasOwnProperty("speechStartTimeout"))
+                                    object.speechStartTimeout = $root.google.protobuf.Duration.toObject(message.speechStartTimeout, options);
+                                if (message.speechEndTimeout != null && message.hasOwnProperty("speechEndTimeout"))
+                                    object.speechEndTimeout = $root.google.protobuf.Duration.toObject(message.speechEndTimeout, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VoiceActivityTimeout to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VoiceActivityTimeout.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VoiceActivityTimeout
+                             * @function getTypeUrl
+                             * @memberof google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VoiceActivityTimeout.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.speech.v1p1beta1.StreamingRecognitionConfig.VoiceActivityTimeout";
+                            };
+    
+                            return VoiceActivityTimeout;
+                        })();
     
                         return StreamingRecognitionConfig;
                     })();
@@ -15740,6 +16365,7 @@
                          * @property {google.rpc.IStatus|null} [error] StreamingRecognizeResponse error
                          * @property {Array.<google.cloud.speech.v1p1beta1.IStreamingRecognitionResult>|null} [results] StreamingRecognizeResponse results
                          * @property {google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType|null} [speechEventType] StreamingRecognizeResponse speechEventType
+                         * @property {google.protobuf.IDuration|null} [speechEventTime] StreamingRecognizeResponse speechEventTime
                          * @property {google.protobuf.IDuration|null} [totalBilledTime] StreamingRecognizeResponse totalBilledTime
                          * @property {google.cloud.speech.v1p1beta1.ISpeechAdaptationInfo|null} [speechAdaptationInfo] StreamingRecognizeResponse speechAdaptationInfo
                          * @property {number|Long|null} [requestId] StreamingRecognizeResponse requestId
@@ -15784,6 +16410,14 @@
                          * @instance
                          */
                         StreamingRecognizeResponse.prototype.speechEventType = 0;
+    
+                        /**
+                         * StreamingRecognizeResponse speechEventTime.
+                         * @member {google.protobuf.IDuration|null|undefined} speechEventTime
+                         * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.speechEventTime = null;
     
                         /**
                          * StreamingRecognizeResponse totalBilledTime.
@@ -15842,6 +16476,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.speechEventType);
                             if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.speechEventTime != null && Object.hasOwnProperty.call(message, "speechEventTime"))
+                                $root.google.protobuf.Duration.encode(message.speechEventTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.speechAdaptationInfo != null && Object.hasOwnProperty.call(message, "speechAdaptationInfo"))
                                 $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.encode(message.speechAdaptationInfo, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
@@ -15892,6 +16528,10 @@
                                     }
                                 case 4: {
                                         message.speechEventType = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.speechEventTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -15961,8 +16601,16 @@
                                     return "speechEventType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
+                            if (message.speechEventTime != null && message.hasOwnProperty("speechEventTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.speechEventTime);
+                                if (error)
+                                    return "speechEventTime." + error;
+                            }
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime")) {
                                 var error = $root.google.protobuf.Duration.verify(message.totalBilledTime);
                                 if (error)
@@ -16021,6 +16669,23 @@
                             case 1:
                                 message.speechEventType = 1;
                                 break;
+                            case "SPEECH_ACTIVITY_BEGIN":
+                            case 2:
+                                message.speechEventType = 2;
+                                break;
+                            case "SPEECH_ACTIVITY_END":
+                            case 3:
+                                message.speechEventType = 3;
+                                break;
+                            case "SPEECH_ACTIVITY_TIMEOUT":
+                            case 4:
+                                message.speechEventType = 4;
+                                break;
+                            }
+                            if (object.speechEventTime != null) {
+                                if (typeof object.speechEventTime !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.speechEventTime: object expected");
+                                message.speechEventTime = $root.google.protobuf.Duration.fromObject(object.speechEventTime);
                             }
                             if (object.totalBilledTime != null) {
                                 if (typeof object.totalBilledTime !== "object")
@@ -16063,6 +16728,7 @@
                                 object.error = null;
                                 object.speechEventType = options.enums === String ? "SPEECH_EVENT_UNSPECIFIED" : 0;
                                 object.totalBilledTime = null;
+                                object.speechEventTime = null;
                                 object.speechAdaptationInfo = null;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
@@ -16081,6 +16747,8 @@
                                 object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
+                            if (message.speechEventTime != null && message.hasOwnProperty("speechEventTime"))
+                                object.speechEventTime = $root.google.protobuf.Duration.toObject(message.speechEventTime, options);
                             if (message.speechAdaptationInfo != null && message.hasOwnProperty("speechAdaptationInfo"))
                                 object.speechAdaptationInfo = $root.google.cloud.speech.v1p1beta1.SpeechAdaptationInfo.toObject(message.speechAdaptationInfo, options);
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -16123,11 +16791,17 @@
                          * @enum {number}
                          * @property {number} SPEECH_EVENT_UNSPECIFIED=0 SPEECH_EVENT_UNSPECIFIED value
                          * @property {number} END_OF_SINGLE_UTTERANCE=1 END_OF_SINGLE_UTTERANCE value
+                         * @property {number} SPEECH_ACTIVITY_BEGIN=2 SPEECH_ACTIVITY_BEGIN value
+                         * @property {number} SPEECH_ACTIVITY_END=3 SPEECH_ACTIVITY_END value
+                         * @property {number} SPEECH_ACTIVITY_TIMEOUT=4 SPEECH_ACTIVITY_TIMEOUT value
                          */
                         StreamingRecognizeResponse.SpeechEventType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SPEECH_EVENT_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "END_OF_SINGLE_UTTERANCE"] = 1;
+                            values[valuesById[2] = "SPEECH_ACTIVITY_BEGIN"] = 2;
+                            values[valuesById[3] = "SPEECH_ACTIVITY_END"] = 3;
+                            values[valuesById[4] = "SPEECH_ACTIVITY_TIMEOUT"] = 4;
                             return values;
                         })();
     
