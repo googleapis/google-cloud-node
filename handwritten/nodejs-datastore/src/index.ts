@@ -780,7 +780,7 @@ class Datastore extends DatastoreRequest {
   }
 
   /**
-   * Maps to {@link Datastore#save}, forcing the method to be `insert`.
+   * Maps to {@link https://cloud.google.com/nodejs/docs/reference/datastore/latest/datastore/datastore#_google_cloud_datastore_Datastore_save_member_1_|Datastore#save}, forcing the method to be `insert`.
    *
    * @param {object|object[]} entities Datastore key object(s).
    * @param {Key} entities.key Datastore key object.
@@ -1189,7 +1189,7 @@ class Datastore extends DatastoreRequest {
   }
 
   /**
-   * Maps to {@link Datastore#save}, forcing the method to be `update`.
+   * Maps to {@link https://cloud.google.com/nodejs/docs/reference/datastore/latest/datastore/datastore#_google_cloud_datastore_Datastore_save_member_1_|Datastore#save}, forcing the method to be `update`.
    *
    * @param {object|object[]} entities Datastore key object(s).
    * @param {Key} entities.key Datastore key object.
@@ -1219,7 +1219,7 @@ class Datastore extends DatastoreRequest {
   }
 
   /**
-   * Maps to {@link Datastore#save}, forcing the method to be `upsert`.
+   * Maps to {@link https://cloud.google.com/nodejs/docs/reference/datastore/latest/datastore/datastore#_google_cloud_datastore_Datastore_save_member_1_|Datastore#save}, forcing the method to be `upsert`.
    *
    * @param {object|object[]} entities Datastore key object(s).
    * @param {Key} entities.key Datastore key object.
