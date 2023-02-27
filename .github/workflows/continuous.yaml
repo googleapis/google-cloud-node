@@ -36,8 +36,7 @@ jobs:
         env:
           BUILD_TYPE: continuous
           TEST_TYPE: units
-      - if: ${{ always() }}
-        run: |
+      - run: |
           curl https://github.com/googleapis/repo-automation-bots/releases/download/flakybot-1.1.0/flakybot -o flakybot -s -L
           chmod +x ./flakybot
           ./flakybot --repo GoogleCloudPlatform/nodejs-docs-samples --commit_hash ${{github.sha}} --build_url https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
