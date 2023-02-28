@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(scope, cryptoKey) {
-  // [START kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async]
+function main(name) {
+  // [START kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,54 +29,30 @@ function main(scope, cryptoKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization.
-   *  Example: organizations/123
-   */
-  // const scope = 'abc123'
-  /**
    *  Required. The resource name of the
    *  CryptoKey google.cloud.kms.v1.CryptoKey.
    */
-  // const cryptoKey = 'abc123'
-  /**
-   *  The maximum number of resources to return. The service may return fewer
-   *  than this value.
-   *  If unspecified, at most 500 resources will be returned.
-   *  The maximum value is 500; values above 500 will be coerced to 500.
-   */
-  // const pageSize = 1234
-  /**
-   *  A page token, received from a previous
-   *  KeyTrackingService.SearchProtectedResources google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources 
-   *  call. Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to
-   *  KeyTrackingService.SearchProtectedResources google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources 
-   *  must match the call that provided the page token.
-   */
-  // const pageToken = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Inventory library
-  const {KeyTrackingServiceClient} = require('@google-cloud/inventory').v1;
+  const {KeyTrackingServiceClient} = require('inventory').v1;
 
   // Instantiates a client
   const inventoryClient = new KeyTrackingServiceClient();
 
-  async function callSearchProtectedResources() {
+  async function callGetProtectedResourcesSummary() {
     // Construct request
     const request = {
-      scope,
-      cryptoKey,
+      name,
     };
 
     // Run request
-    const iterable = await inventoryClient.searchProtectedResourcesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await inventoryClient.getProtectedResourcesSummary(request);
+    console.log(response);
   }
 
-  callSearchProtectedResources();
-  // [END kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async]
+  callGetProtectedResourcesSummary();
+  // [END kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async]
 }
 
 process.on('unhandledRejection', err => {
