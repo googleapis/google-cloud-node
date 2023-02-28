@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {KeyTrackingServiceClient} = require('@google-cloud/inventory').v1;
-const kmsinventoryClient = new KeyTrackingServiceClient();
+const {KeyDashboardServiceClient} = require('@google-cloud/inventory').v1;
+const inventoryClient = new KeyDashboardServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -34,7 +34,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      `node ./quickstart.js projects/${projectId}`,
       {cwd}
     );
     assert(output !== null);
