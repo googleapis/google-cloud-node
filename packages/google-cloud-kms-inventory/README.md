@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,55 @@ npm install inventory
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The Google Cloud project for which to retrieve key metadata, in
+ *  the format `projects/*`
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. The maximum number of keys to return. The service may return
+ *  fewer than this value. If unspecified, at most 1000 keys will be returned.
+ *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. Pass this into a subsequent request in order to receive the next
+ *  page of results.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Inventory library
+const {KeyDashboardServiceClient} = require('inventory').v1;
+
+// Instantiates a client
+const inventoryClient = new KeyDashboardServiceClient();
+
+async function callListCryptoKeys() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await inventoryClient.listCryptoKeysAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListCryptoKeys();
+
+```
+
 
 
 ## Samples
@@ -65,6 +114,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Key_dashboard_service.list_crypto_keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js,samples/README.md) |
 | Key_tracking_service.get_protected_resources_summary | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js,samples/README.md) |
 | Key_tracking_service.search_protected_resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms-inventory/samples/test/quickstart.js,samples/README.md) |
 
 
