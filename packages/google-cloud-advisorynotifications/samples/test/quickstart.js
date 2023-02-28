@@ -15,12 +15,12 @@
 'use strict';
 
 // describe('Quickstart', () => {
-  //  Cannot run this test since we do not have these permissions on google org
-  //  it('should run quickstart', async () => {
-  //    const output = execSync(
-  //    'node ./quickstart.js organizations/433637338589/locations/us-central1',
-  //    {cwd}
-  //  );
-  //  assert(output !== null);
-  // });
+//  Cannot run this test since we do not have these permissions on google org
+//  it('should run quickstart', async () => {
+//    const output = execSync(
+//    'node ./quickstart.js organizations/433637338589/locations/us-central1',
+//    {cwd}
+//  );
+//  assert(output !== null);
+// });
 // });
