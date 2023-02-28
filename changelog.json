@@ -4,6 +4,166 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "1cf6d18d0d56afcc6d4f4425107aaf8d27c45709",
+          "message": "Expose v2 RepositoryManager for cloudbuild",
+          "issues": [
+            "4018"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "0d413b14-cb7d-4d30-a18a-4b37f6a9d34c",
+      "createTime": "2023-02-23T20:30:56.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f98ece2ab73b44cdab04892f9b0e81ef18995390",
+          "message": "[dialogflow-cx] added gcs.proto. added support for GcsDestination and TextToSpeechSettings",
+          "issues": [
+            "3998"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "528cf1b3-bd62-44a2-b39e-5746b3ea1769",
+      "createTime": "2023-02-23T20:30:56.020Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c530beb09626986e4eaaec3066cb6b627dce6070",
+          "message": "[dataproc] add support for new Dataproc features",
+          "issues": [
+            "4000"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "03532a27-7e18-4a05-8afb-57ba958aac15",
+      "createTime": "2023-02-23T20:30:56.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bc0e904fa8890c60e61176f7e48fcbb58def595",
+          "message": "Change default version to v1beta1",
+          "issues": [
+            "36"
+          ],
+          "breakingChangeNote": "change default version to v1beta1 ([#36](https://github.com/googleapis/google-cloud-node/issues/36))"
+        },
+        {
+          "type": "feat",
+          "sha": "eaf6c343c401a132efc89fe21ec61664ae04fb8b",
+          "message": "Added Snooze API support",
+          "issues": []
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "f639ea51-ad62-4f59-91e6-fe45facdc576",
+      "createTime": "2023-02-23T20:30:56.014Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b9c09e31a08a43bfa1049465aa7633c73ea91fc0",
+          "message": "[translate] Add supported fields in document translation request and refresh translation v3 GA service proto documentation",
+          "issues": [
+            "4007"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "b1cca3dc-fccb-4290-8bd8-4d9107df8f33",
+      "createTime": "2023-02-22T06:11:36.250Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f81218fe90fb0ead2487c3e321e258edbde74039",
+          "message": "[documentai] Added Training and Evaluation functions, request, responses and metadata to document_processor_service.proto",
+          "issues": [
+            "4008"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "1446e8f8-1d18-49b0-a0c5-1bd1f5b5bb93",
+      "createTime": "2023-02-22T06:11:36.249Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57c0441e11fe7c7f2b185bb8061c8be1a036be11",
+          "message": "[dialogflow] added support for AssistQueryParameters and SynthesizeSpeechConfig",
+          "issues": [
+            "3995"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "e970007f-4f35-4621-8bdf-d0ab72eda267",
+      "createTime": "2023-02-22T06:11:36.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "904ac0cadd5b59c75309ac7766dad5da3080d105",
+          "message": "[contentwarehouse] Added Training and Evaluation functions, request, responses and metadata to document_processor_service.proto",
+          "issues": [
+            "4009"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "093b1f50-c319-4241-a82e-3adf2ed3f1cb",
+      "createTime": "2023-02-22T06:11:36.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e2944f565b39ae151e11f938fb9dcbefd337880e",
+          "message": "Add match service in aiplatform v1beta1 match_service.proto",
+          "issues": [
+            "4002"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "52a207d6-c69c-437c-8b84-cb32466f2142",
+      "createTime": "2023-02-22T06:11:36.245Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "f2134ed5f166a3bb7dd0bed556700f0b0fd9756a",
           "message": "[Many APIs] changing format of the jsdoc links",
@@ -4071,5 +4231,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-02-15T18:51:29.272Z"
+  "updateTime": "2023-02-23T20:30:56.022Z"
 }

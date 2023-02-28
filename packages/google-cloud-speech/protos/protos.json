@@ -172,6 +172,28 @@
                         "interimResults": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "voiceActivityTimeout": {
+                          "type": "VoiceActivityTimeout",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "VoiceActivityTimeout": {
+                          "fields": {
+                            "speechStartTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "speechEndTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -500,6 +522,10 @@
                           "type": "SpeechEventType",
                           "id": 4
                         },
+                        "speechEventTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8
+                        },
                         "totalBilledTime": {
                           "type": "google.protobuf.Duration",
                           "id": 5
@@ -517,7 +543,10 @@
                         "SpeechEventType": {
                           "values": {
                             "SPEECH_EVENT_UNSPECIFIED": 0,
-                            "END_OF_SINGLE_UTTERANCE": 1
+                            "END_OF_SINGLE_UTTERANCE": 1,
+                            "SPEECH_ACTIVITY_BEGIN": 2,
+                            "SPEECH_ACTIVITY_END": 3,
+                            "SPEECH_ACTIVITY_TIMEOUT": 4
                           }
                         }
                       }
@@ -1297,6 +1326,28 @@
                         "interimResults": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "voiceActivityTimeout": {
+                          "type": "VoiceActivityTimeout",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "VoiceActivityTimeout": {
+                          "fields": {
+                            "speechStartTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "speechEndTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -1658,6 +1709,10 @@
                           "type": "SpeechEventType",
                           "id": 4
                         },
+                        "speechEventTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8
+                        },
                         "totalBilledTime": {
                           "type": "google.protobuf.Duration",
                           "id": 5
@@ -1675,7 +1730,10 @@
                         "SpeechEventType": {
                           "values": {
                             "SPEECH_EVENT_UNSPECIFIED": 0,
-                            "END_OF_SINGLE_UTTERANCE": 1
+                            "END_OF_SINGLE_UTTERANCE": 1,
+                            "SPEECH_ACTIVITY_BEGIN": 2,
+                            "SPEECH_ACTIVITY_END": 3,
+                            "SPEECH_ACTIVITY_TIMEOUT": 4
                           }
                         }
                       }
