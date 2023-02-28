@@ -20563,6 +20563,9 @@ export namespace google {
 
                         /** MatchIntentRequest queryInput */
                         queryInput?: (google.cloud.dialogflow.cx.v3.IQueryInput|null);
+
+                        /** MatchIntentRequest persistParameterChanges */
+                        persistParameterChanges?: (boolean|null);
                     }
 
                     /** Represents a MatchIntentRequest. */
@@ -20582,6 +20585,9 @@ export namespace google {
 
                         /** MatchIntentRequest queryInput. */
                         public queryInput?: (google.cloud.dialogflow.cx.v3.IQueryInput|null);
+
+                        /** MatchIntentRequest persistParameterChanges. */
+                        public persistParameterChanges: boolean;
 
                         /**
                          * Creates a new MatchIntentRequest instance using the specified properties.
