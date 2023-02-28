@@ -24,6 +24,8 @@ export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 # A script file for running the test in a sub project.
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
+curl https://github.com/googleapis/repo-automation-bots/releases/download/flakybot-1.1.0/flakybot -o flakybot -s -L
+chmod +x ./flakybot
 
 if [ ${BUILD_TYPE} == "presubmit" ]; then
     # For presubmit build, we want to know the difference from the
