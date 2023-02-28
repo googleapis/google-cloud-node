@@ -29,7 +29,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await kmsinventoryClient.getProjectId();
+    projectId = await inventoryClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
