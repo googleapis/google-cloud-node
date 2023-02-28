@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.5.1...dialogflow-v5.6.0) (2023-02-22)
+
+
+### Features
+
+* [dialogflow] added support for AssistQueryParameters and SynthesizeSpeechConfig ([#3995](https://github.com/googleapis/google-cloud-node/issues/3995)) ([57c0441](https://github.com/googleapis/google-cloud-node/commit/57c0441e11fe7c7f2b185bb8061c8be1a036be11))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.5.0...dialogflow-v5.5.1) (2023-02-15)
 
 

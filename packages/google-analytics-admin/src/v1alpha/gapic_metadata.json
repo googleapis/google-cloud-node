@@ -345,6 +345,66 @@
                 "runAccessReport"
               ]
             },
+            "CreateAccessBinding": {
+              "methods": [
+                "createAccessBinding"
+              ]
+            },
+            "GetAccessBinding": {
+              "methods": [
+                "getAccessBinding"
+              ]
+            },
+            "UpdateAccessBinding": {
+              "methods": [
+                "updateAccessBinding"
+              ]
+            },
+            "DeleteAccessBinding": {
+              "methods": [
+                "deleteAccessBinding"
+              ]
+            },
+            "BatchCreateAccessBindings": {
+              "methods": [
+                "batchCreateAccessBindings"
+              ]
+            },
+            "BatchGetAccessBindings": {
+              "methods": [
+                "batchGetAccessBindings"
+              ]
+            },
+            "BatchUpdateAccessBindings": {
+              "methods": [
+                "batchUpdateAccessBindings"
+              ]
+            },
+            "BatchDeleteAccessBindings": {
+              "methods": [
+                "batchDeleteAccessBindings"
+              ]
+            },
+            "GetExpandedDataSet": {
+              "methods": [
+                "getExpandedDataSet"
+              ]
+            },
+            "CreateExpandedDataSet": {
+              "methods": [
+                "createExpandedDataSet"
+              ]
+            },
+            "UpdateExpandedDataSet": {
+              "methods": [
+                "updateExpandedDataSet"
+              ]
+            },
+            "DeleteExpandedDataSet": {
+              "methods": [
+                "deleteExpandedDataSet"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "setAutomatedGa4ConfigurationOptOut"
@@ -477,6 +537,20 @@
                 "listSearchAds360Links",
                 "listSearchAds360LinksStream",
                 "listSearchAds360LinksAsync"
+              ]
+            },
+            "ListAccessBindings": {
+              "methods": [
+                "listAccessBindings",
+                "listAccessBindingsStream",
+                "listAccessBindingsAsync"
+              ]
+            },
+            "ListExpandedDataSets": {
+              "methods": [
+                "listExpandedDataSets",
+                "listExpandedDataSetsStream",
+                "listExpandedDataSetsAsync"
               ]
             },
             "ListBigQueryLinks": {
@@ -826,6 +900,66 @@
                 "runAccessReport"
               ]
             },
+            "CreateAccessBinding": {
+              "methods": [
+                "createAccessBinding"
+              ]
+            },
+            "GetAccessBinding": {
+              "methods": [
+                "getAccessBinding"
+              ]
+            },
+            "UpdateAccessBinding": {
+              "methods": [
+                "updateAccessBinding"
+              ]
+            },
+            "DeleteAccessBinding": {
+              "methods": [
+                "deleteAccessBinding"
+              ]
+            },
+            "BatchCreateAccessBindings": {
+              "methods": [
+                "batchCreateAccessBindings"
+              ]
+            },
+            "BatchGetAccessBindings": {
+              "methods": [
+                "batchGetAccessBindings"
+              ]
+            },
+            "BatchUpdateAccessBindings": {
+              "methods": [
+                "batchUpdateAccessBindings"
+              ]
+            },
+            "BatchDeleteAccessBindings": {
+              "methods": [
+                "batchDeleteAccessBindings"
+              ]
+            },
+            "GetExpandedDataSet": {
+              "methods": [
+                "getExpandedDataSet"
+              ]
+            },
+            "CreateExpandedDataSet": {
+              "methods": [
+                "createExpandedDataSet"
+              ]
+            },
+            "UpdateExpandedDataSet": {
+              "methods": [
+                "updateExpandedDataSet"
+              ]
+            },
+            "DeleteExpandedDataSet": {
+              "methods": [
+                "deleteExpandedDataSet"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "setAutomatedGa4ConfigurationOptOut"
@@ -958,6 +1092,20 @@
                 "listSearchAds360Links",
                 "listSearchAds360LinksStream",
                 "listSearchAds360LinksAsync"
+              ]
+            },
+            "ListAccessBindings": {
+              "methods": [
+                "listAccessBindings",
+                "listAccessBindingsStream",
+                "listAccessBindingsAsync"
+              ]
+            },
+            "ListExpandedDataSets": {
+              "methods": [
+                "listExpandedDataSets",
+                "listExpandedDataSetsStream",
+                "listExpandedDataSetsAsync"
               ]
             },
             "ListBigQueryLinks": {
