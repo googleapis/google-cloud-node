@@ -19,7 +19,9 @@
 import {KeyDashboardServiceClient, KeyTrackingServiceClient} from 'inventory';
 
 // check that the client class type name can be used
-function doStuffWithKeyDashboardServiceClient(client: KeyDashboardServiceClient) {
+function doStuffWithKeyDashboardServiceClient(
+  client: KeyDashboardServiceClient
+) {
   client.close();
 }
 function doStuffWithKeyTrackingServiceClient(client: KeyTrackingServiceClient) {
