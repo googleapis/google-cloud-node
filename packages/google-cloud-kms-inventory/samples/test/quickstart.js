@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {KeyDashboardServiceClient} = require('@google-cloud/inventory').v1;
+const {KeyDashboardServiceClient} = require('@google-cloud/kms-inventory').v1;
 const inventoryClient = new KeyDashboardServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

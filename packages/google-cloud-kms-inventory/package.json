@@ -1,5 +1,5 @@
 {
-  "name": "inventory",
+  "name": "@google-cloud/kms-inventory",
   "version": "0.1.0",
   "description": "Inventory client for Node.js",
   "repository": "googleapis/nodejs-inventory",
