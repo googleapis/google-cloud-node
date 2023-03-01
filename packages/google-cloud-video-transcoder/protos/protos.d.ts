@@ -4086,6 +4086,12 @@ export namespace google {
 
                         /** AudioStream sampleRateHertz */
                         sampleRateHertz?: (number|null);
+
+                        /** AudioStream languageCode */
+                        languageCode?: (string|null);
+
+                        /** AudioStream displayName */
+                        displayName?: (string|null);
                     }
 
                     /** Represents an AudioStream. */
@@ -4114,6 +4120,12 @@ export namespace google {
 
                         /** AudioStream sampleRateHertz. */
                         public sampleRateHertz: number;
+
+                        /** AudioStream languageCode. */
+                        public languageCode: string;
+
+                        /** AudioStream displayName. */
+                        public displayName: string;
 
                         /**
                          * Creates a new AudioStream instance using the specified properties.
@@ -4329,8 +4341,14 @@ export namespace google {
                         /** TextStream codec */
                         codec?: (string|null);
 
+                        /** TextStream languageCode */
+                        languageCode?: (string|null);
+
                         /** TextStream mapping */
                         mapping?: (google.cloud.video.transcoder.v1.TextStream.ITextMapping[]|null);
+
+                        /** TextStream displayName */
+                        displayName?: (string|null);
                     }
 
                     /** Represents a TextStream. */
@@ -4345,8 +4363,14 @@ export namespace google {
                         /** TextStream codec. */
                         public codec: string;
 
+                        /** TextStream languageCode. */
+                        public languageCode: string;
+
                         /** TextStream mapping. */
                         public mapping: google.cloud.video.transcoder.v1.TextStream.ITextMapping[];
+
+                        /** TextStream displayName. */
+                        public displayName: string;
 
                         /**
                          * Creates a new TextStream instance using the specified properties.
