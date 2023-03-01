@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.4.1...video-transcoder-v2.5.0) (2023-03-01)
+
+
+### Features
+
+* [video-transcoder] Specifying language code and display name for text and audio streams is now supported ([#4035](https://github.com/googleapis/google-cloud-node/issues/4035)) ([73d846e](https://github.com/googleapis/google-cloud-node/commit/73d846e1aedc4103d25ae7e7dbecf7c4f5a8775a))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v2.4.0...video-transcoder-v2.4.1) (2023-02-15)
 
 
