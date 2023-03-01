@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "3.3.0",
+        "version": "3.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -3014,7 +3014,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -3034,6 +3034,10 @@
                     {
                         "name": "query_input",
                         "type": ".google.cloud.dialogflow.cx.v3.QueryInput"
+                    },
+                    {
+                        "name": "persist_parameter_changes",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.dialogflow.cx.v3.MatchIntentResponse",

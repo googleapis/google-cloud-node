@@ -1020,6 +1020,14 @@
                             "sampleRateHertz": {
                               "type": "int32",
                               "id": 6
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -1074,10 +1082,18 @@
                               "type": "string",
                               "id": 1
                             },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
                             "mapping": {
                               "rule": "repeated",
                               "type": "TextMapping",
                               "id": 3
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 4
                             }
                           },
                           "nested": {

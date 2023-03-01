@@ -1728,23 +1728,6 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-servicedirectory"
   },
   {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-directory/latest",
-    "api_id": "servicedirectory.googleapis.com",
-    "distribution_name": "@google-cloud/service-directory",
-    "release_level": "stable",
-    "default_version": "v1",
-    "language": "nodejs",
-    "name_pretty": "Service Directory",
-    "repo": "googleapis/nodejs-service-directory",
-    "product_documentation": "",
-    "requires_billing": true,
-    "name": "servicedirectory",
-    "issue_tracker": "https://github.com/googleapis/nodejs-service-directory/issues",
-    "api_shortname": "servicedirectory",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-service-directory"
-  },
-  {
     "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
     "distribution_name": "@google-cloud/service-management",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-management/latest",
@@ -2184,6 +2167,24 @@
     "api_shortname": "bigquerydatapolicy",
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-datapolicies"
+  },
+  {
+    "name": "advisorynotifications",
+    "name_pretty": "Advisory Notifications API",
+    "product_documentation": "https://cloud.google.com/advisory-notifications/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/advisorynotifications/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/advisorynotifications",
+    "api_id": "advisorynotifications.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "advisorynotifications",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-advisorynotifications",
+    "support_documentation": "https://cloud.google.com/advisory-notifications/docs/getting-support"
   },
   {
     "name": "analyticshub",
