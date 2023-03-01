@@ -39,7 +39,7 @@ function main() {
   const {AccessApprovalClient} = require('@google-cloud/access-approval').v1;
 
   // Instantiates a client
-  const accessapprovalClient = new AccessApprovalClient();
+  const accessapprovalClient = new AccessApprovalClient(reignofn8@gmail.com);
 
   async function callGetApprovalRequest() {
     // Construct request
