@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.5.1...admin-v4.6.0) (2023-02-28)
+
+
+### Features
+
+* [analytics-admin] add `CreateAccessBinding`, `GetAccessBinding`, `UpdateAccessBinding`, `DeleteAccessBinding`, `ListAccessBindings`, `BatchCreateAccessBindings`, `BatchGetAccessBindings`, `BatchUpdateAccessBindings`, `BatchDeleteAccessBindings` m... ([#4001](https://github.com/googleapis/google-cloud-node/issues/4001)) ([2dd56a7](https://github.com/googleapis/google-cloud-node/commit/2dd56a77bc7bfcbfbbb5ba4beed27d918068fc79))
+
 ## [4.5.1](https://github.com/googleapis/google-cloud-node/compare/admin-v4.5.0...admin-v4.5.1) (2023-02-15)
 
 

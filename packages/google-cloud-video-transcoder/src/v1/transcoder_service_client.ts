@@ -638,8 +638,8 @@ export class TranscoderServiceClient {
    * @param {google.cloud.video.transcoder.v1.JobTemplate} request.jobTemplate
    *   Required. Parameters for creating job template.
    * @param {string} request.jobTemplateId
-   *   Required. The ID to use for the job template, which will become the final component
-   *   of the job template's resource name.
+   *   Required. The ID to use for the job template, which will become the final
+   *   component of the job template's resource name.
    *
    *   This value should be 4-63 characters, and valid characters must match the
    *   regular expression `{@link a-zA-Z0-9_-|a-zA-Z}*`.
@@ -1150,8 +1150,8 @@ export class TranscoderServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location from which to retrieve the collection of job templates.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent location from which to retrieve the collection of job
+   *   templates. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    * @param {string} request.pageToken
@@ -1256,8 +1256,8 @@ export class TranscoderServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location from which to retrieve the collection of job templates.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent location from which to retrieve the collection of job
+   *   templates. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    * @param {string} request.pageToken
@@ -1310,8 +1310,8 @@ export class TranscoderServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location from which to retrieve the collection of job templates.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent location from which to retrieve the collection of job
+   *   templates. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    * @param {string} request.pageToken
