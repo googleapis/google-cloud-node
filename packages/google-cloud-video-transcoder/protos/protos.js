@@ -10684,6 +10684,8 @@
                              * @property {Array.<string>|null} [channelLayout] AudioStream channelLayout
                              * @property {Array.<google.cloud.video.transcoder.v1.AudioStream.IAudioMapping>|null} [mapping] AudioStream mapping
                              * @property {number|null} [sampleRateHertz] AudioStream sampleRateHertz
+                             * @property {string|null} [languageCode] AudioStream languageCode
+                             * @property {string|null} [displayName] AudioStream displayName
                              */
     
                             /**
@@ -10752,6 +10754,22 @@
                             AudioStream.prototype.sampleRateHertz = 0;
     
                             /**
+                             * AudioStream languageCode.
+                             * @member {string} languageCode
+                             * @memberof google.cloud.video.transcoder.v1.AudioStream
+                             * @instance
+                             */
+                            AudioStream.prototype.languageCode = "";
+    
+                            /**
+                             * AudioStream displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.video.transcoder.v1.AudioStream
+                             * @instance
+                             */
+                            AudioStream.prototype.displayName = "";
+    
+                            /**
                              * Creates a new AudioStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.AudioStream
@@ -10789,6 +10807,10 @@
                                         $root.google.cloud.video.transcoder.v1.AudioStream.AudioMapping.encode(message.mapping[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.sampleRateHertz != null && Object.hasOwnProperty.call(message, "sampleRateHertz"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).int32(message.sampleRateHertz);
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.languageCode);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
                                 return writer;
                             };
     
@@ -10849,6 +10871,14 @@
                                         }
                                     case 6: {
                                             message.sampleRateHertz = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.displayName = reader.string();
                                             break;
                                         }
                                     default:
@@ -10914,6 +10944,12 @@
                                 if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                     if (!$util.isInteger(message.sampleRateHertz))
                                         return "sampleRateHertz: integer expected";
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
                                 return null;
                             };
     
@@ -10954,6 +10990,10 @@
                                 }
                                 if (object.sampleRateHertz != null)
                                     message.sampleRateHertz = object.sampleRateHertz | 0;
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
                                 return message;
                             };
     
@@ -10979,6 +11019,8 @@
                                     object.bitrateBps = 0;
                                     object.channelCount = 0;
                                     object.sampleRateHertz = 0;
+                                    object.languageCode = "";
+                                    object.displayName = "";
                                 }
                                 if (message.codec != null && message.hasOwnProperty("codec"))
                                     object.codec = message.codec;
@@ -10998,6 +11040,10 @@
                                 }
                                 if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                     object.sampleRateHertz = message.sampleRateHertz;
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    object.languageCode = message.languageCode;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
                                 return object;
                             };
     
@@ -11356,7 +11402,9 @@
                              * @memberof google.cloud.video.transcoder.v1
                              * @interface ITextStream
                              * @property {string|null} [codec] TextStream codec
+                             * @property {string|null} [languageCode] TextStream languageCode
                              * @property {Array.<google.cloud.video.transcoder.v1.TextStream.ITextMapping>|null} [mapping] TextStream mapping
+                             * @property {string|null} [displayName] TextStream displayName
                              */
     
                             /**
@@ -11384,12 +11432,28 @@
                             TextStream.prototype.codec = "";
     
                             /**
+                             * TextStream languageCode.
+                             * @member {string} languageCode
+                             * @memberof google.cloud.video.transcoder.v1.TextStream
+                             * @instance
+                             */
+                            TextStream.prototype.languageCode = "";
+    
+                            /**
                              * TextStream mapping.
                              * @member {Array.<google.cloud.video.transcoder.v1.TextStream.ITextMapping>} mapping
                              * @memberof google.cloud.video.transcoder.v1.TextStream
                              * @instance
                              */
                             TextStream.prototype.mapping = $util.emptyArray;
+    
+                            /**
+                             * TextStream displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.video.transcoder.v1.TextStream
+                             * @instance
+                             */
+                            TextStream.prototype.displayName = "";
     
                             /**
                              * Creates a new TextStream instance using the specified properties.
@@ -11417,9 +11481,13 @@
                                     writer = $Writer.create();
                                 if (message.codec != null && Object.hasOwnProperty.call(message, "codec"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.codec);
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
                                 if (message.mapping != null && message.mapping.length)
                                     for (var i = 0; i < message.mapping.length; ++i)
                                         $root.google.cloud.video.transcoder.v1.TextStream.TextMapping.encode(message.mapping[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
                                 return writer;
                             };
     
@@ -11458,10 +11526,18 @@
                                             message.codec = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
                                     case 3: {
                                             if (!(message.mapping && message.mapping.length))
                                                 message.mapping = [];
                                             message.mapping.push($root.google.cloud.video.transcoder.v1.TextStream.TextMapping.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.displayName = reader.string();
                                             break;
                                         }
                                     default:
@@ -11502,6 +11578,9 @@
                                 if (message.codec != null && message.hasOwnProperty("codec"))
                                     if (!$util.isString(message.codec))
                                         return "codec: string expected";
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
                                 if (message.mapping != null && message.hasOwnProperty("mapping")) {
                                     if (!Array.isArray(message.mapping))
                                         return "mapping: array expected";
@@ -11511,6 +11590,9 @@
                                             return "mapping." + error;
                                     }
                                 }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
                                 return null;
                             };
     
@@ -11528,6 +11610,8 @@
                                 var message = new $root.google.cloud.video.transcoder.v1.TextStream();
                                 if (object.codec != null)
                                     message.codec = String(object.codec);
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
                                 if (object.mapping) {
                                     if (!Array.isArray(object.mapping))
                                         throw TypeError(".google.cloud.video.transcoder.v1.TextStream.mapping: array expected");
@@ -11538,6 +11622,8 @@
                                         message.mapping[i] = $root.google.cloud.video.transcoder.v1.TextStream.TextMapping.fromObject(object.mapping[i]);
                                     }
                                 }
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
                                 return message;
                             };
     
@@ -11556,15 +11642,22 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.mapping = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.codec = "";
+                                    object.languageCode = "";
+                                    object.displayName = "";
+                                }
                                 if (message.codec != null && message.hasOwnProperty("codec"))
                                     object.codec = message.codec;
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    object.languageCode = message.languageCode;
                                 if (message.mapping && message.mapping.length) {
                                     object.mapping = [];
                                     for (var j = 0; j < message.mapping.length; ++j)
                                         object.mapping[j] = $root.google.cloud.video.transcoder.v1.TextStream.TextMapping.toObject(message.mapping[j], options);
                                 }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
                                 return object;
                             };
     

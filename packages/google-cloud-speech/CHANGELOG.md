@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v5.3.1...speech-v5.4.0) (2023-02-28)
+
+
+### Features
+
+* Voice Activity Detection: adding speech event time and speech event type ([#4020](https://github.com/googleapis/google-cloud-node/issues/4020)) ([c66276d](https://github.com/googleapis/google-cloud-node/commit/c66276de5e7a2343913941abe373a339c84123bb))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/speech-v5.3.0...speech-v5.3.1) (2023-02-15)
 
 
