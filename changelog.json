@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "73d846e1aedc4103d25ae7e7dbecf7c4f5a8775a",
+          "message": "[video-transcoder] Specifying language code and display name for text and audio streams is now supported",
+          "issues": [
+            "4035"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "f132205e-d61a-4db3-9b5b-cfccd629f480",
+      "createTime": "2023-03-01T19:38:11.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "310c189c2af21be7363880206200f24c2ec60fbe",
           "message": "Add initial files for google.cloud.advisorynotifications.v1",
           "issues": [
@@ -4282,5 +4299,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-02-28T02:19:10.801Z"
+  "updateTime": "2023-03-01T19:38:11.617Z"
 }
