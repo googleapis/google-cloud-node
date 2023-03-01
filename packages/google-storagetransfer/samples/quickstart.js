@@ -15,8 +15,11 @@
 
 'use strict';
 
-async function main(projectId = 'my-project', gcsSourceBucket = "my-source-bucket",
-                    gcsSinkBucket = "my-sink-bucket") {
+async function main(
+  projectId = 'my-project',
+  gcsSourceBucket = 'my-source-bucket',
+  gcsSinkBucket = 'my-sink-bucket'
+) {
   // [START storagetransfer_quickstart]
 
   // Imports the Google Cloud client library
