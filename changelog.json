@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ebaed2007ee154ce8f9a604d023d5a5cd1ef7b81",
+          "message": "[dialogflow-cx] Added persist_parameter_changes field from `query_params` to MatchIntentRequest",
+          "issues": [
+            "4031"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "a114f189-3dcb-4e93-8f61-392fa990908f",
+      "createTime": "2023-03-01T20:52:56.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "73d846e1aedc4103d25ae7e7dbecf7c4f5a8775a",
           "message": "[video-transcoder] Specifying language code and display name for text and audio streams is now supported",
           "issues": [
@@ -4299,5 +4316,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-03-01T19:38:11.617Z"
+  "updateTime": "2023-03-01T20:52:56.363Z"
 }
