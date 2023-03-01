@@ -14,11 +14,11 @@ Inventory client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](googleapis/nodejs-inventory/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-kms-inventory/CHANGELOG.md).
 
 * [KMS Inventory API Node.js Client API Reference][client-docs]
 * [KMS Inventory API Documentation][product-docs]
-* [github.com/googleapis/nodejs-inventory](googleapis/nodejs-inventory)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-kms-inventory](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-kms-inventory)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
