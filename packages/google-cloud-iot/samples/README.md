@@ -32,7 +32,6 @@
   * [Device_manager.update_device](#device_manager.update_device)
   * [Device_manager.update_device_registry](#device_manager.update_device_registry)
   * [Quickstart](#quickstart)
-  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
@@ -382,23 +381,6 @@ __Usage:__
 
 
 `node packages/google-cloud-iot/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iot/samples/test/quickstart.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iot/samples/test/quickstart.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-iot/samples/test/quickstart.test.js`
 
 
 
