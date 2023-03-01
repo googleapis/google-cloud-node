@@ -47,7 +47,7 @@
   "packages/google-cloud-datastream": "2.2.1",
   "packages/google-cloud-deploy": "2.3.1",
   "packages/google-cloud-dialogflow": "5.6.0",
-  "packages/google-cloud-dialogflow-cx": "3.3.0",
+  "packages/google-cloud-dialogflow-cx": "3.4.0",
   "packages/google-cloud-discoveryengine": "0.3.1",
   "packages/google-cloud-documentai": "7.1.0",
   "packages/google-cloud-domains": "2.2.1",
