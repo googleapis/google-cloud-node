@@ -5168,6 +5168,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "persistParameterChanges": {
+                              "type": "bool",
+                              "id": 5
                             }
                           }
                         },
@@ -12746,6 +12750,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "persistParameterChanges": {
+                              "type": "bool",
+                              "id": 5
                             }
                           }
                         },
