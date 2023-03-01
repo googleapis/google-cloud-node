@@ -7988,6 +7988,603 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Represents a SqlTranslationService */
+                    class SqlTranslationService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new SqlTranslationService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new SqlTranslationService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SqlTranslationService;
+
+                        /**
+                         * Calls TranslateQuery.
+                         * @param request TranslateQueryRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TranslateQueryResponse
+                         */
+                        public translateQuery(request: google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest, callback: google.cloud.bigquery.migration.v2alpha.SqlTranslationService.TranslateQueryCallback): void;
+
+                        /**
+                         * Calls TranslateQuery.
+                         * @param request TranslateQueryRequest message or plain object
+                         * @returns Promise
+                         */
+                        public translateQuery(request: google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest): Promise<google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse>;
+                    }
+
+                    namespace SqlTranslationService {
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationService|translateQuery}.
+                         * @param error Error, if any
+                         * @param [response] TranslateQueryResponse
+                         */
+                        type TranslateQueryCallback = (error: (Error|null), response?: google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse) => void;
+                    }
+
+                    /** Properties of a TranslateQueryRequest. */
+                    interface ITranslateQueryRequest {
+
+                        /** TranslateQueryRequest parent */
+                        parent?: (string|null);
+
+                        /** TranslateQueryRequest sourceDialect */
+                        sourceDialect?: (google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect|keyof typeof google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect|null);
+
+                        /** TranslateQueryRequest query */
+                        query?: (string|null);
+                    }
+
+                    /** Represents a TranslateQueryRequest. */
+                    class TranslateQueryRequest implements ITranslateQueryRequest {
+
+                        /**
+                         * Constructs a new TranslateQueryRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest);
+
+                        /** TranslateQueryRequest parent. */
+                        public parent: string;
+
+                        /** TranslateQueryRequest sourceDialect. */
+                        public sourceDialect: (google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect|keyof typeof google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect);
+
+                        /** TranslateQueryRequest query. */
+                        public query: string;
+
+                        /**
+                         * Creates a new TranslateQueryRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TranslateQueryRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest): google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest;
+
+                        /**
+                         * Encodes the specified TranslateQueryRequest message. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.verify|verify} messages.
+                         * @param message TranslateQueryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TranslateQueryRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.verify|verify} messages.
+                         * @param message TranslateQueryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2alpha.ITranslateQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TranslateQueryRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TranslateQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest;
+
+                        /**
+                         * Decodes a TranslateQueryRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TranslateQueryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest;
+
+                        /**
+                         * Verifies a TranslateQueryRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TranslateQueryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TranslateQueryRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest;
+
+                        /**
+                         * Creates a plain object from a TranslateQueryRequest message. Also converts values to other types if specified.
+                         * @param message TranslateQueryRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TranslateQueryRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TranslateQueryRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TranslateQueryRequest {
+
+                        /** SqlTranslationSourceDialect enum. */
+                        enum SqlTranslationSourceDialect {
+                            SQL_TRANSLATION_SOURCE_DIALECT_UNSPECIFIED = 0,
+                            TERADATA = 1
+                        }
+                    }
+
+                    /** Properties of a TranslateQueryResponse. */
+                    interface ITranslateQueryResponse {
+
+                        /** TranslateQueryResponse translationJob */
+                        translationJob?: (string|null);
+
+                        /** TranslateQueryResponse translatedQuery */
+                        translatedQuery?: (string|null);
+
+                        /** TranslateQueryResponse errors */
+                        errors?: (google.cloud.bigquery.migration.v2alpha.ISqlTranslationError[]|null);
+
+                        /** TranslateQueryResponse warnings */
+                        warnings?: (google.cloud.bigquery.migration.v2alpha.ISqlTranslationWarning[]|null);
+                    }
+
+                    /** Represents a TranslateQueryResponse. */
+                    class TranslateQueryResponse implements ITranslateQueryResponse {
+
+                        /**
+                         * Constructs a new TranslateQueryResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse);
+
+                        /** TranslateQueryResponse translationJob. */
+                        public translationJob: string;
+
+                        /** TranslateQueryResponse translatedQuery. */
+                        public translatedQuery: string;
+
+                        /** TranslateQueryResponse errors. */
+                        public errors: google.cloud.bigquery.migration.v2alpha.ISqlTranslationError[];
+
+                        /** TranslateQueryResponse warnings. */
+                        public warnings: google.cloud.bigquery.migration.v2alpha.ISqlTranslationWarning[];
+
+                        /**
+                         * Creates a new TranslateQueryResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TranslateQueryResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse): google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse;
+
+                        /**
+                         * Encodes the specified TranslateQueryResponse message. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse.verify|verify} messages.
+                         * @param message TranslateQueryResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TranslateQueryResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse.verify|verify} messages.
+                         * @param message TranslateQueryResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2alpha.ITranslateQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TranslateQueryResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TranslateQueryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse;
+
+                        /**
+                         * Decodes a TranslateQueryResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TranslateQueryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse;
+
+                        /**
+                         * Verifies a TranslateQueryResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TranslateQueryResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TranslateQueryResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse;
+
+                        /**
+                         * Creates a plain object from a TranslateQueryResponse message. Also converts values to other types if specified.
+                         * @param message TranslateQueryResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TranslateQueryResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TranslateQueryResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SqlTranslationErrorDetail. */
+                    interface ISqlTranslationErrorDetail {
+
+                        /** SqlTranslationErrorDetail row */
+                        row?: (number|Long|string|null);
+
+                        /** SqlTranslationErrorDetail column */
+                        column?: (number|Long|string|null);
+
+                        /** SqlTranslationErrorDetail message */
+                        message?: (string|null);
+                    }
+
+                    /** Represents a SqlTranslationErrorDetail. */
+                    class SqlTranslationErrorDetail implements ISqlTranslationErrorDetail {
+
+                        /**
+                         * Constructs a new SqlTranslationErrorDetail.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail);
+
+                        /** SqlTranslationErrorDetail row. */
+                        public row: (number|Long|string);
+
+                        /** SqlTranslationErrorDetail column. */
+                        public column: (number|Long|string);
+
+                        /** SqlTranslationErrorDetail message. */
+                        public message: string;
+
+                        /**
+                         * Creates a new SqlTranslationErrorDetail instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlTranslationErrorDetail instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail): google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail;
+
+                        /**
+                         * Encodes the specified SqlTranslationErrorDetail message. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail.verify|verify} messages.
+                         * @param message SqlTranslationErrorDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlTranslationErrorDetail message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail.verify|verify} messages.
+                         * @param message SqlTranslationErrorDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlTranslationErrorDetail message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlTranslationErrorDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail;
+
+                        /**
+                         * Decodes a SqlTranslationErrorDetail message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlTranslationErrorDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail;
+
+                        /**
+                         * Verifies a SqlTranslationErrorDetail message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlTranslationErrorDetail message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlTranslationErrorDetail
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail;
+
+                        /**
+                         * Creates a plain object from a SqlTranslationErrorDetail message. Also converts values to other types if specified.
+                         * @param message SqlTranslationErrorDetail
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2alpha.SqlTranslationErrorDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlTranslationErrorDetail to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlTranslationErrorDetail
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SqlTranslationError. */
+                    interface ISqlTranslationError {
+
+                        /** SqlTranslationError errorType */
+                        errorType?: (google.cloud.bigquery.migration.v2alpha.SqlTranslationError.SqlTranslationErrorType|keyof typeof google.cloud.bigquery.migration.v2alpha.SqlTranslationError.SqlTranslationErrorType|null);
+
+                        /** SqlTranslationError errorDetail */
+                        errorDetail?: (google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail|null);
+                    }
+
+                    /** Represents a SqlTranslationError. */
+                    class SqlTranslationError implements ISqlTranslationError {
+
+                        /**
+                         * Constructs a new SqlTranslationError.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2alpha.ISqlTranslationError);
+
+                        /** SqlTranslationError errorType. */
+                        public errorType: (google.cloud.bigquery.migration.v2alpha.SqlTranslationError.SqlTranslationErrorType|keyof typeof google.cloud.bigquery.migration.v2alpha.SqlTranslationError.SqlTranslationErrorType);
+
+                        /** SqlTranslationError errorDetail. */
+                        public errorDetail?: (google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail|null);
+
+                        /**
+                         * Creates a new SqlTranslationError instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlTranslationError instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2alpha.ISqlTranslationError): google.cloud.bigquery.migration.v2alpha.SqlTranslationError;
+
+                        /**
+                         * Encodes the specified SqlTranslationError message. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationError.verify|verify} messages.
+                         * @param message SqlTranslationError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2alpha.ISqlTranslationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlTranslationError message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationError.verify|verify} messages.
+                         * @param message SqlTranslationError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2alpha.ISqlTranslationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlTranslationError message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlTranslationError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2alpha.SqlTranslationError;
+
+                        /**
+                         * Decodes a SqlTranslationError message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlTranslationError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2alpha.SqlTranslationError;
+
+                        /**
+                         * Verifies a SqlTranslationError message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlTranslationError message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlTranslationError
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2alpha.SqlTranslationError;
+
+                        /**
+                         * Creates a plain object from a SqlTranslationError message. Also converts values to other types if specified.
+                         * @param message SqlTranslationError
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2alpha.SqlTranslationError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlTranslationError to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlTranslationError
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SqlTranslationError {
+
+                        /** SqlTranslationErrorType enum. */
+                        enum SqlTranslationErrorType {
+                            SQL_TRANSLATION_ERROR_TYPE_UNSPECIFIED = 0,
+                            SQL_PARSE_ERROR = 1,
+                            UNSUPPORTED_SQL_FUNCTION = 2
+                        }
+                    }
+
+                    /** Properties of a SqlTranslationWarning. */
+                    interface ISqlTranslationWarning {
+
+                        /** SqlTranslationWarning warningDetail */
+                        warningDetail?: (google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail|null);
+                    }
+
+                    /** Represents a SqlTranslationWarning. */
+                    class SqlTranslationWarning implements ISqlTranslationWarning {
+
+                        /**
+                         * Constructs a new SqlTranslationWarning.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2alpha.ISqlTranslationWarning);
+
+                        /** SqlTranslationWarning warningDetail. */
+                        public warningDetail?: (google.cloud.bigquery.migration.v2alpha.ISqlTranslationErrorDetail|null);
+
+                        /**
+                         * Creates a new SqlTranslationWarning instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlTranslationWarning instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2alpha.ISqlTranslationWarning): google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning;
+
+                        /**
+                         * Encodes the specified SqlTranslationWarning message. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning.verify|verify} messages.
+                         * @param message SqlTranslationWarning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2alpha.ISqlTranslationWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlTranslationWarning message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning.verify|verify} messages.
+                         * @param message SqlTranslationWarning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2alpha.ISqlTranslationWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlTranslationWarning message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlTranslationWarning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning;
+
+                        /**
+                         * Decodes a SqlTranslationWarning message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlTranslationWarning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning;
+
+                        /**
+                         * Verifies a SqlTranslationWarning message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlTranslationWarning message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlTranslationWarning
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning;
+
+                        /**
+                         * Creates a plain object from a SqlTranslationWarning message. Also converts values to other types if specified.
+                         * @param message SqlTranslationWarning
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2alpha.SqlTranslationWarning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlTranslationWarning to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlTranslationWarning
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
             }
         }

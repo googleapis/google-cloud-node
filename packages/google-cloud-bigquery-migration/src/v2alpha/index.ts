@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {MigrationServiceClient} from './migration_service_client';
+export {SqlTranslationServiceClient} from './sql_translation_service_client';

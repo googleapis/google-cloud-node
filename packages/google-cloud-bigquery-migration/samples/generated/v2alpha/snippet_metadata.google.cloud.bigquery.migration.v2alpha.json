@@ -330,6 +330,54 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "bigquerymigration_v2alpha_generated_SqlTranslationService_TranslateQuery_async",
+            "title": "MigrationService translateQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Translates input queries from source dialects to GoogleSQL.",
+            "canonical": true,
+            "file": "sql_translation_service.translate_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TranslateQuery",
+                "fullName": "google.cloud.bigquery.migration.v2alpha.SqlTranslationService.TranslateQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "source_dialect",
+                        "type": ".google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest.SqlTranslationSourceDialect"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.migration.v2alpha.TranslateQueryResponse",
+                "client": {
+                    "shortName": "SqlTranslationServiceClient",
+                    "fullName": "google.cloud.bigquery.migration.v2alpha.SqlTranslationServiceClient"
+                },
+                "method": {
+                    "shortName": "TranslateQuery",
+                    "fullName": "google.cloud.bigquery.migration.v2alpha.SqlTranslationService.TranslateQuery",
+                    "service": {
+                        "shortName": "SqlTranslationService",
+                        "fullName": "google.cloud.bigquery.migration.v2alpha.SqlTranslationService"
+                    }
+                }
+            }
         }
     ]
 }

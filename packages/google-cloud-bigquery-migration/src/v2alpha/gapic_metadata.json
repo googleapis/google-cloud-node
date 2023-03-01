@@ -96,6 +96,30 @@
           }
         }
       }
+    },
+    "SqlTranslationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SqlTranslationServiceClient",
+          "rpcs": {
+            "TranslateQuery": {
+              "methods": [
+                "translateQuery"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SqlTranslationServiceClient",
+          "rpcs": {
+            "TranslateQuery": {
+              "methods": [
+                "translateQuery"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

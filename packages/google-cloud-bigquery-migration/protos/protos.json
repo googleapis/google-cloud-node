@@ -949,7 +949,7 @@
                         "csharp_namespace": "Google.Cloud.BigQuery.Migration.V2Alpha",
                         "go_package": "cloud.google.com/go/bigquery/migration/apiv2alpha/migrationpb;migrationpb",
                         "java_multiple_files": true,
-                        "java_outer_classname": "MigrationServiceProto",
+                        "java_outer_classname": "TranslationServiceProto",
                         "java_package": "com.google.cloud.bigquery.migration.v2alpha",
                         "php_namespace": "Google\\Cloud\\BigQuery\\Migration\\V2alpha"
                       },
@@ -1841,6 +1841,138 @@
                             "nextPageToken": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "SqlTranslationService": {
+                          "options": {
+                            "(google.api.default_host)": "bigquerymigration.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "TranslateQuery": {
+                              "requestType": "TranslateQueryRequest",
+                              "responseType": "TranslateQueryResponse",
+                              "options": {
+                                "(google.api.http).post": "/v2alpha/{parent=projects/*/locations/*}:translateQuery",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "parent,source_dialect,query"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2alpha/{parent=projects/*/locations/*}:translateQuery",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,source_dialect,query"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "TranslateQueryRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "sourceDialect": {
+                              "type": "SqlTranslationSourceDialect",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "query": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SqlTranslationSourceDialect": {
+                              "values": {
+                                "SQL_TRANSLATION_SOURCE_DIALECT_UNSPECIFIED": 0,
+                                "TERADATA": 1
+                              }
+                            }
+                          }
+                        },
+                        "TranslateQueryResponse": {
+                          "fields": {
+                            "translationJob": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "translatedQuery": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "errors": {
+                              "rule": "repeated",
+                              "type": "SqlTranslationError",
+                              "id": 2
+                            },
+                            "warnings": {
+                              "rule": "repeated",
+                              "type": "SqlTranslationWarning",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "SqlTranslationErrorDetail": {
+                          "fields": {
+                            "row": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "column": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "SqlTranslationError": {
+                          "fields": {
+                            "errorType": {
+                              "type": "SqlTranslationErrorType",
+                              "id": 1
+                            },
+                            "errorDetail": {
+                              "type": "SqlTranslationErrorDetail",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SqlTranslationErrorType": {
+                              "values": {
+                                "SQL_TRANSLATION_ERROR_TYPE_UNSPECIFIED": 0,
+                                "SQL_PARSE_ERROR": 1,
+                                "UNSUPPORTED_SQL_FUNCTION": 2
+                              }
+                            }
+                          }
+                        },
+                        "SqlTranslationWarning": {
+                          "fields": {
+                            "warningDetail": {
+                              "type": "SqlTranslationErrorDetail",
+                              "id": 1
                             }
                           }
                         }
