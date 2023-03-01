@@ -107,7 +107,7 @@
   "packages/google-cloud-translate": "7.2.0",
   "packages/google-cloud-video-livestream": "0.4.1",
   "packages/google-cloud-video-stitcher": "0.3.1",
-  "packages/google-cloud-video-transcoder": "2.4.1",
+  "packages/google-cloud-video-transcoder": "2.5.0",
   "packages/google-cloud-videointelligence": "4.2.1",
   "packages/google-cloud-vision": "3.1.2",
   "packages/google-cloud-vmmigration": "2.3.1",
