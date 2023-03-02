@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/storage",
   "description": "Cloud Storage Client Library for Node.js",
-  "version": "6.9.3",
+  "version": "6.9.4",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {

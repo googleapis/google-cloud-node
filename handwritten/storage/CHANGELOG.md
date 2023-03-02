@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.9.4](https://github.com/googleapis/nodejs-storage/compare/v6.9.3...v6.9.4) (2023-03-02)
+
+
+### Bug Fixes
+
+* Refactor createReadStream to remove unnecessary stream ([#2153](https://github.com/googleapis/nodejs-storage/issues/2153)) ([2c97310](https://github.com/googleapis/nodejs-storage/commit/2c97310da9edd1afbf61711631979433f10249a5))
+
 ## [6.9.3](https://github.com/googleapis/nodejs-storage/compare/v6.9.2...v6.9.3) (2023-02-15)
 
 
