@@ -566,6 +566,8 @@ export class SessionsClient {
    *   The parameters of this query.
    * @param {google.cloud.dialogflow.cx.v3beta1.QueryInput} request.queryInput
    *   Required. The input specification.
+   * @param {boolean} request.persistParameterChanges
+   *   Persist session parameter changes from `query_params`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

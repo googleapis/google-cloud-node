@@ -50,6 +50,10 @@ function main(session, queryInput) {
    *  Required. The input specification.
    */
   // const queryInput = {}
+  /**
+   *  Persist session parameter changes from `query_params`.
+   */
+  // const persistParameterChanges = true
 
   // Imports the Cx library
   const {SessionsClient} = require('@google-cloud/dialogflow-cx').v3beta1;
