@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "44756d7c15642a065628cd4a598198a56584dbff",
+          "message": "Add initial files for google.cloud.kms.inventory.v1",
+          "issues": [
+            "4011"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "a108d2a6-3503-40d3-ad24-467ec2fa1c80",
+      "createTime": "2023-03-02T07:21:42.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44756d7c15642a065628cd4a598198a56584dbff",
+          "message": "Add initial files for google.cloud.kms.inventory.v1",
+          "issues": [
+            "4011"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "0a134d09-750b-412f-a8e9-e2e5cf3fa123",
+      "createTime": "2023-03-02T07:21:42.469Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ebaed2007ee154ce8f9a604d023d5a5cd1ef7b81",
           "message": "[dialogflow-cx] Added persist_parameter_changes field from `query_params` to MatchIntentRequest",
           "issues": [
@@ -4316,5 +4350,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-03-01T20:52:56.363Z"
+  "updateTime": "2023-03-02T07:21:42.471Z"
 }

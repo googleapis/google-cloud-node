@@ -132,6 +132,7 @@
     "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
+    "packages/google-cloud-kms-inventory": {},
     "packages/google-cloud-advisorynotifications": {},
     "packages/typeless-sample-bot": {}
   },
