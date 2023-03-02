@@ -3398,6 +3398,9 @@ export namespace google {
 
                     /** StatusEvent taskExecution */
                     taskExecution?: (google.cloud.batch.v1.ITaskExecution|null);
+
+                    /** StatusEvent taskState */
+                    taskState?: (google.cloud.batch.v1.TaskStatus.State|keyof typeof google.cloud.batch.v1.TaskStatus.State|null);
                 }
 
                 /** Represents a StatusEvent. */
@@ -3420,6 +3423,9 @@ export namespace google {
 
                     /** StatusEvent taskExecution. */
                     public taskExecution?: (google.cloud.batch.v1.ITaskExecution|null);
+
+                    /** StatusEvent taskState. */
+                    public taskState: (google.cloud.batch.v1.TaskStatus.State|keyof typeof google.cloud.batch.v1.TaskStatus.State);
 
                     /**
                      * Creates a new StatusEvent instance using the specified properties.

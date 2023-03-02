@@ -8772,6 +8772,7 @@
                          * @property {string|null} [description] StatusEvent description
                          * @property {google.protobuf.ITimestamp|null} [eventTime] StatusEvent eventTime
                          * @property {google.cloud.batch.v1.ITaskExecution|null} [taskExecution] StatusEvent taskExecution
+                         * @property {google.cloud.batch.v1.TaskStatus.State|null} [taskState] StatusEvent taskState
                          */
     
                         /**
@@ -8822,6 +8823,14 @@
                         StatusEvent.prototype.taskExecution = null;
     
                         /**
+                         * StatusEvent taskState.
+                         * @member {google.cloud.batch.v1.TaskStatus.State} taskState
+                         * @memberof google.cloud.batch.v1.StatusEvent
+                         * @instance
+                         */
+                        StatusEvent.prototype.taskState = 0;
+    
+                        /**
                          * Creates a new StatusEvent instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1.StatusEvent
@@ -8853,6 +8862,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
                             if (message.taskExecution != null && Object.hasOwnProperty.call(message, "taskExecution"))
                                 $root.google.cloud.batch.v1.TaskExecution.encode(message.taskExecution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.taskState != null && Object.hasOwnProperty.call(message, "taskState"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.taskState);
                             return writer;
                         };
     
@@ -8901,6 +8912,10 @@
                                     }
                                 case 4: {
                                         message.taskExecution = $root.google.cloud.batch.v1.TaskExecution.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.taskState = reader.int32();
                                         break;
                                     }
                                 default:
@@ -8954,6 +8969,18 @@
                                 if (error)
                                     return "taskExecution." + error;
                             }
+                            if (message.taskState != null && message.hasOwnProperty("taskState"))
+                                switch (message.taskState) {
+                                default:
+                                    return "taskState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -8983,6 +9010,38 @@
                                     throw TypeError(".google.cloud.batch.v1.StatusEvent.taskExecution: object expected");
                                 message.taskExecution = $root.google.cloud.batch.v1.TaskExecution.fromObject(object.taskExecution);
                             }
+                            switch (object.taskState) {
+                            default:
+                                if (typeof object.taskState === "number") {
+                                    message.taskState = object.taskState;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.taskState = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.taskState = 1;
+                                break;
+                            case "ASSIGNED":
+                            case 2:
+                                message.taskState = 2;
+                                break;
+                            case "RUNNING":
+                            case 3:
+                                message.taskState = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.taskState = 4;
+                                break;
+                            case "SUCCEEDED":
+                            case 5:
+                                message.taskState = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -9004,6 +9063,7 @@
                                 object.eventTime = null;
                                 object.type = "";
                                 object.taskExecution = null;
+                                object.taskState = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
@@ -9013,6 +9073,8 @@
                                 object.type = message.type;
                             if (message.taskExecution != null && message.hasOwnProperty("taskExecution"))
                                 object.taskExecution = $root.google.cloud.batch.v1.TaskExecution.toObject(message.taskExecution, options);
+                            if (message.taskState != null && message.hasOwnProperty("taskState"))
+                                object.taskState = options.enums === String ? $root.google.cloud.batch.v1.TaskStatus.State[message.taskState] === undefined ? message.taskState : $root.google.cloud.batch.v1.TaskStatus.State[message.taskState] : message.taskState;
                             return object;
                         };
     

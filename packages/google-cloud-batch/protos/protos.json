@@ -845,6 +845,10 @@
                         "taskExecution": {
                           "type": "TaskExecution",
                           "id": 4
+                        },
+                        "taskState": {
+                          "type": "TaskStatus.State",
+                          "id": 5
                         }
                       }
                     },
