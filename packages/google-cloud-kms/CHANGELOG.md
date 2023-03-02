@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.3.1...kms-v3.4.0) (2023-03-02)
+
+
+### Features
+
+* Add initial files for google.cloud.kms.inventory.v1 ([#4011](https://github.com/googleapis/google-cloud-node/issues/4011)) ([44756d7](https://github.com/googleapis/google-cloud-node/commit/44756d7c15642a065628cd4a598198a56584dbff))
+
 ## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/kms-v3.3.0...kms-v3.3.1) (2023-02-15)
 
 
