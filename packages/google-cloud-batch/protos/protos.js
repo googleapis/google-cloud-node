@@ -17279,6 +17279,7 @@
                          * @property {Array.<google.cloud.batch.v1alpha.IStatusEvent>|null} [statusEvents] JobStatus statusEvents
                          * @property {Object.<string,google.cloud.batch.v1alpha.JobStatus.ITaskGroupStatus>|null} [taskGroups] JobStatus taskGroups
                          * @property {google.protobuf.IDuration|null} [runDuration] JobStatus runDuration
+                         * @property {google.cloud.batch.v1alpha.IResourceUsage|null} [resourceUsage] JobStatus resourceUsage
                          */
     
                         /**
@@ -17331,6 +17332,14 @@
                         JobStatus.prototype.runDuration = null;
     
                         /**
+                         * JobStatus resourceUsage.
+                         * @member {google.cloud.batch.v1alpha.IResourceUsage|null|undefined} resourceUsage
+                         * @memberof google.cloud.batch.v1alpha.JobStatus
+                         * @instance
+                         */
+                        JobStatus.prototype.resourceUsage = null;
+    
+                        /**
                          * Creates a new JobStatus instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.JobStatus
@@ -17366,6 +17375,8 @@
                                 }
                             if (message.runDuration != null && Object.hasOwnProperty.call(message, "runDuration"))
                                 $root.google.protobuf.Duration.encode(message.runDuration, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.resourceUsage != null && Object.hasOwnProperty.call(message, "resourceUsage"))
+                                $root.google.cloud.batch.v1alpha.ResourceUsage.encode(message.resourceUsage, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -17435,6 +17446,10 @@
                                     }
                                 case 5: {
                                         message.runDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.resourceUsage = $root.google.cloud.batch.v1alpha.ResourceUsage.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -17508,6 +17523,11 @@
                                 var error = $root.google.protobuf.Duration.verify(message.runDuration);
                                 if (error)
                                     return "runDuration." + error;
+                            }
+                            if (message.resourceUsage != null && message.hasOwnProperty("resourceUsage")) {
+                                var error = $root.google.cloud.batch.v1alpha.ResourceUsage.verify(message.resourceUsage);
+                                if (error)
+                                    return "resourceUsage." + error;
                             }
                             return null;
                         };
@@ -17585,6 +17605,11 @@
                                     throw TypeError(".google.cloud.batch.v1alpha.JobStatus.runDuration: object expected");
                                 message.runDuration = $root.google.protobuf.Duration.fromObject(object.runDuration);
                             }
+                            if (object.resourceUsage != null) {
+                                if (typeof object.resourceUsage !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.JobStatus.resourceUsage: object expected");
+                                message.resourceUsage = $root.google.cloud.batch.v1alpha.ResourceUsage.fromObject(object.resourceUsage);
+                            }
                             return message;
                         };
     
@@ -17608,6 +17633,7 @@
                             if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.runDuration = null;
+                                object.resourceUsage = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.batch.v1alpha.JobStatus.State[message.state] === undefined ? message.state : $root.google.cloud.batch.v1alpha.JobStatus.State[message.state] : message.state;
@@ -17624,6 +17650,8 @@
                             }
                             if (message.runDuration != null && message.hasOwnProperty("runDuration"))
                                 object.runDuration = $root.google.protobuf.Duration.toObject(message.runDuration, options);
+                            if (message.resourceUsage != null && message.hasOwnProperty("resourceUsage"))
+                                object.resourceUsage = $root.google.cloud.batch.v1alpha.ResourceUsage.toObject(message.resourceUsage, options);
                             return object;
                         };
     
@@ -18292,6 +18320,209 @@
                         })();
     
                         return JobStatus;
+                    })();
+    
+                    v1alpha.ResourceUsage = (function() {
+    
+                        /**
+                         * Properties of a ResourceUsage.
+                         * @memberof google.cloud.batch.v1alpha
+                         * @interface IResourceUsage
+                         * @property {number|null} [coreHours] ResourceUsage coreHours
+                         */
+    
+                        /**
+                         * Constructs a new ResourceUsage.
+                         * @memberof google.cloud.batch.v1alpha
+                         * @classdesc Represents a ResourceUsage.
+                         * @implements IResourceUsage
+                         * @constructor
+                         * @param {google.cloud.batch.v1alpha.IResourceUsage=} [properties] Properties to set
+                         */
+                        function ResourceUsage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceUsage coreHours.
+                         * @member {number} coreHours
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @instance
+                         */
+                        ResourceUsage.prototype.coreHours = 0;
+    
+                        /**
+                         * Creates a new ResourceUsage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.IResourceUsage=} [properties] Properties to set
+                         * @returns {google.cloud.batch.v1alpha.ResourceUsage} ResourceUsage instance
+                         */
+                        ResourceUsage.create = function create(properties) {
+                            return new ResourceUsage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceUsage message. Does not implicitly {@link google.cloud.batch.v1alpha.ResourceUsage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.IResourceUsage} message ResourceUsage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceUsage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.coreHours != null && Object.hasOwnProperty.call(message, "coreHours"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.coreHours);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceUsage message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.ResourceUsage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.IResourceUsage} message ResourceUsage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceUsage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceUsage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.batch.v1alpha.ResourceUsage} ResourceUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceUsage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1alpha.ResourceUsage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.coreHours = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceUsage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.batch.v1alpha.ResourceUsage} ResourceUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceUsage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceUsage message.
+                         * @function verify
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceUsage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.coreHours != null && message.hasOwnProperty("coreHours"))
+                                if (typeof message.coreHours !== "number")
+                                    return "coreHours: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceUsage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.batch.v1alpha.ResourceUsage} ResourceUsage
+                         */
+                        ResourceUsage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.batch.v1alpha.ResourceUsage)
+                                return object;
+                            var message = new $root.google.cloud.batch.v1alpha.ResourceUsage();
+                            if (object.coreHours != null)
+                                message.coreHours = Number(object.coreHours);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceUsage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.ResourceUsage} message ResourceUsage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceUsage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.coreHours = 0;
+                            if (message.coreHours != null && message.hasOwnProperty("coreHours"))
+                                object.coreHours = options.json && !isFinite(message.coreHours) ? String(message.coreHours) : message.coreHours;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceUsage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceUsage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceUsage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.batch.v1alpha.ResourceUsage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceUsage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.batch.v1alpha.ResourceUsage";
+                        };
+    
+                        return ResourceUsage;
                     })();
     
                     v1alpha.JobNotification = (function() {
@@ -22963,6 +23194,7 @@
                          * @property {string|null} [description] StatusEvent description
                          * @property {google.protobuf.ITimestamp|null} [eventTime] StatusEvent eventTime
                          * @property {google.cloud.batch.v1alpha.ITaskExecution|null} [taskExecution] StatusEvent taskExecution
+                         * @property {google.cloud.batch.v1alpha.TaskStatus.State|null} [taskState] StatusEvent taskState
                          */
     
                         /**
@@ -23013,6 +23245,14 @@
                         StatusEvent.prototype.taskExecution = null;
     
                         /**
+                         * StatusEvent taskState.
+                         * @member {google.cloud.batch.v1alpha.TaskStatus.State} taskState
+                         * @memberof google.cloud.batch.v1alpha.StatusEvent
+                         * @instance
+                         */
+                        StatusEvent.prototype.taskState = 0;
+    
+                        /**
                          * Creates a new StatusEvent instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.StatusEvent
@@ -23044,6 +23284,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
                             if (message.taskExecution != null && Object.hasOwnProperty.call(message, "taskExecution"))
                                 $root.google.cloud.batch.v1alpha.TaskExecution.encode(message.taskExecution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.taskState != null && Object.hasOwnProperty.call(message, "taskState"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.taskState);
                             return writer;
                         };
     
@@ -23092,6 +23334,10 @@
                                     }
                                 case 4: {
                                         message.taskExecution = $root.google.cloud.batch.v1alpha.TaskExecution.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.taskState = reader.int32();
                                         break;
                                     }
                                 default:
@@ -23145,6 +23391,18 @@
                                 if (error)
                                     return "taskExecution." + error;
                             }
+                            if (message.taskState != null && message.hasOwnProperty("taskState"))
+                                switch (message.taskState) {
+                                default:
+                                    return "taskState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -23174,6 +23432,38 @@
                                     throw TypeError(".google.cloud.batch.v1alpha.StatusEvent.taskExecution: object expected");
                                 message.taskExecution = $root.google.cloud.batch.v1alpha.TaskExecution.fromObject(object.taskExecution);
                             }
+                            switch (object.taskState) {
+                            default:
+                                if (typeof object.taskState === "number") {
+                                    message.taskState = object.taskState;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.taskState = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.taskState = 1;
+                                break;
+                            case "ASSIGNED":
+                            case 2:
+                                message.taskState = 2;
+                                break;
+                            case "RUNNING":
+                            case 3:
+                                message.taskState = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.taskState = 4;
+                                break;
+                            case "SUCCEEDED":
+                            case 5:
+                                message.taskState = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -23195,6 +23485,7 @@
                                 object.eventTime = null;
                                 object.type = "";
                                 object.taskExecution = null;
+                                object.taskState = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
@@ -23204,6 +23495,8 @@
                                 object.type = message.type;
                             if (message.taskExecution != null && message.hasOwnProperty("taskExecution"))
                                 object.taskExecution = $root.google.cloud.batch.v1alpha.TaskExecution.toObject(message.taskExecution, options);
+                            if (message.taskState != null && message.hasOwnProperty("taskState"))
+                                object.taskState = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskStatus.State[message.taskState] === undefined ? message.taskState : $root.google.cloud.batch.v1alpha.TaskStatus.State[message.taskState] : message.taskState;
                             return object;
                         };
     
@@ -23447,6 +23740,7 @@
                          * @interface ITaskStatus
                          * @property {google.cloud.batch.v1alpha.TaskStatus.State|null} [state] TaskStatus state
                          * @property {Array.<google.cloud.batch.v1alpha.IStatusEvent>|null} [statusEvents] TaskStatus statusEvents
+                         * @property {google.cloud.batch.v1alpha.ITaskResourceUsage|null} [resourceUsage] TaskStatus resourceUsage
                          */
     
                         /**
@@ -23482,6 +23776,14 @@
                         TaskStatus.prototype.statusEvents = $util.emptyArray;
     
                         /**
+                         * TaskStatus resourceUsage.
+                         * @member {google.cloud.batch.v1alpha.ITaskResourceUsage|null|undefined} resourceUsage
+                         * @memberof google.cloud.batch.v1alpha.TaskStatus
+                         * @instance
+                         */
+                        TaskStatus.prototype.resourceUsage = null;
+    
+                        /**
                          * Creates a new TaskStatus instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.TaskStatus
@@ -23510,6 +23812,8 @@
                             if (message.statusEvents != null && message.statusEvents.length)
                                 for (var i = 0; i < message.statusEvents.length; ++i)
                                     $root.google.cloud.batch.v1alpha.StatusEvent.encode(message.statusEvents[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.resourceUsage != null && Object.hasOwnProperty.call(message, "resourceUsage"))
+                                $root.google.cloud.batch.v1alpha.TaskResourceUsage.encode(message.resourceUsage, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -23552,6 +23856,10 @@
                                         if (!(message.statusEvents && message.statusEvents.length))
                                             message.statusEvents = [];
                                         message.statusEvents.push($root.google.cloud.batch.v1alpha.StatusEvent.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resourceUsage = $root.google.cloud.batch.v1alpha.TaskResourceUsage.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -23610,6 +23918,11 @@
                                         return "statusEvents." + error;
                                 }
                             }
+                            if (message.resourceUsage != null && message.hasOwnProperty("resourceUsage")) {
+                                var error = $root.google.cloud.batch.v1alpha.TaskResourceUsage.verify(message.resourceUsage);
+                                if (error)
+                                    return "resourceUsage." + error;
+                            }
                             return null;
                         };
     
@@ -23667,6 +23980,11 @@
                                     message.statusEvents[i] = $root.google.cloud.batch.v1alpha.StatusEvent.fromObject(object.statusEvents[i]);
                                 }
                             }
+                            if (object.resourceUsage != null) {
+                                if (typeof object.resourceUsage !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.TaskStatus.resourceUsage: object expected");
+                                message.resourceUsage = $root.google.cloud.batch.v1alpha.TaskResourceUsage.fromObject(object.resourceUsage);
+                            }
                             return message;
                         };
     
@@ -23685,8 +24003,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.statusEvents = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.resourceUsage = null;
+                            }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskStatus.State[message.state] === undefined ? message.state : $root.google.cloud.batch.v1alpha.TaskStatus.State[message.state] : message.state;
                             if (message.statusEvents && message.statusEvents.length) {
@@ -23694,6 +24014,8 @@
                                 for (var j = 0; j < message.statusEvents.length; ++j)
                                     object.statusEvents[j] = $root.google.cloud.batch.v1alpha.StatusEvent.toObject(message.statusEvents[j], options);
                             }
+                            if (message.resourceUsage != null && message.hasOwnProperty("resourceUsage"))
+                                object.resourceUsage = $root.google.cloud.batch.v1alpha.TaskResourceUsage.toObject(message.resourceUsage, options);
                             return object;
                         };
     
@@ -23746,6 +24068,209 @@
                         })();
     
                         return TaskStatus;
+                    })();
+    
+                    v1alpha.TaskResourceUsage = (function() {
+    
+                        /**
+                         * Properties of a TaskResourceUsage.
+                         * @memberof google.cloud.batch.v1alpha
+                         * @interface ITaskResourceUsage
+                         * @property {number|null} [coreHours] TaskResourceUsage coreHours
+                         */
+    
+                        /**
+                         * Constructs a new TaskResourceUsage.
+                         * @memberof google.cloud.batch.v1alpha
+                         * @classdesc Represents a TaskResourceUsage.
+                         * @implements ITaskResourceUsage
+                         * @constructor
+                         * @param {google.cloud.batch.v1alpha.ITaskResourceUsage=} [properties] Properties to set
+                         */
+                        function TaskResourceUsage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TaskResourceUsage coreHours.
+                         * @member {number} coreHours
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @instance
+                         */
+                        TaskResourceUsage.prototype.coreHours = 0;
+    
+                        /**
+                         * Creates a new TaskResourceUsage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.ITaskResourceUsage=} [properties] Properties to set
+                         * @returns {google.cloud.batch.v1alpha.TaskResourceUsage} TaskResourceUsage instance
+                         */
+                        TaskResourceUsage.create = function create(properties) {
+                            return new TaskResourceUsage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TaskResourceUsage message. Does not implicitly {@link google.cloud.batch.v1alpha.TaskResourceUsage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.ITaskResourceUsage} message TaskResourceUsage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TaskResourceUsage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.coreHours != null && Object.hasOwnProperty.call(message, "coreHours"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.coreHours);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TaskResourceUsage message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.TaskResourceUsage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.ITaskResourceUsage} message TaskResourceUsage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TaskResourceUsage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TaskResourceUsage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.batch.v1alpha.TaskResourceUsage} TaskResourceUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TaskResourceUsage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1alpha.TaskResourceUsage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.coreHours = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TaskResourceUsage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.batch.v1alpha.TaskResourceUsage} TaskResourceUsage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TaskResourceUsage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TaskResourceUsage message.
+                         * @function verify
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TaskResourceUsage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.coreHours != null && message.hasOwnProperty("coreHours"))
+                                if (typeof message.coreHours !== "number")
+                                    return "coreHours: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TaskResourceUsage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.batch.v1alpha.TaskResourceUsage} TaskResourceUsage
+                         */
+                        TaskResourceUsage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.batch.v1alpha.TaskResourceUsage)
+                                return object;
+                            var message = new $root.google.cloud.batch.v1alpha.TaskResourceUsage();
+                            if (object.coreHours != null)
+                                message.coreHours = Number(object.coreHours);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TaskResourceUsage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.TaskResourceUsage} message TaskResourceUsage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TaskResourceUsage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.coreHours = 0;
+                            if (message.coreHours != null && message.hasOwnProperty("coreHours"))
+                                object.coreHours = options.json && !isFinite(message.coreHours) ? String(message.coreHours) : message.coreHours;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TaskResourceUsage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TaskResourceUsage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TaskResourceUsage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.batch.v1alpha.TaskResourceUsage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TaskResourceUsage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.batch.v1alpha.TaskResourceUsage";
+                        };
+    
+                        return TaskResourceUsage;
                     })();
     
                     v1alpha.Runnable = (function() {

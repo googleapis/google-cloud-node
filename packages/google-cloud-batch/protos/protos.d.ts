@@ -6762,6 +6762,9 @@ export namespace google {
 
                     /** JobStatus runDuration */
                     runDuration?: (google.protobuf.IDuration|null);
+
+                    /** JobStatus resourceUsage */
+                    resourceUsage?: (google.cloud.batch.v1alpha.IResourceUsage|null);
                 }
 
                 /** Represents a JobStatus. */
@@ -6784,6 +6787,9 @@ export namespace google {
 
                     /** JobStatus runDuration. */
                     public runDuration?: (google.protobuf.IDuration|null);
+
+                    /** JobStatus resourceUsage. */
+                    public resourceUsage?: (google.cloud.batch.v1alpha.IResourceUsage|null);
 
                     /**
                      * Creates a new JobStatus instance using the specified properties.
@@ -7093,6 +7099,103 @@ export namespace google {
                         FAILED = 5,
                         DELETION_IN_PROGRESS = 6
                     }
+                }
+
+                /** Properties of a ResourceUsage. */
+                interface IResourceUsage {
+
+                    /** ResourceUsage coreHours */
+                    coreHours?: (number|null);
+                }
+
+                /** Represents a ResourceUsage. */
+                class ResourceUsage implements IResourceUsage {
+
+                    /**
+                     * Constructs a new ResourceUsage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IResourceUsage);
+
+                    /** ResourceUsage coreHours. */
+                    public coreHours: number;
+
+                    /**
+                     * Creates a new ResourceUsage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceUsage instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IResourceUsage): google.cloud.batch.v1alpha.ResourceUsage;
+
+                    /**
+                     * Encodes the specified ResourceUsage message. Does not implicitly {@link google.cloud.batch.v1alpha.ResourceUsage.verify|verify} messages.
+                     * @param message ResourceUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IResourceUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceUsage message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.ResourceUsage.verify|verify} messages.
+                     * @param message ResourceUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IResourceUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceUsage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.ResourceUsage;
+
+                    /**
+                     * Decodes a ResourceUsage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.ResourceUsage;
+
+                    /**
+                     * Verifies a ResourceUsage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceUsage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceUsage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.ResourceUsage;
+
+                    /**
+                     * Creates a plain object from a ResourceUsage message. Also converts values to other types if specified.
+                     * @param message ResourceUsage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.ResourceUsage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceUsage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceUsage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a JobNotification. */
@@ -8776,6 +8879,9 @@ export namespace google {
 
                     /** StatusEvent taskExecution */
                     taskExecution?: (google.cloud.batch.v1alpha.ITaskExecution|null);
+
+                    /** StatusEvent taskState */
+                    taskState?: (google.cloud.batch.v1alpha.TaskStatus.State|keyof typeof google.cloud.batch.v1alpha.TaskStatus.State|null);
                 }
 
                 /** Represents a StatusEvent. */
@@ -8798,6 +8904,9 @@ export namespace google {
 
                     /** StatusEvent taskExecution. */
                     public taskExecution?: (google.cloud.batch.v1alpha.ITaskExecution|null);
+
+                    /** StatusEvent taskState. */
+                    public taskState: (google.cloud.batch.v1alpha.TaskStatus.State|keyof typeof google.cloud.batch.v1alpha.TaskStatus.State);
 
                     /**
                      * Creates a new StatusEvent instance using the specified properties.
@@ -8982,6 +9091,9 @@ export namespace google {
 
                     /** TaskStatus statusEvents */
                     statusEvents?: (google.cloud.batch.v1alpha.IStatusEvent[]|null);
+
+                    /** TaskStatus resourceUsage */
+                    resourceUsage?: (google.cloud.batch.v1alpha.ITaskResourceUsage|null);
                 }
 
                 /** Represents a TaskStatus. */
@@ -8998,6 +9110,9 @@ export namespace google {
 
                     /** TaskStatus statusEvents. */
                     public statusEvents: google.cloud.batch.v1alpha.IStatusEvent[];
+
+                    /** TaskStatus resourceUsage. */
+                    public resourceUsage?: (google.cloud.batch.v1alpha.ITaskResourceUsage|null);
 
                     /**
                      * Creates a new TaskStatus instance using the specified properties.
@@ -9088,6 +9203,103 @@ export namespace google {
                         FAILED = 4,
                         SUCCEEDED = 5
                     }
+                }
+
+                /** Properties of a TaskResourceUsage. */
+                interface ITaskResourceUsage {
+
+                    /** TaskResourceUsage coreHours */
+                    coreHours?: (number|null);
+                }
+
+                /** Represents a TaskResourceUsage. */
+                class TaskResourceUsage implements ITaskResourceUsage {
+
+                    /**
+                     * Constructs a new TaskResourceUsage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.ITaskResourceUsage);
+
+                    /** TaskResourceUsage coreHours. */
+                    public coreHours: number;
+
+                    /**
+                     * Creates a new TaskResourceUsage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TaskResourceUsage instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.ITaskResourceUsage): google.cloud.batch.v1alpha.TaskResourceUsage;
+
+                    /**
+                     * Encodes the specified TaskResourceUsage message. Does not implicitly {@link google.cloud.batch.v1alpha.TaskResourceUsage.verify|verify} messages.
+                     * @param message TaskResourceUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.ITaskResourceUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TaskResourceUsage message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.TaskResourceUsage.verify|verify} messages.
+                     * @param message TaskResourceUsage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.ITaskResourceUsage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TaskResourceUsage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TaskResourceUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.TaskResourceUsage;
+
+                    /**
+                     * Decodes a TaskResourceUsage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TaskResourceUsage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.TaskResourceUsage;
+
+                    /**
+                     * Verifies a TaskResourceUsage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TaskResourceUsage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TaskResourceUsage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.TaskResourceUsage;
+
+                    /**
+                     * Creates a plain object from a TaskResourceUsage message. Also converts values to other types if specified.
+                     * @param message TaskResourceUsage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.TaskResourceUsage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TaskResourceUsage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TaskResourceUsage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Runnable. */

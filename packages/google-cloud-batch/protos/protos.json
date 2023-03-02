@@ -1674,6 +1674,10 @@
                         "runDuration": {
                           "type": "google.protobuf.Duration",
                           "id": 5
+                        },
+                        "resourceUsage": {
+                          "type": "ResourceUsage",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -1721,6 +1725,14 @@
                             "FAILED": 5,
                             "DELETION_IN_PROGRESS": 6
                           }
+                        }
+                      }
+                    },
+                    "ResourceUsage": {
+                      "fields": {
+                        "coreHours": {
+                          "type": "double",
+                          "id": 1
                         }
                       }
                     },
@@ -2125,6 +2137,10 @@
                         "taskExecution": {
                           "type": "TaskExecution",
                           "id": 4
+                        },
+                        "taskState": {
+                          "type": "TaskStatus.State",
+                          "id": 5
                         }
                       }
                     },
@@ -2146,6 +2162,10 @@
                           "rule": "repeated",
                           "type": "StatusEvent",
                           "id": 2
+                        },
+                        "resourceUsage": {
+                          "type": "TaskResourceUsage",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -2158,6 +2178,14 @@
                             "FAILED": 4,
                             "SUCCEEDED": 5
                           }
+                        }
+                      }
+                    },
+                    "TaskResourceUsage": {
+                      "fields": {
+                        "coreHours": {
+                          "type": "double",
+                          "id": 1
                         }
                       }
                     },
