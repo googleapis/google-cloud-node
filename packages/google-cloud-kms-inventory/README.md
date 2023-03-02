@@ -93,10 +93,11 @@ async function callListCryptoKeys() {
   };
 
   // Run request
-  const iterable = await inventoryClient.listCryptoKeysAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
+  const [response] = await inventoryClient.listCryptoKeys(request, {
+    maxResults: 1,
+    autoPaginate: false,
+  });
+  console.log(response);
 }
 
 callListCryptoKeys();
