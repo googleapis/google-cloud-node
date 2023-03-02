@@ -27,8 +27,6 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
-  IamClient,
-  IamProtos,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
@@ -67,7 +65,6 @@ export class BatchServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
-  iamClient: IamClient;
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
@@ -166,8 +163,6 @@ export class BatchServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
@@ -246,20 +241,6 @@ export class BatchServiceClient {
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/v1alpha/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:getIamPolicy',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:setIamPolicy',
-          body: '*',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1alpha/{resource=projects/*/locations/*/jobs/*}:testIamPermissions',
-          body: '*',
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
@@ -466,8 +447,8 @@ export class BatchServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes since the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
@@ -734,8 +715,8 @@ export class BatchServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes after the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
@@ -1263,146 +1244,6 @@ export class BatchServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.batch.v1alpha.ITask>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  getIamPolicy(
-    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          IamProtos.google.iam.v1.Policy,
-          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      IamProtos.google.iam.v1.Policy,
-      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
-    return this.iamClient.getIamPolicy(request, options, callback);
-  }
-
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
-  setIamPolicy(
-    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          IamProtos.google.iam.v1.Policy,
-          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      IamProtos.google.iam.v1.Policy,
-      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
-    return this.iamClient.setIamPolicy(request, options, callback);
-  }
-
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
-  testIamPermissions(
-    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          IamProtos.google.iam.v1.TestIamPermissionsResponse,
-          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      IamProtos.google.iam.v1.TestIamPermissionsResponse,
-      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
-    return this.iamClient.testIamPermissions(request, options, callback);
-  }
-
   /**
    * Gets information about a location.
    *
@@ -1932,7 +1773,6 @@ export class BatchServiceClient {
       return this.batchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
-        this.iamClient.close();
         this.locationsClient.close();
         this.operationsClient.close();
       });
