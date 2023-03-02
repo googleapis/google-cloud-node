@@ -1038,7 +1038,6 @@ describe('File', () => {
       it('should create an authenticated request', done => {
         file.requestStream = (opts: DecorateRequestOptions) => {
           assert.deepStrictEqual(opts, {
-            forever: false,
             uri: '',
             headers: {
               'Accept-Encoding': 'gzip',

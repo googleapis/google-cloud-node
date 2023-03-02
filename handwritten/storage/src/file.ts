@@ -394,7 +394,7 @@ export interface SetStorageClassCallback {
   (err?: Error | null, apiResponse?: Metadata): void;
 }
 
-class RequestError extends Error {
+export class RequestError extends Error {
   code?: string;
   errors?: Error[];
 }
@@ -1387,10 +1387,8 @@ class File extends ServiceObject<File> {
 
     const throughStream = new PassThroughShim();
 
-    let isCompressed = true;
     let crc32c = true;
     let md5 = false;
-    let safeToValidate = true;
 
     if (typeof options.validation === 'string') {
       const value = options.validation.toLowerCase().trim();
@@ -1414,6 +1412,98 @@ class File extends ServiceObject<File> {
       crc32c = false;
       md5 = false;
     }
+
+    const onComplete = (err: Error | null) => {
+      if (err) {
+        throughStream.destroy(err);
+      }
+    };
+
+    // We listen to the response event from the request stream so that we
+    // can...
+    //
+    //   1) Intercept any data from going to the user if an error occurred.
+    //   2) Calculate the hashes from the http.IncomingMessage response
+    //   stream,
+    //      which will return the bytes from the source without decompressing
+    //      gzip'd content. We then send it through decompressed, if
+    //      applicable, to the user.
+    const onResponse = (
+      err: Error | null,
+      _body: ResponseBody,
+      rawResponseStream: Metadata
+    ) => {
+      if (err) {
+        // Get error message from the body.
+        this.getBufferFromReadable(rawResponseStream).then(body => {
+          err.message = body.toString('utf8');
+          throughStream.destroy(err);
+        });
+
+        return;
+      }
+
+      const headers = rawResponseStream.toJSON().headers;
+      const isCompressed = headers['content-encoding'] === 'gzip';
+      const hashes: {crc32c?: string; md5?: string} = {};
+
+      // The object is safe to validate if:
+      // 1. It was stored gzip and returned to us gzip OR
+      // 2. It was never stored as gzip
+      const safeToValidate =
+        (headers['x-goog-stored-content-encoding'] === 'gzip' &&
+          isCompressed) ||
+        headers['x-goog-stored-content-encoding'] === 'identity';
+
+      const transformStreams: Transform[] = [];
+
+      if (shouldRunValidation) {
+        // The x-goog-hash header should be set with a crc32c and md5 hash.
+        // ex: headers['x-goog-hash'] = 'crc32c=xxxx,md5=xxxx'
+        if (typeof headers['x-goog-hash'] === 'string') {
+          headers['x-goog-hash']
+            .split(',')
+            .forEach((hashKeyValPair: string) => {
+              const delimiterIndex = hashKeyValPair.indexOf('=');
+              const hashType = hashKeyValPair.substr(0, delimiterIndex);
+              const hashValue = hashKeyValPair.substr(delimiterIndex + 1);
+              hashes[hashType as 'crc32c' | 'md5'] = hashValue;
+            });
+        }
+
+        validateStream = new HashStreamValidator({
+          crc32c,
+          md5,
+          crc32cGenerator: this.crc32cGenerator,
+          crc32cExpected: hashes.crc32c,
+          md5Expected: hashes.md5,
+        });
+      }
+
+      if (md5 && !hashes.md5) {
+        const hashError = new RequestError(
+          FileExceptionMessages.MD5_NOT_AVAILABLE
+        );
+        hashError.code = 'MD5_NOT_AVAILABLE';
+        throughStream.destroy(hashError);
+        return;
+      }
+
+      if (safeToValidate && shouldRunValidation && validateStream) {
+        transformStreams.push(validateStream);
+      }
+
+      if (isCompressed && options.decompress) {
+        transformStreams.push(zlib.createGunzip());
+      }
+
+      pipeline(
+        rawResponseStream,
+        ...(transformStreams as [Transform]),
+        throughStream,
+        onComplete
+      );
+    };
 
     // Authenticate the request, then pipe the remote API request to the stream
     // returned to the user.
@@ -1445,13 +1535,10 @@ class File extends ServiceObject<File> {
       }
 
       const reqOpts = {
-        forever: false,
         uri: '',
         headers,
         qs: query,
       };
-
-      const hashes: {crc32c?: string; md5?: string} = {};
 
       this.requestStream(reqOpts)
         .on('error', err => {
@@ -1462,151 +1549,7 @@ class File extends ServiceObject<File> {
           util.handleResp(null, res, null, onResponse);
         })
         .resume();
-
-      // We listen to the response event from the request stream so that we
-      // can...
-      //
-      //   1) Intercept any data from going to the user if an error occurred.
-      //   2) Calculate the hashes from the http.IncomingMessage response
-      //   stream,
-      //      which will return the bytes from the source without decompressing
-      //      gzip'd content. We then send it through decompressed, if
-      //      applicable, to the user.
-      const onResponse = (
-        err: Error | null,
-        _body: ResponseBody,
-        rawResponseStream: Metadata
-      ) => {
-        if (err) {
-          // Get error message from the body.
-          this.getBufferFromReadable(rawResponseStream).then(body => {
-            err.message = body.toString('utf8');
-            throughStream.destroy(err);
-          });
-
-          return;
-        }
-
-        rawResponseStream.on('error', onComplete);
-
-        const headers = rawResponseStream.toJSON().headers;
-        isCompressed = headers['content-encoding'] === 'gzip';
-
-        // The object is safe to validate if:
-        // 1. It was stored gzip and returned to us gzip OR
-        // 2. It was never stored as gzip
-        safeToValidate =
-          (headers['x-goog-stored-content-encoding'] === 'gzip' &&
-            isCompressed) ||
-          headers['x-goog-stored-content-encoding'] === 'identity';
-
-        const transformStreams: Transform[] = [];
-
-        if (shouldRunValidation) {
-          // The x-goog-hash header should be set with a crc32c and md5 hash.
-          // ex: headers['x-goog-hash'] = 'crc32c=xxxx,md5=xxxx'
-          if (typeof headers['x-goog-hash'] === 'string') {
-            headers['x-goog-hash']
-              .split(',')
-              .forEach((hashKeyValPair: string) => {
-                const delimiterIndex = hashKeyValPair.indexOf('=');
-                const hashType = hashKeyValPair.substr(0, delimiterIndex);
-                const hashValue = hashKeyValPair.substr(delimiterIndex + 1);
-                hashes[hashType as 'crc32c' | 'md5'] = hashValue;
-              });
-          }
-
-          validateStream = new HashStreamValidator({
-            crc32c,
-            md5,
-            crc32cGenerator: this.crc32cGenerator,
-          });
-
-          transformStreams.push(validateStream);
-        }
-
-        if (isCompressed && options.decompress) {
-          transformStreams.push(zlib.createGunzip());
-        }
-
-        const handoffStream = new PassThrough({
-          final: cb => {
-            // Preserving `onComplete`'s ability to
-            // destroy `throughStream` before pipeline
-            // attempts to.
-            onComplete(null)
-              .then(() => {
-                cb();
-              })
-              .catch(cb);
-          },
-        });
-
-        pipeline(
-          rawResponseStream,
-          ...(transformStreams as [Transform]),
-          handoffStream,
-          throughStream,
-          onComplete
-        );
-      };
-
-      // This is hooked to the `complete` event from the request stream. This is
-      // our chance to validate the data and let the user know if anything went
-      // wrong.
-      let onCompleteCalled = false;
-      const onComplete = async (err: Error | null) => {
-        if (onCompleteCalled) {
-          return;
-        }
-
-        onCompleteCalled = true;
-
-        if (err) {
-          throughStream.destroy(err);
-          return;
-        }
-
-        if (rangeRequest || !shouldRunValidation) {
-          return;
-        }
-
-        // If we're doing validation, assume the worst-- a data integrity
-        // mismatch. If not, these tests won't be performed, and we can assume
-        // the best.
-        // We must check if the server decompressed the data on serve because hash
-        // validation is not possible in this case.
-        let failed = (crc32c || md5) && safeToValidate;
-        if (validateStream && safeToValidate) {
-          if (crc32c && hashes.crc32c) {
-            failed = !validateStream.test('crc32c', hashes.crc32c);
-          }
-
-          if (md5 && hashes.md5) {
-            failed = !validateStream.test('md5', hashes.md5);
-          }
-        }
-
-        if (md5 && !hashes.md5) {
-          const hashError = new RequestError(
-            FileExceptionMessages.MD5_NOT_AVAILABLE
-          );
-          hashError.code = 'MD5_NOT_AVAILABLE';
-
-          throughStream.destroy(hashError);
-        } else if (failed) {
-          const mismatchError = new RequestError(
-            FileExceptionMessages.DOWNLOAD_MISMATCH
-          );
-          mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';
-
-          throughStream.destroy(mismatchError);
-        } else {
-          return;
-        }
-      };
     };
-
     throughStream.on('reading', makeRequest);
 
     return throughStream;
@@ -1971,6 +1914,7 @@ class File extends ServiceObject<File> {
       crc32c,
       md5,
       crc32cGenerator: this.crc32cGenerator,
+      updateHashesOnly: true,
     });
 
     const fileWriteStream = duplexify();
