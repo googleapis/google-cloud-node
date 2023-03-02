@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent location from which to retrieve the collection of job templates.
-   *  Format: `projects/{project}/locations/{location}`
+   *  Required. The parent location from which to retrieve the collection of job
+   *  templates. Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

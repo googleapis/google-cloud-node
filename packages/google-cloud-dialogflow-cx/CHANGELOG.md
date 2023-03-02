@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.3.0...dialogflow-cx-v3.4.0) (2023-03-01)
+
+
+### Features
+
+* [dialogflow-cx] Added persist_parameter_changes field from `query_params` to MatchIntentRequest ([#4031](https://github.com/googleapis/google-cloud-node/issues/4031)) ([ebaed20](https://github.com/googleapis/google-cloud-node/commit/ebaed2007ee154ce8f9a604d023d5a5cd1ef7b81))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.2.1...dialogflow-cx-v3.3.0) (2023-02-23)
 
 
