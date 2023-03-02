@@ -2919,6 +2919,10 @@
                               "type": "double",
                               "id": 1
                             },
+                            "uploadConversationAnalysisPercentage": {
+                              "type": "double",
+                              "id": 6
+                            },
                             "annotatorSelector": {
                               "type": "AnnotatorSelector",
                               "id": 5
