@@ -21,7 +21,7 @@ const {describe, it, before} = require('mocha');
 const {KeyDashboardServiceClient} = require('@google-cloud/kms-inventory').v1;
 const inventoryClient = new KeyDashboardServiceClient();
 
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8', stdio: 'ignore'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 

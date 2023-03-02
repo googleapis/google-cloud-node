@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, maxResults, autoPaginate) {
   // [START kmsinventory_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -56,10 +56,11 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await inventoryClient.listCryptoKeysAsync(request);
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const [response] = await inventoryClient.listCryptoKeys(request, {
+      maxResults: 1,
+      autoPaginate: false,
+    });
+    console.log(response);
   }
 
   callListCryptoKeys();
