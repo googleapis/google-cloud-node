@@ -28707,6 +28707,7 @@
                              * @memberof google.cloud.contactcenterinsights.v1.Settings
                              * @interface IAnalysisConfig
                              * @property {number|null} [runtimeIntegrationAnalysisPercentage] AnalysisConfig runtimeIntegrationAnalysisPercentage
+                             * @property {number|null} [uploadConversationAnalysisPercentage] AnalysisConfig uploadConversationAnalysisPercentage
                              * @property {google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null} [annotatorSelector] AnalysisConfig annotatorSelector
                              */
     
@@ -28732,6 +28733,14 @@
                              * @instance
                              */
                             AnalysisConfig.prototype.runtimeIntegrationAnalysisPercentage = 0;
+    
+                            /**
+                             * AnalysisConfig uploadConversationAnalysisPercentage.
+                             * @member {number} uploadConversationAnalysisPercentage
+                             * @memberof google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig
+                             * @instance
+                             */
+                            AnalysisConfig.prototype.uploadConversationAnalysisPercentage = 0;
     
                             /**
                              * AnalysisConfig annotatorSelector.
@@ -28769,6 +28778,8 @@
                                     writer.uint32(/* id 1, wireType 1 =*/9).double(message.runtimeIntegrationAnalysisPercentage);
                                 if (message.annotatorSelector != null && Object.hasOwnProperty.call(message, "annotatorSelector"))
                                     $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.encode(message.annotatorSelector, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.uploadConversationAnalysisPercentage != null && Object.hasOwnProperty.call(message, "uploadConversationAnalysisPercentage"))
+                                    writer.uint32(/* id 6, wireType 1 =*/49).double(message.uploadConversationAnalysisPercentage);
                                 return writer;
                             };
     
@@ -28805,6 +28816,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.runtimeIntegrationAnalysisPercentage = reader.double();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.uploadConversationAnalysisPercentage = reader.double();
                                             break;
                                         }
                                     case 5: {
@@ -28849,6 +28864,9 @@
                                 if (message.runtimeIntegrationAnalysisPercentage != null && message.hasOwnProperty("runtimeIntegrationAnalysisPercentage"))
                                     if (typeof message.runtimeIntegrationAnalysisPercentage !== "number")
                                         return "runtimeIntegrationAnalysisPercentage: number expected";
+                                if (message.uploadConversationAnalysisPercentage != null && message.hasOwnProperty("uploadConversationAnalysisPercentage"))
+                                    if (typeof message.uploadConversationAnalysisPercentage !== "number")
+                                        return "uploadConversationAnalysisPercentage: number expected";
                                 if (message.annotatorSelector != null && message.hasOwnProperty("annotatorSelector")) {
                                     var error = $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.verify(message.annotatorSelector);
                                     if (error)
@@ -28871,6 +28889,8 @@
                                 var message = new $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig();
                                 if (object.runtimeIntegrationAnalysisPercentage != null)
                                     message.runtimeIntegrationAnalysisPercentage = Number(object.runtimeIntegrationAnalysisPercentage);
+                                if (object.uploadConversationAnalysisPercentage != null)
+                                    message.uploadConversationAnalysisPercentage = Number(object.uploadConversationAnalysisPercentage);
                                 if (object.annotatorSelector != null) {
                                     if (typeof object.annotatorSelector !== "object")
                                         throw TypeError(".google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.annotatorSelector: object expected");
@@ -28895,11 +28915,14 @@
                                 if (options.defaults) {
                                     object.runtimeIntegrationAnalysisPercentage = 0;
                                     object.annotatorSelector = null;
+                                    object.uploadConversationAnalysisPercentage = 0;
                                 }
                                 if (message.runtimeIntegrationAnalysisPercentage != null && message.hasOwnProperty("runtimeIntegrationAnalysisPercentage"))
                                     object.runtimeIntegrationAnalysisPercentage = options.json && !isFinite(message.runtimeIntegrationAnalysisPercentage) ? String(message.runtimeIntegrationAnalysisPercentage) : message.runtimeIntegrationAnalysisPercentage;
                                 if (message.annotatorSelector != null && message.hasOwnProperty("annotatorSelector"))
                                     object.annotatorSelector = $root.google.cloud.contactcenterinsights.v1.AnnotatorSelector.toObject(message.annotatorSelector, options);
+                                if (message.uploadConversationAnalysisPercentage != null && message.hasOwnProperty("uploadConversationAnalysisPercentage"))
+                                    object.uploadConversationAnalysisPercentage = options.json && !isFinite(message.uploadConversationAnalysisPercentage) ? String(message.uploadConversationAnalysisPercentage) : message.uploadConversationAnalysisPercentage;
                                 return object;
                             };
     
