@@ -21,6 +21,11 @@ set -eo pipefail
 pwd
 
 npm install
+npm pack .
+# npm provides no way to specify, observe, or predict the name of the tarball
+# file it generates.  We have to look in the current directory for the freshest
+# .tgz file.
+TARBALL=$(ls -1 -t *.tgz | head -1)
 
-# publish library to npm
-npm publish --access=public --registry=https://wombat-dressing-room.appspot.com
+# publish library to npm.
+npm publish --access=public --registry=https://wombat-dressing-room.appspot.com "$TARBALL" 
