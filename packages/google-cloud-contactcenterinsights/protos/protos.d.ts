@@ -12117,6 +12117,9 @@ export namespace google {
                         /** AnalysisConfig runtimeIntegrationAnalysisPercentage */
                         runtimeIntegrationAnalysisPercentage?: (number|null);
 
+                        /** AnalysisConfig uploadConversationAnalysisPercentage */
+                        uploadConversationAnalysisPercentage?: (number|null);
+
                         /** AnalysisConfig annotatorSelector */
                         annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
                     }
@@ -12132,6 +12135,9 @@ export namespace google {
 
                         /** AnalysisConfig runtimeIntegrationAnalysisPercentage. */
                         public runtimeIntegrationAnalysisPercentage: number;
+
+                        /** AnalysisConfig uploadConversationAnalysisPercentage. */
+                        public uploadConversationAnalysisPercentage: number;
 
                         /** AnalysisConfig annotatorSelector. */
                         public annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
