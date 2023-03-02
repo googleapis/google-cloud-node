@@ -1,0 +1,91 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.batch.v1",
+  "libraryPackage": "@google-cloud/batch",
+  "services": {
+    "BatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BatchServiceClient",
+          "rpcs": {
+            "CreateJob": {
+              "methods": [
+                "createJob"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "deleteJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BatchServiceClient",
+          "rpcs": {
+            "CreateJob": {
+              "methods": [
+                "createJob"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "getTask"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "deleteJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "listTasks",
+                "listTasksStream",
+                "listTasksAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
