@@ -468,6 +468,9 @@ export class VizierServiceClient {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -665,6 +668,10 @@ export class VizierServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -867,6 +874,7 @@ export class VizierServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1021,6 +1029,7 @@ export class VizierServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1186,6 +1195,9 @@ export class VizierServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -2619,7 +2631,7 @@ export class VizierServiceClient {
    * Checks  whether a Trial should stop or not. Returns a
    * long-running operation. When the operation is successful,
    * it will contain a
-   * {@link google.cloud.ml.v1.CheckTrialEarlyStoppingStateResponse|CheckTrialEarlyStoppingStateResponse}.
+   * {@link google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateResponse|CheckTrialEarlyStoppingStateResponse}.
    *
    * @param {Object} request
    *   The request object that will be sent.
