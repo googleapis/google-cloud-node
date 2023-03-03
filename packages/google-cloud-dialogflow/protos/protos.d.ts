@@ -41965,6 +41965,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BargeInConfig. */
+                interface IBargeInConfig {
+
+                    /** BargeInConfig noBargeInDuration */
+                    noBargeInDuration?: (google.protobuf.IDuration|null);
+
+                    /** BargeInConfig totalDuration */
+                    totalDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a BargeInConfig. */
+                class BargeInConfig implements IBargeInConfig {
+
+                    /**
+                     * Constructs a new BargeInConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.IBargeInConfig);
+
+                    /** BargeInConfig noBargeInDuration. */
+                    public noBargeInDuration?: (google.protobuf.IDuration|null);
+
+                    /** BargeInConfig totalDuration. */
+                    public totalDuration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new BargeInConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BargeInConfig instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.IBargeInConfig): google.cloud.dialogflow.v2beta1.BargeInConfig;
+
+                    /**
+                     * Encodes the specified BargeInConfig message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BargeInConfig.verify|verify} messages.
+                     * @param message BargeInConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.IBargeInConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BargeInConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.BargeInConfig.verify|verify} messages.
+                     * @param message BargeInConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.IBargeInConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BargeInConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BargeInConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.BargeInConfig;
+
+                    /**
+                     * Decodes a BargeInConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BargeInConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.BargeInConfig;
+
+                    /**
+                     * Verifies a BargeInConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BargeInConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BargeInConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.BargeInConfig;
+
+                    /**
+                     * Creates a plain object from a BargeInConfig message. Also converts values to other types if specified.
+                     * @param message BargeInConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.BargeInConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BargeInConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BargeInConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an InputAudioConfig. */
                 interface IInputAudioConfig {
 
@@ -41997,6 +42100,9 @@ export namespace google {
 
                     /** InputAudioConfig disableNoSpeechRecognizedEvent */
                     disableNoSpeechRecognizedEvent?: (boolean|null);
+
+                    /** InputAudioConfig bargeInConfig */
+                    bargeInConfig?: (google.cloud.dialogflow.v2beta1.IBargeInConfig|null);
                 }
 
                 /** Represents an InputAudioConfig. */
@@ -42037,6 +42143,9 @@ export namespace google {
 
                     /** InputAudioConfig disableNoSpeechRecognizedEvent. */
                     public disableNoSpeechRecognizedEvent: boolean;
+
+                    /** InputAudioConfig bargeInConfig. */
+                    public bargeInConfig?: (google.cloud.dialogflow.v2beta1.IBargeInConfig|null);
 
                     /**
                      * Creates a new InputAudioConfig instance using the specified properties.
@@ -56444,6 +56553,9 @@ export namespace google {
 
                     /** SuggestConversationSummaryRequest contextSize */
                     contextSize?: (number|null);
+
+                    /** SuggestConversationSummaryRequest assistQueryParams */
+                    assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
                 }
 
                 /** Represents a SuggestConversationSummaryRequest. */
@@ -56463,6 +56575,9 @@ export namespace google {
 
                     /** SuggestConversationSummaryRequest contextSize. */
                     public contextSize: number;
+
+                    /** SuggestConversationSummaryRequest assistQueryParams. */
+                    public assistQueryParams?: (google.cloud.dialogflow.v2beta1.IAssistQueryParameters|null);
 
                     /**
                      * Creates a new SuggestConversationSummaryRequest instance using the specified properties.
@@ -57109,6 +57224,9 @@ export namespace google {
 
                     /** ConversationProfile securitySettings */
                     securitySettings?: (string|null);
+
+                    /** ConversationProfile ttsConfig */
+                    ttsConfig?: (google.cloud.dialogflow.v2beta1.ISynthesizeSpeechConfig|null);
                 }
 
                 /** Represents a ConversationProfile. */
@@ -57161,6 +57279,9 @@ export namespace google {
 
                     /** ConversationProfile securitySettings. */
                     public securitySettings: string;
+
+                    /** ConversationProfile ttsConfig. */
+                    public ttsConfig?: (google.cloud.dialogflow.v2beta1.ISynthesizeSpeechConfig|null);
 
                     /**
                      * Creates a new ConversationProfile instance using the specified properties.
