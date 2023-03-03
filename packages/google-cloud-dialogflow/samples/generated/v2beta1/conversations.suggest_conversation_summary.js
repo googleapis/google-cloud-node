@@ -48,6 +48,10 @@ function main(conversation) {
    *  suggestion. By default 500 and at most 1000.
    */
   // const contextSize = 1234
+  /**
+   *  Parameters for a human assist query.
+   */
+  // const assistQueryParams = {}
 
   // Imports the Dialogflow library
   const {ConversationsClient} = require('@google-cloud/dialogflow').v2beta1;

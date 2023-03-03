@@ -926,6 +926,8 @@ export class ConversationsClient {
    *   Max number of messages prior to and including
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 500 and at most 1000.
+   * @param {google.cloud.dialogflow.v2beta1.AssistQueryParameters} request.assistQueryParams
+   *   Parameters for a human assist query.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
