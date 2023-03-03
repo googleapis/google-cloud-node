@@ -402,6 +402,10 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 24
+                        },
+                        "disableContainerLogging": {
+                          "type": "bool",
+                          "id": 34
                         }
                       },
                       "nested": {
@@ -19535,6 +19539,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "disableContainerLogging": {
+                          "type": "bool",
+                          "id": 34
                         }
                       },
                       "nested": {
