@@ -7143,7 +7143,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{conversation_profile=projects/*/locations/*/conversationProfiles/*}:setSuggestionFeatureConfig",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "conversation_profile",
+                            "(google.api.method_signature)": "conversation_profile,participant_role,suggestion_feature_config",
                             "(google.longrunning.operation_info).response_type": "ConversationProfile",
                             "(google.longrunning.operation_info).metadata_type": "SetSuggestionFeatureConfigOperationMetadata"
                           },
@@ -7162,6 +7162,9 @@
                               "(google.api.method_signature)": "conversation_profile"
                             },
                             {
+                              "(google.api.method_signature)": "conversation_profile,participant_role,suggestion_feature_config"
+                            },
+                            {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ConversationProfile",
                                 "metadata_type": "SetSuggestionFeatureConfigOperationMetadata"
@@ -7177,7 +7180,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{conversation_profile=projects/*/locations/*/conversationProfiles/*}:clearSuggestionFeatureConfig",
                             "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "conversation_profile",
+                            "(google.api.method_signature)": "conversation_profile,participant_role,suggestion_feature_type",
                             "(google.longrunning.operation_info).response_type": "ConversationProfile",
                             "(google.longrunning.operation_info).metadata_type": "ClearSuggestionFeatureConfigOperationMetadata"
                           },
@@ -7194,6 +7197,9 @@
                             },
                             {
                               "(google.api.method_signature)": "conversation_profile"
+                            },
+                            {
+                              "(google.api.method_signature)": "conversation_profile,participant_role,suggestion_feature_type"
                             },
                             {
                               "(google.longrunning.operation_info)": {
