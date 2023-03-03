@@ -466,6 +466,9 @@ export class EndpointServiceClient {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -674,6 +677,10 @@ export class EndpointServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -891,6 +898,7 @@ export class EndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1064,6 +1072,7 @@ export class EndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1248,6 +1257,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
