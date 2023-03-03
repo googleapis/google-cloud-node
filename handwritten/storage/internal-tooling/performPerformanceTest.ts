@@ -18,7 +18,7 @@ import yargs from 'yargs';
 import {performance} from 'perf_hooks';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
-import path = require('path');
+import * as path from 'path';
 import {
   BLOCK_SIZE_IN_BYTES,
   cleanupFile,
@@ -87,6 +87,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
       elapsedTimeUs: 0,
       cpuTimeUs: -1,
       status: '[OK]',
+      chunkSize: sizeInBytes,
     };
 
     start = performance.now();
@@ -112,6 +113,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
       elapsedTimeUs: 0,
       cpuTimeUs: -1,
       status: '[OK]',
+      chunkSize: sizeInBytes,
     };
 
     const destinationFileName = generateRandomFileName(TEST_NAME_STRING);

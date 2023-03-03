@@ -84,6 +84,7 @@ async function main() {
     elapsedTimeUs: 0,
     cpuTimeUs: 0,
     status: '[OK]',
+    chunkSize: 0,
   };
 
   ({bucket, transferManager} = await performanceTestSetup(
@@ -151,6 +152,7 @@ async function performUploadManyFilesTest(): Promise<TestResult> {
     elapsedTimeUs: Math.round((end - start) * 1000),
     cpuTimeUs: -1,
     status: '[OK]',
+    chunkSize: creationInfo.totalSizeInBytes,
   };
 
   return result;
@@ -199,6 +201,7 @@ async function performDownloadManyFilesTest(): Promise<TestResult> {
     elapsedTimeUs: Math.round((end - start) * 1000),
     cpuTimeUs: -1,
     status: '[OK]',
+    chunkSize: creationInfo.totalSizeInBytes,
   };
   return result;
 }
@@ -242,6 +245,7 @@ async function performDownloadFileInChunksTest(): Promise<TestResult> {
     elapsedTimeUs: Math.round((end - start) * 1000),
     cpuTimeUs: -1,
     status: '[OK]',
+    chunkSize: argv.chunksize,
   };
 
   return result;

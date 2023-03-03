@@ -16,7 +16,7 @@
 
 import {execSync} from 'child_process';
 import {mkdirSync, mkdtempSync, unlinkSync} from 'fs';
-import path = require('path');
+import * as path from 'path';
 import {Bucket, Storage, TransferManager} from '../src';
 
 export const BLOCK_SIZE_IN_BYTES = 1024;
@@ -39,6 +39,7 @@ export interface TestResult {
   elapsedTimeUs: number;
   cpuTimeUs: number;
   status: '[OK]';
+  chunkSize: number;
 }
 
 export interface RandomDirectoryCreationInformation {
@@ -253,7 +254,7 @@ export async function* convertToCloudMonitoringFormat(
     op="${curResult.op}",\
     object_size="${curResult.objectSize}",\
     transfer_offset="0",\
-    transfer_size="${curResult.objectSize}",\
+    transfer_size="${curResult.chunkSize}",\
     app_buffer_size="${curResult.appBufferSize}",\
     crc32c_enabled="${curResult.crc32Enabled}",\
     md5_enabled="${curResult.md5Enabled}",\
