@@ -29,7 +29,8 @@
                         "NVIDIA_TESLA_T4": 5,
                         "NVIDIA_TESLA_A100": 8,
                         "TPU_V2": 6,
-                        "TPU_V3": 7
+                        "TPU_V3": 7,
+                        "TPU_V4_POD": 10
                       }
                     },
                     "Annotation": {
@@ -401,6 +402,10 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 24
+                        },
+                        "disableContainerLogging": {
+                          "type": "bool",
+                          "id": 34
                         }
                       },
                       "nested": {
@@ -2502,6 +2507,11 @@
                           "oneof": [
                             "gcsDestination"
                           ]
+                        },
+                        "split": {
+                          "oneof": [
+                            "fractionSplit"
+                          ]
                         }
                       },
                       "fields": {
@@ -2509,9 +2519,29 @@
                           "type": "GcsDestination",
                           "id": 1
                         },
+                        "fractionSplit": {
+                          "type": "ExportFractionSplit",
+                          "id": 5
+                        },
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ExportFractionSplit": {
+                      "fields": {
+                        "trainingFraction": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "validationFraction": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "testFraction": {
+                          "type": "double",
+                          "id": 3
                         }
                       }
                     },
@@ -4109,6 +4139,122 @@
                         }
                       }
                     },
+                    "EvaluatedAnnotation": {
+                      "fields": {
+                        "type": {
+                          "type": "EvaluatedAnnotationType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "predictions": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "groundTruths": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataItemPayload": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "evaluatedDataItemViewId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "explanations": {
+                          "rule": "repeated",
+                          "type": "EvaluatedAnnotationExplanation",
+                          "id": 8
+                        },
+                        "errorAnalysisAnnotations": {
+                          "rule": "repeated",
+                          "type": "ErrorAnalysisAnnotation",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "EvaluatedAnnotationType": {
+                          "values": {
+                            "EVALUATED_ANNOTATION_TYPE_UNSPECIFIED": 0,
+                            "TRUE_POSITIVE": 1,
+                            "FALSE_POSITIVE": 2,
+                            "FALSE_NEGATIVE": 3
+                          }
+                        }
+                      }
+                    },
+                    "EvaluatedAnnotationExplanation": {
+                      "fields": {
+                        "explanationType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "explanation": {
+                          "type": "Explanation",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ErrorAnalysisAnnotation": {
+                      "fields": {
+                        "attributedItems": {
+                          "rule": "repeated",
+                          "type": "AttributedItem",
+                          "id": 1
+                        },
+                        "queryType": {
+                          "type": "QueryType",
+                          "id": 2
+                        },
+                        "outlierScore": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "outlierThreshold": {
+                          "type": "double",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "AttributedItem": {
+                          "fields": {
+                            "annotationResourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "distance": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "QueryType": {
+                          "values": {
+                            "QUERY_TYPE_UNSPECIFIED": 0,
+                            "ALL_SIMILAR": 1,
+                            "SAME_CLASS_SIMILAR": 2,
+                            "SAME_CLASS_DISSIMILAR": 3
+                          }
+                        }
+                      }
+                    },
                     "Event": {
                       "fields": {
                         "artifact": {
@@ -4486,6 +4632,13 @@
                                 "maxNodeCount": {
                                   "type": "int32",
                                   "id": 2
+                                },
+                                "cpuUtilizationTarget": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }
@@ -5322,6 +5475,34 @@
                             }
                           ]
                         },
+                        "DeleteFeatureValues": {
+                          "requestType": "DeleteFeatureValuesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:deleteFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "entity_type",
+                            "(google.longrunning.operation_info).response_type": "DeleteFeatureValuesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteFeatureValuesOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:deleteFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "entity_type"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeleteFeatureValuesResponse",
+                                "metadata_type": "DeleteFeatureValuesOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "SearchFeatures": {
                           "requestType": "SearchFeaturesRequest",
                           "responseType": "SearchFeaturesResponse",
@@ -6129,6 +6310,14 @@
                         }
                       }
                     },
+                    "DeleteFeatureValuesOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "CreateEntityTypeOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
@@ -6150,6 +6339,138 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "DeleteFeatureValuesRequest": {
+                      "oneofs": {
+                        "DeleteOption": {
+                          "oneof": [
+                            "selectEntity",
+                            "selectTimeRangeAndFeature"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "selectEntity": {
+                          "type": "SelectEntity",
+                          "id": 2
+                        },
+                        "selectTimeRangeAndFeature": {
+                          "type": "SelectTimeRangeAndFeature",
+                          "id": 3
+                        },
+                        "entityType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SelectEntity": {
+                          "fields": {
+                            "entityIdSelector": {
+                              "type": "EntityIdSelector",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "SelectTimeRangeAndFeature": {
+                          "fields": {
+                            "timeRange": {
+                              "type": "google.type.Interval",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "featureSelector": {
+                              "type": "FeatureSelector",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "skipOnlineStorageDelete": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFeatureValuesResponse": {
+                      "oneofs": {
+                        "response": {
+                          "oneof": [
+                            "selectEntity",
+                            "selectTimeRangeAndFeature"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "selectEntity": {
+                          "type": "SelectEntity",
+                          "id": 1
+                        },
+                        "selectTimeRangeAndFeature": {
+                          "type": "SelectTimeRangeAndFeature",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "SelectEntity": {
+                          "fields": {
+                            "offlineStorageDeletedEntityRowCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "onlineStorageDeletedEntityCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SelectTimeRangeAndFeature": {
+                          "fields": {
+                            "impactedFeatureCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "offlineStorageModifiedEntityRowCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "onlineStorageModifiedEntityCount": {
+                              "type": "int64",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "EntityIdSelector": {
+                      "oneofs": {
+                        "EntityIdsSource": {
+                          "oneof": [
+                            "csvSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "csvSource": {
+                          "type": "CsvSource",
+                          "id": 3
+                        },
+                        "entityIdField": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -10193,6 +10514,7 @@
                           "type": "bool",
                           "id": 14,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -12670,6 +12992,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "modelExplanation": {
+                          "type": "ModelExplanation",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -12687,6 +13016,83 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sliceSpec": {
+                              "type": "SliceSpec",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SliceSpec": {
+                              "fields": {
+                                "configs": {
+                                  "keyType": "string",
+                                  "type": "SliceConfig",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "SliceConfig": {
+                                  "oneofs": {
+                                    "kind": {
+                                      "oneof": [
+                                        "value",
+                                        "range",
+                                        "allValues"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "value": {
+                                      "type": "Value",
+                                      "id": 1
+                                    },
+                                    "range": {
+                                      "type": "Range",
+                                      "id": 2
+                                    },
+                                    "allValues": {
+                                      "type": "google.protobuf.BoolValue",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "Range": {
+                                  "fields": {
+                                    "low": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "high": {
+                                      "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "Value": {
+                                  "oneofs": {
+                                    "kind": {
+                                      "oneof": [
+                                        "stringValue",
+                                        "floatValue"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "stringValue": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "floatValue": {
+                                      "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
@@ -12966,6 +13372,26 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,model_evaluation_slices"
+                            }
+                          ]
+                        },
+                        "BatchImportEvaluatedAnnotations": {
+                          "requestType": "BatchImportEvaluatedAnnotationsRequest",
+                          "responseType": "BatchImportEvaluatedAnnotationsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/models/*/evaluations/*/slices/*}:batchImport",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,evaluated_annotations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/models/*/evaluations/*/slices/*}:batchImport",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,evaluated_annotations"
                             }
                           ]
                         },
@@ -13465,6 +13891,37 @@
                         "importedModelEvaluationSlices": {
                           "rule": "repeated",
                           "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BatchImportEvaluatedAnnotationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ModelEvaluationSlice"
+                          }
+                        },
+                        "evaluatedAnnotations": {
+                          "rule": "repeated",
+                          "type": "EvaluatedAnnotation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchImportEvaluatedAnnotationsResponse": {
+                      "fields": {
+                        "importedEvaluatedAnnotationsCount": {
+                          "type": "int32",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
@@ -18693,7 +19150,8 @@
                         "NVIDIA_TESLA_A100": 8,
                         "NVIDIA_A100_80GB": 9,
                         "TPU_V2": 6,
-                        "TPU_V3": 7
+                        "TPU_V3": 7,
+                        "TPU_V4_POD": 10
                       }
                     },
                     "Annotation": {
@@ -19081,6 +19539,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "disableContainerLogging": {
+                          "type": "bool",
+                          "id": 34
                         }
                       },
                       "nested": {
@@ -20895,6 +21357,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "largeModelReference": {
+                          "type": "LargeModelReference",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -20934,6 +21403,17 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                              }
+                            }
+                          }
+                        },
+                        "LargeModelReference": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
@@ -21794,6 +22274,11 @@
                           "oneof": [
                             "gcsDestination"
                           ]
+                        },
+                        "split": {
+                          "oneof": [
+                            "fractionSplit"
+                          ]
                         }
                       },
                       "fields": {
@@ -21801,9 +22286,29 @@
                           "type": "GcsDestination",
                           "id": 1
                         },
+                        "fractionSplit": {
+                          "type": "ExportFractionSplit",
+                          "id": 5
+                        },
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ExportFractionSplit": {
+                      "fields": {
+                        "trainingFraction": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "validationFraction": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "testFraction": {
+                          "type": "double",
+                          "id": 3
                         }
                       }
                     },
@@ -23715,6 +24220,122 @@
                         }
                       }
                     },
+                    "EvaluatedAnnotation": {
+                      "fields": {
+                        "type": {
+                          "type": "EvaluatedAnnotationType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "predictions": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "groundTruths": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataItemPayload": {
+                          "type": "google.protobuf.Value",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "evaluatedDataItemViewId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "explanations": {
+                          "rule": "repeated",
+                          "type": "EvaluatedAnnotationExplanation",
+                          "id": 8
+                        },
+                        "errorAnalysisAnnotations": {
+                          "rule": "repeated",
+                          "type": "ErrorAnalysisAnnotation",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "EvaluatedAnnotationType": {
+                          "values": {
+                            "EVALUATED_ANNOTATION_TYPE_UNSPECIFIED": 0,
+                            "TRUE_POSITIVE": 1,
+                            "FALSE_POSITIVE": 2,
+                            "FALSE_NEGATIVE": 3
+                          }
+                        }
+                      }
+                    },
+                    "EvaluatedAnnotationExplanation": {
+                      "fields": {
+                        "explanationType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "explanation": {
+                          "type": "Explanation",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ErrorAnalysisAnnotation": {
+                      "fields": {
+                        "attributedItems": {
+                          "rule": "repeated",
+                          "type": "AttributedItem",
+                          "id": 1
+                        },
+                        "queryType": {
+                          "type": "QueryType",
+                          "id": 2
+                        },
+                        "outlierScore": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "outlierThreshold": {
+                          "type": "double",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "AttributedItem": {
+                          "fields": {
+                            "annotationResourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "distance": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "QueryType": {
+                          "values": {
+                            "QUERY_TYPE_UNSPECIFIED": 0,
+                            "ALL_SIMILAR": 1,
+                            "SAME_CLASS_SIMILAR": 2,
+                            "SAME_CLASS_DISSIMILAR": 3
+                          }
+                        }
+                      }
+                    },
                     "Event": {
                       "fields": {
                         "artifact": {
@@ -24083,6 +24704,13 @@
                                 "maxNodeCount": {
                                   "type": "int32",
                                   "id": 2
+                                },
+                                "cpuUtilizationTarget": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }
@@ -25850,7 +26478,54 @@
                       }
                     },
                     "DeleteFeatureValuesResponse": {
-                      "fields": {}
+                      "oneofs": {
+                        "response": {
+                          "oneof": [
+                            "selectEntity",
+                            "selectTimeRangeAndFeature"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "selectEntity": {
+                          "type": "SelectEntity",
+                          "id": 1
+                        },
+                        "selectTimeRangeAndFeature": {
+                          "type": "SelectTimeRangeAndFeature",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "SelectEntity": {
+                          "fields": {
+                            "offlineStorageDeletedEntityRowCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "onlineStorageDeletedEntityCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SelectTimeRangeAndFeature": {
+                          "fields": {
+                            "impactedFeatureCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "offlineStorageModifiedEntityRowCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "onlineStorageModifiedEntityCount": {
+                              "type": "int64",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
                     },
                     "EntityIdSelector": {
                       "oneofs": {
@@ -29478,6 +30153,7 @@
                           "type": "bool",
                           "id": 14,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -32107,6 +32783,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "modelExplanation": {
+                          "type": "ModelExplanation",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -32124,6 +32807,83 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sliceSpec": {
+                              "type": "SliceSpec",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SliceSpec": {
+                              "fields": {
+                                "configs": {
+                                  "keyType": "string",
+                                  "type": "SliceConfig",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "SliceConfig": {
+                                  "oneofs": {
+                                    "kind": {
+                                      "oneof": [
+                                        "value",
+                                        "range",
+                                        "allValues"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "value": {
+                                      "type": "Value",
+                                      "id": 1
+                                    },
+                                    "range": {
+                                      "type": "Range",
+                                      "id": 2
+                                    },
+                                    "allValues": {
+                                      "type": "google.protobuf.BoolValue",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "Range": {
+                                  "fields": {
+                                    "low": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "high": {
+                                      "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "Value": {
+                                  "oneofs": {
+                                    "kind": {
+                                      "oneof": [
+                                        "stringValue",
+                                        "floatValue"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "stringValue": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "floatValue": {
+                                      "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
@@ -32431,6 +33191,26 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,model_evaluation_slices"
+                            }
+                          ]
+                        },
+                        "BatchImportEvaluatedAnnotations": {
+                          "requestType": "BatchImportEvaluatedAnnotationsRequest",
+                          "responseType": "BatchImportEvaluatedAnnotationsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/models/*/evaluations/*/slices/*}:batchImport",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,evaluated_annotations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/models/*/evaluations/*/slices/*}:batchImport",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,evaluated_annotations"
                             }
                           ]
                         },
@@ -32953,6 +33733,37 @@
                         "importedModelEvaluationSlices": {
                           "rule": "repeated",
                           "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BatchImportEvaluatedAnnotationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ModelEvaluationSlice"
+                          }
+                        },
+                        "evaluatedAnnotations": {
+                          "rule": "repeated",
+                          "type": "EvaluatedAnnotation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchImportEvaluatedAnnotationsResponse": {
+                      "fields": {
+                        "importedEvaluatedAnnotationsCount": {
+                          "type": "int32",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
