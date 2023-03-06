@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/scheduler-v3.2.1...scheduler-v3.3.0) (2023-03-06)
+
+
+### Features
+
+* [scheduler] Location API methods ([#4048](https://github.com/googleapis/google-cloud-node/issues/4048)) ([304eac5](https://github.com/googleapis/google-cloud-node/commit/304eac5d2ee704f948b29fdcbb638a62ff0582cd))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/scheduler-v3.2.0...scheduler-v3.2.1) (2023-02-15)
 
 

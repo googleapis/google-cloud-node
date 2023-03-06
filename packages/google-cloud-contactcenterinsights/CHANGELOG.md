@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.4.1...contact-center-insights-v2.5.0) (2023-03-06)
+
+
+### Features
+
+* [contactcenterinsights] add a way to specify the conversation automatic analysis percentage for the UploadConversation API when creating Analyses in Insights ([#4041](https://github.com/googleapis/google-cloud-node/issues/4041)) ([117ae72](https://github.com/googleapis/google-cloud-node/commit/117ae7293c8cf472e900d56c90225c49d6ca2dbc))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.4.0...contact-center-insights-v2.4.1) (2023-02-15)
 
 

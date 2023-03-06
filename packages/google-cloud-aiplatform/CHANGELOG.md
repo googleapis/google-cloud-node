@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.7.0...aiplatform-v2.8.0) (2023-03-06)
+
+
+### Features
+
+* Add disable_container_logging to BatchPredictionJob in aiplatform v1,v1beta1 batch_prediction_job.proto ([#4052](https://github.com/googleapis/google-cloud-node/issues/4052)) ([735af33](https://github.com/googleapis/google-cloud-node/commit/735af33f8c5548118e0df774f08f89cc657445ef))
+
 ## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.6.1...aiplatform-v2.7.0) (2023-02-22)
 
 
