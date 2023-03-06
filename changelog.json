@@ -5,6 +5,160 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "146700d2fa0d5ee8fc7a262700e0819b50ede21c",
+          "message": "[grafeas] Import of Grafeas from Github",
+          "issues": [
+            "4049"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "02b37d10-3650-462e-bd05-050a32a56bd8",
+      "createTime": "2023-03-06T20:06:16.917Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "304eac5d2ee704f948b29fdcbb638a62ff0582cd",
+          "message": "[scheduler] Location API methods",
+          "issues": [
+            "4048"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "4f7e365c-94ba-4334-bb95-8f4f1c97d4fc",
+      "createTime": "2023-03-06T20:06:16.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "26e514417196042f68eb605d4e86d0733ae8047c",
+          "message": "[dialogflow-cx] change java package of Cloud Build v2",
+          "issues": [
+            "4055"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "24827f92-4d4d-490b-84a2-57f92334b00f",
+      "createTime": "2023-03-06T20:06:16.914Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7a67d3e424c19bc576f821d65895e9598307eb8",
+          "message": "[dialogflow] added support for custom content types",
+          "issues": [
+            "4053"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "67397d97-c8c0-4208-bb58-f296a1eefc78",
+      "createTime": "2023-03-06T20:06:16.911Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d1cef14fabc0b1e3dbc957f70f383a5464f7c840",
+          "message": "Roll back dependency @google-cloud/dataform to ^0.4.0",
+          "issues": [
+            "4044"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "2ea3549d-326c-4563-9d03-3494c7364a34",
+      "createTime": "2023-03-06T20:06:16.910Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "117ae7293c8cf472e900d56c90225c49d6ca2dbc",
+          "message": "[contactcenterinsights] add a way to specify the conversation automatic analysis percentage for the UploadConversation API when creating Analyses in Insights",
+          "issues": [
+            "4041"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "164fce81-e629-450d-aa65-7c7195b99388",
+      "createTime": "2023-03-06T20:06:16.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "443abe3310b5063df855c3ab0d5fc8d338570cdf",
+          "message": "[binaryauthorization] Import of Grafeas from Github",
+          "issues": [
+            "4051"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "4f369152-8b9d-4694-ab7e-91aceb12b47f",
+      "createTime": "2023-03-06T20:06:16.908Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a4c234315a2337c07f2556a6125f22bf7ddada2f",
+          "message": "[batch] added StatusEvent.task_state",
+          "issues": [
+            "4042"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "13fb57eb-9db4-4eae-8bb1-883bec1fe147",
+      "createTime": "2023-03-06T20:06:16.906Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "735af33f8c5548118e0df774f08f89cc657445ef",
+          "message": "Add disable_container_logging to BatchPredictionJob in aiplatform v1,v1beta1 batch_prediction_job.proto",
+          "issues": [
+            "4052"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "fffb7e00-cf32-4058-8502-b9fd5bdf80a5",
+      "createTime": "2023-03-06T20:06:16.905Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "44756d7c15642a065628cd4a598198a56584dbff",
           "message": "Add initial files for google.cloud.kms.inventory.v1",
           "issues": [
@@ -4350,5 +4504,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-03-02T07:21:42.471Z"
+  "updateTime": "2023-03-06T20:06:16.917Z"
 }

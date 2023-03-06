@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.4.0...dialogflow-cx-v3.4.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* [dialogflow-cx] change java package of Cloud Build v2 ([#4055](https://github.com/googleapis/google-cloud-node/issues/4055)) ([26e5144](https://github.com/googleapis/google-cloud-node/commit/26e514417196042f68eb605d4e86d0733ae8047c))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.3.0...dialogflow-cx-v3.4.0) (2023-03-01)
 
 
