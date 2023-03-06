@@ -1465,8 +1465,8 @@ class File extends ServiceObject<File> {
             .split(',')
             .forEach((hashKeyValPair: string) => {
               const delimiterIndex = hashKeyValPair.indexOf('=');
-              const hashType = hashKeyValPair.substr(0, delimiterIndex);
-              const hashValue = hashKeyValPair.substr(delimiterIndex + 1);
+              const hashType = hashKeyValPair.substring(0, delimiterIndex);
+              const hashValue = hashKeyValPair.substring(delimiterIndex + 1);
               hashes[hashType as 'crc32c' | 'md5'] = hashValue;
             });
         }

@@ -303,7 +303,8 @@ class AclRoleAccessorMethods {
       const isPrefix = entity.charAt(entity.length - 1) === '-';
 
       accessMethods.forEach(accessMethod => {
-        let method = accessMethod + entity[0].toUpperCase() + entity.substr(1);
+        let method =
+          accessMethod + entity[0].toUpperCase() + entity.substring(1);
 
         if (isPrefix) {
           method = method.replace('-', '');
