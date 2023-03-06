@@ -41,6 +41,7 @@
   * [Featurestore_service.create_featurestore](#featurestore_service.create_featurestore)
   * [Featurestore_service.delete_entity_type](#featurestore_service.delete_entity_type)
   * [Featurestore_service.delete_feature](#featurestore_service.delete_feature)
+  * [Featurestore_service.delete_feature_values](#featurestore_service.delete_feature_values)
   * [Featurestore_service.delete_featurestore](#featurestore_service.delete_featurestore)
   * [Featurestore_service.export_feature_values](#featurestore_service.export_feature_values)
   * [Featurestore_service.get_entity_type](#featurestore_service.get_entity_type)
@@ -138,6 +139,7 @@
   * [Metadata_service.update_execution](#metadata_service.update_execution)
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
+  * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
   * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
   * [Model_service.copy_model](#model_service.copy_model)
   * [Model_service.delete_model](#model_service.delete_model)
@@ -350,6 +352,7 @@
   * [Metadata_service.update_execution](#metadata_service.update_execution)
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
+  * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
   * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
   * [Model_service.copy_model](#model_service.copy_model)
   * [Model_service.delete_model](#model_service.delete_model)
@@ -933,6 +936,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature.js`
+
+
+-----
+
+
+
+
+### Featurestore_service.delete_feature_values
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature_values.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature_values.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.delete_feature_values.js`
 
 
 -----
@@ -2582,6 +2602,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/migration_service.search_migratable_resources.js`
+
+
+-----
+
+
+
+
+### Model_service.batch_import_evaluated_annotations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_evaluated_annotations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_evaluated_annotations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/model_service.batch_import_evaluated_annotations.js`
 
 
 -----
@@ -6186,6 +6223,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.search_migratable_resources.js`
+
+
+-----
+
+
+
+
+### Model_service.batch_import_evaluated_annotations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.batch_import_evaluated_annotations.js`
 
 
 -----

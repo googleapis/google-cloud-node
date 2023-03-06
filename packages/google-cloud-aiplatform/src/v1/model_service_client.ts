@@ -474,6 +474,9 @@ export class ModelServiceClient {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -671,6 +674,10 @@ export class ModelServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -873,6 +880,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1027,6 +1035,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1192,6 +1201,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1421,6 +1433,7 @@ export class ModelServiceClient {
       'copyModel',
       'importModelEvaluation',
       'batchImportModelEvaluationSlices',
+      'batchImportEvaluatedAnnotations',
       'getModelEvaluation',
       'listModelEvaluations',
       'getModelEvaluationSlice',
@@ -2024,6 +2037,111 @@ export class ModelServiceClient {
     );
   }
   /**
+   * Imports a list of externally generated EvaluatedAnnotations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent ModelEvaluationSlice resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
+   * @param {number[]} request.evaluatedAnnotations
+   *   Required. Evaluated annotations resource to be imported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsResponse | BatchImportEvaluatedAnnotationsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.batch_import_evaluated_annotations.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_BatchImportEvaluatedAnnotations_async
+   */
+  batchImportEvaluatedAnnotations(
+    request?: protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchImportEvaluatedAnnotations(
+    request: protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsResponse,
+      | protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchImportEvaluatedAnnotations(
+    request: protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsResponse,
+      | protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchImportEvaluatedAnnotations(
+    request?: protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsResponse,
+          | protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsResponse,
+      | protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1.IBatchImportEvaluatedAnnotationsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchImportEvaluatedAnnotations(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Gets a ModelEvaluation.
    *
    * @param {Object} request
@@ -2527,8 +2645,9 @@ export class ModelServiceClient {
   /**
    * Deletes a Model version.
    *
-   * Model version can only be deleted if there are no {@link |DeployedModels}
-   * created from it. Deleting the only version in the Model is not allowed. Use
+   * Model version can only be deleted if there are no
+   * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModels} created from it.
+   * Deleting the only version in the Model is not allowed. Use
    * {@link google.cloud.aiplatform.v1.ModelService.DeleteModel|DeleteModel} for
    * deleting the Model instead.
    *
