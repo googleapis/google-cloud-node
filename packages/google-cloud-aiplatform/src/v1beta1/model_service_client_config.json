@@ -79,6 +79,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchImportEvaluatedAnnotations": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetModelEvaluation": {
           "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
