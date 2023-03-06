@@ -18,18 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -119,22 +108,14 @@ export class KeyManagementServiceClient {
    *     const client = new KeyManagementServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof KeyManagementServiceClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -160,7 +141,7 @@ export class KeyManagementServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -173,14 +154,18 @@ export class KeyManagementServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -188,7 +173,7 @@ export class KeyManagementServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else if (opts.fallback === 'rest' ) {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -206,6 +191,9 @@ export class KeyManagementServiceClient {
       ),
       cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
+      ekmConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ekmConfig'
       ),
       ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
@@ -228,35 +216,20 @@ export class KeyManagementServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listKeyRings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'keyRings'
-      ),
-      listCryptoKeys: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'cryptoKeys'
-      ),
-      listCryptoKeyVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'cryptoKeyVersions'
-      ),
-      listImportJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'importJobs'
-      ),
+      listKeyRings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'keyRings'),
+      listCryptoKeys:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cryptoKeys'),
+      listCryptoKeyVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cryptoKeyVersions'),
+      listImportJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'importJobs')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.kms.v1.KeyManagementService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.kms.v1.KeyManagementService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -287,62 +260,32 @@ export class KeyManagementServiceClient {
     // Put together the "service stub" for
     // google.cloud.kms.v1.KeyManagementService.
     this.keyManagementServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.kms.v1.KeyManagementService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.kms.v1.KeyManagementService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.kms.v1.KeyManagementService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const keyManagementServiceStubMethods = [
-      'listKeyRings',
-      'listCryptoKeys',
-      'listCryptoKeyVersions',
-      'listImportJobs',
-      'getKeyRing',
-      'getCryptoKey',
-      'getCryptoKeyVersion',
-      'getPublicKey',
-      'getImportJob',
-      'createKeyRing',
-      'createCryptoKey',
-      'createCryptoKeyVersion',
-      'importCryptoKeyVersion',
-      'createImportJob',
-      'updateCryptoKey',
-      'updateCryptoKeyVersion',
-      'updateCryptoKeyPrimaryVersion',
-      'destroyCryptoKeyVersion',
-      'restoreCryptoKeyVersion',
-      'encrypt',
-      'decrypt',
-      'asymmetricSign',
-      'asymmetricDecrypt',
-      'macSign',
-      'macVerify',
-      'generateRandomBytes',
-    ];
+    const keyManagementServiceStubMethods =
+        ['listKeyRings', 'listCryptoKeys', 'listCryptoKeyVersions', 'listImportJobs', 'getKeyRing', 'getCryptoKey', 'getCryptoKeyVersion', 'getPublicKey', 'getImportJob', 'createKeyRing', 'createCryptoKey', 'createCryptoKeyVersion', 'importCryptoKeyVersion', 'createImportJob', 'updateCryptoKey', 'updateCryptoKeyVersion', 'updateCryptoKeyPrimaryVersion', 'destroyCryptoKeyVersion', 'restoreCryptoKeyVersion', 'encrypt', 'decrypt', 'asymmetricSign', 'asymmetricDecrypt', 'macSign', 'macVerify', 'generateRandomBytes'];
     for (const methodName of keyManagementServiceStubMethods) {
       const callPromise = this.keyManagementServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -389,7 +332,7 @@ export class KeyManagementServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloudkms',
+      'https://www.googleapis.com/auth/cloudkms'
     ];
   }
 
@@ -399,9 +342,8 @@ export class KeyManagementServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -412,2584 +354,2227 @@ export class KeyManagementServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns metadata for a given {@link google.cloud.kms.v1.KeyRing|KeyRing}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRing} to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.KeyRing | KeyRing}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.get_key_ring.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_GetKeyRing_async
-   */
+/**
+ * Returns metadata for a given {@link google.cloud.kms.v1.KeyRing|KeyRing}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRing} to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.KeyRing | KeyRing}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.get_key_ring.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GetKeyRing_async
+ */
   getKeyRing(
-    request?: protos.google.cloud.kms.v1.IGetKeyRingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IGetKeyRingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IKeyRing,
+        protos.google.cloud.kms.v1.IGetKeyRingRequest|undefined, {}|undefined
+      ]>;
   getKeyRing(
-    request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getKeyRing(
-    request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getKeyRing(
-    request?: protos.google.cloud.kms.v1.IGetKeyRingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IKeyRing,
-          protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IGetKeyRingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getKeyRing(
+      request: protos.google.cloud.kms.v1.IGetKeyRingRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.IGetKeyRingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getKeyRing(
+      request?: protos.google.cloud.kms.v1.IGetKeyRingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.IGetKeyRingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.IGetKeyRingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IKeyRing,
+        protos.google.cloud.kms.v1.IGetKeyRingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.getKeyRing(request, options, callback);
   }
-  /**
-   * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKey|CryptoKey}, as
-   * well as its {@link google.cloud.kms.v1.CryptoKey.primary|primary}
-   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.get_crypto_key.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_GetCryptoKey_async
-   */
+/**
+ * Returns metadata for a given {@link google.cloud.kms.v1.CryptoKey|CryptoKey}, as
+ * well as its {@link google.cloud.kms.v1.CryptoKey.primary|primary}
+ * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.get_crypto_key.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GetCryptoKey_async
+ */
   getCryptoKey(
-    request?: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.IGetCryptoKeyRequest|undefined, {}|undefined
+      ]>;
   getCryptoKey(
-    request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCryptoKey(
-    request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCryptoKey(
-    request?: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKey,
-          protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCryptoKey(
+      request: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCryptoKey(
+      request?: protos.google.cloud.kms.v1.IGetCryptoKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.IGetCryptoKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.getCryptoKey(request, options, callback);
   }
-  /**
-   * Returns metadata for a given
-   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.get_crypto_key_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_GetCryptoKeyVersion_async
-   */
+/**
+ * Returns metadata for a given
+ * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.get_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GetCryptoKeyVersion_async
+ */
   getCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>;
   getCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.getCryptoKeyVersion(request, options, callback);
   }
-  /**
-   * Returns the public key for the given
-   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. The
-   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
-   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN|ASYMMETRIC_SIGN}
-   * or
-   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT|ASYMMETRIC_DECRYPT}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.PublicKey | PublicKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.get_public_key.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_GetPublicKey_async
-   */
+/**
+ * Returns the public key for the given
+ * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. The
+ * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+ * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN|ASYMMETRIC_SIGN}
+ * or
+ * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT|ASYMMETRIC_DECRYPT}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.PublicKey | PublicKey}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.get_public_key.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GetPublicKey_async
+ */
   getPublicKey(
-    request?: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IPublicKey,
-      protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IPublicKey,
+        protos.google.cloud.kms.v1.IGetPublicKeyRequest|undefined, {}|undefined
+      ]>;
   getPublicKey(
-    request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IPublicKey,
-      protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPublicKey(
-    request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IPublicKey,
-      protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPublicKey(
-    request?: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IPublicKey,
-          protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IPublicKey,
-      protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IPublicKey,
-      protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPublicKey(
+      request: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IPublicKey,
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPublicKey(
+      request?: protos.google.cloud.kms.v1.IGetPublicKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IPublicKey,
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IPublicKey,
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IPublicKey,
+        protos.google.cloud.kms.v1.IGetPublicKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.getPublicKey(request, options, callback);
   }
-  /**
-   * Returns metadata for a given {@link google.cloud.kms.v1.ImportJob|ImportJob}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
-   *   {@link google.cloud.kms.v1.ImportJob|ImportJob} to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.ImportJob | ImportJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.get_import_job.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_GetImportJob_async
-   */
+/**
+ * Returns metadata for a given {@link google.cloud.kms.v1.ImportJob|ImportJob}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
+ *   {@link google.cloud.kms.v1.ImportJob|ImportJob} to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.ImportJob | ImportJob}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.get_import_job.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GetImportJob_async
+ */
   getImportJob(
-    request?: protos.google.cloud.kms.v1.IGetImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IGetImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IImportJob,
+        protos.google.cloud.kms.v1.IGetImportJobRequest|undefined, {}|undefined
+      ]>;
   getImportJob(
-    request: protos.google.cloud.kms.v1.IGetImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getImportJob(
-    request: protos.google.cloud.kms.v1.IGetImportJobRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getImportJob(
-    request?: protos.google.cloud.kms.v1.IGetImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IGetImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IImportJob,
-          protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getImportJob(
+      request: protos.google.cloud.kms.v1.IGetImportJobRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getImportJob(
+      request?: protos.google.cloud.kms.v1.IGetImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.IGetImportJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IImportJob,
+        protos.google.cloud.kms.v1.IGetImportJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.getImportJob(request, options, callback);
   }
-  /**
-   * Create a new {@link google.cloud.kms.v1.KeyRing|KeyRing} in a given Project and
-   * Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.keyRingId
-   *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`
-   * @param {google.cloud.kms.v1.KeyRing} request.keyRing
-   *   Required. A {@link google.cloud.kms.v1.KeyRing|KeyRing} with initial field
-   *   values.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.KeyRing | KeyRing}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.create_key_ring.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_CreateKeyRing_async
-   */
+/**
+ * Create a new {@link google.cloud.kms.v1.KeyRing|KeyRing} in a given Project and
+ * Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+ *   `projects/* /locations/*`.
+ * @param {string} request.keyRingId
+ *   Required. It must be unique within a location and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ * @param {google.cloud.kms.v1.KeyRing} request.keyRing
+ *   Required. A {@link google.cloud.kms.v1.KeyRing|KeyRing} with initial field
+ *   values.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.KeyRing | KeyRing}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.create_key_ring.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_CreateKeyRing_async
+ */
   createKeyRing(
-    request?: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IKeyRing,
+        protos.google.cloud.kms.v1.ICreateKeyRingRequest|undefined, {}|undefined
+      ]>;
   createKeyRing(
-    request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createKeyRing(
-    request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createKeyRing(
-    request?: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IKeyRing,
-          protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IKeyRing,
-      protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createKeyRing(
+      request: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest|null|undefined,
+          {}|null|undefined>): void;
+  createKeyRing(
+      request?: protos.google.cloud.kms.v1.ICreateKeyRingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IKeyRing,
+        protos.google.cloud.kms.v1.ICreateKeyRingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.createKeyRing(request, options, callback);
   }
-  /**
-   * Create a new {@link google.cloud.kms.v1.CryptoKey|CryptoKey} within a
-   * {@link google.cloud.kms.v1.KeyRing|KeyRing}.
-   *
-   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} and
-   * {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm|CryptoKey.version_template.algorithm}
-   * are required.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the KeyRing
-   *   associated with the {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
-   * @param {string} request.cryptoKeyId
-   *   Required. It must be unique within a KeyRing and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`
-   * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
-   *   Required. A {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with initial field
-   *   values.
-   * @param {boolean} request.skipInitialVersionCreation
-   *   If set to true, the request will create a
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} without any
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}. You must
-   *   manually call
-   *   {@link google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion|CreateCryptoKeyVersion}
-   *   or
-   *   {@link google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion}
-   *   before you can use this {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.create_crypto_key.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_CreateCryptoKey_async
-   */
+/**
+ * Create a new {@link google.cloud.kms.v1.CryptoKey|CryptoKey} within a
+ * {@link google.cloud.kms.v1.KeyRing|KeyRing}.
+ *
+ * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} and
+ * {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm|CryptoKey.version_template.algorithm}
+ * are required.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the KeyRing
+ *   associated with the {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
+ * @param {string} request.cryptoKeyId
+ *   Required. It must be unique within a KeyRing and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
+ *   Required. A {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with initial field
+ *   values.
+ * @param {boolean} request.skipInitialVersionCreation
+ *   If set to true, the request will create a
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} without any
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}. You must
+ *   manually call
+ *   {@link google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion|CreateCryptoKeyVersion}
+ *   or
+ *   {@link google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion}
+ *   before you can use this {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.create_crypto_key.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_CreateCryptoKey_async
+ */
   createCryptoKey(
-    request?: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.ICreateCryptoKeyRequest|undefined, {}|undefined
+      ]>;
   createCryptoKey(
-    request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCryptoKey(
-    request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCryptoKey(
-    request?: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKey,
-          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCryptoKey(
+      request: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCryptoKey(
+      request?: protos.google.cloud.kms.v1.ICreateCryptoKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.ICreateCryptoKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.createCryptoKey(request, options, callback);
   }
-  /**
-   * Create a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in a
-   * {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   *
-   * The server will assign the next sequential id. If unset,
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} associated with the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
-   *   Required. A {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
-   *   initial field values.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.create_crypto_key_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async
-   */
+/**
+ * Create a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in a
+ * {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ *
+ * The server will assign the next sequential id. If unset,
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} associated with the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
+ *   Required. A {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+ *   initial field values.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.create_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async
+ */
   createCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>;
   createCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
-    return this.innerApiCalls.createCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.createCryptoKeyVersion(request, options, callback);
   }
-  /**
-   * Import wrapped key material into a
-   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
-   *
-   * All requests must specify a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}. If
-   * a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} is additionally
-   * specified in the request, key material will be reimported into that
-   * version. Otherwise, a new version will be created, and will be assigned the
-   * next sequential id within the {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to be imported into.
-   *
-   *   The create permission is only required on this key when creating a new
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
-   * @param {string} [request.cryptoKeyVersion]
-   *   Optional. The optional {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of
-   *   an existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to
-   *   target for an import operation. If this field is not present, a new
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} containing the
-   *   supplied key material is created.
-   *
-   *   If this field is present, the supplied key material is imported into
-   *   the existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. To
-   *   import into an existing
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
-   *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent},
-   *   have been previously created via {@link |ImportCryptoKeyVersion}, and be in
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}
-   *   or
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
-   *   state. The key material and algorithm must match the previous
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} exactly if the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} has ever contained
-   *   key material.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm} request.algorithm
-   *   Required. The
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm}
-   *   of the key being imported. This does not need to match the
-   *   {@link google.cloud.kms.v1.CryptoKey.version_template|version_template} of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} this version imports into.
-   * @param {string} request.importJob
-   *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
-   *   {@link google.cloud.kms.v1.ImportJob|ImportJob} that was used to wrap this key
-   *   material.
-   * @param {Buffer} [request.wrappedKey]
-   *   Optional. The wrapped key material to import.
-   *
-   *   Before wrapping, key material must be formatted. If importing symmetric key
-   *   material, the expected key material format is plain bytes. If importing
-   *   asymmetric key material, the expected key material format is PKCS#8-encoded
-   *   DER (the PrivateKeyInfo structure from RFC 5208).
-   *
-   *   When wrapping with import methods
-   *   ({@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256|RSA_OAEP_3072_SHA1_AES_256}
-   *   or
-   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256|RSA_OAEP_4096_SHA1_AES_256}
-   *   or
-   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA256_AES_256|RSA_OAEP_3072_SHA256_AES_256}
-   *   or
-   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA256_AES_256|RSA_OAEP_4096_SHA256_AES_256}),
-   *
-   *   this field must contain the concatenation of:
-   *   <ol>
-   *     <li>An ephemeral AES-256 wrapping key wrapped with the
-   *         {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using
-   *         RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an empty
-   *         label.
-   *     </li>
-   *     <li>The formatted key to be imported, wrapped with the ephemeral AES-256
-   *         key using AES-KWP (RFC 5649).
-   *     </li>
-   *   </ol>
-   *
-   *   This format is the same as the format produced by PKCS#11 mechanism
-   *   CKM_RSA_AES_KEY_WRAP.
-   *
-   *   When wrapping with import methods
-   *   ({@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA256|RSA_OAEP_3072_SHA256}
-   *   or
-   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA256|RSA_OAEP_4096_SHA256}),
-   *
-   *   this field must contain the formatted key to be imported, wrapped with the
-   *   {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using RSAES-OAEP
-   *   with SHA-256, MGF1 with SHA-256, and an empty label.
-   * @param {Buffer} [request.rsaAesWrappedKey]
-   *   Optional. This field has the same meaning as
-   *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.wrapped_key|wrapped_key}.
-   *   Prefer to use that field in new work. Either that field or this field
-   *   (but not both) must be specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.import_crypto_key_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_ImportCryptoKeyVersion_async
-   */
+/**
+ * Import wrapped key material into a
+ * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+ *
+ * All requests must specify a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}. If
+ * a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} is additionally
+ * specified in the request, key material will be reimported into that
+ * version. Otherwise, a new version will be created, and will be assigned the
+ * next sequential id within the {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to be imported into.
+ *
+ *   The create permission is only required on this key when creating a new
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+ * @param {string} [request.cryptoKeyVersion]
+ *   Optional. The optional {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of
+ *   an existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to
+ *   target for an import operation. If this field is not present, a new
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} containing the
+ *   supplied key material is created.
+ *
+ *   If this field is present, the supplied key material is imported into
+ *   the existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. To
+ *   import into an existing
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
+ *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent},
+ *   have been previously created via {@link |ImportCryptoKeyVersion}, and be in
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}
+ *   or
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
+ *   state. The key material and algorithm must match the previous
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} exactly if the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} has ever contained
+ *   key material.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm} request.algorithm
+ *   Required. The
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm}
+ *   of the key being imported. This does not need to match the
+ *   {@link google.cloud.kms.v1.CryptoKey.version_template|version_template} of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} this version imports into.
+ * @param {string} request.importJob
+ *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
+ *   {@link google.cloud.kms.v1.ImportJob|ImportJob} that was used to wrap this key
+ *   material.
+ * @param {Buffer} [request.wrappedKey]
+ *   Optional. The wrapped key material to import.
+ *
+ *   Before wrapping, key material must be formatted. If importing symmetric key
+ *   material, the expected key material format is plain bytes. If importing
+ *   asymmetric key material, the expected key material format is PKCS#8-encoded
+ *   DER (the PrivateKeyInfo structure from RFC 5208).
+ *
+ *   When wrapping with import methods
+ *   ({@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256|RSA_OAEP_3072_SHA1_AES_256}
+ *   or
+ *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256|RSA_OAEP_4096_SHA1_AES_256}
+ *   or
+ *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA256_AES_256|RSA_OAEP_3072_SHA256_AES_256}
+ *   or
+ *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA256_AES_256|RSA_OAEP_4096_SHA256_AES_256}),
+ *
+ *   this field must contain the concatenation of:
+ *   <ol>
+ *     <li>An ephemeral AES-256 wrapping key wrapped with the
+ *         {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using
+ *         RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an empty
+ *         label.
+ *     </li>
+ *     <li>The formatted key to be imported, wrapped with the ephemeral AES-256
+ *         key using AES-KWP (RFC 5649).
+ *     </li>
+ *   </ol>
+ *
+ *   This format is the same as the format produced by PKCS#11 mechanism
+ *   CKM_RSA_AES_KEY_WRAP.
+ *
+ *   When wrapping with import methods
+ *   ({@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA256|RSA_OAEP_3072_SHA256}
+ *   or
+ *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA256|RSA_OAEP_4096_SHA256}),
+ *
+ *   this field must contain the formatted key to be imported, wrapped with the
+ *   {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using RSAES-OAEP
+ *   with SHA-256, MGF1 with SHA-256, and an empty label.
+ * @param {Buffer} [request.rsaAesWrappedKey]
+ *   Optional. This field has the same meaning as
+ *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.wrapped_key|wrapped_key}.
+ *   Prefer to use that field in new work. Either that field or this field
+ *   (but not both) must be specified.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.import_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_ImportCryptoKeyVersion_async
+ */
   importCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>;
   importCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  importCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  importCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
-    return this.innerApiCalls.importCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.importCryptoKeyVersion(request, options, callback);
   }
-  /**
-   * Create a new {@link google.cloud.kms.v1.ImportJob|ImportJob} within a
-   * {@link google.cloud.kms.v1.KeyRing|KeyRing}.
-   *
-   * {@link google.cloud.kms.v1.ImportJob.import_method|ImportJob.import_method} is
-   * required.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRing} associated with the
-   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
-   * @param {string} request.importJobId
-   *   Required. It must be unique within a KeyRing and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`
-   * @param {google.cloud.kms.v1.ImportJob} request.importJob
-   *   Required. An {@link google.cloud.kms.v1.ImportJob|ImportJob} with initial field
-   *   values.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.ImportJob | ImportJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.create_import_job.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_CreateImportJob_async
-   */
+/**
+ * Create a new {@link google.cloud.kms.v1.ImportJob|ImportJob} within a
+ * {@link google.cloud.kms.v1.KeyRing|KeyRing}.
+ *
+ * {@link google.cloud.kms.v1.ImportJob.import_method|ImportJob.import_method} is
+ * required.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link google.cloud.kms.v1.KeyRing.name|name} of the
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRing} associated with the
+ *   {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
+ * @param {string} request.importJobId
+ *   Required. It must be unique within a KeyRing and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ * @param {google.cloud.kms.v1.ImportJob} request.importJob
+ *   Required. An {@link google.cloud.kms.v1.ImportJob|ImportJob} with initial field
+ *   values.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.ImportJob | ImportJob}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.create_import_job.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_CreateImportJob_async
+ */
   createImportJob(
-    request?: protos.google.cloud.kms.v1.ICreateImportJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.ICreateImportJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IImportJob,
+        protos.google.cloud.kms.v1.ICreateImportJobRequest|undefined, {}|undefined
+      ]>;
   createImportJob(
-    request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createImportJob(
-    request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createImportJob(
-    request?: protos.google.cloud.kms.v1.ICreateImportJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IImportJob,
-          protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IImportJob,
-      protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.ICreateImportJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createImportJob(
+      request: protos.google.cloud.kms.v1.ICreateImportJobRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.ICreateImportJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createImportJob(
+      request?: protos.google.cloud.kms.v1.ICreateImportJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.ICreateImportJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.ICreateImportJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IImportJob,
+        protos.google.cloud.kms.v1.ICreateImportJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.createImportJob(request, options, callback);
   }
-  /**
-   * Update a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
-   *   Required. {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.update_crypto_key.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_async
-   */
+/**
+ * Update a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.kms.v1.CryptoKey} request.cryptoKey
+ *   Required. {@link google.cloud.kms.v1.CryptoKey|CryptoKey} with updated values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields to be updated in this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.update_crypto_key.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_async
+ */
   updateCryptoKey(
-    request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest|undefined, {}|undefined
+      ]>;
   updateCryptoKey(
-    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCryptoKey(
-    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCryptoKey(
-    request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKey,
-          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCryptoKey(
+      request: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCryptoKey(
+      request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'crypto_key.name': request.cryptoKey!.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'crypto_key.name': request.cryptoKey!.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.updateCryptoKey(request, options, callback);
   }
-  /**
-   * Update a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s
-   * metadata.
-   *
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} may be changed between
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED}
-   * and
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED}
-   * using this method. See
-   * {@link google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion|DestroyCryptoKeyVersion}
-   * and
-   * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion}
-   * to move between other states.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
-   *   Required. {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
-   *   updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.update_crypto_key_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyVersion_async
-   */
+/**
+ * Update a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s
+ * metadata.
+ *
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} may be changed between
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED|ENABLED}
+ * and
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED}
+ * using this method. See
+ * {@link google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion|DestroyCryptoKeyVersion}
+ * and
+ * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion}
+ * to move between other states.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion} request.cryptoKeyVersion
+ *   Required. {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+ *   updated values.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields to be updated in this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.update_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyVersion_async
+ */
   updateCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>;
   updateCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'crypto_key_version.name': request.cryptoKeyVersion!.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'crypto_key_version.name': request.cryptoKeyVersion!.name ?? '',
+    });
     this.initialize();
-    return this.innerApiCalls.updateCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.updateCryptoKeyVersion(request, options, callback);
   }
-  /**
-   * Update the version of a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} that
-   * will be used in
-   * {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}.
-   *
-   * Returns an error if called on a key whose purpose is not
-   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to update.
-   * @param {string} request.cryptoKeyVersionId
-   *   Required. The id of the child
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use as primary.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.update_crypto_key_primary_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyPrimaryVersion_async
-   */
+/**
+ * Update the version of a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} that
+ * will be used in
+ * {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}.
+ *
+ * Returns an error if called on a key whose purpose is not
+ * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to update.
+ * @param {string} request.cryptoKeyVersionId
+ *   Required. The id of the child
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use as primary.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.update_crypto_key_primary_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyPrimaryVersion_async
+ */
   updateCryptoKeyPrimaryVersion(
-    request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      (
-        | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest|undefined, {}|undefined
+      ]>;
   updateCryptoKeyPrimaryVersion(
-    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCryptoKeyPrimaryVersion(
-    request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCryptoKeyPrimaryVersion(
-    request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKey,
-          | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKey,
-      | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey,
-      (
-        | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCryptoKeyPrimaryVersion(
+      request: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCryptoKeyPrimaryVersion(
+      request?: protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey,
+        protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
-    return this.innerApiCalls.updateCryptoKeyPrimaryVersion(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.updateCryptoKeyPrimaryVersion(request, options, callback);
   }
-  /**
-   * Schedule a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for
-   * destruction.
-   *
-   * Upon calling this method,
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|CryptoKeyVersion.state} will
-   * be set to
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED},
-   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will
-   * be set to the time
-   * {@link google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration|destroy_scheduled_duration}
-   * in the future. At that time, the
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will automatically
-   * change to
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED},
-   * and the key material will be irrevocably destroyed.
-   *
-   * Before the
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} is
-   * reached,
-   * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion}
-   * may be called to reverse the process.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to destroy.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.destroy_crypto_key_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_DestroyCryptoKeyVersion_async
-   */
+/**
+ * Schedule a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for
+ * destruction.
+ *
+ * Upon calling this method,
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.state|CryptoKeyVersion.state} will
+ * be set to
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED},
+ * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will
+ * be set to the time
+ * {@link google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration|destroy_scheduled_duration}
+ * in the future. At that time, the
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will automatically
+ * change to
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED},
+ * and the key material will be irrevocably destroyed.
+ *
+ * Before the
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} is
+ * reached,
+ * {@link google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion|RestoreCryptoKeyVersion}
+ * may be called to reverse the process.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to destroy.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.destroy_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_DestroyCryptoKeyVersion_async
+ */
   destroyCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>;
   destroyCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  destroyCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  destroyCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.destroyCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Restore a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in the
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED}
-   * state.
-   *
-   * Upon restoration of the CryptoKeyVersion,
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED},
-   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will
-   * be cleared.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to restore.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.restore_crypto_key_version.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_RestoreCryptoKeyVersion_async
-   */
-  restoreCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  restoreCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restoreCryptoKeyVersion(
-    request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  restoreCryptoKeyVersion(
-    request?: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  destroyCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+      callback: Callback<
           protos.google.cloud.kms.v1.ICryptoKeyVersion,
-          | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion,
-      protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  destroyCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
-    return this.innerApiCalls.restoreCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.destroyCryptoKeyVersion(request, options, callback);
   }
-  /**
-   * Encrypts data, so that it can only be recovered by a call to
-   * {@link google.cloud.kms.v1.KeyManagementService.Decrypt|Decrypt}. The
-   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
-   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} or
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
-   *   encryption.
-   *
-   *   If a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} is specified, the server
-   *   will use its {@link google.cloud.kms.v1.CryptoKey.primary|primary version}.
-   * @param {Buffer} request.plaintext
-   *   Required. The data to encrypt. Must be no larger than 64KiB.
-   *
-   *   The maximum size depends on the key version's
-   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
-   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE},
-   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL|EXTERNAL}, and
-   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC|EXTERNAL_VPC} keys, the
-   *   plaintext must be no larger than 64KiB. For
-   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
-   *   the plaintext and additional_authenticated_data fields must be no larger
-   *   than 8KiB.
-   * @param {Buffer} [request.additionalAuthenticatedData]
-   *   Optional. Optional data that, if specified, must also be provided during
-   *   decryption through
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
-   *
-   *   The maximum size depends on the key version's
-   *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
-   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE},
-   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL|EXTERNAL}, and
-   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC|EXTERNAL_VPC} keys the
-   *   AAD must be no larger than 64KiB. For
-   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
-   *   the plaintext and additional_authenticated_data fields must be no larger
-   *   than 8KiB.
-   * @param {google.protobuf.Int64Value} [request.plaintextCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.EncryptRequest.plaintext_crc32c|EncryptRequest.plaintext_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c|EncryptRequest.additional_authenticated_data_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.EncryptResponse | EncryptResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.encrypt.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_Encrypt_async
-   */
+/**
+ * Restore a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in the
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED}
+ * state.
+ *
+ * Upon restoration of the CryptoKeyVersion,
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will be set to
+ * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED|DISABLED},
+ * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will
+ * be cleared.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to restore.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.restore_crypto_key_version.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_RestoreCryptoKeyVersion_async
+ */
+  restoreCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>;
+  restoreCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  restoreCryptoKeyVersion(
+      request: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  restoreCryptoKeyVersion(
+      request?: protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion,
+        protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.restoreCryptoKeyVersion(request, options, callback);
+  }
+/**
+ * Encrypts data, so that it can only be recovered by a call to
+ * {@link google.cloud.kms.v1.KeyManagementService.Decrypt|Decrypt}. The
+ * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+ * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} or
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+ *   encryption.
+ *
+ *   If a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} is specified, the server
+ *   will use its {@link google.cloud.kms.v1.CryptoKey.primary|primary version}.
+ * @param {Buffer} request.plaintext
+ *   Required. The data to encrypt. Must be no larger than 64KiB.
+ *
+ *   The maximum size depends on the key version's
+ *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
+ *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE},
+ *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL|EXTERNAL}, and
+ *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC|EXTERNAL_VPC} keys, the
+ *   plaintext must be no larger than 64KiB. For
+ *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
+ *   the plaintext and additional_authenticated_data fields must be no larger
+ *   than 8KiB.
+ * @param {Buffer} [request.additionalAuthenticatedData]
+ *   Optional. Optional data that, if specified, must also be provided during
+ *   decryption through
+ *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
+ *
+ *   The maximum size depends on the key version's
+ *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
+ *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE},
+ *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL|EXTERNAL}, and
+ *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC|EXTERNAL_VPC} keys the
+ *   AAD must be no larger than 64KiB. For
+ *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
+ *   the plaintext and additional_authenticated_data fields must be no larger
+ *   than 8KiB.
+ * @param {google.protobuf.Int64Value} [request.plaintextCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.plaintext|EncryptRequest.plaintext})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.EncryptRequest.plaintext_crc32c|EncryptRequest.plaintext_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c|EncryptRequest.additional_authenticated_data_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.EncryptResponse | EncryptResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.encrypt.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_Encrypt_async
+ */
   encrypt(
-    request?: protos.google.cloud.kms.v1.IEncryptRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEncryptResponse,
-      protos.google.cloud.kms.v1.IEncryptRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IEncryptRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IEncryptResponse,
+        protos.google.cloud.kms.v1.IEncryptRequest|undefined, {}|undefined
+      ]>;
   encrypt(
-    request: protos.google.cloud.kms.v1.IEncryptRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEncryptResponse,
-      protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  encrypt(
-    request: protos.google.cloud.kms.v1.IEncryptRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEncryptResponse,
-      protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  encrypt(
-    request?: protos.google.cloud.kms.v1.IEncryptRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IEncryptRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IEncryptResponse,
-          protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IEncryptResponse,
-      protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEncryptResponse,
-      protos.google.cloud.kms.v1.IEncryptRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IEncryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  encrypt(
+      request: protos.google.cloud.kms.v1.IEncryptRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IEncryptResponse,
+          protos.google.cloud.kms.v1.IEncryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  encrypt(
+      request?: protos.google.cloud.kms.v1.IEncryptRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IEncryptResponse,
+          protos.google.cloud.kms.v1.IEncryptRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IEncryptResponse,
+          protos.google.cloud.kms.v1.IEncryptRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IEncryptResponse,
+        protos.google.cloud.kms.v1.IEncryptRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.encrypt(request, options, callback);
   }
-  /**
-   * Decrypts data that was protected by
-   * {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}. The
-   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
-   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to use for decryption. The
-   *   server will choose the appropriate version.
-   * @param {Buffer} request.ciphertext
-   *   Required. The encrypted data originally returned in
-   *   {@link google.cloud.kms.v1.EncryptResponse.ciphertext|EncryptResponse.ciphertext}.
-   * @param {Buffer} [request.additionalAuthenticatedData]
-   *   Optional. Optional data that must match the data originally supplied in
-   *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
-   * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext_crc32c|DecryptRequest.ciphertext_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data_crc32c|DecryptRequest.additional_authenticated_data_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.DecryptResponse | DecryptResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.decrypt.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_Decrypt_async
-   */
+/**
+ * Decrypts data that was protected by
+ * {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}. The
+ * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} must be
+ * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to use for decryption. The
+ *   server will choose the appropriate version.
+ * @param {Buffer} request.ciphertext
+ *   Required. The encrypted data originally returned in
+ *   {@link google.cloud.kms.v1.EncryptResponse.ciphertext|EncryptResponse.ciphertext}.
+ * @param {Buffer} [request.additionalAuthenticatedData]
+ *   Optional. Optional data that must match the data originally supplied in
+ *   {@link google.cloud.kms.v1.EncryptRequest.additional_authenticated_data|EncryptRequest.additional_authenticated_data}.
+ * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.ciphertext|DecryptRequest.ciphertext})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.DecryptRequest.ciphertext_crc32c|DecryptRequest.ciphertext_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {google.protobuf.Int64Value} [request.additionalAuthenticatedDataCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data|DecryptRequest.additional_authenticated_data})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.DecryptRequest.additional_authenticated_data_crc32c|DecryptRequest.additional_authenticated_data_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.DecryptResponse | DecryptResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.decrypt.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_Decrypt_async
+ */
   decrypt(
-    request?: protos.google.cloud.kms.v1.IDecryptRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IDecryptResponse,
-      protos.google.cloud.kms.v1.IDecryptRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IDecryptRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IDecryptResponse,
+        protos.google.cloud.kms.v1.IDecryptRequest|undefined, {}|undefined
+      ]>;
   decrypt(
-    request: protos.google.cloud.kms.v1.IDecryptRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IDecryptResponse,
-      protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  decrypt(
-    request: protos.google.cloud.kms.v1.IDecryptRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IDecryptResponse,
-      protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  decrypt(
-    request?: protos.google.cloud.kms.v1.IDecryptRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IDecryptRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IDecryptResponse,
-          protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IDecryptResponse,
-      protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IDecryptResponse,
-      protos.google.cloud.kms.v1.IDecryptRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IDecryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  decrypt(
+      request: protos.google.cloud.kms.v1.IDecryptRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IDecryptResponse,
+          protos.google.cloud.kms.v1.IDecryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  decrypt(
+      request?: protos.google.cloud.kms.v1.IDecryptRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IDecryptResponse,
+          protos.google.cloud.kms.v1.IDecryptRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IDecryptResponse,
+          protos.google.cloud.kms.v1.IDecryptRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IDecryptResponse,
+        protos.google.cloud.kms.v1.IDecryptRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.decrypt(request, options, callback);
   }
-  /**
-   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
-   * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
-   * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-   * key retrieved from
-   * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
-   *   signing.
-   * @param {google.cloud.kms.v1.Digest} [request.digest]
-   *   Optional. The digest of the data to sign. The digest must be produced with
-   *   the same digest algorithm as specified by the key version's
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion.algorithm|algorithm}.
-   *
-   *   This field may not be supplied if
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}
-   *   is supplied.
-   * @param {google.protobuf.Int64Value} [request.digestCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest_crc32c|AsymmetricSignRequest.digest_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {Buffer} [request.data]
-   *   Optional. The data to sign.
-   *   It can't be supplied if
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}
-   *   is supplied.
-   * @param {google.protobuf.Int64Value} [request.dataCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data_crc32c|AsymmetricSignRequest.data_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.AsymmetricSignResponse | AsymmetricSignResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.asymmetric_sign.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_AsymmetricSign_async
-   */
+/**
+ * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+ * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+ * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+ * key retrieved from
+ * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+ *   signing.
+ * @param {google.cloud.kms.v1.Digest} [request.digest]
+ *   Optional. The digest of the data to sign. The digest must be produced with
+ *   the same digest algorithm as specified by the key version's
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion.algorithm|algorithm}.
+ *
+ *   This field may not be supplied if
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}
+ *   is supplied.
+ * @param {google.protobuf.Int64Value} [request.digestCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest_crc32c|AsymmetricSignRequest.digest_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {Buffer} [request.data]
+ *   Optional. The data to sign.
+ *   It can't be supplied if
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.digest|AsymmetricSignRequest.digest}
+ *   is supplied.
+ * @param {google.protobuf.Int64Value} [request.dataCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.AsymmetricSignRequest.data|AsymmetricSignRequest.data})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.AsymmetricSignRequest.data_crc32c|AsymmetricSignRequest.data_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.AsymmetricSignResponse | AsymmetricSignResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.asymmetric_sign.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_AsymmetricSign_async
+ */
   asymmetricSign(
-    request?: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+        protos.google.cloud.kms.v1.IAsymmetricSignRequest|undefined, {}|undefined
+      ]>;
   asymmetricSign(
-    request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  asymmetricSign(
-    request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  asymmetricSign(
-    request?: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IAsymmetricSignResponse,
-          protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IAsymmetricSignResponse,
-      protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest|null|undefined,
+          {}|null|undefined>): void;
+  asymmetricSign(
+      request: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest|null|undefined,
+          {}|null|undefined>): void;
+  asymmetricSign(
+      request?: protos.google.cloud.kms.v1.IAsymmetricSignRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+        protos.google.cloud.kms.v1.IAsymmetricSignRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.asymmetricSign(request, options, callback);
   }
-  /**
-   * Decrypts data that was encrypted with a public key retrieved from
-   * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}
-   * corresponding to a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
-   * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
-   * ASYMMETRIC_DECRYPT.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
-   *   decryption.
-   * @param {Buffer} request.ciphertext
-   *   Required. The data encrypted with the named
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s public key using
-   *   OAEP.
-   * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}.
-   *   If specified,
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   verify the integrity of the received
-   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}
-   *   using this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext_crc32c|AsymmetricDecryptRequest.ciphertext_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.AsymmetricDecryptResponse | AsymmetricDecryptResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.asymmetric_decrypt.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_AsymmetricDecrypt_async
-   */
+/**
+ * Decrypts data that was encrypted with a public key retrieved from
+ * {@link google.cloud.kms.v1.KeyManagementService.GetPublicKey|GetPublicKey}
+ * corresponding to a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+ * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose}
+ * ASYMMETRIC_DECRYPT.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+ *   decryption.
+ * @param {Buffer} request.ciphertext
+ *   Required. The data encrypted with the named
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s public key using
+ *   OAEP.
+ * @param {google.protobuf.Int64Value} [request.ciphertextCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}.
+ *   If specified,
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   verify the integrity of the received
+ *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext}
+ *   using this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext|AsymmetricDecryptRequest.ciphertext})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext_crc32c|AsymmetricDecryptRequest.ciphertext_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.AsymmetricDecryptResponse | AsymmetricDecryptResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.asymmetric_decrypt.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_AsymmetricDecrypt_async
+ */
   asymmetricDecrypt(
-    request?: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+        protos.google.cloud.kms.v1.IAsymmetricDecryptRequest|undefined, {}|undefined
+      ]>;
   asymmetricDecrypt(
-    request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  asymmetricDecrypt(
-    request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  asymmetricDecrypt(
-    request?: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-          | protos.google.cloud.kms.v1.IAsymmetricDecryptRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
-      protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IAsymmetricDecryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  asymmetricDecrypt(
+      request: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+          protos.google.cloud.kms.v1.IAsymmetricDecryptRequest|null|undefined,
+          {}|null|undefined>): void;
+  asymmetricDecrypt(
+      request?: protos.google.cloud.kms.v1.IAsymmetricDecryptRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+          protos.google.cloud.kms.v1.IAsymmetricDecryptRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+          protos.google.cloud.kms.v1.IAsymmetricDecryptRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+        protos.google.cloud.kms.v1.IAsymmetricDecryptRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.asymmetricDecrypt(request, options, callback);
   }
-  /**
-   * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
-   * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} MAC,
-   * producing a tag that can be verified by another source with the same key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
-   *   signing.
-   * @param {Buffer} request.data
-   *   Required. The data to sign. The MAC tag is computed over this data field
-   *   based on the specific algorithm.
-   * @param {google.protobuf.Int64Value} [request.dataCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
-   *   will verify the integrity of the received
-   *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} using this
-   *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
-   *   will report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}) is
-   *   equal to
-   *   {@link google.cloud.kms.v1.MacSignRequest.data_crc32c|MacSignRequest.data_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.MacSignResponse | MacSignResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.mac_sign.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_MacSign_async
-   */
+/**
+ * Signs data using a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+ * with {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} MAC,
+ * producing a tag that can be verified by another source with the same key.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+ *   signing.
+ * @param {Buffer} request.data
+ *   Required. The data to sign. The MAC tag is computed over this data field
+ *   based on the specific algorithm.
+ * @param {google.protobuf.Int64Value} [request.dataCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}. If
+ *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+ *   will verify the integrity of the received
+ *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} using this
+ *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+ *   will report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data}) is
+ *   equal to
+ *   {@link google.cloud.kms.v1.MacSignRequest.data_crc32c|MacSignRequest.data_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.MacSignResponse | MacSignResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.mac_sign.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_MacSign_async
+ */
   macSign(
-    request?: protos.google.cloud.kms.v1.IMacSignRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IMacSignResponse,
-      protos.google.cloud.kms.v1.IMacSignRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IMacSignRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IMacSignResponse,
+        protos.google.cloud.kms.v1.IMacSignRequest|undefined, {}|undefined
+      ]>;
   macSign(
-    request: protos.google.cloud.kms.v1.IMacSignRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IMacSignResponse,
-      protos.google.cloud.kms.v1.IMacSignRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  macSign(
-    request: protos.google.cloud.kms.v1.IMacSignRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IMacSignResponse,
-      protos.google.cloud.kms.v1.IMacSignRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  macSign(
-    request?: protos.google.cloud.kms.v1.IMacSignRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IMacSignRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IMacSignResponse,
-          protos.google.cloud.kms.v1.IMacSignRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IMacSignResponse,
-      protos.google.cloud.kms.v1.IMacSignRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IMacSignResponse,
-      protos.google.cloud.kms.v1.IMacSignRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IMacSignRequest|null|undefined,
+          {}|null|undefined>): void;
+  macSign(
+      request: protos.google.cloud.kms.v1.IMacSignRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IMacSignResponse,
+          protos.google.cloud.kms.v1.IMacSignRequest|null|undefined,
+          {}|null|undefined>): void;
+  macSign(
+      request?: protos.google.cloud.kms.v1.IMacSignRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IMacSignResponse,
+          protos.google.cloud.kms.v1.IMacSignRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IMacSignResponse,
+          protos.google.cloud.kms.v1.IMacSignRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IMacSignResponse,
+        protos.google.cloud.kms.v1.IMacSignRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.macSign(request, options, callback);
   }
-  /**
-   * Verifies MAC tag using a
-   * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
-   * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} MAC, and returns
-   * a response that indicates whether or not the verification was successful.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
-   *   verification.
-   * @param {Buffer} request.data
-   *   Required. The data used previously as a
-   *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} to generate
-   *   the MAC tag.
-   * @param {google.protobuf.Int64Value} [request.dataCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
-   *   will verify the integrity of the received
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data} using
-   *   this checksum.
-   *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
-   *   report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data})
-   *   is equal to
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.data_crc32c|MacVerifyRequest.data_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {Buffer} request.mac
-   *   Required. The signature to verify.
-   * @param {google.protobuf.Int64Value} [request.macCrc32c]
-   *   Optional. An optional CRC32C checksum of the
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac}. If
-   *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
-   *   will verify the integrity of the received
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac} using this
-   *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
-   *   will report an error if the checksum verification fails. If you receive a
-   *   checksum error, your client should verify that
-   *   CRC32C({@link |MacVerifyRequest.tag}) is equal to
-   *   {@link google.cloud.kms.v1.MacVerifyRequest.mac_crc32c|MacVerifyRequest.mac_crc32c},
-   *   and if so, perform a limited number of retries. A persistent mismatch may
-   *   indicate an issue in your computation of the CRC32C checksum. Note: This
-   *   field is defined as int64 for reasons of compatibility across different
-   *   languages. However, it is a non-negative integer, which will never exceed
-   *   2^32-1, and can be safely downconverted to uint32 in languages that support
-   *   this type.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.MacVerifyResponse | MacVerifyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.mac_verify.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_MacVerify_async
-   */
+/**
+ * Verifies MAC tag using a
+ * {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with
+ * {@link google.cloud.kms.v1.CryptoKey.purpose|CryptoKey.purpose} MAC, and returns
+ * a response that indicates whether or not the verification was successful.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use for
+ *   verification.
+ * @param {Buffer} request.data
+ *   Required. The data used previously as a
+ *   {@link google.cloud.kms.v1.MacSignRequest.data|MacSignRequest.data} to generate
+ *   the MAC tag.
+ * @param {google.protobuf.Int64Value} [request.dataCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data}. If
+ *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+ *   will verify the integrity of the received
+ *   {@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data} using
+ *   this checksum.
+ *   {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService} will
+ *   report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link google.cloud.kms.v1.MacVerifyRequest.data|MacVerifyRequest.data})
+ *   is equal to
+ *   {@link google.cloud.kms.v1.MacVerifyRequest.data_crc32c|MacVerifyRequest.data_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {Buffer} request.mac
+ *   Required. The signature to verify.
+ * @param {google.protobuf.Int64Value} [request.macCrc32c]
+ *   Optional. An optional CRC32C checksum of the
+ *   {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac}. If
+ *   specified, {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+ *   will verify the integrity of the received
+ *   {@link google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac} using this
+ *   checksum. {@link google.cloud.kms.v1.KeyManagementService|KeyManagementService}
+ *   will report an error if the checksum verification fails. If you receive a
+ *   checksum error, your client should verify that
+ *   CRC32C({@link |MacVerifyRequest.tag}) is equal to
+ *   {@link google.cloud.kms.v1.MacVerifyRequest.mac_crc32c|MacVerifyRequest.mac_crc32c},
+ *   and if so, perform a limited number of retries. A persistent mismatch may
+ *   indicate an issue in your computation of the CRC32C checksum. Note: This
+ *   field is defined as int64 for reasons of compatibility across different
+ *   languages. However, it is a non-negative integer, which will never exceed
+ *   2^32-1, and can be safely downconverted to uint32 in languages that support
+ *   this type.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.MacVerifyResponse | MacVerifyResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.mac_verify.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_MacVerify_async
+ */
   macVerify(
-    request?: protos.google.cloud.kms.v1.IMacVerifyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IMacVerifyResponse,
-      protos.google.cloud.kms.v1.IMacVerifyRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IMacVerifyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IMacVerifyResponse,
+        protos.google.cloud.kms.v1.IMacVerifyRequest|undefined, {}|undefined
+      ]>;
   macVerify(
-    request: protos.google.cloud.kms.v1.IMacVerifyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IMacVerifyResponse,
-      protos.google.cloud.kms.v1.IMacVerifyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  macVerify(
-    request: protos.google.cloud.kms.v1.IMacVerifyRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IMacVerifyResponse,
-      protos.google.cloud.kms.v1.IMacVerifyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  macVerify(
-    request?: protos.google.cloud.kms.v1.IMacVerifyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IMacVerifyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IMacVerifyResponse,
-          protos.google.cloud.kms.v1.IMacVerifyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IMacVerifyResponse,
-      protos.google.cloud.kms.v1.IMacVerifyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IMacVerifyResponse,
-      protos.google.cloud.kms.v1.IMacVerifyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IMacVerifyRequest|null|undefined,
+          {}|null|undefined>): void;
+  macVerify(
+      request: protos.google.cloud.kms.v1.IMacVerifyRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IMacVerifyResponse,
+          protos.google.cloud.kms.v1.IMacVerifyRequest|null|undefined,
+          {}|null|undefined>): void;
+  macVerify(
+      request?: protos.google.cloud.kms.v1.IMacVerifyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IMacVerifyResponse,
+          protos.google.cloud.kms.v1.IMacVerifyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IMacVerifyResponse,
+          protos.google.cloud.kms.v1.IMacVerifyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IMacVerifyResponse,
+        protos.google.cloud.kms.v1.IMacVerifyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.macVerify(request, options, callback);
   }
-  /**
-   * Generate random bytes using the Cloud KMS randomness source in the provided
-   * location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.location
-   *   The project-specific location in which to generate random bytes.
-   *   For example, "projects/my-project/locations/us-central1".
-   * @param {number} request.lengthBytes
-   *   The length in bytes of the amount of randomness to retrieve.  Minimum 8
-   *   bytes, maximum 1024 bytes.
-   * @param {google.cloud.kms.v1.ProtectionLevel} request.protectionLevel
-   *   The {@link google.cloud.kms.v1.ProtectionLevel|ProtectionLevel} to use when
-   *   generating the random data. Currently, only
-   *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} protection level is
-   *   supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.v1.GenerateRandomBytesResponse | GenerateRandomBytesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.generate_random_bytes.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_async
-   */
+/**
+ * Generate random bytes using the Cloud KMS randomness source in the provided
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.location
+ *   The project-specific location in which to generate random bytes.
+ *   For example, "projects/my-project/locations/us-central1".
+ * @param {number} request.lengthBytes
+ *   The length in bytes of the amount of randomness to retrieve.  Minimum 8
+ *   bytes, maximum 1024 bytes.
+ * @param {google.cloud.kms.v1.ProtectionLevel} request.protectionLevel
+ *   The {@link google.cloud.kms.v1.ProtectionLevel|ProtectionLevel} to use when
+ *   generating the random data. Currently, only
+ *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} protection level is
+ *   supported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.cloud.kms.v1.GenerateRandomBytesResponse | GenerateRandomBytesResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.generate_random_bytes.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_async
+ */
   generateRandomBytes(
-    request?: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
-      protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+        protos.google.cloud.kms.v1.IGenerateRandomBytesRequest|undefined, {}|undefined
+      ]>;
   generateRandomBytes(
-    request: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
-      protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateRandomBytes(
-    request: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
-      protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateRandomBytes(
-    request?: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
-          | protos.google.cloud.kms.v1.IGenerateRandomBytesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
-      protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
-      protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IGenerateRandomBytesRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateRandomBytes(
+      request: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
+      callback: Callback<
+          protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+          protos.google.cloud.kms.v1.IGenerateRandomBytesRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateRandomBytes(
+      request?: protos.google.cloud.kms.v1.IGenerateRandomBytesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+          protos.google.cloud.kms.v1.IGenerateRandomBytesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+          protos.google.cloud.kms.v1.IGenerateRandomBytesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+        protos.google.cloud.kms.v1.IGenerateRandomBytesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        location: request.location ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'location': request.location ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.generateRandomBytes(request, options, callback);
   }
 
-  /**
-   * Lists {@link google.cloud.kms.v1.KeyRing|KeyRings}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
-   *   including the
-   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.  For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.kms.v1.KeyRing | KeyRing}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listKeyRingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link google.cloud.kms.v1.KeyRing|KeyRings}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+ *   including the
+ *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
+ *   in a subsequent request.  If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.  For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link google.cloud.kms.v1.KeyRing | KeyRing}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listKeyRingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listKeyRings(
-    request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IKeyRing[],
-      protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IKeyRing[],
+        protos.google.cloud.kms.v1.IListKeyRingsRequest|null,
+        protos.google.cloud.kms.v1.IListKeyRingsResponse
+      ]>;
   listKeyRings(
-    request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListKeyRingsRequest,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IKeyRing
-    >
-  ): void;
-  listKeyRings(
-    request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListKeyRingsRequest,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IKeyRing
-    >
-  ): void;
-  listKeyRings(
-    request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.kms.v1.IListKeyRingsRequest,
-          protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
-          protos.google.cloud.kms.v1.IKeyRing
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.kms.v1.IListKeyRingsRequest,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IKeyRing
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IKeyRing[],
-      protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
-      protos.google.cloud.kms.v1.IListKeyRingsResponse
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IListKeyRingsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IKeyRing>): void;
+  listKeyRings(
+      request: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyRingsRequest,
+          protos.google.cloud.kms.v1.IListKeyRingsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IKeyRing>): void;
+  listKeyRings(
+      request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyRingsRequest,
+          protos.google.cloud.kms.v1.IListKeyRingsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IKeyRing>,
+      callback?: PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyRingsRequest,
+          protos.google.cloud.kms.v1.IListKeyRingsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IKeyRing>):
+      Promise<[
+        protos.google.cloud.kms.v1.IKeyRing[],
+        protos.google.cloud.kms.v1.IListKeyRingsRequest|null,
+        protos.google.cloud.kms.v1.IListKeyRingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.listKeyRings(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
-   *   including the
-   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.  For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.kms.v1.KeyRing | KeyRing} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listKeyRingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+ *   including the
+ *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
+ *   in a subsequent request.  If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.  For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link google.cloud.kms.v1.KeyRing | KeyRing} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listKeyRingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listKeyRingsStream(
-    request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listKeyRings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3000,62 +2585,63 @@ export class KeyManagementServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listKeyRings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
-   *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
-   *   including the
-   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.  For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.kms.v1.KeyRing | KeyRing}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.list_key_rings.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_ListKeyRings_async
-   */
+/**
+ * Equivalent to `listKeyRings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the location associated with the
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings}, in the format
+ *   `projects/* /locations/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings} to include in the response. Further
+ *   {@link google.cloud.kms.v1.KeyRing|KeyRings} can subsequently be obtained by
+ *   including the
+ *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}
+ *   in a subsequent request.  If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListKeyRingsResponse.next_page_token|ListKeyRingsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.  For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link google.cloud.kms.v1.KeyRing | KeyRing}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.list_key_rings.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_ListKeyRings_async
+ */
   listKeyRingsAsync(
-    request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.kms.v1.IKeyRing> {
+      request?: protos.google.cloud.kms.v1.IListKeyRingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.kms.v1.IKeyRing>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listKeyRings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3065,171 +2651,162 @@ export class KeyManagementServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.IKeyRing>;
   }
-  /**
-   * Lists {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
-   *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
-   *   obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
-   *   The fields of the primary version to include in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCryptoKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link google.cloud.kms.v1.CryptoKey|CryptoKeys}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
+ *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
+ *   obtained by including the
+ *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
+ *   in a subsequent request.  If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
+ *   The fields of the primary version to include in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link google.cloud.kms.v1.CryptoKey | CryptoKey}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCryptoKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listCryptoKeys(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey[],
-      protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey[],
+        protos.google.cloud.kms.v1.IListCryptoKeysRequest|null,
+        protos.google.cloud.kms.v1.IListCryptoKeysResponse
+      ]>;
   listCryptoKeys(
-    request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
-      protos.google.cloud.kms.v1.ICryptoKey
-    >
-  ): void;
-  listCryptoKeys(
-    request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
-      protos.google.cloud.kms.v1.ICryptoKey
-    >
-  ): void;
-  listCryptoKeys(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-          protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
-          protos.google.cloud.kms.v1.ICryptoKey
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
-      protos.google.cloud.kms.v1.ICryptoKey
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKey[],
-      protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeysResponse
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKey>): void;
+  listCryptoKeys(
+      request: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKey>): void;
+  listCryptoKeys(
+      request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKey>,
+      callback?: PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKey>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKey[],
+        protos.google.cloud.kms.v1.IListCryptoKeysRequest|null,
+        protos.google.cloud.kms.v1.IListCryptoKeysResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.listCryptoKeys(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
-   *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
-   *   obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
-   *   The fields of the primary version to include in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCryptoKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
+ *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
+ *   obtained by including the
+ *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
+ *   in a subsequent request.  If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
+ *   The fields of the primary version to include in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link google.cloud.kms.v1.CryptoKey | CryptoKey} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCryptoKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listCryptoKeysStream(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3240,63 +2817,64 @@ export class KeyManagementServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCryptoKeys`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
-   *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
-   *   obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
-   *   in a subsequent request.  If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
-   *   The fields of the primary version to include in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.kms.v1.CryptoKey | CryptoKey}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.list_crypto_keys.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_ListCryptoKeys_async
-   */
+/**
+ * Equivalent to `listCryptoKeys`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} to include in the response.
+ *   Further {@link google.cloud.kms.v1.CryptoKey|CryptoKeys} can subsequently be
+ *   obtained by including the
+ *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}
+ *   in a subsequent request.  If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token|ListCryptoKeysResponse.next_page_token}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.versionView
+ *   The fields of the primary version to include in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link google.cloud.kms.v1.CryptoKey | CryptoKey}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.list_crypto_keys.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_ListCryptoKeys_async
+ */
   listCryptoKeysAsync(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.kms.v1.ICryptoKey> {
+      request?: protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.kms.v1.ICryptoKey>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3306,181 +2884,164 @@ export class KeyManagementServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.ICryptoKey>;
   }
-  /**
-   * Lists {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
-   *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
-   *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
-   *   can subsequently be obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
-   *   The fields to include in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCryptoKeyVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+ *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
+ *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
+ *   can subsequently be obtained by including the
+ *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
+ *   The fields to include in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCryptoKeyVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listCryptoKeyVersions(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion[],
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion[],
+        protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest|null,
+        protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      ]>;
   listCryptoKeyVersions(
-    request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-      | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.kms.v1.ICryptoKeyVersion
-    >
-  ): void;
-  listCryptoKeyVersions(
-    request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-      | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.kms.v1.ICryptoKeyVersion
-    >
-  ): void;
-  listCryptoKeyVersions(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-          | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.kms.v1.ICryptoKeyVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-      | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.kms.v1.ICryptoKeyVersion
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.ICryptoKeyVersion[],
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
-      protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKeyVersion>): void;
+  listCryptoKeyVersions(
+      request: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKeyVersion>): void;
+  listCryptoKeyVersions(
+      request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKeyVersion>,
+      callback?: PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse|null|undefined,
+          protos.google.cloud.kms.v1.ICryptoKeyVersion>):
+      Promise<[
+        protos.google.cloud.kms.v1.ICryptoKeyVersion[],
+        protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest|null,
+        protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.listCryptoKeyVersions(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
-   *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
-   *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
-   *   can subsequently be obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
-   *   The fields to include in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCryptoKeyVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+ *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
+ *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
+ *   can subsequently be obtained by including the
+ *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
+ *   The fields to include in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCryptoKeyVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listCryptoKeyVersionsStream(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCryptoKeyVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3491,64 +3052,65 @@ export class KeyManagementServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listCryptoKeyVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
-   *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
-   *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
-   *   can subsequently be obtained by including the
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
-   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
-   *   The fields to include in the response.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.list_crypto_key_versions.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_ListCryptoKeyVersions_async
-   */
+/**
+ * Equivalent to `listCryptoKeyVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the
+ *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to list, in the format
+ *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} to include in the
+ *   response. Further {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions}
+ *   can subsequently be obtained by including the
+ *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token|ListCryptoKeyVersionsResponse.next_page_token}.
+ * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView} request.view
+ *   The fields to include in the response.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link google.cloud.kms.v1.CryptoKeyVersion | CryptoKeyVersion}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.list_crypto_key_versions.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_ListCryptoKeyVersions_async
+ */
   listCryptoKeyVersionsAsync(
-    request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.kms.v1.ICryptoKeyVersion> {
+      request?: protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.kms.v1.ICryptoKeyVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCryptoKeyVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3558,167 +3120,158 @@ export class KeyManagementServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.ICryptoKeyVersion>;
   }
-  /**
-   * Lists {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
-   *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
-   *   obtained by including the
-   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.kms.v1.ImportJob | ImportJob}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listImportJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+ /**
+ * Lists {@link google.cloud.kms.v1.ImportJob|ImportJobs}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
+ *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
+ *   obtained by including the
+ *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link google.cloud.kms.v1.ImportJob | ImportJob}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listImportJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listImportJobs(
-    request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IImportJob[],
-      protos.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protos.google.cloud.kms.v1.IListImportJobsResponse
-    ]
-  >;
+      request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.v1.IImportJob[],
+        protos.google.cloud.kms.v1.IListImportJobsRequest|null,
+        protos.google.cloud.kms.v1.IListImportJobsResponse
+      ]>;
   listImportJobs(
-    request: protos.google.cloud.kms.v1.IListImportJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListImportJobsRequest,
-      protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IImportJob
-    >
-  ): void;
-  listImportJobs(
-    request: protos.google.cloud.kms.v1.IListImportJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListImportJobsRequest,
-      protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IImportJob
-    >
-  ): void;
-  listImportJobs(
-    request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.kms.v1.IListImportJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.kms.v1.IListImportJobsRequest,
-          protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
-          protos.google.cloud.kms.v1.IImportJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.kms.v1.IListImportJobsRequest,
-      protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IImportJob
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IImportJob[],
-      protos.google.cloud.kms.v1.IListImportJobsRequest | null,
-      protos.google.cloud.kms.v1.IListImportJobsResponse
-    ]
-  > | void {
+          protos.google.cloud.kms.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IImportJob>): void;
+  listImportJobs(
+      request: protos.google.cloud.kms.v1.IListImportJobsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.v1.IListImportJobsRequest,
+          protos.google.cloud.kms.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IImportJob>): void;
+  listImportJobs(
+      request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.kms.v1.IListImportJobsRequest,
+          protos.google.cloud.kms.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IImportJob>,
+      callback?: PaginationCallback<
+          protos.google.cloud.kms.v1.IListImportJobsRequest,
+          protos.google.cloud.kms.v1.IListImportJobsResponse|null|undefined,
+          protos.google.cloud.kms.v1.IImportJob>):
+      Promise<[
+        protos.google.cloud.kms.v1.IImportJob[],
+        protos.google.cloud.kms.v1.IListImportJobsRequest|null,
+        protos.google.cloud.kms.v1.IListImportJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     this.initialize();
     return this.innerApiCalls.listImportJobs(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
-   *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
-   *   obtained by including the
-   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.kms.v1.ImportJob | ImportJob} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listImportJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
+ *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
+ *   obtained by including the
+ *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link google.cloud.kms.v1.ImportJob | ImportJob} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listImportJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listImportJobsStream(
-    request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3729,61 +3282,62 @@ export class KeyManagementServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listImportJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
-   *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
-   *   obtained by including the
-   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order. For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.kms.v1.ImportJob | ImportJob}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_management_service.list_import_jobs.js</caption>
-   * region_tag:cloudkms_v1_generated_KeyManagementService_ListImportJobs_async
-   */
+/**
+ * Equivalent to `listImportJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the {@link google.cloud.kms.v1.KeyRing|KeyRing}
+ *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ * @param {number} [request.pageSize]
+ *   Optional. Optional limit on the number of
+ *   {@link google.cloud.kms.v1.ImportJob|ImportJobs} to include in the response.
+ *   Further {@link google.cloud.kms.v1.ImportJob|ImportJobs} can subsequently be
+ *   obtained by including the
+ *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}
+ *   in a subsequent request. If unspecified, the server will pick an
+ *   appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. Optional pagination token, returned earlier via
+ *   {@link google.cloud.kms.v1.ListImportJobsResponse.next_page_token|ListImportJobsResponse.next_page_token}.
+ * @param {string} [request.filter]
+ *   Optional. Only include resources that match the filter in the response. For
+ *   more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order. For more information, see
+ *   [Sorting and filtering list
+ *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link google.cloud.kms.v1.ImportJob | ImportJob}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_management_service.list_import_jobs.js</caption>
+ * region_tag:cloudkms_v1_generated_KeyManagementService_ListImportJobs_async
+ */
   listImportJobsAsync(
-    request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.kms.v1.IImportJob> {
+      request?: protos.google.cloud.kms.v1.IListImportJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.kms.v1.IImportJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3793,31 +3347,31 @@ export class KeyManagementServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.kms.v1.IImportJob>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -3832,40 +3386,40 @@ export class KeyManagementServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ):Promise<IamProtos.google.iam.v1.Policy> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -3880,41 +3434,41 @@ export class KeyManagementServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ):Promise<IamProtos.google.iam.v1.Policy> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -3929,11 +3483,11 @@ export class KeyManagementServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ):Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3974,7 +3528,7 @@ export class KeyManagementServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -4026,12 +3580,7 @@ export class KeyManagementServiceClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -4048,8 +3597,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -4060,8 +3608,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -4072,8 +3619,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
   }
 
   /**
@@ -4084,8 +3630,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
   }
 
   /**
@@ -4098,13 +3643,7 @@ export class KeyManagementServiceClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  cryptoKeyVersionPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  cryptoKeyVersionPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
       project: project,
       location: location,
@@ -4122,9 +3661,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).project;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).project;
   }
 
   /**
@@ -4135,9 +3672,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).location;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).location;
   }
 
   /**
@@ -4148,9 +3683,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).key_ring;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).key_ring;
   }
 
   /**
@@ -4161,9 +3694,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key;
   }
 
   /**
@@ -4174,9 +3705,43 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key_version;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified ekmConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  ekmConfigPath(project:string,location:string) {
+    return this.pathTemplates.ekmConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EkmConfig resource.
+   *
+   * @param {string} ekmConfigName
+   *   A fully-qualified path representing EkmConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEkmConfigName(ekmConfigName: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.match(ekmConfigName).project;
+  }
+
+  /**
+   * Parse the location from EkmConfig resource.
+   *
+   * @param {string} ekmConfigName
+   *   A fully-qualified path representing EkmConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEkmConfigName(ekmConfigName: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.match(ekmConfigName).location;
   }
 
   /**
@@ -4187,7 +3752,7 @@ export class KeyManagementServiceClient {
    * @param {string} ekm_connection
    * @returns {string} Resource name string.
    */
-  ekmConnectionPath(project: string, location: string, ekmConnection: string) {
+  ekmConnectionPath(project:string,location:string,ekmConnection:string) {
     return this.pathTemplates.ekmConnectionPathTemplate.render({
       project: project,
       location: location,
@@ -4203,8 +3768,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEkmConnectionName(ekmConnectionName: string) {
-    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName)
-      .project;
+    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName).project;
   }
 
   /**
@@ -4215,8 +3779,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEkmConnectionName(ekmConnectionName: string) {
-    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName)
-      .location;
+    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName).location;
   }
 
   /**
@@ -4227,8 +3790,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the ekm_connection.
    */
   matchEkmConnectionFromEkmConnectionName(ekmConnectionName: string) {
-    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName)
-      .ekm_connection;
+    return this.pathTemplates.ekmConnectionPathTemplate.match(ekmConnectionName).ekm_connection;
   }
 
   /**
@@ -4240,12 +3802,7 @@ export class KeyManagementServiceClient {
    * @param {string} import_job
    * @returns {string} Resource name string.
    */
-  importJobPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    importJob: string
-  ) {
+  importJobPath(project:string,location:string,keyRing:string,importJob:string) {
     return this.pathTemplates.importJobPathTemplate.render({
       project: project,
       location: location,
@@ -4262,8 +3819,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .project;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).project;
   }
 
   /**
@@ -4274,8 +3830,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .location;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).location;
   }
 
   /**
@@ -4286,8 +3841,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .key_ring;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).key_ring;
   }
 
   /**
@@ -4298,8 +3852,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the import_job.
    */
   matchImportJobFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .import_job;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).import_job;
   }
 
   /**
@@ -4310,7 +3863,7 @@ export class KeyManagementServiceClient {
    * @param {string} key_ring
    * @returns {string} Resource name string.
    */
-  keyRingPath(project: string, location: string, keyRing: string) {
+  keyRingPath(project:string,location:string,keyRing:string) {
     return this.pathTemplates.keyRingPathTemplate.render({
       project: project,
       location: location,
@@ -4358,7 +3911,7 @@ export class KeyManagementServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4397,13 +3950,7 @@ export class KeyManagementServiceClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  publicKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  publicKeyPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.publicKeyPathTemplate.render({
       project: project,
       location: location,
@@ -4421,8 +3968,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .project;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).project;
   }
 
   /**
@@ -4433,8 +3979,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .location;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).location;
   }
 
   /**
@@ -4445,8 +3990,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .key_ring;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).key_ring;
   }
 
   /**
@@ -4457,8 +4001,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .crypto_key;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key;
   }
 
   /**
@@ -4469,8 +4012,7 @@ export class KeyManagementServiceClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .crypto_key_version;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
   }
 
   /**

@@ -100,6 +100,44 @@
                               "(google.api.method_signature)": "ekm_connection,update_mask"
                             }
                           ]
+                        },
+                        "GetEkmConfig": {
+                          "requestType": "GetEkmConfigRequest",
+                          "responseType": "EkmConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/ekmConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/ekmConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateEkmConfig": {
+                          "requestType": "UpdateEkmConfigRequest",
+                          "responseType": "EkmConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{ekm_config.name=projects/*/locations/*/ekmConfig}",
+                            "(google.api.http).body": "ekm_config",
+                            "(google.api.method_signature)": "ekm_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{ekm_config.name=projects/*/locations/*/ekmConfig}",
+                                "body": "ekm_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "ekm_config,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -216,6 +254,36 @@
                         }
                       }
                     },
+                    "GetEkmConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/EkmConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEkmConfigRequest": {
+                      "fields": {
+                        "ekmConfig": {
+                          "type": "EkmConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "Certificate": {
                       "fields": {
                         "rawDer": {
@@ -315,6 +383,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "keyManagementMode": {
+                          "type": "KeyManagementMode",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cryptoSpacePath": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -350,6 +432,36 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
+                          }
+                        },
+                        "KeyManagementMode": {
+                          "values": {
+                            "KEY_MANAGEMENT_MODE_UNSPECIFIED": 0,
+                            "MANUAL": 1,
+                            "CLOUD_KMS": 2
+                          }
+                        }
+                      }
+                    },
+                    "EkmConfig": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/EkmConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/ekmConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "defaultEkmConnection": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/EkmConnection"
                           }
                         }
                       }
@@ -624,6 +736,20 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "generationFailureReason": {
+                          "type": "string",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "externalDestructionFailureReason": {
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "externalProtectionLevelOptions": {
                           "type": "ExternalProtectionLevelOptions",
                           "id": 17
@@ -679,7 +805,10 @@
                             "DESTROYED": 3,
                             "DESTROY_SCHEDULED": 4,
                             "PENDING_IMPORT": 6,
-                            "IMPORT_FAILED": 7
+                            "IMPORT_FAILED": 7,
+                            "GENERATION_FAILED": 8,
+                            "PENDING_EXTERNAL_DESTRUCTION": 9,
+                            "EXTERNAL_DESTRUCTION_FAILED": 10
                           }
                         },
                         "CryptoKeyVersionView": {

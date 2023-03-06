@@ -22,9 +22,7 @@ import {EkmServiceClient, KeyManagementServiceClient} from '@google-cloud/kms';
 function doStuffWithEkmServiceClient(client: EkmServiceClient) {
   client.close();
 }
-function doStuffWithKeyManagementServiceClient(
-  client: KeyManagementServiceClient
-) {
+function doStuffWithKeyManagementServiceClient(client: KeyManagementServiceClient) {
   client.close();
 }
 
