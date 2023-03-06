@@ -642,7 +642,7 @@ class Acl extends AclRoleAccessorMethods {
    * @param {object|function} [options] Configuration options. If you want to
    *     receive a list of all access controls, pass the callback function as
    * the only argument.
-   * @param {string} [options.entity] Whose permissions will be fetched.
+   * @param {string} options.entity Whose permissions will be fetched.
    * @param {number} [options.generation] **File Objects Only** Select a specific
    *     revision of this file (as opposed to the latest version, the default).
    * @param {string} [options.userProject] The ID of the project which will be
