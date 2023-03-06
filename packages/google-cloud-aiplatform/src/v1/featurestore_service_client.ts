@@ -477,6 +477,9 @@ export class FeaturestoreServiceClient {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -674,6 +677,10 @@ export class FeaturestoreServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
@@ -876,6 +883,7 @@ export class FeaturestoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1030,6 +1038,7 @@ export class FeaturestoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1195,6 +1204,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1369,6 +1381,12 @@ export class FeaturestoreServiceClient {
     const exportFeatureValuesMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.ExportFeatureValuesOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteFeatureValuesResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteFeatureValuesResponse'
+    ) as gax.protobuf.Type;
+    const deleteFeatureValuesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteFeatureValuesOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createFeaturestore: new this._gaxModule.LongrunningDescriptor(
@@ -1429,6 +1447,11 @@ export class FeaturestoreServiceClient {
         this.operationsClient,
         exportFeatureValuesResponse.decode.bind(exportFeatureValuesResponse),
         exportFeatureValuesMetadata.decode.bind(exportFeatureValuesMetadata)
+      ),
+      deleteFeatureValues: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteFeatureValuesResponse.decode.bind(deleteFeatureValuesResponse),
+        deleteFeatureValuesMetadata.decode.bind(deleteFeatureValuesMetadata)
       ),
     };
 
@@ -1501,6 +1524,7 @@ export class FeaturestoreServiceClient {
       'importFeatureValues',
       'batchReadFeatureValues',
       'exportFeatureValues',
+      'deleteFeatureValues',
       'searchFeatures',
     ];
     for (const methodName of featurestoreServiceStubMethods) {
@@ -3796,6 +3820,160 @@ export class FeaturestoreServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ExportFeatureValuesResponse,
       protos.google.cloud.aiplatform.v1.ExportFeatureValuesOperationMetadata
+    >;
+  }
+  /**
+   * Delete Feature values from Featurestore.
+   *
+   * The progress of the deletion is tracked by the returned operation. The
+   * deleted feature values are guaranteed to be invisible to subsequent read
+   * operations after the operation is marked as successfully done.
+   *
+   * If a delete feature values operation fails, the feature values
+   * returned from reads and exports may be inconsistent. If consistency is
+   * required, the caller must retry the same delete request again and wait till
+   * the new operation returned is marked as successfully done.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectEntity} request.selectEntity
+   *   Select feature values to be deleted by specifying entities.
+   * @param {google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature} request.selectTimeRangeAndFeature
+   *   Select feature values to be deleted by specifying time range and
+   *   features.
+   * @param {string} request.entityType
+   *   Required. The resource name of the EntityType grouping the Features for
+   *   which values are being deleted from. Format:
+   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/featurestore_service.delete_feature_values.js</caption>
+   * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeatureValues_async
+   */
+  deleteFeatureValues(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteFeatureValues(
+    request: protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeatureValues(
+    request: protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFeatureValues(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+            protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesResponse,
+        protos.google.cloud.aiplatform.v1.IDeleteFeatureValuesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        entity_type: request.entityType ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteFeatureValues(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteFeatureValues()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/featurestore_service.delete_feature_values.js</caption>
+   * region_tag:aiplatform_v1_generated_FeaturestoreService_DeleteFeatureValues_async
+   */
+  async checkDeleteFeatureValuesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.DeleteFeatureValuesResponse,
+      protos.google.cloud.aiplatform.v1.DeleteFeatureValuesOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFeatureValues,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.DeleteFeatureValuesResponse,
+      protos.google.cloud.aiplatform.v1.DeleteFeatureValuesOperationMetadata
     >;
   }
   /**
