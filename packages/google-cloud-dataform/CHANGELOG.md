@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.0.0...dataform-v1.0.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* **deps:** Roll back dependency @google-cloud/dataform to ^0.4.0 ([#4044](https://github.com/googleapis/google-cloud-node/issues/4044)) ([d1cef14](https://github.com/googleapis/google-cloud-node/commit/d1cef14fabc0b1e3dbc957f70f383a5464f7c840))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v0.4.0...dataform-v1.0.0) (2023-02-23)
 
 

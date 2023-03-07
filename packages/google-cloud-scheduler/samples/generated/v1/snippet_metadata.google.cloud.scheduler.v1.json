@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-scheduler",
-        "version": "3.2.0",
+        "version": "3.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],

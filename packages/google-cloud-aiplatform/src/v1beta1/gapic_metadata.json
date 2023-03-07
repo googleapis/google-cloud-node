@@ -1636,6 +1636,11 @@
                 "batchImportModelEvaluationSlices"
               ]
             },
+            "BatchImportEvaluatedAnnotations": {
+              "methods": [
+                "batchImportEvaluatedAnnotations"
+              ]
+            },
             "GetModelEvaluation": {
               "methods": [
                 "getModelEvaluation"
@@ -1732,6 +1737,11 @@
             "BatchImportModelEvaluationSlices": {
               "methods": [
                 "batchImportModelEvaluationSlices"
+              ]
+            },
+            "BatchImportEvaluatedAnnotations": {
+              "methods": [
+                "batchImportEvaluatedAnnotations"
               ]
             },
             "GetModelEvaluation": {
