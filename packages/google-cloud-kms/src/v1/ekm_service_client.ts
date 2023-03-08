@@ -200,6 +200,9 @@ export class EkmServiceClient {
       cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
+      ekmConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ekmConfig'
+      ),
       ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
       ),
@@ -282,6 +285,8 @@ export class EkmServiceClient {
       'getEkmConnection',
       'createEkmConnection',
       'updateEkmConnection',
+      'getEkmConfig',
+      'updateEkmConfig',
     ];
     for (const methodName of ekmServiceStubMethods) {
       const callPromise = this.ekmServiceStub.then(
@@ -636,6 +641,177 @@ export class EkmServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateEkmConnection(request, options, callback);
+  }
+  /**
+   * Returns the {@link google.cloud.kms.v1.EkmConfig|EkmConfig} singleton resource
+   * for a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The {@link google.cloud.kms.v1.EkmConfig.name|name} of the
+   *   {@link google.cloud.kms.v1.EkmConfig|EkmConfig} to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.kms.v1.EkmConfig | EkmConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/ekm_service.get_ekm_config.js</caption>
+   * region_tag:cloudkms_v1_generated_EkmService_GetEkmConfig_async
+   */
+  getEkmConfig(
+    request?: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getEkmConfig(
+    request: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEkmConfig(
+    request: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEkmConfig(
+    request?: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConfig,
+          protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEkmConfig(request, options, callback);
+  }
+  /**
+   * Updates the {@link google.cloud.kms.v1.EkmConfig|EkmConfig} singleton resource
+   * for a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.kms.v1.EkmConfig} request.ekmConfig
+   *   Required. {@link google.cloud.kms.v1.EkmConfig|EkmConfig} with updated values.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated in this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.kms.v1.EkmConfig | EkmConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/ekm_service.update_ekm_config.js</caption>
+   * region_tag:cloudkms_v1_generated_EkmService_UpdateEkmConfig_async
+   */
+  updateEkmConfig(
+    request?: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateEkmConfig(
+    request: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEkmConfig(
+    request: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEkmConfig(
+    request?: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConfig,
+          protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IEkmConfig,
+      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'ekm_config.name': request.ekmConfig!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEkmConfig(request, options, callback);
   }
 
   /**
@@ -1262,6 +1438,44 @@ export class EkmServiceClient {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified ekmConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  ekmConfigPath(project: string, location: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EkmConfig resource.
+   *
+   * @param {string} ekmConfigName
+   *   A fully-qualified path representing EkmConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEkmConfigName(ekmConfigName: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.match(ekmConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EkmConfig resource.
+   *
+   * @param {string} ekmConfigName
+   *   A fully-qualified path representing EkmConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEkmConfigName(ekmConfigName: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.match(ekmConfigName)
+      .location;
   }
 
   /**

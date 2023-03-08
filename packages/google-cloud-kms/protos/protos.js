@@ -230,6 +230,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService|getEkmConfig}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef GetEkmConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.EkmConfig} [response] EkmConfig
+                         */
+    
+                        /**
+                         * Calls GetEkmConfig.
+                         * @function getEkmConfig
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetEkmConfigRequest} request GetEkmConfigRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.GetEkmConfigCallback} callback Node-style callback called with the error, if any, and EkmConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.getEkmConfig = function getEkmConfig(request, callback) {
+                            return this.rpcCall(getEkmConfig, $root.google.cloud.kms.v1.GetEkmConfigRequest, $root.google.cloud.kms.v1.EkmConfig, request, callback);
+                        }, "name", { value: "GetEkmConfig" });
+    
+                        /**
+                         * Calls GetEkmConfig.
+                         * @function getEkmConfig
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetEkmConfigRequest} request GetEkmConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.EkmConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.EkmService|updateEkmConfig}.
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @typedef UpdateEkmConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.EkmConfig} [response] EkmConfig
+                         */
+    
+                        /**
+                         * Calls UpdateEkmConfig.
+                         * @function updateEkmConfig
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IUpdateEkmConfigRequest} request UpdateEkmConfigRequest message or plain object
+                         * @param {google.cloud.kms.v1.EkmService.UpdateEkmConfigCallback} callback Node-style callback called with the error, if any, and EkmConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(EkmService.prototype.updateEkmConfig = function updateEkmConfig(request, callback) {
+                            return this.rpcCall(updateEkmConfig, $root.google.cloud.kms.v1.UpdateEkmConfigRequest, $root.google.cloud.kms.v1.EkmConfig, request, callback);
+                        }, "name", { value: "UpdateEkmConfig" });
+    
+                        /**
+                         * Calls UpdateEkmConfig.
+                         * @function updateEkmConfig
+                         * @memberof google.cloud.kms.v1.EkmService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IUpdateEkmConfigRequest} request UpdateEkmConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.EkmConfig>} Promise
+                         * @variation 2
+                         */
+    
                         return EkmService;
                     })();
     
@@ -1496,6 +1562,446 @@
                         return UpdateEkmConnectionRequest;
                     })();
     
+                    v1.GetEkmConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEkmConfigRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IGetEkmConfigRequest
+                         * @property {string|null} [name] GetEkmConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetEkmConfigRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a GetEkmConfigRequest.
+                         * @implements IGetEkmConfigRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IGetEkmConfigRequest=} [properties] Properties to set
+                         */
+                        function GetEkmConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEkmConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @instance
+                         */
+                        GetEkmConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetEkmConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetEkmConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GetEkmConfigRequest} GetEkmConfigRequest instance
+                         */
+                        GetEkmConfigRequest.create = function create(properties) {
+                            return new GetEkmConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEkmConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.GetEkmConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetEkmConfigRequest} message GetEkmConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEkmConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEkmConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetEkmConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetEkmConfigRequest} message GetEkmConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEkmConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEkmConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.GetEkmConfigRequest} GetEkmConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEkmConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetEkmConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEkmConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.GetEkmConfigRequest} GetEkmConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEkmConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEkmConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEkmConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEkmConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.GetEkmConfigRequest} GetEkmConfigRequest
+                         */
+                        GetEkmConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GetEkmConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.GetEkmConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEkmConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.GetEkmConfigRequest} message GetEkmConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEkmConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEkmConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEkmConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetEkmConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.GetEkmConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetEkmConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.GetEkmConfigRequest";
+                        };
+    
+                        return GetEkmConfigRequest;
+                    })();
+    
+                    v1.UpdateEkmConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateEkmConfigRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IUpdateEkmConfigRequest
+                         * @property {google.cloud.kms.v1.IEkmConfig|null} [ekmConfig] UpdateEkmConfigRequest ekmConfig
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateEkmConfigRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateEkmConfigRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an UpdateEkmConfigRequest.
+                         * @implements IUpdateEkmConfigRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IUpdateEkmConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateEkmConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateEkmConfigRequest ekmConfig.
+                         * @member {google.cloud.kms.v1.IEkmConfig|null|undefined} ekmConfig
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @instance
+                         */
+                        UpdateEkmConfigRequest.prototype.ekmConfig = null;
+    
+                        /**
+                         * UpdateEkmConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @instance
+                         */
+                        UpdateEkmConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateEkmConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateEkmConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.UpdateEkmConfigRequest} UpdateEkmConfigRequest instance
+                         */
+                        UpdateEkmConfigRequest.create = function create(properties) {
+                            return new UpdateEkmConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEkmConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateEkmConfigRequest} message UpdateEkmConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEkmConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ekmConfig != null && Object.hasOwnProperty.call(message, "ekmConfig"))
+                                $root.google.cloud.kms.v1.EkmConfig.encode(message.ekmConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateEkmConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateEkmConfigRequest} message UpdateEkmConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateEkmConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateEkmConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.UpdateEkmConfigRequest} UpdateEkmConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEkmConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateEkmConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ekmConfig = $root.google.cloud.kms.v1.EkmConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateEkmConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.UpdateEkmConfigRequest} UpdateEkmConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateEkmConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateEkmConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateEkmConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ekmConfig != null && message.hasOwnProperty("ekmConfig")) {
+                                var error = $root.google.cloud.kms.v1.EkmConfig.verify(message.ekmConfig);
+                                if (error)
+                                    return "ekmConfig." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateEkmConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.UpdateEkmConfigRequest} UpdateEkmConfigRequest
+                         */
+                        UpdateEkmConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.UpdateEkmConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.UpdateEkmConfigRequest();
+                            if (object.ekmConfig != null) {
+                                if (typeof object.ekmConfig !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.UpdateEkmConfigRequest.ekmConfig: object expected");
+                                message.ekmConfig = $root.google.cloud.kms.v1.EkmConfig.fromObject(object.ekmConfig);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.UpdateEkmConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateEkmConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.UpdateEkmConfigRequest} message UpdateEkmConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateEkmConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.ekmConfig = null;
+                                object.updateMask = null;
+                            }
+                            if (message.ekmConfig != null && message.hasOwnProperty("ekmConfig"))
+                                object.ekmConfig = $root.google.cloud.kms.v1.EkmConfig.toObject(message.ekmConfig, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateEkmConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateEkmConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateEkmConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.UpdateEkmConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateEkmConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.UpdateEkmConfigRequest";
+                        };
+    
+                        return UpdateEkmConfigRequest;
+                    })();
+    
                     v1.Certificate = (function() {
     
                         /**
@@ -1930,6 +2436,8 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] EkmConnection createTime
                          * @property {Array.<google.cloud.kms.v1.EkmConnection.IServiceResolver>|null} [serviceResolvers] EkmConnection serviceResolvers
                          * @property {string|null} [etag] EkmConnection etag
+                         * @property {google.cloud.kms.v1.EkmConnection.KeyManagementMode|null} [keyManagementMode] EkmConnection keyManagementMode
+                         * @property {string|null} [cryptoSpacePath] EkmConnection cryptoSpacePath
                          */
     
                         /**
@@ -1981,6 +2489,22 @@
                         EkmConnection.prototype.etag = "";
     
                         /**
+                         * EkmConnection keyManagementMode.
+                         * @member {google.cloud.kms.v1.EkmConnection.KeyManagementMode} keyManagementMode
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.keyManagementMode = 0;
+    
+                        /**
+                         * EkmConnection cryptoSpacePath.
+                         * @member {string} cryptoSpacePath
+                         * @memberof google.cloud.kms.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.cryptoSpacePath = "";
+    
+                        /**
                          * Creates a new EkmConnection instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.EkmConnection
@@ -2013,6 +2537,10 @@
                                     $root.google.cloud.kms.v1.EkmConnection.ServiceResolver.encode(message.serviceResolvers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
+                            if (message.keyManagementMode != null && Object.hasOwnProperty.call(message, "keyManagementMode"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.keyManagementMode);
+                            if (message.cryptoSpacePath != null && Object.hasOwnProperty.call(message, "cryptoSpacePath"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.cryptoSpacePath);
                             return writer;
                         };
     
@@ -2063,6 +2591,14 @@
                                     }
                                 case 5: {
                                         message.etag = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.keyManagementMode = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.cryptoSpacePath = reader.string();
                                         break;
                                     }
                                 default:
@@ -2120,6 +2656,18 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.keyManagementMode != null && message.hasOwnProperty("keyManagementMode"))
+                                switch (message.keyManagementMode) {
+                                default:
+                                    return "keyManagementMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.cryptoSpacePath != null && message.hasOwnProperty("cryptoSpacePath"))
+                                if (!$util.isString(message.cryptoSpacePath))
+                                    return "cryptoSpacePath: string expected";
                             return null;
                         };
     
@@ -2154,6 +2702,28 @@
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            switch (object.keyManagementMode) {
+                            default:
+                                if (typeof object.keyManagementMode === "number") {
+                                    message.keyManagementMode = object.keyManagementMode;
+                                    break;
+                                }
+                                break;
+                            case "KEY_MANAGEMENT_MODE_UNSPECIFIED":
+                            case 0:
+                                message.keyManagementMode = 0;
+                                break;
+                            case "MANUAL":
+                            case 1:
+                                message.keyManagementMode = 1;
+                                break;
+                            case "CLOUD_KMS":
+                            case 2:
+                                message.keyManagementMode = 2;
+                                break;
+                            }
+                            if (object.cryptoSpacePath != null)
+                                message.cryptoSpacePath = String(object.cryptoSpacePath);
                             return message;
                         };
     
@@ -2176,6 +2746,8 @@
                                 object.name = "";
                                 object.createTime = null;
                                 object.etag = "";
+                                object.keyManagementMode = options.enums === String ? "KEY_MANAGEMENT_MODE_UNSPECIFIED" : 0;
+                                object.cryptoSpacePath = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2188,6 +2760,10 @@
                             }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.keyManagementMode != null && message.hasOwnProperty("keyManagementMode"))
+                                object.keyManagementMode = options.enums === String ? $root.google.cloud.kms.v1.EkmConnection.KeyManagementMode[message.keyManagementMode] === undefined ? message.keyManagementMode : $root.google.cloud.kms.v1.EkmConnection.KeyManagementMode[message.keyManagementMode] : message.keyManagementMode;
+                            if (message.cryptoSpacePath != null && message.hasOwnProperty("cryptoSpacePath"))
+                                object.cryptoSpacePath = message.cryptoSpacePath;
                             return object;
                         };
     
@@ -2512,7 +3088,250 @@
                             return ServiceResolver;
                         })();
     
+                        /**
+                         * KeyManagementMode enum.
+                         * @name google.cloud.kms.v1.EkmConnection.KeyManagementMode
+                         * @enum {number}
+                         * @property {number} KEY_MANAGEMENT_MODE_UNSPECIFIED=0 KEY_MANAGEMENT_MODE_UNSPECIFIED value
+                         * @property {number} MANUAL=1 MANUAL value
+                         * @property {number} CLOUD_KMS=2 CLOUD_KMS value
+                         */
+                        EkmConnection.KeyManagementMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KEY_MANAGEMENT_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MANUAL"] = 1;
+                            values[valuesById[2] = "CLOUD_KMS"] = 2;
+                            return values;
+                        })();
+    
                         return EkmConnection;
+                    })();
+    
+                    v1.EkmConfig = (function() {
+    
+                        /**
+                         * Properties of an EkmConfig.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IEkmConfig
+                         * @property {string|null} [name] EkmConfig name
+                         * @property {string|null} [defaultEkmConnection] EkmConfig defaultEkmConnection
+                         */
+    
+                        /**
+                         * Constructs a new EkmConfig.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an EkmConfig.
+                         * @implements IEkmConfig
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IEkmConfig=} [properties] Properties to set
+                         */
+                        function EkmConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EkmConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @instance
+                         */
+                        EkmConfig.prototype.name = "";
+    
+                        /**
+                         * EkmConfig defaultEkmConnection.
+                         * @member {string} defaultEkmConnection
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @instance
+                         */
+                        EkmConfig.prototype.defaultEkmConnection = "";
+    
+                        /**
+                         * Creates a new EkmConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {google.cloud.kms.v1.IEkmConfig=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.EkmConfig} EkmConfig instance
+                         */
+                        EkmConfig.create = function create(properties) {
+                            return new EkmConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConfig message. Does not implicitly {@link google.cloud.kms.v1.EkmConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {google.cloud.kms.v1.IEkmConfig} message EkmConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.defaultEkmConnection != null && Object.hasOwnProperty.call(message, "defaultEkmConnection"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.defaultEkmConnection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConfig message, length delimited. Does not implicitly {@link google.cloud.kms.v1.EkmConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {google.cloud.kms.v1.IEkmConfig} message EkmConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EkmConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.EkmConfig} EkmConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EkmConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.defaultEkmConnection = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EkmConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.EkmConfig} EkmConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EkmConfig message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EkmConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.defaultEkmConnection != null && message.hasOwnProperty("defaultEkmConnection"))
+                                if (!$util.isString(message.defaultEkmConnection))
+                                    return "defaultEkmConnection: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EkmConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.EkmConfig} EkmConfig
+                         */
+                        EkmConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.EkmConfig)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.EkmConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.defaultEkmConnection != null)
+                                message.defaultEkmConnection = String(object.defaultEkmConnection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EkmConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {google.cloud.kms.v1.EkmConfig} message EkmConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EkmConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.defaultEkmConnection = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.defaultEkmConnection != null && message.hasOwnProperty("defaultEkmConnection"))
+                                object.defaultEkmConnection = message.defaultEkmConnection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EkmConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EkmConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EkmConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.EkmConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EkmConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.EkmConfig";
+                        };
+    
+                        return EkmConfig;
                     })();
     
                     v1.KeyRing = (function() {
@@ -4356,6 +5175,8 @@
                          * @property {string|null} [importJob] CryptoKeyVersion importJob
                          * @property {google.protobuf.ITimestamp|null} [importTime] CryptoKeyVersion importTime
                          * @property {string|null} [importFailureReason] CryptoKeyVersion importFailureReason
+                         * @property {string|null} [generationFailureReason] CryptoKeyVersion generationFailureReason
+                         * @property {string|null} [externalDestructionFailureReason] CryptoKeyVersion externalDestructionFailureReason
                          * @property {google.cloud.kms.v1.IExternalProtectionLevelOptions|null} [externalProtectionLevelOptions] CryptoKeyVersion externalProtectionLevelOptions
                          * @property {boolean|null} [reimportEligible] CryptoKeyVersion reimportEligible
                          */
@@ -4472,6 +5293,22 @@
                         CryptoKeyVersion.prototype.importFailureReason = "";
     
                         /**
+                         * CryptoKeyVersion generationFailureReason.
+                         * @member {string} generationFailureReason
+                         * @memberof google.cloud.kms.v1.CryptoKeyVersion
+                         * @instance
+                         */
+                        CryptoKeyVersion.prototype.generationFailureReason = "";
+    
+                        /**
+                         * CryptoKeyVersion externalDestructionFailureReason.
+                         * @member {string} externalDestructionFailureReason
+                         * @memberof google.cloud.kms.v1.CryptoKeyVersion
+                         * @instance
+                         */
+                        CryptoKeyVersion.prototype.externalDestructionFailureReason = "";
+    
+                        /**
                          * CryptoKeyVersion externalProtectionLevelOptions.
                          * @member {google.cloud.kms.v1.IExternalProtectionLevelOptions|null|undefined} externalProtectionLevelOptions
                          * @memberof google.cloud.kms.v1.CryptoKeyVersion
@@ -4539,6 +5376,10 @@
                                 $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.encode(message.externalProtectionLevelOptions, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.reimportEligible != null && Object.hasOwnProperty.call(message, "reimportEligible"))
                                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.reimportEligible);
+                            if (message.generationFailureReason != null && Object.hasOwnProperty.call(message, "generationFailureReason"))
+                                writer.uint32(/* id 19, wireType 2 =*/154).string(message.generationFailureReason);
+                            if (message.externalDestructionFailureReason != null && Object.hasOwnProperty.call(message, "externalDestructionFailureReason"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.externalDestructionFailureReason);
                             return writer;
                         };
     
@@ -4621,6 +5462,14 @@
                                         message.importFailureReason = reader.string();
                                         break;
                                     }
+                                case 19: {
+                                        message.generationFailureReason = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.externalDestructionFailureReason = reader.string();
+                                        break;
+                                    }
                                 case 17: {
                                         message.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.decode(reader, reader.uint32());
                                         break;
@@ -4679,6 +5528,9 @@
                                 case 4:
                                 case 6:
                                 case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
@@ -4763,6 +5615,12 @@
                             if (message.importFailureReason != null && message.hasOwnProperty("importFailureReason"))
                                 if (!$util.isString(message.importFailureReason))
                                     return "importFailureReason: string expected";
+                            if (message.generationFailureReason != null && message.hasOwnProperty("generationFailureReason"))
+                                if (!$util.isString(message.generationFailureReason))
+                                    return "generationFailureReason: string expected";
+                            if (message.externalDestructionFailureReason != null && message.hasOwnProperty("externalDestructionFailureReason"))
+                                if (!$util.isString(message.externalDestructionFailureReason))
+                                    return "externalDestructionFailureReason: string expected";
                             if (message.externalProtectionLevelOptions != null && message.hasOwnProperty("externalProtectionLevelOptions")) {
                                 var error = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.verify(message.externalProtectionLevelOptions);
                                 if (error)
@@ -4826,6 +5684,18 @@
                             case "IMPORT_FAILED":
                             case 7:
                                 message.state = 7;
+                                break;
+                            case "GENERATION_FAILED":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "PENDING_EXTERNAL_DESTRUCTION":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "EXTERNAL_DESTRUCTION_FAILED":
+                            case 10:
+                                message.state = 10;
                                 break;
                             }
                             switch (object.protectionLevel) {
@@ -5014,6 +5884,10 @@
                             }
                             if (object.importFailureReason != null)
                                 message.importFailureReason = String(object.importFailureReason);
+                            if (object.generationFailureReason != null)
+                                message.generationFailureReason = String(object.generationFailureReason);
+                            if (object.externalDestructionFailureReason != null)
+                                message.externalDestructionFailureReason = String(object.externalDestructionFailureReason);
                             if (object.externalProtectionLevelOptions != null) {
                                 if (typeof object.externalProtectionLevelOptions !== "object")
                                     throw TypeError(".google.cloud.kms.v1.CryptoKeyVersion.externalProtectionLevelOptions: object expected");
@@ -5052,6 +5926,8 @@
                                 object.importFailureReason = "";
                                 object.externalProtectionLevelOptions = null;
                                 object.reimportEligible = false;
+                                object.generationFailureReason = "";
+                                object.externalDestructionFailureReason = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5081,6 +5957,10 @@
                                 object.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.toObject(message.externalProtectionLevelOptions, options);
                             if (message.reimportEligible != null && message.hasOwnProperty("reimportEligible"))
                                 object.reimportEligible = message.reimportEligible;
+                            if (message.generationFailureReason != null && message.hasOwnProperty("generationFailureReason"))
+                                object.generationFailureReason = message.generationFailureReason;
+                            if (message.externalDestructionFailureReason != null && message.hasOwnProperty("externalDestructionFailureReason"))
+                                object.externalDestructionFailureReason = message.externalDestructionFailureReason;
                             return object;
                         };
     
@@ -5190,6 +6070,9 @@
                          * @property {number} DESTROY_SCHEDULED=4 DESTROY_SCHEDULED value
                          * @property {number} PENDING_IMPORT=6 PENDING_IMPORT value
                          * @property {number} IMPORT_FAILED=7 IMPORT_FAILED value
+                         * @property {number} GENERATION_FAILED=8 GENERATION_FAILED value
+                         * @property {number} PENDING_EXTERNAL_DESTRUCTION=9 PENDING_EXTERNAL_DESTRUCTION value
+                         * @property {number} EXTERNAL_DESTRUCTION_FAILED=10 EXTERNAL_DESTRUCTION_FAILED value
                          */
                         CryptoKeyVersion.CryptoKeyVersionState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -5201,6 +6084,9 @@
                             values[valuesById[4] = "DESTROY_SCHEDULED"] = 4;
                             values[valuesById[6] = "PENDING_IMPORT"] = 6;
                             values[valuesById[7] = "IMPORT_FAILED"] = 7;
+                            values[valuesById[8] = "GENERATION_FAILED"] = 8;
+                            values[valuesById[9] = "PENDING_EXTERNAL_DESTRUCTION"] = 9;
+                            values[valuesById[10] = "EXTERNAL_DESTRUCTION_FAILED"] = 10;
                             return values;
                         })();
     
