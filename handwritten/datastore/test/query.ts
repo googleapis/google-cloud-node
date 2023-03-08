@@ -19,6 +19,7 @@ const {Query} = require('../src/query');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import {Datastore} from '../src';
 import {AggregateField, AggregateQuery} from '../src/aggregate';
+import {PropertyFilter, EntityFilter, or} from '../src/filter';
 
 describe('Query', () => {
   const SCOPE = {} as Datastore;
@@ -162,6 +163,40 @@ describe('Query', () => {
       assert.strictEqual(filter.name, 'name');
       assert.strictEqual(filter.op, '=');
       assert.strictEqual(filter.val, 'Stephen');
+    });
+  });
+
+  describe('filter with Filter class', () => {
+    it('should support filter with Filter', () => {
+      const now = new Date();
+      const query = new Query(['kind1']).filter(
+        new PropertyFilter('date', '<=', now)
+      );
+      const filter = query.entityFilters[0];
+
+      assert.strictEqual(filter.name, 'date');
+      assert.strictEqual(filter.op, '<=');
+      assert.strictEqual(filter.val, now);
+    });
+    it('should support filter with OR', () => {
+      const now = new Date();
+      const query = new Query(['kind1']).filter(
+        or([
+          new PropertyFilter('date', '<=', now),
+          new PropertyFilter('name', '=', 'Stephen'),
+        ])
+      );
+      const filter = query.entityFilters[0];
+      assert.strictEqual(filter.op, 'OR');
+      // Check filters
+      const filters = filter.filters;
+      assert.strictEqual(filters.length, 2);
+      assert.strictEqual(filters[0].name, 'date');
+      assert.strictEqual(filters[0].op, '<=');
+      assert.strictEqual(filters[0].val, now);
+      assert.strictEqual(filters[1].name, 'name');
+      assert.strictEqual(filters[1].op, '=');
+      assert.strictEqual(filters[1].val, 'Stephen');
     });
     it('should accept null as value', () => {
       assert.strictEqual(

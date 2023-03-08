@@ -17,6 +17,12 @@ indexes:
   - name: appearances
 
 - kind: Character
+  ancestor: no
+  properties:
+  - name: family
+  - name: appearances
+
+- kind: Character
   ancestor: yes
   properties:
   - name: name
