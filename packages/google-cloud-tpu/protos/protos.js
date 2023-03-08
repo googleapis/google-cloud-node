@@ -9093,6 +9093,7 @@
                          * @property {google.cloud.tpu.v2.Node.ApiVersion|null} [apiVersion] Node apiVersion
                          * @property {Array.<google.cloud.tpu.v2.ISymptom>|null} [symptoms] Node symptoms
                          * @property {google.cloud.tpu.v2.IShieldedInstanceConfig|null} [shieldedInstanceConfig] Node shieldedInstanceConfig
+                         * @property {google.cloud.tpu.v2.IAcceleratorConfig|null} [acceleratorConfig] Node acceleratorConfig
                          */
     
                         /**
@@ -9285,6 +9286,14 @@
                         Node.prototype.shieldedInstanceConfig = null;
     
                         /**
+                         * Node acceleratorConfig.
+                         * @member {google.cloud.tpu.v2.IAcceleratorConfig|null|undefined} acceleratorConfig
+                         * @memberof google.cloud.tpu.v2.Node
+                         * @instance
+                         */
+                        Node.prototype.acceleratorConfig = null;
+    
+                        /**
                          * Creates a new Node instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2.Node
@@ -9356,6 +9365,8 @@
                                     $root.google.cloud.tpu.v2.AttachedDisk.encode(message.dataDisks[i], writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
                                 $root.google.cloud.tpu.v2.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                            if (message.acceleratorConfig != null && Object.hasOwnProperty.call(message, "acceleratorConfig"))
+                                $root.google.cloud.tpu.v2.AcceleratorConfig.encode(message.acceleratorConfig, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                             return writer;
                         };
     
@@ -9518,6 +9529,10 @@
                                     }
                                 case 45: {
                                         message.shieldedInstanceConfig = $root.google.cloud.tpu.v2.ShieldedInstanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 46: {
+                                        message.acceleratorConfig = $root.google.cloud.tpu.v2.AcceleratorConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -9693,6 +9708,11 @@
                                 var error = $root.google.cloud.tpu.v2.ShieldedInstanceConfig.verify(message.shieldedInstanceConfig);
                                 if (error)
                                     return "shieldedInstanceConfig." + error;
+                            }
+                            if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig")) {
+                                var error = $root.google.cloud.tpu.v2.AcceleratorConfig.verify(message.acceleratorConfig);
+                                if (error)
+                                    return "acceleratorConfig." + error;
                             }
                             return null;
                         };
@@ -9930,6 +9950,11 @@
                                     throw TypeError(".google.cloud.tpu.v2.Node.shieldedInstanceConfig: object expected");
                                 message.shieldedInstanceConfig = $root.google.cloud.tpu.v2.ShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
                             }
+                            if (object.acceleratorConfig != null) {
+                                if (typeof object.acceleratorConfig !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2.Node.acceleratorConfig: object expected");
+                                message.acceleratorConfig = $root.google.cloud.tpu.v2.AcceleratorConfig.fromObject(object.acceleratorConfig);
+                            }
                             return message;
                         };
     
@@ -9976,6 +10001,7 @@
                                 object.serviceAccount = null;
                                 object.apiVersion = options.enums === String ? "API_VERSION_UNSPECIFIED" : 0;
                                 object.shieldedInstanceConfig = null;
+                                object.acceleratorConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10041,6 +10067,8 @@
                             }
                             if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
                                 object.shieldedInstanceConfig = $root.google.cloud.tpu.v2.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
+                            if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig"))
+                                object.acceleratorConfig = $root.google.cloud.tpu.v2.AcceleratorConfig.toObject(message.acceleratorConfig, options);
                             return object;
                         };
     
@@ -12617,6 +12645,7 @@
                          * @interface IAcceleratorType
                          * @property {string|null} [name] AcceleratorType name
                          * @property {string|null} [type] AcceleratorType type
+                         * @property {Array.<google.cloud.tpu.v2.IAcceleratorConfig>|null} [acceleratorConfigs] AcceleratorType acceleratorConfigs
                          */
     
                         /**
@@ -12628,6 +12657,7 @@
                          * @param {google.cloud.tpu.v2.IAcceleratorType=} [properties] Properties to set
                          */
                         function AcceleratorType(properties) {
+                            this.acceleratorConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12649,6 +12679,14 @@
                          * @instance
                          */
                         AcceleratorType.prototype.type = "";
+    
+                        /**
+                         * AcceleratorType acceleratorConfigs.
+                         * @member {Array.<google.cloud.tpu.v2.IAcceleratorConfig>} acceleratorConfigs
+                         * @memberof google.cloud.tpu.v2.AcceleratorType
+                         * @instance
+                         */
+                        AcceleratorType.prototype.acceleratorConfigs = $util.emptyArray;
     
                         /**
                          * Creates a new AcceleratorType instance using the specified properties.
@@ -12678,6 +12716,9 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                            if (message.acceleratorConfigs != null && message.acceleratorConfigs.length)
+                                for (var i = 0; i < message.acceleratorConfigs.length; ++i)
+                                    $root.google.cloud.tpu.v2.AcceleratorConfig.encode(message.acceleratorConfigs[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -12718,6 +12759,12 @@
                                     }
                                 case 2: {
                                         message.type = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.acceleratorConfigs && message.acceleratorConfigs.length))
+                                            message.acceleratorConfigs = [];
+                                        message.acceleratorConfigs.push($root.google.cloud.tpu.v2.AcceleratorConfig.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -12761,6 +12808,15 @@
                             if (message.type != null && message.hasOwnProperty("type"))
                                 if (!$util.isString(message.type))
                                     return "type: string expected";
+                            if (message.acceleratorConfigs != null && message.hasOwnProperty("acceleratorConfigs")) {
+                                if (!Array.isArray(message.acceleratorConfigs))
+                                    return "acceleratorConfigs: array expected";
+                                for (var i = 0; i < message.acceleratorConfigs.length; ++i) {
+                                    var error = $root.google.cloud.tpu.v2.AcceleratorConfig.verify(message.acceleratorConfigs[i]);
+                                    if (error)
+                                        return "acceleratorConfigs." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -12780,6 +12836,16 @@
                                 message.name = String(object.name);
                             if (object.type != null)
                                 message.type = String(object.type);
+                            if (object.acceleratorConfigs) {
+                                if (!Array.isArray(object.acceleratorConfigs))
+                                    throw TypeError(".google.cloud.tpu.v2.AcceleratorType.acceleratorConfigs: array expected");
+                                message.acceleratorConfigs = [];
+                                for (var i = 0; i < object.acceleratorConfigs.length; ++i) {
+                                    if (typeof object.acceleratorConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.tpu.v2.AcceleratorType.acceleratorConfigs: object expected");
+                                    message.acceleratorConfigs[i] = $root.google.cloud.tpu.v2.AcceleratorConfig.fromObject(object.acceleratorConfigs[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -12796,6 +12862,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.acceleratorConfigs = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.type = "";
@@ -12804,6 +12872,11 @@
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = message.type;
+                            if (message.acceleratorConfigs && message.acceleratorConfigs.length) {
+                                object.acceleratorConfigs = [];
+                                for (var j = 0; j < message.acceleratorConfigs.length; ++j)
+                                    object.acceleratorConfigs[j] = $root.google.cloud.tpu.v2.AcceleratorConfig.toObject(message.acceleratorConfigs[j], options);
+                            }
                             return object;
                         };
     
@@ -15824,6 +15897,280 @@
                         };
     
                         return GetGuestAttributesResponse;
+                    })();
+    
+                    v2.AcceleratorConfig = (function() {
+    
+                        /**
+                         * Properties of an AcceleratorConfig.
+                         * @memberof google.cloud.tpu.v2
+                         * @interface IAcceleratorConfig
+                         * @property {google.cloud.tpu.v2.AcceleratorConfig.Type|null} [type] AcceleratorConfig type
+                         * @property {string|null} [topology] AcceleratorConfig topology
+                         */
+    
+                        /**
+                         * Constructs a new AcceleratorConfig.
+                         * @memberof google.cloud.tpu.v2
+                         * @classdesc Represents an AcceleratorConfig.
+                         * @implements IAcceleratorConfig
+                         * @constructor
+                         * @param {google.cloud.tpu.v2.IAcceleratorConfig=} [properties] Properties to set
+                         */
+                        function AcceleratorConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AcceleratorConfig type.
+                         * @member {google.cloud.tpu.v2.AcceleratorConfig.Type} type
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @instance
+                         */
+                        AcceleratorConfig.prototype.type = 0;
+    
+                        /**
+                         * AcceleratorConfig topology.
+                         * @member {string} topology
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @instance
+                         */
+                        AcceleratorConfig.prototype.topology = "";
+    
+                        /**
+                         * Creates a new AcceleratorConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2.IAcceleratorConfig=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2.AcceleratorConfig} AcceleratorConfig instance
+                         */
+                        AcceleratorConfig.create = function create(properties) {
+                            return new AcceleratorConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AcceleratorConfig message. Does not implicitly {@link google.cloud.tpu.v2.AcceleratorConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2.IAcceleratorConfig} message AcceleratorConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcceleratorConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.topology != null && Object.hasOwnProperty.call(message, "topology"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.topology);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AcceleratorConfig message, length delimited. Does not implicitly {@link google.cloud.tpu.v2.AcceleratorConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2.IAcceleratorConfig} message AcceleratorConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcceleratorConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AcceleratorConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2.AcceleratorConfig} AcceleratorConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcceleratorConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2.AcceleratorConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.topology = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AcceleratorConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2.AcceleratorConfig} AcceleratorConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcceleratorConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AcceleratorConfig message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AcceleratorConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 2:
+                                case 4:
+                                case 7:
+                                    break;
+                                }
+                            if (message.topology != null && message.hasOwnProperty("topology"))
+                                if (!$util.isString(message.topology))
+                                    return "topology: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AcceleratorConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2.AcceleratorConfig} AcceleratorConfig
+                         */
+                        AcceleratorConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2.AcceleratorConfig)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2.AcceleratorConfig();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "V2":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "V3":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "V4":
+                            case 7:
+                                message.type = 7;
+                                break;
+                            }
+                            if (object.topology != null)
+                                message.topology = String(object.topology);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AcceleratorConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2.AcceleratorConfig} message AcceleratorConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AcceleratorConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.topology = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.tpu.v2.AcceleratorConfig.Type[message.type] === undefined ? message.type : $root.google.cloud.tpu.v2.AcceleratorConfig.Type[message.type] : message.type;
+                            if (message.topology != null && message.hasOwnProperty("topology"))
+                                object.topology = message.topology;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AcceleratorConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AcceleratorConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AcceleratorConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2.AcceleratorConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AcceleratorConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2.AcceleratorConfig";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.tpu.v2.AcceleratorConfig.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} V2=2 V2 value
+                         * @property {number} V3=4 V3 value
+                         * @property {number} V4=7 V4 value
+                         */
+                        AcceleratorConfig.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[2] = "V2"] = 2;
+                            values[valuesById[4] = "V3"] = 4;
+                            values[valuesById[7] = "V4"] = 7;
+                            return values;
+                        })();
+    
+                        return AcceleratorConfig;
                     })();
     
                     v2.ShieldedInstanceConfig = (function() {
