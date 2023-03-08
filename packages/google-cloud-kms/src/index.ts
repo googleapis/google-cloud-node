@@ -16,7 +16,6 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as 1 from './1';
 import * as v1 from './v1';
 
 const EkmServiceClient = v1.EkmServiceClient;
@@ -24,7 +23,7 @@ type EkmServiceClient = v1.EkmServiceClient;
 const KeyManagementServiceClient = v1.KeyManagementServiceClient;
 type KeyManagementServiceClient = v1.KeyManagementServiceClient;
 
-export {1, v1, EkmServiceClient, KeyManagementServiceClient};
-export default {1, v1, EkmServiceClient, KeyManagementServiceClient};
+export {v1, EkmServiceClient, KeyManagementServiceClient};
+export default {v1, EkmServiceClient, KeyManagementServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
