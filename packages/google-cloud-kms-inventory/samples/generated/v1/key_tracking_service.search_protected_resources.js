@@ -56,7 +56,7 @@ function main(scope, cryptoKey) {
   // const pageToken = 'abc123'
 
   // Imports the Inventory library
-  const {KeyTrackingServiceClient} = require('inventory').v1;
+  const {KeyTrackingServiceClient} = require('@google-cloud/kms-inventory').v1;
 
   // Instantiates a client
   const inventoryClient = new KeyTrackingServiceClient();
