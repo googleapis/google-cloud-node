@@ -14,34 +14,29 @@
  * limitations under the License.
  */
 
+const yargs = require('yargs');
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
-import yargs from 'yargs';
 import {Bucket, TransferManager} from '../src';
-import {TRANSFER_MANAGER_TEST_TYPES} from './performanceTest';
 import {
   BLOCK_SIZE_IN_BYTES,
   cleanupFile,
-  DEFAULT_LARGE_FILE_SIZE_BYTES,
-  DEFAULT_PROJECT_ID,
-  DEFAULT_SMALL_FILE_SIZE_BYTES,
   generateRandomDirectoryStructure,
   generateRandomFile,
   generateRandomFileName,
   getValidationType,
   NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-  DEFAULT_NUMBER_OF_OBJECTS,
   performanceTestSetup,
   TestResult,
+  performanceTestCommand,
+  getLowHighFileSize,
+  PERFORMANCE_TEST_TYPES,
 } from './performanceUtils';
 import {performance} from 'perf_hooks';
 import {rmSync} from 'fs';
 import * as path from 'path';
 
 const TEST_NAME_STRING = 'tm-perf-metrics';
-const DEFAULT_BUCKET_NAME = 'nodejs-transfer-manager-perf-metrics';
-const DEFAULT_NUMBER_OF_PROMISES = 2;
-const DEFAULT_CHUNK_SIZE_BYTES = 16 * 1024 * 1024;
 const DIRECTORY_PROBABILITY = 0.1;
 
 let bucket: Bucket;
@@ -49,23 +44,7 @@ let transferManager: TransferManager;
 const checkType = getValidationType();
 
 const argv = yargs(process.argv.slice(2))
-  .options({
-    bucket: {type: 'string', default: DEFAULT_BUCKET_NAME},
-    small: {type: 'number', default: DEFAULT_SMALL_FILE_SIZE_BYTES},
-    large: {type: 'number', default: DEFAULT_LARGE_FILE_SIZE_BYTES},
-    numpromises: {type: 'number', default: DEFAULT_NUMBER_OF_PROMISES},
-    numobjects: {type: 'number', default: DEFAULT_NUMBER_OF_OBJECTS},
-    chunksize: {type: 'number', default: DEFAULT_CHUNK_SIZE_BYTES},
-    projectid: {type: 'string', default: DEFAULT_PROJECT_ID},
-    testtype: {
-      type: 'string',
-      choices: [
-        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES,
-        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES,
-        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD,
-      ],
-    },
-  })
+  .command(performanceTestCommand)
   .parseSync();
 
 /**
@@ -85,21 +64,22 @@ async function main() {
     cpuTimeUs: 0,
     status: '[OK]',
     chunkSize: 0,
+    workers: argv.workers,
   };
 
   ({bucket, transferManager} = await performanceTestSetup(
-    argv.projectid,
-    argv.bucket
+    argv.project!,
+    argv.bucket!
   ));
 
-  switch (argv.testtype) {
-    case TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES:
+  switch (argv.test_type) {
+    case PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES:
       result = await performUploadManyFilesTest();
       break;
-    case TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES:
+    case PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES:
       result = await performDownloadManyFilesTest();
       break;
-    case TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD:
+    case PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD:
       result = await performDownloadFileInChunksTest();
       break;
     default:
@@ -122,17 +102,18 @@ async function performTestCleanup() {
  * @returns {Promise<TestResult>} A promise that resolves containing information about the test results.
  */
 async function performUploadManyFilesTest(): Promise<TestResult> {
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
   const creationInfo = generateRandomDirectoryStructure(
-    argv.numobjects,
+    argv.num_objects,
     TEST_NAME_STRING,
-    argv.small,
-    argv.large,
+    fileSizeRange.low,
+    fileSizeRange.high,
     DIRECTORY_PROBABILITY
   );
 
   const start = performance.now();
   await transferManager.uploadManyFiles(creationInfo.paths, {
-    concurrencyLimit: argv.numpromises,
+    concurrencyLimit: argv.workers,
     passthroughOptions: {
       validation: checkType,
     },
@@ -153,6 +134,7 @@ async function performUploadManyFilesTest(): Promise<TestResult> {
     cpuTimeUs: -1,
     status: '[OK]',
     chunkSize: creationInfo.totalSizeInBytes,
+    workers: argv.workers,
   };
 
   return result;
@@ -164,16 +146,17 @@ async function performUploadManyFilesTest(): Promise<TestResult> {
  * @returns {Promise<TestResult>} A promise that resolves containing information about the test results.
  */
 async function performDownloadManyFilesTest(): Promise<TestResult> {
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
   const creationInfo = generateRandomDirectoryStructure(
-    argv.numobjects,
+    argv.num_objects,
     TEST_NAME_STRING,
-    argv.small,
-    argv.large,
+    fileSizeRange.low,
+    fileSizeRange.high,
     DIRECTORY_PROBABILITY
   );
 
   await transferManager.uploadManyFiles(creationInfo.paths, {
-    concurrencyLimit: argv.numpromises,
+    concurrencyLimit: argv.workers,
     passthroughOptions: {
       validation: checkType,
     },
@@ -181,7 +164,7 @@ async function performDownloadManyFilesTest(): Promise<TestResult> {
   const start = performance.now();
   await transferManager.downloadManyFiles(TEST_NAME_STRING, {
     prefix: path.join(__dirname, '..', '..'),
-    concurrencyLimit: argv.numpromises,
+    concurrencyLimit: argv.workers,
     passthroughOptions: {
       validation: checkType,
     },
@@ -202,6 +185,7 @@ async function performDownloadManyFilesTest(): Promise<TestResult> {
     cpuTimeUs: -1,
     status: '[OK]',
     chunkSize: creationInfo.totalSizeInBytes,
+    workers: argv.workers,
   };
   return result;
 }
@@ -212,11 +196,12 @@ async function performDownloadManyFilesTest(): Promise<TestResult> {
  * @returns {Promise<TestResult>} A promise that resolves containing information about the test results.
  */
 async function performDownloadFileInChunksTest(): Promise<TestResult> {
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
   const fileName = generateRandomFileName(TEST_NAME_STRING);
   const sizeInBytes = generateRandomFile(
     fileName,
-    argv.small,
-    argv.large,
+    fileSizeRange.low,
+    fileSizeRange.high,
     __dirname
   );
   const file = bucket.file(`${fileName}`);
@@ -225,8 +210,8 @@ async function performDownloadFileInChunksTest(): Promise<TestResult> {
   cleanupFile(fileName);
   const start = performance.now();
   await transferManager.downloadFileInChunks(file, {
-    concurrencyLimit: argv.numpromises,
-    chunkSizeBytes: argv.chunksize,
+    concurrencyLimit: argv.workers,
+    chunkSizeBytes: argv.range_read_size,
     destination: path.join(__dirname, fileName),
     validation: checkType === 'crc32c' ? checkType : false,
   });
@@ -245,9 +230,11 @@ async function performDownloadFileInChunksTest(): Promise<TestResult> {
     elapsedTimeUs: Math.round((end - start) * 1000),
     cpuTimeUs: -1,
     status: '[OK]',
-    chunkSize: argv.chunksize,
+    chunkSize: argv.range_read_size,
+    workers: argv.workers,
   };
 
+  rmSync(TEST_NAME_STRING, {recursive: true, force: true});
   return result;
 }
 

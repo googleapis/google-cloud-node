@@ -14,73 +14,30 @@
  * limitations under the License.
  */
 
+const yargs = require('yargs');
 import {appendFile} from 'fs/promises';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {Worker} from 'worker_threads';
-import yargs = require('yargs');
 import {
   convertToCSVFormat,
   convertToCloudMonitoringFormat,
   TestResult,
   log,
+  performanceTestCommand,
+  OUTPUT_FORMATS,
+  PERFORMANCE_TEST_TYPES,
 } from './performanceUtils';
 import {existsSync} from 'fs';
 import {writeFile} from 'fs/promises';
 
-const DEFAULT_BUCKET_NAME = 'nodejs-performance-test';
-const DEFAULT_ITERATIONS = 100;
-const DEFAULT_THREADS = 1;
 const CSV_HEADERS =
   'Op,ObjectSize,AppBufferSize,LibBufferSize,Crc32cEnabled,MD5Enabled,ApiName,ElapsedTimeUs,CpuTimeUs,Status\n';
-export const enum TRANSFER_MANAGER_TEST_TYPES {
-  WRITE_ONE_READ_THREE = 'w1r3',
-  TRANSFER_MANAGER_UPLOAD_MANY_FILES = 'tm-upload',
-  TRANSFER_MANAGER_DOWNLOAD_MANY_FILES = 'tm-download',
-  TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD = 'tm-chunked',
-  APPLICATION_LARGE_FILE_DOWNLOAD = 'application-large',
-  APPLICATION_UPLOAD_MULTIPLE_OBJECTS = 'application-upload',
-  APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS = 'application-download',
-}
-
-const enum OUTPUT_FORMATS {
-  CSV = 'csv',
-  CLOUD_MONITORING = 'cloudmon',
-}
 
 const argv = yargs(process.argv.slice(2))
-  .options({
-    bucket: {type: 'string', default: DEFAULT_BUCKET_NAME},
-    iterations: {type: 'number', default: DEFAULT_ITERATIONS},
-    numthreads: {type: 'number', default: DEFAULT_THREADS},
-    testtype: {
-      type: 'string',
-      choices: [
-        TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE,
-        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES,
-        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES,
-        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD,
-        TRANSFER_MANAGER_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS,
-        TRANSFER_MANAGER_TEST_TYPES.APPLICATION_LARGE_FILE_DOWNLOAD,
-        TRANSFER_MANAGER_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS,
-      ],
-      default: TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE,
-    },
-    format: {
-      type: 'string',
-      choices: [OUTPUT_FORMATS.CSV, OUTPUT_FORMATS.CLOUD_MONITORING],
-      default: OUTPUT_FORMATS.CSV,
-    },
-    filename: {
-      type: 'string',
-    },
-    debug: {
-      type: 'boolean',
-      default: false,
-    },
-  })
+  .command(performanceTestCommand)
   .parseSync();
 
-let iterationsRemaining = argv.iterations;
+let iterationsRemaining = argv.samples;
 
 /**
  * Main entry point for performing a Write 1 Read 3 performance measurement test.
@@ -89,7 +46,7 @@ let iterationsRemaining = argv.iterations;
  * specified by the iterations parameter or 100 if not specified.
  */
 function main() {
-  let numThreads = argv.numthreads;
+  let numThreads = argv.workers;
   if (numThreads > iterationsRemaining) {
     log(
       `${numThreads} is greater than number of iterations (${iterationsRemaining}). Using ${iterationsRemaining} threads instead.`,
@@ -97,7 +54,7 @@ function main() {
     );
     numThreads = iterationsRemaining;
   }
-  if (argv.testtype !== TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE) {
+  if (argv.test_type !== PERFORMANCE_TEST_TYPES.WRITE_ONE_READ_THREE) {
     numThreads = 1;
   }
   for (let i = 0; i < numThreads; i++) {
@@ -116,24 +73,26 @@ function createWorker() {
     argv.debug
   );
   let testPath = '';
-  if (argv.testtype === TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE) {
+  if (
+    argv.test_type === PERFORMANCE_TEST_TYPES.WRITE_ONE_READ_THREE ||
+    argv.test_type === PERFORMANCE_TEST_TYPES.RANGE_READ
+  ) {
     testPath = `${__dirname}/performPerformanceTest.js`;
   } else if (
-    argv.testtype ===
-      TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES ||
-    argv.testtype ===
-      TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD ||
-    argv.testtype ===
-      TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES
+    argv.test_type ===
+      PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES ||
+    argv.test_type ===
+      PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD ||
+    argv.test_type ===
+      PERFORMANCE_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES
   ) {
     testPath = `${__dirname}/performTransferManagerTest.js`;
   } else if (
-    argv.testtype ===
-      TRANSFER_MANAGER_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS ||
-    argv.testtype ===
-      TRANSFER_MANAGER_TEST_TYPES.APPLICATION_LARGE_FILE_DOWNLOAD ||
-    argv.testtype ===
-      TRANSFER_MANAGER_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS
+    argv.test_type ===
+      PERFORMANCE_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS ||
+    argv.test_type === PERFORMANCE_TEST_TYPES.APPLICATION_LARGE_FILE_DOWNLOAD ||
+    argv.test_type ===
+      PERFORMANCE_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS
   ) {
     testPath = `${__dirname}/performApplicationPerformanceTest.js`;
   }
@@ -163,29 +122,28 @@ async function recordResult(results: TestResult[] | TestResult) {
   const resultsToAppend: TestResult[] = Array.isArray(results)
     ? results
     : [results];
-
   if (
-    argv.filename &&
-    argv.format === OUTPUT_FORMATS.CSV &&
-    !existsSync(argv.filename)
+    argv.file_name &&
+    argv.output_type === OUTPUT_FORMATS.CSV &&
+    !existsSync(argv.file_name)
   ) {
-    await writeFile(argv.filename, CSV_HEADERS);
+    await writeFile(argv.file_name, CSV_HEADERS);
   }
 
-  if (argv.format === OUTPUT_FORMATS.CSV) {
-    argv.filename
+  if (argv.output_type === OUTPUT_FORMATS.CSV) {
+    argv.file_name
       ? await appendFile(
-          argv.filename,
+          argv.file_name,
           `${convertToCSVFormat(resultsToAppend)}\n`
         )
       : log(convertToCSVFormat(resultsToAppend), true);
-  } else if (argv.format === OUTPUT_FORMATS.CLOUD_MONITORING) {
+  } else if (argv.output_type === OUTPUT_FORMATS.CLOUD_MONITORING) {
     for await (const outputString of convertToCloudMonitoringFormat(
       resultsToAppend,
-      argv.bucket
+      argv.bucket!
     )) {
-      argv.filename
-        ? await appendFile(argv.filename, `${outputString}\n`)
+      argv.file_name
+        ? await appendFile(argv.file_name, `${outputString}\n`)
         : log(outputString, true);
     }
   }

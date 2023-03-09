@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import yargs from 'yargs';
+const yargs = require('yargs');
 import {performance} from 'perf_hooks';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
@@ -22,33 +22,29 @@ import * as path from 'path';
 import {
   BLOCK_SIZE_IN_BYTES,
   cleanupFile,
-  DEFAULT_LARGE_FILE_SIZE_BYTES,
-  DEFAULT_PROJECT_ID,
-  DEFAULT_SMALL_FILE_SIZE_BYTES,
   generateRandomFile,
   generateRandomFileName,
+  getLowHighFileSize,
   getValidationType,
   NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+  performanceTestCommand,
   performanceTestSetup,
+  PERFORMANCE_TEST_TYPES,
   TestResult,
 } from './performanceUtils';
 import {Bucket} from '../src';
+import {rmSync} from 'fs';
 
 const TEST_NAME_STRING = 'nodejs-perf-metrics';
 const DEFAULT_NUMBER_OF_WRITES = 1;
 const DEFAULT_NUMBER_OF_READS = 3;
-const DEFAULT_BUCKET_NAME = 'nodejs-perf-metrics';
+const DEFAULT_RANGE_READS = 3;
 
 let bucket: Bucket;
 const checkType = getValidationType();
 
 const argv = yargs(process.argv.slice(2))
-  .options({
-    bucket: {type: 'string', default: DEFAULT_BUCKET_NAME},
-    small: {type: 'number', default: DEFAULT_SMALL_FILE_SIZE_BYTES},
-    large: {type: 'number', default: DEFAULT_LARGE_FILE_SIZE_BYTES},
-    projectid: {type: 'string', default: DEFAULT_PROJECT_ID},
-  })
+  .command(performanceTestCommand)
   .parseSync();
 
 /**
@@ -56,8 +52,77 @@ const argv = yargs(process.argv.slice(2))
  * to the parent thread.
  */
 async function main() {
-  const results = await performWriteReadTest();
+  let results: TestResult[] = [];
+
+  ({bucket} = await performanceTestSetup(argv.project!, argv.bucket!));
+
+  switch (argv.test_type) {
+    case PERFORMANCE_TEST_TYPES.WRITE_ONE_READ_THREE:
+      results = await performWriteReadTest();
+      break;
+    case PERFORMANCE_TEST_TYPES.RANGE_READ:
+      results = await performRangedReadTest();
+      break;
+    default:
+      break;
+  }
+
   parentPort?.postMessage(results);
+}
+
+/**
+ * Performs an iteration of a ranged read test. Only the last result will be reported.
+ *
+ * @returns {Promise<TestResult[]>} Promise that resolves to an array of test results for the iteration.
+ */
+async function performRangedReadTest(): Promise<TestResult[]> {
+  const results: TestResult[] = [];
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
+  const fileName = generateRandomFileName(TEST_NAME_STRING);
+  const sizeInBytes = generateRandomFile(
+    fileName,
+    fileSizeRange.low,
+    fileSizeRange.high,
+    __dirname
+  );
+  const file = bucket.file(`${fileName}`);
+  const destinationFileName = generateRandomFileName(TEST_NAME_STRING);
+  const destination = path.join(__dirname, destinationFileName);
+
+  const iterationResult: TestResult = {
+    op: 'READ',
+    objectSize: sizeInBytes,
+    appBufferSize: BLOCK_SIZE_IN_BYTES,
+    libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+    crc32Enabled: false,
+    md5Enabled: false,
+    apiName: 'JSON',
+    elapsedTimeUs: 0,
+    cpuTimeUs: -1,
+    status: '[OK]',
+    chunkSize: argv.range_read_size,
+    workers: argv.workers,
+  };
+
+  await bucket.upload(`${__dirname}/${fileName}`);
+  cleanupFile(fileName);
+
+  for (let i = 0; i < DEFAULT_RANGE_READS; i++) {
+    const start = performance.now();
+    await file.download({
+      start: 0,
+      end: argv.range_read_size,
+      destination,
+    });
+    const end = performance.now();
+    cleanupFile(destinationFileName);
+    iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
+  }
+
+  rmSync(TEST_NAME_STRING, {recursive: true, force: true});
+  await file.delete();
+  results.push(iterationResult);
+  return results;
 }
 
 /**
@@ -67,10 +132,15 @@ async function main() {
  */
 async function performWriteReadTest(): Promise<TestResult[]> {
   const results: TestResult[] = [];
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
   const fileName = generateRandomFileName(TEST_NAME_STRING);
-  const sizeInBytes = generateRandomFile(fileName, argv.small, argv.large);
-
-  ({bucket} = await performanceTestSetup(argv.projectid, argv.bucket));
+  const file = bucket.file(`${fileName}`);
+  const sizeInBytes = generateRandomFile(
+    fileName,
+    fileSizeRange.low,
+    fileSizeRange.high,
+    __dirname
+  );
 
   for (let j = 0; j < DEFAULT_NUMBER_OF_WRITES; j++) {
     let start = 0;
@@ -88,6 +158,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
       cpuTimeUs: -1,
       status: '[OK]',
       chunkSize: sizeInBytes,
+      workers: argv.workers,
     };
 
     start = performance.now();
@@ -98,23 +169,24 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     results.push(iterationResult);
   }
 
+  const iterationResult: TestResult = {
+    op: 'READ',
+    objectSize: sizeInBytes,
+    appBufferSize: BLOCK_SIZE_IN_BYTES,
+    libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+    crc32Enabled: checkType === 'crc32c',
+    md5Enabled: checkType === 'md5',
+    apiName: 'JSON',
+    elapsedTimeUs: 0,
+    cpuTimeUs: -1,
+    status: '[OK]',
+    chunkSize: sizeInBytes,
+    workers: argv.workers,
+  };
+
   for (let j = 0; j < DEFAULT_NUMBER_OF_READS; j++) {
     let start = 0;
     let end = 0;
-    const file = bucket.file(`${fileName}`);
-    const iterationResult: TestResult = {
-      op: `READ[${j}]`,
-      objectSize: sizeInBytes,
-      appBufferSize: BLOCK_SIZE_IN_BYTES,
-      libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-      crc32Enabled: checkType === 'crc32c',
-      md5Enabled: checkType === 'md5',
-      apiName: 'JSON',
-      elapsedTimeUs: 0,
-      cpuTimeUs: -1,
-      status: '[OK]',
-      chunkSize: sizeInBytes,
-    };
 
     const destinationFileName = generateRandomFileName(TEST_NAME_STRING);
     const destination = path.join(__dirname, destinationFileName);
@@ -125,11 +197,11 @@ async function performWriteReadTest(): Promise<TestResult[]> {
 
     cleanupFile(destinationFileName);
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
-    results.push(iterationResult);
   }
 
-  cleanupFile(fileName);
-
+  rmSync(TEST_NAME_STRING, {recursive: true, force: true});
+  await file.delete();
+  results.push(iterationResult);
   return results;
 }
 

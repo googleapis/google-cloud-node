@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import yargs from 'yargs';
+const yargs = require('yargs');
 import {promises as fsp, rmSync} from 'fs';
 import {
   Bucket,
@@ -28,33 +28,24 @@ import {performance} from 'perf_hooks';
 import {parentPort} from 'worker_threads';
 import {
   BLOCK_SIZE_IN_BYTES,
-  DEFAULT_PROJECT_ID,
-  DEFAULT_NUMBER_OF_OBJECTS,
-  DEFAULT_SMALL_FILE_SIZE_BYTES,
-  DEFAULT_LARGE_FILE_SIZE_BYTES,
   NODE_DEFAULT_HIGHWATER_MARK_BYTES,
   generateRandomDirectoryStructure,
   getValidationType,
   performanceTestSetup,
   TestResult,
+  performanceTestCommand,
+  getLowHighFileSize,
+  PERFORMANCE_TEST_TYPES,
 } from './performanceUtils';
-import {TRANSFER_MANAGER_TEST_TYPES} from './performanceTest';
 
 const TEST_NAME_STRING = 'nodejs-perf-metrics-application';
-const DEFAULT_BUCKET_NAME = 'nodejs-perf-metrics-shaffeeullah';
 
 let bucket: Bucket;
 
 const checkType = getValidationType();
 
 const argv = yargs(process.argv.slice(2))
-  .options({
-    bucket: {type: 'string', default: DEFAULT_BUCKET_NAME},
-    small: {type: 'number', default: DEFAULT_SMALL_FILE_SIZE_BYTES},
-    large: {type: 'number', default: DEFAULT_LARGE_FILE_SIZE_BYTES},
-    projectid: {type: 'string', default: DEFAULT_PROJECT_ID},
-    numobjects: {type: 'number', default: DEFAULT_NUMBER_OF_OBJECTS},
-  })
+  .command(performanceTestCommand)
   .parseSync();
 
 /**
@@ -74,15 +65,16 @@ async function main() {
     cpuTimeUs: 0,
     status: '[OK]',
     chunkSize: 0,
+    workers: argv.workers,
   };
 
-  ({bucket} = await performanceTestSetup(argv.projectid, argv.bucket));
+  ({bucket} = await performanceTestSetup(argv.project!, argv.bucket!));
 
-  switch (argv.testtype) {
-    case TRANSFER_MANAGER_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS:
+  switch (argv.test_type) {
+    case PERFORMANCE_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS:
       result = await performWriteTest();
       break;
-    case TRANSFER_MANAGER_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS:
+    case PERFORMANCE_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS:
       result = await performReadTest();
       break;
     // case TRANSFER_MANAGER_TEST_TYPES.APPLICATION_LARGE_FILE_DOWNLOAD:
@@ -129,11 +121,12 @@ async function downloadInParallel(bucket: Bucket, options: DownloadOptions) {
 async function performWriteTest(): Promise<TestResult> {
   await bucket.deleteFiles(); //start clean
 
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
   const creationInfo = generateRandomDirectoryStructure(
-    argv.numobjects,
+    argv.num_objects,
     TEST_NAME_STRING,
-    argv.small,
-    argv.large
+    fileSizeRange.low,
+    fileSizeRange.high
   );
 
   const start = performance.now();
@@ -155,6 +148,7 @@ async function performWriteTest(): Promise<TestResult> {
     cpuTimeUs: -1,
     status: '[OK]',
     chunkSize: creationInfo.totalSizeInBytes,
+    workers: argv.workers,
   };
   return result;
 }
@@ -165,12 +159,13 @@ async function performWriteTest(): Promise<TestResult> {
  * @returns {Promise<TestResult>} Promise that resolves to an array of test results for the iteration.
  */
 async function performReadTest(): Promise<TestResult> {
+  const fileSizeRange = getLowHighFileSize(argv.object_size);
   await bucket.deleteFiles(); // start clean
   const creationInfo = generateRandomDirectoryStructure(
-    argv.numobjects,
+    argv.num_objects,
     TEST_NAME_STRING,
-    argv.small,
-    argv.large
+    fileSizeRange.low,
+    fileSizeRange.high
   );
   await uploadInParallel(bucket, creationInfo.paths, {validation: checkType});
 
@@ -190,6 +185,7 @@ async function performReadTest(): Promise<TestResult> {
     cpuTimeUs: -1,
     status: '[OK]',
     chunkSize: creationInfo.totalSizeInBytes,
+    workers: argv.workers,
   };
 
   rmSync(TEST_NAME_STRING, {recursive: true, force: true});
