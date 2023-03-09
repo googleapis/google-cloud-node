@@ -20,6 +20,109 @@ export namespace google {
     /** Namespace protobuf. */
     namespace protobuf {
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a DoubleValue. */
         interface IDoubleValue {
 
@@ -4761,109 +4864,6 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
-
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Any
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
     }
 
     /** Namespace geo. */
@@ -5317,6 +5317,239 @@ export namespace google {
                     FALLBACK_ROUTING_MODE_UNSPECIFIED = 0,
                     FALLBACK_TRAFFIC_UNAWARE = 1,
                     FALLBACK_TRAFFIC_AWARE = 2
+                }
+
+                /** Properties of a GeocodingResults. */
+                interface IGeocodingResults {
+
+                    /** GeocodingResults origin */
+                    origin?: (google.maps.routing.v2.IGeocodedWaypoint|null);
+
+                    /** GeocodingResults destination */
+                    destination?: (google.maps.routing.v2.IGeocodedWaypoint|null);
+
+                    /** GeocodingResults intermediates */
+                    intermediates?: (google.maps.routing.v2.IGeocodedWaypoint[]|null);
+                }
+
+                /** Represents a GeocodingResults. */
+                class GeocodingResults implements IGeocodingResults {
+
+                    /**
+                     * Constructs a new GeocodingResults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routing.v2.IGeocodingResults);
+
+                    /** GeocodingResults origin. */
+                    public origin?: (google.maps.routing.v2.IGeocodedWaypoint|null);
+
+                    /** GeocodingResults destination. */
+                    public destination?: (google.maps.routing.v2.IGeocodedWaypoint|null);
+
+                    /** GeocodingResults intermediates. */
+                    public intermediates: google.maps.routing.v2.IGeocodedWaypoint[];
+
+                    /**
+                     * Creates a new GeocodingResults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeocodingResults instance
+                     */
+                    public static create(properties?: google.maps.routing.v2.IGeocodingResults): google.maps.routing.v2.GeocodingResults;
+
+                    /**
+                     * Encodes the specified GeocodingResults message. Does not implicitly {@link google.maps.routing.v2.GeocodingResults.verify|verify} messages.
+                     * @param message GeocodingResults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routing.v2.IGeocodingResults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeocodingResults message, length delimited. Does not implicitly {@link google.maps.routing.v2.GeocodingResults.verify|verify} messages.
+                     * @param message GeocodingResults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routing.v2.IGeocodingResults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeocodingResults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeocodingResults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.GeocodingResults;
+
+                    /**
+                     * Decodes a GeocodingResults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeocodingResults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.GeocodingResults;
+
+                    /**
+                     * Verifies a GeocodingResults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeocodingResults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeocodingResults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.GeocodingResults;
+
+                    /**
+                     * Creates a plain object from a GeocodingResults message. Also converts values to other types if specified.
+                     * @param message GeocodingResults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routing.v2.GeocodingResults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeocodingResults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeocodingResults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GeocodedWaypoint. */
+                interface IGeocodedWaypoint {
+
+                    /** GeocodedWaypoint geocoderStatus */
+                    geocoderStatus?: (google.rpc.IStatus|null);
+
+                    /** GeocodedWaypoint intermediateWaypointRequestIndex */
+                    intermediateWaypointRequestIndex?: (number|null);
+
+                    /** GeocodedWaypoint type */
+                    type?: (string[]|null);
+
+                    /** GeocodedWaypoint partialMatch */
+                    partialMatch?: (boolean|null);
+
+                    /** GeocodedWaypoint placeId */
+                    placeId?: (string|null);
+                }
+
+                /** Represents a GeocodedWaypoint. */
+                class GeocodedWaypoint implements IGeocodedWaypoint {
+
+                    /**
+                     * Constructs a new GeocodedWaypoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.routing.v2.IGeocodedWaypoint);
+
+                    /** GeocodedWaypoint geocoderStatus. */
+                    public geocoderStatus?: (google.rpc.IStatus|null);
+
+                    /** GeocodedWaypoint intermediateWaypointRequestIndex. */
+                    public intermediateWaypointRequestIndex?: (number|null);
+
+                    /** GeocodedWaypoint type. */
+                    public type: string[];
+
+                    /** GeocodedWaypoint partialMatch. */
+                    public partialMatch: boolean;
+
+                    /** GeocodedWaypoint placeId. */
+                    public placeId: string;
+
+                    /** GeocodedWaypoint _intermediateWaypointRequestIndex. */
+                    public _intermediateWaypointRequestIndex?: "intermediateWaypointRequestIndex";
+
+                    /**
+                     * Creates a new GeocodedWaypoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeocodedWaypoint instance
+                     */
+                    public static create(properties?: google.maps.routing.v2.IGeocodedWaypoint): google.maps.routing.v2.GeocodedWaypoint;
+
+                    /**
+                     * Encodes the specified GeocodedWaypoint message. Does not implicitly {@link google.maps.routing.v2.GeocodedWaypoint.verify|verify} messages.
+                     * @param message GeocodedWaypoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.routing.v2.IGeocodedWaypoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeocodedWaypoint message, length delimited. Does not implicitly {@link google.maps.routing.v2.GeocodedWaypoint.verify|verify} messages.
+                     * @param message GeocodedWaypoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.routing.v2.IGeocodedWaypoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeocodedWaypoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeocodedWaypoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.routing.v2.GeocodedWaypoint;
+
+                    /**
+                     * Decodes a GeocodedWaypoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeocodedWaypoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.routing.v2.GeocodedWaypoint;
+
+                    /**
+                     * Verifies a GeocodedWaypoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeocodedWaypoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeocodedWaypoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.routing.v2.GeocodedWaypoint;
+
+                    /**
+                     * Creates a plain object from a GeocodedWaypoint message. Also converts values to other types if specified.
+                     * @param message GeocodedWaypoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.routing.v2.GeocodedWaypoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeocodedWaypoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeocodedWaypoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Location. */
@@ -7241,6 +7474,9 @@ export namespace google {
 
                     /** ComputeRoutesResponse fallbackInfo */
                     fallbackInfo?: (google.maps.routing.v2.IFallbackInfo|null);
+
+                    /** ComputeRoutesResponse geocodingResults */
+                    geocodingResults?: (google.maps.routing.v2.IGeocodingResults|null);
                 }
 
                 /** Represents a ComputeRoutesResponse. */
@@ -7257,6 +7493,9 @@ export namespace google {
 
                     /** ComputeRoutesResponse fallbackInfo. */
                     public fallbackInfo?: (google.maps.routing.v2.IFallbackInfo|null);
+
+                    /** ComputeRoutesResponse geocodingResults. */
+                    public geocodingResults?: (google.maps.routing.v2.IGeocodingResults|null);
 
                     /**
                      * Creates a new ComputeRoutesResponse instance using the specified properties.
@@ -7854,6 +8093,9 @@ export namespace google {
                     /** Waypoint placeId */
                     placeId?: (string|null);
 
+                    /** Waypoint address */
+                    address?: (string|null);
+
                     /** Waypoint via */
                     via?: (boolean|null);
 
@@ -7879,6 +8121,9 @@ export namespace google {
                     /** Waypoint placeId. */
                     public placeId?: (string|null);
 
+                    /** Waypoint address. */
+                    public address?: (string|null);
+
                     /** Waypoint via. */
                     public via: boolean;
 
@@ -7889,7 +8134,7 @@ export namespace google {
                     public sideOfRoad: boolean;
 
                     /** Waypoint locationType. */
-                    public locationType?: ("location"|"placeId");
+                    public locationType?: ("location"|"placeId"|"address");
 
                     /**
                      * Creates a new Waypoint instance using the specified properties.
@@ -7969,6 +8214,119 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -8345,119 +8703,6 @@ export namespace google {
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7
-        }
-    }
-
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Properties of a Status. */
-        interface IStatus {
-
-            /** Status code */
-            code?: (number|null);
-
-            /** Status message */
-            message?: (string|null);
-
-            /** Status details */
-            details?: (google.protobuf.IAny[]|null);
-        }
-
-        /** Represents a Status. */
-        class Status implements IStatus {
-
-            /**
-             * Constructs a new Status.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.rpc.IStatus);
-
-            /** Status code. */
-            public code: number;
-
-            /** Status message. */
-            public message: string;
-
-            /** Status details. */
-            public details: google.protobuf.IAny[];
-
-            /**
-             * Creates a new Status instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Status instance
-             */
-            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
-
-            /**
-             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
-
-            /**
-             * Verifies a Status message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Status message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Status
-             */
-            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
-
-            /**
-             * Creates a plain object from a Status message. Also converts values to other types if specified.
-             * @param message Status
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Status to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Status
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }
