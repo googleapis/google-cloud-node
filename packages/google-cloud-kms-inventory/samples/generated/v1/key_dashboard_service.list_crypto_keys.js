@@ -46,7 +46,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Inventory library
-  const {KeyDashboardServiceClient} = require('inventory').v1;
+  const {KeyDashboardServiceClient} = require('@google-cloud/kms-inventory').v1;
 
   // Instantiates a client
   const inventoryClient = new KeyDashboardServiceClient();
