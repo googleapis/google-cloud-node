@@ -5194,6 +5194,56 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
+    describe('ekmConfig', () => {
+      const fakePath = '/rendered/path/ekmConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.ekmConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ekmConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ekmConfigPath', () => {
+        const result = client.ekmConfigPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ekmConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEkmConfigName', () => {
+        const result = client.matchProjectFromEkmConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ekmConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEkmConfigName', () => {
+        const result = client.matchLocationFromEkmConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ekmConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('ekmConnection', () => {
       const fakePath = '/rendered/path/ekmConnection';
       const expectedParameters = {

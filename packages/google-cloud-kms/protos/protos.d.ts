@@ -101,6 +101,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateEkmConnection(request: google.cloud.kms.v1.IUpdateEkmConnectionRequest): Promise<google.cloud.kms.v1.EkmConnection>;
+
+                    /**
+                     * Calls GetEkmConfig.
+                     * @param request GetEkmConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EkmConfig
+                     */
+                    public getEkmConfig(request: google.cloud.kms.v1.IGetEkmConfigRequest, callback: google.cloud.kms.v1.EkmService.GetEkmConfigCallback): void;
+
+                    /**
+                     * Calls GetEkmConfig.
+                     * @param request GetEkmConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEkmConfig(request: google.cloud.kms.v1.IGetEkmConfigRequest): Promise<google.cloud.kms.v1.EkmConfig>;
+
+                    /**
+                     * Calls UpdateEkmConfig.
+                     * @param request UpdateEkmConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EkmConfig
+                     */
+                    public updateEkmConfig(request: google.cloud.kms.v1.IUpdateEkmConfigRequest, callback: google.cloud.kms.v1.EkmService.UpdateEkmConfigCallback): void;
+
+                    /**
+                     * Calls UpdateEkmConfig.
+                     * @param request UpdateEkmConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEkmConfig(request: google.cloud.kms.v1.IUpdateEkmConfigRequest): Promise<google.cloud.kms.v1.EkmConfig>;
                 }
 
                 namespace EkmService {
@@ -132,6 +160,20 @@ export namespace google {
                      * @param [response] EkmConnection
                      */
                     type UpdateEkmConnectionCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService|getEkmConfig}.
+                     * @param error Error, if any
+                     * @param [response] EkmConfig
+                     */
+                    type GetEkmConfigCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.EkmService|updateEkmConfig}.
+                     * @param error Error, if any
+                     * @param [response] EkmConfig
+                     */
+                    type UpdateEkmConfigCallback = (error: (Error|null), response?: google.cloud.kms.v1.EkmConfig) => void;
                 }
 
                 /** Properties of a ListEkmConnectionsRequest. */
@@ -673,6 +715,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetEkmConfigRequest. */
+                interface IGetEkmConfigRequest {
+
+                    /** GetEkmConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEkmConfigRequest. */
+                class GetEkmConfigRequest implements IGetEkmConfigRequest {
+
+                    /**
+                     * Constructs a new GetEkmConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetEkmConfigRequest);
+
+                    /** GetEkmConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEkmConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEkmConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetEkmConfigRequest): google.cloud.kms.v1.GetEkmConfigRequest;
+
+                    /**
+                     * Encodes the specified GetEkmConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.GetEkmConfigRequest.verify|verify} messages.
+                     * @param message GetEkmConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetEkmConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEkmConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetEkmConfigRequest.verify|verify} messages.
+                     * @param message GetEkmConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetEkmConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEkmConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEkmConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetEkmConfigRequest;
+
+                    /**
+                     * Decodes a GetEkmConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEkmConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetEkmConfigRequest;
+
+                    /**
+                     * Verifies a GetEkmConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEkmConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEkmConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetEkmConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetEkmConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetEkmConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetEkmConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEkmConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEkmConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateEkmConfigRequest. */
+                interface IUpdateEkmConfigRequest {
+
+                    /** UpdateEkmConfigRequest ekmConfig */
+                    ekmConfig?: (google.cloud.kms.v1.IEkmConfig|null);
+
+                    /** UpdateEkmConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateEkmConfigRequest. */
+                class UpdateEkmConfigRequest implements IUpdateEkmConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateEkmConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IUpdateEkmConfigRequest);
+
+                    /** UpdateEkmConfigRequest ekmConfig. */
+                    public ekmConfig?: (google.cloud.kms.v1.IEkmConfig|null);
+
+                    /** UpdateEkmConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateEkmConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEkmConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IUpdateEkmConfigRequest): google.cloud.kms.v1.UpdateEkmConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateEkmConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConfigRequest.verify|verify} messages.
+                     * @param message UpdateEkmConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IUpdateEkmConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEkmConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateEkmConfigRequest.verify|verify} messages.
+                     * @param message UpdateEkmConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IUpdateEkmConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEkmConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEkmConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.UpdateEkmConfigRequest;
+
+                    /**
+                     * Decodes an UpdateEkmConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEkmConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.UpdateEkmConfigRequest;
+
+                    /**
+                     * Verifies an UpdateEkmConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEkmConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEkmConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.UpdateEkmConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEkmConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEkmConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.UpdateEkmConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEkmConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateEkmConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Certificate. */
                 interface ICertificate {
 
@@ -832,6 +1074,12 @@ export namespace google {
 
                     /** EkmConnection etag */
                     etag?: (string|null);
+
+                    /** EkmConnection keyManagementMode */
+                    keyManagementMode?: (google.cloud.kms.v1.EkmConnection.KeyManagementMode|keyof typeof google.cloud.kms.v1.EkmConnection.KeyManagementMode|null);
+
+                    /** EkmConnection cryptoSpacePath */
+                    cryptoSpacePath?: (string|null);
                 }
 
                 /** Represents an EkmConnection. */
@@ -854,6 +1102,12 @@ export namespace google {
 
                     /** EkmConnection etag. */
                     public etag: string;
+
+                    /** EkmConnection keyManagementMode. */
+                    public keyManagementMode: (google.cloud.kms.v1.EkmConnection.KeyManagementMode|keyof typeof google.cloud.kms.v1.EkmConnection.KeyManagementMode);
+
+                    /** EkmConnection cryptoSpacePath. */
+                    public cryptoSpacePath: string;
 
                     /**
                      * Creates a new EkmConnection instance using the specified properties.
@@ -1049,6 +1303,116 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** KeyManagementMode enum. */
+                    enum KeyManagementMode {
+                        KEY_MANAGEMENT_MODE_UNSPECIFIED = 0,
+                        MANUAL = 1,
+                        CLOUD_KMS = 2
+                    }
+                }
+
+                /** Properties of an EkmConfig. */
+                interface IEkmConfig {
+
+                    /** EkmConfig name */
+                    name?: (string|null);
+
+                    /** EkmConfig defaultEkmConnection */
+                    defaultEkmConnection?: (string|null);
+                }
+
+                /** Represents an EkmConfig. */
+                class EkmConfig implements IEkmConfig {
+
+                    /**
+                     * Constructs a new EkmConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IEkmConfig);
+
+                    /** EkmConfig name. */
+                    public name: string;
+
+                    /** EkmConfig defaultEkmConnection. */
+                    public defaultEkmConnection: string;
+
+                    /**
+                     * Creates a new EkmConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EkmConfig instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IEkmConfig): google.cloud.kms.v1.EkmConfig;
+
+                    /**
+                     * Encodes the specified EkmConfig message. Does not implicitly {@link google.cloud.kms.v1.EkmConfig.verify|verify} messages.
+                     * @param message EkmConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IEkmConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EkmConfig message, length delimited. Does not implicitly {@link google.cloud.kms.v1.EkmConfig.verify|verify} messages.
+                     * @param message EkmConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IEkmConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EkmConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EkmConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.EkmConfig;
+
+                    /**
+                     * Decodes an EkmConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EkmConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.EkmConfig;
+
+                    /**
+                     * Verifies an EkmConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EkmConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EkmConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.EkmConfig;
+
+                    /**
+                     * Creates a plain object from an EkmConfig message. Also converts values to other types if specified.
+                     * @param message EkmConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.EkmConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EkmConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EkmConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a KeyRing. */
@@ -1696,6 +2060,12 @@ export namespace google {
                     /** CryptoKeyVersion importFailureReason */
                     importFailureReason?: (string|null);
 
+                    /** CryptoKeyVersion generationFailureReason */
+                    generationFailureReason?: (string|null);
+
+                    /** CryptoKeyVersion externalDestructionFailureReason */
+                    externalDestructionFailureReason?: (string|null);
+
                     /** CryptoKeyVersion externalProtectionLevelOptions */
                     externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
 
@@ -1747,6 +2117,12 @@ export namespace google {
 
                     /** CryptoKeyVersion importFailureReason. */
                     public importFailureReason: string;
+
+                    /** CryptoKeyVersion generationFailureReason. */
+                    public generationFailureReason: string;
+
+                    /** CryptoKeyVersion externalDestructionFailureReason. */
+                    public externalDestructionFailureReason: string;
 
                     /** CryptoKeyVersion externalProtectionLevelOptions. */
                     public externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
@@ -1876,7 +2252,10 @@ export namespace google {
                         DESTROYED = 3,
                         DESTROY_SCHEDULED = 4,
                         PENDING_IMPORT = 6,
-                        IMPORT_FAILED = 7
+                        IMPORT_FAILED = 7,
+                        GENERATION_FAILED = 8,
+                        PENDING_EXTERNAL_DESTRUCTION = 9,
+                        EXTERNAL_DESTRUCTION_FAILED = 10
                     }
 
                     /** CryptoKeyVersionView enum. */
