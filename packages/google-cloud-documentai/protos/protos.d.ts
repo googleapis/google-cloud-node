@@ -28542,11 +28542,20 @@ export namespace google {
                 /** Properties of an OcrConfig. */
                 interface IOcrConfig {
 
+                    /** OcrConfig hints */
+                    hints?: (google.cloud.documentai.v1beta3.OcrConfig.IHints|null);
+
                     /** OcrConfig enableNativePdfParsing */
                     enableNativePdfParsing?: (boolean|null);
 
+                    /** OcrConfig enableImageQualityScores */
+                    enableImageQualityScores?: (boolean|null);
+
                     /** OcrConfig advancedOcrOptions */
                     advancedOcrOptions?: (string[]|null);
+
+                    /** OcrConfig enableSymbol */
+                    enableSymbol?: (boolean|null);
                 }
 
                 /** Represents an OcrConfig. */
@@ -28558,11 +28567,20 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.documentai.v1beta3.IOcrConfig);
 
+                    /** OcrConfig hints. */
+                    public hints?: (google.cloud.documentai.v1beta3.OcrConfig.IHints|null);
+
                     /** OcrConfig enableNativePdfParsing. */
                     public enableNativePdfParsing: boolean;
 
+                    /** OcrConfig enableImageQualityScores. */
+                    public enableImageQualityScores: boolean;
+
                     /** OcrConfig advancedOcrOptions. */
                     public advancedOcrOptions: string[];
+
+                    /** OcrConfig enableSymbol. */
+                    public enableSymbol: boolean;
 
                     /**
                      * Creates a new OcrConfig instance using the specified properties.
@@ -28640,6 +28658,106 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OcrConfig {
+
+                    /** Properties of a Hints. */
+                    interface IHints {
+
+                        /** Hints languageHints */
+                        languageHints?: (string[]|null);
+                    }
+
+                    /** Represents a Hints. */
+                    class Hints implements IHints {
+
+                        /**
+                         * Constructs a new Hints.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.OcrConfig.IHints);
+
+                        /** Hints languageHints. */
+                        public languageHints: string[];
+
+                        /**
+                         * Creates a new Hints instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Hints instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.OcrConfig.IHints): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Encodes the specified Hints message. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.Hints.verify|verify} messages.
+                         * @param message Hints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Hints message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.OcrConfig.Hints.verify|verify} messages.
+                         * @param message Hints message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.OcrConfig.IHints, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Hints message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Hints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Decodes a Hints message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Hints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Verifies a Hints message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Hints message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Hints
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.OcrConfig.Hints;
+
+                        /**
+                         * Creates a plain object from a Hints message. Also converts values to other types if specified.
+                         * @param message Hints
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.OcrConfig.Hints, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Hints to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Hints
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents a DocumentProcessorService */
