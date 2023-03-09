@@ -11520,6 +11520,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssVersion */
             cvssVersion?: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion|null);
+
+            /** VulnerabilityNote cvssV2 */
+            cvssV2?: (grafeas.v1.ICVSS|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -11551,6 +11554,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssVersion. */
             public cvssVersion: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion);
+
+            /** VulnerabilityNote cvssV2. */
+            public cvssV2?: (grafeas.v1.ICVSS|null);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.
@@ -12064,6 +12070,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence cvssVersion */
             cvssVersion?: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion|null);
+
+            /** VulnerabilityOccurrence cvssV2 */
+            cvssV2?: (grafeas.v1.ICVSS|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -12107,6 +12116,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence cvssVersion. */
             public cvssVersion: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion);
+
+            /** VulnerabilityOccurrence cvssV2. */
+            public cvssV2?: (grafeas.v1.ICVSS|null);
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.
