@@ -218,6 +218,9 @@ class Query {
       this.entityFilters.push(propertyOrFilter);
       return this;
     } else {
+      process.emitWarning(
+        'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
+      );
       let operator = operatorOrValue as Operator;
       if (arguments.length === 2) {
         value = operatorOrValue as {};
