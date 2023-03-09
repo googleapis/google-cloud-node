@@ -207,6 +207,9 @@ export class KeyManagementServiceClient {
       cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
+      ekmConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ekmConfig'
+      ),
       ekmConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ekmConnections/{ekm_connection}'
       ),
@@ -4177,6 +4180,44 @@ export class KeyManagementServiceClient {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified ekmConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  ekmConfigPath(project: string, location: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EkmConfig resource.
+   *
+   * @param {string} ekmConfigName
+   *   A fully-qualified path representing EkmConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEkmConfigName(ekmConfigName: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.match(ekmConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EkmConfig resource.
+   *
+   * @param {string} ekmConfigName
+   *   A fully-qualified path representing EkmConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEkmConfigName(ekmConfigName: string) {
+    return this.pathTemplates.ekmConfigPathTemplate.match(ekmConfigName)
+      .location;
   }
 
   /**

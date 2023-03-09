@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dialogflow",
-        "version": "5.6.0",
+        "version": "5.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1398,7 +1398,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -1418,6 +1418,10 @@
                     {
                         "name": "context_size",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "assist_query_params",
+                        "type": ".google.cloud.dialogflow.v2beta1.AssistQueryParameters"
                     }
                 ],
                 "resultType": ".google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse",

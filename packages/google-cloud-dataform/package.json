@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "dataform client for Node.js",
   "repository": {
     "type": "git",

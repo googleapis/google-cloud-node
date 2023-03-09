@@ -2551,6 +2551,10 @@
                 "cvssVersion": {
                   "type": "grafeas.v1.CVSSVersion",
                   "id": 7
+                },
+                "cvssV2": {
+                  "type": "CVSS",
+                  "id": 8
                 }
               },
               "nested": {
@@ -2698,6 +2702,10 @@
                 "cvssVersion": {
                   "type": "grafeas.v1.CVSSVersion",
                   "id": 11
+                },
+                "cvssV2": {
+                  "type": "CVSS",
+                  "id": 12
                 }
               },
               "nested": {

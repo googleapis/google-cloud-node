@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dialogflow-cx",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "Cx client for Node.js",
   "repository": {
     "type": "git",

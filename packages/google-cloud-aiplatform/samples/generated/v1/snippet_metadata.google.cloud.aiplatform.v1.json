@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.7.0",
+        "version": "2.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -2060,6 +2060,54 @@
                 "method": {
                     "shortName": "ExportFeatureValues",
                     "fullName": "google.cloud.aiplatform.v1.FeaturestoreService.ExportFeatureValues",
+                    "service": {
+                        "shortName": "FeaturestoreService",
+                        "fullName": "google.cloud.aiplatform.v1.FeaturestoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_FeaturestoreService_DeleteFeatureValues_async",
+            "title": "DatasetService deleteFeatureValues Sample",
+            "origin": "API_DEFINITION",
+            "description": " Delete Feature values from Featurestore. The progress of the deletion is tracked by the returned operation. The deleted feature values are guaranteed to be invisible to subsequent read operations after the operation is marked as successfully done. If a delete feature values operation fails, the feature values returned from reads and exports may be inconsistent. If consistency is required, the caller must retry the same delete request again and wait till the new operation returned is marked as successfully done.",
+            "canonical": true,
+            "file": "featurestore_service.delete_feature_values.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteFeatureValues",
+                "fullName": "google.cloud.aiplatform.v1.FeaturestoreService.DeleteFeatureValues",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "select_entity",
+                        "type": ".google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectEntity"
+                    },
+                    {
+                        "name": "select_time_range_and_feature",
+                        "type": ".google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature"
+                    },
+                    {
+                        "name": "entity_type",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeaturestoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.FeaturestoreServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteFeatureValues",
+                    "fullName": "google.cloud.aiplatform.v1.FeaturestoreService.DeleteFeatureValues",
                     "service": {
                         "shortName": "FeaturestoreService",
                         "fullName": "google.cloud.aiplatform.v1.FeaturestoreService"
@@ -6235,7 +6283,7 @@
             "regionTag": "aiplatform_v1_generated_ModelService_DeleteModelVersion_async",
             "title": "DatasetService deleteModelVersion Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a Model version. Model version can only be deleted if there are no [DeployedModels][] created from it. Deleting the only version in the Model is not allowed. Use [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for deleting the Model instead.",
+            "description": " Deletes a Model version. Model version can only be deleted if there are no [DeployedModels][google.cloud.aiplatform.v1.DeployedModel] created from it. Deleting the only version in the Model is not allowed. Use [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for deleting the Model instead.",
             "canonical": true,
             "file": "model_service.delete_model_version.js",
             "language": "JAVASCRIPT",
@@ -6496,6 +6544,50 @@
                 "method": {
                     "shortName": "BatchImportModelEvaluationSlices",
                     "fullName": "google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ModelService_BatchImportEvaluatedAnnotations_async",
+            "title": "DatasetService batchImportEvaluatedAnnotations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports a list of externally generated EvaluatedAnnotations.",
+            "canonical": true,
+            "file": "model_service.batch_import_evaluated_annotations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchImportEvaluatedAnnotations",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.BatchImportEvaluatedAnnotations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "evaluated_annotations",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchImportEvaluatedAnnotations",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.BatchImportEvaluatedAnnotations",
                     "service": {
                         "shortName": "ModelService",
                         "fullName": "google.cloud.aiplatform.v1.ModelService"
@@ -9383,7 +9475,7 @@
             "regionTag": "aiplatform_v1_generated_VizierService_CheckTrialEarlyStoppingState_async",
             "title": "DatasetService checkTrialEarlyStoppingState Sample",
             "origin": "API_DEFINITION",
-            "description": " Checks  whether a Trial should stop or not. Returns a long-running operation. When the operation is successful, it will contain a [CheckTrialEarlyStoppingStateResponse][google.cloud.ml.v1.CheckTrialEarlyStoppingStateResponse].",
+            "description": " Checks  whether a Trial should stop or not. Returns a long-running operation. When the operation is successful, it will contain a [CheckTrialEarlyStoppingStateResponse][google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateResponse].",
             "canonical": true,
             "file": "vizier_service.check_trial_early_stopping_state.js",
             "language": "JAVASCRIPT",
