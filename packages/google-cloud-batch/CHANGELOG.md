@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.6.1...batch-v0.7.0) (2023-03-06)
+
+
+### Features
+
+* [batch] added StatusEvent.task_state ([#4042](https://github.com/googleapis/google-cloud-node/issues/4042)) ([a4c2343](https://github.com/googleapis/google-cloud-node/commit/a4c234315a2337c07f2556a6125f22bf7ddada2f))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/batch-v0.6.0...batch-v0.6.1) (2023-02-15)
 
 

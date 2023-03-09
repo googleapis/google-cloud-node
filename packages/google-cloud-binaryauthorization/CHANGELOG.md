@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.2.1...binary-authorization-v2.3.0) (2023-03-06)
+
+
+### Features
+
+* [binaryauthorization] Import of Grafeas from Github ([#4051](https://github.com/googleapis/google-cloud-node/issues/4051)) ([443abe3](https://github.com/googleapis/google-cloud-node/commit/443abe3310b5063df855c3ab0d5fc8d338570cdf))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.2.0...binary-authorization-v2.2.1) (2023-02-15)
 
 

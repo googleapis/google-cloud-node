@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.6.0...dialogflow-v5.7.0) (2023-03-06)
+
+
+### Features
+
+* [dialogflow] added support for custom content types ([#4053](https://github.com/googleapis/google-cloud-node/issues/4053)) ([e7a67d3](https://github.com/googleapis/google-cloud-node/commit/e7a67d3e424c19bc576f821d65895e9598307eb8))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.5.1...dialogflow-v5.6.0) (2023-02-22)
 
 
