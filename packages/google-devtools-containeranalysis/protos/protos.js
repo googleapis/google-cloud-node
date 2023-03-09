@@ -29478,6 +29478,7 @@
                  * @property {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>|null} [windowsDetails] VulnerabilityNote windowsDetails
                  * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] VulnerabilityNote sourceUpdateTime
                  * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityNote cvssVersion
+                 * @property {grafeas.v1.ICVSS|null} [cvssV2] VulnerabilityNote cvssV2
                  */
     
                 /**
@@ -29554,6 +29555,14 @@
                 VulnerabilityNote.prototype.cvssVersion = 0;
     
                 /**
+                 * VulnerabilityNote cvssV2.
+                 * @member {grafeas.v1.ICVSS|null|undefined} cvssV2
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.cvssV2 = null;
+    
+                /**
                  * Creates a new VulnerabilityNote instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityNote
@@ -29593,6 +29602,8 @@
                         $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     if (message.cvssVersion != null && Object.hasOwnProperty.call(message, "cvssVersion"))
                         writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cvssVersion);
+                    if (message.cvssV2 != null && Object.hasOwnProperty.call(message, "cvssV2"))
+                        $root.grafeas.v1.CVSS.encode(message.cvssV2, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                     return writer;
                 };
     
@@ -29657,6 +29668,10 @@
                             }
                         case 7: {
                                 message.cvssVersion = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.cvssV2 = $root.grafeas.v1.CVSS.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -29746,6 +29761,11 @@
                         case 2:
                             break;
                         }
+                    if (message.cvssV2 != null && message.hasOwnProperty("cvssV2")) {
+                        var error = $root.grafeas.v1.CVSS.verify(message.cvssV2);
+                        if (error)
+                            return "cvssV2." + error;
+                    }
                     return null;
                 };
     
@@ -29845,6 +29865,11 @@
                         message.cvssVersion = 2;
                         break;
                     }
+                    if (object.cvssV2 != null) {
+                        if (typeof object.cvssV2 !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.cvssV2: object expected");
+                        message.cvssV2 = $root.grafeas.v1.CVSS.fromObject(object.cvssV2);
+                    }
                     return message;
                 };
     
@@ -29871,6 +29896,7 @@
                         object.cvssV3 = null;
                         object.sourceUpdateTime = null;
                         object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
+                        object.cvssV2 = null;
                     }
                     if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
                         object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
@@ -29892,6 +29918,8 @@
                         object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
                     if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
                         object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] === undefined ? message.cvssVersion : $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
+                    if (message.cvssV2 != null && message.hasOwnProperty("cvssV2"))
+                        object.cvssV2 = $root.grafeas.v1.CVSS.toObject(message.cvssV2, options);
                     return object;
                 };
     
@@ -30986,6 +31014,7 @@
                  * @property {grafeas.v1.Severity|null} [effectiveSeverity] VulnerabilityOccurrence effectiveSeverity
                  * @property {boolean|null} [fixAvailable] VulnerabilityOccurrence fixAvailable
                  * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityOccurrence cvssVersion
+                 * @property {grafeas.v1.ICVSS|null} [cvssV2] VulnerabilityOccurrence cvssV2
                  */
     
                 /**
@@ -31094,6 +31123,14 @@
                 VulnerabilityOccurrence.prototype.cvssVersion = 0;
     
                 /**
+                 * VulnerabilityOccurrence cvssV2.
+                 * @member {grafeas.v1.ICVSS|null|undefined} cvssV2
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.cvssV2 = null;
+    
+                /**
                  * Creates a new VulnerabilityOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityOccurrence
@@ -31141,6 +31178,8 @@
                         $root.grafeas.v1.CVSS.encode(message.cvssv3, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                     if (message.cvssVersion != null && Object.hasOwnProperty.call(message, "cvssVersion"))
                         writer.uint32(/* id 11, wireType 0 =*/88).int32(message.cvssVersion);
+                    if (message.cvssV2 != null && Object.hasOwnProperty.call(message, "cvssV2"))
+                        $root.grafeas.v1.CVSS.encode(message.cvssV2, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     return writer;
                 };
     
@@ -31221,6 +31260,10 @@
                             }
                         case 11: {
                                 message.cvssVersion = reader.int32();
+                                break;
+                            }
+                        case 12: {
+                                message.cvssV2 = $root.grafeas.v1.CVSS.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -31329,6 +31372,11 @@
                         case 2:
                             break;
                         }
+                    if (message.cvssV2 != null && message.hasOwnProperty("cvssV2")) {
+                        var error = $root.grafeas.v1.CVSS.verify(message.cvssV2);
+                        if (error)
+                            return "cvssV2." + error;
+                    }
                     return null;
                 };
     
@@ -31463,6 +31511,11 @@
                         message.cvssVersion = 2;
                         break;
                     }
+                    if (object.cvssV2 != null) {
+                        if (typeof object.cvssV2 !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.cvssV2: object expected");
+                        message.cvssV2 = $root.grafeas.v1.CVSS.fromObject(object.cvssV2);
+                    }
                     return message;
                 };
     
@@ -31493,6 +31546,7 @@
                         object.fixAvailable = false;
                         object.cvssv3 = null;
                         object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
+                        object.cvssV2 = null;
                     }
                     if (message.type != null && message.hasOwnProperty("type"))
                         object.type = message.type;
@@ -31522,6 +31576,8 @@
                         object.cvssv3 = $root.grafeas.v1.CVSS.toObject(message.cvssv3, options);
                     if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
                         object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] === undefined ? message.cvssVersion : $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
+                    if (message.cvssV2 != null && message.hasOwnProperty("cvssV2"))
+                        object.cvssV2 = $root.grafeas.v1.CVSS.toObject(message.cvssV2, options);
                     return object;
                 };
     
