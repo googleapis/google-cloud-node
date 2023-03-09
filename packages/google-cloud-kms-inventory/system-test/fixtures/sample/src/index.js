@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const inventory = require('@google-cloud/kms-inventory');
+const inventory = require('@google-cloud/inventory');
 
 function main() {
   const keyDashboardServiceClient = new inventory.KeyDashboardServiceClient();

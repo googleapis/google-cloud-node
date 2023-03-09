@@ -19,7 +19,7 @@
 import {
   KeyDashboardServiceClient,
   KeyTrackingServiceClient,
-} from '@google-cloud/kms-inventory';
+} from '@google-cloud/inventory';
 
 // check that the client class type name can be used
 function doStuffWithKeyDashboardServiceClient(
