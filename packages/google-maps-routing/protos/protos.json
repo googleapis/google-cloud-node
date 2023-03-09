@@ -13,6 +13,18 @@
             "optimize_for": "SPEED"
           },
           "nested": {
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "DoubleValue": {
               "fields": {
                 "value": {
@@ -1091,18 +1103,6 @@
                   "id": 2
                 }
               }
-            },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
             }
           }
         },
@@ -1214,6 +1214,58 @@
                         "FALLBACK_ROUTING_MODE_UNSPECIFIED": 0,
                         "FALLBACK_TRAFFIC_UNAWARE": 1,
                         "FALLBACK_TRAFFIC_AWARE": 2
+                      }
+                    },
+                    "GeocodingResults": {
+                      "fields": {
+                        "origin": {
+                          "type": "GeocodedWaypoint",
+                          "id": 1
+                        },
+                        "destination": {
+                          "type": "GeocodedWaypoint",
+                          "id": 2
+                        },
+                        "intermediates": {
+                          "rule": "repeated",
+                          "type": "GeocodedWaypoint",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GeocodedWaypoint": {
+                      "oneofs": {
+                        "_intermediateWaypointRequestIndex": {
+                          "oneof": [
+                            "intermediateWaypointRequestIndex"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "geocoderStatus": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "intermediateWaypointRequestIndex": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "type": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "partialMatch": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "placeId": {
+                          "type": "string",
+                          "id": 5
+                        }
                       }
                     },
                     "Location": {
@@ -1839,6 +1891,10 @@
                         "fallbackInfo": {
                           "type": "FallbackInfo",
                           "id": 2
+                        },
+                        "geocodingResults": {
+                          "type": "GeocodingResults",
+                          "id": 3
                         }
                       }
                     },
@@ -2013,7 +2069,8 @@
                         "locationType": {
                           "oneof": [
                             "location",
-                            "placeId"
+                            "placeId",
+                            "address"
                           ]
                         }
                       },
@@ -2025,6 +2082,10 @@
                         "placeId": {
                           "type": "string",
                           "id": 2
+                        },
+                        "address": {
+                          "type": "string",
+                          "id": 7
                         },
                         "via": {
                           "type": "bool",
@@ -2041,6 +2102,35 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }
@@ -2175,35 +2265,6 @@
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
-                }
               }
             }
           }

@@ -48,6 +48,242 @@
              */
             var protobuf = {};
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.DoubleValue = (function() {
     
                 /**
@@ -12538,242 +12774,6 @@
                 return Timestamp;
             })();
     
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type_url = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.value = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Any
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Any";
-                };
-    
-                return Any;
-            })();
-    
             return protobuf;
         })();
     
@@ -13873,6 +13873,625 @@
                         values[valuesById[1] = "FALLBACK_TRAFFIC_UNAWARE"] = 1;
                         values[valuesById[2] = "FALLBACK_TRAFFIC_AWARE"] = 2;
                         return values;
+                    })();
+    
+                    v2.GeocodingResults = (function() {
+    
+                        /**
+                         * Properties of a GeocodingResults.
+                         * @memberof google.maps.routing.v2
+                         * @interface IGeocodingResults
+                         * @property {google.maps.routing.v2.IGeocodedWaypoint|null} [origin] GeocodingResults origin
+                         * @property {google.maps.routing.v2.IGeocodedWaypoint|null} [destination] GeocodingResults destination
+                         * @property {Array.<google.maps.routing.v2.IGeocodedWaypoint>|null} [intermediates] GeocodingResults intermediates
+                         */
+    
+                        /**
+                         * Constructs a new GeocodingResults.
+                         * @memberof google.maps.routing.v2
+                         * @classdesc Represents a GeocodingResults.
+                         * @implements IGeocodingResults
+                         * @constructor
+                         * @param {google.maps.routing.v2.IGeocodingResults=} [properties] Properties to set
+                         */
+                        function GeocodingResults(properties) {
+                            this.intermediates = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GeocodingResults origin.
+                         * @member {google.maps.routing.v2.IGeocodedWaypoint|null|undefined} origin
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @instance
+                         */
+                        GeocodingResults.prototype.origin = null;
+    
+                        /**
+                         * GeocodingResults destination.
+                         * @member {google.maps.routing.v2.IGeocodedWaypoint|null|undefined} destination
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @instance
+                         */
+                        GeocodingResults.prototype.destination = null;
+    
+                        /**
+                         * GeocodingResults intermediates.
+                         * @member {Array.<google.maps.routing.v2.IGeocodedWaypoint>} intermediates
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @instance
+                         */
+                        GeocodingResults.prototype.intermediates = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GeocodingResults instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {google.maps.routing.v2.IGeocodingResults=} [properties] Properties to set
+                         * @returns {google.maps.routing.v2.GeocodingResults} GeocodingResults instance
+                         */
+                        GeocodingResults.create = function create(properties) {
+                            return new GeocodingResults(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GeocodingResults message. Does not implicitly {@link google.maps.routing.v2.GeocodingResults.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {google.maps.routing.v2.IGeocodingResults} message GeocodingResults message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeocodingResults.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.origin != null && Object.hasOwnProperty.call(message, "origin"))
+                                $root.google.maps.routing.v2.GeocodedWaypoint.encode(message.origin, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                $root.google.maps.routing.v2.GeocodedWaypoint.encode(message.destination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.intermediates != null && message.intermediates.length)
+                                for (var i = 0; i < message.intermediates.length; ++i)
+                                    $root.google.maps.routing.v2.GeocodedWaypoint.encode(message.intermediates[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GeocodingResults message, length delimited. Does not implicitly {@link google.maps.routing.v2.GeocodingResults.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {google.maps.routing.v2.IGeocodingResults} message GeocodingResults message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeocodingResults.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GeocodingResults message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routing.v2.GeocodingResults} GeocodingResults
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeocodingResults.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routing.v2.GeocodingResults();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.origin = $root.google.maps.routing.v2.GeocodedWaypoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.destination = $root.google.maps.routing.v2.GeocodedWaypoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.intermediates && message.intermediates.length))
+                                            message.intermediates = [];
+                                        message.intermediates.push($root.google.maps.routing.v2.GeocodedWaypoint.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GeocodingResults message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routing.v2.GeocodingResults} GeocodingResults
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeocodingResults.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GeocodingResults message.
+                         * @function verify
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GeocodingResults.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.origin != null && message.hasOwnProperty("origin")) {
+                                var error = $root.google.maps.routing.v2.GeocodedWaypoint.verify(message.origin);
+                                if (error)
+                                    return "origin." + error;
+                            }
+                            if (message.destination != null && message.hasOwnProperty("destination")) {
+                                var error = $root.google.maps.routing.v2.GeocodedWaypoint.verify(message.destination);
+                                if (error)
+                                    return "destination." + error;
+                            }
+                            if (message.intermediates != null && message.hasOwnProperty("intermediates")) {
+                                if (!Array.isArray(message.intermediates))
+                                    return "intermediates: array expected";
+                                for (var i = 0; i < message.intermediates.length; ++i) {
+                                    var error = $root.google.maps.routing.v2.GeocodedWaypoint.verify(message.intermediates[i]);
+                                    if (error)
+                                        return "intermediates." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GeocodingResults message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routing.v2.GeocodingResults} GeocodingResults
+                         */
+                        GeocodingResults.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routing.v2.GeocodingResults)
+                                return object;
+                            var message = new $root.google.maps.routing.v2.GeocodingResults();
+                            if (object.origin != null) {
+                                if (typeof object.origin !== "object")
+                                    throw TypeError(".google.maps.routing.v2.GeocodingResults.origin: object expected");
+                                message.origin = $root.google.maps.routing.v2.GeocodedWaypoint.fromObject(object.origin);
+                            }
+                            if (object.destination != null) {
+                                if (typeof object.destination !== "object")
+                                    throw TypeError(".google.maps.routing.v2.GeocodingResults.destination: object expected");
+                                message.destination = $root.google.maps.routing.v2.GeocodedWaypoint.fromObject(object.destination);
+                            }
+                            if (object.intermediates) {
+                                if (!Array.isArray(object.intermediates))
+                                    throw TypeError(".google.maps.routing.v2.GeocodingResults.intermediates: array expected");
+                                message.intermediates = [];
+                                for (var i = 0; i < object.intermediates.length; ++i) {
+                                    if (typeof object.intermediates[i] !== "object")
+                                        throw TypeError(".google.maps.routing.v2.GeocodingResults.intermediates: object expected");
+                                    message.intermediates[i] = $root.google.maps.routing.v2.GeocodedWaypoint.fromObject(object.intermediates[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GeocodingResults message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {google.maps.routing.v2.GeocodingResults} message GeocodingResults
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GeocodingResults.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.intermediates = [];
+                            if (options.defaults) {
+                                object.origin = null;
+                                object.destination = null;
+                            }
+                            if (message.origin != null && message.hasOwnProperty("origin"))
+                                object.origin = $root.google.maps.routing.v2.GeocodedWaypoint.toObject(message.origin, options);
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                object.destination = $root.google.maps.routing.v2.GeocodedWaypoint.toObject(message.destination, options);
+                            if (message.intermediates && message.intermediates.length) {
+                                object.intermediates = [];
+                                for (var j = 0; j < message.intermediates.length; ++j)
+                                    object.intermediates[j] = $root.google.maps.routing.v2.GeocodedWaypoint.toObject(message.intermediates[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GeocodingResults to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GeocodingResults.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GeocodingResults
+                         * @function getTypeUrl
+                         * @memberof google.maps.routing.v2.GeocodingResults
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GeocodingResults.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routing.v2.GeocodingResults";
+                        };
+    
+                        return GeocodingResults;
+                    })();
+    
+                    v2.GeocodedWaypoint = (function() {
+    
+                        /**
+                         * Properties of a GeocodedWaypoint.
+                         * @memberof google.maps.routing.v2
+                         * @interface IGeocodedWaypoint
+                         * @property {google.rpc.IStatus|null} [geocoderStatus] GeocodedWaypoint geocoderStatus
+                         * @property {number|null} [intermediateWaypointRequestIndex] GeocodedWaypoint intermediateWaypointRequestIndex
+                         * @property {Array.<string>|null} [type] GeocodedWaypoint type
+                         * @property {boolean|null} [partialMatch] GeocodedWaypoint partialMatch
+                         * @property {string|null} [placeId] GeocodedWaypoint placeId
+                         */
+    
+                        /**
+                         * Constructs a new GeocodedWaypoint.
+                         * @memberof google.maps.routing.v2
+                         * @classdesc Represents a GeocodedWaypoint.
+                         * @implements IGeocodedWaypoint
+                         * @constructor
+                         * @param {google.maps.routing.v2.IGeocodedWaypoint=} [properties] Properties to set
+                         */
+                        function GeocodedWaypoint(properties) {
+                            this.type = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GeocodedWaypoint geocoderStatus.
+                         * @member {google.rpc.IStatus|null|undefined} geocoderStatus
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         */
+                        GeocodedWaypoint.prototype.geocoderStatus = null;
+    
+                        /**
+                         * GeocodedWaypoint intermediateWaypointRequestIndex.
+                         * @member {number|null|undefined} intermediateWaypointRequestIndex
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         */
+                        GeocodedWaypoint.prototype.intermediateWaypointRequestIndex = null;
+    
+                        /**
+                         * GeocodedWaypoint type.
+                         * @member {Array.<string>} type
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         */
+                        GeocodedWaypoint.prototype.type = $util.emptyArray;
+    
+                        /**
+                         * GeocodedWaypoint partialMatch.
+                         * @member {boolean} partialMatch
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         */
+                        GeocodedWaypoint.prototype.partialMatch = false;
+    
+                        /**
+                         * GeocodedWaypoint placeId.
+                         * @member {string} placeId
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         */
+                        GeocodedWaypoint.prototype.placeId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * GeocodedWaypoint _intermediateWaypointRequestIndex.
+                         * @member {"intermediateWaypointRequestIndex"|undefined} _intermediateWaypointRequestIndex
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         */
+                        Object.defineProperty(GeocodedWaypoint.prototype, "_intermediateWaypointRequestIndex", {
+                            get: $util.oneOfGetter($oneOfFields = ["intermediateWaypointRequestIndex"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new GeocodedWaypoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {google.maps.routing.v2.IGeocodedWaypoint=} [properties] Properties to set
+                         * @returns {google.maps.routing.v2.GeocodedWaypoint} GeocodedWaypoint instance
+                         */
+                        GeocodedWaypoint.create = function create(properties) {
+                            return new GeocodedWaypoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GeocodedWaypoint message. Does not implicitly {@link google.maps.routing.v2.GeocodedWaypoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {google.maps.routing.v2.IGeocodedWaypoint} message GeocodedWaypoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeocodedWaypoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.geocoderStatus != null && Object.hasOwnProperty.call(message, "geocoderStatus"))
+                                $root.google.rpc.Status.encode(message.geocoderStatus, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.intermediateWaypointRequestIndex != null && Object.hasOwnProperty.call(message, "intermediateWaypointRequestIndex"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.intermediateWaypointRequestIndex);
+                            if (message.type != null && message.type.length)
+                                for (var i = 0; i < message.type.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.type[i]);
+                            if (message.partialMatch != null && Object.hasOwnProperty.call(message, "partialMatch"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.partialMatch);
+                            if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.placeId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GeocodedWaypoint message, length delimited. Does not implicitly {@link google.maps.routing.v2.GeocodedWaypoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {google.maps.routing.v2.IGeocodedWaypoint} message GeocodedWaypoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeocodedWaypoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GeocodedWaypoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.routing.v2.GeocodedWaypoint} GeocodedWaypoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeocodedWaypoint.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.routing.v2.GeocodedWaypoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.geocoderStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.intermediateWaypointRequestIndex = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.type && message.type.length))
+                                            message.type = [];
+                                        message.type.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.partialMatch = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.placeId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GeocodedWaypoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.routing.v2.GeocodedWaypoint} GeocodedWaypoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeocodedWaypoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GeocodedWaypoint message.
+                         * @function verify
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GeocodedWaypoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.geocoderStatus != null && message.hasOwnProperty("geocoderStatus")) {
+                                var error = $root.google.rpc.Status.verify(message.geocoderStatus);
+                                if (error)
+                                    return "geocoderStatus." + error;
+                            }
+                            if (message.intermediateWaypointRequestIndex != null && message.hasOwnProperty("intermediateWaypointRequestIndex")) {
+                                properties._intermediateWaypointRequestIndex = 1;
+                                if (!$util.isInteger(message.intermediateWaypointRequestIndex))
+                                    return "intermediateWaypointRequestIndex: integer expected";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                if (!Array.isArray(message.type))
+                                    return "type: array expected";
+                                for (var i = 0; i < message.type.length; ++i)
+                                    if (!$util.isString(message.type[i]))
+                                        return "type: string[] expected";
+                            }
+                            if (message.partialMatch != null && message.hasOwnProperty("partialMatch"))
+                                if (typeof message.partialMatch !== "boolean")
+                                    return "partialMatch: boolean expected";
+                            if (message.placeId != null && message.hasOwnProperty("placeId"))
+                                if (!$util.isString(message.placeId))
+                                    return "placeId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GeocodedWaypoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.routing.v2.GeocodedWaypoint} GeocodedWaypoint
+                         */
+                        GeocodedWaypoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.routing.v2.GeocodedWaypoint)
+                                return object;
+                            var message = new $root.google.maps.routing.v2.GeocodedWaypoint();
+                            if (object.geocoderStatus != null) {
+                                if (typeof object.geocoderStatus !== "object")
+                                    throw TypeError(".google.maps.routing.v2.GeocodedWaypoint.geocoderStatus: object expected");
+                                message.geocoderStatus = $root.google.rpc.Status.fromObject(object.geocoderStatus);
+                            }
+                            if (object.intermediateWaypointRequestIndex != null)
+                                message.intermediateWaypointRequestIndex = object.intermediateWaypointRequestIndex | 0;
+                            if (object.type) {
+                                if (!Array.isArray(object.type))
+                                    throw TypeError(".google.maps.routing.v2.GeocodedWaypoint.type: array expected");
+                                message.type = [];
+                                for (var i = 0; i < object.type.length; ++i)
+                                    message.type[i] = String(object.type[i]);
+                            }
+                            if (object.partialMatch != null)
+                                message.partialMatch = Boolean(object.partialMatch);
+                            if (object.placeId != null)
+                                message.placeId = String(object.placeId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GeocodedWaypoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {google.maps.routing.v2.GeocodedWaypoint} message GeocodedWaypoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GeocodedWaypoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.type = [];
+                            if (options.defaults) {
+                                object.geocoderStatus = null;
+                                object.partialMatch = false;
+                                object.placeId = "";
+                            }
+                            if (message.geocoderStatus != null && message.hasOwnProperty("geocoderStatus"))
+                                object.geocoderStatus = $root.google.rpc.Status.toObject(message.geocoderStatus, options);
+                            if (message.intermediateWaypointRequestIndex != null && message.hasOwnProperty("intermediateWaypointRequestIndex")) {
+                                object.intermediateWaypointRequestIndex = message.intermediateWaypointRequestIndex;
+                                if (options.oneofs)
+                                    object._intermediateWaypointRequestIndex = "intermediateWaypointRequestIndex";
+                            }
+                            if (message.type && message.type.length) {
+                                object.type = [];
+                                for (var j = 0; j < message.type.length; ++j)
+                                    object.type[j] = message.type[j];
+                            }
+                            if (message.partialMatch != null && message.hasOwnProperty("partialMatch"))
+                                object.partialMatch = message.partialMatch;
+                            if (message.placeId != null && message.hasOwnProperty("placeId"))
+                                object.placeId = message.placeId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GeocodedWaypoint to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GeocodedWaypoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GeocodedWaypoint
+                         * @function getTypeUrl
+                         * @memberof google.maps.routing.v2.GeocodedWaypoint
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GeocodedWaypoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.routing.v2.GeocodedWaypoint";
+                        };
+    
+                        return GeocodedWaypoint;
                     })();
     
                     v2.Location = (function() {
@@ -19666,6 +20285,7 @@
                          * @interface IComputeRoutesResponse
                          * @property {Array.<google.maps.routing.v2.IRoute>|null} [routes] ComputeRoutesResponse routes
                          * @property {google.maps.routing.v2.IFallbackInfo|null} [fallbackInfo] ComputeRoutesResponse fallbackInfo
+                         * @property {google.maps.routing.v2.IGeocodingResults|null} [geocodingResults] ComputeRoutesResponse geocodingResults
                          */
     
                         /**
@@ -19701,6 +20321,14 @@
                         ComputeRoutesResponse.prototype.fallbackInfo = null;
     
                         /**
+                         * ComputeRoutesResponse geocodingResults.
+                         * @member {google.maps.routing.v2.IGeocodingResults|null|undefined} geocodingResults
+                         * @memberof google.maps.routing.v2.ComputeRoutesResponse
+                         * @instance
+                         */
+                        ComputeRoutesResponse.prototype.geocodingResults = null;
+    
+                        /**
                          * Creates a new ComputeRoutesResponse instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.ComputeRoutesResponse
@@ -19729,6 +20357,8 @@
                                     $root.google.maps.routing.v2.Route.encode(message.routes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.fallbackInfo != null && Object.hasOwnProperty.call(message, "fallbackInfo"))
                                 $root.google.maps.routing.v2.FallbackInfo.encode(message.fallbackInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.geocodingResults != null && Object.hasOwnProperty.call(message, "geocodingResults"))
+                                $root.google.maps.routing.v2.GeocodingResults.encode(message.geocodingResults, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -19771,6 +20401,10 @@
                                     }
                                 case 2: {
                                         message.fallbackInfo = $root.google.maps.routing.v2.FallbackInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.geocodingResults = $root.google.maps.routing.v2.GeocodingResults.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -19822,6 +20456,11 @@
                                 if (error)
                                     return "fallbackInfo." + error;
                             }
+                            if (message.geocodingResults != null && message.hasOwnProperty("geocodingResults")) {
+                                var error = $root.google.maps.routing.v2.GeocodingResults.verify(message.geocodingResults);
+                                if (error)
+                                    return "geocodingResults." + error;
+                            }
                             return null;
                         };
     
@@ -19852,6 +20491,11 @@
                                     throw TypeError(".google.maps.routing.v2.ComputeRoutesResponse.fallbackInfo: object expected");
                                 message.fallbackInfo = $root.google.maps.routing.v2.FallbackInfo.fromObject(object.fallbackInfo);
                             }
+                            if (object.geocodingResults != null) {
+                                if (typeof object.geocodingResults !== "object")
+                                    throw TypeError(".google.maps.routing.v2.ComputeRoutesResponse.geocodingResults: object expected");
+                                message.geocodingResults = $root.google.maps.routing.v2.GeocodingResults.fromObject(object.geocodingResults);
+                            }
                             return message;
                         };
     
@@ -19870,8 +20514,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.routes = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.fallbackInfo = null;
+                                object.geocodingResults = null;
+                            }
                             if (message.routes && message.routes.length) {
                                 object.routes = [];
                                 for (var j = 0; j < message.routes.length; ++j)
@@ -19879,6 +20525,8 @@
                             }
                             if (message.fallbackInfo != null && message.hasOwnProperty("fallbackInfo"))
                                 object.fallbackInfo = $root.google.maps.routing.v2.FallbackInfo.toObject(message.fallbackInfo, options);
+                            if (message.geocodingResults != null && message.hasOwnProperty("geocodingResults"))
+                                object.geocodingResults = $root.google.maps.routing.v2.GeocodingResults.toObject(message.geocodingResults, options);
                             return object;
                         };
     
@@ -21373,6 +22021,7 @@
                          * @interface IWaypoint
                          * @property {google.maps.routing.v2.ILocation|null} [location] Waypoint location
                          * @property {string|null} [placeId] Waypoint placeId
+                         * @property {string|null} [address] Waypoint address
                          * @property {boolean|null} [via] Waypoint via
                          * @property {boolean|null} [vehicleStopover] Waypoint vehicleStopover
                          * @property {boolean|null} [sideOfRoad] Waypoint sideOfRoad
@@ -21410,6 +22059,14 @@
                         Waypoint.prototype.placeId = null;
     
                         /**
+                         * Waypoint address.
+                         * @member {string|null|undefined} address
+                         * @memberof google.maps.routing.v2.Waypoint
+                         * @instance
+                         */
+                        Waypoint.prototype.address = null;
+    
+                        /**
                          * Waypoint via.
                          * @member {boolean} via
                          * @memberof google.maps.routing.v2.Waypoint
@@ -21438,12 +22095,12 @@
     
                         /**
                          * Waypoint locationType.
-                         * @member {"location"|"placeId"|undefined} locationType
+                         * @member {"location"|"placeId"|"address"|undefined} locationType
                          * @memberof google.maps.routing.v2.Waypoint
                          * @instance
                          */
                         Object.defineProperty(Waypoint.prototype, "locationType", {
-                            get: $util.oneOfGetter($oneOfFields = ["location", "placeId"]),
+                            get: $util.oneOfGetter($oneOfFields = ["location", "placeId", "address"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21481,6 +22138,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.vehicleStopover);
                             if (message.sideOfRoad != null && Object.hasOwnProperty.call(message, "sideOfRoad"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.sideOfRoad);
+                            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.address);
                             return writer;
                         };
     
@@ -21521,6 +22180,10 @@
                                     }
                                 case 2: {
                                         message.placeId = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.address = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -21586,6 +22249,13 @@
                                 if (!$util.isString(message.placeId))
                                     return "placeId: string expected";
                             }
+                            if (message.address != null && message.hasOwnProperty("address")) {
+                                if (properties.locationType === 1)
+                                    return "locationType: multiple values";
+                                properties.locationType = 1;
+                                if (!$util.isString(message.address))
+                                    return "address: string expected";
+                            }
                             if (message.via != null && message.hasOwnProperty("via"))
                                 if (typeof message.via !== "boolean")
                                     return "via: boolean expected";
@@ -21617,6 +22287,8 @@
                             }
                             if (object.placeId != null)
                                 message.placeId = String(object.placeId);
+                            if (object.address != null)
+                                message.address = String(object.address);
                             if (object.via != null)
                                 message.via = Boolean(object.via);
                             if (object.vehicleStopover != null)
@@ -21660,6 +22332,11 @@
                                 object.vehicleStopover = message.vehicleStopover;
                             if (message.sideOfRoad != null && message.hasOwnProperty("sideOfRoad"))
                                 object.sideOfRoad = message.sideOfRoad;
+                            if (message.address != null && message.hasOwnProperty("address")) {
+                                object.address = message.address;
+                                if (options.oneofs)
+                                    object.locationType = "address";
+                            }
                             return object;
                         };
     
@@ -21699,6 +22376,290 @@
             })();
     
             return maps;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         google.api = (function() {
@@ -22700,290 +23661,6 @@
             })();
     
             return api;
-        })();
-    
-        google.rpc = (function() {
-    
-            /**
-             * Namespace rpc.
-             * @memberof google
-             * @namespace
-             */
-            var rpc = {};
-    
-            rpc.Status = (function() {
-    
-                /**
-                 * Properties of a Status.
-                 * @memberof google.rpc
-                 * @interface IStatus
-                 * @property {number|null} [code] Status code
-                 * @property {string|null} [message] Status message
-                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
-                 */
-    
-                /**
-                 * Constructs a new Status.
-                 * @memberof google.rpc
-                 * @classdesc Represents a Status.
-                 * @implements IStatus
-                 * @constructor
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 */
-                function Status(properties) {
-                    this.details = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Status code.
-                 * @member {number} code
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.code = 0;
-    
-                /**
-                 * Status message.
-                 * @member {string} message
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.message = "";
-    
-                /**
-                 * Status details.
-                 * @member {Array.<google.protobuf.IAny>} details
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.details = $util.emptyArray;
-    
-                /**
-                 * Creates a new Status instance using the specified properties.
-                 * @function create
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 * @returns {google.rpc.Status} Status instance
-                 */
-                Status.create = function create(properties) {
-                    return new Status(properties);
-                };
-    
-                /**
-                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.code = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.message = reader.string();
-                                break;
-                            }
-                        case 3: {
-                                if (!(message.details && message.details.length))
-                                    message.details = [];
-                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Status message.
-                 * @function verify
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Status.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        if (!$util.isInteger(message.code))
-                            return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        if (!$util.isString(message.message))
-                            return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.rpc.Status} Status
-                 */
-                Status.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.rpc.Status)
-                        return object;
-                    var message = new $root.google.rpc.Status();
-                    if (object.code != null)
-                        message.code = object.code | 0;
-                    if (object.message != null)
-                        message.message = String(object.message);
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".google.rpc.Status.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Status message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.Status} message Status
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Status.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.details = [];
-                    if (options.defaults) {
-                        object.code = 0;
-                        object.message = "";
-                    }
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        object.message = message.message;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Status to JSON.
-                 * @function toJSON
-                 * @memberof google.rpc.Status
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Status.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Status
-                 * @function getTypeUrl
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.rpc.Status";
-                };
-    
-                return Status;
-            })();
-    
-            return rpc;
         })();
     
         return google;

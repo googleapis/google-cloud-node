@@ -1,6 +1,7 @@
 [
   "../../protos/google/geo/type/viewport.proto",
   "../../protos/google/maps/routing/v2/fallback_info.proto",
+  "../../protos/google/maps/routing/v2/geocoding_results.proto",
   "../../protos/google/maps/routing/v2/location.proto",
   "../../protos/google/maps/routing/v2/maneuver.proto",
   "../../protos/google/maps/routing/v2/navigation_instruction.proto",
