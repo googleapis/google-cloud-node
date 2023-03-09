@@ -60,9 +60,9 @@ import {GrafeasClient} from '@google-cloud/grafeas';""")
             os.unlink(filePath)
 
 
-node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",templates_excludes=['packages/google-devtools-containeranalysis/src/v1/index.ts', 'packages/google-devtools-containeranalysis/package.json', 'packages/google-devtools-containeranalysis/system-test/fixtures/sample/src/index.js', 'packages/google-devtools-containeranalysis/system-test/fixtures/sample/src/index.ts'],staging_excludes=[
-    'packages/google-devtools-containeranalysis/package.json', 'packages/google-devtools-containeranalysis/README.md',
-    'packages/google-devtools-containeranalysis/src/v1beta1/index.ts', 'packages/google-devtools-containeranalysis/src/v1/index.ts', 'packages/google-devtools-containeranalysis/tslint.json', 'packages/google-devtools-containeranalysis/src/index.ts', 'packages/google-devtools-containeranalysis/system-test/fixtures/sample/src/index.js', 'packages/google-devtools-containeranalysis/system-test/fixtures/sample/src/index.ts'],
+node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",templates_excludes=['src/v1/index.ts', 'package.json', 'system-test/fixtures/sample/src/index.js', 'system-test/fixtures/sample/src/index.ts'],staging_excludes=[
+    'package.json', 'README.md',
+    'src/v1beta1/index.ts', 'src/v1/index.ts', 'tslint.json', 'src/index.ts', 'system-test/fixtures/sample/src/index.js', 'system-test/fixtures/sample/src/index.ts'],
     patch_staging=patch)
 
 # Add beta version GrafeasClient to export

@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2023 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/inventory',
+    systemName: '@google-cloud/kms-inventory',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

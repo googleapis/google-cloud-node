@@ -5975,14 +5975,37 @@
                     },
                     "OcrConfig": {
                       "fields": {
+                        "hints": {
+                          "type": "Hints",
+                          "id": 2
+                        },
                         "enableNativePdfParsing": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "enableImageQualityScores": {
+                          "type": "bool",
+                          "id": 4
                         },
                         "advancedOcrOptions": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 5
+                        },
+                        "enableSymbol": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Hints": {
+                          "fields": {
+                            "languageHints": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },

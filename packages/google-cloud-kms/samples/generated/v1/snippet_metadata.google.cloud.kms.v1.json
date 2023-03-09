@@ -200,6 +200,90 @@
             }
         },
         {
+            "regionTag": "cloudkms_v1_generated_EkmService_GetEkmConfig_async",
+            "title": "EkmService getEkmConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource for a given project and location.",
+            "canonical": true,
+            "file": "ekm_service.get_ekm_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetEkmConfig",
+                "fullName": "google.cloud.kms.v1.EkmService.GetEkmConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.kms.v1.EkmConfig",
+                "client": {
+                    "shortName": "EkmServiceClient",
+                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
+                },
+                "method": {
+                    "shortName": "GetEkmConfig",
+                    "fullName": "google.cloud.kms.v1.EkmService.GetEkmConfig",
+                    "service": {
+                        "shortName": "EkmService",
+                        "fullName": "google.cloud.kms.v1.EkmService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudkms_v1_generated_EkmService_UpdateEkmConfig_async",
+            "title": "EkmService updateEkmConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource for a given project and location.",
+            "canonical": true,
+            "file": "ekm_service.update_ekm_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateEkmConfig",
+                "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "ekm_config",
+                        "type": ".google.cloud.kms.v1.EkmConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.kms.v1.EkmConfig",
+                "client": {
+                    "shortName": "EkmServiceClient",
+                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateEkmConfig",
+                    "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
+                    "service": {
+                        "shortName": "EkmService",
+                        "fullName": "google.cloud.kms.v1.EkmService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_async",
             "title": "EkmService listKeyRings Sample",
             "origin": "API_DEFINITION",

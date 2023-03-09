@@ -25,6 +25,16 @@
                 "updateEkmConnection"
               ]
             },
+            "GetEkmConfig": {
+              "methods": [
+                "getEkmConfig"
+              ]
+            },
+            "UpdateEkmConfig": {
+              "methods": [
+                "updateEkmConfig"
+              ]
+            },
             "ListEkmConnections": {
               "methods": [
                 "listEkmConnections",
@@ -50,6 +60,16 @@
             "UpdateEkmConnection": {
               "methods": [
                 "updateEkmConnection"
+              ]
+            },
+            "GetEkmConfig": {
+              "methods": [
+                "getEkmConfig"
+              ]
+            },
+            "UpdateEkmConfig": {
+              "methods": [
+                "updateEkmConfig"
               ]
             },
             "ListEkmConnections": {

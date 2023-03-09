@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async]
+function main(ekmConfig, updateMask) {
+  // [START cloudkms_v1_generated_EkmService_UpdateEkmConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,34 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the
-   *  CryptoKey google.cloud.kms.v1.CryptoKey.
+   *  Required. EkmConfig google.cloud.kms.v1.EkmConfig  with updated values.
    */
-  // const name = 'abc123'
+  // const ekmConfig = {}
+  /**
+   *  Required. List of fields to be updated in this request.
+   */
+  // const updateMask = {}
 
-  // Imports the Inventory library
-  const {KeyTrackingServiceClient} = require('@google-cloud/kms-inventory').v1;
+  // Imports the Kms library
+  const {EkmServiceClient} = require('@google-cloud/kms').v1;
 
   // Instantiates a client
-  const inventoryClient = new KeyTrackingServiceClient();
+  const kmsClient = new EkmServiceClient();
 
-  async function callGetProtectedResourcesSummary() {
+  async function callUpdateEkmConfig() {
     // Construct request
     const request = {
-      name,
+      ekmConfig,
+      updateMask,
     };
 
     // Run request
-    const response = await inventoryClient.getProtectedResourcesSummary(request);
+    const response = await kmsClient.updateEkmConfig(request);
     console.log(response);
   }
 
-  callGetProtectedResourcesSummary();
-  // [END kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async]
+  callUpdateEkmConfig();
+  // [END cloudkms_v1_generated_EkmService_UpdateEkmConfig_async]
 }
 
 process.on('unhandledRejection', err => {
