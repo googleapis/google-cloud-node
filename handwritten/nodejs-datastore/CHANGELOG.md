@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/nodejs-datastore/compare/v7.3.2...v7.4.0) (2023-03-09)
+
+
+### Features
+
+* Introduce EntityFilter class with support for and/or filters ([#1061](https://github.com/googleapis/nodejs-datastore/issues/1061)) ([8fc58c0](https://github.com/googleapis/nodejs-datastore/commit/8fc58c0f18e5333f996099e09ec673e9bf3460af))
+
+
+### Bug Fixes
+
+* Or filters with warnings ([#1075](https://github.com/googleapis/nodejs-datastore/issues/1075)) ([73bfcc4](https://github.com/googleapis/nodejs-datastore/commit/73bfcc40129309b512627f873d9f841f7ad370ee))
+
 ## [7.3.2](https://github.com/googleapis/nodejs-datastore/compare/v7.3.1...v7.3.2) (2023-02-17)
 
 
