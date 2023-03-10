@@ -70,7 +70,8 @@ function main(origin, destination) {
   // const departureTime = {}
   /**
    *  Optional. Specifies whether to calculate alternate routes in addition to
-   *  the route.
+   *  the route. No alternative routes are returned for requests that have
+   *  intermediate waypoints.
    */
   // const computeAlternativeRoutes = true
   /**
