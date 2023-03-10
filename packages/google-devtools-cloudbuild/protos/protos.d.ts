@@ -6397,6 +6397,9 @@ export namespace google {
 
                     /** BuildOptions volumes */
                     volumes?: (google.devtools.cloudbuild.v1.IVolume[]|null);
+
+                    /** BuildOptions defaultLogsBucketBehavior */
+                    defaultLogsBucketBehavior?: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null);
                 }
 
                 /** Represents a BuildOptions. */
@@ -6446,6 +6449,9 @@ export namespace google {
 
                     /** BuildOptions volumes. */
                     public volumes: google.devtools.cloudbuild.v1.IVolume[];
+
+                    /** BuildOptions defaultLogsBucketBehavior. */
+                    public defaultLogsBucketBehavior: (google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|keyof typeof google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior);
 
                     /**
                      * Creates a new BuildOptions instance using the specified properties.
@@ -6660,6 +6666,12 @@ export namespace google {
                         STACKDRIVER_ONLY = 3,
                         CLOUD_LOGGING_ONLY = 5,
                         NONE = 4
+                    }
+
+                    /** DefaultLogsBucketBehavior enum. */
+                    enum DefaultLogsBucketBehavior {
+                        DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED = 0,
+                        REGIONAL_USER_OWNED_BUCKET = 1
                     }
                 }
 

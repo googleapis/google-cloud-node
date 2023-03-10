@@ -16414,6 +16414,7 @@
                          * @property {Array.<string>|null} [env] BuildOptions env
                          * @property {Array.<string>|null} [secretEnv] BuildOptions secretEnv
                          * @property {Array.<google.devtools.cloudbuild.v1.IVolume>|null} [volumes] BuildOptions volumes
+                         * @property {google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior|null} [defaultLogsBucketBehavior] BuildOptions defaultLogsBucketBehavior
                          */
     
                         /**
@@ -16540,6 +16541,14 @@
                         BuildOptions.prototype.volumes = $util.emptyArray;
     
                         /**
+                         * BuildOptions defaultLogsBucketBehavior.
+                         * @member {google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior} defaultLogsBucketBehavior
+                         * @memberof google.devtools.cloudbuild.v1.BuildOptions
+                         * @instance
+                         */
+                        BuildOptions.prototype.defaultLogsBucketBehavior = 0;
+    
+                        /**
                          * Creates a new BuildOptions instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.BuildOptions
@@ -16596,6 +16605,8 @@
                                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.dynamicSubstitutions);
                             if (message.pool != null && Object.hasOwnProperty.call(message, "pool"))
                                 $root.google.devtools.cloudbuild.v1.BuildOptions.PoolOption.encode(message.pool, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.defaultLogsBucketBehavior != null && Object.hasOwnProperty.call(message, "defaultLogsBucketBehavior"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.defaultLogsBucketBehavior);
                             return writer;
                         };
     
@@ -16693,6 +16704,10 @@
                                         if (!(message.volumes && message.volumes.length))
                                             message.volumes = [];
                                         message.volumes.push($root.google.devtools.cloudbuild.v1.Volume.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 21: {
+                                        message.defaultLogsBucketBehavior = reader.int32();
                                         break;
                                     }
                                 default:
@@ -16828,6 +16843,14 @@
                                         return "volumes." + error;
                                 }
                             }
+                            if (message.defaultLogsBucketBehavior != null && message.hasOwnProperty("defaultLogsBucketBehavior"))
+                                switch (message.defaultLogsBucketBehavior) {
+                                default:
+                                    return "defaultLogsBucketBehavior: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -17022,6 +17045,22 @@
                                     message.volumes[i] = $root.google.devtools.cloudbuild.v1.Volume.fromObject(object.volumes[i]);
                                 }
                             }
+                            switch (object.defaultLogsBucketBehavior) {
+                            default:
+                                if (typeof object.defaultLogsBucketBehavior === "number") {
+                                    message.defaultLogsBucketBehavior = object.defaultLogsBucketBehavior;
+                                    break;
+                                }
+                                break;
+                            case "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED":
+                            case 0:
+                                message.defaultLogsBucketBehavior = 0;
+                                break;
+                            case "REGIONAL_USER_OWNED_BUCKET":
+                            case 1:
+                                message.defaultLogsBucketBehavior = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -17058,6 +17097,7 @@
                                 object.logging = options.enums === String ? "LOGGING_UNSPECIFIED" : 0;
                                 object.dynamicSubstitutions = false;
                                 object.pool = null;
+                                object.defaultLogsBucketBehavior = options.enums === String ? "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED" : 0;
                             }
                             if (message.sourceProvenanceHash && message.sourceProvenanceHash.length) {
                                 object.sourceProvenanceHash = [];
@@ -17100,6 +17140,8 @@
                                 object.dynamicSubstitutions = message.dynamicSubstitutions;
                             if (message.pool != null && message.hasOwnProperty("pool"))
                                 object.pool = $root.google.devtools.cloudbuild.v1.BuildOptions.PoolOption.toObject(message.pool, options);
+                            if (message.defaultLogsBucketBehavior != null && message.hasOwnProperty("defaultLogsBucketBehavior"))
+                                object.defaultLogsBucketBehavior = options.enums === String ? $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] === undefined ? message.defaultLogsBucketBehavior : $root.google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior[message.defaultLogsBucketBehavior] : message.defaultLogsBucketBehavior;
                             return object;
                         };
     
@@ -17415,6 +17457,20 @@
                             values[valuesById[3] = "STACKDRIVER_ONLY"] = 3;
                             values[valuesById[5] = "CLOUD_LOGGING_ONLY"] = 5;
                             values[valuesById[4] = "NONE"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * DefaultLogsBucketBehavior enum.
+                         * @name google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior
+                         * @enum {number}
+                         * @property {number} DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED=0 DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED value
+                         * @property {number} REGIONAL_USER_OWNED_BUCKET=1 REGIONAL_USER_OWNED_BUCKET value
+                         */
+                        BuildOptions.DefaultLogsBucketBehavior = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REGIONAL_USER_OWNED_BUCKET"] = 1;
                             return values;
                         })();
     
