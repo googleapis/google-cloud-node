@@ -2022,6 +2022,13 @@
                           "rule": "repeated",
                           "type": "Volume",
                           "id": 14
+                        },
+                        "defaultLogsBucketBehavior": {
+                          "type": "DefaultLogsBucketBehavior",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2077,6 +2084,12 @@
                             "STACKDRIVER_ONLY": 3,
                             "CLOUD_LOGGING_ONLY": 5,
                             "NONE": 4
+                          }
+                        },
+                        "DefaultLogsBucketBehavior": {
+                          "values": {
+                            "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED": 0,
+                            "REGIONAL_USER_OWNED_BUCKET": 1
                           }
                         }
                       }
