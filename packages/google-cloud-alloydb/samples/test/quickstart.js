@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/alloydb').v1;
-const alloydbClient = new Client();
+const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1;
+const alloydbClient = new AlloyDBAdminClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
