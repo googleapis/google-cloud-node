@@ -389,7 +389,8 @@ export class RoutesClient {
    *   time that has already occurred, then the request fails.
    * @param {boolean} [request.computeAlternativeRoutes]
    *   Optional. Specifies whether to calculate alternate routes in addition to
-   *   the route.
+   *   the route. No alternative routes are returned for requests that have
+   *   intermediate waypoints.
    * @param {google.maps.routing.v2.RouteModifiers} [request.routeModifiers]
    *   Optional. A set of conditions to satisfy that affect the way routes are
    *   calculated.
