@@ -732,6 +732,9 @@ export namespace google {
 
                     /** Customer channelPartnerId */
                     channelPartnerId?: (string|null);
+
+                    /** Customer correlationId */
+                    correlationId?: (string|null);
                 }
 
                 /** Represents a Customer. */
@@ -778,6 +781,9 @@ export namespace google {
 
                     /** Customer channelPartnerId. */
                     public channelPartnerId: string;
+
+                    /** Customer correlationId. */
+                    public correlationId: string;
 
                     /**
                      * Creates a new Customer instance using the specified properties.
@@ -982,6 +988,220 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EntitlementChange. */
+                interface IEntitlementChange {
+
+                    /** EntitlementChange suspensionReason */
+                    suspensionReason?: (google.cloud.channel.v1.Entitlement.SuspensionReason|keyof typeof google.cloud.channel.v1.Entitlement.SuspensionReason|null);
+
+                    /** EntitlementChange cancellationReason */
+                    cancellationReason?: (google.cloud.channel.v1.EntitlementChange.CancellationReason|keyof typeof google.cloud.channel.v1.EntitlementChange.CancellationReason|null);
+
+                    /** EntitlementChange activationReason */
+                    activationReason?: (google.cloud.channel.v1.EntitlementChange.ActivationReason|keyof typeof google.cloud.channel.v1.EntitlementChange.ActivationReason|null);
+
+                    /** EntitlementChange otherChangeReason */
+                    otherChangeReason?: (string|null);
+
+                    /** EntitlementChange entitlement */
+                    entitlement?: (string|null);
+
+                    /** EntitlementChange offer */
+                    offer?: (string|null);
+
+                    /** EntitlementChange provisionedService */
+                    provisionedService?: (google.cloud.channel.v1.IProvisionedService|null);
+
+                    /** EntitlementChange changeType */
+                    changeType?: (google.cloud.channel.v1.EntitlementChange.ChangeType|keyof typeof google.cloud.channel.v1.EntitlementChange.ChangeType|null);
+
+                    /** EntitlementChange createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EntitlementChange operatorType */
+                    operatorType?: (google.cloud.channel.v1.EntitlementChange.OperatorType|keyof typeof google.cloud.channel.v1.EntitlementChange.OperatorType|null);
+
+                    /** EntitlementChange parameters */
+                    parameters?: (google.cloud.channel.v1.IParameter[]|null);
+
+                    /** EntitlementChange operator */
+                    operator?: (string|null);
+                }
+
+                /** Represents an EntitlementChange. */
+                class EntitlementChange implements IEntitlementChange {
+
+                    /**
+                     * Constructs a new EntitlementChange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IEntitlementChange);
+
+                    /** EntitlementChange suspensionReason. */
+                    public suspensionReason?: (google.cloud.channel.v1.Entitlement.SuspensionReason|keyof typeof google.cloud.channel.v1.Entitlement.SuspensionReason|null);
+
+                    /** EntitlementChange cancellationReason. */
+                    public cancellationReason?: (google.cloud.channel.v1.EntitlementChange.CancellationReason|keyof typeof google.cloud.channel.v1.EntitlementChange.CancellationReason|null);
+
+                    /** EntitlementChange activationReason. */
+                    public activationReason?: (google.cloud.channel.v1.EntitlementChange.ActivationReason|keyof typeof google.cloud.channel.v1.EntitlementChange.ActivationReason|null);
+
+                    /** EntitlementChange otherChangeReason. */
+                    public otherChangeReason?: (string|null);
+
+                    /** EntitlementChange entitlement. */
+                    public entitlement: string;
+
+                    /** EntitlementChange offer. */
+                    public offer: string;
+
+                    /** EntitlementChange provisionedService. */
+                    public provisionedService?: (google.cloud.channel.v1.IProvisionedService|null);
+
+                    /** EntitlementChange changeType. */
+                    public changeType: (google.cloud.channel.v1.EntitlementChange.ChangeType|keyof typeof google.cloud.channel.v1.EntitlementChange.ChangeType);
+
+                    /** EntitlementChange createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EntitlementChange operatorType. */
+                    public operatorType: (google.cloud.channel.v1.EntitlementChange.OperatorType|keyof typeof google.cloud.channel.v1.EntitlementChange.OperatorType);
+
+                    /** EntitlementChange parameters. */
+                    public parameters: google.cloud.channel.v1.IParameter[];
+
+                    /** EntitlementChange operator. */
+                    public operator: string;
+
+                    /** EntitlementChange changeReason. */
+                    public changeReason?: ("suspensionReason"|"cancellationReason"|"activationReason"|"otherChangeReason");
+
+                    /**
+                     * Creates a new EntitlementChange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntitlementChange instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IEntitlementChange): google.cloud.channel.v1.EntitlementChange;
+
+                    /**
+                     * Encodes the specified EntitlementChange message. Does not implicitly {@link google.cloud.channel.v1.EntitlementChange.verify|verify} messages.
+                     * @param message EntitlementChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IEntitlementChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntitlementChange message, length delimited. Does not implicitly {@link google.cloud.channel.v1.EntitlementChange.verify|verify} messages.
+                     * @param message EntitlementChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IEntitlementChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntitlementChange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntitlementChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.EntitlementChange;
+
+                    /**
+                     * Decodes an EntitlementChange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntitlementChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.EntitlementChange;
+
+                    /**
+                     * Verifies an EntitlementChange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntitlementChange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntitlementChange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.EntitlementChange;
+
+                    /**
+                     * Creates a plain object from an EntitlementChange message. Also converts values to other types if specified.
+                     * @param message EntitlementChange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.EntitlementChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntitlementChange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EntitlementChange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EntitlementChange {
+
+                    /** ChangeType enum. */
+                    enum ChangeType {
+                        CHANGE_TYPE_UNSPECIFIED = 0,
+                        CREATED = 1,
+                        PRICE_PLAN_SWITCHED = 3,
+                        COMMITMENT_CHANGED = 4,
+                        RENEWED = 5,
+                        SUSPENDED = 6,
+                        ACTIVATED = 7,
+                        CANCELLED = 8,
+                        SKU_CHANGED = 9,
+                        RENEWAL_SETTING_CHANGED = 10,
+                        PAID_SUBSCRIPTION_STARTED = 11,
+                        LICENSE_CAP_CHANGED = 12,
+                        SUSPENSION_DETAILS_CHANGED = 13,
+                        TRIAL_END_DATE_EXTENDED = 14,
+                        TRIAL_STARTED = 15
+                    }
+
+                    /** OperatorType enum. */
+                    enum OperatorType {
+                        OPERATOR_TYPE_UNSPECIFIED = 0,
+                        CUSTOMER_SERVICE_REPRESENTATIVE = 1,
+                        SYSTEM = 2,
+                        CUSTOMER = 3,
+                        RESELLER = 4
+                    }
+
+                    /** CancellationReason enum. */
+                    enum CancellationReason {
+                        CANCELLATION_REASON_UNSPECIFIED = 0,
+                        SERVICE_TERMINATED = 1,
+                        RELATIONSHIP_ENDED = 2,
+                        PARTIAL_TRANSFER = 3
+                    }
+
+                    /** ActivationReason enum. */
+                    enum ActivationReason {
+                        ACTIVATION_REASON_UNSPECIFIED = 0,
+                        RESELLER_REVOKED_SUSPENSION = 1,
+                        CUSTOMER_ACCEPTED_PENDING_TOS = 2,
+                        RENEWAL_SETTINGS_CHANGED = 3,
+                        OTHER_ACTIVATION_REASON = 100
+                    }
                 }
 
                 /** Properties of an Entitlement. */
@@ -7166,6 +7386,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listSubscribers(request: google.cloud.channel.v1.IListSubscribersRequest): Promise<google.cloud.channel.v1.ListSubscribersResponse>;
+
+                    /**
+                     * Calls ListEntitlementChanges.
+                     * @param request ListEntitlementChangesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListEntitlementChangesResponse
+                     */
+                    public listEntitlementChanges(request: google.cloud.channel.v1.IListEntitlementChangesRequest, callback: google.cloud.channel.v1.CloudChannelService.ListEntitlementChangesCallback): void;
+
+                    /**
+                     * Calls ListEntitlementChanges.
+                     * @param request ListEntitlementChangesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listEntitlementChanges(request: google.cloud.channel.v1.IListEntitlementChangesRequest): Promise<google.cloud.channel.v1.ListEntitlementChangesResponse>;
                 }
 
                 namespace CloudChannelService {
@@ -7484,6 +7718,13 @@ export namespace google {
                      * @param [response] ListSubscribersResponse
                      */
                     type ListSubscribersCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListSubscribersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|listEntitlementChanges}.
+                     * @param error Error, if any
+                     * @param [response] ListEntitlementChangesResponse
+                     */
+                    type ListEntitlementChangesCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListEntitlementChangesResponse) => void;
                 }
 
                 /** Properties of a CheckCloudIdentityAccountsExistRequest. */
@@ -13054,6 +13295,9 @@ export namespace google {
 
                     /** ListOffersRequest languageCode */
                     languageCode?: (string|null);
+
+                    /** ListOffersRequest showFutureOffers */
+                    showFutureOffers?: (boolean|null);
                 }
 
                 /** Represents a ListOffersRequest. */
@@ -13079,6 +13323,9 @@ export namespace google {
 
                     /** ListOffersRequest languageCode. */
                     public languageCode: string;
+
+                    /** ListOffersRequest showFutureOffers. */
+                    public showFutureOffers: boolean;
 
                     /**
                      * Creates a new ListOffersRequest instance using the specified properties.
@@ -14949,6 +15196,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListSubscribersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEntitlementChangesRequest. */
+                interface IListEntitlementChangesRequest {
+
+                    /** ListEntitlementChangesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListEntitlementChangesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListEntitlementChangesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListEntitlementChangesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListEntitlementChangesRequest. */
+                class ListEntitlementChangesRequest implements IListEntitlementChangesRequest {
+
+                    /**
+                     * Constructs a new ListEntitlementChangesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListEntitlementChangesRequest);
+
+                    /** ListEntitlementChangesRequest parent. */
+                    public parent: string;
+
+                    /** ListEntitlementChangesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListEntitlementChangesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListEntitlementChangesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListEntitlementChangesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEntitlementChangesRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListEntitlementChangesRequest): google.cloud.channel.v1.ListEntitlementChangesRequest;
+
+                    /**
+                     * Encodes the specified ListEntitlementChangesRequest message. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesRequest.verify|verify} messages.
+                     * @param message ListEntitlementChangesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListEntitlementChangesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEntitlementChangesRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesRequest.verify|verify} messages.
+                     * @param message ListEntitlementChangesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListEntitlementChangesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEntitlementChangesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEntitlementChangesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListEntitlementChangesRequest;
+
+                    /**
+                     * Decodes a ListEntitlementChangesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEntitlementChangesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListEntitlementChangesRequest;
+
+                    /**
+                     * Verifies a ListEntitlementChangesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEntitlementChangesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEntitlementChangesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListEntitlementChangesRequest;
+
+                    /**
+                     * Creates a plain object from a ListEntitlementChangesRequest message. Also converts values to other types if specified.
+                     * @param message ListEntitlementChangesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListEntitlementChangesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEntitlementChangesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEntitlementChangesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListEntitlementChangesResponse. */
+                interface IListEntitlementChangesResponse {
+
+                    /** ListEntitlementChangesResponse entitlementChanges */
+                    entitlementChanges?: (google.cloud.channel.v1.IEntitlementChange[]|null);
+
+                    /** ListEntitlementChangesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListEntitlementChangesResponse. */
+                class ListEntitlementChangesResponse implements IListEntitlementChangesResponse {
+
+                    /**
+                     * Constructs a new ListEntitlementChangesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListEntitlementChangesResponse);
+
+                    /** ListEntitlementChangesResponse entitlementChanges. */
+                    public entitlementChanges: google.cloud.channel.v1.IEntitlementChange[];
+
+                    /** ListEntitlementChangesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListEntitlementChangesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListEntitlementChangesResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListEntitlementChangesResponse): google.cloud.channel.v1.ListEntitlementChangesResponse;
+
+                    /**
+                     * Encodes the specified ListEntitlementChangesResponse message. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesResponse.verify|verify} messages.
+                     * @param message ListEntitlementChangesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListEntitlementChangesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListEntitlementChangesResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesResponse.verify|verify} messages.
+                     * @param message ListEntitlementChangesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListEntitlementChangesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListEntitlementChangesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListEntitlementChangesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListEntitlementChangesResponse;
+
+                    /**
+                     * Decodes a ListEntitlementChangesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListEntitlementChangesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListEntitlementChangesResponse;
+
+                    /**
+                     * Verifies a ListEntitlementChangesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListEntitlementChangesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListEntitlementChangesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListEntitlementChangesResponse;
+
+                    /**
+                     * Creates a plain object from a ListEntitlementChangesResponse message. Also converts values to other types if specified.
+                     * @param message ListEntitlementChangesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListEntitlementChangesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListEntitlementChangesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListEntitlementChangesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
