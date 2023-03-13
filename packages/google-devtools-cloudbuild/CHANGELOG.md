@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.4.0...cloudbuild-v3.5.0) (2023-03-13)
+
+
+### Features
+
+* [cloudbuild] Add DefaultLogsBucketBehavior to BuildOptions ([#4067](https://github.com/googleapis/google-cloud-node/issues/4067)) ([def2bc3](https://github.com/googleapis/google-cloud-node/commit/def2bc300a3507af7d0250f9ce9b94eaa553d5c7))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.3.0...cloudbuild-v3.4.0) (2023-02-23)
 
 

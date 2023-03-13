@@ -5,6 +5,123 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b04c77858f6d807c11a31a3fb7e3adc3289ff581",
+          "message": "Add initial files for google.cloud.alloydb.v1",
+          "issues": [
+            "4072"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "c5a02fec-e247-4746-8bb0-8425ca8a8ec1",
+      "createTime": "2023-03-13T17:28:30.813Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e325ac51cf2550cc9d9dba6a8145d4affe766930",
+          "message": "[routing] added support for specifying waypoints as addresses",
+          "issues": [
+            "4065"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "6eccf512-3b1b-4d5e-a446-33ae4bbefb89",
+      "createTime": "2023-03-13T17:28:30.811Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1323ead136e4352f44ccf57498b4aaa473533322",
+          "message": "[containeranalysis] Import of Grafeas from Github",
+          "issues": [
+            "4050"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "9ff0c2dc-eed7-40cf-90ec-ef1ea551883a",
+      "createTime": "2023-03-13T17:28:30.810Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "def2bc300a3507af7d0250f9ce9b94eaa553d5c7",
+          "message": "[cloudbuild] Add DefaultLogsBucketBehavior to BuildOptions",
+          "issues": [
+            "4067"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "431c9430-d1d2-4620-8169-85c1bf1522a5",
+      "createTime": "2023-03-13T17:28:30.808Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27f2e1ea523a619451ec4df285cbf160ca518e45",
+          "message": "[tpu] add AcceleratorConfig to ListAcceleratorTypesResponse",
+          "issues": [
+            "4059"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "3562bba5-2059-4abd-ba9f-2810c0515e2c",
+      "createTime": "2023-03-13T17:28:30.807Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cb0ae8f35987770884741683cebf7d6d3d1fd093",
+          "message": "Add support for Coordinated External Keys",
+          "issues": []
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "c7ac29d9-506d-49da-84ed-a08a99f13f17",
+      "createTime": "2023-03-13T17:28:30.805Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "91b38119e9cf9f700e87ad0d12ba54e72dc53960",
+          "message": "[documentai] added hints.language_hints field in OcrConfig",
+          "issues": [
+            "4062"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "79070c4c-6e7f-4934-a89a-ed54842d2ad7",
+      "createTime": "2023-03-13T17:28:30.803Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "146700d2fa0d5ee8fc7a262700e0819b50ede21c",
           "message": "[grafeas] Import of Grafeas from Github",
           "issues": [
@@ -4504,5 +4621,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-03-06T20:06:16.917Z"
+  "updateTime": "2023-03-13T17:28:30.813Z"
 }
