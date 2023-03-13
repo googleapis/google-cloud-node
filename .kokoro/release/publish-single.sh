@@ -29,3 +29,9 @@ TARBALL=$(ls -1 -t *.tgz | head -1)
 
 # publish library to npm.
 npm publish --access=public --registry=https://wombat-dressing-room.appspot.com "$TARBALL" 
+
+# Kokoro collects *.tgz and package-lock.json files and stores them in Placer
+# so we can generate SBOMs and attestations.
+# However, we *don't* want Kokoro to collect package-lock.json and *.tgz files
+# that happened to be installed with dependencies.
+find node_modules -name package-lock.json -o -name "*.tgz" | xargs rm -f
