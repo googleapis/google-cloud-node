@@ -134,7 +134,8 @@
     "packages/grafeas": {},
     "packages/google-cloud-kms-inventory": {},
     "packages/google-cloud-advisorynotifications": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-alloydb": {}
   },
   "plugins": [
     {

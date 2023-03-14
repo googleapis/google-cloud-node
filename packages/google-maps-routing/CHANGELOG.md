@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.3.1...routing-v0.4.0) (2023-03-13)
+
+
+### Features
+
+* [routing] added support for specifying waypoints as addresses ([#4065](https://github.com/googleapis/google-cloud-node/issues/4065)) ([e325ac5](https://github.com/googleapis/google-cloud-node/commit/e325ac51cf2550cc9d9dba6a8145d4affe766930))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/routing-v0.3.0...routing-v0.3.1) (2023-02-15)
 
 

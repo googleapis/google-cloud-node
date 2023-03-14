@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.1.0...documentai-v7.2.0) (2023-03-13)
+
+
+### Features
+
+* [documentai] added hints.language_hints field in OcrConfig ([#4062](https://github.com/googleapis/google-cloud-node/issues/4062)) ([91b3811](https://github.com/googleapis/google-cloud-node/commit/91b38119e9cf9f700e87ad0d12ba54e72dc53960))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.0.1...documentai-v7.1.0) (2023-02-22)
 
 
