@@ -2446,7 +2446,7 @@
                     "go_package": "google.golang.org/genproto/googleapis/devtools/cloudbuild/v2;cloudbuild",
                     "java_multiple_files": true,
                     "java_outer_classname": "RepositoryManagerProto",
-                    "java_package": "google.devtools.cloudbuild.v2",
+                    "java_package": "com.google.cloudbuild.v2",
                     "objc_class_prefix": "GCB",
                     "php_namespace": "Google\\Cloud\\Build\\V2",
                     "ruby_package": "Google::Cloud::Build::V2",
