@@ -158,6 +158,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "ReconcileTags": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "StarEntry": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -181,6 +186,11 @@
         "TestIamPermissions": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ImportEntries": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }
