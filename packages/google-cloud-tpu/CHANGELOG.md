@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.4.1...tpu-v2.5.0) (2023-03-13)
+
+
+### Features
+
+* [tpu] add AcceleratorConfig to ListAcceleratorTypesResponse ([#4059](https://github.com/googleapis/google-cloud-node/issues/4059)) ([27f2e1e](https://github.com/googleapis/google-cloud-node/commit/27f2e1ea523a619451ec4df285cbf160ca518e45))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.4.0...tpu-v2.4.1) (2023-02-15)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-routing",
-        "version": "0.3.1",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 132,
+                    "end": 133,
                     "type": "FULL"
                 }
             ],
