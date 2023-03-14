@@ -31,18 +31,6 @@
         "TestIamPermissions": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
-        },
-        "GetScanConfig": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "ListScanConfigs": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "UpdateScanConfig": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
         }
       }
     }

@@ -24,23 +24,6 @@
               "methods": [
                 "testIamPermissions"
               ]
-            },
-            "GetScanConfig": {
-              "methods": [
-                "getScanConfig"
-              ]
-            },
-            "UpdateScanConfig": {
-              "methods": [
-                "updateScanConfig"
-              ]
-            },
-            "ListScanConfigs": {
-              "methods": [
-                "listScanConfigs",
-                "listScanConfigsStream",
-                "listScanConfigsAsync"
-              ]
             }
           }
         },
@@ -60,23 +43,6 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
-              ]
-            },
-            "GetScanConfig": {
-              "methods": [
-                "getScanConfig"
-              ]
-            },
-            "UpdateScanConfig": {
-              "methods": [
-                "updateScanConfig"
-              ]
-            },
-            "ListScanConfigs": {
-              "methods": [
-                "listScanConfigs",
-                "listScanConfigsStream",
-                "listScanConfigsAsync"
               ]
             }
           }
