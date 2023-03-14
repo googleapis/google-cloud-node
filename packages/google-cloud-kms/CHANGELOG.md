@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.4.0...kms-v3.5.0) (2023-03-13)
+
+
+### Features
+
+* Add support for Coordinated External Keys ([cb0ae8f](https://github.com/googleapis/google-cloud-node/commit/cb0ae8f35987770884741683cebf7d6d3d1fd093))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.3.1...kms-v3.4.0) (2023-03-02)
 
 
