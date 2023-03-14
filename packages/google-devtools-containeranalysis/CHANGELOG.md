@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.4.2...containeranalysis-v4.5.0) (2023-03-13)
+
+
+### Features
+
+* [containeranalysis] Import of Grafeas from Github ([#4050](https://github.com/googleapis/google-cloud-node/issues/4050)) ([1323ead](https://github.com/googleapis/google-cloud-node/commit/1323ead136e4352f44ccf57498b4aaa473533322))
+
 ## [4.4.2](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.4.1...containeranalysis-v4.4.2) (2023-02-15)
 
 
