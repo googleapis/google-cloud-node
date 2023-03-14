@@ -23780,6 +23780,7 @@
              * @property {number} UPGRADE=8 UPGRADE value
              * @property {number} COMPLIANCE=9 COMPLIANCE value
              * @property {number} DSSE_ATTESTATION=10 DSSE_ATTESTATION value
+             * @property {number} VULNERABILITY_ASSESSMENT=11 VULNERABILITY_ASSESSMENT value
              */
             v1.NoteKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -23794,6 +23795,7 @@
                 values[valuesById[8] = "UPGRADE"] = 8;
                 values[valuesById[9] = "COMPLIANCE"] = 9;
                 values[valuesById[10] = "DSSE_ATTESTATION"] = 10;
+                values[valuesById[11] = "VULNERABILITY_ASSESSMENT"] = 11;
                 return values;
             })();
     
