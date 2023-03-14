@@ -1001,6 +1001,7 @@
              * @property {number} UPGRADE=8 UPGRADE value
              * @property {number} COMPLIANCE=9 COMPLIANCE value
              * @property {number} DSSE_ATTESTATION=10 DSSE_ATTESTATION value
+             * @property {number} VULNERABILITY_ASSESSMENT=11 VULNERABILITY_ASSESSMENT value
              */
             v1.NoteKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -1015,6 +1016,7 @@
                 values[valuesById[8] = "UPGRADE"] = 8;
                 values[valuesById[9] = "COMPLIANCE"] = 9;
                 values[valuesById[10] = "DSSE_ATTESTATION"] = 10;
+                values[valuesById[11] = "VULNERABILITY_ASSESSMENT"] = 11;
                 return values;
             })();
     
@@ -16571,6 +16573,7 @@
                         case 8:
                         case 9:
                         case 10:
+                        case 11:
                             break;
                         }
                     return null;
@@ -16638,6 +16641,10 @@
                     case "DSSE_ATTESTATION":
                     case 10:
                         message.analysisKind = 10;
+                        break;
+                    case "VULNERABILITY_ASSESSMENT":
+                    case 11:
+                        message.analysisKind = 11;
                         break;
                     }
                     return message;
@@ -19015,6 +19022,7 @@
                         case 8:
                         case 9:
                         case 10:
+                        case 11:
                             break;
                         }
                     if (message.remediation != null && message.hasOwnProperty("remediation"))
@@ -19204,6 +19212,10 @@
                     case "DSSE_ATTESTATION":
                     case 10:
                         message.kind = 10;
+                        break;
+                    case "VULNERABILITY_ASSESSMENT":
+                    case 11:
+                        message.kind = 11;
                         break;
                     }
                     if (object.remediation != null)
@@ -19422,6 +19434,7 @@
                  * @property {grafeas.v1.IUpgradeNote|null} [upgrade] Note upgrade
                  * @property {grafeas.v1.IComplianceNote|null} [compliance] Note compliance
                  * @property {grafeas.v1.IDSSEAttestationNote|null} [dsseAttestation] Note dsseAttestation
+                 * @property {grafeas.v1.IVulnerabilityAssessmentNote|null} [vulnerabilityAssessment] Note vulnerabilityAssessment
                  */
     
                 /**
@@ -19593,17 +19606,25 @@
                  */
                 Note.prototype.dsseAttestation = null;
     
+                /**
+                 * Note vulnerabilityAssessment.
+                 * @member {grafeas.v1.IVulnerabilityAssessmentNote|null|undefined} vulnerabilityAssessment
+                 * @memberof grafeas.v1.Note
+                 * @instance
+                 */
+                Note.prototype.vulnerabilityAssessment = null;
+    
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
     
                 /**
                  * Note type.
-                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|undefined} type
+                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"vulnerabilityAssessment"|undefined} type
                  * @memberof grafeas.v1.Note
                  * @instance
                  */
                 Object.defineProperty(Note.prototype, "type", {
-                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade", "compliance", "dsseAttestation"]),
+                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade", "compliance", "dsseAttestation", "vulnerabilityAssessment"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -19671,6 +19692,8 @@
                         $root.grafeas.v1.ComplianceNote.encode(message.compliance, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                     if (message.dsseAttestation != null && Object.hasOwnProperty.call(message, "dsseAttestation"))
                         $root.grafeas.v1.DSSEAttestationNote.encode(message.dsseAttestation, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                    if (message.vulnerabilityAssessment != null && Object.hasOwnProperty.call(message, "vulnerabilityAssessment"))
+                        $root.grafeas.v1.VulnerabilityAssessmentNote.encode(message.vulnerabilityAssessment, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     return writer;
                 };
     
@@ -19785,6 +19808,10 @@
                                 message.dsseAttestation = $root.grafeas.v1.DSSEAttestationNote.decode(reader, reader.uint32());
                                 break;
                             }
+                        case 20: {
+                                message.vulnerabilityAssessment = $root.grafeas.v1.VulnerabilityAssessmentNote.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -19845,6 +19872,7 @@
                         case 8:
                         case 9:
                         case 10:
+                        case 11:
                             break;
                         }
                     if (message.relatedUrl != null && message.hasOwnProperty("relatedUrl")) {
@@ -19976,6 +20004,16 @@
                                 return "dsseAttestation." + error;
                         }
                     }
+                    if (message.vulnerabilityAssessment != null && message.hasOwnProperty("vulnerabilityAssessment")) {
+                        if (properties.type === 1)
+                            return "type: multiple values";
+                        properties.type = 1;
+                        {
+                            var error = $root.grafeas.v1.VulnerabilityAssessmentNote.verify(message.vulnerabilityAssessment);
+                            if (error)
+                                return "vulnerabilityAssessment." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -20047,6 +20085,10 @@
                     case "DSSE_ATTESTATION":
                     case 10:
                         message.kind = 10;
+                        break;
+                    case "VULNERABILITY_ASSESSMENT":
+                    case 11:
+                        message.kind = 11;
                         break;
                     }
                     if (object.relatedUrl) {
@@ -20130,6 +20172,11 @@
                         if (typeof object.dsseAttestation !== "object")
                             throw TypeError(".grafeas.v1.Note.dsseAttestation: object expected");
                         message.dsseAttestation = $root.grafeas.v1.DSSEAttestationNote.fromObject(object.dsseAttestation);
+                    }
+                    if (object.vulnerabilityAssessment != null) {
+                        if (typeof object.vulnerabilityAssessment !== "object")
+                            throw TypeError(".grafeas.v1.Note.vulnerabilityAssessment: object expected");
+                        message.vulnerabilityAssessment = $root.grafeas.v1.VulnerabilityAssessmentNote.fromObject(object.vulnerabilityAssessment);
                     }
                     return message;
                 };
@@ -20233,6 +20280,11 @@
                         object.dsseAttestation = $root.grafeas.v1.DSSEAttestationNote.toObject(message.dsseAttestation, options);
                         if (options.oneofs)
                             object.type = "dsseAttestation";
+                    }
+                    if (message.vulnerabilityAssessment != null && message.hasOwnProperty("vulnerabilityAssessment")) {
+                        object.vulnerabilityAssessment = $root.grafeas.v1.VulnerabilityAssessmentNote.toObject(message.vulnerabilityAssessment, options);
+                        if (options.oneofs)
+                            object.type = "vulnerabilityAssessment";
                     }
                     return object;
                 };
@@ -29465,6 +29517,1970 @@
                 return UpgradeOccurrence;
             })();
     
+            v1.VulnerabilityAssessmentNote = (function() {
+    
+                /**
+                 * Properties of a VulnerabilityAssessmentNote.
+                 * @memberof grafeas.v1
+                 * @interface IVulnerabilityAssessmentNote
+                 * @property {string|null} [title] VulnerabilityAssessmentNote title
+                 * @property {string|null} [shortDescription] VulnerabilityAssessmentNote shortDescription
+                 * @property {string|null} [longDescription] VulnerabilityAssessmentNote longDescription
+                 * @property {string|null} [languageCode] VulnerabilityAssessmentNote languageCode
+                 * @property {grafeas.v1.VulnerabilityAssessmentNote.IPublisher|null} [publisher] VulnerabilityAssessmentNote publisher
+                 * @property {grafeas.v1.VulnerabilityAssessmentNote.IProduct|null} [product] VulnerabilityAssessmentNote product
+                 * @property {grafeas.v1.VulnerabilityAssessmentNote.IAssessment|null} [assessment] VulnerabilityAssessmentNote assessment
+                 */
+    
+                /**
+                 * Constructs a new VulnerabilityAssessmentNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a VulnerabilityAssessmentNote.
+                 * @implements IVulnerabilityAssessmentNote
+                 * @constructor
+                 * @param {grafeas.v1.IVulnerabilityAssessmentNote=} [properties] Properties to set
+                 */
+                function VulnerabilityAssessmentNote(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * VulnerabilityAssessmentNote title.
+                 * @member {string} title
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.title = "";
+    
+                /**
+                 * VulnerabilityAssessmentNote shortDescription.
+                 * @member {string} shortDescription
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.shortDescription = "";
+    
+                /**
+                 * VulnerabilityAssessmentNote longDescription.
+                 * @member {string} longDescription
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.longDescription = "";
+    
+                /**
+                 * VulnerabilityAssessmentNote languageCode.
+                 * @member {string} languageCode
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.languageCode = "";
+    
+                /**
+                 * VulnerabilityAssessmentNote publisher.
+                 * @member {grafeas.v1.VulnerabilityAssessmentNote.IPublisher|null|undefined} publisher
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.publisher = null;
+    
+                /**
+                 * VulnerabilityAssessmentNote product.
+                 * @member {grafeas.v1.VulnerabilityAssessmentNote.IProduct|null|undefined} product
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.product = null;
+    
+                /**
+                 * VulnerabilityAssessmentNote assessment.
+                 * @member {grafeas.v1.VulnerabilityAssessmentNote.IAssessment|null|undefined} assessment
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 */
+                VulnerabilityAssessmentNote.prototype.assessment = null;
+    
+                /**
+                 * Creates a new VulnerabilityAssessmentNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityAssessmentNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.VulnerabilityAssessmentNote} VulnerabilityAssessmentNote instance
+                 */
+                VulnerabilityAssessmentNote.create = function create(properties) {
+                    return new VulnerabilityAssessmentNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified VulnerabilityAssessmentNote message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityAssessmentNote} message VulnerabilityAssessmentNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                VulnerabilityAssessmentNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                    if (message.shortDescription != null && Object.hasOwnProperty.call(message, "shortDescription"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.shortDescription);
+                    if (message.longDescription != null && Object.hasOwnProperty.call(message, "longDescription"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.longDescription);
+                    if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.languageCode);
+                    if (message.publisher != null && Object.hasOwnProperty.call(message, "publisher"))
+                        $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher.encode(message.publisher, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.product != null && Object.hasOwnProperty.call(message, "product"))
+                        $root.grafeas.v1.VulnerabilityAssessmentNote.Product.encode(message.product, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.assessment != null && Object.hasOwnProperty.call(message, "assessment"))
+                        $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.encode(message.assessment, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified VulnerabilityAssessmentNote message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {grafeas.v1.IVulnerabilityAssessmentNote} message VulnerabilityAssessmentNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                VulnerabilityAssessmentNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a VulnerabilityAssessmentNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.VulnerabilityAssessmentNote} VulnerabilityAssessmentNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                VulnerabilityAssessmentNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityAssessmentNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.title = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.shortDescription = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.longDescription = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.languageCode = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.publisher = $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.product = $root.grafeas.v1.VulnerabilityAssessmentNote.Product.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.assessment = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a VulnerabilityAssessmentNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.VulnerabilityAssessmentNote} VulnerabilityAssessmentNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                VulnerabilityAssessmentNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a VulnerabilityAssessmentNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                VulnerabilityAssessmentNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        if (!$util.isString(message.title))
+                            return "title: string expected";
+                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                        if (!$util.isString(message.shortDescription))
+                            return "shortDescription: string expected";
+                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                        if (!$util.isString(message.longDescription))
+                            return "longDescription: string expected";
+                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                        if (!$util.isString(message.languageCode))
+                            return "languageCode: string expected";
+                    if (message.publisher != null && message.hasOwnProperty("publisher")) {
+                        var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher.verify(message.publisher);
+                        if (error)
+                            return "publisher." + error;
+                    }
+                    if (message.product != null && message.hasOwnProperty("product")) {
+                        var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Product.verify(message.product);
+                        if (error)
+                            return "product." + error;
+                    }
+                    if (message.assessment != null && message.hasOwnProperty("assessment")) {
+                        var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.verify(message.assessment);
+                        if (error)
+                            return "assessment." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a VulnerabilityAssessmentNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.VulnerabilityAssessmentNote} VulnerabilityAssessmentNote
+                 */
+                VulnerabilityAssessmentNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.VulnerabilityAssessmentNote)
+                        return object;
+                    var message = new $root.grafeas.v1.VulnerabilityAssessmentNote();
+                    if (object.title != null)
+                        message.title = String(object.title);
+                    if (object.shortDescription != null)
+                        message.shortDescription = String(object.shortDescription);
+                    if (object.longDescription != null)
+                        message.longDescription = String(object.longDescription);
+                    if (object.languageCode != null)
+                        message.languageCode = String(object.languageCode);
+                    if (object.publisher != null) {
+                        if (typeof object.publisher !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.publisher: object expected");
+                        message.publisher = $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher.fromObject(object.publisher);
+                    }
+                    if (object.product != null) {
+                        if (typeof object.product !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.product: object expected");
+                        message.product = $root.grafeas.v1.VulnerabilityAssessmentNote.Product.fromObject(object.product);
+                    }
+                    if (object.assessment != null) {
+                        if (typeof object.assessment !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.assessment: object expected");
+                        message.assessment = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.fromObject(object.assessment);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a VulnerabilityAssessmentNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {grafeas.v1.VulnerabilityAssessmentNote} message VulnerabilityAssessmentNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                VulnerabilityAssessmentNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.title = "";
+                        object.shortDescription = "";
+                        object.longDescription = "";
+                        object.languageCode = "";
+                        object.publisher = null;
+                        object.product = null;
+                        object.assessment = null;
+                    }
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        object.title = message.title;
+                    if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                        object.shortDescription = message.shortDescription;
+                    if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                        object.longDescription = message.longDescription;
+                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                        object.languageCode = message.languageCode;
+                    if (message.publisher != null && message.hasOwnProperty("publisher"))
+                        object.publisher = $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher.toObject(message.publisher, options);
+                    if (message.product != null && message.hasOwnProperty("product"))
+                        object.product = $root.grafeas.v1.VulnerabilityAssessmentNote.Product.toObject(message.product, options);
+                    if (message.assessment != null && message.hasOwnProperty("assessment"))
+                        object.assessment = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.toObject(message.assessment, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this VulnerabilityAssessmentNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                VulnerabilityAssessmentNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for VulnerabilityAssessmentNote
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                VulnerabilityAssessmentNote.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.VulnerabilityAssessmentNote";
+                };
+    
+                VulnerabilityAssessmentNote.Publisher = (function() {
+    
+                    /**
+                     * Properties of a Publisher.
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                     * @interface IPublisher
+                     * @property {string|null} [name] Publisher name
+                     * @property {string|null} [issuingAuthority] Publisher issuingAuthority
+                     * @property {string|null} [publisherNamespace] Publisher publisherNamespace
+                     */
+    
+                    /**
+                     * Constructs a new Publisher.
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                     * @classdesc Represents a Publisher.
+                     * @implements IPublisher
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IPublisher=} [properties] Properties to set
+                     */
+                    function Publisher(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Publisher name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @instance
+                     */
+                    Publisher.prototype.name = "";
+    
+                    /**
+                     * Publisher issuingAuthority.
+                     * @member {string} issuingAuthority
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @instance
+                     */
+                    Publisher.prototype.issuingAuthority = "";
+    
+                    /**
+                     * Publisher publisherNamespace.
+                     * @member {string} publisherNamespace
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @instance
+                     */
+                    Publisher.prototype.publisherNamespace = "";
+    
+                    /**
+                     * Creates a new Publisher instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IPublisher=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Publisher} Publisher instance
+                     */
+                    Publisher.create = function create(properties) {
+                        return new Publisher(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Publisher message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Publisher.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IPublisher} message Publisher message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Publisher.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.issuingAuthority != null && Object.hasOwnProperty.call(message, "issuingAuthority"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.issuingAuthority);
+                        if (message.publisherNamespace != null && Object.hasOwnProperty.call(message, "publisherNamespace"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.publisherNamespace);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Publisher message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Publisher.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IPublisher} message Publisher message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Publisher.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Publisher message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Publisher} Publisher
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Publisher.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.issuingAuthority = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.publisherNamespace = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Publisher message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Publisher} Publisher
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Publisher.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Publisher message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Publisher.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.issuingAuthority != null && message.hasOwnProperty("issuingAuthority"))
+                            if (!$util.isString(message.issuingAuthority))
+                                return "issuingAuthority: string expected";
+                        if (message.publisherNamespace != null && message.hasOwnProperty("publisherNamespace"))
+                            if (!$util.isString(message.publisherNamespace))
+                                return "publisherNamespace: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Publisher message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Publisher} Publisher
+                     */
+                    Publisher.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Publisher();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.issuingAuthority != null)
+                            message.issuingAuthority = String(object.issuingAuthority);
+                        if (object.publisherNamespace != null)
+                            message.publisherNamespace = String(object.publisherNamespace);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Publisher message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.Publisher} message Publisher
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Publisher.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.issuingAuthority = "";
+                            object.publisherNamespace = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.issuingAuthority != null && message.hasOwnProperty("issuingAuthority"))
+                            object.issuingAuthority = message.issuingAuthority;
+                        if (message.publisherNamespace != null && message.hasOwnProperty("publisherNamespace"))
+                            object.publisherNamespace = message.publisherNamespace;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Publisher to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Publisher.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Publisher
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Publisher
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Publisher.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.VulnerabilityAssessmentNote.Publisher";
+                    };
+    
+                    return Publisher;
+                })();
+    
+                VulnerabilityAssessmentNote.Product = (function() {
+    
+                    /**
+                     * Properties of a Product.
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                     * @interface IProduct
+                     * @property {string|null} [name] Product name
+                     * @property {string|null} [id] Product id
+                     * @property {string|null} [genericUri] Product genericUri
+                     */
+    
+                    /**
+                     * Constructs a new Product.
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                     * @classdesc Represents a Product.
+                     * @implements IProduct
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IProduct=} [properties] Properties to set
+                     */
+                    function Product(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Product name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @instance
+                     */
+                    Product.prototype.name = "";
+    
+                    /**
+                     * Product id.
+                     * @member {string} id
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @instance
+                     */
+                    Product.prototype.id = "";
+    
+                    /**
+                     * Product genericUri.
+                     * @member {string|null|undefined} genericUri
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @instance
+                     */
+                    Product.prototype.genericUri = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Product identifier.
+                     * @member {"genericUri"|undefined} identifier
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @instance
+                     */
+                    Object.defineProperty(Product.prototype, "identifier", {
+                        get: $util.oneOfGetter($oneOfFields = ["genericUri"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Product instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IProduct=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Product} Product instance
+                     */
+                    Product.create = function create(properties) {
+                        return new Product(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Product message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Product.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IProduct} message Product message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Product.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                        if (message.genericUri != null && Object.hasOwnProperty.call(message, "genericUri"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.genericUri);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Product message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Product.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IProduct} message Product message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Product.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Product message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Product} Product
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Product.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Product();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.id = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.genericUri = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Product message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Product} Product
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Product.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Product message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Product.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!$util.isString(message.id))
+                                return "id: string expected";
+                        if (message.genericUri != null && message.hasOwnProperty("genericUri")) {
+                            properties.identifier = 1;
+                            if (!$util.isString(message.genericUri))
+                                return "genericUri: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Product message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Product} Product
+                     */
+                    Product.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityAssessmentNote.Product)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Product();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.id != null)
+                            message.id = String(object.id);
+                        if (object.genericUri != null)
+                            message.genericUri = String(object.genericUri);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Product message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.Product} message Product
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Product.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.id = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            object.id = message.id;
+                        if (message.genericUri != null && message.hasOwnProperty("genericUri")) {
+                            object.genericUri = message.genericUri;
+                            if (options.oneofs)
+                                object.identifier = "genericUri";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Product to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Product.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Product
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Product
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Product.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.VulnerabilityAssessmentNote.Product";
+                    };
+    
+                    return Product;
+                })();
+    
+                VulnerabilityAssessmentNote.Assessment = (function() {
+    
+                    /**
+                     * Properties of an Assessment.
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                     * @interface IAssessment
+                     * @property {string|null} [cve] Assessment cve
+                     * @property {string|null} [shortDescription] Assessment shortDescription
+                     * @property {string|null} [longDescription] Assessment longDescription
+                     * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUris] Assessment relatedUris
+                     * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|null} [state] Assessment state
+                     * @property {Array.<string>|null} [impacts] Assessment impacts
+                     * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null} [justification] Assessment justification
+                     * @property {Array.<grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation>|null} [remediations] Assessment remediations
+                     */
+    
+                    /**
+                     * Constructs a new Assessment.
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote
+                     * @classdesc Represents an Assessment.
+                     * @implements IAssessment
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IAssessment=} [properties] Properties to set
+                     */
+                    function Assessment(properties) {
+                        this.relatedUris = [];
+                        this.impacts = [];
+                        this.remediations = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Assessment cve.
+                     * @member {string} cve
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.cve = "";
+    
+                    /**
+                     * Assessment shortDescription.
+                     * @member {string} shortDescription
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.shortDescription = "";
+    
+                    /**
+                     * Assessment longDescription.
+                     * @member {string} longDescription
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.longDescription = "";
+    
+                    /**
+                     * Assessment relatedUris.
+                     * @member {Array.<grafeas.v1.IRelatedUrl>} relatedUris
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.relatedUris = $util.emptyArray;
+    
+                    /**
+                     * Assessment state.
+                     * @member {grafeas.v1.VulnerabilityAssessmentNote.Assessment.State} state
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.state = 0;
+    
+                    /**
+                     * Assessment impacts.
+                     * @member {Array.<string>} impacts
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.impacts = $util.emptyArray;
+    
+                    /**
+                     * Assessment justification.
+                     * @member {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null|undefined} justification
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.justification = null;
+    
+                    /**
+                     * Assessment remediations.
+                     * @member {Array.<grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation>} remediations
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.remediations = $util.emptyArray;
+    
+                    /**
+                     * Creates a new Assessment instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IAssessment=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment} Assessment instance
+                     */
+                    Assessment.create = function create(properties) {
+                        return new Assessment(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Assessment message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IAssessment} message Assessment message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Assessment.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.cve != null && Object.hasOwnProperty.call(message, "cve"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cve);
+                        if (message.shortDescription != null && Object.hasOwnProperty.call(message, "shortDescription"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.shortDescription);
+                        if (message.longDescription != null && Object.hasOwnProperty.call(message, "longDescription"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.longDescription);
+                        if (message.relatedUris != null && message.relatedUris.length)
+                            for (var i = 0; i < message.relatedUris.length; ++i)
+                                $root.grafeas.v1.RelatedUrl.encode(message.relatedUris[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                        if (message.impacts != null && message.impacts.length)
+                            for (var i = 0; i < message.impacts.length; ++i)
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.impacts[i]);
+                        if (message.justification != null && Object.hasOwnProperty.call(message, "justification"))
+                            $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.encode(message.justification, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.remediations != null && message.remediations.length)
+                            for (var i = 0; i < message.remediations.length; ++i)
+                                $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.encode(message.remediations[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Assessment message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.IAssessment} message Assessment message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Assessment.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Assessment message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment} Assessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Assessment.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.cve = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.shortDescription = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.longDescription = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.relatedUris && message.relatedUris.length))
+                                        message.relatedUris = [];
+                                    message.relatedUris.push($root.grafeas.v1.RelatedUrl.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.impacts && message.impacts.length))
+                                        message.impacts = [];
+                                    message.impacts.push(reader.string());
+                                    break;
+                                }
+                            case 7: {
+                                    message.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    if (!(message.remediations && message.remediations.length))
+                                        message.remediations = [];
+                                    message.remediations.push($root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Assessment message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment} Assessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Assessment.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Assessment message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Assessment.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.cve != null && message.hasOwnProperty("cve"))
+                            if (!$util.isString(message.cve))
+                                return "cve: string expected";
+                        if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                            if (!$util.isString(message.shortDescription))
+                                return "shortDescription: string expected";
+                        if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                            if (!$util.isString(message.longDescription))
+                                return "longDescription: string expected";
+                        if (message.relatedUris != null && message.hasOwnProperty("relatedUris")) {
+                            if (!Array.isArray(message.relatedUris))
+                                return "relatedUris: array expected";
+                            for (var i = 0; i < message.relatedUris.length; ++i) {
+                                var error = $root.grafeas.v1.RelatedUrl.verify(message.relatedUris[i]);
+                                if (error)
+                                    return "relatedUris." + error;
+                            }
+                        }
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        if (message.impacts != null && message.hasOwnProperty("impacts")) {
+                            if (!Array.isArray(message.impacts))
+                                return "impacts: array expected";
+                            for (var i = 0; i < message.impacts.length; ++i)
+                                if (!$util.isString(message.impacts[i]))
+                                    return "impacts: string[] expected";
+                        }
+                        if (message.justification != null && message.hasOwnProperty("justification")) {
+                            var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.verify(message.justification);
+                            if (error)
+                                return "justification." + error;
+                        }
+                        if (message.remediations != null && message.hasOwnProperty("remediations")) {
+                            if (!Array.isArray(message.remediations))
+                                return "remediations: array expected";
+                            for (var i = 0; i < message.remediations.length; ++i) {
+                                var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.verify(message.remediations[i]);
+                                if (error)
+                                    return "remediations." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Assessment message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment} Assessment
+                     */
+                    Assessment.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment();
+                        if (object.cve != null)
+                            message.cve = String(object.cve);
+                        if (object.shortDescription != null)
+                            message.shortDescription = String(object.shortDescription);
+                        if (object.longDescription != null)
+                            message.longDescription = String(object.longDescription);
+                        if (object.relatedUris) {
+                            if (!Array.isArray(object.relatedUris))
+                                throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.relatedUris: array expected");
+                            message.relatedUris = [];
+                            for (var i = 0; i < object.relatedUris.length; ++i) {
+                                if (typeof object.relatedUris[i] !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.relatedUris: object expected");
+                                message.relatedUris[i] = $root.grafeas.v1.RelatedUrl.fromObject(object.relatedUris[i]);
+                            }
+                        }
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "AFFECTED":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "NOT_AFFECTED":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "FIXED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "UNDER_INVESTIGATION":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        }
+                        if (object.impacts) {
+                            if (!Array.isArray(object.impacts))
+                                throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.impacts: array expected");
+                            message.impacts = [];
+                            for (var i = 0; i < object.impacts.length; ++i)
+                                message.impacts[i] = String(object.impacts[i]);
+                        }
+                        if (object.justification != null) {
+                            if (typeof object.justification !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.justification: object expected");
+                            message.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.fromObject(object.justification);
+                        }
+                        if (object.remediations) {
+                            if (!Array.isArray(object.remediations))
+                                throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.remediations: array expected");
+                            message.remediations = [];
+                            for (var i = 0; i < object.remediations.length; ++i) {
+                                if (typeof object.remediations[i] !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.remediations: object expected");
+                                message.remediations[i] = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.fromObject(object.remediations[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Assessment message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment} message Assessment
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Assessment.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.relatedUris = [];
+                            object.impacts = [];
+                            object.remediations = [];
+                        }
+                        if (options.defaults) {
+                            object.cve = "";
+                            object.shortDescription = "";
+                            object.longDescription = "";
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            object.justification = null;
+                        }
+                        if (message.cve != null && message.hasOwnProperty("cve"))
+                            object.cve = message.cve;
+                        if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
+                            object.shortDescription = message.shortDescription;
+                        if (message.longDescription != null && message.hasOwnProperty("longDescription"))
+                            object.longDescription = message.longDescription;
+                        if (message.relatedUris && message.relatedUris.length) {
+                            object.relatedUris = [];
+                            for (var j = 0; j < message.relatedUris.length; ++j)
+                                object.relatedUris[j] = $root.grafeas.v1.RelatedUrl.toObject(message.relatedUris[j], options);
+                        }
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.State[message.state] === undefined ? message.state : $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.State[message.state] : message.state;
+                        if (message.impacts && message.impacts.length) {
+                            object.impacts = [];
+                            for (var j = 0; j < message.impacts.length; ++j)
+                                object.impacts[j] = message.impacts[j];
+                        }
+                        if (message.justification != null && message.hasOwnProperty("justification"))
+                            object.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.toObject(message.justification, options);
+                        if (message.remediations && message.remediations.length) {
+                            object.remediations = [];
+                            for (var j = 0; j < message.remediations.length; ++j)
+                                object.remediations[j] = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.toObject(message.remediations[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Assessment to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Assessment.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Assessment
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Assessment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.VulnerabilityAssessmentNote.Assessment";
+                    };
+    
+                    /**
+                     * State enum.
+                     * @name grafeas.v1.VulnerabilityAssessmentNote.Assessment.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} AFFECTED=1 AFFECTED value
+                     * @property {number} NOT_AFFECTED=2 NOT_AFFECTED value
+                     * @property {number} FIXED=3 FIXED value
+                     * @property {number} UNDER_INVESTIGATION=4 UNDER_INVESTIGATION value
+                     */
+                    Assessment.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AFFECTED"] = 1;
+                        values[valuesById[2] = "NOT_AFFECTED"] = 2;
+                        values[valuesById[3] = "FIXED"] = 3;
+                        values[valuesById[4] = "UNDER_INVESTIGATION"] = 4;
+                        return values;
+                    })();
+    
+                    Assessment.Justification = (function() {
+    
+                        /**
+                         * Properties of a Justification.
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                         * @interface IJustification
+                         * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType|null} [justificationType] Justification justificationType
+                         * @property {string|null} [details] Justification details
+                         */
+    
+                        /**
+                         * Constructs a new Justification.
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                         * @classdesc Represents a Justification.
+                         * @implements IJustification
+                         * @constructor
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification=} [properties] Properties to set
+                         */
+                        function Justification(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Justification justificationType.
+                         * @member {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType} justificationType
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @instance
+                         */
+                        Justification.prototype.justificationType = 0;
+    
+                        /**
+                         * Justification details.
+                         * @member {string} details
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @instance
+                         */
+                        Justification.prototype.details = "";
+    
+                        /**
+                         * Creates a new Justification instance using the specified properties.
+                         * @function create
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification=} [properties] Properties to set
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification} Justification instance
+                         */
+                        Justification.create = function create(properties) {
+                            return new Justification(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Justification message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.verify|verify} messages.
+                         * @function encode
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification} message Justification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Justification.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.justificationType != null && Object.hasOwnProperty.call(message, "justificationType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.justificationType);
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.details);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Justification message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification} message Justification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Justification.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Justification message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification} Justification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Justification.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.justificationType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Justification message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification} Justification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Justification.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Justification message.
+                         * @function verify
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Justification.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.justificationType != null && message.hasOwnProperty("justificationType"))
+                                switch (message.justificationType) {
+                                default:
+                                    return "justificationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Justification message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification} Justification
+                         */
+                        Justification.fromObject = function fromObject(object) {
+                            if (object instanceof $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification)
+                                return object;
+                            var message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification();
+                            switch (object.justificationType) {
+                            default:
+                                if (typeof object.justificationType === "number") {
+                                    message.justificationType = object.justificationType;
+                                    break;
+                                }
+                                break;
+                            case "JUSTIFICATION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.justificationType = 0;
+                                break;
+                            case "COMPONENT_NOT_PRESENT":
+                            case 1:
+                                message.justificationType = 1;
+                                break;
+                            case "VULNERABLE_CODE_NOT_PRESENT":
+                            case 2:
+                                message.justificationType = 2;
+                                break;
+                            case "VULNERABLE_CODE_NOT_IN_EXECUTE_PATH":
+                            case 3:
+                                message.justificationType = 3;
+                                break;
+                            case "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY":
+                            case 4:
+                                message.justificationType = 4;
+                                break;
+                            case "INLINE_MITIGATIONS_ALREADY_EXIST":
+                            case 5:
+                                message.justificationType = 5;
+                                break;
+                            }
+                            if (object.details != null)
+                                message.details = String(object.details);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Justification message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification} message Justification
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Justification.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.justificationType = options.enums === String ? "JUSTIFICATION_TYPE_UNSPECIFIED" : 0;
+                                object.details = "";
+                            }
+                            if (message.justificationType != null && message.hasOwnProperty("justificationType"))
+                                object.justificationType = options.enums === String ? $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType[message.justificationType] === undefined ? message.justificationType : $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType[message.justificationType] : message.justificationType;
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Justification to JSON.
+                         * @function toJSON
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Justification.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Justification
+                         * @function getTypeUrl
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Justification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification";
+                        };
+    
+                        /**
+                         * JustificationType enum.
+                         * @name grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType
+                         * @enum {number}
+                         * @property {number} JUSTIFICATION_TYPE_UNSPECIFIED=0 JUSTIFICATION_TYPE_UNSPECIFIED value
+                         * @property {number} COMPONENT_NOT_PRESENT=1 COMPONENT_NOT_PRESENT value
+                         * @property {number} VULNERABLE_CODE_NOT_PRESENT=2 VULNERABLE_CODE_NOT_PRESENT value
+                         * @property {number} VULNERABLE_CODE_NOT_IN_EXECUTE_PATH=3 VULNERABLE_CODE_NOT_IN_EXECUTE_PATH value
+                         * @property {number} VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY=4 VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY value
+                         * @property {number} INLINE_MITIGATIONS_ALREADY_EXIST=5 INLINE_MITIGATIONS_ALREADY_EXIST value
+                         */
+                        Justification.JustificationType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "JUSTIFICATION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "COMPONENT_NOT_PRESENT"] = 1;
+                            values[valuesById[2] = "VULNERABLE_CODE_NOT_PRESENT"] = 2;
+                            values[valuesById[3] = "VULNERABLE_CODE_NOT_IN_EXECUTE_PATH"] = 3;
+                            values[valuesById[4] = "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY"] = 4;
+                            values[valuesById[5] = "INLINE_MITIGATIONS_ALREADY_EXIST"] = 5;
+                            return values;
+                        })();
+    
+                        return Justification;
+                    })();
+    
+                    Assessment.Remediation = (function() {
+    
+                        /**
+                         * Properties of a Remediation.
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                         * @interface IRemediation
+                         * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType|null} [remediationType] Remediation remediationType
+                         * @property {string|null} [details] Remediation details
+                         * @property {grafeas.v1.IRelatedUrl|null} [remediationUri] Remediation remediationUri
+                         */
+    
+                        /**
+                         * Constructs a new Remediation.
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                         * @classdesc Represents a Remediation.
+                         * @implements IRemediation
+                         * @constructor
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation=} [properties] Properties to set
+                         */
+                        function Remediation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Remediation remediationType.
+                         * @member {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType} remediationType
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @instance
+                         */
+                        Remediation.prototype.remediationType = 0;
+    
+                        /**
+                         * Remediation details.
+                         * @member {string} details
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @instance
+                         */
+                        Remediation.prototype.details = "";
+    
+                        /**
+                         * Remediation remediationUri.
+                         * @member {grafeas.v1.IRelatedUrl|null|undefined} remediationUri
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @instance
+                         */
+                        Remediation.prototype.remediationUri = null;
+    
+                        /**
+                         * Creates a new Remediation instance using the specified properties.
+                         * @function create
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation=} [properties] Properties to set
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation} Remediation instance
+                         */
+                        Remediation.create = function create(properties) {
+                            return new Remediation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Remediation message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.verify|verify} messages.
+                         * @function encode
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation} message Remediation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Remediation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.remediationType != null && Object.hasOwnProperty.call(message, "remediationType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.remediationType);
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.details);
+                            if (message.remediationUri != null && Object.hasOwnProperty.call(message, "remediationUri"))
+                                $root.grafeas.v1.RelatedUrl.encode(message.remediationUri, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Remediation message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation} message Remediation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Remediation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Remediation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation} Remediation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Remediation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.remediationType = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.remediationUri = $root.grafeas.v1.RelatedUrl.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Remediation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation} Remediation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Remediation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Remediation message.
+                         * @function verify
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Remediation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.remediationType != null && message.hasOwnProperty("remediationType"))
+                                switch (message.remediationType) {
+                                default:
+                                    return "remediationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
+                            if (message.remediationUri != null && message.hasOwnProperty("remediationUri")) {
+                                var error = $root.grafeas.v1.RelatedUrl.verify(message.remediationUri);
+                                if (error)
+                                    return "remediationUri." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Remediation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation} Remediation
+                         */
+                        Remediation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation)
+                                return object;
+                            var message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation();
+                            switch (object.remediationType) {
+                            default:
+                                if (typeof object.remediationType === "number") {
+                                    message.remediationType = object.remediationType;
+                                    break;
+                                }
+                                break;
+                            case "REMEDIATION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.remediationType = 0;
+                                break;
+                            case "MITIGATION":
+                            case 1:
+                                message.remediationType = 1;
+                                break;
+                            case "NO_FIX_PLANNED":
+                            case 2:
+                                message.remediationType = 2;
+                                break;
+                            case "NONE_AVAILABLE":
+                            case 3:
+                                message.remediationType = 3;
+                                break;
+                            case "VENDOR_FIX":
+                            case 4:
+                                message.remediationType = 4;
+                                break;
+                            case "WORKAROUND":
+                            case 5:
+                                message.remediationType = 5;
+                                break;
+                            }
+                            if (object.details != null)
+                                message.details = String(object.details);
+                            if (object.remediationUri != null) {
+                                if (typeof object.remediationUri !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.remediationUri: object expected");
+                                message.remediationUri = $root.grafeas.v1.RelatedUrl.fromObject(object.remediationUri);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Remediation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation} message Remediation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Remediation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.remediationType = options.enums === String ? "REMEDIATION_TYPE_UNSPECIFIED" : 0;
+                                object.details = "";
+                                object.remediationUri = null;
+                            }
+                            if (message.remediationType != null && message.hasOwnProperty("remediationType"))
+                                object.remediationType = options.enums === String ? $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType[message.remediationType] === undefined ? message.remediationType : $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType[message.remediationType] : message.remediationType;
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
+                            if (message.remediationUri != null && message.hasOwnProperty("remediationUri"))
+                                object.remediationUri = $root.grafeas.v1.RelatedUrl.toObject(message.remediationUri, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Remediation to JSON.
+                         * @function toJSON
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Remediation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Remediation
+                         * @function getTypeUrl
+                         * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Remediation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation";
+                        };
+    
+                        /**
+                         * RemediationType enum.
+                         * @name grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType
+                         * @enum {number}
+                         * @property {number} REMEDIATION_TYPE_UNSPECIFIED=0 REMEDIATION_TYPE_UNSPECIFIED value
+                         * @property {number} MITIGATION=1 MITIGATION value
+                         * @property {number} NO_FIX_PLANNED=2 NO_FIX_PLANNED value
+                         * @property {number} NONE_AVAILABLE=3 NONE_AVAILABLE value
+                         * @property {number} VENDOR_FIX=4 VENDOR_FIX value
+                         * @property {number} WORKAROUND=5 WORKAROUND value
+                         */
+                        Remediation.RemediationType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REMEDIATION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MITIGATION"] = 1;
+                            values[valuesById[2] = "NO_FIX_PLANNED"] = 2;
+                            values[valuesById[3] = "NONE_AVAILABLE"] = 3;
+                            values[valuesById[4] = "VENDOR_FIX"] = 4;
+                            values[valuesById[5] = "WORKAROUND"] = 5;
+                            return values;
+                        })();
+    
+                        return Remediation;
+                    })();
+    
+                    return Assessment;
+                })();
+    
+                return VulnerabilityAssessmentNote;
+            })();
+    
             v1.VulnerabilityNote = (function() {
     
                 /**
@@ -31015,6 +33031,7 @@
                  * @property {boolean|null} [fixAvailable] VulnerabilityOccurrence fixAvailable
                  * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityOccurrence cvssVersion
                  * @property {grafeas.v1.ICVSS|null} [cvssV2] VulnerabilityOccurrence cvssV2
+                 * @property {grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null} [vexAssessment] VulnerabilityOccurrence vexAssessment
                  */
     
                 /**
@@ -31131,6 +33148,14 @@
                 VulnerabilityOccurrence.prototype.cvssV2 = null;
     
                 /**
+                 * VulnerabilityOccurrence vexAssessment.
+                 * @member {grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null|undefined} vexAssessment
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.vexAssessment = null;
+    
+                /**
                  * Creates a new VulnerabilityOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityOccurrence
@@ -31180,6 +33205,8 @@
                         writer.uint32(/* id 11, wireType 0 =*/88).int32(message.cvssVersion);
                     if (message.cvssV2 != null && Object.hasOwnProperty.call(message, "cvssV2"))
                         $root.grafeas.v1.CVSS.encode(message.cvssV2, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                    if (message.vexAssessment != null && Object.hasOwnProperty.call(message, "vexAssessment"))
+                        $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.encode(message.vexAssessment, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                     return writer;
                 };
     
@@ -31264,6 +33291,10 @@
                             }
                         case 12: {
                                 message.cvssV2 = $root.grafeas.v1.CVSS.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 13: {
+                                message.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -31376,6 +33407,11 @@
                         var error = $root.grafeas.v1.CVSS.verify(message.cvssV2);
                         if (error)
                             return "cvssV2." + error;
+                    }
+                    if (message.vexAssessment != null && message.hasOwnProperty("vexAssessment")) {
+                        var error = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.verify(message.vexAssessment);
+                        if (error)
+                            return "vexAssessment." + error;
                     }
                     return null;
                 };
@@ -31516,6 +33552,11 @@
                             throw TypeError(".grafeas.v1.VulnerabilityOccurrence.cvssV2: object expected");
                         message.cvssV2 = $root.grafeas.v1.CVSS.fromObject(object.cvssV2);
                     }
+                    if (object.vexAssessment != null) {
+                        if (typeof object.vexAssessment !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityOccurrence.vexAssessment: object expected");
+                        message.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.fromObject(object.vexAssessment);
+                    }
                     return message;
                 };
     
@@ -31547,6 +33588,7 @@
                         object.cvssv3 = null;
                         object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
                         object.cvssV2 = null;
+                        object.vexAssessment = null;
                     }
                     if (message.type != null && message.hasOwnProperty("type"))
                         object.type = message.type;
@@ -31578,6 +33620,8 @@
                         object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] === undefined ? message.cvssVersion : $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
                     if (message.cvssV2 != null && message.hasOwnProperty("cvssV2"))
                         object.cvssV2 = $root.grafeas.v1.CVSS.toObject(message.cvssV2, options);
+                    if (message.vexAssessment != null && message.hasOwnProperty("vexAssessment"))
+                        object.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.toObject(message.vexAssessment, options);
                     return object;
                 };
     
@@ -32087,6 +34131,447 @@
                     };
     
                     return PackageIssue;
+                })();
+    
+                VulnerabilityOccurrence.VexAssessment = (function() {
+    
+                    /**
+                     * Properties of a VexAssessment.
+                     * @memberof grafeas.v1.VulnerabilityOccurrence
+                     * @interface IVexAssessment
+                     * @property {string|null} [cve] VexAssessment cve
+                     * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUris] VexAssessment relatedUris
+                     * @property {string|null} [noteName] VexAssessment noteName
+                     * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|null} [state] VexAssessment state
+                     * @property {Array.<string>|null} [impacts] VexAssessment impacts
+                     * @property {Array.<grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation>|null} [remediations] VexAssessment remediations
+                     * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null} [justification] VexAssessment justification
+                     */
+    
+                    /**
+                     * Constructs a new VexAssessment.
+                     * @memberof grafeas.v1.VulnerabilityOccurrence
+                     * @classdesc Represents a VexAssessment.
+                     * @implements IVexAssessment
+                     * @constructor
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IVexAssessment=} [properties] Properties to set
+                     */
+                    function VexAssessment(properties) {
+                        this.relatedUris = [];
+                        this.impacts = [];
+                        this.remediations = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * VexAssessment cve.
+                     * @member {string} cve
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.cve = "";
+    
+                    /**
+                     * VexAssessment relatedUris.
+                     * @member {Array.<grafeas.v1.IRelatedUrl>} relatedUris
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.relatedUris = $util.emptyArray;
+    
+                    /**
+                     * VexAssessment noteName.
+                     * @member {string} noteName
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.noteName = "";
+    
+                    /**
+                     * VexAssessment state.
+                     * @member {grafeas.v1.VulnerabilityAssessmentNote.Assessment.State} state
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.state = 0;
+    
+                    /**
+                     * VexAssessment impacts.
+                     * @member {Array.<string>} impacts
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.impacts = $util.emptyArray;
+    
+                    /**
+                     * VexAssessment remediations.
+                     * @member {Array.<grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation>} remediations
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.remediations = $util.emptyArray;
+    
+                    /**
+                     * VexAssessment justification.
+                     * @member {grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null|undefined} justification
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.justification = null;
+    
+                    /**
+                     * Creates a new VexAssessment instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IVexAssessment=} [properties] Properties to set
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.VexAssessment} VexAssessment instance
+                     */
+                    VexAssessment.create = function create(properties) {
+                        return new VexAssessment(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VexAssessment message. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.VexAssessment.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IVexAssessment} message VexAssessment message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VexAssessment.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.cve != null && Object.hasOwnProperty.call(message, "cve"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.cve);
+                        if (message.relatedUris != null && message.relatedUris.length)
+                            for (var i = 0; i < message.relatedUris.length; ++i)
+                                $root.grafeas.v1.RelatedUrl.encode(message.relatedUris[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.noteName != null && Object.hasOwnProperty.call(message, "noteName"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.noteName);
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                        if (message.impacts != null && message.impacts.length)
+                            for (var i = 0; i < message.impacts.length; ++i)
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.impacts[i]);
+                        if (message.remediations != null && message.remediations.length)
+                            for (var i = 0; i < message.remediations.length; ++i)
+                                $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.encode(message.remediations[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.justification != null && Object.hasOwnProperty.call(message, "justification"))
+                            $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.encode(message.justification, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VexAssessment message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.VexAssessment.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.IVexAssessment} message VexAssessment message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VexAssessment.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VexAssessment message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.VexAssessment} VexAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VexAssessment.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.cve = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.relatedUris && message.relatedUris.length))
+                                        message.relatedUris = [];
+                                    message.relatedUris.push($root.grafeas.v1.RelatedUrl.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    message.noteName = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.impacts && message.impacts.length))
+                                        message.impacts = [];
+                                    message.impacts.push(reader.string());
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.remediations && message.remediations.length))
+                                        message.remediations = [];
+                                    message.remediations.push($root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 7: {
+                                    message.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VexAssessment message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.VexAssessment} VexAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VexAssessment.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VexAssessment message.
+                     * @function verify
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VexAssessment.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.cve != null && message.hasOwnProperty("cve"))
+                            if (!$util.isString(message.cve))
+                                return "cve: string expected";
+                        if (message.relatedUris != null && message.hasOwnProperty("relatedUris")) {
+                            if (!Array.isArray(message.relatedUris))
+                                return "relatedUris: array expected";
+                            for (var i = 0; i < message.relatedUris.length; ++i) {
+                                var error = $root.grafeas.v1.RelatedUrl.verify(message.relatedUris[i]);
+                                if (error)
+                                    return "relatedUris." + error;
+                            }
+                        }
+                        if (message.noteName != null && message.hasOwnProperty("noteName"))
+                            if (!$util.isString(message.noteName))
+                                return "noteName: string expected";
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        if (message.impacts != null && message.hasOwnProperty("impacts")) {
+                            if (!Array.isArray(message.impacts))
+                                return "impacts: array expected";
+                            for (var i = 0; i < message.impacts.length; ++i)
+                                if (!$util.isString(message.impacts[i]))
+                                    return "impacts: string[] expected";
+                        }
+                        if (message.remediations != null && message.hasOwnProperty("remediations")) {
+                            if (!Array.isArray(message.remediations))
+                                return "remediations: array expected";
+                            for (var i = 0; i < message.remediations.length; ++i) {
+                                var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.verify(message.remediations[i]);
+                                if (error)
+                                    return "remediations." + error;
+                            }
+                        }
+                        if (message.justification != null && message.hasOwnProperty("justification")) {
+                            var error = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.verify(message.justification);
+                            if (error)
+                                return "justification." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VexAssessment message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.VulnerabilityOccurrence.VexAssessment} VexAssessment
+                     */
+                    VexAssessment.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment)
+                            return object;
+                        var message = new $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment();
+                        if (object.cve != null)
+                            message.cve = String(object.cve);
+                        if (object.relatedUris) {
+                            if (!Array.isArray(object.relatedUris))
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.relatedUris: array expected");
+                            message.relatedUris = [];
+                            for (var i = 0; i < object.relatedUris.length; ++i) {
+                                if (typeof object.relatedUris[i] !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.relatedUris: object expected");
+                                message.relatedUris[i] = $root.grafeas.v1.RelatedUrl.fromObject(object.relatedUris[i]);
+                            }
+                        }
+                        if (object.noteName != null)
+                            message.noteName = String(object.noteName);
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "AFFECTED":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "NOT_AFFECTED":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "FIXED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "UNDER_INVESTIGATION":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        }
+                        if (object.impacts) {
+                            if (!Array.isArray(object.impacts))
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.impacts: array expected");
+                            message.impacts = [];
+                            for (var i = 0; i < object.impacts.length; ++i)
+                                message.impacts[i] = String(object.impacts[i]);
+                        }
+                        if (object.remediations) {
+                            if (!Array.isArray(object.remediations))
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.remediations: array expected");
+                            message.remediations = [];
+                            for (var i = 0; i < object.remediations.length; ++i) {
+                                if (typeof object.remediations[i] !== "object")
+                                    throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.remediations: object expected");
+                                message.remediations[i] = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.fromObject(object.remediations[i]);
+                            }
+                        }
+                        if (object.justification != null) {
+                            if (typeof object.justification !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.justification: object expected");
+                            message.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.fromObject(object.justification);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a VexAssessment message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {grafeas.v1.VulnerabilityOccurrence.VexAssessment} message VexAssessment
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VexAssessment.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.relatedUris = [];
+                            object.impacts = [];
+                            object.remediations = [];
+                        }
+                        if (options.defaults) {
+                            object.cve = "";
+                            object.noteName = "";
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            object.justification = null;
+                        }
+                        if (message.cve != null && message.hasOwnProperty("cve"))
+                            object.cve = message.cve;
+                        if (message.relatedUris && message.relatedUris.length) {
+                            object.relatedUris = [];
+                            for (var j = 0; j < message.relatedUris.length; ++j)
+                                object.relatedUris[j] = $root.grafeas.v1.RelatedUrl.toObject(message.relatedUris[j], options);
+                        }
+                        if (message.noteName != null && message.hasOwnProperty("noteName"))
+                            object.noteName = message.noteName;
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.State[message.state] === undefined ? message.state : $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.State[message.state] : message.state;
+                        if (message.impacts && message.impacts.length) {
+                            object.impacts = [];
+                            for (var j = 0; j < message.impacts.length; ++j)
+                                object.impacts[j] = message.impacts[j];
+                        }
+                        if (message.remediations && message.remediations.length) {
+                            object.remediations = [];
+                            for (var j = 0; j < message.remediations.length; ++j)
+                                object.remediations[j] = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.toObject(message.remediations[j], options);
+                        }
+                        if (message.justification != null && message.hasOwnProperty("justification"))
+                            object.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.toObject(message.justification, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this VexAssessment to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VexAssessment.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VexAssessment
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VexAssessment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.VulnerabilityOccurrence.VexAssessment";
+                    };
+    
+                    return VexAssessment;
                 })();
     
                 return VulnerabilityOccurrence;

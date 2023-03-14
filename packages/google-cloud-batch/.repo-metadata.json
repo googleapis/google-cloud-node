@@ -1,7 +1,7 @@
 {
   "name": "batch",
   "name_pretty": "Batch",
-  "product_documentation": "cloud.google.com/batch/",
+  "product_documentation": "https://cloud.google.com/batch/docs",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/batch/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "preview",
