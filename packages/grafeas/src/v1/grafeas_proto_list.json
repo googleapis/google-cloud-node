@@ -17,5 +17,6 @@
   "../../protos/grafeas/v1/slsa_provenance.proto",
   "../../protos/grafeas/v1/slsa_provenance_zero_two.proto",
   "../../protos/grafeas/v1/upgrade.proto",
+  "../../protos/grafeas/v1/vex.proto",
   "../../protos/grafeas/v1/vulnerability.proto"
 ]
