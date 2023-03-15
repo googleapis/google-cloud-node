@@ -9306,7 +9306,8 @@ export namespace grafeas {
             ATTESTATION = 7,
             UPGRADE = 8,
             COMPLIANCE = 9,
-            DSSE_ATTESTATION = 10
+            DSSE_ATTESTATION = 10,
+            VULNERABILITY_ASSESSMENT = 11
         }
 
         /** Properties of a RelatedUrl. */
