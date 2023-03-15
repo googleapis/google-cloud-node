@@ -9846,6 +9846,372 @@ describe('v1.CloudChannelServiceClient', () => {
       );
     });
   });
+
+  describe('listEntitlementChanges', () => {
+    it('invokes listEntitlementChanges without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+      ];
+      client.innerApiCalls.listEntitlementChanges =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listEntitlementChanges(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEntitlementChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntitlementChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEntitlementChanges without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+      ];
+      client.innerApiCalls.listEntitlementChanges =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEntitlementChanges(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IEntitlementChange[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEntitlementChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntitlementChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEntitlementChanges with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEntitlementChanges = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listEntitlementChanges(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listEntitlementChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntitlementChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEntitlementChangesStream without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+      ];
+      client.descriptors.page.listEntitlementChanges.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEntitlementChangesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.channel.v1.EntitlementChange[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.channel.v1.EntitlementChange) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEntitlementChanges, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listEntitlementChangesStream with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEntitlementChanges.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listEntitlementChangesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.channel.v1.EntitlementChange[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.channel.v1.EntitlementChange) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEntitlementChanges, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEntitlementChanges without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.channel.v1.EntitlementChange()
+        ),
+      ];
+      client.descriptors.page.listEntitlementChanges.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.channel.v1.IEntitlementChange[] = [];
+      const iterable = client.listEntitlementChangesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEntitlementChanges with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.ListEntitlementChangesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementChangesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEntitlementChanges.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listEntitlementChangesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.channel.v1.IEntitlementChange[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listEntitlementChanges
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(

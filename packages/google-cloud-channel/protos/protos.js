@@ -1912,6 +1912,7 @@
                          * @property {string|null} [languageCode] Customer languageCode
                          * @property {google.cloud.channel.v1.ICloudIdentityInfo|null} [cloudIdentityInfo] Customer cloudIdentityInfo
                          * @property {string|null} [channelPartnerId] Customer channelPartnerId
+                         * @property {string|null} [correlationId] Customer correlationId
                          */
     
                         /**
@@ -2026,6 +2027,14 @@
                         Customer.prototype.channelPartnerId = "";
     
                         /**
+                         * Customer correlationId.
+                         * @member {string} correlationId
+                         * @memberof google.cloud.channel.v1.Customer
+                         * @instance
+                         */
+                        Customer.prototype.correlationId = "";
+    
+                        /**
                          * Creates a new Customer instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.Customer
@@ -2073,6 +2082,8 @@
                                 $root.google.cloud.channel.v1.CloudIdentityInfo.encode(message.cloudIdentityInfo, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.channelPartnerId != null && Object.hasOwnProperty.call(message, "channelPartnerId"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.channelPartnerId);
+                            if (message.correlationId != null && Object.hasOwnProperty.call(message, "correlationId"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.correlationId);
                             return writer;
                         };
     
@@ -2153,6 +2164,10 @@
                                     }
                                 case 13: {
                                         message.channelPartnerId = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.correlationId = reader.string();
                                         break;
                                     }
                                 default:
@@ -2236,6 +2251,9 @@
                             if (message.channelPartnerId != null && message.hasOwnProperty("channelPartnerId"))
                                 if (!$util.isString(message.channelPartnerId))
                                     return "channelPartnerId: string expected";
+                            if (message.correlationId != null && message.hasOwnProperty("correlationId"))
+                                if (!$util.isString(message.correlationId))
+                                    return "correlationId: string expected";
                             return null;
                         };
     
@@ -2290,6 +2308,8 @@
                             }
                             if (object.channelPartnerId != null)
                                 message.channelPartnerId = String(object.channelPartnerId);
+                            if (object.correlationId != null)
+                                message.correlationId = String(object.correlationId);
                             return message;
                         };
     
@@ -2319,6 +2339,7 @@
                                 object.languageCode = "";
                                 object.cloudIdentityInfo = null;
                                 object.channelPartnerId = "";
+                                object.correlationId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2344,6 +2365,8 @@
                                 object.cloudIdentityInfo = $root.google.cloud.channel.v1.CloudIdentityInfo.toObject(message.cloudIdentityInfo, options);
                             if (message.channelPartnerId != null && message.hasOwnProperty("channelPartnerId"))
                                 object.channelPartnerId = message.channelPartnerId;
+                            if (message.correlationId != null && message.hasOwnProperty("correlationId"))
+                                object.correlationId = message.correlationId;
                             return object;
                         };
     
@@ -2693,6 +2716,850 @@
                         };
     
                         return ContactInfo;
+                    })();
+    
+                    v1.EntitlementChange = (function() {
+    
+                        /**
+                         * Properties of an EntitlementChange.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IEntitlementChange
+                         * @property {google.cloud.channel.v1.Entitlement.SuspensionReason|null} [suspensionReason] EntitlementChange suspensionReason
+                         * @property {google.cloud.channel.v1.EntitlementChange.CancellationReason|null} [cancellationReason] EntitlementChange cancellationReason
+                         * @property {google.cloud.channel.v1.EntitlementChange.ActivationReason|null} [activationReason] EntitlementChange activationReason
+                         * @property {string|null} [otherChangeReason] EntitlementChange otherChangeReason
+                         * @property {string|null} [entitlement] EntitlementChange entitlement
+                         * @property {string|null} [offer] EntitlementChange offer
+                         * @property {google.cloud.channel.v1.IProvisionedService|null} [provisionedService] EntitlementChange provisionedService
+                         * @property {google.cloud.channel.v1.EntitlementChange.ChangeType|null} [changeType] EntitlementChange changeType
+                         * @property {google.protobuf.ITimestamp|null} [createTime] EntitlementChange createTime
+                         * @property {google.cloud.channel.v1.EntitlementChange.OperatorType|null} [operatorType] EntitlementChange operatorType
+                         * @property {Array.<google.cloud.channel.v1.IParameter>|null} [parameters] EntitlementChange parameters
+                         * @property {string|null} [operator] EntitlementChange operator
+                         */
+    
+                        /**
+                         * Constructs a new EntitlementChange.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an EntitlementChange.
+                         * @implements IEntitlementChange
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IEntitlementChange=} [properties] Properties to set
+                         */
+                        function EntitlementChange(properties) {
+                            this.parameters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntitlementChange suspensionReason.
+                         * @member {google.cloud.channel.v1.Entitlement.SuspensionReason|null|undefined} suspensionReason
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.suspensionReason = null;
+    
+                        /**
+                         * EntitlementChange cancellationReason.
+                         * @member {google.cloud.channel.v1.EntitlementChange.CancellationReason|null|undefined} cancellationReason
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.cancellationReason = null;
+    
+                        /**
+                         * EntitlementChange activationReason.
+                         * @member {google.cloud.channel.v1.EntitlementChange.ActivationReason|null|undefined} activationReason
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.activationReason = null;
+    
+                        /**
+                         * EntitlementChange otherChangeReason.
+                         * @member {string|null|undefined} otherChangeReason
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.otherChangeReason = null;
+    
+                        /**
+                         * EntitlementChange entitlement.
+                         * @member {string} entitlement
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.entitlement = "";
+    
+                        /**
+                         * EntitlementChange offer.
+                         * @member {string} offer
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.offer = "";
+    
+                        /**
+                         * EntitlementChange provisionedService.
+                         * @member {google.cloud.channel.v1.IProvisionedService|null|undefined} provisionedService
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.provisionedService = null;
+    
+                        /**
+                         * EntitlementChange changeType.
+                         * @member {google.cloud.channel.v1.EntitlementChange.ChangeType} changeType
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.changeType = 0;
+    
+                        /**
+                         * EntitlementChange createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.createTime = null;
+    
+                        /**
+                         * EntitlementChange operatorType.
+                         * @member {google.cloud.channel.v1.EntitlementChange.OperatorType} operatorType
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.operatorType = 0;
+    
+                        /**
+                         * EntitlementChange parameters.
+                         * @member {Array.<google.cloud.channel.v1.IParameter>} parameters
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.parameters = $util.emptyArray;
+    
+                        /**
+                         * EntitlementChange operator.
+                         * @member {string} operator
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        EntitlementChange.prototype.operator = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * EntitlementChange changeReason.
+                         * @member {"suspensionReason"|"cancellationReason"|"activationReason"|"otherChangeReason"|undefined} changeReason
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         */
+                        Object.defineProperty(EntitlementChange.prototype, "changeReason", {
+                            get: $util.oneOfGetter($oneOfFields = ["suspensionReason", "cancellationReason", "activationReason", "otherChangeReason"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new EntitlementChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {google.cloud.channel.v1.IEntitlementChange=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.EntitlementChange} EntitlementChange instance
+                         */
+                        EntitlementChange.create = function create(properties) {
+                            return new EntitlementChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntitlementChange message. Does not implicitly {@link google.cloud.channel.v1.EntitlementChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {google.cloud.channel.v1.IEntitlementChange} message EntitlementChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntitlementChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.entitlement != null && Object.hasOwnProperty.call(message, "entitlement"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.entitlement);
+                            if (message.offer != null && Object.hasOwnProperty.call(message, "offer"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.offer);
+                            if (message.provisionedService != null && Object.hasOwnProperty.call(message, "provisionedService"))
+                                $root.google.cloud.channel.v1.ProvisionedService.encode(message.provisionedService, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.changeType != null && Object.hasOwnProperty.call(message, "changeType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.changeType);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.operatorType != null && Object.hasOwnProperty.call(message, "operatorType"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.operatorType);
+                            if (message.parameters != null && message.parameters.length)
+                                for (var i = 0; i < message.parameters.length; ++i)
+                                    $root.google.cloud.channel.v1.Parameter.encode(message.parameters[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.suspensionReason != null && Object.hasOwnProperty.call(message, "suspensionReason"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.suspensionReason);
+                            if (message.cancellationReason != null && Object.hasOwnProperty.call(message, "cancellationReason"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.cancellationReason);
+                            if (message.activationReason != null && Object.hasOwnProperty.call(message, "activationReason"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.activationReason);
+                            if (message.operator != null && Object.hasOwnProperty.call(message, "operator"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.operator);
+                            if (message.otherChangeReason != null && Object.hasOwnProperty.call(message, "otherChangeReason"))
+                                writer.uint32(/* id 100, wireType 2 =*/802).string(message.otherChangeReason);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntitlementChange message, length delimited. Does not implicitly {@link google.cloud.channel.v1.EntitlementChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {google.cloud.channel.v1.IEntitlementChange} message EntitlementChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntitlementChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntitlementChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.EntitlementChange} EntitlementChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntitlementChange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.EntitlementChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 9: {
+                                        message.suspensionReason = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.cancellationReason = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.activationReason = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.otherChangeReason = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.entitlement = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.offer = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.provisionedService = $root.google.cloud.channel.v1.ProvisionedService.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.changeType = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.operatorType = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.parameters && message.parameters.length))
+                                            message.parameters = [];
+                                        message.parameters.push($root.google.cloud.channel.v1.Parameter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 12: {
+                                        message.operator = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntitlementChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.EntitlementChange} EntitlementChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntitlementChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntitlementChange message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntitlementChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.suspensionReason != null && message.hasOwnProperty("suspensionReason")) {
+                                properties.changeReason = 1;
+                                switch (message.suspensionReason) {
+                                default:
+                                    return "suspensionReason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 100:
+                                    break;
+                                }
+                            }
+                            if (message.cancellationReason != null && message.hasOwnProperty("cancellationReason")) {
+                                if (properties.changeReason === 1)
+                                    return "changeReason: multiple values";
+                                properties.changeReason = 1;
+                                switch (message.cancellationReason) {
+                                default:
+                                    return "cancellationReason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.activationReason != null && message.hasOwnProperty("activationReason")) {
+                                if (properties.changeReason === 1)
+                                    return "changeReason: multiple values";
+                                properties.changeReason = 1;
+                                switch (message.activationReason) {
+                                default:
+                                    return "activationReason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 100:
+                                    break;
+                                }
+                            }
+                            if (message.otherChangeReason != null && message.hasOwnProperty("otherChangeReason")) {
+                                if (properties.changeReason === 1)
+                                    return "changeReason: multiple values";
+                                properties.changeReason = 1;
+                                if (!$util.isString(message.otherChangeReason))
+                                    return "otherChangeReason: string expected";
+                            }
+                            if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                if (!$util.isString(message.entitlement))
+                                    return "entitlement: string expected";
+                            if (message.offer != null && message.hasOwnProperty("offer"))
+                                if (!$util.isString(message.offer))
+                                    return "offer: string expected";
+                            if (message.provisionedService != null && message.hasOwnProperty("provisionedService")) {
+                                var error = $root.google.cloud.channel.v1.ProvisionedService.verify(message.provisionedService);
+                                if (error)
+                                    return "provisionedService." + error;
+                            }
+                            if (message.changeType != null && message.hasOwnProperty("changeType"))
+                                switch (message.changeType) {
+                                default:
+                                    return "changeType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.operatorType != null && message.hasOwnProperty("operatorType"))
+                                switch (message.operatorType) {
+                                default:
+                                    return "operatorType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                if (!Array.isArray(message.parameters))
+                                    return "parameters: array expected";
+                                for (var i = 0; i < message.parameters.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.Parameter.verify(message.parameters[i]);
+                                    if (error)
+                                        return "parameters." + error;
+                                }
+                            }
+                            if (message.operator != null && message.hasOwnProperty("operator"))
+                                if (!$util.isString(message.operator))
+                                    return "operator: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntitlementChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.EntitlementChange} EntitlementChange
+                         */
+                        EntitlementChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.EntitlementChange)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.EntitlementChange();
+                            switch (object.suspensionReason) {
+                            default:
+                                if (typeof object.suspensionReason === "number") {
+                                    message.suspensionReason = object.suspensionReason;
+                                    break;
+                                }
+                                break;
+                            case "SUSPENSION_REASON_UNSPECIFIED":
+                            case 0:
+                                message.suspensionReason = 0;
+                                break;
+                            case "RESELLER_INITIATED":
+                            case 1:
+                                message.suspensionReason = 1;
+                                break;
+                            case "TRIAL_ENDED":
+                            case 2:
+                                message.suspensionReason = 2;
+                                break;
+                            case "RENEWAL_WITH_TYPE_CANCEL":
+                            case 3:
+                                message.suspensionReason = 3;
+                                break;
+                            case "PENDING_TOS_ACCEPTANCE":
+                            case 4:
+                                message.suspensionReason = 4;
+                                break;
+                            case "OTHER":
+                            case 100:
+                                message.suspensionReason = 100;
+                                break;
+                            }
+                            switch (object.cancellationReason) {
+                            default:
+                                if (typeof object.cancellationReason === "number") {
+                                    message.cancellationReason = object.cancellationReason;
+                                    break;
+                                }
+                                break;
+                            case "CANCELLATION_REASON_UNSPECIFIED":
+                            case 0:
+                                message.cancellationReason = 0;
+                                break;
+                            case "SERVICE_TERMINATED":
+                            case 1:
+                                message.cancellationReason = 1;
+                                break;
+                            case "RELATIONSHIP_ENDED":
+                            case 2:
+                                message.cancellationReason = 2;
+                                break;
+                            case "PARTIAL_TRANSFER":
+                            case 3:
+                                message.cancellationReason = 3;
+                                break;
+                            }
+                            switch (object.activationReason) {
+                            default:
+                                if (typeof object.activationReason === "number") {
+                                    message.activationReason = object.activationReason;
+                                    break;
+                                }
+                                break;
+                            case "ACTIVATION_REASON_UNSPECIFIED":
+                            case 0:
+                                message.activationReason = 0;
+                                break;
+                            case "RESELLER_REVOKED_SUSPENSION":
+                            case 1:
+                                message.activationReason = 1;
+                                break;
+                            case "CUSTOMER_ACCEPTED_PENDING_TOS":
+                            case 2:
+                                message.activationReason = 2;
+                                break;
+                            case "RENEWAL_SETTINGS_CHANGED":
+                            case 3:
+                                message.activationReason = 3;
+                                break;
+                            case "OTHER_ACTIVATION_REASON":
+                            case 100:
+                                message.activationReason = 100;
+                                break;
+                            }
+                            if (object.otherChangeReason != null)
+                                message.otherChangeReason = String(object.otherChangeReason);
+                            if (object.entitlement != null)
+                                message.entitlement = String(object.entitlement);
+                            if (object.offer != null)
+                                message.offer = String(object.offer);
+                            if (object.provisionedService != null) {
+                                if (typeof object.provisionedService !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.EntitlementChange.provisionedService: object expected");
+                                message.provisionedService = $root.google.cloud.channel.v1.ProvisionedService.fromObject(object.provisionedService);
+                            }
+                            switch (object.changeType) {
+                            default:
+                                if (typeof object.changeType === "number") {
+                                    message.changeType = object.changeType;
+                                    break;
+                                }
+                                break;
+                            case "CHANGE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.changeType = 0;
+                                break;
+                            case "CREATED":
+                            case 1:
+                                message.changeType = 1;
+                                break;
+                            case "PRICE_PLAN_SWITCHED":
+                            case 3:
+                                message.changeType = 3;
+                                break;
+                            case "COMMITMENT_CHANGED":
+                            case 4:
+                                message.changeType = 4;
+                                break;
+                            case "RENEWED":
+                            case 5:
+                                message.changeType = 5;
+                                break;
+                            case "SUSPENDED":
+                            case 6:
+                                message.changeType = 6;
+                                break;
+                            case "ACTIVATED":
+                            case 7:
+                                message.changeType = 7;
+                                break;
+                            case "CANCELLED":
+                            case 8:
+                                message.changeType = 8;
+                                break;
+                            case "SKU_CHANGED":
+                            case 9:
+                                message.changeType = 9;
+                                break;
+                            case "RENEWAL_SETTING_CHANGED":
+                            case 10:
+                                message.changeType = 10;
+                                break;
+                            case "PAID_SUBSCRIPTION_STARTED":
+                            case 11:
+                                message.changeType = 11;
+                                break;
+                            case "LICENSE_CAP_CHANGED":
+                            case 12:
+                                message.changeType = 12;
+                                break;
+                            case "SUSPENSION_DETAILS_CHANGED":
+                            case 13:
+                                message.changeType = 13;
+                                break;
+                            case "TRIAL_END_DATE_EXTENDED":
+                            case 14:
+                                message.changeType = 14;
+                                break;
+                            case "TRIAL_STARTED":
+                            case 15:
+                                message.changeType = 15;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.EntitlementChange.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            switch (object.operatorType) {
+                            default:
+                                if (typeof object.operatorType === "number") {
+                                    message.operatorType = object.operatorType;
+                                    break;
+                                }
+                                break;
+                            case "OPERATOR_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.operatorType = 0;
+                                break;
+                            case "CUSTOMER_SERVICE_REPRESENTATIVE":
+                            case 1:
+                                message.operatorType = 1;
+                                break;
+                            case "SYSTEM":
+                            case 2:
+                                message.operatorType = 2;
+                                break;
+                            case "CUSTOMER":
+                            case 3:
+                                message.operatorType = 3;
+                                break;
+                            case "RESELLER":
+                            case 4:
+                                message.operatorType = 4;
+                                break;
+                            }
+                            if (object.parameters) {
+                                if (!Array.isArray(object.parameters))
+                                    throw TypeError(".google.cloud.channel.v1.EntitlementChange.parameters: array expected");
+                                message.parameters = [];
+                                for (var i = 0; i < object.parameters.length; ++i) {
+                                    if (typeof object.parameters[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.EntitlementChange.parameters: object expected");
+                                    message.parameters[i] = $root.google.cloud.channel.v1.Parameter.fromObject(object.parameters[i]);
+                                }
+                            }
+                            if (object.operator != null)
+                                message.operator = String(object.operator);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntitlementChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {google.cloud.channel.v1.EntitlementChange} message EntitlementChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntitlementChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.parameters = [];
+                            if (options.defaults) {
+                                object.entitlement = "";
+                                object.offer = "";
+                                object.provisionedService = null;
+                                object.changeType = options.enums === String ? "CHANGE_TYPE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.operatorType = options.enums === String ? "OPERATOR_TYPE_UNSPECIFIED" : 0;
+                                object.operator = "";
+                            }
+                            if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                object.entitlement = message.entitlement;
+                            if (message.offer != null && message.hasOwnProperty("offer"))
+                                object.offer = message.offer;
+                            if (message.provisionedService != null && message.hasOwnProperty("provisionedService"))
+                                object.provisionedService = $root.google.cloud.channel.v1.ProvisionedService.toObject(message.provisionedService, options);
+                            if (message.changeType != null && message.hasOwnProperty("changeType"))
+                                object.changeType = options.enums === String ? $root.google.cloud.channel.v1.EntitlementChange.ChangeType[message.changeType] === undefined ? message.changeType : $root.google.cloud.channel.v1.EntitlementChange.ChangeType[message.changeType] : message.changeType;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.operatorType != null && message.hasOwnProperty("operatorType"))
+                                object.operatorType = options.enums === String ? $root.google.cloud.channel.v1.EntitlementChange.OperatorType[message.operatorType] === undefined ? message.operatorType : $root.google.cloud.channel.v1.EntitlementChange.OperatorType[message.operatorType] : message.operatorType;
+                            if (message.parameters && message.parameters.length) {
+                                object.parameters = [];
+                                for (var j = 0; j < message.parameters.length; ++j)
+                                    object.parameters[j] = $root.google.cloud.channel.v1.Parameter.toObject(message.parameters[j], options);
+                            }
+                            if (message.suspensionReason != null && message.hasOwnProperty("suspensionReason")) {
+                                object.suspensionReason = options.enums === String ? $root.google.cloud.channel.v1.Entitlement.SuspensionReason[message.suspensionReason] === undefined ? message.suspensionReason : $root.google.cloud.channel.v1.Entitlement.SuspensionReason[message.suspensionReason] : message.suspensionReason;
+                                if (options.oneofs)
+                                    object.changeReason = "suspensionReason";
+                            }
+                            if (message.cancellationReason != null && message.hasOwnProperty("cancellationReason")) {
+                                object.cancellationReason = options.enums === String ? $root.google.cloud.channel.v1.EntitlementChange.CancellationReason[message.cancellationReason] === undefined ? message.cancellationReason : $root.google.cloud.channel.v1.EntitlementChange.CancellationReason[message.cancellationReason] : message.cancellationReason;
+                                if (options.oneofs)
+                                    object.changeReason = "cancellationReason";
+                            }
+                            if (message.activationReason != null && message.hasOwnProperty("activationReason")) {
+                                object.activationReason = options.enums === String ? $root.google.cloud.channel.v1.EntitlementChange.ActivationReason[message.activationReason] === undefined ? message.activationReason : $root.google.cloud.channel.v1.EntitlementChange.ActivationReason[message.activationReason] : message.activationReason;
+                                if (options.oneofs)
+                                    object.changeReason = "activationReason";
+                            }
+                            if (message.operator != null && message.hasOwnProperty("operator"))
+                                object.operator = message.operator;
+                            if (message.otherChangeReason != null && message.hasOwnProperty("otherChangeReason")) {
+                                object.otherChangeReason = message.otherChangeReason;
+                                if (options.oneofs)
+                                    object.changeReason = "otherChangeReason";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntitlementChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntitlementChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EntitlementChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.EntitlementChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EntitlementChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.EntitlementChange";
+                        };
+    
+                        /**
+                         * ChangeType enum.
+                         * @name google.cloud.channel.v1.EntitlementChange.ChangeType
+                         * @enum {number}
+                         * @property {number} CHANGE_TYPE_UNSPECIFIED=0 CHANGE_TYPE_UNSPECIFIED value
+                         * @property {number} CREATED=1 CREATED value
+                         * @property {number} PRICE_PLAN_SWITCHED=3 PRICE_PLAN_SWITCHED value
+                         * @property {number} COMMITMENT_CHANGED=4 COMMITMENT_CHANGED value
+                         * @property {number} RENEWED=5 RENEWED value
+                         * @property {number} SUSPENDED=6 SUSPENDED value
+                         * @property {number} ACTIVATED=7 ACTIVATED value
+                         * @property {number} CANCELLED=8 CANCELLED value
+                         * @property {number} SKU_CHANGED=9 SKU_CHANGED value
+                         * @property {number} RENEWAL_SETTING_CHANGED=10 RENEWAL_SETTING_CHANGED value
+                         * @property {number} PAID_SUBSCRIPTION_STARTED=11 PAID_SUBSCRIPTION_STARTED value
+                         * @property {number} LICENSE_CAP_CHANGED=12 LICENSE_CAP_CHANGED value
+                         * @property {number} SUSPENSION_DETAILS_CHANGED=13 SUSPENSION_DETAILS_CHANGED value
+                         * @property {number} TRIAL_END_DATE_EXTENDED=14 TRIAL_END_DATE_EXTENDED value
+                         * @property {number} TRIAL_STARTED=15 TRIAL_STARTED value
+                         */
+                        EntitlementChange.ChangeType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CHANGE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATED"] = 1;
+                            values[valuesById[3] = "PRICE_PLAN_SWITCHED"] = 3;
+                            values[valuesById[4] = "COMMITMENT_CHANGED"] = 4;
+                            values[valuesById[5] = "RENEWED"] = 5;
+                            values[valuesById[6] = "SUSPENDED"] = 6;
+                            values[valuesById[7] = "ACTIVATED"] = 7;
+                            values[valuesById[8] = "CANCELLED"] = 8;
+                            values[valuesById[9] = "SKU_CHANGED"] = 9;
+                            values[valuesById[10] = "RENEWAL_SETTING_CHANGED"] = 10;
+                            values[valuesById[11] = "PAID_SUBSCRIPTION_STARTED"] = 11;
+                            values[valuesById[12] = "LICENSE_CAP_CHANGED"] = 12;
+                            values[valuesById[13] = "SUSPENSION_DETAILS_CHANGED"] = 13;
+                            values[valuesById[14] = "TRIAL_END_DATE_EXTENDED"] = 14;
+                            values[valuesById[15] = "TRIAL_STARTED"] = 15;
+                            return values;
+                        })();
+    
+                        /**
+                         * OperatorType enum.
+                         * @name google.cloud.channel.v1.EntitlementChange.OperatorType
+                         * @enum {number}
+                         * @property {number} OPERATOR_TYPE_UNSPECIFIED=0 OPERATOR_TYPE_UNSPECIFIED value
+                         * @property {number} CUSTOMER_SERVICE_REPRESENTATIVE=1 CUSTOMER_SERVICE_REPRESENTATIVE value
+                         * @property {number} SYSTEM=2 SYSTEM value
+                         * @property {number} CUSTOMER=3 CUSTOMER value
+                         * @property {number} RESELLER=4 RESELLER value
+                         */
+                        EntitlementChange.OperatorType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "OPERATOR_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CUSTOMER_SERVICE_REPRESENTATIVE"] = 1;
+                            values[valuesById[2] = "SYSTEM"] = 2;
+                            values[valuesById[3] = "CUSTOMER"] = 3;
+                            values[valuesById[4] = "RESELLER"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * CancellationReason enum.
+                         * @name google.cloud.channel.v1.EntitlementChange.CancellationReason
+                         * @enum {number}
+                         * @property {number} CANCELLATION_REASON_UNSPECIFIED=0 CANCELLATION_REASON_UNSPECIFIED value
+                         * @property {number} SERVICE_TERMINATED=1 SERVICE_TERMINATED value
+                         * @property {number} RELATIONSHIP_ENDED=2 RELATIONSHIP_ENDED value
+                         * @property {number} PARTIAL_TRANSFER=3 PARTIAL_TRANSFER value
+                         */
+                        EntitlementChange.CancellationReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CANCELLATION_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVICE_TERMINATED"] = 1;
+                            values[valuesById[2] = "RELATIONSHIP_ENDED"] = 2;
+                            values[valuesById[3] = "PARTIAL_TRANSFER"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ActivationReason enum.
+                         * @name google.cloud.channel.v1.EntitlementChange.ActivationReason
+                         * @enum {number}
+                         * @property {number} ACTIVATION_REASON_UNSPECIFIED=0 ACTIVATION_REASON_UNSPECIFIED value
+                         * @property {number} RESELLER_REVOKED_SUSPENSION=1 RESELLER_REVOKED_SUSPENSION value
+                         * @property {number} CUSTOMER_ACCEPTED_PENDING_TOS=2 CUSTOMER_ACCEPTED_PENDING_TOS value
+                         * @property {number} RENEWAL_SETTINGS_CHANGED=3 RENEWAL_SETTINGS_CHANGED value
+                         * @property {number} OTHER_ACTIVATION_REASON=100 OTHER_ACTIVATION_REASON value
+                         */
+                        EntitlementChange.ActivationReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTIVATION_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RESELLER_REVOKED_SUSPENSION"] = 1;
+                            values[valuesById[2] = "CUSTOMER_ACCEPTED_PENDING_TOS"] = 2;
+                            values[valuesById[3] = "RENEWAL_SETTINGS_CHANGED"] = 3;
+                            values[valuesById[100] = "OTHER_ACTIVATION_REASON"] = 100;
+                            return values;
+                        })();
+    
+                        return EntitlementChange;
                     })();
     
                     v1.Entitlement = (function() {
@@ -18216,6 +19083,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|listEntitlementChanges}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ListEntitlementChangesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListEntitlementChangesResponse} [response] ListEntitlementChangesResponse
+                         */
+    
+                        /**
+                         * Calls ListEntitlementChanges.
+                         * @function listEntitlementChanges
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesRequest} request ListEntitlementChangesRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ListEntitlementChangesCallback} callback Node-style callback called with the error, if any, and ListEntitlementChangesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.listEntitlementChanges = function listEntitlementChanges(request, callback) {
+                            return this.rpcCall(listEntitlementChanges, $root.google.cloud.channel.v1.ListEntitlementChangesRequest, $root.google.cloud.channel.v1.ListEntitlementChangesResponse, request, callback);
+                        }, "name", { value: "ListEntitlementChanges" });
+    
+                        /**
+                         * Calls ListEntitlementChanges.
+                         * @function listEntitlementChanges
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesRequest} request ListEntitlementChangesRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListEntitlementChangesResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudChannelService;
                     })();
     
@@ -31251,6 +32151,7 @@
                          * @property {string|null} [pageToken] ListOffersRequest pageToken
                          * @property {string|null} [filter] ListOffersRequest filter
                          * @property {string|null} [languageCode] ListOffersRequest languageCode
+                         * @property {boolean|null} [showFutureOffers] ListOffersRequest showFutureOffers
                          */
     
                         /**
@@ -31309,6 +32210,14 @@
                         ListOffersRequest.prototype.languageCode = "";
     
                         /**
+                         * ListOffersRequest showFutureOffers.
+                         * @member {boolean} showFutureOffers
+                         * @memberof google.cloud.channel.v1.ListOffersRequest
+                         * @instance
+                         */
+                        ListOffersRequest.prototype.showFutureOffers = false;
+    
+                        /**
                          * Creates a new ListOffersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.ListOffersRequest
@@ -31342,6 +32251,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.languageCode);
+                            if (message.showFutureOffers != null && Object.hasOwnProperty.call(message, "showFutureOffers"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.showFutureOffers);
                             return writer;
                         };
     
@@ -31396,6 +32307,10 @@
                                         message.languageCode = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.showFutureOffers = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31446,6 +32361,9 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
+                            if (message.showFutureOffers != null && message.hasOwnProperty("showFutureOffers"))
+                                if (typeof message.showFutureOffers !== "boolean")
+                                    return "showFutureOffers: boolean expected";
                             return null;
                         };
     
@@ -31471,6 +32389,8 @@
                                 message.filter = String(object.filter);
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
+                            if (object.showFutureOffers != null)
+                                message.showFutureOffers = Boolean(object.showFutureOffers);
                             return message;
                         };
     
@@ -31493,6 +32413,7 @@
                                 object.pageToken = "";
                                 object.filter = "";
                                 object.languageCode = "";
+                                object.showFutureOffers = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -31504,6 +32425,8 @@
                                 object.filter = message.filter;
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
+                            if (message.showFutureOffers != null && message.hasOwnProperty("showFutureOffers"))
+                                object.showFutureOffers = message.showFutureOffers;
                             return object;
                         };
     
@@ -35683,6 +36606,527 @@
                         };
     
                         return ListSubscribersResponse;
+                    })();
+    
+                    v1.ListEntitlementChangesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListEntitlementChangesRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListEntitlementChangesRequest
+                         * @property {string|null} [parent] ListEntitlementChangesRequest parent
+                         * @property {number|null} [pageSize] ListEntitlementChangesRequest pageSize
+                         * @property {string|null} [pageToken] ListEntitlementChangesRequest pageToken
+                         * @property {string|null} [filter] ListEntitlementChangesRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListEntitlementChangesRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListEntitlementChangesRequest.
+                         * @implements IListEntitlementChangesRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesRequest=} [properties] Properties to set
+                         */
+                        function ListEntitlementChangesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEntitlementChangesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @instance
+                         */
+                        ListEntitlementChangesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListEntitlementChangesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @instance
+                         */
+                        ListEntitlementChangesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListEntitlementChangesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @instance
+                         */
+                        ListEntitlementChangesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListEntitlementChangesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @instance
+                         */
+                        ListEntitlementChangesRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListEntitlementChangesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesRequest} ListEntitlementChangesRequest instance
+                         */
+                        ListEntitlementChangesRequest.create = function create(properties) {
+                            return new ListEntitlementChangesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEntitlementChangesRequest message. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesRequest} message ListEntitlementChangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEntitlementChangesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEntitlementChangesRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesRequest} message ListEntitlementChangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEntitlementChangesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEntitlementChangesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesRequest} ListEntitlementChangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEntitlementChangesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListEntitlementChangesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEntitlementChangesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesRequest} ListEntitlementChangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEntitlementChangesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEntitlementChangesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEntitlementChangesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEntitlementChangesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesRequest} ListEntitlementChangesRequest
+                         */
+                        ListEntitlementChangesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListEntitlementChangesRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListEntitlementChangesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEntitlementChangesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListEntitlementChangesRequest} message ListEntitlementChangesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEntitlementChangesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEntitlementChangesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEntitlementChangesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEntitlementChangesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEntitlementChangesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListEntitlementChangesRequest";
+                        };
+    
+                        return ListEntitlementChangesRequest;
+                    })();
+    
+                    v1.ListEntitlementChangesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListEntitlementChangesResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListEntitlementChangesResponse
+                         * @property {Array.<google.cloud.channel.v1.IEntitlementChange>|null} [entitlementChanges] ListEntitlementChangesResponse entitlementChanges
+                         * @property {string|null} [nextPageToken] ListEntitlementChangesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListEntitlementChangesResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListEntitlementChangesResponse.
+                         * @implements IListEntitlementChangesResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesResponse=} [properties] Properties to set
+                         */
+                        function ListEntitlementChangesResponse(properties) {
+                            this.entitlementChanges = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEntitlementChangesResponse entitlementChanges.
+                         * @member {Array.<google.cloud.channel.v1.IEntitlementChange>} entitlementChanges
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @instance
+                         */
+                        ListEntitlementChangesResponse.prototype.entitlementChanges = $util.emptyArray;
+    
+                        /**
+                         * ListEntitlementChangesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @instance
+                         */
+                        ListEntitlementChangesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListEntitlementChangesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesResponse} ListEntitlementChangesResponse instance
+                         */
+                        ListEntitlementChangesResponse.create = function create(properties) {
+                            return new ListEntitlementChangesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEntitlementChangesResponse message. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesResponse} message ListEntitlementChangesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEntitlementChangesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.entitlementChanges != null && message.entitlementChanges.length)
+                                for (var i = 0; i < message.entitlementChanges.length; ++i)
+                                    $root.google.cloud.channel.v1.EntitlementChange.encode(message.entitlementChanges[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEntitlementChangesResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListEntitlementChangesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListEntitlementChangesResponse} message ListEntitlementChangesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEntitlementChangesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEntitlementChangesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesResponse} ListEntitlementChangesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEntitlementChangesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListEntitlementChangesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.entitlementChanges && message.entitlementChanges.length))
+                                            message.entitlementChanges = [];
+                                        message.entitlementChanges.push($root.google.cloud.channel.v1.EntitlementChange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEntitlementChangesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesResponse} ListEntitlementChangesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEntitlementChangesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEntitlementChangesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEntitlementChangesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.entitlementChanges != null && message.hasOwnProperty("entitlementChanges")) {
+                                if (!Array.isArray(message.entitlementChanges))
+                                    return "entitlementChanges: array expected";
+                                for (var i = 0; i < message.entitlementChanges.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.EntitlementChange.verify(message.entitlementChanges[i]);
+                                    if (error)
+                                        return "entitlementChanges." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEntitlementChangesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListEntitlementChangesResponse} ListEntitlementChangesResponse
+                         */
+                        ListEntitlementChangesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListEntitlementChangesResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListEntitlementChangesResponse();
+                            if (object.entitlementChanges) {
+                                if (!Array.isArray(object.entitlementChanges))
+                                    throw TypeError(".google.cloud.channel.v1.ListEntitlementChangesResponse.entitlementChanges: array expected");
+                                message.entitlementChanges = [];
+                                for (var i = 0; i < object.entitlementChanges.length; ++i) {
+                                    if (typeof object.entitlementChanges[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.ListEntitlementChangesResponse.entitlementChanges: object expected");
+                                    message.entitlementChanges[i] = $root.google.cloud.channel.v1.EntitlementChange.fromObject(object.entitlementChanges[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEntitlementChangesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListEntitlementChangesResponse} message ListEntitlementChangesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEntitlementChangesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.entitlementChanges = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.entitlementChanges && message.entitlementChanges.length) {
+                                object.entitlementChanges = [];
+                                for (var j = 0; j < message.entitlementChanges.length; ++j)
+                                    object.entitlementChanges[j] = $root.google.cloud.channel.v1.EntitlementChange.toObject(message.entitlementChanges[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEntitlementChangesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEntitlementChangesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEntitlementChangesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListEntitlementChangesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEntitlementChangesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListEntitlementChangesResponse";
+                        };
+    
+                        return ListEntitlementChangesResponse;
                     })();
     
                     v1.CustomerEvent = (function() {

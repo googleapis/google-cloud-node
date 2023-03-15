@@ -302,6 +302,11 @@ export class CloudChannelServiceClient {
         'nextPageToken',
         'serviceAccounts'
       ),
+      listEntitlementChanges: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'entitlementChanges'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -567,6 +572,7 @@ export class CloudChannelServiceClient {
       'registerSubscriber',
       'unregisterSubscriber',
       'listSubscribers',
+      'listEntitlementChanges',
     ];
     for (const methodName of cloudChannelServiceStubMethods) {
       const callPromise = this.cloudChannelServiceStub.then(
@@ -7333,6 +7339,11 @@ export class CloudChannelServiceClient {
    *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
+   * @param {boolean} [request.showFutureOffers]
+   *   Optional. A boolean flag that determines if a response returns future
+   *   offers 30 days from now. If the show_future_offers is true, the response
+   *   will only contain offers that are scheduled to be available 30 days from
+   *   now.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7436,6 +7447,11 @@ export class CloudChannelServiceClient {
    *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
+   * @param {boolean} [request.showFutureOffers]
+   *   Optional. A boolean flag that determines if a response returns future
+   *   offers 30 days from now. If the show_future_offers is true, the response
+   *   will only contain offers that are scheduled to be available 30 days from
+   *   now.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -7495,6 +7511,11 @@ export class CloudChannelServiceClient {
    *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
+   * @param {boolean} [request.showFutureOffers]
+   *   Optional. A boolean flag that determines if a response returns future
+   *   offers 30 days from now. If the show_future_offers is true, the response
+   *   will only contain offers that are scheduled to be available 30 days from
+   *   now.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -8214,6 +8235,262 @@ export class CloudChannelServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<string>;
+  }
+  /**
+   * List entitlement history.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The reseller account making the request and the
+   * provided reseller account are different.
+   * * INVALID_ARGUMENT: Missing or invalid required fields in the request.
+   * * NOT_FOUND: The parent resource doesn't exist. Usually the result of an
+   * invalid name parameter.
+   * * INTERNAL: Any non-user error related to a technical issue in the backend.
+   * In this case, contact CloudChannel support.
+   * * UNKNOWN: Any non-user error related to a technical issue in the backend.
+   * In this case, contact Cloud Channel support.
+   *
+   * Return value:
+   * List of {@link google.cloud.channel.v1.EntitlementChange|EntitlementChange}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the entitlement for which to list
+   *   entitlement changes. The `-` wildcard may be used to match entitlements
+   *   across a customer. Formats:
+   *
+   *     * accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
+   *     * accounts/{account_id}/customers/{customer_id}/entitlements/-
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of entitlement changes to return. The service
+   *   may return fewer than this value. If unspecified, returns at most 10
+   *   entitlement changes. The maximum value is 50; the server will coerce values
+   *   above 50.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the list results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.channel.v1.EntitlementChange | EntitlementChange}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEntitlementChangesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEntitlementChanges(
+    request?: protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IEntitlementChange[],
+      protos.google.cloud.channel.v1.IListEntitlementChangesRequest | null,
+      protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+    ]
+  >;
+  listEntitlementChanges(
+    request: protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+      | protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IEntitlementChange
+    >
+  ): void;
+  listEntitlementChanges(
+    request: protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+      | protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IEntitlementChange
+    >
+  ): void;
+  listEntitlementChanges(
+    request?: protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+          | protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IEntitlementChange
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+      | protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IEntitlementChange
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IEntitlementChange[],
+      protos.google.cloud.channel.v1.IListEntitlementChangesRequest | null,
+      protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEntitlementChanges(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the entitlement for which to list
+   *   entitlement changes. The `-` wildcard may be used to match entitlements
+   *   across a customer. Formats:
+   *
+   *     * accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
+   *     * accounts/{account_id}/customers/{customer_id}/entitlements/-
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of entitlement changes to return. The service
+   *   may return fewer than this value. If unspecified, returns at most 10
+   *   entitlement changes. The maximum value is 50; the server will coerce values
+   *   above 50.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the list results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.channel.v1.EntitlementChange | EntitlementChange} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEntitlementChangesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEntitlementChangesStream(
+    request?: protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEntitlementChanges'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEntitlementChanges.createStream(
+      this.innerApiCalls.listEntitlementChanges as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEntitlementChanges`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the entitlement for which to list
+   *   entitlement changes. The `-` wildcard may be used to match entitlements
+   *   across a customer. Formats:
+   *
+   *     * accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
+   *     * accounts/{account_id}/customers/{customer_id}/entitlements/-
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of entitlement changes to return. The service
+   *   may return fewer than this value. If unspecified, returns at most 10
+   *   entitlement changes. The maximum value is 50; the server will coerce values
+   *   above 50.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges|CloudChannelService.ListEntitlementChanges}
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the list results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.channel.v1.EntitlementChange | EntitlementChange}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_entitlement_changes.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListEntitlementChanges_async
+   */
+  listEntitlementChangesAsync(
+    request?: protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.channel.v1.IEntitlementChange> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEntitlementChanges'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEntitlementChanges.asyncIterate(
+      this.innerApiCalls['listEntitlementChanges'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.channel.v1.IEntitlementChange>;
   }
   /**
    * Gets the latest state of a long-running operation.  Clients can use this
