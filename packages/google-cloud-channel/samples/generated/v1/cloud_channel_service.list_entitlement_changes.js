@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START cloudchannel_v1_generated_CloudChannelService_ListOffers_async]
+  // [START cloudchannel_v1_generated_CloudChannelService_ListEntitlementChanges_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,33 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the reseller account from which to list
-   *  Offers. Parent uses the format: accounts/{account_id}.
+   *  Required. The resource name of the entitlement for which to list
+   *  entitlement changes. The `-` wildcard may be used to match entitlements
+   *  across a customer. Formats:
+   *    * accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
+   *    * accounts/{account_id}/customers/{customer_id}/entitlements/-
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server might return fewer results than
-   *  requested. If unspecified, returns at most 500 Offers. The maximum value is
-   *  1000; the server will coerce values above 1000.
+   *  Optional. The maximum number of entitlement changes to return. The service
+   *  may return fewer than this value. If unspecified, returns at most 10
+   *  entitlement changes. The maximum value is 50; the server will coerce values
+   *  above 50.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A token for a page of results other than the first page.
+   *  Optional. A page token, received from a previous
+   *  CloudChannelService.ListEntitlementChanges google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges 
+   *  call. Provide this to retrieve the subsequent page.
+   *  When paginating, all other parameters provided to
+   *  CloudChannelService.ListEntitlementChanges google.cloud.channel.v1.CloudChannelService.ListEntitlementChanges 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. The expression to filter results by name (name of
-   *  the Offer), sku.name (name of the SKU), or sku.product.name (name of the
-   *  Product).
-   *  Example 1: sku.product.name=products/p1 AND sku.name!=products/p1/skus/s1
-   *  Example 2: name=accounts/a1/offers/o1
+   *  Optional. Filters applied to the list results.
    */
   // const filter = 'abc123'
-  /**
-   *  Optional. The BCP-47 language code. For example, "en-US". The
-   *  response will localize in the corresponding language code, if specified.
-   *  The default value is "en-US".
-   */
-  // const languageCode = 'abc123'
-  /**
-   *  Optional. A boolean flag that determines if a response returns future
-   *  offers 30 days from now. If the show_future_offers is true, the response
-   *  will only contain offers that are scheduled to be available 30 days from
-   *  now.
-   */
-  // const showFutureOffers = true
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
@@ -71,21 +63,21 @@ function main(parent) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function callListOffers() {
+  async function callListEntitlementChanges() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await channelClient.listOffersAsync(request);
+    const iterable = await channelClient.listEntitlementChangesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListOffers();
-  // [END cloudchannel_v1_generated_CloudChannelService_ListOffers_async]
+  callListEntitlementChanges();
+  // [END cloudchannel_v1_generated_CloudChannelService_ListEntitlementChanges_async]
 }
 
 process.on('unhandledRejection', err => {

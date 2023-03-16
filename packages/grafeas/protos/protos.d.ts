@@ -435,7 +435,8 @@ export namespace grafeas {
             ATTESTATION = 7,
             UPGRADE = 8,
             COMPLIANCE = 9,
-            DSSE_ATTESTATION = 10
+            DSSE_ATTESTATION = 10,
+            VULNERABILITY_ASSESSMENT = 11
         }
 
         /** Properties of a RelatedUrl. */
@@ -7591,6 +7592,9 @@ export namespace grafeas {
 
             /** Note dsseAttestation */
             dsseAttestation?: (grafeas.v1.IDSSEAttestationNote|null);
+
+            /** Note vulnerabilityAssessment */
+            vulnerabilityAssessment?: (grafeas.v1.IVulnerabilityAssessmentNote|null);
         }
 
         /** Represents a Note. */
@@ -7659,8 +7663,11 @@ export namespace grafeas {
             /** Note dsseAttestation. */
             public dsseAttestation?: (grafeas.v1.IDSSEAttestationNote|null);
 
+            /** Note vulnerabilityAssessment. */
+            public vulnerabilityAssessment?: (grafeas.v1.IVulnerabilityAssessmentNote|null);
+
             /** Note type. */
-            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation");
+            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"vulnerabilityAssessment");
 
             /**
              * Creates a new Note instance using the specified properties.
@@ -11497,6 +11504,752 @@ export namespace grafeas {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a VulnerabilityAssessmentNote. */
+        interface IVulnerabilityAssessmentNote {
+
+            /** VulnerabilityAssessmentNote title */
+            title?: (string|null);
+
+            /** VulnerabilityAssessmentNote shortDescription */
+            shortDescription?: (string|null);
+
+            /** VulnerabilityAssessmentNote longDescription */
+            longDescription?: (string|null);
+
+            /** VulnerabilityAssessmentNote languageCode */
+            languageCode?: (string|null);
+
+            /** VulnerabilityAssessmentNote publisher */
+            publisher?: (grafeas.v1.VulnerabilityAssessmentNote.IPublisher|null);
+
+            /** VulnerabilityAssessmentNote product */
+            product?: (grafeas.v1.VulnerabilityAssessmentNote.IProduct|null);
+
+            /** VulnerabilityAssessmentNote assessment */
+            assessment?: (grafeas.v1.VulnerabilityAssessmentNote.IAssessment|null);
+        }
+
+        /** Represents a VulnerabilityAssessmentNote. */
+        class VulnerabilityAssessmentNote implements IVulnerabilityAssessmentNote {
+
+            /**
+             * Constructs a new VulnerabilityAssessmentNote.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IVulnerabilityAssessmentNote);
+
+            /** VulnerabilityAssessmentNote title. */
+            public title: string;
+
+            /** VulnerabilityAssessmentNote shortDescription. */
+            public shortDescription: string;
+
+            /** VulnerabilityAssessmentNote longDescription. */
+            public longDescription: string;
+
+            /** VulnerabilityAssessmentNote languageCode. */
+            public languageCode: string;
+
+            /** VulnerabilityAssessmentNote publisher. */
+            public publisher?: (grafeas.v1.VulnerabilityAssessmentNote.IPublisher|null);
+
+            /** VulnerabilityAssessmentNote product. */
+            public product?: (grafeas.v1.VulnerabilityAssessmentNote.IProduct|null);
+
+            /** VulnerabilityAssessmentNote assessment. */
+            public assessment?: (grafeas.v1.VulnerabilityAssessmentNote.IAssessment|null);
+
+            /**
+             * Creates a new VulnerabilityAssessmentNote instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns VulnerabilityAssessmentNote instance
+             */
+            public static create(properties?: grafeas.v1.IVulnerabilityAssessmentNote): grafeas.v1.VulnerabilityAssessmentNote;
+
+            /**
+             * Encodes the specified VulnerabilityAssessmentNote message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.verify|verify} messages.
+             * @param message VulnerabilityAssessmentNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IVulnerabilityAssessmentNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified VulnerabilityAssessmentNote message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.verify|verify} messages.
+             * @param message VulnerabilityAssessmentNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IVulnerabilityAssessmentNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a VulnerabilityAssessmentNote message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns VulnerabilityAssessmentNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityAssessmentNote;
+
+            /**
+             * Decodes a VulnerabilityAssessmentNote message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns VulnerabilityAssessmentNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityAssessmentNote;
+
+            /**
+             * Verifies a VulnerabilityAssessmentNote message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a VulnerabilityAssessmentNote message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns VulnerabilityAssessmentNote
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityAssessmentNote;
+
+            /**
+             * Creates a plain object from a VulnerabilityAssessmentNote message. Also converts values to other types if specified.
+             * @param message VulnerabilityAssessmentNote
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.VulnerabilityAssessmentNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this VulnerabilityAssessmentNote to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for VulnerabilityAssessmentNote
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace VulnerabilityAssessmentNote {
+
+            /** Properties of a Publisher. */
+            interface IPublisher {
+
+                /** Publisher name */
+                name?: (string|null);
+
+                /** Publisher issuingAuthority */
+                issuingAuthority?: (string|null);
+
+                /** Publisher publisherNamespace */
+                publisherNamespace?: (string|null);
+            }
+
+            /** Represents a Publisher. */
+            class Publisher implements IPublisher {
+
+                /**
+                 * Constructs a new Publisher.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.VulnerabilityAssessmentNote.IPublisher);
+
+                /** Publisher name. */
+                public name: string;
+
+                /** Publisher issuingAuthority. */
+                public issuingAuthority: string;
+
+                /** Publisher publisherNamespace. */
+                public publisherNamespace: string;
+
+                /**
+                 * Creates a new Publisher instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Publisher instance
+                 */
+                public static create(properties?: grafeas.v1.VulnerabilityAssessmentNote.IPublisher): grafeas.v1.VulnerabilityAssessmentNote.Publisher;
+
+                /**
+                 * Encodes the specified Publisher message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Publisher.verify|verify} messages.
+                 * @param message Publisher message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.VulnerabilityAssessmentNote.IPublisher, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Publisher message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Publisher.verify|verify} messages.
+                 * @param message Publisher message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.VulnerabilityAssessmentNote.IPublisher, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Publisher message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Publisher
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityAssessmentNote.Publisher;
+
+                /**
+                 * Decodes a Publisher message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Publisher
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityAssessmentNote.Publisher;
+
+                /**
+                 * Verifies a Publisher message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Publisher message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Publisher
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityAssessmentNote.Publisher;
+
+                /**
+                 * Creates a plain object from a Publisher message. Also converts values to other types if specified.
+                 * @param message Publisher
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.VulnerabilityAssessmentNote.Publisher, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Publisher to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Publisher
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a Product. */
+            interface IProduct {
+
+                /** Product name */
+                name?: (string|null);
+
+                /** Product id */
+                id?: (string|null);
+
+                /** Product genericUri */
+                genericUri?: (string|null);
+            }
+
+            /** Represents a Product. */
+            class Product implements IProduct {
+
+                /**
+                 * Constructs a new Product.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.VulnerabilityAssessmentNote.IProduct);
+
+                /** Product name. */
+                public name: string;
+
+                /** Product id. */
+                public id: string;
+
+                /** Product genericUri. */
+                public genericUri?: (string|null);
+
+                /** Product identifier. */
+                public identifier?: "genericUri";
+
+                /**
+                 * Creates a new Product instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Product instance
+                 */
+                public static create(properties?: grafeas.v1.VulnerabilityAssessmentNote.IProduct): grafeas.v1.VulnerabilityAssessmentNote.Product;
+
+                /**
+                 * Encodes the specified Product message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Product.verify|verify} messages.
+                 * @param message Product message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.VulnerabilityAssessmentNote.IProduct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Product message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Product.verify|verify} messages.
+                 * @param message Product message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.VulnerabilityAssessmentNote.IProduct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Product message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Product
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityAssessmentNote.Product;
+
+                /**
+                 * Decodes a Product message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Product
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityAssessmentNote.Product;
+
+                /**
+                 * Verifies a Product message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Product message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Product
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityAssessmentNote.Product;
+
+                /**
+                 * Creates a plain object from a Product message. Also converts values to other types if specified.
+                 * @param message Product
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.VulnerabilityAssessmentNote.Product, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Product to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Product
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an Assessment. */
+            interface IAssessment {
+
+                /** Assessment cve */
+                cve?: (string|null);
+
+                /** Assessment shortDescription */
+                shortDescription?: (string|null);
+
+                /** Assessment longDescription */
+                longDescription?: (string|null);
+
+                /** Assessment relatedUris */
+                relatedUris?: (grafeas.v1.IRelatedUrl[]|null);
+
+                /** Assessment state */
+                state?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|null);
+
+                /** Assessment impacts */
+                impacts?: (string[]|null);
+
+                /** Assessment justification */
+                justification?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null);
+
+                /** Assessment remediations */
+                remediations?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation[]|null);
+            }
+
+            /** Represents an Assessment. */
+            class Assessment implements IAssessment {
+
+                /**
+                 * Constructs a new Assessment.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.VulnerabilityAssessmentNote.IAssessment);
+
+                /** Assessment cve. */
+                public cve: string;
+
+                /** Assessment shortDescription. */
+                public shortDescription: string;
+
+                /** Assessment longDescription. */
+                public longDescription: string;
+
+                /** Assessment relatedUris. */
+                public relatedUris: grafeas.v1.IRelatedUrl[];
+
+                /** Assessment state. */
+                public state: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.State);
+
+                /** Assessment impacts. */
+                public impacts: string[];
+
+                /** Assessment justification. */
+                public justification?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null);
+
+                /** Assessment remediations. */
+                public remediations: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation[];
+
+                /**
+                 * Creates a new Assessment instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Assessment instance
+                 */
+                public static create(properties?: grafeas.v1.VulnerabilityAssessmentNote.IAssessment): grafeas.v1.VulnerabilityAssessmentNote.Assessment;
+
+                /**
+                 * Encodes the specified Assessment message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.verify|verify} messages.
+                 * @param message Assessment message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.VulnerabilityAssessmentNote.IAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Assessment message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.verify|verify} messages.
+                 * @param message Assessment message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.VulnerabilityAssessmentNote.IAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Assessment message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Assessment
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityAssessmentNote.Assessment;
+
+                /**
+                 * Decodes an Assessment message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Assessment
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityAssessmentNote.Assessment;
+
+                /**
+                 * Verifies an Assessment message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Assessment message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Assessment
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityAssessmentNote.Assessment;
+
+                /**
+                 * Creates a plain object from an Assessment message. Also converts values to other types if specified.
+                 * @param message Assessment
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Assessment to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Assessment
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Assessment {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    AFFECTED = 1,
+                    NOT_AFFECTED = 2,
+                    FIXED = 3,
+                    UNDER_INVESTIGATION = 4
+                }
+
+                /** Properties of a Justification. */
+                interface IJustification {
+
+                    /** Justification justificationType */
+                    justificationType?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType|null);
+
+                    /** Justification details */
+                    details?: (string|null);
+                }
+
+                /** Represents a Justification. */
+                class Justification implements IJustification {
+
+                    /**
+                     * Constructs a new Justification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification);
+
+                    /** Justification justificationType. */
+                    public justificationType: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.JustificationType);
+
+                    /** Justification details. */
+                    public details: string;
+
+                    /**
+                     * Creates a new Justification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Justification instance
+                     */
+                    public static create(properties?: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification;
+
+                    /**
+                     * Encodes the specified Justification message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.verify|verify} messages.
+                     * @param message Justification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Justification message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.verify|verify} messages.
+                     * @param message Justification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Justification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Justification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification;
+
+                    /**
+                     * Decodes a Justification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Justification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification;
+
+                    /**
+                     * Verifies a Justification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Justification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Justification
+                     */
+                    public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification;
+
+                    /**
+                     * Creates a plain object from a Justification message. Also converts values to other types if specified.
+                     * @param message Justification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Justification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Justification
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Justification {
+
+                    /** JustificationType enum. */
+                    enum JustificationType {
+                        JUSTIFICATION_TYPE_UNSPECIFIED = 0,
+                        COMPONENT_NOT_PRESENT = 1,
+                        VULNERABLE_CODE_NOT_PRESENT = 2,
+                        VULNERABLE_CODE_NOT_IN_EXECUTE_PATH = 3,
+                        VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY = 4,
+                        INLINE_MITIGATIONS_ALREADY_EXIST = 5
+                    }
+                }
+
+                /** Properties of a Remediation. */
+                interface IRemediation {
+
+                    /** Remediation remediationType */
+                    remediationType?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType|null);
+
+                    /** Remediation details */
+                    details?: (string|null);
+
+                    /** Remediation remediationUri */
+                    remediationUri?: (grafeas.v1.IRelatedUrl|null);
+                }
+
+                /** Represents a Remediation. */
+                class Remediation implements IRemediation {
+
+                    /**
+                     * Constructs a new Remediation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation);
+
+                    /** Remediation remediationType. */
+                    public remediationType: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.RemediationType);
+
+                    /** Remediation details. */
+                    public details: string;
+
+                    /** Remediation remediationUri. */
+                    public remediationUri?: (grafeas.v1.IRelatedUrl|null);
+
+                    /**
+                     * Creates a new Remediation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Remediation instance
+                     */
+                    public static create(properties?: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation;
+
+                    /**
+                     * Encodes the specified Remediation message. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.verify|verify} messages.
+                     * @param message Remediation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Remediation message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.verify|verify} messages.
+                     * @param message Remediation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Remediation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Remediation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation;
+
+                    /**
+                     * Decodes a Remediation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Remediation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation;
+
+                    /**
+                     * Verifies a Remediation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Remediation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Remediation
+                     */
+                    public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation;
+
+                    /**
+                     * Creates a plain object from a Remediation message. Also converts values to other types if specified.
+                     * @param message Remediation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Remediation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Remediation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Remediation {
+
+                    /** RemediationType enum. */
+                    enum RemediationType {
+                        REMEDIATION_TYPE_UNSPECIFIED = 0,
+                        MITIGATION = 1,
+                        NO_FIX_PLANNED = 2,
+                        NONE_AVAILABLE = 3,
+                        VENDOR_FIX = 4,
+                        WORKAROUND = 5
+                    }
+                }
+            }
+        }
+
         /** Properties of a VulnerabilityNote. */
         interface IVulnerabilityNote {
 
@@ -12073,6 +12826,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence cvssV2 */
             cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityOccurrence vexAssessment */
+            vexAssessment?: (grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -12119,6 +12875,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence cvssV2. */
             public cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityOccurrence vexAssessment. */
+            public vexAssessment?: (grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null);
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.
@@ -12345,6 +13104,139 @@ export namespace grafeas {
 
                 /**
                  * Gets the default type url for PackageIssue
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a VexAssessment. */
+            interface IVexAssessment {
+
+                /** VexAssessment cve */
+                cve?: (string|null);
+
+                /** VexAssessment relatedUris */
+                relatedUris?: (grafeas.v1.IRelatedUrl[]|null);
+
+                /** VexAssessment noteName */
+                noteName?: (string|null);
+
+                /** VexAssessment state */
+                state?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|null);
+
+                /** VexAssessment impacts */
+                impacts?: (string[]|null);
+
+                /** VexAssessment remediations */
+                remediations?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation[]|null);
+
+                /** VexAssessment justification */
+                justification?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null);
+            }
+
+            /** Represents a VexAssessment. */
+            class VexAssessment implements IVexAssessment {
+
+                /**
+                 * Constructs a new VexAssessment.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.VulnerabilityOccurrence.IVexAssessment);
+
+                /** VexAssessment cve. */
+                public cve: string;
+
+                /** VexAssessment relatedUris. */
+                public relatedUris: grafeas.v1.IRelatedUrl[];
+
+                /** VexAssessment noteName. */
+                public noteName: string;
+
+                /** VexAssessment state. */
+                public state: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|keyof typeof grafeas.v1.VulnerabilityAssessmentNote.Assessment.State);
+
+                /** VexAssessment impacts. */
+                public impacts: string[];
+
+                /** VexAssessment remediations. */
+                public remediations: grafeas.v1.VulnerabilityAssessmentNote.Assessment.IRemediation[];
+
+                /** VexAssessment justification. */
+                public justification?: (grafeas.v1.VulnerabilityAssessmentNote.Assessment.IJustification|null);
+
+                /**
+                 * Creates a new VexAssessment instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VexAssessment instance
+                 */
+                public static create(properties?: grafeas.v1.VulnerabilityOccurrence.IVexAssessment): grafeas.v1.VulnerabilityOccurrence.VexAssessment;
+
+                /**
+                 * Encodes the specified VexAssessment message. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.VexAssessment.verify|verify} messages.
+                 * @param message VexAssessment message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.VulnerabilityOccurrence.IVexAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VexAssessment message, length delimited. Does not implicitly {@link grafeas.v1.VulnerabilityOccurrence.VexAssessment.verify|verify} messages.
+                 * @param message VexAssessment message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.VulnerabilityOccurrence.IVexAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VexAssessment message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VexAssessment
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.VulnerabilityOccurrence.VexAssessment;
+
+                /**
+                 * Decodes a VexAssessment message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VexAssessment
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.VulnerabilityOccurrence.VexAssessment;
+
+                /**
+                 * Verifies a VexAssessment message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VexAssessment message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VexAssessment
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.VulnerabilityOccurrence.VexAssessment;
+
+                /**
+                 * Creates a plain object from a VexAssessment message. Also converts values to other types if specified.
+                 * @param message VexAssessment
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.VulnerabilityOccurrence.VexAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VexAssessment to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VexAssessment
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

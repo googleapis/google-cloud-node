@@ -260,6 +260,198 @@ export namespace google {
                     type UpdateTunnelDestGroupCallback = (error: (Error|null), response?: google.cloud.iap.v1.TunnelDestGroup) => void;
                 }
 
+                /** Represents an IdentityAwareProxyOAuthService */
+                class IdentityAwareProxyOAuthService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new IdentityAwareProxyOAuthService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new IdentityAwareProxyOAuthService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IdentityAwareProxyOAuthService;
+
+                    /**
+                     * Calls ListBrands.
+                     * @param request ListBrandsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBrandsResponse
+                     */
+                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrandsCallback): void;
+
+                    /**
+                     * Calls ListBrands.
+                     * @param request ListBrandsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest): Promise<google.cloud.iap.v1.ListBrandsResponse>;
+
+                    /**
+                     * Calls CreateBrand.
+                     * @param request CreateBrandRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Brand
+                     */
+                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrandCallback): void;
+
+                    /**
+                     * Calls CreateBrand.
+                     * @param request CreateBrandRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest): Promise<google.cloud.iap.v1.Brand>;
+
+                    /**
+                     * Calls GetBrand.
+                     * @param request GetBrandRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Brand
+                     */
+                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrandCallback): void;
+
+                    /**
+                     * Calls GetBrand.
+                     * @param request GetBrandRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest): Promise<google.cloud.iap.v1.Brand>;
+
+                    /**
+                     * Calls CreateIdentityAwareProxyClient.
+                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls CreateIdentityAwareProxyClient.
+                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls ListIdentityAwareProxyClients.
+                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIdentityAwareProxyClientsResponse
+                     */
+                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClientsCallback): void;
+
+                    /**
+                     * Calls ListIdentityAwareProxyClients.
+                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest): Promise<google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse>;
+
+                    /**
+                     * Calls GetIdentityAwareProxyClient.
+                     * @param request GetIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls GetIdentityAwareProxyClient.
+                     * @param request GetIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls ResetIdentityAwareProxyClientSecret.
+                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
+                     */
+                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecretCallback): void;
+
+                    /**
+                     * Calls ResetIdentityAwareProxyClientSecret.
+                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
+
+                    /**
+                     * Calls DeleteIdentityAwareProxyClient.
+                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClientCallback): void;
+
+                    /**
+                     * Calls DeleteIdentityAwareProxyClient.
+                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace IdentityAwareProxyOAuthService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listBrands}.
+                     * @param error Error, if any
+                     * @param [response] ListBrandsResponse
+                     */
+                    type ListBrandsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListBrandsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createBrand}.
+                     * @param error Error, if any
+                     * @param [response] Brand
+                     */
+                    type CreateBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getBrand}.
+                     * @param error Error, if any
+                     * @param [response] Brand
+                     */
+                    type GetBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type CreateIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listIdentityAwareProxyClients}.
+                     * @param error Error, if any
+                     * @param [response] ListIdentityAwareProxyClientsResponse
+                     */
+                    type ListIdentityAwareProxyClientsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type GetIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|resetIdentityAwareProxyClientSecret}.
+                     * @param error Error, if any
+                     * @param [response] IdentityAwareProxyClient
+                     */
+                    type ResetIdentityAwareProxyClientSecretCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|deleteIdentityAwareProxyClient}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
                 /** Properties of a ListTunnelDestGroupsRequest. */
                 interface IListTunnelDestGroupsRequest {
 
@@ -1830,7 +2022,8 @@ export namespace google {
                         METHOD_UNSPECIFIED = 0,
                         LOGIN = 1,
                         PASSWORD = 2,
-                        SECURE_KEY = 3
+                        SECURE_KEY = 3,
+                        ENROLLED_SECOND_FACTORS = 4
                     }
 
                     /** PolicyType enum. */
@@ -2395,198 +2588,6 @@ export namespace google {
                         JWT = 2,
                         RCTOKEN = 3
                     }
-                }
-
-                /** Represents an IdentityAwareProxyOAuthService */
-                class IdentityAwareProxyOAuthService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new IdentityAwareProxyOAuthService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new IdentityAwareProxyOAuthService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IdentityAwareProxyOAuthService;
-
-                    /**
-                     * Calls ListBrands.
-                     * @param request ListBrandsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListBrandsResponse
-                     */
-                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListBrandsCallback): void;
-
-                    /**
-                     * Calls ListBrands.
-                     * @param request ListBrandsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listBrands(request: google.cloud.iap.v1.IListBrandsRequest): Promise<google.cloud.iap.v1.ListBrandsResponse>;
-
-                    /**
-                     * Calls CreateBrand.
-                     * @param request CreateBrandRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Brand
-                     */
-                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateBrandCallback): void;
-
-                    /**
-                     * Calls CreateBrand.
-                     * @param request CreateBrandRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createBrand(request: google.cloud.iap.v1.ICreateBrandRequest): Promise<google.cloud.iap.v1.Brand>;
-
-                    /**
-                     * Calls GetBrand.
-                     * @param request GetBrandRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Brand
-                     */
-                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetBrandCallback): void;
-
-                    /**
-                     * Calls GetBrand.
-                     * @param request GetBrandRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getBrand(request: google.cloud.iap.v1.IGetBrandRequest): Promise<google.cloud.iap.v1.Brand>;
-
-                    /**
-                     * Calls CreateIdentityAwareProxyClient.
-                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.CreateIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls CreateIdentityAwareProxyClient.
-                     * @param request CreateIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createIdentityAwareProxyClient(request: google.cloud.iap.v1.ICreateIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls ListIdentityAwareProxyClients.
-                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListIdentityAwareProxyClientsResponse
-                     */
-                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ListIdentityAwareProxyClientsCallback): void;
-
-                    /**
-                     * Calls ListIdentityAwareProxyClients.
-                     * @param request ListIdentityAwareProxyClientsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listIdentityAwareProxyClients(request: google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest): Promise<google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse>;
-
-                    /**
-                     * Calls GetIdentityAwareProxyClient.
-                     * @param request GetIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.GetIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls GetIdentityAwareProxyClient.
-                     * @param request GetIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getIdentityAwareProxyClient(request: google.cloud.iap.v1.IGetIdentityAwareProxyClientRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls ResetIdentityAwareProxyClientSecret.
-                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and IdentityAwareProxyClient
-                     */
-                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.ResetIdentityAwareProxyClientSecretCallback): void;
-
-                    /**
-                     * Calls ResetIdentityAwareProxyClientSecret.
-                     * @param request ResetIdentityAwareProxyClientSecretRequest message or plain object
-                     * @returns Promise
-                     */
-                    public resetIdentityAwareProxyClientSecret(request: google.cloud.iap.v1.IResetIdentityAwareProxyClientSecretRequest): Promise<google.cloud.iap.v1.IdentityAwareProxyClient>;
-
-                    /**
-                     * Calls DeleteIdentityAwareProxyClient.
-                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest, callback: google.cloud.iap.v1.IdentityAwareProxyOAuthService.DeleteIdentityAwareProxyClientCallback): void;
-
-                    /**
-                     * Calls DeleteIdentityAwareProxyClient.
-                     * @param request DeleteIdentityAwareProxyClientRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteIdentityAwareProxyClient(request: google.cloud.iap.v1.IDeleteIdentityAwareProxyClientRequest): Promise<google.protobuf.Empty>;
-                }
-
-                namespace IdentityAwareProxyOAuthService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listBrands}.
-                     * @param error Error, if any
-                     * @param [response] ListBrandsResponse
-                     */
-                    type ListBrandsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListBrandsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createBrand}.
-                     * @param error Error, if any
-                     * @param [response] Brand
-                     */
-                    type CreateBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getBrand}.
-                     * @param error Error, if any
-                     * @param [response] Brand
-                     */
-                    type GetBrandCallback = (error: (Error|null), response?: google.cloud.iap.v1.Brand) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|createIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type CreateIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|listIdentityAwareProxyClients}.
-                     * @param error Error, if any
-                     * @param [response] ListIdentityAwareProxyClientsResponse
-                     */
-                    type ListIdentityAwareProxyClientsCallback = (error: (Error|null), response?: google.cloud.iap.v1.ListIdentityAwareProxyClientsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|getIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type GetIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|resetIdentityAwareProxyClientSecret}.
-                     * @param error Error, if any
-                     * @param [response] IdentityAwareProxyClient
-                     */
-                    type ResetIdentityAwareProxyClientSecretCallback = (error: (Error|null), response?: google.cloud.iap.v1.IdentityAwareProxyClient) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.iap.v1.IdentityAwareProxyOAuthService|deleteIdentityAwareProxyClient}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteIdentityAwareProxyClientCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a ListBrandsRequest. */

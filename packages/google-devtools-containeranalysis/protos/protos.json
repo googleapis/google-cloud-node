@@ -79,7 +79,8 @@
                 "ATTESTATION": 7,
                 "UPGRADE": 8,
                 "COMPLIANCE": 9,
-                "DSSE_ATTESTATION": 10
+                "DSSE_ATTESTATION": 10,
+                "VULNERABILITY_ASSESSMENT": 11
               }
             },
             "RelatedUrl": {
@@ -1738,7 +1739,8 @@
                     "attestation",
                     "upgrade",
                     "compliance",
-                    "dsseAttestation"
+                    "dsseAttestation",
+                    "vulnerabilityAssessment"
                   ]
                 }
               },
@@ -1820,6 +1822,10 @@
                 "dsseAttestation": {
                   "type": "grafeas.v1.DSSEAttestationNote",
                   "id": 19
+                },
+                "vulnerabilityAssessment": {
+                  "type": "grafeas.v1.VulnerabilityAssessmentNote",
+                  "id": 20
                 }
               }
             },
@@ -2520,6 +2526,181 @@
                 }
               }
             },
+            "VulnerabilityAssessmentNote": {
+              "fields": {
+                "title": {
+                  "type": "string",
+                  "id": 1
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "id": 2
+                },
+                "longDescription": {
+                  "type": "string",
+                  "id": 3
+                },
+                "languageCode": {
+                  "type": "string",
+                  "id": 4
+                },
+                "publisher": {
+                  "type": "Publisher",
+                  "id": 5
+                },
+                "product": {
+                  "type": "Product",
+                  "id": 6
+                },
+                "assessment": {
+                  "type": "Assessment",
+                  "id": 7
+                }
+              },
+              "nested": {
+                "Publisher": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "issuingAuthority": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "publisherNamespace": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "Product": {
+                  "oneofs": {
+                    "identifier": {
+                      "oneof": [
+                        "genericUri"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "id": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "genericUri": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                },
+                "Assessment": {
+                  "fields": {
+                    "cve": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "shortDescription": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "longDescription": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "relatedUris": {
+                      "rule": "repeated",
+                      "type": "grafeas.v1.RelatedUrl",
+                      "id": 4
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 5
+                    },
+                    "impacts": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    },
+                    "justification": {
+                      "type": "Justification",
+                      "id": 7
+                    },
+                    "remediations": {
+                      "rule": "repeated",
+                      "type": "Remediation",
+                      "id": 8
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "AFFECTED": 1,
+                        "NOT_AFFECTED": 2,
+                        "FIXED": 3,
+                        "UNDER_INVESTIGATION": 4
+                      }
+                    },
+                    "Justification": {
+                      "fields": {
+                        "justificationType": {
+                          "type": "JustificationType",
+                          "id": 1
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "JustificationType": {
+                          "values": {
+                            "JUSTIFICATION_TYPE_UNSPECIFIED": 0,
+                            "COMPONENT_NOT_PRESENT": 1,
+                            "VULNERABLE_CODE_NOT_PRESENT": 2,
+                            "VULNERABLE_CODE_NOT_IN_EXECUTE_PATH": 3,
+                            "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY": 4,
+                            "INLINE_MITIGATIONS_ALREADY_EXIST": 5
+                          }
+                        }
+                      }
+                    },
+                    "Remediation": {
+                      "fields": {
+                        "remediationType": {
+                          "type": "RemediationType",
+                          "id": 1
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "remediationUri": {
+                          "type": "grafeas.v1.RelatedUrl",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "RemediationType": {
+                          "values": {
+                            "REMEDIATION_TYPE_UNSPECIFIED": 0,
+                            "MITIGATION": 1,
+                            "NO_FIX_PLANNED": 2,
+                            "NONE_AVAILABLE": 3,
+                            "VENDOR_FIX": 4,
+                            "WORKAROUND": 5
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "VulnerabilityNote": {
               "fields": {
                 "cvssScore": {
@@ -2706,6 +2887,10 @@
                 "cvssV2": {
                   "type": "CVSS",
                   "id": 12
+                },
+                "vexAssessment": {
+                  "type": "VexAssessment",
+                  "id": 13
                 }
               },
               "nested": {
@@ -2754,6 +2939,41 @@
                       "rule": "repeated",
                       "type": "FileLocation",
                       "id": 10
+                    }
+                  }
+                },
+                "VexAssessment": {
+                  "fields": {
+                    "cve": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "relatedUris": {
+                      "rule": "repeated",
+                      "type": "grafeas.v1.RelatedUrl",
+                      "id": 2
+                    },
+                    "noteName": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "state": {
+                      "type": "grafeas.v1.VulnerabilityAssessmentNote.Assessment.State",
+                      "id": 4
+                    },
+                    "impacts": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 5
+                    },
+                    "remediations": {
+                      "rule": "repeated",
+                      "type": "grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation",
+                      "id": 6
+                    },
+                    "justification": {
+                      "type": "grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification",
+                      "id": 7
                     }
                   }
                 }
