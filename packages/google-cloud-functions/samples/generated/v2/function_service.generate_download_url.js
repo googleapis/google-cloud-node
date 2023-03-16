@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of function for which source code Google Cloud Storage signed
-   *  URL should be generated.
+   *  Required. The name of function for which source code Google Cloud Storage
+   *  signed URL should be generated.
    */
   // const name = 'abc123'
 
