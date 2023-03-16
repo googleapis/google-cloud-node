@@ -234,7 +234,6 @@ async function performDownloadFileInChunksTest(): Promise<TestResult> {
     workers: argv.workers,
   };
 
-  rmSync(TEST_NAME_STRING, {recursive: true, force: true});
   return result;
 }
 

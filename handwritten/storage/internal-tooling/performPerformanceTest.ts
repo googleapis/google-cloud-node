@@ -33,7 +33,6 @@ import {
   TestResult,
 } from './performanceUtils';
 import {Bucket} from '../src';
-import {rmSync} from 'fs';
 
 const TEST_NAME_STRING = 'nodejs-perf-metrics';
 const DEFAULT_NUMBER_OF_WRITES = 1;
@@ -119,7 +118,6 @@ async function performRangedReadTest(): Promise<TestResult[]> {
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
   }
 
-  rmSync(TEST_NAME_STRING, {recursive: true, force: true});
   await file.delete();
   results.push(iterationResult);
   return results;
@@ -199,7 +197,6 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
   }
 
-  rmSync(TEST_NAME_STRING, {recursive: true, force: true});
   await file.delete();
   results.push(iterationResult);
   return results;
