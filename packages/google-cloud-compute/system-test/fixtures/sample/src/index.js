@@ -83,6 +83,8 @@ function main() {
     new compute.RegionInstanceGroupManagersClient();
   const regionInstanceGroupsClient = new compute.RegionInstanceGroupsClient();
   const regionInstancesClient = new compute.RegionInstancesClient();
+  const regionInstanceTemplatesClient =
+    new compute.RegionInstanceTemplatesClient();
   const regionNetworkEndpointGroupsClient =
     new compute.RegionNetworkEndpointGroupsClient();
   const regionNetworkFirewallPoliciesClient =

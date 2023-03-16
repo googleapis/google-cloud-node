@@ -455,7 +455,7 @@ export class TargetTcpProxiesClient {
       );
   }
   /**
-   * Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.
+   * Returns the specified TargetTcpProxy resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

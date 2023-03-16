@@ -326,7 +326,7 @@ export class MachineTypesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the specified machine type. Gets a list of available machine types by making a list() request.
+   * Returns the specified machine type.
    *
    * @param {Object} request
    *   The request object that will be sent.

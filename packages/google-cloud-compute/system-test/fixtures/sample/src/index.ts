@@ -70,6 +70,7 @@ import {
   RegionInstanceGroupManagersClient,
   RegionInstanceGroupsClient,
   RegionInstancesClient,
+  RegionInstanceTemplatesClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -299,6 +300,11 @@ function doStuffWithRegionInstanceGroupsClient(
   client.close();
 }
 function doStuffWithRegionInstancesClient(client: RegionInstancesClient) {
+  client.close();
+}
+function doStuffWithRegionInstanceTemplatesClient(
+  client: RegionInstanceTemplatesClient
+) {
   client.close();
 }
 function doStuffWithRegionNetworkEndpointGroupsClient(
@@ -598,6 +604,9 @@ function main() {
   // check that the client instance can be created
   const regionInstancesClient = new RegionInstancesClient();
   doStuffWithRegionInstancesClient(regionInstancesClient);
+  // check that the client instance can be created
+  const regionInstanceTemplatesClient = new RegionInstanceTemplatesClient();
+  doStuffWithRegionInstanceTemplatesClient(regionInstanceTemplatesClient);
   // check that the client instance can be created
   const regionNetworkEndpointGroupsClient =
     new RegionNetworkEndpointGroupsClient();

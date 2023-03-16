@@ -326,7 +326,7 @@ export class DiskTypesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the specified disk type. Gets a list of available disk types by making a list() request.
+   * Returns the specified disk type.
    *
    * @param {Object} request
    *   The request object that will be sent.
