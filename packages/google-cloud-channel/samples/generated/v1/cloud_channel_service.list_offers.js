@@ -57,6 +57,13 @@ function main(parent) {
    *  The default value is "en-US".
    */
   // const languageCode = 'abc123'
+  /**
+   *  Optional. A boolean flag that determines if a response returns future
+   *  offers 30 days from now. If the show_future_offers is true, the response
+   *  will only contain offers that are scheduled to be available 30 days from
+   *  now.
+   */
+  // const showFutureOffers = true
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;

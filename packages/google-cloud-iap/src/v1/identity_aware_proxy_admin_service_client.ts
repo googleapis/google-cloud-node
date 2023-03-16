@@ -722,8 +722,11 @@ export class IdentityAwareProxyAdminServiceClient {
    *   resource.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The field mask specifying which IAP settings should be updated.
-   *   If omitted, the all of the settings are updated. See
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   *   If omitted, then all of the settings are updated. See
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   *
+   *   Note: All IAP reauth settings must always be set together, using the
+   *   field mask: `iapSettings.accessSettings.reauthSettings`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

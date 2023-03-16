@@ -461,7 +461,8 @@ export class PolicyTagManagerSerializationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of project that the imported taxonomies will belong to.
+   *   Required. Resource name of project that the imported taxonomies will belong
+   *   to.
    * @param {google.cloud.datacatalog.v1.InlineSource} request.inlineSource
    *   Inline source taxonomy to import.
    * @param {google.cloud.datacatalog.v1.CrossRegionalSource} request.crossRegionalSource
@@ -561,7 +562,8 @@ export class PolicyTagManagerSerializationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the project that the exported taxonomies belong to.
+   *   Required. Resource name of the project that the exported taxonomies belong
+   *   to.
    * @param {string[]} request.taxonomies
    *   Required. Resource names of the taxonomies to export.
    * @param {boolean} request.serializedTaxonomies

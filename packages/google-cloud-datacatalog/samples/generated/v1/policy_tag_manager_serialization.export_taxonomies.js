@@ -29,7 +29,8 @@ function main(parent, taxonomies) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the project that the exported taxonomies belong to.
+   *  Required. Resource name of the project that the exported taxonomies belong
+   *  to.
    */
   // const parent = 'abc123'
   /**

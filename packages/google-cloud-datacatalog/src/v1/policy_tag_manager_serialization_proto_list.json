@@ -4,6 +4,7 @@
   "../../protos/google/cloud/datacatalog/v1/data_source.proto",
   "../../protos/google/cloud/datacatalog/v1/datacatalog.proto",
   "../../protos/google/cloud/datacatalog/v1/dataplex_spec.proto",
+  "../../protos/google/cloud/datacatalog/v1/dump_content.proto",
   "../../protos/google/cloud/datacatalog/v1/gcs_fileset_spec.proto",
   "../../protos/google/cloud/datacatalog/v1/physical_schema.proto",
   "../../protos/google/cloud/datacatalog/v1/policytagmanager.proto",

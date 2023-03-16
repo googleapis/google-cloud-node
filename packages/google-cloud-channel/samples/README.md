@@ -39,6 +39,7 @@
   * [Cloud_channel_service.list_channel_partner_repricing_configs](#cloud_channel_service.list_channel_partner_repricing_configs)
   * [Cloud_channel_service.list_customer_repricing_configs](#cloud_channel_service.list_customer_repricing_configs)
   * [Cloud_channel_service.list_customers](#cloud_channel_service.list_customers)
+  * [Cloud_channel_service.list_entitlement_changes](#cloud_channel_service.list_entitlement_changes)
   * [Cloud_channel_service.list_entitlements](#cloud_channel_service.list_entitlements)
   * [Cloud_channel_service.list_offers](#cloud_channel_service.list_offers)
   * [Cloud_channel_service.list_products](#cloud_channel_service.list_products)
@@ -530,6 +531,23 @@ __Usage:__
 
 
 `node packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customers.js`
+
+
+-----
+
+
+
+
+### Cloud_channel_service.list_entitlement_changes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlement_changes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlement_changes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlement_changes.js`
 
 
 -----
