@@ -1277,6 +1277,63 @@
                         }
                       }
                     },
+                    "TransactionEvent": {
+                      "fields": {
+                        "eventType": {
+                          "type": "TransactionEventType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reason": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "value": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TransactionEventType": {
+                          "values": {
+                            "TRANSACTION_EVENT_TYPE_UNSPECIFIED": 0,
+                            "MERCHANT_APPROVE": 1,
+                            "MERCHANT_DENY": 2,
+                            "MANUAL_REVIEW": 3,
+                            "AUTHORIZATION": 4,
+                            "AUTHORIZATION_DECLINE": 5,
+                            "PAYMENT_CAPTURE": 6,
+                            "PAYMENT_CAPTURE_DECLINE": 7,
+                            "CANCEL": 8,
+                            "CHARGEBACK_INQUIRY": 9,
+                            "CHARGEBACK_ALERT": 10,
+                            "FRAUD_NOTIFICATION": 11,
+                            "CHARGEBACK": 12,
+                            "CHARGEBACK_REPRESENTMENT": 13,
+                            "CHARGEBACK_REVERSE": 14,
+                            "REFUND_REQUEST": 15,
+                            "REFUND_DECLINE": 16,
+                            "REFUND": 17,
+                            "REFUND_REVERSE": 18
+                          }
+                        }
+                      }
+                    },
                     "AnnotateAssessmentRequest": {
                       "fields": {
                         "name": {
@@ -1308,6 +1365,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "transactionEvent": {
+                          "type": "TransactionEvent",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1334,12 +1398,17 @@
                             "CHARGEBACK": 1,
                             "CHARGEBACK_FRAUD": 8,
                             "CHARGEBACK_DISPUTE": 9,
+                            "REFUND": 10,
+                            "REFUND_FRAUD": 11,
+                            "TRANSACTION_ACCEPTED": 12,
+                            "TRANSACTION_DECLINED": 13,
                             "PAYMENT_HEURISTICS": 2,
                             "INITIATED_TWO_FACTOR": 7,
                             "PASSED_TWO_FACTOR": 3,
                             "FAILED_TWO_FACTOR": 4,
                             "CORRECT_PASSWORD": 5,
-                            "INCORRECT_PASSWORD": 6
+                            "INCORRECT_PASSWORD": 6,
+                            "SOCIAL_SPAM": 14
                           }
                         }
                       }
@@ -1418,6 +1487,10 @@
                         "accountDefenderAssessment": {
                           "type": "AccountDefenderAssessment",
                           "id": 8
+                        },
+                        "fraudPreventionAssessment": {
+                          "type": "FraudPreventionAssessment",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -1428,7 +1501,9 @@
                             "UNEXPECTED_ENVIRONMENT": 2,
                             "TOO_MUCH_TRAFFIC": 3,
                             "UNEXPECTED_USAGE_PATTERNS": 4,
-                            "LOW_CONFIDENCE_SCORE": 5
+                            "LOW_CONFIDENCE_SCORE": 5,
+                            "SUSPECTED_CARDING": 6,
+                            "SUSPECTED_CHARGEBACK": 7
                           }
                         }
                       }
@@ -1476,6 +1551,180 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "transactionData": {
+                          "type": "TransactionData",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TransactionData": {
+                      "oneofs": {
+                        "_transactionId": {
+                          "oneof": [
+                            "transactionId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "transactionId": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "paymentMethod": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "cardBin": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "cardLastFour": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "value": {
+                          "type": "double",
+                          "id": 5
+                        },
+                        "shippingValue": {
+                          "type": "double",
+                          "id": 12
+                        },
+                        "shippingAddress": {
+                          "type": "Address",
+                          "id": 6
+                        },
+                        "billingAddress": {
+                          "type": "Address",
+                          "id": 7
+                        },
+                        "user": {
+                          "type": "User",
+                          "id": 8
+                        },
+                        "merchants": {
+                          "rule": "repeated",
+                          "type": "User",
+                          "id": 13
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "Item",
+                          "id": 14
+                        },
+                        "gatewayInfo": {
+                          "type": "GatewayInfo",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "Address": {
+                          "fields": {
+                            "recipient": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "address": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "locality": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "administrativeArea": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "regionCode": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "postalCode": {
+                              "type": "string",
+                              "id": 6
+                            }
+                          }
+                        },
+                        "User": {
+                          "fields": {
+                            "accountId": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "creationMs": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "email": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "emailVerified": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "phoneNumber": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "phoneVerified": {
+                              "type": "bool",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "Item": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "type": "double",
+                              "id": 2
+                            },
+                            "quantity": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "merchantAccountId": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "GatewayInfo": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "gatewayResponseCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "avsResponseCode": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "cvvResponseCode": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
                         }
                       }
                     },
@@ -1518,6 +1767,40 @@
                             "SITE_MISMATCH": 5,
                             "MISSING": 6,
                             "BROWSER_ERROR": 7
+                          }
+                        }
+                      }
+                    },
+                    "FraudPreventionAssessment": {
+                      "fields": {
+                        "transactionRisk": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "stolenInstrumentVerdict": {
+                          "type": "StolenInstrumentVerdict",
+                          "id": 2
+                        },
+                        "cardTestingVerdict": {
+                          "type": "CardTestingVerdict",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "StolenInstrumentVerdict": {
+                          "fields": {
+                            "risk": {
+                              "type": "float",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CardTestingVerdict": {
+                          "fields": {
+                            "risk": {
+                              "type": "float",
+                              "id": 1
+                            }
                           }
                         }
                       }
