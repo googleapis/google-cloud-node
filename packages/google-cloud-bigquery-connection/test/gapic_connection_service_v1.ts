@@ -1470,6 +1470,70 @@ describe('v1.ConnectionServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('cluster', () => {
+      const fakePath = '/rendered/path/cluster';
+      const expectedParameters = {
+        project: 'projectValue',
+        region: 'regionValue',
+        cluster: 'clusterValue',
+      };
+      const client = new connectionserviceModule.v1.ConnectionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.clusterPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.clusterPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('clusterPath', () => {
+        const result = client.clusterPath(
+          'projectValue',
+          'regionValue',
+          'clusterValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.clusterPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromClusterName', () => {
+        const result = client.matchProjectFromClusterName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRegionFromClusterName', () => {
+        const result = client.matchRegionFromClusterName(fakePath);
+        assert.strictEqual(result, 'regionValue');
+        assert(
+          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromClusterName', () => {
+        const result = client.matchClusterFromClusterName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('connection', () => {
       const fakePath = '/rendered/path/connection';
       const expectedParameters = {
@@ -1577,6 +1641,70 @@ describe('v1.ConnectionServiceClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('service', () => {
+      const fakePath = '/rendered/path/service';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        service: 'serviceValue',
+      };
+      const client = new connectionserviceModule.v1.ConnectionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.servicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.servicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('servicePath', () => {
+        const result = client.servicePath(
+          'projectValue',
+          'locationValue',
+          'serviceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.servicePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromServiceName', () => {
+        const result = client.matchProjectFromServiceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.servicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromServiceName', () => {
+        const result = client.matchLocationFromServiceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.servicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServiceFromServiceName', () => {
+        const result = client.matchServiceFromServiceName(fakePath);
+        assert.strictEqual(result, 'serviceValue');
+        assert(
+          (client.pathTemplates.servicePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
