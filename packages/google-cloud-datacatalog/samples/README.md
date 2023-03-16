@@ -26,12 +26,14 @@
   * [Data_catalog.get_entry_group](#data_catalog.get_entry_group)
   * [Data_catalog.get_iam_policy](#data_catalog.get_iam_policy)
   * [Data_catalog.get_tag_template](#data_catalog.get_tag_template)
+  * [Data_catalog.import_entries](#data_catalog.import_entries)
   * [Data_catalog.list_entries](#data_catalog.list_entries)
   * [Data_catalog.list_entry_groups](#data_catalog.list_entry_groups)
   * [Data_catalog.list_tags](#data_catalog.list_tags)
   * [Data_catalog.lookup_entry](#data_catalog.lookup_entry)
   * [Data_catalog.modify_entry_contacts](#data_catalog.modify_entry_contacts)
   * [Data_catalog.modify_entry_overview](#data_catalog.modify_entry_overview)
+  * [Data_catalog.reconcile_tags](#data_catalog.reconcile_tags)
   * [Data_catalog.rename_tag_template_field](#data_catalog.rename_tag_template_field)
   * [Data_catalog.rename_tag_template_field_enum_value](#data_catalog.rename_tag_template_field_enum_value)
   * [Data_catalog.search_catalog](#data_catalog.search_catalog)
@@ -358,6 +360,23 @@ __Usage:__
 
 
 
+### Data_catalog.import_entries
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.import_entries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.import_entries.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.import_entries.js`
+
+
+-----
+
+
+
+
 ### Data_catalog.list_entries
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.list_entries.js).
@@ -453,6 +472,23 @@ __Usage:__
 
 
 `node packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.modify_entry_overview.js`
+
+
+-----
+
+
+
+
+### Data_catalog.reconcile_tags
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.reconcile_tags.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.reconcile_tags.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-datacatalog/samples/generated/v1/data_catalog.reconcile_tags.js`
 
 
 -----
