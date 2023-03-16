@@ -39,7 +39,7 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-npm install
+npm install --production --engine-strict --ignore-scripts --no-package-lock
 
 retval=0
 
