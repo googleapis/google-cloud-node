@@ -103,7 +103,16 @@
                         "BIGQUERY": 1,
                         "CLOUD_PUBSUB": 2,
                         "DATAPROC_METASTORE": 3,
-                        "DATAPLEX": 4
+                        "DATAPLEX": 4,
+                        "CLOUD_SQL": 8,
+                        "LOOKER": 9
+                      }
+                    },
+                    "ManagingSystem": {
+                      "values": {
+                        "MANAGING_SYSTEM_UNSPECIFIED": 0,
+                        "MANAGING_SYSTEM_DATAPLEX": 1,
+                        "MANAGING_SYSTEM_OTHER": 2
                       }
                     },
                     "DataSource": {
@@ -706,6 +715,30 @@
                             }
                           ]
                         },
+                        "ReconcileTags": {
+                          "requestType": "ReconcileTagsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags:reconcile",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ReconcileTagsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ReconcileTagsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags:reconcile",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ReconcileTagsResponse",
+                                "metadata_type": "ReconcileTagsMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "StarEntry": {
                           "requestType": "StarEntryRequest",
                           "responseType": "StarEntryResponse",
@@ -828,6 +861,30 @@
                                     "body": "*"
                                   }
                                 ]
+                              }
+                            }
+                          ]
+                        },
+                        "ImportEntries": {
+                          "requestType": "ImportEntriesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/entryGroups/*}/entries:import",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ImportEntriesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ImportEntriesMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/entryGroups/*}/entries:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportEntriesResponse",
+                                "metadata_type": "ImportEntriesMetadata"
                               }
                             }
                           ]
@@ -1148,6 +1205,12 @@
                             "userSpecifiedSystem"
                           ]
                         },
+                        "systemSpec": {
+                          "oneof": [
+                            "sqlDatabaseSystemSpec",
+                            "lookerSystemSpec"
+                          ]
+                        },
                         "typeSpec": {
                           "oneof": [
                             "gcsFilesetSpec",
@@ -1199,6 +1262,14 @@
                         "userSpecifiedSystem": {
                           "type": "string",
                           "id": 18
+                        },
+                        "sqlDatabaseSystemSpec": {
+                          "type": "SqlDatabaseSystemSpec",
+                          "id": 39
+                        },
+                        "lookerSystemSpec": {
+                          "type": "LookerSystemSpec",
+                          "id": 40
                         },
                         "gcsFilesetSpec": {
                           "type": "GcsFilesetSpec",
@@ -1291,6 +1362,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "databaseViewSpec": {
+                          "type": "DatabaseViewSpec",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -1299,6 +1374,39 @@
                             "TABLE_TYPE_UNSPECIFIED": 0,
                             "NATIVE": 1,
                             "EXTERNAL": 2
+                          }
+                        },
+                        "DatabaseViewSpec": {
+                          "oneofs": {
+                            "sourceDefinition": {
+                              "oneof": [
+                                "baseTable",
+                                "sqlQuery"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "viewType": {
+                              "type": "ViewType",
+                              "id": 1
+                            },
+                            "baseTable": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "sqlQuery": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ViewType": {
+                              "values": {
+                                "VIEW_TYPE_UNSPECIFIED": 0,
+                                "STANDARD_VIEW": 1,
+                                "MATERIALIZED_VIEW": 2
+                              }
+                            }
                           }
                         }
                       }
@@ -1387,6 +1495,50 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "SqlDatabaseSystemSpec": {
+                      "fields": {
+                        "sqlEngine": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "databaseVersion": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "instanceHost": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LookerSystemSpec": {
+                      "fields": {
+                        "parentInstanceId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parentInstanceDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "parentModelId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "parentModelDisplayName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parentViewId": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "parentViewDisplayName": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -1720,6 +1872,74 @@
                         }
                       }
                     },
+                    "ReconcileTagsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        },
+                        "tagTemplate": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
+                        },
+                        "forceDeleteMissing": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ReconcileTagsResponse": {
+                      "fields": {
+                        "createdTagsCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "updatedTagsCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "deletedTagsCount": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ReconcileTagsMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "ReconciliationState",
+                          "id": 1
+                        },
+                        "errors": {
+                          "keyType": "string",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ReconciliationState": {
+                          "values": {
+                            "RECONCILIATION_STATE_UNSPECIFIED": 0,
+                            "RECONCILIATION_QUEUED": 1,
+                            "RECONCILIATION_IN_PROGRESS": 2,
+                            "RECONCILIATION_DONE": 3
+                          }
+                        }
+                      }
+                    },
                     "ListEntriesRequest": {
                       "fields": {
                         "parent": {
@@ -1787,6 +2007,83 @@
                     "UnstarEntryResponse": {
                       "fields": {}
                     },
+                    "ImportEntriesRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsBucketPath"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Entry"
+                          }
+                        },
+                        "gcsBucketPath": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportEntriesResponse": {
+                      "oneofs": {
+                        "_upsertedEntriesCount": {
+                          "oneof": [
+                            "upsertedEntriesCount"
+                          ]
+                        },
+                        "_deletedEntriesCount": {
+                          "oneof": [
+                            "deletedEntriesCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "upsertedEntriesCount": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "deletedEntriesCount": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ImportEntriesMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "ImportState",
+                          "id": 1
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ImportState": {
+                          "values": {
+                            "IMPORT_STATE_UNSPECIFIED": 0,
+                            "IMPORT_QUEUED": 1,
+                            "IMPORT_IN_PROGRESS": 2,
+                            "IMPORT_DONE": 3,
+                            "IMPORT_OBSOLETE": 4
+                          }
+                        }
+                      }
+                    },
                     "ModifyEntryOverviewRequest": {
                       "fields": {
                         "name": {
@@ -1838,7 +2135,11 @@
                         "ROUTINE": 9,
                         "LAKE": 10,
                         "ZONE": 11,
-                        "SERVICE": 14
+                        "SERVICE": 14,
+                        "DATABASE_SCHEMA": 15,
+                        "DASHBOARD": 16,
+                        "EXPLORE": 17,
+                        "LOOK": 18
                       }
                     },
                     "DataplexSpec": {
@@ -2055,6 +2356,13 @@
                       }
                     },
                     "ColumnSchema": {
+                      "oneofs": {
+                        "systemSpec": {
+                          "oneof": [
+                            "lookerColumnSpec"
+                          ]
+                        }
+                      },
                       "fields": {
                         "column": {
                           "type": "string",
@@ -2084,12 +2392,75 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "defaultValue": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ordinalPosition": {
+                          "type": "int32",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "highestIndexingType": {
+                          "type": "IndexingType",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "subcolumns": {
                           "rule": "repeated",
                           "type": "ColumnSchema",
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lookerColumnSpec": {
+                          "type": "LookerColumnSpec",
+                          "id": 18
+                        },
+                        "gcRule": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IndexingType": {
+                          "values": {
+                            "INDEXING_TYPE_UNSPECIFIED": 0,
+                            "INDEXING_TYPE_NONE": 1,
+                            "INDEXING_TYPE_NON_UNIQUE": 2,
+                            "INDEXING_TYPE_UNIQUE": 3,
+                            "INDEXING_TYPE_PRIMARY_KEY": 4
+                          }
+                        },
+                        "LookerColumnSpec": {
+                          "fields": {
+                            "type": {
+                              "type": "LookerColumnType",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "LookerColumnType": {
+                              "values": {
+                                "LOOKER_COLUMN_TYPE_UNSPECIFIED": 0,
+                                "DIMENSION": 1,
+                                "DIMENSION_GROUP": 2,
+                                "FILTER": 3,
+                                "MEASURE": 4,
+                                "PARAMETER": 5
+                              }
+                            }
                           }
                         }
                       }
@@ -2497,7 +2868,32 @@
                         }
                       }
                     },
+                    "CommonUsageStats": {
+                      "oneofs": {
+                        "_viewCount": {
+                          "oneof": [
+                            "viewCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "viewCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "UsageSignal": {
+                      "oneofs": {
+                        "_favoriteCount": {
+                          "oneof": [
+                            "favoriteCount"
+                          ]
+                        }
+                      },
                       "fields": {
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
@@ -2510,6 +2906,58 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "commonUsageWithinTimeRange": {
+                          "keyType": "string",
+                          "type": "CommonUsageStats",
+                          "id": 3
+                        },
+                        "favoriteCount": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TaggedEntry": {
+                      "oneofs": {
+                        "entry": {
+                          "oneof": [
+                            "v1Entry"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "v1Entry": {
+                          "type": "Entry",
+                          "id": 1
+                        },
+                        "presentTags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 2
+                        },
+                        "absentTags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DumpItem": {
+                      "oneofs": {
+                        "item": {
+                          "oneof": [
+                            "taggedEntry"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "taggedEntry": {
+                          "type": "TaggedEntry",
+                          "id": 1
                         }
                       }
                     },
@@ -2823,6 +3271,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "service": {
+                          "type": "Service",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2830,6 +3285,18 @@
                           "values": {
                             "POLICY_TYPE_UNSPECIFIED": 0,
                             "FINE_GRAINED_ACCESS_CONTROL": 1
+                          }
+                        },
+                        "Service": {
+                          "fields": {
+                            "name": {
+                              "type": "ManagingSystem",
+                              "id": 1
+                            },
+                            "identity": {
+                              "type": "string",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -2929,6 +3396,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -6826,6 +7297,30 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Empty": {
               "fields": {}
             }
@@ -7152,6 +7647,251 @@
                 "location": {
                   "type": "string",
                   "id": 4
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

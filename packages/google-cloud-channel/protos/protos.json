@@ -316,6 +316,13 @@
                         "channelPartnerId": {
                           "type": "string",
                           "id": 13
+                        },
+                        "correlationId": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -350,6 +357,124 @@
                         "phone": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "EntitlementChange": {
+                      "oneofs": {
+                        "changeReason": {
+                          "oneof": [
+                            "suspensionReason",
+                            "cancellationReason",
+                            "activationReason",
+                            "otherChangeReason"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "suspensionReason": {
+                          "type": "Entitlement.SuspensionReason",
+                          "id": 9
+                        },
+                        "cancellationReason": {
+                          "type": "CancellationReason",
+                          "id": 10
+                        },
+                        "activationReason": {
+                          "type": "ActivationReason",
+                          "id": 11
+                        },
+                        "otherChangeReason": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "entitlement": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Entitlement"
+                          }
+                        },
+                        "offer": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Offer"
+                          }
+                        },
+                        "provisionedService": {
+                          "type": "ProvisionedService",
+                          "id": 3
+                        },
+                        "changeType": {
+                          "type": "ChangeType",
+                          "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "operatorType": {
+                          "type": "OperatorType",
+                          "id": 6
+                        },
+                        "parameters": {
+                          "rule": "repeated",
+                          "type": "Parameter",
+                          "id": 8
+                        },
+                        "operator": {
+                          "type": "string",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "ChangeType": {
+                          "values": {
+                            "CHANGE_TYPE_UNSPECIFIED": 0,
+                            "CREATED": 1,
+                            "PRICE_PLAN_SWITCHED": 3,
+                            "COMMITMENT_CHANGED": 4,
+                            "RENEWED": 5,
+                            "SUSPENDED": 6,
+                            "ACTIVATED": 7,
+                            "CANCELLED": 8,
+                            "SKU_CHANGED": 9,
+                            "RENEWAL_SETTING_CHANGED": 10,
+                            "PAID_SUBSCRIPTION_STARTED": 11,
+                            "LICENSE_CAP_CHANGED": 12,
+                            "SUSPENSION_DETAILS_CHANGED": 13,
+                            "TRIAL_END_DATE_EXTENDED": 14,
+                            "TRIAL_STARTED": 15
+                          }
+                        },
+                        "OperatorType": {
+                          "values": {
+                            "OPERATOR_TYPE_UNSPECIFIED": 0,
+                            "CUSTOMER_SERVICE_REPRESENTATIVE": 1,
+                            "SYSTEM": 2,
+                            "CUSTOMER": 3,
+                            "RESELLER": 4
+                          }
+                        },
+                        "CancellationReason": {
+                          "values": {
+                            "CANCELLATION_REASON_UNSPECIFIED": 0,
+                            "SERVICE_TERMINATED": 1,
+                            "RELATIONSHIP_ENDED": 2,
+                            "PARTIAL_TRANSFER": 3
+                          }
+                        },
+                        "ActivationReason": {
+                          "values": {
+                            "ACTIVATION_REASON_UNSPECIFIED": 0,
+                            "RESELLER_REVOKED_SUSPENSION": 1,
+                            "CUSTOMER_ACCEPTED_PENDING_TOS": 2,
+                            "RENEWAL_SETTINGS_CHANGED": 3,
+                            "OTHER_ACTIVATION_REASON": 100
+                          }
                         }
                       }
                     },
@@ -2437,6 +2562,24 @@
                               }
                             }
                           ]
+                        },
+                        "ListEntitlementChanges": {
+                          "requestType": "ListEntitlementChangesRequest",
+                          "responseType": "ListEntitlementChangesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*/customers/*/entitlements/*}:listEntitlementChanges",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*/customers/*/entitlements/*}:listEntitlementChanges"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3569,6 +3712,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "showFutureOffers": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3887,6 +4037,52 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ListEntitlementChangesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Entitlement"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListEntitlementChangesResponse": {
+                      "fields": {
+                        "entitlementChanges": {
+                          "rule": "repeated",
+                          "type": "EntitlementChange",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

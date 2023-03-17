@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -61,6 +63,7 @@ export class DataCatalogClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   dataCatalogStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -234,6 +237,64 @@ export class DataCatalogClient {
       ),
     };
 
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const reconcileTagsResponse = protoFilesRoot.lookup(
+      '.google.cloud.datacatalog.v1.ReconcileTagsResponse'
+    ) as gax.protobuf.Type;
+    const reconcileTagsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.datacatalog.v1.ReconcileTagsMetadata'
+    ) as gax.protobuf.Type;
+    const importEntriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.datacatalog.v1.ImportEntriesResponse'
+    ) as gax.protobuf.Type;
+    const importEntriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.datacatalog.v1.ImportEntriesMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      reconcileTags: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        reconcileTagsResponse.decode.bind(reconcileTagsResponse),
+        reconcileTagsMetadata.decode.bind(reconcileTagsMetadata)
+      ),
+      importEntries: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importEntriesResponse.decode.bind(importEntriesResponse),
+        importEntriesMetadata.decode.bind(importEntriesMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.datacatalog.v1.DataCatalog',
@@ -311,11 +372,13 @@ export class DataCatalogClient {
       'updateTag',
       'deleteTag',
       'listTags',
+      'reconcileTags',
       'starEntry',
       'unstarEntry',
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
+      'importEntries',
     ];
     for (const methodName of dataCatalogStubMethods) {
       const callPromise = this.dataCatalogStub.then(
@@ -332,7 +395,10 @@ export class DataCatalogClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -431,7 +497,8 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The names of the project and location that the new entry group belongs to.
+   *   Required. The names of the project and location that the new entry group
+   *   belongs to.
    *
    *   Note: The entry group itself and its child resources might not be
    *   stored in the location specified in its name.
@@ -2089,8 +2156,8 @@ export class DataCatalogClient {
    * @param {google.cloud.datacatalog.v1.TagTemplateField} request.tagTemplateField
    *   Required. The template to update.
    * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Names of fields whose values to overwrite on an individual field of a tag
-   *   template. The following fields are modifiable:
+   *   Optional. Names of fields whose values to overwrite on an individual field
+   *   of a tag template. The following fields are modifiable:
    *
    *   * `display_name`
    *   * `type.enum_type`
@@ -2211,7 +2278,8 @@ export class DataCatalogClient {
    * @param {string} request.name
    *   Required. The name of the tag template field.
    * @param {string} request.newTagTemplateFieldId
-   *   Required. The new ID of this tag template field. For example, `my_new_field`.
+   *   Required. The new ID of this tag template field. For example,
+   *   `my_new_field`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2316,7 +2384,8 @@ export class DataCatalogClient {
    * @param {string} request.name
    *   Required. The name of the enum field value.
    * @param {string} request.newEnumValueDisplayName
-   *   Required. The new display name of the enum value. For example, `my_new_enum_value`.
+   *   Required. The new display name of the enum value. For example,
+   *   `my_new_enum_value`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3296,6 +3365,324 @@ export class DataCatalogClient {
   }
 
   /**
+   * `ReconcileTags` creates or updates a list of tags on the entry.
+   * If the
+   * {@link google.cloud.datacatalog.v1.ReconcileTagsRequest.force_delete_missing|ReconcileTagsRequest.force_delete_missing}
+   * parameter is set, the operation deletes tags not included in the input tag
+   * list.
+   *
+   * `ReconcileTags` returns a [long-running operation]
+   * [google.longrunning.Operation] resource that can be queried with
+   * {@link google.longrunning.Operations.GetOperation|Operations.GetOperation}
+   * to return [ReconcileTagsMetadata]
+   * [google.cloud.datacatalog.v1.ReconcileTagsMetadata] and
+   * a [ReconcileTagsResponse]
+   * [google.cloud.datacatalog.v1.ReconcileTagsResponse] message.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of {@link google.cloud.datacatalog.v1.Entry|Entry} to be tagged.
+   * @param {string} request.tagTemplate
+   *   Required. The name of the tag template, which is used for reconciliation.
+   * @param {boolean} request.forceDeleteMissing
+   *   If set to `true`, deletes entry tags related to a tag template
+   *   not listed in the tags source from an entry. If set to `false`,
+   *   unlisted tags are retained.
+   * @param {number[]} request.tags
+   *   A list of tags to apply to an entry. A tag can specify a
+   *   tag template, which must be the template specified in the
+   *   `ReconcileTagsRequest`.
+   *   The sole entry and each of its columns must be mentioned at most once.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.reconcile_tags.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_ReconcileTags_async
+   */
+  reconcileTags(
+    request?: protos.google.cloud.datacatalog.v1.IReconcileTagsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
+        protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  reconcileTags(
+    request: protos.google.cloud.datacatalog.v1.IReconcileTagsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
+        protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reconcileTags(
+    request: protos.google.cloud.datacatalog.v1.IReconcileTagsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
+        protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reconcileTags(
+    request?: protos.google.cloud.datacatalog.v1.IReconcileTagsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
+            protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
+        protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
+        protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.reconcileTags(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `reconcileTags()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.reconcile_tags.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_ReconcileTags_async
+   */
+  async checkReconcileTagsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datacatalog.v1.ReconcileTagsResponse,
+      protos.google.cloud.datacatalog.v1.ReconcileTagsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.reconcileTags,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datacatalog.v1.ReconcileTagsResponse,
+      protos.google.cloud.datacatalog.v1.ReconcileTagsMetadata
+    >;
+  }
+  /**
+   * Imports entries from a source, such as data previously dumped into a
+   * Cloud Storage bucket, into Data Catalog. Import of entries
+   * is a sync operation that reconciles the state of the third-party system
+   * with the Data Catalog.
+   *
+   * `ImportEntries` accepts source data snapshots of a third-party system.
+   * Snapshot should be delivered as a .wire or base65-encoded .txt file
+   * containing a sequence of Protocol Buffer messages of
+   * {@link google.cloud.datacatalog.v1.DumpItem|DumpItem} type.
+   *
+   * `ImportEntries` returns a [long-running operation]
+   * [google.longrunning.Operation] resource that can be queried with
+   * {@link google.longrunning.Operations.GetOperation|Operations.GetOperation}
+   * to return
+   * {@link google.cloud.datacatalog.v1.ImportEntriesMetadata|ImportEntriesMetadata}
+   * and an
+   * {@link google.cloud.datacatalog.v1.ImportEntriesResponse|ImportEntriesResponse}
+   * message.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Target entry group for ingested entries.
+   * @param {string} request.gcsBucketPath
+   *   Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.import_entries.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_ImportEntries_async
+   */
+  importEntries(
+    request?: protos.google.cloud.datacatalog.v1.IImportEntriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
+        protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  importEntries(
+    request: protos.google.cloud.datacatalog.v1.IImportEntriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
+        protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importEntries(
+    request: protos.google.cloud.datacatalog.v1.IImportEntriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
+        protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importEntries(
+    request?: protos.google.cloud.datacatalog.v1.IImportEntriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
+            protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
+        protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
+        protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importEntries(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importEntries()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.import_entries.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_ImportEntries_async
+   */
+  async checkImportEntriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datacatalog.v1.ImportEntriesResponse,
+      protos.google.cloud.datacatalog.v1.ImportEntriesMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importEntries,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datacatalog.v1.ImportEntriesResponse,
+      protos.google.cloud.datacatalog.v1.ImportEntriesMetadata
+    >;
+  }
+  /**
    * Searches Data Catalog for multiple resources like entries and tags that
    * match a query.
    *
@@ -3321,9 +3708,8 @@ export class DataCatalogClient {
    *   empty AND `include_gcp_public_datasets` is set to `false`. In this case,
    *   the request returns an error.
    * @param {string} [request.query]
-   *   Optional. The query string with a minimum of 3 characters and specific syntax.
-   *   For more information, see
-   *   [Data Catalog search
+   *   Optional. The query string with a minimum of 3 characters and specific
+   *   syntax. For more information, see [Data Catalog search
    *   syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
    *
    *   An empty query string returns all data assets (in the specified scope)
@@ -3341,10 +3727,11 @@ export class DataCatalogClient {
    *   The maximum number is 1000. If exceeded, throws an "invalid argument"
    *   exception.
    * @param {string} [request.pageToken]
-   *   Optional. Pagination token that, if specified, returns the next page of search
-   *   results. If empty, returns the first page.
+   *   Optional. Pagination token that, if specified, returns the next page of
+   *   search results. If empty, returns the first page.
    *
-   *   This token is returned in the {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
+   *   This token is returned in the
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
    *   field of the response to a previous
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call.
@@ -3453,9 +3840,8 @@ export class DataCatalogClient {
    *   empty AND `include_gcp_public_datasets` is set to `false`. In this case,
    *   the request returns an error.
    * @param {string} [request.query]
-   *   Optional. The query string with a minimum of 3 characters and specific syntax.
-   *   For more information, see
-   *   [Data Catalog search
+   *   Optional. The query string with a minimum of 3 characters and specific
+   *   syntax. For more information, see [Data Catalog search
    *   syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
    *
    *   An empty query string returns all data assets (in the specified scope)
@@ -3473,10 +3859,11 @@ export class DataCatalogClient {
    *   The maximum number is 1000. If exceeded, throws an "invalid argument"
    *   exception.
    * @param {string} [request.pageToken]
-   *   Optional. Pagination token that, if specified, returns the next page of search
-   *   results. If empty, returns the first page.
+   *   Optional. Pagination token that, if specified, returns the next page of
+   *   search results. If empty, returns the first page.
    *
-   *   This token is returned in the {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
+   *   This token is returned in the
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
    *   field of the response to a previous
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call.
@@ -3533,9 +3920,8 @@ export class DataCatalogClient {
    *   empty AND `include_gcp_public_datasets` is set to `false`. In this case,
    *   the request returns an error.
    * @param {string} [request.query]
-   *   Optional. The query string with a minimum of 3 characters and specific syntax.
-   *   For more information, see
-   *   [Data Catalog search
+   *   Optional. The query string with a minimum of 3 characters and specific
+   *   syntax. For more information, see [Data Catalog search
    *   syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
    *
    *   An empty query string returns all data assets (in the specified scope)
@@ -3553,10 +3939,11 @@ export class DataCatalogClient {
    *   The maximum number is 1000. If exceeded, throws an "invalid argument"
    *   exception.
    * @param {string} [request.pageToken]
-   *   Optional. Pagination token that, if specified, returns the next page of search
-   *   results. If empty, returns the first page.
+   *   Optional. Pagination token that, if specified, returns the next page of
+   *   search results. If empty, returns the first page.
    *
-   *   This token is returned in the {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
+   *   This token is returned in the
+   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
    *   field of the response to a previous
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
    *   call.
@@ -4852,6 +5239,7 @@ export class DataCatalogClient {
       return this.dataCatalogStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
