@@ -7310,6 +7310,9 @@ export namespace google {
                     /** ComputeRoutesRequest languageCode */
                     languageCode?: (string|null);
 
+                    /** ComputeRoutesRequest regionCode */
+                    regionCode?: (string|null);
+
                     /** ComputeRoutesRequest units */
                     units?: (google.maps.routing.v2.Units|keyof typeof google.maps.routing.v2.Units|null);
 
@@ -7361,6 +7364,9 @@ export namespace google {
 
                     /** ComputeRoutesRequest languageCode. */
                     public languageCode: string;
+
+                    /** ComputeRoutesRequest regionCode. */
+                    public regionCode: string;
 
                     /** ComputeRoutesRequest units. */
                     public units: (google.maps.routing.v2.Units|keyof typeof google.maps.routing.v2.Units);
@@ -7593,6 +7599,12 @@ export namespace google {
                     /** ComputeRouteMatrixRequest departureTime */
                     departureTime?: (google.protobuf.ITimestamp|null);
 
+                    /** ComputeRouteMatrixRequest languageCode */
+                    languageCode?: (string|null);
+
+                    /** ComputeRouteMatrixRequest regionCode */
+                    regionCode?: (string|null);
+
                     /** ComputeRouteMatrixRequest extraComputations */
                     extraComputations?: (google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[]|null);
                 }
@@ -7620,6 +7632,12 @@ export namespace google {
 
                     /** ComputeRouteMatrixRequest departureTime. */
                     public departureTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ComputeRouteMatrixRequest languageCode. */
+                    public languageCode: string;
+
+                    /** ComputeRouteMatrixRequest regionCode. */
+                    public regionCode: string;
 
                     /** ComputeRouteMatrixRequest extraComputations. */
                     public extraComputations: google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[];
