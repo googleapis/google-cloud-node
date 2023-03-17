@@ -20,13 +20,11 @@ import * as path from 'path';
 import yargs = require('yargs');
 import {Bucket, Storage, TransferManager} from '../src';
 
-export const BLOCK_SIZE_IN_BYTES = 1024;
 export const NODE_DEFAULT_HIGHWATER_MARK_BYTES = 16384;
 export const DEFAULT_DIRECTORY_PROBABILITY = 0.1;
 export const DEFAULT_NUMBER_OF_OBJECTS = 1000;
 
 export const OUTPUT_FORMATS = {
-  CSV: 'cloud-monitoring-csv',
   CLOUD_MONITORING: 'cloud-monitoring',
 } as const;
 
@@ -54,18 +52,21 @@ const DEFAULT_MINIMUM_READ_OFFSET_BYTES = 0;
 const DEFAULT_MAXIMUM_READ_OFFSET_BYTES = 0;
 
 export interface TestResult {
-  op: string;
+  library: 'nodejs';
+  op: 'WRITE' | 'READ[0]' | 'READ[1]' | 'READ[2]';
   objectSize: number;
+  transferSize: number;
+  transferOffset: number;
   appBufferSize: number;
-  libBufferSize: number;
-  crc32Enabled: boolean;
+  crc32cEnabled: boolean;
   md5Enabled: boolean;
-  apiName: 'JSON' | 'XML';
-  elapsedTimeUs: number;
+  api: 'JSON' | 'XML' | 'GRPC' | 'DirectPath';
   cpuTimeUs: number;
-  status: '[OK]';
+  status: 'OK' | 'FAIL' | 'TIMEOUT';
   chunkSize: number;
   workers: number;
+  bucketName: string;
+  elapsedTimeUs: number;
 }
 
 export interface Arguments {
@@ -93,7 +94,7 @@ export const performanceTestCommand: yargs.CommandModule<{}, Arguments> = {
       .option('bucket', {type: 'string', demand: true})
       .option('output_type', {
         type: 'string',
-        choices: [OUTPUT_FORMATS.CSV, OUTPUT_FORMATS.CLOUD_MONITORING],
+        choices: [OUTPUT_FORMATS.CLOUD_MONITORING],
         default: OUTPUT_FORMATS.CLOUD_MONITORING,
       })
       .option('samples', {type: 'number', default: DEFAULT_SAMPLES})
@@ -344,8 +345,7 @@ export function getValidationType(): 'md5' | 'crc32c' | boolean | undefined {
  * @returns {AsyncGenerator<string>} A string containing the results of the conversion to cloud monitoring format.
  */
 export async function* convertToCloudMonitoringFormat(
-  results: TestResult[],
-  bucketName: string
+  results: TestResult[]
 ): AsyncGenerator<string> {
   for (const curResult of results) {
     const throughput =
@@ -356,40 +356,21 @@ export async function* convertToCloudMonitoringFormat(
           1024 /
           (curResult.elapsedTimeUs / 1000000)
         : curResult.objectSize / 1024 / (curResult.elapsedTimeUs / 1000000);
-    yield `throughput{timestamp=${new Date()},\
-    library="nodejs-storage",\
-    api="${curResult.apiName}",\
+    yield `throughput{\
+    library="${curResult.library}",\
+    api="${curResult.api}",\
     op="${curResult.op}",\
     object_size="${curResult.objectSize}",\
-    transfer_offset="0",\
+    transfer_offset="${curResult.transferOffset}",\
     transfer_size="${curResult.chunkSize}",\
     app_buffer_size="${curResult.appBufferSize}",\
-    crc32c_enabled="${curResult.crc32Enabled}",\
+    crc32c_enabled="${curResult.crc32cEnabled}",\
     md5_enabled="${curResult.md5Enabled}",\
-    elapsed_time_us="${curResult.elapsedTimeUs}",\
     cpu_time_us="${curResult.cpuTimeUs}",\
-    elapsedmicroseconds="${curResult.elapsedTimeUs}",\
-    peer="",\
-    bucket_name="${bucketName}",\
-    object_name="",\
-    generation="",\
-    upload_id="",\
-    retry_count="",\
+    bucket_name="${curResult.bucketName}",\
     workers="${curResult.workers}",\
     status_code="${curResult.status}"} ${throughput}`;
   }
-}
-
-/**
- * Converts the supplied test results from javascript objects to a CSV formatted string.
- *
- * @param {TestResult[]} results An array of test iteration result objects that will be converted to CSV format.
- *
- * @returns {string} A string containnig the the CSV results of the conversion.
- */
-export function convertToCSVFormat(results: TestResult[]): string {
-  const csv = results.map(result => Object.values(result));
-  return csv.join('\n');
 }
 
 /**

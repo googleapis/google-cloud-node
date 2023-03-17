@@ -20,7 +20,6 @@ import {performance} from 'perf_hooks';
 import {parentPort} from 'worker_threads';
 import * as path from 'path';
 import {
-  BLOCK_SIZE_IN_BYTES,
   cleanupFile,
   generateRandomFile,
   generateRandomFileName,
@@ -89,18 +88,21 @@ async function performRangedReadTest(): Promise<TestResult[]> {
   const destination = path.join(__dirname, destinationFileName);
 
   const iterationResult: TestResult = {
-    op: 'READ',
+    op: 'READ[0]',
     objectSize: sizeInBytes,
-    appBufferSize: BLOCK_SIZE_IN_BYTES,
-    libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-    crc32Enabled: false,
+    appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+    crc32cEnabled: false,
     md5Enabled: false,
-    apiName: 'JSON',
+    api: 'JSON',
     elapsedTimeUs: 0,
     cpuTimeUs: -1,
-    status: '[OK]',
+    status: 'OK',
     chunkSize: argv.range_read_size,
     workers: argv.workers,
+    library: 'nodejs',
+    transferSize: argv.range_read_size,
+    transferOffset: 0,
+    bucketName: bucket.name,
   };
 
   await bucket.upload(`${__dirname}/${fileName}`);
@@ -147,16 +149,19 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     const iterationResult: TestResult = {
       op: 'WRITE',
       objectSize: sizeInBytes,
-      appBufferSize: BLOCK_SIZE_IN_BYTES,
-      libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-      crc32Enabled: checkType === 'crc32c',
+      appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+      crc32cEnabled: checkType === 'crc32c',
       md5Enabled: checkType === 'md5',
-      apiName: 'JSON',
+      api: 'JSON',
       elapsedTimeUs: 0,
       cpuTimeUs: -1,
-      status: '[OK]',
+      status: 'OK',
       chunkSize: sizeInBytes,
       workers: argv.workers,
+      library: 'nodejs',
+      transferSize: sizeInBytes,
+      transferOffset: 0,
+      bucketName: bucket.name,
     };
 
     start = performance.now();
@@ -168,18 +173,21 @@ async function performWriteReadTest(): Promise<TestResult[]> {
   }
 
   const iterationResult: TestResult = {
-    op: 'READ',
+    op: 'READ[0]',
     objectSize: sizeInBytes,
-    appBufferSize: BLOCK_SIZE_IN_BYTES,
-    libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-    crc32Enabled: checkType === 'crc32c',
+    appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+    crc32cEnabled: checkType === 'crc32c',
     md5Enabled: checkType === 'md5',
-    apiName: 'JSON',
+    api: 'JSON',
     elapsedTimeUs: 0,
     cpuTimeUs: -1,
-    status: '[OK]',
+    status: 'OK',
     chunkSize: sizeInBytes,
     workers: argv.workers,
+    library: 'nodejs',
+    transferSize: sizeInBytes,
+    transferOffset: 0,
+    bucketName: bucket.name,
   };
 
   for (let j = 0; j < DEFAULT_NUMBER_OF_READS; j++) {

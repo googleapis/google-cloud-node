@@ -19,19 +19,12 @@ import {appendFile} from 'fs/promises';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {Worker} from 'worker_threads';
 import {
-  convertToCSVFormat,
   convertToCloudMonitoringFormat,
   TestResult,
   log,
   performanceTestCommand,
-  OUTPUT_FORMATS,
   PERFORMANCE_TEST_TYPES,
 } from './performanceUtils';
-import {existsSync} from 'fs';
-import {writeFile} from 'fs/promises';
-
-const CSV_HEADERS =
-  'Op,ObjectSize,AppBufferSize,LibBufferSize,Crc32cEnabled,MD5Enabled,ApiName,ElapsedTimeUs,CpuTimeUs,Status\n';
 
 const argv = yargs(process.argv.slice(2))
   .command(performanceTestCommand)
@@ -122,30 +115,13 @@ async function recordResult(results: TestResult[] | TestResult) {
   const resultsToAppend: TestResult[] = Array.isArray(results)
     ? results
     : [results];
-  if (
-    argv.file_name &&
-    argv.output_type === OUTPUT_FORMATS.CSV &&
-    !existsSync(argv.file_name)
-  ) {
-    await writeFile(argv.file_name, CSV_HEADERS);
-  }
 
-  if (argv.output_type === OUTPUT_FORMATS.CSV) {
+  for await (const outputString of convertToCloudMonitoringFormat(
+    resultsToAppend
+  )) {
     argv.file_name
-      ? await appendFile(
-          argv.file_name,
-          `${convertToCSVFormat(resultsToAppend)}\n`
-        )
-      : log(convertToCSVFormat(resultsToAppend), true);
-  } else if (argv.output_type === OUTPUT_FORMATS.CLOUD_MONITORING) {
-    for await (const outputString of convertToCloudMonitoringFormat(
-      resultsToAppend,
-      argv.bucket!
-    )) {
-      argv.file_name
-        ? await appendFile(argv.file_name, `${outputString}\n`)
-        : log(outputString, true);
-    }
+      ? await appendFile(argv.file_name, `${outputString}\n`)
+      : log(outputString, true);
   }
 }
 

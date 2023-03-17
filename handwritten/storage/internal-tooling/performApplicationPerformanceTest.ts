@@ -27,7 +27,6 @@ import {performance} from 'perf_hooks';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
 import {
-  BLOCK_SIZE_IN_BYTES,
   NODE_DEFAULT_HIGHWATER_MARK_BYTES,
   generateRandomDirectoryStructure,
   getValidationType,
@@ -53,20 +52,7 @@ const argv = yargs(process.argv.slice(2))
  * to the parent thread.
  */
 async function main() {
-  let result: TestResult = {
-    op: '',
-    objectSize: 0,
-    appBufferSize: 0,
-    libBufferSize: 0,
-    crc32Enabled: false,
-    md5Enabled: false,
-    apiName: 'JSON',
-    elapsedTimeUs: 0,
-    cpuTimeUs: 0,
-    status: '[OK]',
-    chunkSize: 0,
-    workers: argv.workers,
-  };
+  let result: TestResult | undefined = undefined;
 
   ({bucket} = await performanceTestSetup(argv.project!, argv.bucket!));
 
@@ -139,16 +125,19 @@ async function performWriteTest(): Promise<TestResult> {
   const result: TestResult = {
     op: 'WRITE',
     objectSize: creationInfo.totalSizeInBytes,
-    appBufferSize: BLOCK_SIZE_IN_BYTES,
-    libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-    crc32Enabled: checkType === 'crc32c',
+    appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+    crc32cEnabled: checkType === 'crc32c',
     md5Enabled: checkType === 'md5',
-    apiName: 'JSON',
+    api: 'JSON',
     elapsedTimeUs: Math.round((end - start) * 1000),
     cpuTimeUs: -1,
-    status: '[OK]',
+    status: 'OK',
     chunkSize: creationInfo.totalSizeInBytes,
     workers: argv.workers,
+    library: 'nodejs',
+    transferSize: creationInfo.totalSizeInBytes,
+    transferOffset: 0,
+    bucketName: bucket.name,
   };
   return result;
 }
@@ -174,18 +163,21 @@ async function performReadTest(): Promise<TestResult> {
   const end = performance.now();
 
   const result: TestResult = {
-    op: 'READ',
+    op: 'READ[0]',
     objectSize: creationInfo.totalSizeInBytes,
-    appBufferSize: BLOCK_SIZE_IN_BYTES,
-    libBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
-    crc32Enabled: checkType === 'crc32c',
+    appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
+    crc32cEnabled: checkType === 'crc32c',
     md5Enabled: checkType === 'md5',
-    apiName: 'JSON',
+    api: 'JSON',
     elapsedTimeUs: Math.round((end - start) * 1000),
     cpuTimeUs: -1,
-    status: '[OK]',
+    status: 'OK',
     chunkSize: creationInfo.totalSizeInBytes,
     workers: argv.workers,
+    library: 'nodejs',
+    transferSize: creationInfo.totalSizeInBytes,
+    transferOffset: 0,
+    bucketName: bucket.name,
   };
 
   rmSync(TEST_NAME_STRING, {recursive: true, force: true});
