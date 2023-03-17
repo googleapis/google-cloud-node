@@ -33,7 +33,8 @@ function main(name, newEnumValueDisplayName) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The new display name of the enum value. For example, `my_new_enum_value`.
+   *  Required. The new display name of the enum value. For example,
+   *  `my_new_enum_value`.
    */
   // const newEnumValueDisplayName = 'abc123'
 

@@ -472,7 +472,16 @@ export namespace google {
                     BIGQUERY = 1,
                     CLOUD_PUBSUB = 2,
                     DATAPROC_METASTORE = 3,
-                    DATAPLEX = 4
+                    DATAPLEX = 4,
+                    CLOUD_SQL = 8,
+                    LOOKER = 9
+                }
+
+                /** ManagingSystem enum. */
+                enum ManagingSystem {
+                    MANAGING_SYSTEM_UNSPECIFIED = 0,
+                    MANAGING_SYSTEM_DATAPLEX = 1,
+                    MANAGING_SYSTEM_OTHER = 2
                 }
 
                 /** Properties of a DataSource. */
@@ -1105,6 +1114,20 @@ export namespace google {
                     public listTags(request: google.cloud.datacatalog.v1.IListTagsRequest): Promise<google.cloud.datacatalog.v1.ListTagsResponse>;
 
                     /**
+                     * Calls ReconcileTags.
+                     * @param request ReconcileTagsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public reconcileTags(request: google.cloud.datacatalog.v1.IReconcileTagsRequest, callback: google.cloud.datacatalog.v1.DataCatalog.ReconcileTagsCallback): void;
+
+                    /**
+                     * Calls ReconcileTags.
+                     * @param request ReconcileTagsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public reconcileTags(request: google.cloud.datacatalog.v1.IReconcileTagsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls StarEntry.
                      * @param request StarEntryRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and StarEntryResponse
@@ -1173,6 +1196,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                    /**
+                     * Calls ImportEntries.
+                     * @param request ImportEntriesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importEntries(request: google.cloud.datacatalog.v1.IImportEntriesRequest, callback: google.cloud.datacatalog.v1.DataCatalog.ImportEntriesCallback): void;
+
+                    /**
+                     * Calls ImportEntries.
+                     * @param request ImportEntriesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importEntries(request: google.cloud.datacatalog.v1.IImportEntriesRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DataCatalog {
@@ -1367,6 +1404,13 @@ export namespace google {
                     type ListTagsCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1.ListTagsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1.DataCatalog|reconcileTags}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ReconcileTagsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.datacatalog.v1.DataCatalog|starEntry}.
                      * @param error Error, if any
                      * @param [response] StarEntryResponse
@@ -1400,6 +1444,13 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1.DataCatalog|importEntries}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportEntriesCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a SearchCatalogRequest. */
@@ -2934,6 +2985,12 @@ export namespace google {
                     /** Entry userSpecifiedSystem */
                     userSpecifiedSystem?: (string|null);
 
+                    /** Entry sqlDatabaseSystemSpec */
+                    sqlDatabaseSystemSpec?: (google.cloud.datacatalog.v1.ISqlDatabaseSystemSpec|null);
+
+                    /** Entry lookerSystemSpec */
+                    lookerSystemSpec?: (google.cloud.datacatalog.v1.ILookerSystemSpec|null);
+
                     /** Entry gcsFilesetSpec */
                     gcsFilesetSpec?: (google.cloud.datacatalog.v1.IGcsFilesetSpec|null);
 
@@ -3013,6 +3070,12 @@ export namespace google {
                     /** Entry userSpecifiedSystem. */
                     public userSpecifiedSystem?: (string|null);
 
+                    /** Entry sqlDatabaseSystemSpec. */
+                    public sqlDatabaseSystemSpec?: (google.cloud.datacatalog.v1.ISqlDatabaseSystemSpec|null);
+
+                    /** Entry lookerSystemSpec. */
+                    public lookerSystemSpec?: (google.cloud.datacatalog.v1.ILookerSystemSpec|null);
+
                     /** Entry gcsFilesetSpec. */
                     public gcsFilesetSpec?: (google.cloud.datacatalog.v1.IGcsFilesetSpec|null);
 
@@ -3066,6 +3129,9 @@ export namespace google {
 
                     /** Entry system. */
                     public system?: ("integratedSystem"|"userSpecifiedSystem");
+
+                    /** Entry systemSpec. */
+                    public systemSpec?: ("sqlDatabaseSystemSpec"|"lookerSystemSpec");
 
                     /** Entry typeSpec. */
                     public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
@@ -3159,6 +3225,9 @@ export namespace google {
 
                     /** DatabaseTableSpec dataplexTable */
                     dataplexTable?: (google.cloud.datacatalog.v1.IDataplexTableSpec|null);
+
+                    /** DatabaseTableSpec databaseViewSpec */
+                    databaseViewSpec?: (google.cloud.datacatalog.v1.DatabaseTableSpec.IDatabaseViewSpec|null);
                 }
 
                 /** Represents a DatabaseTableSpec. */
@@ -3175,6 +3244,9 @@ export namespace google {
 
                     /** DatabaseTableSpec dataplexTable. */
                     public dataplexTable?: (google.cloud.datacatalog.v1.IDataplexTableSpec|null);
+
+                    /** DatabaseTableSpec databaseViewSpec. */
+                    public databaseViewSpec?: (google.cloud.datacatalog.v1.DatabaseTableSpec.IDatabaseViewSpec|null);
 
                     /**
                      * Creates a new DatabaseTableSpec instance using the specified properties.
@@ -3261,6 +3333,128 @@ export namespace google {
                         TABLE_TYPE_UNSPECIFIED = 0,
                         NATIVE = 1,
                         EXTERNAL = 2
+                    }
+
+                    /** Properties of a DatabaseViewSpec. */
+                    interface IDatabaseViewSpec {
+
+                        /** DatabaseViewSpec viewType */
+                        viewType?: (google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType|keyof typeof google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType|null);
+
+                        /** DatabaseViewSpec baseTable */
+                        baseTable?: (string|null);
+
+                        /** DatabaseViewSpec sqlQuery */
+                        sqlQuery?: (string|null);
+                    }
+
+                    /** Represents a DatabaseViewSpec. */
+                    class DatabaseViewSpec implements IDatabaseViewSpec {
+
+                        /**
+                         * Constructs a new DatabaseViewSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.DatabaseTableSpec.IDatabaseViewSpec);
+
+                        /** DatabaseViewSpec viewType. */
+                        public viewType: (google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType|keyof typeof google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.ViewType);
+
+                        /** DatabaseViewSpec baseTable. */
+                        public baseTable?: (string|null);
+
+                        /** DatabaseViewSpec sqlQuery. */
+                        public sqlQuery?: (string|null);
+
+                        /** DatabaseViewSpec sourceDefinition. */
+                        public sourceDefinition?: ("baseTable"|"sqlQuery");
+
+                        /**
+                         * Creates a new DatabaseViewSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DatabaseViewSpec instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.DatabaseTableSpec.IDatabaseViewSpec): google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec;
+
+                        /**
+                         * Encodes the specified DatabaseViewSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.verify|verify} messages.
+                         * @param message DatabaseViewSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.DatabaseTableSpec.IDatabaseViewSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DatabaseViewSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec.verify|verify} messages.
+                         * @param message DatabaseViewSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.DatabaseTableSpec.IDatabaseViewSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DatabaseViewSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DatabaseViewSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec;
+
+                        /**
+                         * Decodes a DatabaseViewSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DatabaseViewSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec;
+
+                        /**
+                         * Verifies a DatabaseViewSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DatabaseViewSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DatabaseViewSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec;
+
+                        /**
+                         * Creates a plain object from a DatabaseViewSpec message. Also converts values to other types if specified.
+                         * @param message DatabaseViewSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.DatabaseTableSpec.DatabaseViewSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DatabaseViewSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DatabaseViewSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DatabaseViewSpec {
+
+                        /** ViewType enum. */
+                        enum ViewType {
+                            VIEW_TYPE_UNSPECIFIED = 0,
+                            STANDARD_VIEW = 1,
+                            MATERIALIZED_VIEW = 2
+                        }
                     }
                 }
 
@@ -3716,6 +3910,242 @@ export namespace google {
                             INOUT = 3
                         }
                     }
+                }
+
+                /** Properties of a SqlDatabaseSystemSpec. */
+                interface ISqlDatabaseSystemSpec {
+
+                    /** SqlDatabaseSystemSpec sqlEngine */
+                    sqlEngine?: (string|null);
+
+                    /** SqlDatabaseSystemSpec databaseVersion */
+                    databaseVersion?: (string|null);
+
+                    /** SqlDatabaseSystemSpec instanceHost */
+                    instanceHost?: (string|null);
+                }
+
+                /** Represents a SqlDatabaseSystemSpec. */
+                class SqlDatabaseSystemSpec implements ISqlDatabaseSystemSpec {
+
+                    /**
+                     * Constructs a new SqlDatabaseSystemSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ISqlDatabaseSystemSpec);
+
+                    /** SqlDatabaseSystemSpec sqlEngine. */
+                    public sqlEngine: string;
+
+                    /** SqlDatabaseSystemSpec databaseVersion. */
+                    public databaseVersion: string;
+
+                    /** SqlDatabaseSystemSpec instanceHost. */
+                    public instanceHost: string;
+
+                    /**
+                     * Creates a new SqlDatabaseSystemSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlDatabaseSystemSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ISqlDatabaseSystemSpec): google.cloud.datacatalog.v1.SqlDatabaseSystemSpec;
+
+                    /**
+                     * Encodes the specified SqlDatabaseSystemSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.SqlDatabaseSystemSpec.verify|verify} messages.
+                     * @param message SqlDatabaseSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ISqlDatabaseSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlDatabaseSystemSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.SqlDatabaseSystemSpec.verify|verify} messages.
+                     * @param message SqlDatabaseSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ISqlDatabaseSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlDatabaseSystemSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlDatabaseSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.SqlDatabaseSystemSpec;
+
+                    /**
+                     * Decodes a SqlDatabaseSystemSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlDatabaseSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.SqlDatabaseSystemSpec;
+
+                    /**
+                     * Verifies a SqlDatabaseSystemSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlDatabaseSystemSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlDatabaseSystemSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.SqlDatabaseSystemSpec;
+
+                    /**
+                     * Creates a plain object from a SqlDatabaseSystemSpec message. Also converts values to other types if specified.
+                     * @param message SqlDatabaseSystemSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.SqlDatabaseSystemSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlDatabaseSystemSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlDatabaseSystemSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LookerSystemSpec. */
+                interface ILookerSystemSpec {
+
+                    /** LookerSystemSpec parentInstanceId */
+                    parentInstanceId?: (string|null);
+
+                    /** LookerSystemSpec parentInstanceDisplayName */
+                    parentInstanceDisplayName?: (string|null);
+
+                    /** LookerSystemSpec parentModelId */
+                    parentModelId?: (string|null);
+
+                    /** LookerSystemSpec parentModelDisplayName */
+                    parentModelDisplayName?: (string|null);
+
+                    /** LookerSystemSpec parentViewId */
+                    parentViewId?: (string|null);
+
+                    /** LookerSystemSpec parentViewDisplayName */
+                    parentViewDisplayName?: (string|null);
+                }
+
+                /** Represents a LookerSystemSpec. */
+                class LookerSystemSpec implements ILookerSystemSpec {
+
+                    /**
+                     * Constructs a new LookerSystemSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ILookerSystemSpec);
+
+                    /** LookerSystemSpec parentInstanceId. */
+                    public parentInstanceId: string;
+
+                    /** LookerSystemSpec parentInstanceDisplayName. */
+                    public parentInstanceDisplayName: string;
+
+                    /** LookerSystemSpec parentModelId. */
+                    public parentModelId: string;
+
+                    /** LookerSystemSpec parentModelDisplayName. */
+                    public parentModelDisplayName: string;
+
+                    /** LookerSystemSpec parentViewId. */
+                    public parentViewId: string;
+
+                    /** LookerSystemSpec parentViewDisplayName. */
+                    public parentViewDisplayName: string;
+
+                    /**
+                     * Creates a new LookerSystemSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LookerSystemSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ILookerSystemSpec): google.cloud.datacatalog.v1.LookerSystemSpec;
+
+                    /**
+                     * Encodes the specified LookerSystemSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.LookerSystemSpec.verify|verify} messages.
+                     * @param message LookerSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ILookerSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LookerSystemSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.LookerSystemSpec.verify|verify} messages.
+                     * @param message LookerSystemSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ILookerSystemSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LookerSystemSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LookerSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.LookerSystemSpec;
+
+                    /**
+                     * Decodes a LookerSystemSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LookerSystemSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.LookerSystemSpec;
+
+                    /**
+                     * Verifies a LookerSystemSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LookerSystemSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LookerSystemSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.LookerSystemSpec;
+
+                    /**
+                     * Creates a plain object from a LookerSystemSpec message. Also converts values to other types if specified.
+                     * @param message LookerSystemSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.LookerSystemSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LookerSystemSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LookerSystemSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BusinessContext. */
@@ -5690,6 +6120,344 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReconcileTagsRequest. */
+                interface IReconcileTagsRequest {
+
+                    /** ReconcileTagsRequest parent */
+                    parent?: (string|null);
+
+                    /** ReconcileTagsRequest tagTemplate */
+                    tagTemplate?: (string|null);
+
+                    /** ReconcileTagsRequest forceDeleteMissing */
+                    forceDeleteMissing?: (boolean|null);
+
+                    /** ReconcileTagsRequest tags */
+                    tags?: (google.cloud.datacatalog.v1.ITag[]|null);
+                }
+
+                /** Represents a ReconcileTagsRequest. */
+                class ReconcileTagsRequest implements IReconcileTagsRequest {
+
+                    /**
+                     * Constructs a new ReconcileTagsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IReconcileTagsRequest);
+
+                    /** ReconcileTagsRequest parent. */
+                    public parent: string;
+
+                    /** ReconcileTagsRequest tagTemplate. */
+                    public tagTemplate: string;
+
+                    /** ReconcileTagsRequest forceDeleteMissing. */
+                    public forceDeleteMissing: boolean;
+
+                    /** ReconcileTagsRequest tags. */
+                    public tags: google.cloud.datacatalog.v1.ITag[];
+
+                    /**
+                     * Creates a new ReconcileTagsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReconcileTagsRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IReconcileTagsRequest): google.cloud.datacatalog.v1.ReconcileTagsRequest;
+
+                    /**
+                     * Encodes the specified ReconcileTagsRequest message. Does not implicitly {@link google.cloud.datacatalog.v1.ReconcileTagsRequest.verify|verify} messages.
+                     * @param message ReconcileTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IReconcileTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReconcileTagsRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ReconcileTagsRequest.verify|verify} messages.
+                     * @param message ReconcileTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IReconcileTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReconcileTagsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReconcileTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ReconcileTagsRequest;
+
+                    /**
+                     * Decodes a ReconcileTagsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReconcileTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ReconcileTagsRequest;
+
+                    /**
+                     * Verifies a ReconcileTagsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReconcileTagsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReconcileTagsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ReconcileTagsRequest;
+
+                    /**
+                     * Creates a plain object from a ReconcileTagsRequest message. Also converts values to other types if specified.
+                     * @param message ReconcileTagsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ReconcileTagsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReconcileTagsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReconcileTagsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReconcileTagsResponse. */
+                interface IReconcileTagsResponse {
+
+                    /** ReconcileTagsResponse createdTagsCount */
+                    createdTagsCount?: (number|Long|string|null);
+
+                    /** ReconcileTagsResponse updatedTagsCount */
+                    updatedTagsCount?: (number|Long|string|null);
+
+                    /** ReconcileTagsResponse deletedTagsCount */
+                    deletedTagsCount?: (number|Long|string|null);
+                }
+
+                /** Represents a ReconcileTagsResponse. */
+                class ReconcileTagsResponse implements IReconcileTagsResponse {
+
+                    /**
+                     * Constructs a new ReconcileTagsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IReconcileTagsResponse);
+
+                    /** ReconcileTagsResponse createdTagsCount. */
+                    public createdTagsCount: (number|Long|string);
+
+                    /** ReconcileTagsResponse updatedTagsCount. */
+                    public updatedTagsCount: (number|Long|string);
+
+                    /** ReconcileTagsResponse deletedTagsCount. */
+                    public deletedTagsCount: (number|Long|string);
+
+                    /**
+                     * Creates a new ReconcileTagsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReconcileTagsResponse instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IReconcileTagsResponse): google.cloud.datacatalog.v1.ReconcileTagsResponse;
+
+                    /**
+                     * Encodes the specified ReconcileTagsResponse message. Does not implicitly {@link google.cloud.datacatalog.v1.ReconcileTagsResponse.verify|verify} messages.
+                     * @param message ReconcileTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IReconcileTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReconcileTagsResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ReconcileTagsResponse.verify|verify} messages.
+                     * @param message ReconcileTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IReconcileTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReconcileTagsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReconcileTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ReconcileTagsResponse;
+
+                    /**
+                     * Decodes a ReconcileTagsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReconcileTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ReconcileTagsResponse;
+
+                    /**
+                     * Verifies a ReconcileTagsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReconcileTagsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReconcileTagsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ReconcileTagsResponse;
+
+                    /**
+                     * Creates a plain object from a ReconcileTagsResponse message. Also converts values to other types if specified.
+                     * @param message ReconcileTagsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ReconcileTagsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReconcileTagsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReconcileTagsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReconcileTagsMetadata. */
+                interface IReconcileTagsMetadata {
+
+                    /** ReconcileTagsMetadata state */
+                    state?: (google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState|keyof typeof google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState|null);
+
+                    /** ReconcileTagsMetadata errors */
+                    errors?: ({ [k: string]: google.rpc.IStatus }|null);
+                }
+
+                /** Represents a ReconcileTagsMetadata. */
+                class ReconcileTagsMetadata implements IReconcileTagsMetadata {
+
+                    /**
+                     * Constructs a new ReconcileTagsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IReconcileTagsMetadata);
+
+                    /** ReconcileTagsMetadata state. */
+                    public state: (google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState|keyof typeof google.cloud.datacatalog.v1.ReconcileTagsMetadata.ReconciliationState);
+
+                    /** ReconcileTagsMetadata errors. */
+                    public errors: { [k: string]: google.rpc.IStatus };
+
+                    /**
+                     * Creates a new ReconcileTagsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReconcileTagsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IReconcileTagsMetadata): google.cloud.datacatalog.v1.ReconcileTagsMetadata;
+
+                    /**
+                     * Encodes the specified ReconcileTagsMetadata message. Does not implicitly {@link google.cloud.datacatalog.v1.ReconcileTagsMetadata.verify|verify} messages.
+                     * @param message ReconcileTagsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IReconcileTagsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReconcileTagsMetadata message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ReconcileTagsMetadata.verify|verify} messages.
+                     * @param message ReconcileTagsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IReconcileTagsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReconcileTagsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReconcileTagsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ReconcileTagsMetadata;
+
+                    /**
+                     * Decodes a ReconcileTagsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReconcileTagsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ReconcileTagsMetadata;
+
+                    /**
+                     * Verifies a ReconcileTagsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReconcileTagsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReconcileTagsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ReconcileTagsMetadata;
+
+                    /**
+                     * Creates a plain object from a ReconcileTagsMetadata message. Also converts values to other types if specified.
+                     * @param message ReconcileTagsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ReconcileTagsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReconcileTagsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReconcileTagsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReconcileTagsMetadata {
+
+                    /** ReconciliationState enum. */
+                    enum ReconciliationState {
+                        RECONCILIATION_STATE_UNSPECIFIED = 0,
+                        RECONCILIATION_QUEUED = 1,
+                        RECONCILIATION_IN_PROGRESS = 2,
+                        RECONCILIATION_DONE = 3
+                    }
+                }
+
                 /** Properties of a ListEntriesRequest. */
                 interface IListEntriesRequest {
 
@@ -6284,6 +7052,336 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ImportEntriesRequest. */
+                interface IImportEntriesRequest {
+
+                    /** ImportEntriesRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportEntriesRequest gcsBucketPath */
+                    gcsBucketPath?: (string|null);
+                }
+
+                /** Represents an ImportEntriesRequest. */
+                class ImportEntriesRequest implements IImportEntriesRequest {
+
+                    /**
+                     * Constructs a new ImportEntriesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IImportEntriesRequest);
+
+                    /** ImportEntriesRequest parent. */
+                    public parent: string;
+
+                    /** ImportEntriesRequest gcsBucketPath. */
+                    public gcsBucketPath?: (string|null);
+
+                    /** ImportEntriesRequest source. */
+                    public source?: "gcsBucketPath";
+
+                    /**
+                     * Creates a new ImportEntriesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportEntriesRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IImportEntriesRequest): google.cloud.datacatalog.v1.ImportEntriesRequest;
+
+                    /**
+                     * Encodes the specified ImportEntriesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1.ImportEntriesRequest.verify|verify} messages.
+                     * @param message ImportEntriesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IImportEntriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportEntriesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ImportEntriesRequest.verify|verify} messages.
+                     * @param message ImportEntriesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IImportEntriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportEntriesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportEntriesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ImportEntriesRequest;
+
+                    /**
+                     * Decodes an ImportEntriesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportEntriesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ImportEntriesRequest;
+
+                    /**
+                     * Verifies an ImportEntriesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportEntriesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportEntriesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ImportEntriesRequest;
+
+                    /**
+                     * Creates a plain object from an ImportEntriesRequest message. Also converts values to other types if specified.
+                     * @param message ImportEntriesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ImportEntriesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportEntriesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportEntriesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportEntriesResponse. */
+                interface IImportEntriesResponse {
+
+                    /** ImportEntriesResponse upsertedEntriesCount */
+                    upsertedEntriesCount?: (number|Long|string|null);
+
+                    /** ImportEntriesResponse deletedEntriesCount */
+                    deletedEntriesCount?: (number|Long|string|null);
+                }
+
+                /** Represents an ImportEntriesResponse. */
+                class ImportEntriesResponse implements IImportEntriesResponse {
+
+                    /**
+                     * Constructs a new ImportEntriesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IImportEntriesResponse);
+
+                    /** ImportEntriesResponse upsertedEntriesCount. */
+                    public upsertedEntriesCount?: (number|Long|string|null);
+
+                    /** ImportEntriesResponse deletedEntriesCount. */
+                    public deletedEntriesCount?: (number|Long|string|null);
+
+                    /** ImportEntriesResponse _upsertedEntriesCount. */
+                    public _upsertedEntriesCount?: "upsertedEntriesCount";
+
+                    /** ImportEntriesResponse _deletedEntriesCount. */
+                    public _deletedEntriesCount?: "deletedEntriesCount";
+
+                    /**
+                     * Creates a new ImportEntriesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportEntriesResponse instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IImportEntriesResponse): google.cloud.datacatalog.v1.ImportEntriesResponse;
+
+                    /**
+                     * Encodes the specified ImportEntriesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1.ImportEntriesResponse.verify|verify} messages.
+                     * @param message ImportEntriesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IImportEntriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportEntriesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ImportEntriesResponse.verify|verify} messages.
+                     * @param message ImportEntriesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IImportEntriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportEntriesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportEntriesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ImportEntriesResponse;
+
+                    /**
+                     * Decodes an ImportEntriesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportEntriesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ImportEntriesResponse;
+
+                    /**
+                     * Verifies an ImportEntriesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportEntriesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportEntriesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ImportEntriesResponse;
+
+                    /**
+                     * Creates a plain object from an ImportEntriesResponse message. Also converts values to other types if specified.
+                     * @param message ImportEntriesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ImportEntriesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportEntriesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportEntriesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportEntriesMetadata. */
+                interface IImportEntriesMetadata {
+
+                    /** ImportEntriesMetadata state */
+                    state?: (google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState|keyof typeof google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState|null);
+
+                    /** ImportEntriesMetadata errors */
+                    errors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents an ImportEntriesMetadata. */
+                class ImportEntriesMetadata implements IImportEntriesMetadata {
+
+                    /**
+                     * Constructs a new ImportEntriesMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IImportEntriesMetadata);
+
+                    /** ImportEntriesMetadata state. */
+                    public state: (google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState|keyof typeof google.cloud.datacatalog.v1.ImportEntriesMetadata.ImportState);
+
+                    /** ImportEntriesMetadata errors. */
+                    public errors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new ImportEntriesMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportEntriesMetadata instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IImportEntriesMetadata): google.cloud.datacatalog.v1.ImportEntriesMetadata;
+
+                    /**
+                     * Encodes the specified ImportEntriesMetadata message. Does not implicitly {@link google.cloud.datacatalog.v1.ImportEntriesMetadata.verify|verify} messages.
+                     * @param message ImportEntriesMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IImportEntriesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportEntriesMetadata message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ImportEntriesMetadata.verify|verify} messages.
+                     * @param message ImportEntriesMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IImportEntriesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportEntriesMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportEntriesMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ImportEntriesMetadata;
+
+                    /**
+                     * Decodes an ImportEntriesMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportEntriesMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ImportEntriesMetadata;
+
+                    /**
+                     * Verifies an ImportEntriesMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportEntriesMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportEntriesMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ImportEntriesMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportEntriesMetadata message. Also converts values to other types if specified.
+                     * @param message ImportEntriesMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ImportEntriesMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportEntriesMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportEntriesMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportEntriesMetadata {
+
+                    /** ImportState enum. */
+                    enum ImportState {
+                        IMPORT_STATE_UNSPECIFIED = 0,
+                        IMPORT_QUEUED = 1,
+                        IMPORT_IN_PROGRESS = 2,
+                        IMPORT_DONE = 3,
+                        IMPORT_OBSOLETE = 4
+                    }
+                }
+
                 /** Properties of a ModifyEntryOverviewRequest. */
                 interface IModifyEntryOverviewRequest {
 
@@ -6503,7 +7601,11 @@ export namespace google {
                     ROUTINE = 9,
                     LAKE = 10,
                     ZONE = 11,
-                    SERVICE = 14
+                    SERVICE = 14,
+                    DATABASE_SCHEMA = 15,
+                    DASHBOARD = 16,
+                    EXPLORE = 17,
+                    LOOK = 18
                 }
 
                 /** Properties of a DataplexSpec. */
@@ -8072,8 +9174,23 @@ export namespace google {
                     /** ColumnSchema mode */
                     mode?: (string|null);
 
+                    /** ColumnSchema defaultValue */
+                    defaultValue?: (string|null);
+
+                    /** ColumnSchema ordinalPosition */
+                    ordinalPosition?: (number|null);
+
+                    /** ColumnSchema highestIndexingType */
+                    highestIndexingType?: (google.cloud.datacatalog.v1.ColumnSchema.IndexingType|keyof typeof google.cloud.datacatalog.v1.ColumnSchema.IndexingType|null);
+
                     /** ColumnSchema subcolumns */
                     subcolumns?: (google.cloud.datacatalog.v1.IColumnSchema[]|null);
+
+                    /** ColumnSchema lookerColumnSpec */
+                    lookerColumnSpec?: (google.cloud.datacatalog.v1.ColumnSchema.ILookerColumnSpec|null);
+
+                    /** ColumnSchema gcRule */
+                    gcRule?: (string|null);
                 }
 
                 /** Represents a ColumnSchema. */
@@ -8097,8 +9214,26 @@ export namespace google {
                     /** ColumnSchema mode. */
                     public mode: string;
 
+                    /** ColumnSchema defaultValue. */
+                    public defaultValue: string;
+
+                    /** ColumnSchema ordinalPosition. */
+                    public ordinalPosition: number;
+
+                    /** ColumnSchema highestIndexingType. */
+                    public highestIndexingType: (google.cloud.datacatalog.v1.ColumnSchema.IndexingType|keyof typeof google.cloud.datacatalog.v1.ColumnSchema.IndexingType);
+
                     /** ColumnSchema subcolumns. */
                     public subcolumns: google.cloud.datacatalog.v1.IColumnSchema[];
+
+                    /** ColumnSchema lookerColumnSpec. */
+                    public lookerColumnSpec?: (google.cloud.datacatalog.v1.ColumnSchema.ILookerColumnSpec|null);
+
+                    /** ColumnSchema gcRule. */
+                    public gcRule: string;
+
+                    /** ColumnSchema systemSpec. */
+                    public systemSpec?: "lookerColumnSpec";
 
                     /**
                      * Creates a new ColumnSchema instance using the specified properties.
@@ -8176,6 +9311,128 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ColumnSchema {
+
+                    /** IndexingType enum. */
+                    enum IndexingType {
+                        INDEXING_TYPE_UNSPECIFIED = 0,
+                        INDEXING_TYPE_NONE = 1,
+                        INDEXING_TYPE_NON_UNIQUE = 2,
+                        INDEXING_TYPE_UNIQUE = 3,
+                        INDEXING_TYPE_PRIMARY_KEY = 4
+                    }
+
+                    /** Properties of a LookerColumnSpec. */
+                    interface ILookerColumnSpec {
+
+                        /** LookerColumnSpec type */
+                        type?: (google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec.LookerColumnType|keyof typeof google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec.LookerColumnType|null);
+                    }
+
+                    /** Represents a LookerColumnSpec. */
+                    class LookerColumnSpec implements ILookerColumnSpec {
+
+                        /**
+                         * Constructs a new LookerColumnSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.ColumnSchema.ILookerColumnSpec);
+
+                        /** LookerColumnSpec type. */
+                        public type: (google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec.LookerColumnType|keyof typeof google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec.LookerColumnType);
+
+                        /**
+                         * Creates a new LookerColumnSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LookerColumnSpec instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.ColumnSchema.ILookerColumnSpec): google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec;
+
+                        /**
+                         * Encodes the specified LookerColumnSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec.verify|verify} messages.
+                         * @param message LookerColumnSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.ColumnSchema.ILookerColumnSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LookerColumnSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec.verify|verify} messages.
+                         * @param message LookerColumnSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.ColumnSchema.ILookerColumnSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LookerColumnSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LookerColumnSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec;
+
+                        /**
+                         * Decodes a LookerColumnSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LookerColumnSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec;
+
+                        /**
+                         * Verifies a LookerColumnSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LookerColumnSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LookerColumnSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec;
+
+                        /**
+                         * Creates a plain object from a LookerColumnSpec message. Also converts values to other types if specified.
+                         * @param message LookerColumnSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LookerColumnSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LookerColumnSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LookerColumnSpec {
+
+                        /** LookerColumnType enum. */
+                        enum LookerColumnType {
+                            LOOKER_COLUMN_TYPE_UNSPECIFIED = 0,
+                            DIMENSION = 1,
+                            DIMENSION_GROUP = 2,
+                            FILTER = 3,
+                            MEASURE = 4,
+                            PARAMETER = 5
+                        }
+                    }
                 }
 
                 /** Properties of a SearchCatalogResult. */
@@ -9808,6 +11065,106 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CommonUsageStats. */
+                interface ICommonUsageStats {
+
+                    /** CommonUsageStats viewCount */
+                    viewCount?: (number|Long|string|null);
+                }
+
+                /** Represents a CommonUsageStats. */
+                class CommonUsageStats implements ICommonUsageStats {
+
+                    /**
+                     * Constructs a new CommonUsageStats.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ICommonUsageStats);
+
+                    /** CommonUsageStats viewCount. */
+                    public viewCount?: (number|Long|string|null);
+
+                    /** CommonUsageStats _viewCount. */
+                    public _viewCount?: "viewCount";
+
+                    /**
+                     * Creates a new CommonUsageStats instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CommonUsageStats instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ICommonUsageStats): google.cloud.datacatalog.v1.CommonUsageStats;
+
+                    /**
+                     * Encodes the specified CommonUsageStats message. Does not implicitly {@link google.cloud.datacatalog.v1.CommonUsageStats.verify|verify} messages.
+                     * @param message CommonUsageStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ICommonUsageStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CommonUsageStats message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CommonUsageStats.verify|verify} messages.
+                     * @param message CommonUsageStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ICommonUsageStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CommonUsageStats message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CommonUsageStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CommonUsageStats;
+
+                    /**
+                     * Decodes a CommonUsageStats message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CommonUsageStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CommonUsageStats;
+
+                    /**
+                     * Verifies a CommonUsageStats message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CommonUsageStats message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CommonUsageStats
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CommonUsageStats;
+
+                    /**
+                     * Creates a plain object from a CommonUsageStats message. Also converts values to other types if specified.
+                     * @param message CommonUsageStats
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.CommonUsageStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CommonUsageStats to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CommonUsageStats
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a UsageSignal. */
                 interface IUsageSignal {
 
@@ -9816,6 +11173,12 @@ export namespace google {
 
                     /** UsageSignal usageWithinTimeRange */
                     usageWithinTimeRange?: ({ [k: string]: google.cloud.datacatalog.v1.IUsageStats }|null);
+
+                    /** UsageSignal commonUsageWithinTimeRange */
+                    commonUsageWithinTimeRange?: ({ [k: string]: google.cloud.datacatalog.v1.ICommonUsageStats }|null);
+
+                    /** UsageSignal favoriteCount */
+                    favoriteCount?: (number|Long|string|null);
                 }
 
                 /** Represents a UsageSignal. */
@@ -9832,6 +11195,15 @@ export namespace google {
 
                     /** UsageSignal usageWithinTimeRange. */
                     public usageWithinTimeRange: { [k: string]: google.cloud.datacatalog.v1.IUsageStats };
+
+                    /** UsageSignal commonUsageWithinTimeRange. */
+                    public commonUsageWithinTimeRange: { [k: string]: google.cloud.datacatalog.v1.ICommonUsageStats };
+
+                    /** UsageSignal favoriteCount. */
+                    public favoriteCount?: (number|Long|string|null);
+
+                    /** UsageSignal _favoriteCount. */
+                    public _favoriteCount?: "favoriteCount";
 
                     /**
                      * Creates a new UsageSignal instance using the specified properties.
@@ -9905,6 +11277,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UsageSignal
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TaggedEntry. */
+                interface ITaggedEntry {
+
+                    /** TaggedEntry v1Entry */
+                    v1Entry?: (google.cloud.datacatalog.v1.IEntry|null);
+
+                    /** TaggedEntry presentTags */
+                    presentTags?: (google.cloud.datacatalog.v1.ITag[]|null);
+
+                    /** TaggedEntry absentTags */
+                    absentTags?: (google.cloud.datacatalog.v1.ITag[]|null);
+                }
+
+                /** Represents a TaggedEntry. */
+                class TaggedEntry implements ITaggedEntry {
+
+                    /**
+                     * Constructs a new TaggedEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ITaggedEntry);
+
+                    /** TaggedEntry v1Entry. */
+                    public v1Entry?: (google.cloud.datacatalog.v1.IEntry|null);
+
+                    /** TaggedEntry presentTags. */
+                    public presentTags: google.cloud.datacatalog.v1.ITag[];
+
+                    /** TaggedEntry absentTags. */
+                    public absentTags: google.cloud.datacatalog.v1.ITag[];
+
+                    /** TaggedEntry entry. */
+                    public entry?: "v1Entry";
+
+                    /**
+                     * Creates a new TaggedEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TaggedEntry instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ITaggedEntry): google.cloud.datacatalog.v1.TaggedEntry;
+
+                    /**
+                     * Encodes the specified TaggedEntry message. Does not implicitly {@link google.cloud.datacatalog.v1.TaggedEntry.verify|verify} messages.
+                     * @param message TaggedEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ITaggedEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TaggedEntry message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.TaggedEntry.verify|verify} messages.
+                     * @param message TaggedEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ITaggedEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TaggedEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TaggedEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.TaggedEntry;
+
+                    /**
+                     * Decodes a TaggedEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TaggedEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.TaggedEntry;
+
+                    /**
+                     * Verifies a TaggedEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TaggedEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TaggedEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.TaggedEntry;
+
+                    /**
+                     * Creates a plain object from a TaggedEntry message. Also converts values to other types if specified.
+                     * @param message TaggedEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.TaggedEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TaggedEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TaggedEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DumpItem. */
+                interface IDumpItem {
+
+                    /** DumpItem taggedEntry */
+                    taggedEntry?: (google.cloud.datacatalog.v1.ITaggedEntry|null);
+                }
+
+                /** Represents a DumpItem. */
+                class DumpItem implements IDumpItem {
+
+                    /**
+                     * Constructs a new DumpItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDumpItem);
+
+                    /** DumpItem taggedEntry. */
+                    public taggedEntry?: (google.cloud.datacatalog.v1.ITaggedEntry|null);
+
+                    /** DumpItem item. */
+                    public item?: "taggedEntry";
+
+                    /**
+                     * Creates a new DumpItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DumpItem instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDumpItem): google.cloud.datacatalog.v1.DumpItem;
+
+                    /**
+                     * Encodes the specified DumpItem message. Does not implicitly {@link google.cloud.datacatalog.v1.DumpItem.verify|verify} messages.
+                     * @param message DumpItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDumpItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DumpItem message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DumpItem.verify|verify} messages.
+                     * @param message DumpItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDumpItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DumpItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DumpItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DumpItem;
+
+                    /**
+                     * Decodes a DumpItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DumpItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DumpItem;
+
+                    /**
+                     * Verifies a DumpItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DumpItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DumpItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DumpItem;
+
+                    /**
+                     * Creates a plain object from a DumpItem message. Also converts values to other types if specified.
+                     * @param message DumpItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DumpItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DumpItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DumpItem
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10228,6 +11812,9 @@ export namespace google {
 
                     /** Taxonomy activatedPolicyTypes */
                     activatedPolicyTypes?: (google.cloud.datacatalog.v1.Taxonomy.PolicyType[]|null);
+
+                    /** Taxonomy service */
+                    service?: (google.cloud.datacatalog.v1.Taxonomy.IService|null);
                 }
 
                 /** Represents a Taxonomy. */
@@ -10256,6 +11843,9 @@ export namespace google {
 
                     /** Taxonomy activatedPolicyTypes. */
                     public activatedPolicyTypes: google.cloud.datacatalog.v1.Taxonomy.PolicyType[];
+
+                    /** Taxonomy service. */
+                    public service?: (google.cloud.datacatalog.v1.Taxonomy.IService|null);
 
                     /**
                      * Creates a new Taxonomy instance using the specified properties.
@@ -10341,6 +11931,109 @@ export namespace google {
                     enum PolicyType {
                         POLICY_TYPE_UNSPECIFIED = 0,
                         FINE_GRAINED_ACCESS_CONTROL = 1
+                    }
+
+                    /** Properties of a Service. */
+                    interface IService {
+
+                        /** Service name */
+                        name?: (google.cloud.datacatalog.v1.ManagingSystem|keyof typeof google.cloud.datacatalog.v1.ManagingSystem|null);
+
+                        /** Service identity */
+                        identity?: (string|null);
+                    }
+
+                    /** Represents a Service. */
+                    class Service implements IService {
+
+                        /**
+                         * Constructs a new Service.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.Taxonomy.IService);
+
+                        /** Service name. */
+                        public name: (google.cloud.datacatalog.v1.ManagingSystem|keyof typeof google.cloud.datacatalog.v1.ManagingSystem);
+
+                        /** Service identity. */
+                        public identity: string;
+
+                        /**
+                         * Creates a new Service instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Service instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.Taxonomy.IService): google.cloud.datacatalog.v1.Taxonomy.Service;
+
+                        /**
+                         * Encodes the specified Service message. Does not implicitly {@link google.cloud.datacatalog.v1.Taxonomy.Service.verify|verify} messages.
+                         * @param message Service message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.Taxonomy.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Service message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.Taxonomy.Service.verify|verify} messages.
+                         * @param message Service message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.Taxonomy.IService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Service message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.Taxonomy.Service;
+
+                        /**
+                         * Decodes a Service message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Service
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.Taxonomy.Service;
+
+                        /**
+                         * Verifies a Service message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Service
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.Taxonomy.Service;
+
+                        /**
+                         * Creates a plain object from a Service message. Also converts values to other types if specified.
+                         * @param message Service
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.Taxonomy.Service, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Service to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Service
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -10779,6 +12472,9 @@ export namespace google {
 
                     /** ListTaxonomiesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListTaxonomiesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListTaxonomiesRequest. */
@@ -10798,6 +12494,9 @@ export namespace google {
 
                     /** ListTaxonomiesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListTaxonomiesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListTaxonomiesRequest instance using the specified properties.
@@ -24398,6 +26097,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -25391,6 +27093,212 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -26999,6 +28907,1091 @@ export namespace google {
 
             /**
              * Gets the default type url for Expr
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace longrunning. */
+    namespace longrunning {
+
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
+        }
+
+        namespace Operations {
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperation);
+
+            /** Operation name. */
+            public name: string;
+
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Operation instance
+             */
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
+
+            /**
+             * Verifies an Operation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Operation
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Operation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

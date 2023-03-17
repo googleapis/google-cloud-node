@@ -43,6 +43,11 @@ function main(parent) {
    *  The token is returned in the response to a previous list request.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Supported field for filter is 'service' and value is 'dataplex'.
+   *  Eg: service=dataplex.
+   */
+  // const filter = 'abc123'
 
   // Imports the Datacatalog library
   const {PolicyTagManagerClient} = require('@google-cloud/datacatalog').v1;

@@ -1416,6 +1416,9 @@ export class PolicyTagManagerClient {
    *   the first page is returned.
    *
    *   The token is returned in the response to a previous list request.
+   * @param {string} request.filter
+   *   Supported field for filter is 'service' and value is 'dataplex'.
+   *   Eg: service=dataplex.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1518,6 +1521,9 @@ export class PolicyTagManagerClient {
    *   the first page is returned.
    *
    *   The token is returned in the response to a previous list request.
+   * @param {string} request.filter
+   *   Supported field for filter is 'service' and value is 'dataplex'.
+   *   Eg: service=dataplex.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1568,6 +1574,9 @@ export class PolicyTagManagerClient {
    *   the first page is returned.
    *
    *   The token is returned in the response to a previous list request.
+   * @param {string} request.filter
+   *   Supported field for filter is 'service' and value is 'dataplex'.
+   *   Eg: service=dataplex.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

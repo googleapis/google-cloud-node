@@ -36,9 +36,8 @@ function main(scope) {
    */
   // const scope = {}
   /**
-   *  Optional. The query string with a minimum of 3 characters and specific syntax.
-   *  For more information, see
-   *  Data Catalog search
+   *  Optional. The query string with a minimum of 3 characters and specific
+   *  syntax. For more information, see Data Catalog search
    *  syntax (https://cloud.google.com/data-catalog/docs/how-to/search-reference).
    *  An empty query string returns all data assets (in the specified scope)
    *  that you have access to.
@@ -56,9 +55,10 @@ function main(scope) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. Pagination token that, if specified, returns the next page of search
-   *  results. If empty, returns the first page.
-   *  This token is returned in the SearchCatalogResponse.next_page_token google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token 
+   *  Optional. Pagination token that, if specified, returns the next page of
+   *  search results. If empty, returns the first page.
+   *  This token is returned in the
+   *  SearchCatalogResponse.next_page_token google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token 
    *  field of the response to a previous
    *  SearchCatalogRequest google.cloud.datacatalog.v1.DataCatalog.SearchCatalog 
    *  call.
