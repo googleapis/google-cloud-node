@@ -401,6 +401,140 @@ describe('v1.CloudFilestoreManagerClient', () => {
     });
   });
 
+  describe('getSnapshot', () => {
+    it('invokes getSnapshot without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.GetSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.GetSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.Snapshot()
+      );
+      client.innerApiCalls.getSnapshot = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSnapshot(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSnapshot without error using callback', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.GetSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.GetSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.Snapshot()
+      );
+      client.innerApiCalls.getSnapshot =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSnapshot(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.filestore.v1.ISnapshot | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSnapshot with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.GetSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.GetSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSnapshot = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getSnapshot(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSnapshot with closed client', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.GetSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.GetSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSnapshot(request), expectedError);
+    });
+  });
+
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client =
@@ -1336,6 +1470,610 @@ describe('v1.CloudFilestoreManagerClient', () => {
     });
   });
 
+  describe('createSnapshot', () => {
+    it('invokes createSnapshot without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.CreateSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.CreateSnapshotRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createSnapshot =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createSnapshot(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSnapshot without error using callback', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.CreateSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.CreateSnapshotRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createSnapshot =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSnapshot(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.filestore.v1.ISnapshot,
+              protos.google.cloud.common.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.filestore.v1.ISnapshot,
+        protos.google.cloud.common.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSnapshot with call error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.CreateSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.CreateSnapshotRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSnapshot = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createSnapshot(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSnapshot with LRO error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.CreateSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.CreateSnapshotRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSnapshot = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createSnapshot(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateSnapshotProgress without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateSnapshotProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateSnapshotProgress with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateSnapshotProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteSnapshot', () => {
+    it('invokes deleteSnapshot without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.DeleteSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.DeleteSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteSnapshot =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteSnapshot(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSnapshot without error using callback', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.DeleteSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.DeleteSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteSnapshot =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSnapshot(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.common.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.common.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSnapshot with call error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.DeleteSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.DeleteSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSnapshot = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteSnapshot(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSnapshot with LRO error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.DeleteSnapshotRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.DeleteSnapshotRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSnapshot = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteSnapshot(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteSnapshotProgress without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteSnapshotProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteSnapshotProgress with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteSnapshotProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateSnapshot', () => {
+    it('invokes updateSnapshot without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.UpdateSnapshotRequest()
+      );
+      request.snapshot ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.UpdateSnapshotRequest',
+        ['snapshot', 'name']
+      );
+      request.snapshot.name = defaultValue1;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateSnapshot =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateSnapshot(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSnapshot without error using callback', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.UpdateSnapshotRequest()
+      );
+      request.snapshot ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.UpdateSnapshotRequest',
+        ['snapshot', 'name']
+      );
+      request.snapshot.name = defaultValue1;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateSnapshot =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSnapshot(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.filestore.v1.ISnapshot,
+              protos.google.cloud.common.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.filestore.v1.ISnapshot,
+        protos.google.cloud.common.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSnapshot with call error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.UpdateSnapshotRequest()
+      );
+      request.snapshot ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.UpdateSnapshotRequest',
+        ['snapshot', 'name']
+      );
+      request.snapshot.name = defaultValue1;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSnapshot = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSnapshot(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSnapshot with LRO error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.UpdateSnapshotRequest()
+      );
+      request.snapshot ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.UpdateSnapshotRequest',
+        ['snapshot', 'name']
+      );
+      request.snapshot.name = defaultValue1;
+      const expectedHeaderRequestParams = `snapshot.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSnapshot = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateSnapshot(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateSnapshotProgress without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateSnapshotProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateSnapshotProgress with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateSnapshotProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createBackup', () => {
     it('invokes createBackup without error', async () => {
       const client =
@@ -2236,6 +2974,314 @@ describe('v1.CloudFilestoreManagerClient', () => {
     });
   });
 
+  describe('listSnapshots', () => {
+    it('invokes listSnapshots without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+      ];
+      client.innerApiCalls.listSnapshots = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSnapshots(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSnapshots without error using callback', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+      ];
+      client.innerApiCalls.listSnapshots =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSnapshots(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.filestore.v1.ISnapshot[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSnapshots with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSnapshots = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSnapshots(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSnapshotsStream without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+      ];
+      client.descriptors.page.listSnapshots.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSnapshotsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.filestore.v1.Snapshot[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.filestore.v1.Snapshot) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSnapshots.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSnapshots, request)
+      );
+      assert(
+        (client.descriptors.page.listSnapshots.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSnapshotsStream with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSnapshots.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSnapshotsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.filestore.v1.Snapshot[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.filestore.v1.Snapshot) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSnapshots.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSnapshots, request)
+      );
+      assert(
+        (client.descriptors.page.listSnapshots.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSnapshots without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+        generateSampleMessage(new protos.google.cloud.filestore.v1.Snapshot()),
+      ];
+      client.descriptors.page.listSnapshots.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.filestore.v1.ISnapshot[] = [];
+      const iterable = client.listSnapshotsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSnapshots.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSnapshots.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSnapshots with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1.ListSnapshotsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1.ListSnapshotsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSnapshots.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSnapshotsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.filestore.v1.ISnapshot[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSnapshots.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSnapshots.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client =
@@ -2723,6 +3769,83 @@ describe('v1.CloudFilestoreManagerClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('snapshot', () => {
+      const fakePath = '/rendered/path/snapshot';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        snapshot: 'snapshotValue',
+      };
+      const client =
+        new cloudfilestoremanagerModule.v1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.snapshotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.snapshotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('snapshotPath', () => {
+        const result = client.snapshotPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'snapshotValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.snapshotPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSnapshotName', () => {
+        const result = client.matchProjectFromSnapshotName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.snapshotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSnapshotName', () => {
+        const result = client.matchLocationFromSnapshotName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.snapshotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInstanceFromSnapshotName', () => {
+        const result = client.matchInstanceFromSnapshotName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.snapshotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSnapshotFromSnapshotName', () => {
+        const result = client.matchSnapshotFromSnapshotName(fakePath);
+        assert.strictEqual(result, 'snapshotValue');
+        assert(
+          (client.pathTemplates.snapshotPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
