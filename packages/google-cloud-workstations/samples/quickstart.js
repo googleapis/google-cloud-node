@@ -45,14 +45,14 @@ function main(parent) {
   // Instantiates a client
   const workstationsClient = new WorkstationsClient();
 
-  async function callListUsableWorkstationConfigs() {
+  async function callListWorkstations() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await workstationsClient.listUsableWorkstationConfigsAsync(
+    const iterable = await workstationsClient.listWorkstationsAsync(
       request
     );
     for await (const response of iterable) {
@@ -60,7 +60,7 @@ function main(parent) {
     }
   }
 
-  callListUsableWorkstationConfigs();
+  callListWorkstations();
   // [END workstations_quickstart]
 }
 

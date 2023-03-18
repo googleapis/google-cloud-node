@@ -34,7 +34,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      `node ./quickstart.js projects/${projectId}/locations/us-central1/workstationClusters/cluster-lfdegjrv/workstationConfigs/config-lfdeggbx`,
       {cwd}
     );
     assert(output !== null);
