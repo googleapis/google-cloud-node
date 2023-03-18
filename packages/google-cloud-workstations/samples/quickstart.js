@@ -52,9 +52,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await workstationsClient.listWorkstationsAsync(
-      request
-    );
+    const iterable = await workstationsClient.listWorkstationsAsync(request);
     for await (const response of iterable) {
       console.log(response);
     }
