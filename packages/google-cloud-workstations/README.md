@@ -82,14 +82,14 @@ const {WorkstationsClient} = require('@google-cloud/workstations').v1beta;
 // Instantiates a client
 const workstationsClient = new WorkstationsClient();
 
-async function callListUsableWorkstationConfigs() {
+async function callListWorkstations() {
   // Construct request
   const request = {
     parent,
   };
 
   // Run request
-  const iterable = await workstationsClient.listUsableWorkstationConfigsAsync(
+  const iterable = await workstationsClient.listWorkstationsAsync(
     request
   );
   for await (const response of iterable) {
@@ -97,7 +97,7 @@ async function callListUsableWorkstationConfigs() {
   }
 }
 
-callListUsableWorkstationConfigs();
+callListWorkstations();
 
 ```
 
