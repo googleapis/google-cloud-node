@@ -1060,6 +1060,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1231,12 +1245,27 @@
                           "type": "string",
                           "id": 6
                         },
+                        "dockerRegistry": {
+                          "type": "DockerRegistry",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "dockerRepository": {
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DockerRegistry": {
+                          "values": {
+                            "DOCKER_REGISTRY_UNSPECIFIED": 0,
+                            "CONTAINER_REGISTRY": 1,
+                            "ARTIFACT_REGISTRY": 2
                           }
                         }
                       }
@@ -1258,6 +1287,10 @@
                         "availableMemory": {
                           "type": "string",
                           "id": 13
+                        },
+                        "availableCpu": {
+                          "type": "string",
+                          "id": 22
                         },
                         "environmentVariables": {
                           "keyType": "string",
@@ -1318,6 +1351,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "maxInstanceRequestConcurrency": {
+                          "type": "int32",
+                          "id": 20
+                        },
+                        "securityLevel": {
+                          "type": "SecurityLevel",
+                          "id": 21
                         }
                       },
                       "nested": {
@@ -1334,6 +1375,13 @@
                             "ALLOW_ALL": 1,
                             "ALLOW_INTERNAL_ONLY": 2,
                             "ALLOW_INTERNAL_AND_GCLB": 3
+                          }
+                        },
+                        "SecurityLevel": {
+                          "values": {
+                            "SECURITY_LEVEL_UNSPECIFIED": 0,
+                            "SECURE_ALWAYS": 1,
+                            "SECURE_OPTIONAL": 2
                           }
                         }
                       }
@@ -1601,6 +1649,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         }
                       }
