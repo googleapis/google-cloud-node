@@ -452,7 +452,7 @@ export class TargetSslProxiesClient {
       );
   }
   /**
-   * Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
+   * Returns the specified TargetSslProxy resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

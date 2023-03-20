@@ -708,7 +708,7 @@ export class BackendServicesClient {
       );
   }
   /**
-   * Returns the specified BackendService resource. Gets a list of available backend services.
+   * Returns the specified BackendService resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

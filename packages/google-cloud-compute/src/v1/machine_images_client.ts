@@ -450,7 +450,7 @@ export class MachineImagesClient {
       );
   }
   /**
-   * Returns the specified machine image. Gets a list of available machine images by making a list() request.
+   * Returns the specified machine image.
    *
    * @param {Object} request
    *   The request object that will be sent.

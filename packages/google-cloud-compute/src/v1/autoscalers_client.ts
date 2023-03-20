@@ -458,7 +458,7 @@ export class AutoscalersClient {
       );
   }
   /**
-   * Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
+   * Returns the specified autoscaler resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
