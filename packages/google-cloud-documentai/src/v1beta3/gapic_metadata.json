@@ -100,6 +100,11 @@
                 "evaluateProcessorVersion"
               ]
             },
+            "ImportProcessorVersion": {
+              "methods": [
+                "importProcessorVersion"
+              ]
+            },
             "ListProcessorTypes": {
               "methods": [
                 "listProcessorTypes",
@@ -221,6 +226,11 @@
             "EvaluateProcessorVersion": {
               "methods": [
                 "evaluateProcessorVersion"
+              ]
+            },
+            "ImportProcessorVersion": {
+              "methods": [
+                "importProcessorVersion"
               ]
             },
             "ListProcessorTypes": {
