@@ -1113,7 +1113,7 @@ export class InstanceGroupManagersClient {
       );
   }
   /**
-   * Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.
+   * Returns all of the details about the specified managed instance group.
    *
    * @param {Object} request
    *   The request object that will be sent.

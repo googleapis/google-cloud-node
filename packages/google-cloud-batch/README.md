@@ -188,7 +188,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/batch/latest
-[product-docs]: cloud.google.com/batch/
+[product-docs]: https://cloud.google.com/batch/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

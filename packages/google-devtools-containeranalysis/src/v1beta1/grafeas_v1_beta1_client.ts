@@ -72,7 +72,6 @@ export class GrafeasV1Beta1Client {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
   grafeasV1Beta1Stub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -186,15 +185,6 @@ export class GrafeasV1Beta1Client {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
-
-    // This API contains "path templates"; forward-slash-separated
-    // identifiers to uniquely identify resources within the API.
-    // Create useful helper objects for these.
-    this.pathTemplates = {
-      scanConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/scanConfigs/{scan_config}'
-      ),
-    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -1994,47 +1984,6 @@ export class GrafeasV1Beta1Client {
       request as {},
       callSettings
     ) as AsyncIterable<protos.grafeas.v1beta1.IOccurrence>;
-  }
-  // --------------------
-  // -- Path templates --
-  // --------------------
-
-  /**
-   * Return a fully-qualified scanConfig resource name string.
-   *
-   * @param {string} project
-   * @param {string} scan_config
-   * @returns {string} Resource name string.
-   */
-  scanConfigPath(project: string, scanConfig: string) {
-    return this.pathTemplates.scanConfigPathTemplate.render({
-      project: project,
-      scan_config: scanConfig,
-    });
-  }
-
-  /**
-   * Parse the project from ScanConfig resource.
-   *
-   * @param {string} scanConfigName
-   *   A fully-qualified path representing ScanConfig resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromScanConfigName(scanConfigName: string) {
-    return this.pathTemplates.scanConfigPathTemplate.match(scanConfigName)
-      .project;
-  }
-
-  /**
-   * Parse the scan_config from ScanConfig resource.
-   *
-   * @param {string} scanConfigName
-   *   A fully-qualified path representing ScanConfig resource.
-   * @returns {string} A string representing the scan_config.
-   */
-  matchScanConfigFromScanConfigName(scanConfigName: string) {
-    return this.pathTemplates.scanConfigPathTemplate.match(scanConfigName)
-      .scan_config;
   }
 
   /**

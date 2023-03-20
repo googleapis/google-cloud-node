@@ -448,7 +448,7 @@ export class GlobalAddressesClient {
       );
   }
   /**
-   * Returns the specified address resource. Gets a list of available addresses by making a list() request.
+   * Returns the specified address resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

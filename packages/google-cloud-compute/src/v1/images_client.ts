@@ -563,7 +563,7 @@ export class ImagesClient {
       );
   }
   /**
-   * Returns the specified image. Gets a list of available images by making a list() request.
+   * Returns the specified image.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -649,14 +649,14 @@ export class ImagesClient {
     return this.innerApiCalls.get(request, options, callback);
   }
   /**
-   * Returns the latest image that is part of an image family and is not deprecated.
+   * Returns the latest image that is part of an image family and is not deprecated. For more information on image families, see Public image families documentation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.family
    *   Name of the image family to search for.
    * @param {string} request.project
-   *   Project ID for this request.
+   *   The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
