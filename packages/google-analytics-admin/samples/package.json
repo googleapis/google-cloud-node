@@ -18,7 +18,7 @@
     "google-auth-library": "^8.0.0",
     "google-gax": "^3.0.0",
     "http": "0.0.1-security",
-    "open": "^8.0.0",
+    "open": "^9.0.0",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {
