@@ -537,7 +537,7 @@ export class SslPoliciesClient {
     return this.innerApiCalls.get(request, options, callback);
   }
   /**
-   * Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
+   * Returns the specified SSL policy resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

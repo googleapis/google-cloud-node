@@ -321,7 +321,7 @@ export class ZonesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the specified Zone resource. Gets a list of available zones by making a list() request.
+   * Returns the specified Zone resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

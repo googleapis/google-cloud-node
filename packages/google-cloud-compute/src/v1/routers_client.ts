@@ -460,7 +460,7 @@ export class RoutersClient {
       );
   }
   /**
-   * Returns the specified Router resource. Gets a list of available routers by making a list() request.
+   * Returns the specified Router resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

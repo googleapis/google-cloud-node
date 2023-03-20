@@ -459,7 +459,7 @@ export class VpnGatewaysClient {
       );
   }
   /**
-   * Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
+   * Returns the specified VPN gateway.
    *
    * @param {Object} request
    *   The request object that will be sent.

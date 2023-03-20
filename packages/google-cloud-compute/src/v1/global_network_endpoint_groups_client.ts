@@ -703,7 +703,7 @@ export class GlobalNetworkEndpointGroupsClient {
       );
   }
   /**
-   * Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
+   * Returns the specified network endpoint group.
    *
    * @param {Object} request
    *   The request object that will be sent.

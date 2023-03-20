@@ -332,7 +332,7 @@ export class RegionCommitmentsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
+   * Returns the specified commitment resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
