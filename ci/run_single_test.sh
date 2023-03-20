@@ -39,7 +39,7 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-npm install --engine-strict
+npm install --engine-strict --only=prod; npm install --only=dev
 
 retval=0
 
