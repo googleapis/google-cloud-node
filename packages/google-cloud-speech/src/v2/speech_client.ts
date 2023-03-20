@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
@@ -61,6 +63,7 @@ export class SpeechClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   speechStub?: Promise<{[name: string]: Function}>;
@@ -158,6 +161,10 @@ export class SpeechClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -248,6 +255,14 @@ export class SpeechClient {
     if (opts.fallback === 'rest') {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v2/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v2/{name=projects/*}/locations',
+        },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v2/{name=projects/*/locations/*/operations/*}:cancel',
@@ -592,7 +607,7 @@ export class SpeechClient {
   /**
    * Returns the requested
    * {@link google.cloud.speech.v2.Recognizer|Recognizer}. Fails with
-   * {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} if the requested recognizer doesn't
+   * {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} if the requested Recognizer doesn't
    * exist.
    *
    * @param {Object} request
@@ -1790,6 +1805,9 @@ export class SpeechClient {
    *   request.
    * @param {number[]} request.files
    *   Audio files with file metadata for ASR.
+   *   The maximum number of files allowed to be specified is 5.
+   * @param {google.cloud.speech.v2.RecognitionOutputConfig} request.recognitionOutputConfig
+   *   Configuration options for where to output the transcripts of each file.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3766,6 +3784,86 @@ export class SpeechClient {
     ) as AsyncIterable<protos.google.cloud.speech.v2.IPhraseSet>;
   }
   /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -4368,6 +4466,7 @@ export class SpeechClient {
       return this.speechStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }
