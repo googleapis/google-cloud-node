@@ -67,6 +67,7 @@
   * [Disks.set_iam_policy](#disks.set_iam_policy)
   * [Disks.set_labels](#disks.set_labels)
   * [Disks.test_iam_permissions](#disks.test_iam_permissions)
+  * [Disks.update](#disks.update)
   * [External_vpn_gateways.delete](#external_vpn_gateways.delete)
   * [External_vpn_gateways.get](#external_vpn_gateways.get)
   * [External_vpn_gateways.insert](#external_vpn_gateways.insert)
@@ -185,6 +186,7 @@
   * [Instance_groups.list_instances](#instance_groups.list_instances)
   * [Instance_groups.remove_instances](#instance_groups.remove_instances)
   * [Instance_groups.set_named_ports](#instance_groups.set_named_ports)
+  * [Instance_templates.aggregated_list](#instance_templates.aggregated_list)
   * [Instance_templates.delete](#instance_templates.delete)
   * [Instance_templates.get](#instance_templates.get)
   * [Instance_templates.get_iam_policy](#instance_templates.get_iam_policy)
@@ -222,6 +224,7 @@
   * [Instances.set_machine_type](#instances.set_machine_type)
   * [Instances.set_metadata](#instances.set_metadata)
   * [Instances.set_min_cpu_platform](#instances.set_min_cpu_platform)
+  * [Instances.set_name](#instances.set_name)
   * [Instances.set_scheduling](#instances.set_scheduling)
   * [Instances.set_service_account](#instances.set_service_account)
   * [Instances.set_shielded_instance_integrity_policy](#instances.set_shielded_instance_integrity_policy)
@@ -410,6 +413,7 @@
   * [Region_disks.set_iam_policy](#region_disks.set_iam_policy)
   * [Region_disks.set_labels](#region_disks.set_labels)
   * [Region_disks.test_iam_permissions](#region_disks.test_iam_permissions)
+  * [Region_disks.update](#region_disks.update)
   * [Region_health_check_services.delete](#region_health_check_services.delete)
   * [Region_health_check_services.get](#region_health_check_services.get)
   * [Region_health_check_services.insert](#region_health_check_services.insert)
@@ -444,6 +448,10 @@
   * [Region_instance_groups.list](#region_instance_groups.list)
   * [Region_instance_groups.list_instances](#region_instance_groups.list_instances)
   * [Region_instance_groups.set_named_ports](#region_instance_groups.set_named_ports)
+  * [Region_instance_templates.delete](#region_instance_templates.delete)
+  * [Region_instance_templates.get](#region_instance_templates.get)
+  * [Region_instance_templates.insert](#region_instance_templates.insert)
+  * [Region_instance_templates.list](#region_instance_templates.list)
   * [Region_instances.bulk_insert](#region_instances.bulk_insert)
   * [Region_network_endpoint_groups.delete](#region_network_endpoint_groups.delete)
   * [Region_network_endpoint_groups.get](#region_network_endpoint_groups.get)
@@ -1641,6 +1649,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/disks.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Disks.update
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/disks.update.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/disks.update.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/disks.update.js`
 
 
 -----
@@ -3654,6 +3679,23 @@ __Usage:__
 
 
 
+### Instance_templates.aggregated_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_templates.aggregated_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_templates.aggregated_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_templates.aggregated_list.js`
+
+
+-----
+
+
+
+
 ### Instance_templates.delete
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_templates.delete.js).
@@ -4276,6 +4318,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/instances.set_min_cpu_platform.js`
+
+
+-----
+
+
+
+
+### Instances.set_name
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.set_name.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instances.set_name.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instances.set_name.js`
 
 
 -----
@@ -7479,6 +7538,23 @@ __Usage:__
 
 
 
+### Region_disks.update
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.update.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_disks.update.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_disks.update.js`
+
+
+-----
+
+
+
+
 ### Region_health_check_services.delete
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_check_services.delete.js).
@@ -8050,6 +8126,74 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_instance_groups.set_named_ports.js`
+
+
+-----
+
+
+
+
+### Region_instance_templates.delete
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_templates.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_templates.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_templates.delete.js`
+
+
+-----
+
+
+
+
+### Region_instance_templates.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_templates.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_templates.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_templates.get.js`
+
+
+-----
+
+
+
+
+### Region_instance_templates.insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_templates.insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_templates.insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_templates.insert.js`
+
+
+-----
+
+
+
+
+### Region_instance_templates.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_templates.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_instance_templates.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_instance_templates.list.js`
 
 
 -----

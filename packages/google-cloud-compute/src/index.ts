@@ -128,6 +128,8 @@ const RegionInstanceGroupsClient = v1.RegionInstanceGroupsClient;
 type RegionInstanceGroupsClient = v1.RegionInstanceGroupsClient;
 const RegionInstancesClient = v1.RegionInstancesClient;
 type RegionInstancesClient = v1.RegionInstancesClient;
+const RegionInstanceTemplatesClient = v1.RegionInstanceTemplatesClient;
+type RegionInstanceTemplatesClient = v1.RegionInstanceTemplatesClient;
 const RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 type RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 const RegionNetworkFirewallPoliciesClient =
@@ -257,6 +259,7 @@ export {
   RegionInstanceGroupManagersClient,
   RegionInstanceGroupsClient,
   RegionInstancesClient,
+  RegionInstanceTemplatesClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -349,6 +352,7 @@ export default {
   RegionInstanceGroupManagersClient,
   RegionInstanceGroupsClient,
   RegionInstancesClient,
+  RegionInstanceTemplatesClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,

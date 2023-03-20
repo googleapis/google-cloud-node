@@ -150,6 +150,16 @@
                 "testIamPermissions"
               ]
             },
+            "ReconcileTags": {
+              "methods": [
+                "reconcileTags"
+              ]
+            },
+            "ImportEntries": {
+              "methods": [
+                "importEntries"
+              ]
+            },
             "SearchCatalog": {
               "methods": [
                 "searchCatalog",
@@ -321,6 +331,16 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "ReconcileTags": {
+              "methods": [
+                "reconcileTags"
+              ]
+            },
+            "ImportEntries": {
+              "methods": [
+                "importEntries"
               ]
             },
             "SearchCatalog": {

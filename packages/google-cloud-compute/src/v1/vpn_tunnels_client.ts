@@ -451,7 +451,7 @@ export class VpnTunnelsClient {
       );
   }
   /**
-   * Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
+   * Returns the specified VpnTunnel resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

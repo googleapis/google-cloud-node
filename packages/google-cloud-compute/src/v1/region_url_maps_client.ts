@@ -453,7 +453,7 @@ export class RegionUrlMapsClient {
       );
   }
   /**
-   * Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
+   * Returns the specified UrlMap resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
