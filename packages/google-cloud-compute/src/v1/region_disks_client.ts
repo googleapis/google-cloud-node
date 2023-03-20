@@ -247,6 +247,7 @@ export class RegionDisksClient {
       'setIamPolicy',
       'setLabels',
       'testIamPermissions',
+      'update',
     ];
     for (const methodName of regionDisksStubMethods) {
       const callPromise = this.regionDisksStub.then(
@@ -1605,6 +1606,135 @@ export class RegionDisksClient {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
+  /**
+   * Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   The disk name for this request.
+   * @param {google.cloud.compute.v1.Disk} request.diskResource
+   *   The body resource for this request
+   * @param {string} request.paths
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.updateMask
+   *   update_mask indicates fields to be updated as part of this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/region_disks.update.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_Update_async
+   */
+  update(
+    request?: protos.google.cloud.compute.v1.IUpdateRegionDiskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  update(
+    request: protos.google.cloud.compute.v1.IUpdateRegionDiskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  update(
+    request: protos.google.cloud.compute.v1.IUpdateRegionDiskRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  update(
+    request?: protos.google.cloud.compute.v1.IUpdateRegionDiskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdateRegionDiskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateRegionDiskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        disk: request.disk ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .update(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
 
   /**

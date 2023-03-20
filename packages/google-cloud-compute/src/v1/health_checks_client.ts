@@ -455,7 +455,7 @@ export class HealthChecksClient {
       );
   }
   /**
-   * Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
+   * Returns the specified HealthCheck resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

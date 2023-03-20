@@ -452,7 +452,7 @@ export class RegionTargetHttpProxiesClient {
       );
   }
   /**
-   * Returns the specified TargetHttpProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
+   * Returns the specified TargetHttpProxy resource in the specified region.
    *
    * @param {Object} request
    *   The request object that will be sent.

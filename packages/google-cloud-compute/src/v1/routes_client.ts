@@ -434,7 +434,7 @@ export class RoutesClient {
       );
   }
   /**
-   * Returns the specified Route resource. Gets a list of available routes by making a list() request.
+   * Returns the specified Route resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

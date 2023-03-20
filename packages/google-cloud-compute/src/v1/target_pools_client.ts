@@ -714,7 +714,7 @@ export class TargetPoolsClient {
       );
   }
   /**
-   * Returns the specified target pool. Gets a list of available target pools by making a list() request.
+   * Returns the specified target pool.
    *
    * @param {Object} request
    *   The request object that will be sent.

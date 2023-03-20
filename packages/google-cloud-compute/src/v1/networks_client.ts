@@ -576,7 +576,7 @@ export class NetworksClient {
       );
   }
   /**
-   * Returns the specified network. Gets a list of available networks by making a list() request.
+   * Returns the specified network.
    *
    * @param {Object} request
    *   The request object that will be sent.

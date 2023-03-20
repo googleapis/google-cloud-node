@@ -326,7 +326,7 @@ export class NodeTypesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the specified node type. Gets a list of available node types by making a list() request.
+   * Returns the specified node type.
    *
    * @param {Object} request
    *   The request object that will be sent.
