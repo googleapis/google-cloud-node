@@ -52,6 +52,11 @@ function main(name) {
    *  using hmac-sha256 with stable secret.
    */
   // const hashedAccountId = 'Buffer.from('string')'
+  /**
+   *  Optional. If the assessment is part of a payment transaction, provide
+   *  details on payment lifecycle events that occur in the transaction.
+   */
+  // const transactionEvent = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;

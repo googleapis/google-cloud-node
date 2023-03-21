@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-recaptchaenterprise",
-        "version": "3.3.0",
+        "version": "3.3.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -66,7 +66,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -90,6 +90,10 @@
                     {
                         "name": "hashed_account_id",
                         "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "transaction_event",
+                        "type": ".google.cloud.recaptchaenterprise.v1.TransactionEvent"
                     }
                 ],
                 "resultType": ".google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse",

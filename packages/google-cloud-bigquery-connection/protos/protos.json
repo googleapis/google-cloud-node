@@ -14,7 +14,9 @@
                         "go_package": "cloud.google.com/go/bigquery/connection/apiv1/connectionpb;connectionpb",
                         "java_multiple_files": true,
                         "java_package": "com.google.cloud.bigquery.connection.v1",
-                        "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1"
+                        "php_namespace": "Google\\Cloud\\BigQuery\\Connection\\V1",
+                        "(google.api.resource_definition).type": "metastore.googleapis.com/Service",
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/services/{service}"
                       },
                       "nested": {
                         "ConnectionService": {
@@ -303,7 +305,8 @@
                                 "aws",
                                 "azure",
                                 "cloudSpanner",
-                                "cloudResource"
+                                "cloudResource",
+                                "spark"
                               ]
                             }
                           },
@@ -339,6 +342,10 @@
                             "cloudResource": {
                               "type": "CloudResourceProperties",
                               "id": 22
+                            },
+                            "spark": {
+                              "type": "SparkProperties",
+                              "id": 23
                             },
                             "creationTime": {
                               "type": "int64",
@@ -545,6 +552,55 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "MetastoreServiceConfig": {
+                          "fields": {
+                            "metastoreService": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                              }
+                            }
+                          }
+                        },
+                        "SparkHistoryServerConfig": {
+                          "fields": {
+                            "dataprocCluster": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "dataproc.googleapis.com/Cluster"
+                              }
+                            }
+                          }
+                        },
+                        "SparkProperties": {
+                          "fields": {
+                            "serviceAccountId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "metastoreServiceConfig": {
+                              "type": "MetastoreServiceConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sparkHistoryServerConfig": {
+                              "type": "SparkHistoryServerConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

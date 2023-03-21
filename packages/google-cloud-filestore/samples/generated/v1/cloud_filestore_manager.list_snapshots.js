@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, fileShare) {
-  // [START file_v1_generated_CloudFilestoreManager_RestoreInstance_async]
+function main(parent) {
+  // [START file_v1_generated_CloudFilestoreManager_ListSnapshots_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,28 @@ function main(name, fileShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the instance, in the format
-   *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *  Required. The instance for which to retrieve snapshot information,
+   *  in the format
+   *  `projects/{project_id}/locations/{location}/instances/{instance_id}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Required. Name of the file share in the Filestore instance that the backup
-   *  is being restored to.
+   *  The maximum number of items to return.
    */
-  // const fileShare = 'abc123'
+  // const pageSize = 1234
   /**
-   *  The resource name of the backup, in the format
-   *  `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
+   *  The next_page_token value to use if there are additional
+   *  results to retrieve for this list request.
    */
-  // const sourceBackup = 'abc123'
+  // const pageToken = 'abc123'
+  /**
+   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
+   */
+  // const orderBy = 'abc123'
+  /**
+   *  List filter.
+   */
+  // const filter = 'abc123'
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1;
@@ -50,21 +58,21 @@ function main(name, fileShare) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callRestoreInstance() {
+  async function callListSnapshots() {
     // Construct request
     const request = {
-      name,
-      fileShare,
+      parent,
     };
 
     // Run request
-    const [operation] = await filestoreClient.restoreInstance(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await filestoreClient.listSnapshotsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callRestoreInstance();
-  // [END file_v1_generated_CloudFilestoreManager_RestoreInstance_async]
+  callListSnapshots();
+  // [END file_v1_generated_CloudFilestoreManager_ListSnapshots_async]
 }
 
 process.on('unhandledRejection', err => {

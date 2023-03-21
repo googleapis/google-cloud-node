@@ -15,6 +15,11 @@
                 "getInstance"
               ]
             },
+            "GetSnapshot": {
+              "methods": [
+                "getSnapshot"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "getBackup"
@@ -40,6 +45,21 @@
                 "deleteInstance"
               ]
             },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "deleteSnapshot"
+              ]
+            },
+            "UpdateSnapshot": {
+              "methods": [
+                "updateSnapshot"
+              ]
+            },
             "CreateBackup": {
               "methods": [
                 "createBackup"
@@ -60,6 +80,13 @@
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "listSnapshots",
+                "listSnapshotsStream",
+                "listSnapshotsAsync"
               ]
             },
             "ListBackups": {
@@ -79,6 +106,11 @@
                 "getInstance"
               ]
             },
+            "GetSnapshot": {
+              "methods": [
+                "getSnapshot"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "getBackup"
@@ -104,6 +136,21 @@
                 "deleteInstance"
               ]
             },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "deleteSnapshot"
+              ]
+            },
+            "UpdateSnapshot": {
+              "methods": [
+                "updateSnapshot"
+              ]
+            },
             "CreateBackup": {
               "methods": [
                 "createBackup"
@@ -124,6 +171,13 @@
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "listSnapshots",
+                "listSnapshotsStream",
+                "listSnapshotsAsync"
               ]
             },
             "ListBackups": {

@@ -178,11 +178,17 @@ export class ConnectionServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      clusterPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/clusters/{cluster}'
+      ),
       connectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connections/{connection}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      servicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/services/{service}'
       ),
     };
 
@@ -1223,6 +1229,55 @@ export class ConnectionServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified cluster resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} cluster
+   * @returns {string} Resource name string.
+   */
+  clusterPath(project: string, region: string, cluster: string) {
+    return this.pathTemplates.clusterPathTemplate.render({
+      project: project,
+      region: region,
+      cluster: cluster,
+    });
+  }
+
+  /**
+   * Parse the project from Cluster resource.
+   *
+   * @param {string} clusterName
+   *   A fully-qualified path representing Cluster resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromClusterName(clusterName: string) {
+    return this.pathTemplates.clusterPathTemplate.match(clusterName).project;
+  }
+
+  /**
+   * Parse the region from Cluster resource.
+   *
+   * @param {string} clusterName
+   *   A fully-qualified path representing Cluster resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromClusterName(clusterName: string) {
+    return this.pathTemplates.clusterPathTemplate.match(clusterName).region;
+  }
+
+  /**
+   * Parse the cluster from Cluster resource.
+   *
+   * @param {string} clusterName
+   *   A fully-qualified path representing Cluster resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromClusterName(clusterName: string) {
+    return this.pathTemplates.clusterPathTemplate.match(clusterName).cluster;
+  }
+
+  /**
    * Return a fully-qualified connection resource name string.
    *
    * @param {string} project
@@ -1308,6 +1363,55 @@ export class ConnectionServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified service resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  servicePath(project: string, location: string, service: string) {
+    return this.pathTemplates.servicePathTemplate.render({
+      project: project,
+      location: location,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the project from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).project;
+  }
+
+  /**
+   * Parse the location from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).location;
+  }
+
+  /**
+   * Parse the service from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**
