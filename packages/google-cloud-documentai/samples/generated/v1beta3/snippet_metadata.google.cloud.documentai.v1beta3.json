@@ -1018,6 +1018,50 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "documentai_v1beta3_generated_DocumentProcessorService_ImportProcessorVersion_async",
+            "title": "DocumentProcessorService importProcessorVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports a processor version from source processor version.",
+            "canonical": true,
+            "file": "document_processor_service.import_processor_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportProcessorVersion",
+                "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService.ImportProcessorVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "processor_version_source",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DocumentProcessorServiceClient",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportProcessorVersion",
+                    "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService.ImportProcessorVersion",
+                    "service": {
+                        "shortName": "DocumentProcessorService",
+                        "fullName": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+                    }
+                }
+            }
         }
     ]
 }
