@@ -57,8 +57,8 @@ function main(parent, targetId, target) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, the request is validated and the user is provided with
-   *  an expected result, but no actual change is made.
+   *  Optional. If set to true, the request is validated and the user is provided
+   *  with an expected result, but no actual change is made.
    */
   // const validateOnly = true
 
