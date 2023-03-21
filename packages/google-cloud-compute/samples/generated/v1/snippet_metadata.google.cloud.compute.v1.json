@@ -17292,6 +17292,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NodeGroups_SimulateMaintenanceEvent_async",
+            "title": "AcceleratorTypes simulateMaintenanceEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Simulates maintenance event on specified nodes from the node group.",
+            "canonical": true,
+            "file": "node_groups.simulate_maintenance_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SimulateMaintenanceEvent",
+                "fullName": "google.cloud.compute.v1.NodeGroups.SimulateMaintenanceEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "node_group",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "node_groups_simulate_maintenance_event_request_resource",
+                        "type": ".google.cloud.compute.v1.NodeGroupsSimulateMaintenanceEventRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NodeGroupsClient",
+                    "fullName": "google.cloud.compute.v1.NodeGroupsClient"
+                },
+                "method": {
+                    "shortName": "SimulateMaintenanceEvent",
+                    "fullName": "google.cloud.compute.v1.NodeGroups.SimulateMaintenanceEvent",
+                    "service": {
+                        "shortName": "NodeGroups",
+                        "fullName": "google.cloud.compute.v1.NodeGroups"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NodeGroups_TestIamPermissions_async",
             "title": "AcceleratorTypes testIamPermissions Sample",
             "origin": "API_DEFINITION",

@@ -3915,6 +3915,11 @@
                 "setNodeTemplate"
               ]
             },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulateMaintenanceEvent"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -3989,6 +3994,11 @@
             "SetNodeTemplate": {
               "methods": [
                 "setNodeTemplate"
+              ]
+            },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulateMaintenanceEvent"
               ]
             },
             "TestIamPermissions": {
