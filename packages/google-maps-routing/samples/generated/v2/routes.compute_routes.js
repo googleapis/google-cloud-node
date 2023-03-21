@@ -89,6 +89,12 @@ function main(origin, destination) {
    */
   // const languageCode = 'abc123'
   /**
+   *  Optional. The region code, specified as a ccTLD ("top-level domain")
+   *  two-character value. For more information see
+   *  https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#Country_code_top-level_domains
+   */
+  // const regionCode = 'abc123'
+  /**
    *  Optional. Specifies the units of measure for the display fields. This
    *  includes the `instruction` field in `NavigationInstruction`. The units of
    *  measure used for the route, leg, step distance, and duration are not

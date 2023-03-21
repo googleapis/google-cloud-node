@@ -1840,6 +1840,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "units": {
                           "type": "Units",
                           "id": 11,
@@ -1933,6 +1940,20 @@
                         "departureTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

@@ -13175,6 +13175,9 @@ export namespace google {
 
                     /** BatchRecognizeRequest files */
                     files?: (google.cloud.speech.v2.IBatchRecognizeFileMetadata[]|null);
+
+                    /** BatchRecognizeRequest recognitionOutputConfig */
+                    recognitionOutputConfig?: (google.cloud.speech.v2.IRecognitionOutputConfig|null);
                 }
 
                 /** Represents a BatchRecognizeRequest. */
@@ -13197,6 +13200,9 @@ export namespace google {
 
                     /** BatchRecognizeRequest files. */
                     public files: google.cloud.speech.v2.IBatchRecognizeFileMetadata[];
+
+                    /** BatchRecognizeRequest recognitionOutputConfig. */
+                    public recognitionOutputConfig?: (google.cloud.speech.v2.IRecognitionOutputConfig|null);
 
                     /**
                      * Creates a new BatchRecognizeRequest instance using the specified properties.
@@ -13276,11 +13282,308 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GcsOutputConfig. */
+                interface IGcsOutputConfig {
+
+                    /** GcsOutputConfig uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a GcsOutputConfig. */
+                class GcsOutputConfig implements IGcsOutputConfig {
+
+                    /**
+                     * Constructs a new GcsOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.IGcsOutputConfig);
+
+                    /** GcsOutputConfig uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new GcsOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.IGcsOutputConfig): google.cloud.speech.v2.GcsOutputConfig;
+
+                    /**
+                     * Encodes the specified GcsOutputConfig message. Does not implicitly {@link google.cloud.speech.v2.GcsOutputConfig.verify|verify} messages.
+                     * @param message GcsOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.IGcsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.GcsOutputConfig.verify|verify} messages.
+                     * @param message GcsOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.IGcsOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.GcsOutputConfig;
+
+                    /**
+                     * Decodes a GcsOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.GcsOutputConfig;
+
+                    /**
+                     * Verifies a GcsOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.GcsOutputConfig;
+
+                    /**
+                     * Creates a plain object from a GcsOutputConfig message. Also converts values to other types if specified.
+                     * @param message GcsOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.GcsOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InlineOutputConfig. */
+                interface IInlineOutputConfig {
+                }
+
+                /** Represents an InlineOutputConfig. */
+                class InlineOutputConfig implements IInlineOutputConfig {
+
+                    /**
+                     * Constructs a new InlineOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.IInlineOutputConfig);
+
+                    /**
+                     * Creates a new InlineOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InlineOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.IInlineOutputConfig): google.cloud.speech.v2.InlineOutputConfig;
+
+                    /**
+                     * Encodes the specified InlineOutputConfig message. Does not implicitly {@link google.cloud.speech.v2.InlineOutputConfig.verify|verify} messages.
+                     * @param message InlineOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.IInlineOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InlineOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.InlineOutputConfig.verify|verify} messages.
+                     * @param message InlineOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.IInlineOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InlineOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InlineOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.InlineOutputConfig;
+
+                    /**
+                     * Decodes an InlineOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InlineOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.InlineOutputConfig;
+
+                    /**
+                     * Verifies an InlineOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InlineOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InlineOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.InlineOutputConfig;
+
+                    /**
+                     * Creates a plain object from an InlineOutputConfig message. Also converts values to other types if specified.
+                     * @param message InlineOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.InlineOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InlineOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InlineOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RecognitionOutputConfig. */
+                interface IRecognitionOutputConfig {
+
+                    /** RecognitionOutputConfig gcsOutputConfig */
+                    gcsOutputConfig?: (google.cloud.speech.v2.IGcsOutputConfig|null);
+
+                    /** RecognitionOutputConfig inlineResponseConfig */
+                    inlineResponseConfig?: (google.cloud.speech.v2.IInlineOutputConfig|null);
+                }
+
+                /** Represents a RecognitionOutputConfig. */
+                class RecognitionOutputConfig implements IRecognitionOutputConfig {
+
+                    /**
+                     * Constructs a new RecognitionOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.IRecognitionOutputConfig);
+
+                    /** RecognitionOutputConfig gcsOutputConfig. */
+                    public gcsOutputConfig?: (google.cloud.speech.v2.IGcsOutputConfig|null);
+
+                    /** RecognitionOutputConfig inlineResponseConfig. */
+                    public inlineResponseConfig?: (google.cloud.speech.v2.IInlineOutputConfig|null);
+
+                    /** RecognitionOutputConfig output. */
+                    public output?: ("gcsOutputConfig"|"inlineResponseConfig");
+
+                    /**
+                     * Creates a new RecognitionOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecognitionOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.IRecognitionOutputConfig): google.cloud.speech.v2.RecognitionOutputConfig;
+
+                    /**
+                     * Encodes the specified RecognitionOutputConfig message. Does not implicitly {@link google.cloud.speech.v2.RecognitionOutputConfig.verify|verify} messages.
+                     * @param message RecognitionOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.IRecognitionOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecognitionOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.RecognitionOutputConfig.verify|verify} messages.
+                     * @param message RecognitionOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.IRecognitionOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecognitionOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecognitionOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.RecognitionOutputConfig;
+
+                    /**
+                     * Decodes a RecognitionOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecognitionOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.RecognitionOutputConfig;
+
+                    /**
+                     * Verifies a RecognitionOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecognitionOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecognitionOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.RecognitionOutputConfig;
+
+                    /**
+                     * Creates a plain object from a RecognitionOutputConfig message. Also converts values to other types if specified.
+                     * @param message RecognitionOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.RecognitionOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecognitionOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecognitionOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BatchRecognizeResponse. */
                 interface IBatchRecognizeResponse {
 
                     /** BatchRecognizeResponse results */
                     results?: ({ [k: string]: google.cloud.speech.v2.IBatchRecognizeFileResult }|null);
+
+                    /** BatchRecognizeResponse totalBilledDuration */
+                    totalBilledDuration?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a BatchRecognizeResponse. */
@@ -13294,6 +13597,9 @@ export namespace google {
 
                     /** BatchRecognizeResponse results. */
                     public results: { [k: string]: google.cloud.speech.v2.IBatchRecognizeFileResult };
+
+                    /** BatchRecognizeResponse totalBilledDuration. */
+                    public totalBilledDuration?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new BatchRecognizeResponse instance using the specified properties.
@@ -13373,6 +13679,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BatchRecognizeResults. */
+                interface IBatchRecognizeResults {
+
+                    /** BatchRecognizeResults results */
+                    results?: (google.cloud.speech.v2.ISpeechRecognitionResult[]|null);
+
+                    /** BatchRecognizeResults metadata */
+                    metadata?: (google.cloud.speech.v2.IRecognitionResponseMetadata|null);
+                }
+
+                /** Represents a BatchRecognizeResults. */
+                class BatchRecognizeResults implements IBatchRecognizeResults {
+
+                    /**
+                     * Constructs a new BatchRecognizeResults.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.IBatchRecognizeResults);
+
+                    /** BatchRecognizeResults results. */
+                    public results: google.cloud.speech.v2.ISpeechRecognitionResult[];
+
+                    /** BatchRecognizeResults metadata. */
+                    public metadata?: (google.cloud.speech.v2.IRecognitionResponseMetadata|null);
+
+                    /**
+                     * Creates a new BatchRecognizeResults instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchRecognizeResults instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.IBatchRecognizeResults): google.cloud.speech.v2.BatchRecognizeResults;
+
+                    /**
+                     * Encodes the specified BatchRecognizeResults message. Does not implicitly {@link google.cloud.speech.v2.BatchRecognizeResults.verify|verify} messages.
+                     * @param message BatchRecognizeResults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.IBatchRecognizeResults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchRecognizeResults message, length delimited. Does not implicitly {@link google.cloud.speech.v2.BatchRecognizeResults.verify|verify} messages.
+                     * @param message BatchRecognizeResults message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.IBatchRecognizeResults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchRecognizeResults message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchRecognizeResults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.BatchRecognizeResults;
+
+                    /**
+                     * Decodes a BatchRecognizeResults message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchRecognizeResults
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.BatchRecognizeResults;
+
+                    /**
+                     * Verifies a BatchRecognizeResults message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchRecognizeResults message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchRecognizeResults
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.BatchRecognizeResults;
+
+                    /**
+                     * Creates a plain object from a BatchRecognizeResults message. Also converts values to other types if specified.
+                     * @param message BatchRecognizeResults
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.BatchRecognizeResults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchRecognizeResults to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchRecognizeResults
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BatchRecognizeFileResult. */
                 interface IBatchRecognizeFileResult {
 
@@ -13381,6 +13790,12 @@ export namespace google {
 
                     /** BatchRecognizeFileResult error */
                     error?: (google.rpc.IStatus|null);
+
+                    /** BatchRecognizeFileResult metadata */
+                    metadata?: (google.cloud.speech.v2.IRecognitionResponseMetadata|null);
+
+                    /** BatchRecognizeFileResult transcript */
+                    transcript?: (google.cloud.speech.v2.IBatchRecognizeResults|null);
                 }
 
                 /** Represents a BatchRecognizeFileResult. */
@@ -13397,6 +13812,12 @@ export namespace google {
 
                     /** BatchRecognizeFileResult error. */
                     public error?: (google.rpc.IStatus|null);
+
+                    /** BatchRecognizeFileResult metadata. */
+                    public metadata?: (google.cloud.speech.v2.IRecognitionResponseMetadata|null);
+
+                    /** BatchRecognizeFileResult transcript. */
+                    public transcript?: (google.cloud.speech.v2.IBatchRecognizeResults|null);
 
                     /**
                      * Creates a new BatchRecognizeFileResult instance using the specified properties.
