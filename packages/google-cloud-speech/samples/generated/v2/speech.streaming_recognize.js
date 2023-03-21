@@ -44,6 +44,7 @@ function main(recognizer) {
   // const streamingConfig = {}
   /**
    *  Inline audio bytes to be Recognized.
+   *  Maximum size for this field is 15 KB per request.
    */
   // const audio = 'Buffer.from('string')'
 

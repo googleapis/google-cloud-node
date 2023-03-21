@@ -59,8 +59,13 @@ function main(recognizer) {
   // const configMask = {}
   /**
    *  Audio files with file metadata for ASR.
+   *  The maximum number of files allowed to be specified is 5.
    */
   // const files = 1234
+  /**
+   *  Configuration options for where to output the transcripts of each file.
+   */
+  // const recognitionOutputConfig = {}
 
   // Imports the Speech library
   const {SpeechClient} = require('@google-cloud/speech').v2;

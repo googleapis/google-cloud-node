@@ -32270,6 +32270,7 @@
                          * @property {google.cloud.speech.v2.IRecognitionConfig|null} [config] BatchRecognizeRequest config
                          * @property {google.protobuf.IFieldMask|null} [configMask] BatchRecognizeRequest configMask
                          * @property {Array.<google.cloud.speech.v2.IBatchRecognizeFileMetadata>|null} [files] BatchRecognizeRequest files
+                         * @property {google.cloud.speech.v2.IRecognitionOutputConfig|null} [recognitionOutputConfig] BatchRecognizeRequest recognitionOutputConfig
                          */
     
                         /**
@@ -32321,6 +32322,14 @@
                         BatchRecognizeRequest.prototype.files = $util.emptyArray;
     
                         /**
+                         * BatchRecognizeRequest recognitionOutputConfig.
+                         * @member {google.cloud.speech.v2.IRecognitionOutputConfig|null|undefined} recognitionOutputConfig
+                         * @memberof google.cloud.speech.v2.BatchRecognizeRequest
+                         * @instance
+                         */
+                        BatchRecognizeRequest.prototype.recognitionOutputConfig = null;
+    
+                        /**
                          * Creates a new BatchRecognizeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.BatchRecognizeRequest
@@ -32353,6 +32362,8 @@
                                 $root.google.cloud.speech.v2.RecognitionConfig.encode(message.config, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.configMask != null && Object.hasOwnProperty.call(message, "configMask"))
                                 $root.google.protobuf.FieldMask.encode(message.configMask, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.recognitionOutputConfig != null && Object.hasOwnProperty.call(message, "recognitionOutputConfig"))
+                                $root.google.cloud.speech.v2.RecognitionOutputConfig.encode(message.recognitionOutputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -32403,6 +32414,10 @@
                                         if (!(message.files && message.files.length))
                                             message.files = [];
                                         message.files.push($root.google.cloud.speech.v2.BatchRecognizeFileMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.recognitionOutputConfig = $root.google.cloud.speech.v2.RecognitionOutputConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -32462,6 +32477,11 @@
                                         return "files." + error;
                                 }
                             }
+                            if (message.recognitionOutputConfig != null && message.hasOwnProperty("recognitionOutputConfig")) {
+                                var error = $root.google.cloud.speech.v2.RecognitionOutputConfig.verify(message.recognitionOutputConfig);
+                                if (error)
+                                    return "recognitionOutputConfig." + error;
+                            }
                             return null;
                         };
     
@@ -32499,6 +32519,11 @@
                                     message.files[i] = $root.google.cloud.speech.v2.BatchRecognizeFileMetadata.fromObject(object.files[i]);
                                 }
                             }
+                            if (object.recognitionOutputConfig != null) {
+                                if (typeof object.recognitionOutputConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeRequest.recognitionOutputConfig: object expected");
+                                message.recognitionOutputConfig = $root.google.cloud.speech.v2.RecognitionOutputConfig.fromObject(object.recognitionOutputConfig);
+                            }
                             return message;
                         };
     
@@ -32521,6 +32546,7 @@
                                 object.recognizer = "";
                                 object.config = null;
                                 object.configMask = null;
+                                object.recognitionOutputConfig = null;
                             }
                             if (message.recognizer != null && message.hasOwnProperty("recognizer"))
                                 object.recognizer = message.recognizer;
@@ -32533,6 +32559,8 @@
                                 object.config = $root.google.cloud.speech.v2.RecognitionConfig.toObject(message.config, options);
                             if (message.configMask != null && message.hasOwnProperty("configMask"))
                                 object.configMask = $root.google.protobuf.FieldMask.toObject(message.configMask, options);
+                            if (message.recognitionOutputConfig != null && message.hasOwnProperty("recognitionOutputConfig"))
+                                object.recognitionOutputConfig = $root.google.cloud.speech.v2.RecognitionOutputConfig.toObject(message.recognitionOutputConfig, options);
                             return object;
                         };
     
@@ -32565,6 +32593,646 @@
                         return BatchRecognizeRequest;
                     })();
     
+                    v2.GcsOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a GcsOutputConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IGcsOutputConfig
+                         * @property {string|null} [uri] GcsOutputConfig uri
+                         */
+    
+                        /**
+                         * Constructs a new GcsOutputConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a GcsOutputConfig.
+                         * @implements IGcsOutputConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IGcsOutputConfig=} [properties] Properties to set
+                         */
+                        function GcsOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsOutputConfig uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @instance
+                         */
+                        GcsOutputConfig.prototype.uri = "";
+    
+                        /**
+                         * Creates a new GcsOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IGcsOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.GcsOutputConfig} GcsOutputConfig instance
+                         */
+                        GcsOutputConfig.create = function create(properties) {
+                            return new GcsOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsOutputConfig message. Does not implicitly {@link google.cloud.speech.v2.GcsOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IGcsOutputConfig} message GcsOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.GcsOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IGcsOutputConfig} message GcsOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.GcsOutputConfig} GcsOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.GcsOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.GcsOutputConfig} GcsOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.GcsOutputConfig} GcsOutputConfig
+                         */
+                        GcsOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.GcsOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.GcsOutputConfig();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.GcsOutputConfig} message GcsOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GcsOutputConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.GcsOutputConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GcsOutputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.GcsOutputConfig";
+                        };
+    
+                        return GcsOutputConfig;
+                    })();
+    
+                    v2.InlineOutputConfig = (function() {
+    
+                        /**
+                         * Properties of an InlineOutputConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IInlineOutputConfig
+                         */
+    
+                        /**
+                         * Constructs a new InlineOutputConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents an InlineOutputConfig.
+                         * @implements IInlineOutputConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IInlineOutputConfig=} [properties] Properties to set
+                         */
+                        function InlineOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new InlineOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IInlineOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.InlineOutputConfig} InlineOutputConfig instance
+                         */
+                        InlineOutputConfig.create = function create(properties) {
+                            return new InlineOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InlineOutputConfig message. Does not implicitly {@link google.cloud.speech.v2.InlineOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IInlineOutputConfig} message InlineOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InlineOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.InlineOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IInlineOutputConfig} message InlineOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InlineOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.InlineOutputConfig} InlineOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.InlineOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InlineOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.InlineOutputConfig} InlineOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InlineOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InlineOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InlineOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.InlineOutputConfig} InlineOutputConfig
+                         */
+                        InlineOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.InlineOutputConfig)
+                                return object;
+                            return new $root.google.cloud.speech.v2.InlineOutputConfig();
+                        };
+    
+                        /**
+                         * Creates a plain object from an InlineOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.InlineOutputConfig} message InlineOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InlineOutputConfig.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this InlineOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InlineOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InlineOutputConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.InlineOutputConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InlineOutputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.InlineOutputConfig";
+                        };
+    
+                        return InlineOutputConfig;
+                    })();
+    
+                    v2.RecognitionOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a RecognitionOutputConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IRecognitionOutputConfig
+                         * @property {google.cloud.speech.v2.IGcsOutputConfig|null} [gcsOutputConfig] RecognitionOutputConfig gcsOutputConfig
+                         * @property {google.cloud.speech.v2.IInlineOutputConfig|null} [inlineResponseConfig] RecognitionOutputConfig inlineResponseConfig
+                         */
+    
+                        /**
+                         * Constructs a new RecognitionOutputConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a RecognitionOutputConfig.
+                         * @implements IRecognitionOutputConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IRecognitionOutputConfig=} [properties] Properties to set
+                         */
+                        function RecognitionOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RecognitionOutputConfig gcsOutputConfig.
+                         * @member {google.cloud.speech.v2.IGcsOutputConfig|null|undefined} gcsOutputConfig
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @instance
+                         */
+                        RecognitionOutputConfig.prototype.gcsOutputConfig = null;
+    
+                        /**
+                         * RecognitionOutputConfig inlineResponseConfig.
+                         * @member {google.cloud.speech.v2.IInlineOutputConfig|null|undefined} inlineResponseConfig
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @instance
+                         */
+                        RecognitionOutputConfig.prototype.inlineResponseConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RecognitionOutputConfig output.
+                         * @member {"gcsOutputConfig"|"inlineResponseConfig"|undefined} output
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RecognitionOutputConfig.prototype, "output", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsOutputConfig", "inlineResponseConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RecognitionOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IRecognitionOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.RecognitionOutputConfig} RecognitionOutputConfig instance
+                         */
+                        RecognitionOutputConfig.create = function create(properties) {
+                            return new RecognitionOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RecognitionOutputConfig message. Does not implicitly {@link google.cloud.speech.v2.RecognitionOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IRecognitionOutputConfig} message RecognitionOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecognitionOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsOutputConfig != null && Object.hasOwnProperty.call(message, "gcsOutputConfig"))
+                                $root.google.cloud.speech.v2.GcsOutputConfig.encode(message.gcsOutputConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.inlineResponseConfig != null && Object.hasOwnProperty.call(message, "inlineResponseConfig"))
+                                $root.google.cloud.speech.v2.InlineOutputConfig.encode(message.inlineResponseConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RecognitionOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.RecognitionOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IRecognitionOutputConfig} message RecognitionOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecognitionOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RecognitionOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.RecognitionOutputConfig} RecognitionOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecognitionOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.RecognitionOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.gcsOutputConfig = $root.google.cloud.speech.v2.GcsOutputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inlineResponseConfig = $root.google.cloud.speech.v2.InlineOutputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RecognitionOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.RecognitionOutputConfig} RecognitionOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecognitionOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RecognitionOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RecognitionOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsOutputConfig != null && message.hasOwnProperty("gcsOutputConfig")) {
+                                properties.output = 1;
+                                {
+                                    var error = $root.google.cloud.speech.v2.GcsOutputConfig.verify(message.gcsOutputConfig);
+                                    if (error)
+                                        return "gcsOutputConfig." + error;
+                                }
+                            }
+                            if (message.inlineResponseConfig != null && message.hasOwnProperty("inlineResponseConfig")) {
+                                if (properties.output === 1)
+                                    return "output: multiple values";
+                                properties.output = 1;
+                                {
+                                    var error = $root.google.cloud.speech.v2.InlineOutputConfig.verify(message.inlineResponseConfig);
+                                    if (error)
+                                        return "inlineResponseConfig." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RecognitionOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.RecognitionOutputConfig} RecognitionOutputConfig
+                         */
+                        RecognitionOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.RecognitionOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.RecognitionOutputConfig();
+                            if (object.gcsOutputConfig != null) {
+                                if (typeof object.gcsOutputConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionOutputConfig.gcsOutputConfig: object expected");
+                                message.gcsOutputConfig = $root.google.cloud.speech.v2.GcsOutputConfig.fromObject(object.gcsOutputConfig);
+                            }
+                            if (object.inlineResponseConfig != null) {
+                                if (typeof object.inlineResponseConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionOutputConfig.inlineResponseConfig: object expected");
+                                message.inlineResponseConfig = $root.google.cloud.speech.v2.InlineOutputConfig.fromObject(object.inlineResponseConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RecognitionOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.RecognitionOutputConfig} message RecognitionOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RecognitionOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsOutputConfig != null && message.hasOwnProperty("gcsOutputConfig")) {
+                                object.gcsOutputConfig = $root.google.cloud.speech.v2.GcsOutputConfig.toObject(message.gcsOutputConfig, options);
+                                if (options.oneofs)
+                                    object.output = "gcsOutputConfig";
+                            }
+                            if (message.inlineResponseConfig != null && message.hasOwnProperty("inlineResponseConfig")) {
+                                object.inlineResponseConfig = $root.google.cloud.speech.v2.InlineOutputConfig.toObject(message.inlineResponseConfig, options);
+                                if (options.oneofs)
+                                    object.output = "inlineResponseConfig";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RecognitionOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RecognitionOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RecognitionOutputConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RecognitionOutputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.RecognitionOutputConfig";
+                        };
+    
+                        return RecognitionOutputConfig;
+                    })();
+    
                     v2.BatchRecognizeResponse = (function() {
     
                         /**
@@ -32572,6 +33240,7 @@
                          * @memberof google.cloud.speech.v2
                          * @interface IBatchRecognizeResponse
                          * @property {Object.<string,google.cloud.speech.v2.IBatchRecognizeFileResult>|null} [results] BatchRecognizeResponse results
+                         * @property {google.protobuf.IDuration|null} [totalBilledDuration] BatchRecognizeResponse totalBilledDuration
                          */
     
                         /**
@@ -32597,6 +33266,14 @@
                          * @instance
                          */
                         BatchRecognizeResponse.prototype.results = $util.emptyObject;
+    
+                        /**
+                         * BatchRecognizeResponse totalBilledDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} totalBilledDuration
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResponse
+                         * @instance
+                         */
+                        BatchRecognizeResponse.prototype.totalBilledDuration = null;
     
                         /**
                          * Creates a new BatchRecognizeResponse instance using the specified properties.
@@ -32627,6 +33304,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.speech.v2.BatchRecognizeFileResult.encode(message.results[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.totalBilledDuration != null && Object.hasOwnProperty.call(message, "totalBilledDuration"))
+                                $root.google.protobuf.Duration.encode(message.totalBilledDuration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -32684,6 +33363,10 @@
                                         message.results[key] = value;
                                         break;
                                     }
+                                case 2: {
+                                        message.totalBilledDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32729,6 +33412,11 @@
                                         return "results." + error;
                                 }
                             }
+                            if (message.totalBilledDuration != null && message.hasOwnProperty("totalBilledDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.totalBilledDuration);
+                                if (error)
+                                    return "totalBilledDuration." + error;
+                            }
                             return null;
                         };
     
@@ -32754,6 +33442,11 @@
                                     message.results[keys[i]] = $root.google.cloud.speech.v2.BatchRecognizeFileResult.fromObject(object.results[keys[i]]);
                                 }
                             }
+                            if (object.totalBilledDuration != null) {
+                                if (typeof object.totalBilledDuration !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeResponse.totalBilledDuration: object expected");
+                                message.totalBilledDuration = $root.google.protobuf.Duration.fromObject(object.totalBilledDuration);
+                            }
                             return message;
                         };
     
@@ -32772,12 +33465,16 @@
                             var object = {};
                             if (options.objects || options.defaults)
                                 object.results = {};
+                            if (options.defaults)
+                                object.totalBilledDuration = null;
                             var keys2;
                             if (message.results && (keys2 = Object.keys(message.results)).length) {
                                 object.results = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.results[keys2[j]] = $root.google.cloud.speech.v2.BatchRecognizeFileResult.toObject(message.results[keys2[j]], options);
                             }
+                            if (message.totalBilledDuration != null && message.hasOwnProperty("totalBilledDuration"))
+                                object.totalBilledDuration = $root.google.protobuf.Duration.toObject(message.totalBilledDuration, options);
                             return object;
                         };
     
@@ -32810,6 +33507,259 @@
                         return BatchRecognizeResponse;
                     })();
     
+                    v2.BatchRecognizeResults = (function() {
+    
+                        /**
+                         * Properties of a BatchRecognizeResults.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IBatchRecognizeResults
+                         * @property {Array.<google.cloud.speech.v2.ISpeechRecognitionResult>|null} [results] BatchRecognizeResults results
+                         * @property {google.cloud.speech.v2.IRecognitionResponseMetadata|null} [metadata] BatchRecognizeResults metadata
+                         */
+    
+                        /**
+                         * Constructs a new BatchRecognizeResults.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a BatchRecognizeResults.
+                         * @implements IBatchRecognizeResults
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IBatchRecognizeResults=} [properties] Properties to set
+                         */
+                        function BatchRecognizeResults(properties) {
+                            this.results = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchRecognizeResults results.
+                         * @member {Array.<google.cloud.speech.v2.ISpeechRecognitionResult>} results
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @instance
+                         */
+                        BatchRecognizeResults.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * BatchRecognizeResults metadata.
+                         * @member {google.cloud.speech.v2.IRecognitionResponseMetadata|null|undefined} metadata
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @instance
+                         */
+                        BatchRecognizeResults.prototype.metadata = null;
+    
+                        /**
+                         * Creates a new BatchRecognizeResults instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {google.cloud.speech.v2.IBatchRecognizeResults=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.BatchRecognizeResults} BatchRecognizeResults instance
+                         */
+                        BatchRecognizeResults.create = function create(properties) {
+                            return new BatchRecognizeResults(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRecognizeResults message. Does not implicitly {@link google.cloud.speech.v2.BatchRecognizeResults.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {google.cloud.speech.v2.IBatchRecognizeResults} message BatchRecognizeResults message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRecognizeResults.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.results != null && message.results.length)
+                                for (var i = 0; i < message.results.length; ++i)
+                                    $root.google.cloud.speech.v2.SpeechRecognitionResult.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.cloud.speech.v2.RecognitionResponseMetadata.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchRecognizeResults message, length delimited. Does not implicitly {@link google.cloud.speech.v2.BatchRecognizeResults.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {google.cloud.speech.v2.IBatchRecognizeResults} message BatchRecognizeResults message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchRecognizeResults.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchRecognizeResults message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.BatchRecognizeResults} BatchRecognizeResults
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRecognizeResults.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.BatchRecognizeResults();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.results && message.results.length))
+                                            message.results = [];
+                                        message.results.push($root.google.cloud.speech.v2.SpeechRecognitionResult.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchRecognizeResults message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.BatchRecognizeResults} BatchRecognizeResults
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchRecognizeResults.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchRecognizeResults message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchRecognizeResults.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.results != null && message.hasOwnProperty("results")) {
+                                if (!Array.isArray(message.results))
+                                    return "results: array expected";
+                                for (var i = 0; i < message.results.length; ++i) {
+                                    var error = $root.google.cloud.speech.v2.SpeechRecognitionResult.verify(message.results[i]);
+                                    if (error)
+                                        return "results." + error;
+                                }
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.cloud.speech.v2.RecognitionResponseMetadata.verify(message.metadata);
+                                if (error)
+                                    return "metadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchRecognizeResults message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.BatchRecognizeResults} BatchRecognizeResults
+                         */
+                        BatchRecognizeResults.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.BatchRecognizeResults)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.BatchRecognizeResults();
+                            if (object.results) {
+                                if (!Array.isArray(object.results))
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeResults.results: array expected");
+                                message.results = [];
+                                for (var i = 0; i < object.results.length; ++i) {
+                                    if (typeof object.results[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v2.BatchRecognizeResults.results: object expected");
+                                    message.results[i] = $root.google.cloud.speech.v2.SpeechRecognitionResult.fromObject(object.results[i]);
+                                }
+                            }
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeResults.metadata: object expected");
+                                message.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.fromObject(object.metadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchRecognizeResults message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {google.cloud.speech.v2.BatchRecognizeResults} message BatchRecognizeResults
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchRecognizeResults.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.results = [];
+                            if (options.defaults)
+                                object.metadata = null;
+                            if (message.results && message.results.length) {
+                                object.results = [];
+                                for (var j = 0; j < message.results.length; ++j)
+                                    object.results[j] = $root.google.cloud.speech.v2.SpeechRecognitionResult.toObject(message.results[j], options);
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.toObject(message.metadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchRecognizeResults to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchRecognizeResults.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchRecognizeResults
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.BatchRecognizeResults
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchRecognizeResults.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.BatchRecognizeResults";
+                        };
+    
+                        return BatchRecognizeResults;
+                    })();
+    
                     v2.BatchRecognizeFileResult = (function() {
     
                         /**
@@ -32818,6 +33768,8 @@
                          * @interface IBatchRecognizeFileResult
                          * @property {string|null} [uri] BatchRecognizeFileResult uri
                          * @property {google.rpc.IStatus|null} [error] BatchRecognizeFileResult error
+                         * @property {google.cloud.speech.v2.IRecognitionResponseMetadata|null} [metadata] BatchRecognizeFileResult metadata
+                         * @property {google.cloud.speech.v2.IBatchRecognizeResults|null} [transcript] BatchRecognizeFileResult transcript
                          */
     
                         /**
@@ -32852,6 +33804,22 @@
                         BatchRecognizeFileResult.prototype.error = null;
     
                         /**
+                         * BatchRecognizeFileResult metadata.
+                         * @member {google.cloud.speech.v2.IRecognitionResponseMetadata|null|undefined} metadata
+                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
+                         * @instance
+                         */
+                        BatchRecognizeFileResult.prototype.metadata = null;
+    
+                        /**
+                         * BatchRecognizeFileResult transcript.
+                         * @member {google.cloud.speech.v2.IBatchRecognizeResults|null|undefined} transcript
+                         * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
+                         * @instance
+                         */
+                        BatchRecognizeFileResult.prototype.transcript = null;
+    
+                        /**
                          * Creates a new BatchRecognizeFileResult instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.BatchRecognizeFileResult
@@ -32879,6 +33847,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
                             if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                $root.google.cloud.speech.v2.RecognitionResponseMetadata.encode(message.metadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.transcript != null && Object.hasOwnProperty.call(message, "transcript"))
+                                $root.google.cloud.speech.v2.BatchRecognizeResults.encode(message.transcript, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -32919,6 +33891,14 @@
                                     }
                                 case 2: {
                                         message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -32964,6 +33944,16 @@
                                 if (error)
                                     return "error." + error;
                             }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                var error = $root.google.cloud.speech.v2.RecognitionResponseMetadata.verify(message.metadata);
+                                if (error)
+                                    return "metadata." + error;
+                            }
+                            if (message.transcript != null && message.hasOwnProperty("transcript")) {
+                                var error = $root.google.cloud.speech.v2.BatchRecognizeResults.verify(message.transcript);
+                                if (error)
+                                    return "transcript." + error;
+                            }
                             return null;
                         };
     
@@ -32986,6 +33976,16 @@
                                     throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.error: object expected");
                                 message.error = $root.google.rpc.Status.fromObject(object.error);
                             }
+                            if (object.metadata != null) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.metadata: object expected");
+                                message.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.fromObject(object.metadata);
+                            }
+                            if (object.transcript != null) {
+                                if (typeof object.transcript !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.BatchRecognizeFileResult.transcript: object expected");
+                                message.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.fromObject(object.transcript);
+                            }
                             return message;
                         };
     
@@ -33005,11 +34005,17 @@
                             if (options.defaults) {
                                 object.uri = "";
                                 object.error = null;
+                                object.metadata = null;
+                                object.transcript = null;
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                object.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.toObject(message.metadata, options);
+                            if (message.transcript != null && message.hasOwnProperty("transcript"))
+                                object.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.toObject(message.transcript, options);
                             return object;
                         };
     

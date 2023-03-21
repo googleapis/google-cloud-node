@@ -3063,7 +3063,10 @@
                         },
                         "updateConfigRequest": {
                           "type": "UpdateConfigRequest",
-                          "id": 21
+                          "id": 21,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "progressPercent": {
                           "type": "int32",
@@ -3698,6 +3701,41 @@
                           "rule": "repeated",
                           "type": "BatchRecognizeFileMetadata",
                           "id": 3
+                        },
+                        "recognitionOutputConfig": {
+                          "type": "RecognitionOutputConfig",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "GcsOutputConfig": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "InlineOutputConfig": {
+                      "fields": {}
+                    },
+                    "RecognitionOutputConfig": {
+                      "oneofs": {
+                        "output": {
+                          "oneof": [
+                            "gcsOutputConfig",
+                            "inlineResponseConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsOutputConfig": {
+                          "type": "GcsOutputConfig",
+                          "id": 1
+                        },
+                        "inlineResponseConfig": {
+                          "type": "InlineOutputConfig",
+                          "id": 2
                         }
                       }
                     },
@@ -3707,6 +3745,23 @@
                           "keyType": "string",
                           "type": "BatchRecognizeFileResult",
                           "id": 1
+                        },
+                        "totalBilledDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchRecognizeResults": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SpeechRecognitionResult",
+                          "id": 1
+                        },
+                        "metadata": {
+                          "type": "RecognitionResponseMetadata",
+                          "id": 2
                         }
                       }
                     },
@@ -3719,6 +3774,14 @@
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 2
+                        },
+                        "metadata": {
+                          "type": "RecognitionResponseMetadata",
+                          "id": 3
+                        },
+                        "transcript": {
+                          "type": "BatchRecognizeResults",
+                          "id": 4
                         }
                       }
                     },
