@@ -33,7 +33,7 @@ function main(family, project) {
    */
   // const family = 'abc123'
   /**
-   *  Project ID for this request.
+   *  The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project.
    */
   // const project = 'my-project'
 

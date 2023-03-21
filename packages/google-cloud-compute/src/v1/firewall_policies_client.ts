@@ -1418,7 +1418,7 @@ export class FirewallPoliciesClient {
    * @param {string} request.firewallPolicy
    *   Name of the firewall policy to update.
    * @param {string} request.parentId
-   *   The new parent of the firewall policy.
+   *   The new parent of the firewall policy. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
@@ -2225,7 +2225,7 @@ export class FirewallPoliciesClient {
    * @param {string} request.pageToken
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.parentId
-   *   Parent ID for this request.
+   *   Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
@@ -2317,7 +2317,7 @@ export class FirewallPoliciesClient {
    * @param {string} request.pageToken
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.parentId
-   *   Parent ID for this request.
+   *   Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
@@ -2365,7 +2365,7 @@ export class FirewallPoliciesClient {
    * @param {string} request.pageToken
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.parentId
-   *   Parent ID for this request.
+   *   Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]

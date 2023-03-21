@@ -459,7 +459,7 @@ export class TargetHttpsProxiesClient {
       );
   }
   /**
-   * Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.
+   * Returns the specified TargetHttpsProxy resource.
    *
    * @param {Object} request
    *   The request object that will be sent.

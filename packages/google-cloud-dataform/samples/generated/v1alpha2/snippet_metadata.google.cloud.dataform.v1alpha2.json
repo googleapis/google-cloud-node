@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataform",
-        "version": "1.0.1",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
