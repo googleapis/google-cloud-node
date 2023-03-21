@@ -426,6 +426,147 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a TransactionEvent. */
+                interface ITransactionEvent {
+
+                    /** TransactionEvent eventType */
+                    eventType?: (google.cloud.recaptchaenterprise.v1.TransactionEvent.TransactionEventType|keyof typeof google.cloud.recaptchaenterprise.v1.TransactionEvent.TransactionEventType|null);
+
+                    /** TransactionEvent reason */
+                    reason?: (string|null);
+
+                    /** TransactionEvent value */
+                    value?: (number|null);
+
+                    /** TransactionEvent eventTime */
+                    eventTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TransactionEvent. */
+                class TransactionEvent implements ITransactionEvent {
+
+                    /**
+                     * Constructs a new TransactionEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ITransactionEvent);
+
+                    /** TransactionEvent eventType. */
+                    public eventType: (google.cloud.recaptchaenterprise.v1.TransactionEvent.TransactionEventType|keyof typeof google.cloud.recaptchaenterprise.v1.TransactionEvent.TransactionEventType);
+
+                    /** TransactionEvent reason. */
+                    public reason: string;
+
+                    /** TransactionEvent value. */
+                    public value: number;
+
+                    /** TransactionEvent eventTime. */
+                    public eventTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TransactionEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransactionEvent instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ITransactionEvent): google.cloud.recaptchaenterprise.v1.TransactionEvent;
+
+                    /**
+                     * Encodes the specified TransactionEvent message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionEvent.verify|verify} messages.
+                     * @param message TransactionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ITransactionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransactionEvent message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionEvent.verify|verify} messages.
+                     * @param message TransactionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ITransactionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransactionEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransactionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TransactionEvent;
+
+                    /**
+                     * Decodes a TransactionEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransactionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TransactionEvent;
+
+                    /**
+                     * Verifies a TransactionEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransactionEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransactionEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TransactionEvent;
+
+                    /**
+                     * Creates a plain object from a TransactionEvent message. Also converts values to other types if specified.
+                     * @param message TransactionEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.TransactionEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransactionEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransactionEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TransactionEvent {
+
+                    /** TransactionEventType enum. */
+                    enum TransactionEventType {
+                        TRANSACTION_EVENT_TYPE_UNSPECIFIED = 0,
+                        MERCHANT_APPROVE = 1,
+                        MERCHANT_DENY = 2,
+                        MANUAL_REVIEW = 3,
+                        AUTHORIZATION = 4,
+                        AUTHORIZATION_DECLINE = 5,
+                        PAYMENT_CAPTURE = 6,
+                        PAYMENT_CAPTURE_DECLINE = 7,
+                        CANCEL = 8,
+                        CHARGEBACK_INQUIRY = 9,
+                        CHARGEBACK_ALERT = 10,
+                        FRAUD_NOTIFICATION = 11,
+                        CHARGEBACK = 12,
+                        CHARGEBACK_REPRESENTMENT = 13,
+                        CHARGEBACK_REVERSE = 14,
+                        REFUND_REQUEST = 15,
+                        REFUND_DECLINE = 16,
+                        REFUND = 17,
+                        REFUND_REVERSE = 18
+                    }
+                }
+
                 /** Properties of an AnnotateAssessmentRequest. */
                 interface IAnnotateAssessmentRequest {
 
@@ -440,6 +581,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
+
+                    /** AnnotateAssessmentRequest transactionEvent */
+                    transactionEvent?: (google.cloud.recaptchaenterprise.v1.ITransactionEvent|null);
                 }
 
                 /** Represents an AnnotateAssessmentRequest. */
@@ -462,6 +606,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
+
+                    /** AnnotateAssessmentRequest transactionEvent. */
+                    public transactionEvent?: (google.cloud.recaptchaenterprise.v1.ITransactionEvent|null);
 
                     /**
                      * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -1051,6 +1198,9 @@ export namespace google {
 
                     /** Assessment privatePasswordLeakVerification */
                     privatePasswordLeakVerification?: (google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null);
+
+                    /** Assessment fraudPreventionAssessment */
+                    fraudPreventionAssessment?: (google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null);
                 }
 
                 /** Represents an Assessment. */
@@ -1082,6 +1232,9 @@ export namespace google {
 
                     /** Assessment privatePasswordLeakVerification. */
                     public privatePasswordLeakVerification?: (google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null);
+
+                    /** Assessment fraudPreventionAssessment. */
+                    public fraudPreventionAssessment?: (google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -1181,6 +1334,9 @@ export namespace google {
 
                     /** Event hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
+
+                    /** Event transactionData */
+                    transactionData?: (google.cloud.recaptchaenterprise.v1.ITransactionData|null);
                 }
 
                 /** Represents an Event. */
@@ -1209,6 +1365,9 @@ export namespace google {
 
                     /** Event hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
+
+                    /** Event transactionData. */
+                    public transactionData?: (google.cloud.recaptchaenterprise.v1.ITransactionData|null);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -1286,6 +1445,665 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransactionData. */
+                interface ITransactionData {
+
+                    /** TransactionData transactionId */
+                    transactionId?: (string|null);
+
+                    /** TransactionData paymentMethod */
+                    paymentMethod?: (string|null);
+
+                    /** TransactionData cardBin */
+                    cardBin?: (string|null);
+
+                    /** TransactionData cardLastFour */
+                    cardLastFour?: (string|null);
+
+                    /** TransactionData currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** TransactionData value */
+                    value?: (number|null);
+
+                    /** TransactionData shippingValue */
+                    shippingValue?: (number|null);
+
+                    /** TransactionData shippingAddress */
+                    shippingAddress?: (google.cloud.recaptchaenterprise.v1.TransactionData.IAddress|null);
+
+                    /** TransactionData billingAddress */
+                    billingAddress?: (google.cloud.recaptchaenterprise.v1.TransactionData.IAddress|null);
+
+                    /** TransactionData user */
+                    user?: (google.cloud.recaptchaenterprise.v1.TransactionData.IUser|null);
+
+                    /** TransactionData merchants */
+                    merchants?: (google.cloud.recaptchaenterprise.v1.TransactionData.IUser[]|null);
+
+                    /** TransactionData items */
+                    items?: (google.cloud.recaptchaenterprise.v1.TransactionData.IItem[]|null);
+
+                    /** TransactionData gatewayInfo */
+                    gatewayInfo?: (google.cloud.recaptchaenterprise.v1.TransactionData.IGatewayInfo|null);
+                }
+
+                /** Represents a TransactionData. */
+                class TransactionData implements ITransactionData {
+
+                    /**
+                     * Constructs a new TransactionData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ITransactionData);
+
+                    /** TransactionData transactionId. */
+                    public transactionId?: (string|null);
+
+                    /** TransactionData paymentMethod. */
+                    public paymentMethod: string;
+
+                    /** TransactionData cardBin. */
+                    public cardBin: string;
+
+                    /** TransactionData cardLastFour. */
+                    public cardLastFour: string;
+
+                    /** TransactionData currencyCode. */
+                    public currencyCode: string;
+
+                    /** TransactionData value. */
+                    public value: number;
+
+                    /** TransactionData shippingValue. */
+                    public shippingValue: number;
+
+                    /** TransactionData shippingAddress. */
+                    public shippingAddress?: (google.cloud.recaptchaenterprise.v1.TransactionData.IAddress|null);
+
+                    /** TransactionData billingAddress. */
+                    public billingAddress?: (google.cloud.recaptchaenterprise.v1.TransactionData.IAddress|null);
+
+                    /** TransactionData user. */
+                    public user?: (google.cloud.recaptchaenterprise.v1.TransactionData.IUser|null);
+
+                    /** TransactionData merchants. */
+                    public merchants: google.cloud.recaptchaenterprise.v1.TransactionData.IUser[];
+
+                    /** TransactionData items. */
+                    public items: google.cloud.recaptchaenterprise.v1.TransactionData.IItem[];
+
+                    /** TransactionData gatewayInfo. */
+                    public gatewayInfo?: (google.cloud.recaptchaenterprise.v1.TransactionData.IGatewayInfo|null);
+
+                    /** TransactionData _transactionId. */
+                    public _transactionId?: "transactionId";
+
+                    /**
+                     * Creates a new TransactionData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransactionData instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ITransactionData): google.cloud.recaptchaenterprise.v1.TransactionData;
+
+                    /**
+                     * Encodes the specified TransactionData message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.verify|verify} messages.
+                     * @param message TransactionData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ITransactionData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransactionData message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.verify|verify} messages.
+                     * @param message TransactionData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ITransactionData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransactionData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransactionData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TransactionData;
+
+                    /**
+                     * Decodes a TransactionData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransactionData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TransactionData;
+
+                    /**
+                     * Verifies a TransactionData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransactionData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransactionData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TransactionData;
+
+                    /**
+                     * Creates a plain object from a TransactionData message. Also converts values to other types if specified.
+                     * @param message TransactionData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.TransactionData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransactionData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransactionData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TransactionData {
+
+                    /** Properties of an Address. */
+                    interface IAddress {
+
+                        /** Address recipient */
+                        recipient?: (string|null);
+
+                        /** Address address */
+                        address?: (string[]|null);
+
+                        /** Address locality */
+                        locality?: (string|null);
+
+                        /** Address administrativeArea */
+                        administrativeArea?: (string|null);
+
+                        /** Address regionCode */
+                        regionCode?: (string|null);
+
+                        /** Address postalCode */
+                        postalCode?: (string|null);
+                    }
+
+                    /** Represents an Address. */
+                    class Address implements IAddress {
+
+                        /**
+                         * Constructs a new Address.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IAddress);
+
+                        /** Address recipient. */
+                        public recipient: string;
+
+                        /** Address address. */
+                        public address: string[];
+
+                        /** Address locality. */
+                        public locality: string;
+
+                        /** Address administrativeArea. */
+                        public administrativeArea: string;
+
+                        /** Address regionCode. */
+                        public regionCode: string;
+
+                        /** Address postalCode. */
+                        public postalCode: string;
+
+                        /**
+                         * Creates a new Address instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Address instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IAddress): google.cloud.recaptchaenterprise.v1.TransactionData.Address;
+
+                        /**
+                         * Encodes the specified Address message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.Address.verify|verify} messages.
+                         * @param message Address message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.TransactionData.IAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Address message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.Address.verify|verify} messages.
+                         * @param message Address message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.TransactionData.IAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Address message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Address
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TransactionData.Address;
+
+                        /**
+                         * Decodes an Address message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Address
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TransactionData.Address;
+
+                        /**
+                         * Verifies an Address message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Address message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Address
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TransactionData.Address;
+
+                        /**
+                         * Creates a plain object from an Address message. Also converts values to other types if specified.
+                         * @param message Address
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.TransactionData.Address, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Address to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Address
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a User. */
+                    interface IUser {
+
+                        /** User accountId */
+                        accountId?: (string|null);
+
+                        /** User creationMs */
+                        creationMs?: (number|Long|string|null);
+
+                        /** User email */
+                        email?: (string|null);
+
+                        /** User emailVerified */
+                        emailVerified?: (boolean|null);
+
+                        /** User phoneNumber */
+                        phoneNumber?: (string|null);
+
+                        /** User phoneVerified */
+                        phoneVerified?: (boolean|null);
+                    }
+
+                    /** Represents a User. */
+                    class User implements IUser {
+
+                        /**
+                         * Constructs a new User.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IUser);
+
+                        /** User accountId. */
+                        public accountId: string;
+
+                        /** User creationMs. */
+                        public creationMs: (number|Long|string);
+
+                        /** User email. */
+                        public email: string;
+
+                        /** User emailVerified. */
+                        public emailVerified: boolean;
+
+                        /** User phoneNumber. */
+                        public phoneNumber: string;
+
+                        /** User phoneVerified. */
+                        public phoneVerified: boolean;
+
+                        /**
+                         * Creates a new User instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns User instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IUser): google.cloud.recaptchaenterprise.v1.TransactionData.User;
+
+                        /**
+                         * Encodes the specified User message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.User.verify|verify} messages.
+                         * @param message User message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.TransactionData.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified User message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.User.verify|verify} messages.
+                         * @param message User message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.TransactionData.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a User message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TransactionData.User;
+
+                        /**
+                         * Decodes a User message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TransactionData.User;
+
+                        /**
+                         * Verifies a User message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a User message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns User
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TransactionData.User;
+
+                        /**
+                         * Creates a plain object from a User message. Also converts values to other types if specified.
+                         * @param message User
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.TransactionData.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this User to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for User
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Item. */
+                    interface IItem {
+
+                        /** Item name */
+                        name?: (string|null);
+
+                        /** Item value */
+                        value?: (number|null);
+
+                        /** Item quantity */
+                        quantity?: (number|Long|string|null);
+
+                        /** Item merchantAccountId */
+                        merchantAccountId?: (string|null);
+                    }
+
+                    /** Represents an Item. */
+                    class Item implements IItem {
+
+                        /**
+                         * Constructs a new Item.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IItem);
+
+                        /** Item name. */
+                        public name: string;
+
+                        /** Item value. */
+                        public value: number;
+
+                        /** Item quantity. */
+                        public quantity: (number|Long|string);
+
+                        /** Item merchantAccountId. */
+                        public merchantAccountId: string;
+
+                        /**
+                         * Creates a new Item instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Item instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IItem): google.cloud.recaptchaenterprise.v1.TransactionData.Item;
+
+                        /**
+                         * Encodes the specified Item message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.Item.verify|verify} messages.
+                         * @param message Item message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.TransactionData.IItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Item message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.Item.verify|verify} messages.
+                         * @param message Item message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.TransactionData.IItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Item message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Item
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TransactionData.Item;
+
+                        /**
+                         * Decodes an Item message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Item
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TransactionData.Item;
+
+                        /**
+                         * Verifies an Item message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Item message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Item
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TransactionData.Item;
+
+                        /**
+                         * Creates a plain object from an Item message. Also converts values to other types if specified.
+                         * @param message Item
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.TransactionData.Item, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Item to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Item
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GatewayInfo. */
+                    interface IGatewayInfo {
+
+                        /** GatewayInfo name */
+                        name?: (string|null);
+
+                        /** GatewayInfo gatewayResponseCode */
+                        gatewayResponseCode?: (string|null);
+
+                        /** GatewayInfo avsResponseCode */
+                        avsResponseCode?: (string|null);
+
+                        /** GatewayInfo cvvResponseCode */
+                        cvvResponseCode?: (string|null);
+                    }
+
+                    /** Represents a GatewayInfo. */
+                    class GatewayInfo implements IGatewayInfo {
+
+                        /**
+                         * Constructs a new GatewayInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IGatewayInfo);
+
+                        /** GatewayInfo name. */
+                        public name: string;
+
+                        /** GatewayInfo gatewayResponseCode. */
+                        public gatewayResponseCode: string;
+
+                        /** GatewayInfo avsResponseCode. */
+                        public avsResponseCode: string;
+
+                        /** GatewayInfo cvvResponseCode. */
+                        public cvvResponseCode: string;
+
+                        /**
+                         * Creates a new GatewayInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GatewayInfo instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.TransactionData.IGatewayInfo): google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Encodes the specified GatewayInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo.verify|verify} messages.
+                         * @param message GatewayInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.TransactionData.IGatewayInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GatewayInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo.verify|verify} messages.
+                         * @param message GatewayInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.TransactionData.IGatewayInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GatewayInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GatewayInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Decodes a GatewayInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GatewayInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Verifies a GatewayInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GatewayInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GatewayInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Creates a plain object from a GatewayInfo message. Also converts values to other types if specified.
+                         * @param message GatewayInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GatewayInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GatewayInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a RiskAnalysis. */
@@ -1400,7 +2218,9 @@ export namespace google {
                         UNEXPECTED_ENVIRONMENT = 2,
                         TOO_MUCH_TRAFFIC = 3,
                         UNEXPECTED_USAGE_PATTERNS = 4,
-                        LOW_CONFIDENCE_SCORE = 5
+                        LOW_CONFIDENCE_SCORE = 5,
+                        SUSPECTED_CARDING = 6,
+                        SUSPECTED_CHARGEBACK = 7
                     }
                 }
 
@@ -1548,6 +2368,312 @@ export namespace google {
                         DUPE = 4,
                         MISSING = 5,
                         BROWSER_ERROR = 6
+                    }
+                }
+
+                /** Properties of a FraudPreventionAssessment. */
+                interface IFraudPreventionAssessment {
+
+                    /** FraudPreventionAssessment transactionRisk */
+                    transactionRisk?: (number|null);
+
+                    /** FraudPreventionAssessment stolenInstrumentVerdict */
+                    stolenInstrumentVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict|null);
+
+                    /** FraudPreventionAssessment cardTestingVerdict */
+                    cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict|null);
+                }
+
+                /** Represents a FraudPreventionAssessment. */
+                class FraudPreventionAssessment implements IFraudPreventionAssessment {
+
+                    /**
+                     * Constructs a new FraudPreventionAssessment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment);
+
+                    /** FraudPreventionAssessment transactionRisk. */
+                    public transactionRisk: number;
+
+                    /** FraudPreventionAssessment stolenInstrumentVerdict. */
+                    public stolenInstrumentVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict|null);
+
+                    /** FraudPreventionAssessment cardTestingVerdict. */
+                    public cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict|null);
+
+                    /**
+                     * Creates a new FraudPreventionAssessment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FraudPreventionAssessment instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment;
+
+                    /**
+                     * Encodes the specified FraudPreventionAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.verify|verify} messages.
+                     * @param message FraudPreventionAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FraudPreventionAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.verify|verify} messages.
+                     * @param message FraudPreventionAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FraudPreventionAssessment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FraudPreventionAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment;
+
+                    /**
+                     * Decodes a FraudPreventionAssessment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FraudPreventionAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment;
+
+                    /**
+                     * Verifies a FraudPreventionAssessment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FraudPreventionAssessment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FraudPreventionAssessment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment;
+
+                    /**
+                     * Creates a plain object from a FraudPreventionAssessment message. Also converts values to other types if specified.
+                     * @param message FraudPreventionAssessment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FraudPreventionAssessment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FraudPreventionAssessment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FraudPreventionAssessment {
+
+                    /** Properties of a StolenInstrumentVerdict. */
+                    interface IStolenInstrumentVerdict {
+
+                        /** StolenInstrumentVerdict risk */
+                        risk?: (number|null);
+                    }
+
+                    /** Represents a StolenInstrumentVerdict. */
+                    class StolenInstrumentVerdict implements IStolenInstrumentVerdict {
+
+                        /**
+                         * Constructs a new StolenInstrumentVerdict.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict);
+
+                        /** StolenInstrumentVerdict risk. */
+                        public risk: number;
+
+                        /**
+                         * Creates a new StolenInstrumentVerdict instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StolenInstrumentVerdict instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Encodes the specified StolenInstrumentVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict.verify|verify} messages.
+                         * @param message StolenInstrumentVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StolenInstrumentVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict.verify|verify} messages.
+                         * @param message StolenInstrumentVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IStolenInstrumentVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StolenInstrumentVerdict message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StolenInstrumentVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Decodes a StolenInstrumentVerdict message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StolenInstrumentVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Verifies a StolenInstrumentVerdict message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StolenInstrumentVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StolenInstrumentVerdict
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Creates a plain object from a StolenInstrumentVerdict message. Also converts values to other types if specified.
+                         * @param message StolenInstrumentVerdict
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StolenInstrumentVerdict to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StolenInstrumentVerdict
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CardTestingVerdict. */
+                    interface ICardTestingVerdict {
+
+                        /** CardTestingVerdict risk */
+                        risk?: (number|null);
+                    }
+
+                    /** Represents a CardTestingVerdict. */
+                    class CardTestingVerdict implements ICardTestingVerdict {
+
+                        /**
+                         * Constructs a new CardTestingVerdict.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict);
+
+                        /** CardTestingVerdict risk. */
+                        public risk: number;
+
+                        /**
+                         * Creates a new CardTestingVerdict instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CardTestingVerdict instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Encodes the specified CardTestingVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict.verify|verify} messages.
+                         * @param message CardTestingVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CardTestingVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict.verify|verify} messages.
+                         * @param message CardTestingVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CardTestingVerdict message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CardTestingVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Decodes a CardTestingVerdict message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CardTestingVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Verifies a CardTestingVerdict message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CardTestingVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CardTestingVerdict
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Creates a plain object from a CardTestingVerdict message. Also converts values to other types if specified.
+                         * @param message CardTestingVerdict
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CardTestingVerdict to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CardTestingVerdict
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -4838,6 +5964,147 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a TransactionEvent. */
+                interface ITransactionEvent {
+
+                    /** TransactionEvent eventType */
+                    eventType?: (google.cloud.recaptchaenterprise.v1beta1.TransactionEvent.TransactionEventType|keyof typeof google.cloud.recaptchaenterprise.v1beta1.TransactionEvent.TransactionEventType|null);
+
+                    /** TransactionEvent reason */
+                    reason?: (string|null);
+
+                    /** TransactionEvent value */
+                    value?: (number|null);
+
+                    /** TransactionEvent eventTime */
+                    eventTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TransactionEvent. */
+                class TransactionEvent implements ITransactionEvent {
+
+                    /**
+                     * Constructs a new TransactionEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent);
+
+                    /** TransactionEvent eventType. */
+                    public eventType: (google.cloud.recaptchaenterprise.v1beta1.TransactionEvent.TransactionEventType|keyof typeof google.cloud.recaptchaenterprise.v1beta1.TransactionEvent.TransactionEventType);
+
+                    /** TransactionEvent reason. */
+                    public reason: string;
+
+                    /** TransactionEvent value. */
+                    public value: number;
+
+                    /** TransactionEvent eventTime. */
+                    public eventTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TransactionEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransactionEvent instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent): google.cloud.recaptchaenterprise.v1beta1.TransactionEvent;
+
+                    /**
+                     * Encodes the specified TransactionEvent message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionEvent.verify|verify} messages.
+                     * @param message TransactionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransactionEvent message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionEvent.verify|verify} messages.
+                     * @param message TransactionEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransactionEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransactionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.TransactionEvent;
+
+                    /**
+                     * Decodes a TransactionEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransactionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.TransactionEvent;
+
+                    /**
+                     * Verifies a TransactionEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransactionEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransactionEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.TransactionEvent;
+
+                    /**
+                     * Creates a plain object from a TransactionEvent message. Also converts values to other types if specified.
+                     * @param message TransactionEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.TransactionEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransactionEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransactionEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TransactionEvent {
+
+                    /** TransactionEventType enum. */
+                    enum TransactionEventType {
+                        TRANSACTION_EVENT_TYPE_UNSPECIFIED = 0,
+                        MERCHANT_APPROVE = 1,
+                        MERCHANT_DENY = 2,
+                        MANUAL_REVIEW = 3,
+                        AUTHORIZATION = 4,
+                        AUTHORIZATION_DECLINE = 5,
+                        PAYMENT_CAPTURE = 6,
+                        PAYMENT_CAPTURE_DECLINE = 7,
+                        CANCEL = 8,
+                        CHARGEBACK_INQUIRY = 9,
+                        CHARGEBACK_ALERT = 10,
+                        FRAUD_NOTIFICATION = 11,
+                        CHARGEBACK = 12,
+                        CHARGEBACK_REPRESENTMENT = 13,
+                        CHARGEBACK_REVERSE = 14,
+                        REFUND_REQUEST = 15,
+                        REFUND_DECLINE = 16,
+                        REFUND = 17,
+                        REFUND_REVERSE = 18
+                    }
+                }
+
                 /** Properties of an AnnotateAssessmentRequest. */
                 interface IAnnotateAssessmentRequest {
 
@@ -4852,6 +6119,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
+
+                    /** AnnotateAssessmentRequest transactionEvent */
+                    transactionEvent?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent|null);
                 }
 
                 /** Represents an AnnotateAssessmentRequest. */
@@ -4874,6 +6144,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
+
+                    /** AnnotateAssessmentRequest transactionEvent. */
+                    public transactionEvent?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionEvent|null);
 
                     /**
                      * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -4970,12 +6243,17 @@ export namespace google {
                         CHARGEBACK = 1,
                         CHARGEBACK_FRAUD = 8,
                         CHARGEBACK_DISPUTE = 9,
+                        REFUND = 10,
+                        REFUND_FRAUD = 11,
+                        TRANSACTION_ACCEPTED = 12,
+                        TRANSACTION_DECLINED = 13,
                         PAYMENT_HEURISTICS = 2,
                         INITIATED_TWO_FACTOR = 7,
                         PASSED_TWO_FACTOR = 3,
                         FAILED_TWO_FACTOR = 4,
                         CORRECT_PASSWORD = 5,
-                        INCORRECT_PASSWORD = 6
+                        INCORRECT_PASSWORD = 6,
+                        SOCIAL_SPAM = 14
                     }
                 }
 
@@ -5202,6 +6480,9 @@ export namespace google {
 
                     /** Assessment accountDefenderAssessment */
                     accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment|null);
+
+                    /** Assessment fraudPreventionAssessment */
+                    fraudPreventionAssessment?: (google.cloud.recaptchaenterprise.v1beta1.IFraudPreventionAssessment|null);
                 }
 
                 /** Represents an Assessment. */
@@ -5233,6 +6514,9 @@ export namespace google {
 
                     /** Assessment accountDefenderAssessment. */
                     public accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1beta1.IAccountDefenderAssessment|null);
+
+                    /** Assessment fraudPreventionAssessment. */
+                    public fraudPreventionAssessment?: (google.cloud.recaptchaenterprise.v1beta1.IFraudPreventionAssessment|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -5321,7 +6605,9 @@ export namespace google {
                         UNEXPECTED_ENVIRONMENT = 2,
                         TOO_MUCH_TRAFFIC = 3,
                         UNEXPECTED_USAGE_PATTERNS = 4,
-                        LOW_CONFIDENCE_SCORE = 5
+                        LOW_CONFIDENCE_SCORE = 5,
+                        SUSPECTED_CARDING = 6,
+                        SUSPECTED_CHARGEBACK = 7
                     }
                 }
 
@@ -5345,6 +6631,9 @@ export namespace google {
 
                     /** Event hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
+
+                    /** Event transactionData */
+                    transactionData?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionData|null);
                 }
 
                 /** Represents an Event. */
@@ -5373,6 +6662,9 @@ export namespace google {
 
                     /** Event hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
+
+                    /** Event transactionData. */
+                    public transactionData?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionData|null);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -5450,6 +6742,665 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransactionData. */
+                interface ITransactionData {
+
+                    /** TransactionData transactionId */
+                    transactionId?: (string|null);
+
+                    /** TransactionData paymentMethod */
+                    paymentMethod?: (string|null);
+
+                    /** TransactionData cardBin */
+                    cardBin?: (string|null);
+
+                    /** TransactionData cardLastFour */
+                    cardLastFour?: (string|null);
+
+                    /** TransactionData currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** TransactionData value */
+                    value?: (number|null);
+
+                    /** TransactionData shippingValue */
+                    shippingValue?: (number|null);
+
+                    /** TransactionData shippingAddress */
+                    shippingAddress?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress|null);
+
+                    /** TransactionData billingAddress */
+                    billingAddress?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress|null);
+
+                    /** TransactionData user */
+                    user?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser|null);
+
+                    /** TransactionData merchants */
+                    merchants?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser[]|null);
+
+                    /** TransactionData items */
+                    items?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IItem[]|null);
+
+                    /** TransactionData gatewayInfo */
+                    gatewayInfo?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IGatewayInfo|null);
+                }
+
+                /** Represents a TransactionData. */
+                class TransactionData implements ITransactionData {
+
+                    /**
+                     * Constructs a new TransactionData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.ITransactionData);
+
+                    /** TransactionData transactionId. */
+                    public transactionId?: (string|null);
+
+                    /** TransactionData paymentMethod. */
+                    public paymentMethod: string;
+
+                    /** TransactionData cardBin. */
+                    public cardBin: string;
+
+                    /** TransactionData cardLastFour. */
+                    public cardLastFour: string;
+
+                    /** TransactionData currencyCode. */
+                    public currencyCode: string;
+
+                    /** TransactionData value. */
+                    public value: number;
+
+                    /** TransactionData shippingValue. */
+                    public shippingValue: number;
+
+                    /** TransactionData shippingAddress. */
+                    public shippingAddress?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress|null);
+
+                    /** TransactionData billingAddress. */
+                    public billingAddress?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress|null);
+
+                    /** TransactionData user. */
+                    public user?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser|null);
+
+                    /** TransactionData merchants. */
+                    public merchants: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser[];
+
+                    /** TransactionData items. */
+                    public items: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IItem[];
+
+                    /** TransactionData gatewayInfo. */
+                    public gatewayInfo?: (google.cloud.recaptchaenterprise.v1beta1.TransactionData.IGatewayInfo|null);
+
+                    /** TransactionData _transactionId. */
+                    public _transactionId?: "transactionId";
+
+                    /**
+                     * Creates a new TransactionData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransactionData instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.ITransactionData): google.cloud.recaptchaenterprise.v1beta1.TransactionData;
+
+                    /**
+                     * Encodes the specified TransactionData message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.verify|verify} messages.
+                     * @param message TransactionData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.ITransactionData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransactionData message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.verify|verify} messages.
+                     * @param message TransactionData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.ITransactionData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransactionData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransactionData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.TransactionData;
+
+                    /**
+                     * Decodes a TransactionData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransactionData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.TransactionData;
+
+                    /**
+                     * Verifies a TransactionData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransactionData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransactionData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.TransactionData;
+
+                    /**
+                     * Creates a plain object from a TransactionData message. Also converts values to other types if specified.
+                     * @param message TransactionData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransactionData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransactionData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TransactionData {
+
+                    /** Properties of an Address. */
+                    interface IAddress {
+
+                        /** Address recipient */
+                        recipient?: (string|null);
+
+                        /** Address address */
+                        address?: (string[]|null);
+
+                        /** Address locality */
+                        locality?: (string|null);
+
+                        /** Address administrativeArea */
+                        administrativeArea?: (string|null);
+
+                        /** Address regionCode */
+                        regionCode?: (string|null);
+
+                        /** Address postalCode */
+                        postalCode?: (string|null);
+                    }
+
+                    /** Represents an Address. */
+                    class Address implements IAddress {
+
+                        /**
+                         * Constructs a new Address.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress);
+
+                        /** Address recipient. */
+                        public recipient: string;
+
+                        /** Address address. */
+                        public address: string[];
+
+                        /** Address locality. */
+                        public locality: string;
+
+                        /** Address administrativeArea. */
+                        public administrativeArea: string;
+
+                        /** Address regionCode. */
+                        public regionCode: string;
+
+                        /** Address postalCode. */
+                        public postalCode: string;
+
+                        /**
+                         * Creates a new Address instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Address instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address;
+
+                        /**
+                         * Encodes the specified Address message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address.verify|verify} messages.
+                         * @param message Address message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Address message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address.verify|verify} messages.
+                         * @param message Address message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Address message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Address
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address;
+
+                        /**
+                         * Decodes an Address message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Address
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address;
+
+                        /**
+                         * Verifies an Address message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Address message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Address
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address;
+
+                        /**
+                         * Creates a plain object from an Address message. Also converts values to other types if specified.
+                         * @param message Address
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.Address, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Address to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Address
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a User. */
+                    interface IUser {
+
+                        /** User accountId */
+                        accountId?: (string|null);
+
+                        /** User creationMs */
+                        creationMs?: (number|Long|string|null);
+
+                        /** User email */
+                        email?: (string|null);
+
+                        /** User emailVerified */
+                        emailVerified?: (boolean|null);
+
+                        /** User phoneNumber */
+                        phoneNumber?: (string|null);
+
+                        /** User phoneVerified */
+                        phoneVerified?: (boolean|null);
+                    }
+
+                    /** Represents a User. */
+                    class User implements IUser {
+
+                        /**
+                         * Constructs a new User.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser);
+
+                        /** User accountId. */
+                        public accountId: string;
+
+                        /** User creationMs. */
+                        public creationMs: (number|Long|string);
+
+                        /** User email. */
+                        public email: string;
+
+                        /** User emailVerified. */
+                        public emailVerified: boolean;
+
+                        /** User phoneNumber. */
+                        public phoneNumber: string;
+
+                        /** User phoneVerified. */
+                        public phoneVerified: boolean;
+
+                        /**
+                         * Creates a new User instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns User instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser): google.cloud.recaptchaenterprise.v1beta1.TransactionData.User;
+
+                        /**
+                         * Encodes the specified User message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.User.verify|verify} messages.
+                         * @param message User message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified User message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.User.verify|verify} messages.
+                         * @param message User message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a User message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.TransactionData.User;
+
+                        /**
+                         * Decodes a User message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.TransactionData.User;
+
+                        /**
+                         * Verifies a User message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a User message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns User
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.TransactionData.User;
+
+                        /**
+                         * Creates a plain object from a User message. Also converts values to other types if specified.
+                         * @param message User
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this User to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for User
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Item. */
+                    interface IItem {
+
+                        /** Item name */
+                        name?: (string|null);
+
+                        /** Item value */
+                        value?: (number|null);
+
+                        /** Item quantity */
+                        quantity?: (number|Long|string|null);
+
+                        /** Item merchantAccountId */
+                        merchantAccountId?: (string|null);
+                    }
+
+                    /** Represents an Item. */
+                    class Item implements IItem {
+
+                        /**
+                         * Constructs a new Item.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IItem);
+
+                        /** Item name. */
+                        public name: string;
+
+                        /** Item value. */
+                        public value: number;
+
+                        /** Item quantity. */
+                        public quantity: (number|Long|string);
+
+                        /** Item merchantAccountId. */
+                        public merchantAccountId: string;
+
+                        /**
+                         * Creates a new Item instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Item instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IItem): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item;
+
+                        /**
+                         * Encodes the specified Item message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item.verify|verify} messages.
+                         * @param message Item message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Item message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item.verify|verify} messages.
+                         * @param message Item message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Item message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Item
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item;
+
+                        /**
+                         * Decodes an Item message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Item
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item;
+
+                        /**
+                         * Verifies an Item message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Item message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Item
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item;
+
+                        /**
+                         * Creates a plain object from an Item message. Also converts values to other types if specified.
+                         * @param message Item
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.Item, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Item to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Item
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GatewayInfo. */
+                    interface IGatewayInfo {
+
+                        /** GatewayInfo name */
+                        name?: (string|null);
+
+                        /** GatewayInfo gatewayResponseCode */
+                        gatewayResponseCode?: (string|null);
+
+                        /** GatewayInfo avsResponseCode */
+                        avsResponseCode?: (string|null);
+
+                        /** GatewayInfo cvvResponseCode */
+                        cvvResponseCode?: (string|null);
+                    }
+
+                    /** Represents a GatewayInfo. */
+                    class GatewayInfo implements IGatewayInfo {
+
+                        /**
+                         * Constructs a new GatewayInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IGatewayInfo);
+
+                        /** GatewayInfo name. */
+                        public name: string;
+
+                        /** GatewayInfo gatewayResponseCode. */
+                        public gatewayResponseCode: string;
+
+                        /** GatewayInfo avsResponseCode. */
+                        public avsResponseCode: string;
+
+                        /** GatewayInfo cvvResponseCode. */
+                        public cvvResponseCode: string;
+
+                        /**
+                         * Creates a new GatewayInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GatewayInfo instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IGatewayInfo): google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Encodes the specified GatewayInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo.verify|verify} messages.
+                         * @param message GatewayInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IGatewayInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GatewayInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo.verify|verify} messages.
+                         * @param message GatewayInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.IGatewayInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GatewayInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GatewayInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Decodes a GatewayInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GatewayInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Verifies a GatewayInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GatewayInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GatewayInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo;
+
+                        /**
+                         * Creates a plain object from a GatewayInfo message. Also converts values to other types if specified.
+                         * @param message GatewayInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.TransactionData.GatewayInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GatewayInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GatewayInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a TokenProperties. */
@@ -5585,6 +7536,312 @@ export namespace google {
                         SITE_MISMATCH = 5,
                         MISSING = 6,
                         BROWSER_ERROR = 7
+                    }
+                }
+
+                /** Properties of a FraudPreventionAssessment. */
+                interface IFraudPreventionAssessment {
+
+                    /** FraudPreventionAssessment transactionRisk */
+                    transactionRisk?: (number|null);
+
+                    /** FraudPreventionAssessment stolenInstrumentVerdict */
+                    stolenInstrumentVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict|null);
+
+                    /** FraudPreventionAssessment cardTestingVerdict */
+                    cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict|null);
+                }
+
+                /** Represents a FraudPreventionAssessment. */
+                class FraudPreventionAssessment implements IFraudPreventionAssessment {
+
+                    /**
+                     * Constructs a new FraudPreventionAssessment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.IFraudPreventionAssessment);
+
+                    /** FraudPreventionAssessment transactionRisk. */
+                    public transactionRisk: number;
+
+                    /** FraudPreventionAssessment stolenInstrumentVerdict. */
+                    public stolenInstrumentVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict|null);
+
+                    /** FraudPreventionAssessment cardTestingVerdict. */
+                    public cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict|null);
+
+                    /**
+                     * Creates a new FraudPreventionAssessment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FraudPreventionAssessment instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.IFraudPreventionAssessment): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment;
+
+                    /**
+                     * Encodes the specified FraudPreventionAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.verify|verify} messages.
+                     * @param message FraudPreventionAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1beta1.IFraudPreventionAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FraudPreventionAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.verify|verify} messages.
+                     * @param message FraudPreventionAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.IFraudPreventionAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FraudPreventionAssessment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FraudPreventionAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment;
+
+                    /**
+                     * Decodes a FraudPreventionAssessment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FraudPreventionAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment;
+
+                    /**
+                     * Verifies a FraudPreventionAssessment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FraudPreventionAssessment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FraudPreventionAssessment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment;
+
+                    /**
+                     * Creates a plain object from a FraudPreventionAssessment message. Also converts values to other types if specified.
+                     * @param message FraudPreventionAssessment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FraudPreventionAssessment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FraudPreventionAssessment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FraudPreventionAssessment {
+
+                    /** Properties of a StolenInstrumentVerdict. */
+                    interface IStolenInstrumentVerdict {
+
+                        /** StolenInstrumentVerdict risk */
+                        risk?: (number|null);
+                    }
+
+                    /** Represents a StolenInstrumentVerdict. */
+                    class StolenInstrumentVerdict implements IStolenInstrumentVerdict {
+
+                        /**
+                         * Constructs a new StolenInstrumentVerdict.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict);
+
+                        /** StolenInstrumentVerdict risk. */
+                        public risk: number;
+
+                        /**
+                         * Creates a new StolenInstrumentVerdict instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StolenInstrumentVerdict instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Encodes the specified StolenInstrumentVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict.verify|verify} messages.
+                         * @param message StolenInstrumentVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StolenInstrumentVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict.verify|verify} messages.
+                         * @param message StolenInstrumentVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StolenInstrumentVerdict message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StolenInstrumentVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Decodes a StolenInstrumentVerdict message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StolenInstrumentVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Verifies a StolenInstrumentVerdict message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StolenInstrumentVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StolenInstrumentVerdict
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict;
+
+                        /**
+                         * Creates a plain object from a StolenInstrumentVerdict message. Also converts values to other types if specified.
+                         * @param message StolenInstrumentVerdict
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StolenInstrumentVerdict to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StolenInstrumentVerdict
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CardTestingVerdict. */
+                    interface ICardTestingVerdict {
+
+                        /** CardTestingVerdict risk */
+                        risk?: (number|null);
+                    }
+
+                    /** Represents a CardTestingVerdict. */
+                    class CardTestingVerdict implements ICardTestingVerdict {
+
+                        /**
+                         * Constructs a new CardTestingVerdict.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict);
+
+                        /** CardTestingVerdict risk. */
+                        public risk: number;
+
+                        /**
+                         * Creates a new CardTestingVerdict instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CardTestingVerdict instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Encodes the specified CardTestingVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.verify|verify} messages.
+                         * @param message CardTestingVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CardTestingVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.verify|verify} messages.
+                         * @param message CardTestingVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CardTestingVerdict message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CardTestingVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Decodes a CardTestingVerdict message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CardTestingVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Verifies a CardTestingVerdict message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CardTestingVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CardTestingVerdict
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict;
+
+                        /**
+                         * Creates a plain object from a CardTestingVerdict message. Also converts values to other types if specified.
+                         * @param message CardTestingVerdict
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CardTestingVerdict to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CardTestingVerdict
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 

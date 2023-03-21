@@ -11,6 +11,7 @@
   "api_id": "publicca.googleapis.com",
   "default_version": "v1beta1",
   "requires_billing": true,
-  "library_type": "GAPIC_AUTO"
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "publicca"
 }
 

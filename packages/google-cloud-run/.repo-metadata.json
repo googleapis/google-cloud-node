@@ -11,5 +11,6 @@
   "api_id": "run.googleapis.com",
   "default_version": "v2",
   "requires_billing": true,
-  "library_type": "GAPIC_AUTO"
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "run"
 }

@@ -401,6 +401,10 @@ export class RoutesClient {
    *   [Language Support](https://developers.google.com/maps/faq#languagesupport)
    *   for the list of supported languages. When you don't provide this value, the
    *   display language is inferred from the location of the route request.
+   * @param {string} [request.regionCode]
+   *   Optional. The region code, specified as a ccTLD ("top-level domain")
+   *   two-character value. For more information see
+   *   https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#Country_code_top-level_domains
    * @param {google.maps.routing.v2.Units} [request.units]
    *   Optional. Specifies the units of measure for the display fields. This
    *   includes the `instruction` field in `NavigationInstruction`. The units of
@@ -558,6 +562,17 @@ export class RoutesClient {
    *   Optional. The departure time. If you don't set this value, this defaults to
    *   the time that you made the request. If you set this value to a time that
    *   has already occurred, the request fails.
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see
+   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. See
+   *   [Language Support](https://developers.google.com/maps/faq#languagesupport)
+   *   for the list of supported languages. When you don't provide this value, the
+   *   display language is inferred from the location of the first origin.
+   * @param {string} [request.regionCode]
+   *   Optional. The region code, specified as a ccTLD ("top-level domain")
+   *   two-character value. For more information see
+   *   https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains#Country_code_top-level_domains
    * @param {number[]} [request.extraComputations]
    *   Optional. A list of extra computations which may be used to complete the
    *   request. Note: These extra computations may return extra fields on the

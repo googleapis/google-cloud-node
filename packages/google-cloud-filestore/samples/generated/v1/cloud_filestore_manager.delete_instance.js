@@ -33,6 +33,11 @@ function main(name) {
    *  `projects/{project_id}/locations/{location}/instances/{instance_id}`
    */
   // const name = 'abc123'
+  /**
+   *  If set to true, all snapshots of the instance will also be deleted.
+   *  (Otherwise, the request will only work if the instance has no snapshots.)
+   */
+  // const force = true
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1;

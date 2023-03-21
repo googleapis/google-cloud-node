@@ -1807,6 +1807,7 @@
                              * @property {google.cloud.bigquery.connection.v1.IAzureProperties|null} [azure] Connection azure
                              * @property {google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null} [cloudSpanner] Connection cloudSpanner
                              * @property {google.cloud.bigquery.connection.v1.ICloudResourceProperties|null} [cloudResource] Connection cloudResource
+                             * @property {google.cloud.bigquery.connection.v1.ISparkProperties|null} [spark] Connection spark
                              * @property {number|Long|null} [creationTime] Connection creationTime
                              * @property {number|Long|null} [lastModifiedTime] Connection lastModifiedTime
                              * @property {boolean|null} [hasCredential] Connection hasCredential
@@ -1892,6 +1893,14 @@
                             Connection.prototype.cloudResource = null;
     
                             /**
+                             * Connection spark.
+                             * @member {google.cloud.bigquery.connection.v1.ISparkProperties|null|undefined} spark
+                             * @memberof google.cloud.bigquery.connection.v1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.spark = null;
+    
+                            /**
                              * Connection creationTime.
                              * @member {number|Long} creationTime
                              * @memberof google.cloud.bigquery.connection.v1.Connection
@@ -1920,12 +1929,12 @@
     
                             /**
                              * Connection properties.
-                             * @member {"cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|undefined} properties
+                             * @member {"cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|"spark"|undefined} properties
                              * @memberof google.cloud.bigquery.connection.v1.Connection
                              * @instance
                              */
                             Object.defineProperty(Connection.prototype, "properties", {
-                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "azure", "cloudSpanner", "cloudResource"]),
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "azure", "cloudSpanner", "cloudResource", "spark"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1975,6 +1984,8 @@
                                     $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.encode(message.cloudSpanner, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                                 if (message.cloudResource != null && Object.hasOwnProperty.call(message, "cloudResource"))
                                     $root.google.cloud.bigquery.connection.v1.CloudResourceProperties.encode(message.cloudResource, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                if (message.spark != null && Object.hasOwnProperty.call(message, "spark"))
+                                    $root.google.cloud.bigquery.connection.v1.SparkProperties.encode(message.spark, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2039,6 +2050,10 @@
                                         }
                                     case 22: {
                                             message.cloudResource = $root.google.cloud.bigquery.connection.v1.CloudResourceProperties.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 23: {
+                                            message.spark = $root.google.cloud.bigquery.connection.v1.SparkProperties.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 5: {
@@ -2146,6 +2161,16 @@
                                             return "cloudResource." + error;
                                     }
                                 }
+                                if (message.spark != null && message.hasOwnProperty("spark")) {
+                                    if (properties.properties === 1)
+                                        return "properties: multiple values";
+                                    properties.properties = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.SparkProperties.verify(message.spark);
+                                        if (error)
+                                            return "spark." + error;
+                                    }
+                                }
                                 if (message.creationTime != null && message.hasOwnProperty("creationTime"))
                                     if (!$util.isInteger(message.creationTime) && !(message.creationTime && $util.isInteger(message.creationTime.low) && $util.isInteger(message.creationTime.high)))
                                         return "creationTime: integer|Long expected";
@@ -2200,6 +2225,11 @@
                                     if (typeof object.cloudResource !== "object")
                                         throw TypeError(".google.cloud.bigquery.connection.v1.Connection.cloudResource: object expected");
                                     message.cloudResource = $root.google.cloud.bigquery.connection.v1.CloudResourceProperties.fromObject(object.cloudResource);
+                                }
+                                if (object.spark != null) {
+                                    if (typeof object.spark !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.Connection.spark: object expected");
+                                    message.spark = $root.google.cloud.bigquery.connection.v1.SparkProperties.fromObject(object.spark);
                                 }
                                 if (object.creationTime != null)
                                     if ($util.Long)
@@ -2295,6 +2325,11 @@
                                     object.cloudResource = $root.google.cloud.bigquery.connection.v1.CloudResourceProperties.toObject(message.cloudResource, options);
                                     if (options.oneofs)
                                         object.properties = "cloudResource";
+                                }
+                                if (message.spark != null && message.hasOwnProperty("spark")) {
+                                    object.spark = $root.google.cloud.bigquery.connection.v1.SparkProperties.toObject(message.spark, options);
+                                    if (options.oneofs)
+                                        object.properties = "spark";
                                 }
                                 return object;
                             };
@@ -4451,6 +4486,672 @@
                             };
     
                             return CloudResourceProperties;
+                        })();
+    
+                        v1.MetastoreServiceConfig = (function() {
+    
+                            /**
+                             * Properties of a MetastoreServiceConfig.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface IMetastoreServiceConfig
+                             * @property {string|null} [metastoreService] MetastoreServiceConfig metastoreService
+                             */
+    
+                            /**
+                             * Constructs a new MetastoreServiceConfig.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents a MetastoreServiceConfig.
+                             * @implements IMetastoreServiceConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.IMetastoreServiceConfig=} [properties] Properties to set
+                             */
+                            function MetastoreServiceConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MetastoreServiceConfig metastoreService.
+                             * @member {string} metastoreService
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @instance
+                             */
+                            MetastoreServiceConfig.prototype.metastoreService = "";
+    
+                            /**
+                             * Creates a new MetastoreServiceConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IMetastoreServiceConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.MetastoreServiceConfig} MetastoreServiceConfig instance
+                             */
+                            MetastoreServiceConfig.create = function create(properties) {
+                                return new MetastoreServiceConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MetastoreServiceConfig message. Does not implicitly {@link google.cloud.bigquery.connection.v1.MetastoreServiceConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IMetastoreServiceConfig} message MetastoreServiceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetastoreServiceConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.metastoreService != null && Object.hasOwnProperty.call(message, "metastoreService"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.metastoreService);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MetastoreServiceConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.MetastoreServiceConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IMetastoreServiceConfig} message MetastoreServiceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetastoreServiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MetastoreServiceConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.MetastoreServiceConfig} MetastoreServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetastoreServiceConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.metastoreService = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MetastoreServiceConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.MetastoreServiceConfig} MetastoreServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetastoreServiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MetastoreServiceConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MetastoreServiceConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.metastoreService != null && message.hasOwnProperty("metastoreService"))
+                                    if (!$util.isString(message.metastoreService))
+                                        return "metastoreService: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MetastoreServiceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.MetastoreServiceConfig} MetastoreServiceConfig
+                             */
+                            MetastoreServiceConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig();
+                                if (object.metastoreService != null)
+                                    message.metastoreService = String(object.metastoreService);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MetastoreServiceConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.MetastoreServiceConfig} message MetastoreServiceConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MetastoreServiceConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.metastoreService = "";
+                                if (message.metastoreService != null && message.hasOwnProperty("metastoreService"))
+                                    object.metastoreService = message.metastoreService;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MetastoreServiceConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MetastoreServiceConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MetastoreServiceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1.MetastoreServiceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MetastoreServiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1.MetastoreServiceConfig";
+                            };
+    
+                            return MetastoreServiceConfig;
+                        })();
+    
+                        v1.SparkHistoryServerConfig = (function() {
+    
+                            /**
+                             * Properties of a SparkHistoryServerConfig.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface ISparkHistoryServerConfig
+                             * @property {string|null} [dataprocCluster] SparkHistoryServerConfig dataprocCluster
+                             */
+    
+                            /**
+                             * Constructs a new SparkHistoryServerConfig.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents a SparkHistoryServerConfig.
+                             * @implements ISparkHistoryServerConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig=} [properties] Properties to set
+                             */
+                            function SparkHistoryServerConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SparkHistoryServerConfig dataprocCluster.
+                             * @member {string} dataprocCluster
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @instance
+                             */
+                            SparkHistoryServerConfig.prototype.dataprocCluster = "";
+    
+                            /**
+                             * Creates a new SparkHistoryServerConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.SparkHistoryServerConfig} SparkHistoryServerConfig instance
+                             */
+                            SparkHistoryServerConfig.create = function create(properties) {
+                                return new SparkHistoryServerConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SparkHistoryServerConfig message. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig} message SparkHistoryServerConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SparkHistoryServerConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataprocCluster != null && Object.hasOwnProperty.call(message, "dataprocCluster"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataprocCluster);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SparkHistoryServerConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig} message SparkHistoryServerConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SparkHistoryServerConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SparkHistoryServerConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.SparkHistoryServerConfig} SparkHistoryServerConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SparkHistoryServerConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataprocCluster = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SparkHistoryServerConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.SparkHistoryServerConfig} SparkHistoryServerConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SparkHistoryServerConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SparkHistoryServerConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SparkHistoryServerConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataprocCluster != null && message.hasOwnProperty("dataprocCluster"))
+                                    if (!$util.isString(message.dataprocCluster))
+                                        return "dataprocCluster: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SparkHistoryServerConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.SparkHistoryServerConfig} SparkHistoryServerConfig
+                             */
+                            SparkHistoryServerConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig();
+                                if (object.dataprocCluster != null)
+                                    message.dataprocCluster = String(object.dataprocCluster);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SparkHistoryServerConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.SparkHistoryServerConfig} message SparkHistoryServerConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SparkHistoryServerConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.dataprocCluster = "";
+                                if (message.dataprocCluster != null && message.hasOwnProperty("dataprocCluster"))
+                                    object.dataprocCluster = message.dataprocCluster;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SparkHistoryServerConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SparkHistoryServerConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SparkHistoryServerConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1.SparkHistoryServerConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SparkHistoryServerConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1.SparkHistoryServerConfig";
+                            };
+    
+                            return SparkHistoryServerConfig;
+                        })();
+    
+                        v1.SparkProperties = (function() {
+    
+                            /**
+                             * Properties of a SparkProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface ISparkProperties
+                             * @property {string|null} [serviceAccountId] SparkProperties serviceAccountId
+                             * @property {google.cloud.bigquery.connection.v1.IMetastoreServiceConfig|null} [metastoreServiceConfig] SparkProperties metastoreServiceConfig
+                             * @property {google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig|null} [sparkHistoryServerConfig] SparkProperties sparkHistoryServerConfig
+                             */
+    
+                            /**
+                             * Constructs a new SparkProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents a SparkProperties.
+                             * @implements ISparkProperties
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.ISparkProperties=} [properties] Properties to set
+                             */
+                            function SparkProperties(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SparkProperties serviceAccountId.
+                             * @member {string} serviceAccountId
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @instance
+                             */
+                            SparkProperties.prototype.serviceAccountId = "";
+    
+                            /**
+                             * SparkProperties metastoreServiceConfig.
+                             * @member {google.cloud.bigquery.connection.v1.IMetastoreServiceConfig|null|undefined} metastoreServiceConfig
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @instance
+                             */
+                            SparkProperties.prototype.metastoreServiceConfig = null;
+    
+                            /**
+                             * SparkProperties sparkHistoryServerConfig.
+                             * @member {google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig|null|undefined} sparkHistoryServerConfig
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @instance
+                             */
+                            SparkProperties.prototype.sparkHistoryServerConfig = null;
+    
+                            /**
+                             * Creates a new SparkProperties instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISparkProperties=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.SparkProperties} SparkProperties instance
+                             */
+                            SparkProperties.create = function create(properties) {
+                                return new SparkProperties(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SparkProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkProperties.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISparkProperties} message SparkProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SparkProperties.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.serviceAccountId != null && Object.hasOwnProperty.call(message, "serviceAccountId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountId);
+                                if (message.metastoreServiceConfig != null && Object.hasOwnProperty.call(message, "metastoreServiceConfig"))
+                                    $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig.encode(message.metastoreServiceConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.sparkHistoryServerConfig != null && Object.hasOwnProperty.call(message, "sparkHistoryServerConfig"))
+                                    $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.encode(message.sparkHistoryServerConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SparkProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkProperties.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ISparkProperties} message SparkProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SparkProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SparkProperties message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.SparkProperties} SparkProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SparkProperties.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.SparkProperties();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.serviceAccountId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.metastoreServiceConfig = $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.sparkHistoryServerConfig = $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SparkProperties message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.SparkProperties} SparkProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SparkProperties.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SparkProperties message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SparkProperties.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.serviceAccountId != null && message.hasOwnProperty("serviceAccountId"))
+                                    if (!$util.isString(message.serviceAccountId))
+                                        return "serviceAccountId: string expected";
+                                if (message.metastoreServiceConfig != null && message.hasOwnProperty("metastoreServiceConfig")) {
+                                    var error = $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig.verify(message.metastoreServiceConfig);
+                                    if (error)
+                                        return "metastoreServiceConfig." + error;
+                                }
+                                if (message.sparkHistoryServerConfig != null && message.hasOwnProperty("sparkHistoryServerConfig")) {
+                                    var error = $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.verify(message.sparkHistoryServerConfig);
+                                    if (error)
+                                        return "sparkHistoryServerConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SparkProperties message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.SparkProperties} SparkProperties
+                             */
+                            SparkProperties.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.SparkProperties)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.SparkProperties();
+                                if (object.serviceAccountId != null)
+                                    message.serviceAccountId = String(object.serviceAccountId);
+                                if (object.metastoreServiceConfig != null) {
+                                    if (typeof object.metastoreServiceConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.SparkProperties.metastoreServiceConfig: object expected");
+                                    message.metastoreServiceConfig = $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig.fromObject(object.metastoreServiceConfig);
+                                }
+                                if (object.sparkHistoryServerConfig != null) {
+                                    if (typeof object.sparkHistoryServerConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.SparkProperties.sparkHistoryServerConfig: object expected");
+                                    message.sparkHistoryServerConfig = $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.fromObject(object.sparkHistoryServerConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SparkProperties message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.SparkProperties} message SparkProperties
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SparkProperties.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.serviceAccountId = "";
+                                    object.metastoreServiceConfig = null;
+                                    object.sparkHistoryServerConfig = null;
+                                }
+                                if (message.serviceAccountId != null && message.hasOwnProperty("serviceAccountId"))
+                                    object.serviceAccountId = message.serviceAccountId;
+                                if (message.metastoreServiceConfig != null && message.hasOwnProperty("metastoreServiceConfig"))
+                                    object.metastoreServiceConfig = $root.google.cloud.bigquery.connection.v1.MetastoreServiceConfig.toObject(message.metastoreServiceConfig, options);
+                                if (message.sparkHistoryServerConfig != null && message.hasOwnProperty("sparkHistoryServerConfig"))
+                                    object.sparkHistoryServerConfig = $root.google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.toObject(message.sparkHistoryServerConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SparkProperties to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SparkProperties.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SparkProperties
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.connection.v1.SparkProperties
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SparkProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.connection.v1.SparkProperties";
+                            };
+    
+                            return SparkProperties;
                         })();
     
                         return v1;

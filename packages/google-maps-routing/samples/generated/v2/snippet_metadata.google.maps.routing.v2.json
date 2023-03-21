@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 133,
+                    "end": 139,
                     "type": "FULL"
                 }
             ],
@@ -76,6 +76,10 @@
                         "type": "TYPE_STRING"
                     },
                     {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
                         "name": "units",
                         "type": ".google.maps.routing.v2.Units"
                     },
@@ -114,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 109,
                     "type": "FULL"
                 }
             ],
@@ -142,6 +146,14 @@
                     {
                         "name": "departure_time",
                         "type": ".google.protobuf.Timestamp"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "extra_computations",

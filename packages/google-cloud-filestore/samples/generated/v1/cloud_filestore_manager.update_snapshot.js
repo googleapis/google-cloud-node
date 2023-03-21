@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, fileShare) {
-  // [START file_v1_generated_CloudFilestoreManager_RestoreInstance_async]
+function main(updateMask, snapshot) {
+  // [START file_v1_generated_CloudFilestoreManager_UpdateSnapshot_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,14 @@ function main(name, fileShare) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the instance, in the format
-   *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *  Required. Mask of fields to update. At least one path must be supplied in
+   *  this field.
    */
-  // const name = 'abc123'
+  // const updateMask = {}
   /**
-   *  Required. Name of the file share in the Filestore instance that the backup
-   *  is being restored to.
+   *  Required. A snapshot resource.
    */
-  // const fileShare = 'abc123'
-  /**
-   *  The resource name of the backup, in the format
-   *  `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
-   */
-  // const sourceBackup = 'abc123'
+  // const snapshot = {}
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1;
@@ -50,21 +44,21 @@ function main(name, fileShare) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callRestoreInstance() {
+  async function callUpdateSnapshot() {
     // Construct request
     const request = {
-      name,
-      fileShare,
+      updateMask,
+      snapshot,
     };
 
     // Run request
-    const [operation] = await filestoreClient.restoreInstance(request);
+    const [operation] = await filestoreClient.updateSnapshot(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callRestoreInstance();
-  // [END file_v1_generated_CloudFilestoreManager_RestoreInstance_async]
+  callUpdateSnapshot();
+  // [END file_v1_generated_CloudFilestoreManager_UpdateSnapshot_async]
 }
 
 process.on('unhandledRejection', err => {
