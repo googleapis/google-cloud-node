@@ -226,6 +226,9 @@ export class AnalyticsAdminServiceClient {
         new this._gaxModule.PathTemplate(
           'properties/{property}/displayVideo360AdvertiserLinkProposals/{display_video_360_advertiser_link_proposal}'
         ),
+      enhancedMeasurementSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/dataStreams/{data_stream}/enhancedMeasurementSettings'
+      ),
       expandedDataSetPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/expandedDataSets/{expanded_data_set}'
       ),
@@ -518,6 +521,11 @@ export class AnalyticsAdminServiceClient {
       'fetchAutomatedGa4ConfigurationOptOut',
       'getBigQueryLink',
       'listBigQueryLinks',
+      'getEnhancedMeasurementSettings',
+      'updateEnhancedMeasurementSettings',
+      'createConnectedSiteTag',
+      'deleteConnectedSiteTag',
+      'listConnectedSiteTags',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -908,7 +916,7 @@ export class AnalyticsAdminServiceClient {
    *   The account to create.
    * @param {string} request.redirectUri
    *   Redirect URI where the user will be sent after accepting Terms of Service.
-   *   Must be configured in Developers Console as a Redirect URI.
+   *   Must be configured in Cloud Console as a Redirect URI.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7250,9 +7258,14 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.entity
-   *   The Data Access Report is requested for this property.
-   *   For example if "123" is your GA4 property ID, then entity should be
-   *   "properties/123".
+   *   The Data Access Report supports requesting at the property level or account
+   *   level. If requested at the account level, Data Access Reports include all
+   *   access for all properties under that account.
+   *
+   *   To request at the property level, entity should be for example
+   *   'properties/123' if "123" is your GA4 property ID. To request at the
+   *   account level, entity should be for example 'accounts/1234' if "1234" is
+   *   your GA4 Account ID.
    * @param {number[]} request.dimensions
    *   The dimensions requested and displayed in the response. Requests are
    *   allowed up to 9 dimensions.
@@ -7308,7 +7321,8 @@ export class AnalyticsAdminServiceClient {
    *   Specifies how rows are ordered in the response.
    * @param {boolean} request.returnEntityQuota
    *   Toggles whether to return the current state of this Analytics Property's
-   *   quota. Quota is returned in [AccessQuota](#AccessQuota).
+   *   quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+   *   requests, this field must be false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8021,8 +8035,9 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The account or property that owns the access bindings. The parent
-   *   field in the UpdateAccessBindingRequest messages must either be empty or
-   *   match this field. Formats:
+   *   of all provided AccessBinding in UpdateAccessBindingRequest messages must
+   *   match this field.
+   *   Formats:
    *   - accounts/{account}
    *   - properties/{property}
    * @param {number[]} request.requests
@@ -8129,8 +8144,8 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The account or property that owns the access bindings. The parent
-   *   field in the DeleteAccessBindingRequest messages must either be empty or
-   *   match this field. Formats:
+   *   of all provided values for the 'names' field in DeleteAccessBindingRequest
+   *   messages must match this field. Formats:
    *   - accounts/{account}
    *   - properties/{property}
    * @param {number[]} request.requests
@@ -8926,6 +8941,528 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getBigQueryLink(request, options, callback);
+  }
+  /**
+   * Returns the enhanced measurement settings for this data stream.
+   * Note that the stream must enable enhanced measurement for these settings to
+   * take effect.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the settings to lookup.
+   *   Format:
+   *   properties/{property}/dataStreams/{data_stream}/enhancedMeasurementSettings
+   *   Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings | EnhancedMeasurementSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_enhanced_measurement_settings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEnhancedMeasurementSettings_async
+   */
+  getEnhancedMeasurementSettings(
+    request?: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getEnhancedMeasurementSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnhancedMeasurementSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnhancedMeasurementSettings(
+    request?: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+          | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEnhancedMeasurementSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates the enhanced measurement settings for this data stream.
+   * Note that the stream must enable enhanced measurement for these settings to
+   * take effect.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.EnhancedMeasurementSettings} request.enhancedMeasurementSettings
+   *   Required. The settings to update.
+   *   The `name` field is used to identify the settings to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings | EnhancedMeasurementSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_enhanced_measurement_settings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEnhancedMeasurementSettings_async
+   */
+  updateEnhancedMeasurementSettings(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateEnhancedMeasurementSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnhancedMeasurementSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnhancedMeasurementSettings(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'enhanced_measurement_settings.name':
+          request.enhancedMeasurementSettings!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEnhancedMeasurementSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Creates a connected site tag for a Universal Analytics property. You can
+   * create a maximum of 20 connected site tags per property.
+   * Note: This API cannot be used on GA4 properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   The Universal Analytics property to create connected site tags for.
+   *   This API does not support GA4 properties.
+   *   Format: properties/{universalAnalyticsPropertyId}
+   *   Example: properties/1234
+   * @param {google.analytics.admin.v1alpha.ConnectedSiteTag} request.connectedSiteTag
+   *   Required. The tag to add to the Universal Analytics property
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse | CreateConnectedSiteTagResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_connected_site_tag.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateConnectedSiteTag_async
+   */
+  createConnectedSiteTag(
+    request?: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createConnectedSiteTag(
+    request: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+      | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConnectedSiteTag(
+    request: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+      | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConnectedSiteTag(
+    request?: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+          | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+      | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.createConnectedSiteTag(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a connected site tag for a Universal Analytics property.
+   * Note: this has no effect on GA4 properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   The Universal Analytics property to delete connected site tags for.
+   *   This API does not support GA4 properties.
+   *   Format: properties/{universalAnalyticsPropertyId}
+   *   Example: properties/1234
+   * @param {string} request.tagId
+   *   Tag ID to forward events to. Also known as the Measurement ID, or the
+   *   "G-ID"  (For example: G-12345).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_connected_site_tag.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteConnectedSiteTag_async
+   */
+  deleteConnectedSiteTag(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteConnectedSiteTag(
+    request: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConnectedSiteTag(
+    request: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConnectedSiteTag(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.deleteConnectedSiteTag(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Lists the connected site tags for a Universal Analytics property. A maximum
+   * of 20 connected site tags will be returned. Note: this has no effect on GA4
+   * property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   The Universal Analytics property to fetch connected site tags for.
+   *   This does not work on GA4 properties. A maximum of 20 connected site tags
+   *   will be returned.
+   *   Example Format: `properties/1234`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse | ListConnectedSiteTagsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_connected_site_tags.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async
+   */
+  listConnectedSiteTags(
+    request?: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  listConnectedSiteTags(
+    request: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+      | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listConnectedSiteTags(
+    request: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+      | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listConnectedSiteTags(
+    request?: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+          | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+      | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.listConnectedSiteTags(request, options, callback);
   }
 
   /**
@@ -13716,6 +14253,50 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.displayVideo360AdvertiserLinkProposalPathTemplate.match(
       displayVideo360AdvertiserLinkProposalName
     ).property;
+  }
+
+  /**
+   * Return a fully-qualified enhancedMeasurementSettings resource name string.
+   *
+   * @param {string} property
+   * @param {string} data_stream
+   * @returns {string} Resource name string.
+   */
+  enhancedMeasurementSettingsPath(property: string, dataStream: string) {
+    return this.pathTemplates.enhancedMeasurementSettingsPathTemplate.render({
+      property: property,
+      data_stream: dataStream,
+    });
+  }
+
+  /**
+   * Parse the property from EnhancedMeasurementSettings resource.
+   *
+   * @param {string} enhancedMeasurementSettingsName
+   *   A fully-qualified path representing EnhancedMeasurementSettings resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromEnhancedMeasurementSettingsName(
+    enhancedMeasurementSettingsName: string
+  ) {
+    return this.pathTemplates.enhancedMeasurementSettingsPathTemplate.match(
+      enhancedMeasurementSettingsName
+    ).property;
+  }
+
+  /**
+   * Parse the data_stream from EnhancedMeasurementSettings resource.
+   *
+   * @param {string} enhancedMeasurementSettingsName
+   *   A fully-qualified path representing EnhancedMeasurementSettings resource.
+   * @returns {string} A string representing the data_stream.
+   */
+  matchDataStreamFromEnhancedMeasurementSettingsName(
+    enhancedMeasurementSettingsName: string
+  ) {
+    return this.pathTemplates.enhancedMeasurementSettingsPathTemplate.match(
+      enhancedMeasurementSettingsName
+    ).data_stream;
   }
 
   /**
