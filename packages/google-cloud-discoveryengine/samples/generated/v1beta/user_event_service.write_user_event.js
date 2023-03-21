@@ -30,7 +30,7 @@ function main(parent, userEvent) {
    */
   /**
    *  Required. The parent DataStore resource name, such as
-   *  `projects/{project}/locations/{location}/dataStores/{data_store}`.
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    */
   // const parent = 'abc123'
   /**

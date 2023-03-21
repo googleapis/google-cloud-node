@@ -30,7 +30,7 @@ function main(servingConfig, userEvent) {
    */
   /**
    *  Required. Full resource name of the format:
-   *  projects/* /locations/global/dataStores/* /servingConfigs/*
+   *  projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*
    *  Before you can request recommendations from your model, you must create at
    *  least one serving config  for it.
    */
@@ -121,8 +121,8 @@ function main(servingConfig, userEvent) {
    *  * The key portion of a label must be unique. However, you can use the same
    *    key with multiple resources.
    *  * Keys must start with a lowercase letter or international character.
-   *  See Google Cloud
-   *  Document (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *  See Requirements for
+   *  labels (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *  for more details.
    */
   // const userLabels = 1234
