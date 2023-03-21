@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(enhancedMeasurementSettings, updateMask) {
-  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEnhancedMeasurementSettings_async]
+function main() {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,17 +29,12 @@ function main(enhancedMeasurementSettings, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The settings to update.
-   *  The `name` field is used to identify the settings to be updated.
+   *  The Universal Analytics property to fetch connected site tags for.
+   *  This does not work on GA4 properties. A maximum of 20 connected site tags
+   *  will be returned.
+   *  Example Format: `properties/1234`
    */
-  // const enhancedMeasurementSettings = {}
-  /**
-   *  Required. The list of fields to be updated. Field names must be in snake
-   *  case (e.g., "field_to_update"). Omitted fields will not be updated. To
-   *  replace the entire entity, use one path with the string "*" to match all
-   *  fields.
-   */
-  // const updateMask = {}
+  // const property = 'abc123'
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
@@ -47,20 +42,18 @@ function main(enhancedMeasurementSettings, updateMask) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callUpdateEnhancedMeasurementSettings() {
+  async function callListConnectedSiteTags() {
     // Construct request
     const request = {
-      enhancedMeasurementSettings,
-      updateMask,
     };
 
     // Run request
-    const response = await adminClient.updateEnhancedMeasurementSettings(request);
+    const response = await adminClient.listConnectedSiteTags(request);
     console.log(response);
   }
 
-  callUpdateEnhancedMeasurementSettings();
-  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEnhancedMeasurementSettings_async]
+  callListConnectedSiteTags();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async]
 }
 
 process.on('unhandledRejection', err => {
