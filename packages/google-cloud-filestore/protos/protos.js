@@ -661,6 +661,171 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|listSnapshots}.
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @typedef ListSnapshotsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.filestore.v1.ListSnapshotsResponse} [response] ListSnapshotsResponse
+                         */
+    
+                        /**
+                         * Calls ListSnapshots.
+                         * @function listSnapshots
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IListSnapshotsRequest} request ListSnapshotsRequest message or plain object
+                         * @param {google.cloud.filestore.v1.CloudFilestoreManager.ListSnapshotsCallback} callback Node-style callback called with the error, if any, and ListSnapshotsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudFilestoreManager.prototype.listSnapshots = function listSnapshots(request, callback) {
+                            return this.rpcCall(listSnapshots, $root.google.cloud.filestore.v1.ListSnapshotsRequest, $root.google.cloud.filestore.v1.ListSnapshotsResponse, request, callback);
+                        }, "name", { value: "ListSnapshots" });
+    
+                        /**
+                         * Calls ListSnapshots.
+                         * @function listSnapshots
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IListSnapshotsRequest} request ListSnapshotsRequest message or plain object
+                         * @returns {Promise<google.cloud.filestore.v1.ListSnapshotsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|getSnapshot}.
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @typedef GetSnapshotCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.filestore.v1.Snapshot} [response] Snapshot
+                         */
+    
+                        /**
+                         * Calls GetSnapshot.
+                         * @function getSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IGetSnapshotRequest} request GetSnapshotRequest message or plain object
+                         * @param {google.cloud.filestore.v1.CloudFilestoreManager.GetSnapshotCallback} callback Node-style callback called with the error, if any, and Snapshot
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudFilestoreManager.prototype.getSnapshot = function getSnapshot(request, callback) {
+                            return this.rpcCall(getSnapshot, $root.google.cloud.filestore.v1.GetSnapshotRequest, $root.google.cloud.filestore.v1.Snapshot, request, callback);
+                        }, "name", { value: "GetSnapshot" });
+    
+                        /**
+                         * Calls GetSnapshot.
+                         * @function getSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IGetSnapshotRequest} request GetSnapshotRequest message or plain object
+                         * @returns {Promise<google.cloud.filestore.v1.Snapshot>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|createSnapshot}.
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @typedef CreateSnapshotCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSnapshot.
+                         * @function createSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.ICreateSnapshotRequest} request CreateSnapshotRequest message or plain object
+                         * @param {google.cloud.filestore.v1.CloudFilestoreManager.CreateSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudFilestoreManager.prototype.createSnapshot = function createSnapshot(request, callback) {
+                            return this.rpcCall(createSnapshot, $root.google.cloud.filestore.v1.CreateSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSnapshot" });
+    
+                        /**
+                         * Calls CreateSnapshot.
+                         * @function createSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.ICreateSnapshotRequest} request CreateSnapshotRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|deleteSnapshot}.
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @typedef DeleteSnapshotCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSnapshot.
+                         * @function deleteSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IDeleteSnapshotRequest} request DeleteSnapshotRequest message or plain object
+                         * @param {google.cloud.filestore.v1.CloudFilestoreManager.DeleteSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudFilestoreManager.prototype.deleteSnapshot = function deleteSnapshot(request, callback) {
+                            return this.rpcCall(deleteSnapshot, $root.google.cloud.filestore.v1.DeleteSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSnapshot" });
+    
+                        /**
+                         * Calls DeleteSnapshot.
+                         * @function deleteSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IDeleteSnapshotRequest} request DeleteSnapshotRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|updateSnapshot}.
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @typedef UpdateSnapshotCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateSnapshot.
+                         * @function updateSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IUpdateSnapshotRequest} request UpdateSnapshotRequest message or plain object
+                         * @param {google.cloud.filestore.v1.CloudFilestoreManager.UpdateSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudFilestoreManager.prototype.updateSnapshot = function updateSnapshot(request, callback) {
+                            return this.rpcCall(updateSnapshot, $root.google.cloud.filestore.v1.UpdateSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateSnapshot" });
+    
+                        /**
+                         * Calls UpdateSnapshot.
+                         * @function updateSnapshot
+                         * @memberof google.cloud.filestore.v1.CloudFilestoreManager
+                         * @instance
+                         * @param {google.cloud.filestore.v1.IUpdateSnapshotRequest} request UpdateSnapshotRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|listBackups}.
                          * @memberof google.cloud.filestore.v1.CloudFilestoreManager
                          * @typedef ListBackupsCallback
@@ -838,6 +1003,7 @@
                          * @property {Array.<google.cloud.filestore.v1.NetworkConfig.AddressMode>|null} [modes] NetworkConfig modes
                          * @property {string|null} [reservedIpRange] NetworkConfig reservedIpRange
                          * @property {Array.<string>|null} [ipAddresses] NetworkConfig ipAddresses
+                         * @property {google.cloud.filestore.v1.NetworkConfig.ConnectMode|null} [connectMode] NetworkConfig connectMode
                          */
     
                         /**
@@ -890,6 +1056,14 @@
                         NetworkConfig.prototype.ipAddresses = $util.emptyArray;
     
                         /**
+                         * NetworkConfig connectMode.
+                         * @member {google.cloud.filestore.v1.NetworkConfig.ConnectMode} connectMode
+                         * @memberof google.cloud.filestore.v1.NetworkConfig
+                         * @instance
+                         */
+                        NetworkConfig.prototype.connectMode = 0;
+    
+                        /**
                          * Creates a new NetworkConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.filestore.v1.NetworkConfig
@@ -926,6 +1100,8 @@
                             if (message.ipAddresses != null && message.ipAddresses.length)
                                 for (var i = 0; i < message.ipAddresses.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.ipAddresses[i]);
+                            if (message.connectMode != null && Object.hasOwnProperty.call(message, "connectMode"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.connectMode);
                             return writer;
                         };
     
@@ -983,6 +1159,10 @@
                                         if (!(message.ipAddresses && message.ipAddresses.length))
                                             message.ipAddresses = [];
                                         message.ipAddresses.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.connectMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -1045,6 +1225,15 @@
                                     if (!$util.isString(message.ipAddresses[i]))
                                         return "ipAddresses: string[] expected";
                             }
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                switch (message.connectMode) {
+                                default:
+                                    return "connectMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1092,6 +1281,26 @@
                                 for (var i = 0; i < object.ipAddresses.length; ++i)
                                     message.ipAddresses[i] = String(object.ipAddresses[i]);
                             }
+                            switch (object.connectMode) {
+                            default:
+                                if (typeof object.connectMode === "number") {
+                                    message.connectMode = object.connectMode;
+                                    break;
+                                }
+                                break;
+                            case "CONNECT_MODE_UNSPECIFIED":
+                            case 0:
+                                message.connectMode = 0;
+                                break;
+                            case "DIRECT_PEERING":
+                            case 1:
+                                message.connectMode = 1;
+                                break;
+                            case "PRIVATE_SERVICE_ACCESS":
+                            case 2:
+                                message.connectMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1115,6 +1324,7 @@
                             if (options.defaults) {
                                 object.network = "";
                                 object.reservedIpRange = "";
+                                object.connectMode = options.enums === String ? "CONNECT_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.network != null && message.hasOwnProperty("network"))
                                 object.network = message.network;
@@ -1130,6 +1340,8 @@
                                 for (var j = 0; j < message.ipAddresses.length; ++j)
                                     object.ipAddresses[j] = message.ipAddresses[j];
                             }
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                object.connectMode = options.enums === String ? $root.google.cloud.filestore.v1.NetworkConfig.ConnectMode[message.connectMode] === undefined ? message.connectMode : $root.google.cloud.filestore.v1.NetworkConfig.ConnectMode[message.connectMode] : message.connectMode;
                             return object;
                         };
     
@@ -1170,6 +1382,22 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "ADDRESS_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "MODE_IPV4"] = 1;
+                            return values;
+                        })();
+    
+                        /**
+                         * ConnectMode enum.
+                         * @name google.cloud.filestore.v1.NetworkConfig.ConnectMode
+                         * @enum {number}
+                         * @property {number} CONNECT_MODE_UNSPECIFIED=0 CONNECT_MODE_UNSPECIFIED value
+                         * @property {number} DIRECT_PEERING=1 DIRECT_PEERING value
+                         * @property {number} PRIVATE_SERVICE_ACCESS=2 PRIVATE_SERVICE_ACCESS value
+                         */
+                        NetworkConfig.ConnectMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONNECT_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DIRECT_PEERING"] = 1;
+                            values[valuesById[2] = "PRIVATE_SERVICE_ACCESS"] = 2;
                             return values;
                         })();
     
@@ -1942,6 +2170,8 @@
                          * @property {Array.<google.cloud.filestore.v1.INetworkConfig>|null} [networks] Instance networks
                          * @property {string|null} [etag] Instance etag
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Instance satisfiesPzs
+                         * @property {string|null} [kmsKeyName] Instance kmsKeyName
+                         * @property {Array.<google.cloud.filestore.v1.Instance.SuspensionReason>|null} [suspensionReasons] Instance suspensionReasons
                          */
     
                         /**
@@ -1956,6 +2186,7 @@
                             this.labels = {};
                             this.fileShares = [];
                             this.networks = [];
+                            this.suspensionReasons = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2051,6 +2282,22 @@
                         Instance.prototype.satisfiesPzs = null;
     
                         /**
+                         * Instance kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.filestore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.kmsKeyName = "";
+    
+                        /**
+                         * Instance suspensionReasons.
+                         * @member {Array.<google.cloud.filestore.v1.Instance.SuspensionReason>} suspensionReasons
+                         * @memberof google.cloud.filestore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.suspensionReasons = $util.emptyArray;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.filestore.v1.Instance
@@ -2099,6 +2346,14 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.etag);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 $root.google.protobuf.BoolValue.encode(message.satisfiesPzs, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.kmsKeyName);
+                            if (message.suspensionReasons != null && message.suspensionReasons.length) {
+                                writer.uint32(/* id 15, wireType 2 =*/122).fork();
+                                for (var i = 0; i < message.suspensionReasons.length; ++i)
+                                    writer.int32(message.suspensionReasons[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -2200,6 +2455,21 @@
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 15: {
+                                        if (!(message.suspensionReasons && message.suspensionReasons.length))
+                                            message.suspensionReasons = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.suspensionReasons.push(reader.int32());
+                                        } else
+                                            message.suspensionReasons.push(reader.int32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2252,6 +2522,9 @@
                                 case 4:
                                 case 6:
                                 case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
@@ -2272,6 +2545,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -2307,6 +2581,21 @@
                                 var error = $root.google.protobuf.BoolValue.verify(message.satisfiesPzs);
                                 if (error)
                                     return "satisfiesPzs." + error;
+                            }
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            if (message.suspensionReasons != null && message.hasOwnProperty("suspensionReasons")) {
+                                if (!Array.isArray(message.suspensionReasons))
+                                    return "suspensionReasons: array expected";
+                                for (var i = 0; i < message.suspensionReasons.length; ++i)
+                                    switch (message.suspensionReasons[i]) {
+                                    default:
+                                        return "suspensionReasons: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                             }
                             return null;
                         };
@@ -2362,6 +2651,18 @@
                             case 7:
                                 message.state = 7;
                                 break;
+                            case "SUSPENDED":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "SUSPENDING":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "RESUMING":
+                            case 10:
+                                message.state = 10;
+                                break;
                             }
                             if (object.statusMessage != null)
                                 message.statusMessage = String(object.statusMessage);
@@ -2401,6 +2702,10 @@
                             case 5:
                                 message.tier = 5;
                                 break;
+                            case "ENTERPRISE":
+                            case 6:
+                                message.tier = 6;
+                                break;
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -2436,6 +2741,29 @@
                                     throw TypeError(".google.cloud.filestore.v1.Instance.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            if (object.suspensionReasons) {
+                                if (!Array.isArray(object.suspensionReasons))
+                                    throw TypeError(".google.cloud.filestore.v1.Instance.suspensionReasons: array expected");
+                                message.suspensionReasons = [];
+                                for (var i = 0; i < object.suspensionReasons.length; ++i)
+                                    switch (object.suspensionReasons[i]) {
+                                    default:
+                                        if (typeof object.suspensionReasons[i] === "number") {
+                                            message.suspensionReasons[i] = object.suspensionReasons[i];
+                                            break;
+                                        }
+                                    case "SUSPENSION_REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.suspensionReasons[i] = 0;
+                                        break;
+                                    case "KMS_KEY_ISSUE":
+                                    case 1:
+                                        message.suspensionReasons[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -2455,6 +2783,7 @@
                             if (options.arrays || options.defaults) {
                                 object.fileShares = [];
                                 object.networks = [];
+                                object.suspensionReasons = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -2467,6 +2796,7 @@
                                 object.tier = options.enums === String ? "TIER_UNSPECIFIED" : 0;
                                 object.etag = "";
                                 object.satisfiesPzs = null;
+                                object.kmsKeyName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2500,6 +2830,13 @@
                                 object.etag = message.etag;
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = $root.google.protobuf.BoolValue.toObject(message.satisfiesPzs, options);
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
+                            if (message.suspensionReasons && message.suspensionReasons.length) {
+                                object.suspensionReasons = [];
+                                for (var j = 0; j < message.suspensionReasons.length; ++j)
+                                    object.suspensionReasons[j] = options.enums === String ? $root.google.cloud.filestore.v1.Instance.SuspensionReason[message.suspensionReasons[j]] === undefined ? message.suspensionReasons[j] : $root.google.cloud.filestore.v1.Instance.SuspensionReason[message.suspensionReasons[j]] : message.suspensionReasons[j];
+                            }
                             return object;
                         };
     
@@ -2540,6 +2877,9 @@
                          * @property {number} DELETING=4 DELETING value
                          * @property {number} ERROR=6 ERROR value
                          * @property {number} RESTORING=7 RESTORING value
+                         * @property {number} SUSPENDED=8 SUSPENDED value
+                         * @property {number} SUSPENDING=9 SUSPENDING value
+                         * @property {number} RESUMING=10 RESUMING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2550,6 +2890,9 @@
                             values[valuesById[4] = "DELETING"] = 4;
                             values[valuesById[6] = "ERROR"] = 6;
                             values[valuesById[7] = "RESTORING"] = 7;
+                            values[valuesById[8] = "SUSPENDED"] = 8;
+                            values[valuesById[9] = "SUSPENDING"] = 9;
+                            values[valuesById[10] = "RESUMING"] = 10;
                             return values;
                         })();
     
@@ -2563,6 +2906,7 @@
                          * @property {number} BASIC_HDD=3 BASIC_HDD value
                          * @property {number} BASIC_SSD=4 BASIC_SSD value
                          * @property {number} HIGH_SCALE_SSD=5 HIGH_SCALE_SSD value
+                         * @property {number} ENTERPRISE=6 ENTERPRISE value
                          */
                         Instance.Tier = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2572,6 +2916,21 @@
                             values[valuesById[3] = "BASIC_HDD"] = 3;
                             values[valuesById[4] = "BASIC_SSD"] = 4;
                             values[valuesById[5] = "HIGH_SCALE_SSD"] = 5;
+                            values[valuesById[6] = "ENTERPRISE"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * SuspensionReason enum.
+                         * @name google.cloud.filestore.v1.Instance.SuspensionReason
+                         * @enum {number}
+                         * @property {number} SUSPENSION_REASON_UNSPECIFIED=0 SUSPENSION_REASON_UNSPECIFIED value
+                         * @property {number} KMS_KEY_ISSUE=1 KMS_KEY_ISSUE value
+                         */
+                        Instance.SuspensionReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SUSPENSION_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KMS_KEY_ISSUE"] = 1;
                             return values;
                         })();
     
@@ -3549,6 +3908,7 @@
                          * @memberof google.cloud.filestore.v1
                          * @interface IDeleteInstanceRequest
                          * @property {string|null} [name] DeleteInstanceRequest name
+                         * @property {boolean|null} [force] DeleteInstanceRequest force
                          */
     
                         /**
@@ -3573,6 +3933,14 @@
                          * @instance
                          */
                         DeleteInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteInstanceRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.filestore.v1.DeleteInstanceRequest
+                         * @instance
+                         */
+                        DeleteInstanceRequest.prototype.force = false;
     
                         /**
                          * Creates a new DeleteInstanceRequest instance using the specified properties.
@@ -3600,6 +3968,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
                             return writer;
                         };
     
@@ -3636,6 +4006,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
                                         break;
                                     }
                                 default:
@@ -3676,6 +4050,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -3693,6 +4070,8 @@
                             var message = new $root.google.cloud.filestore.v1.DeleteInstanceRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -3709,10 +4088,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.force = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -4329,6 +4712,1869 @@
                         return ListInstancesResponse;
                     })();
     
+                    v1.Snapshot = (function() {
+    
+                        /**
+                         * Properties of a Snapshot.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface ISnapshot
+                         * @property {string|null} [name] Snapshot name
+                         * @property {string|null} [description] Snapshot description
+                         * @property {google.cloud.filestore.v1.Snapshot.State|null} [state] Snapshot state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Snapshot createTime
+                         * @property {Object.<string,string>|null} [labels] Snapshot labels
+                         * @property {number|Long|null} [filesystemUsedBytes] Snapshot filesystemUsedBytes
+                         */
+    
+                        /**
+                         * Constructs a new Snapshot.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a Snapshot.
+                         * @implements ISnapshot
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.ISnapshot=} [properties] Properties to set
+                         */
+                        function Snapshot(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Snapshot name.
+                         * @member {string} name
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         */
+                        Snapshot.prototype.name = "";
+    
+                        /**
+                         * Snapshot description.
+                         * @member {string} description
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         */
+                        Snapshot.prototype.description = "";
+    
+                        /**
+                         * Snapshot state.
+                         * @member {google.cloud.filestore.v1.Snapshot.State} state
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         */
+                        Snapshot.prototype.state = 0;
+    
+                        /**
+                         * Snapshot createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         */
+                        Snapshot.prototype.createTime = null;
+    
+                        /**
+                         * Snapshot labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         */
+                        Snapshot.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Snapshot filesystemUsedBytes.
+                         * @member {number|Long} filesystemUsedBytes
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         */
+                        Snapshot.prototype.filesystemUsedBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new Snapshot instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {google.cloud.filestore.v1.ISnapshot=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.Snapshot} Snapshot instance
+                         */
+                        Snapshot.create = function create(properties) {
+                            return new Snapshot(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Snapshot message. Does not implicitly {@link google.cloud.filestore.v1.Snapshot.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {google.cloud.filestore.v1.ISnapshot} message Snapshot message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Snapshot.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.filesystemUsedBytes != null && Object.hasOwnProperty.call(message, "filesystemUsedBytes"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.filesystemUsedBytes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Snapshot message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.Snapshot.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {google.cloud.filestore.v1.ISnapshot} message Snapshot message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Snapshot.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Snapshot message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.Snapshot} Snapshot
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Snapshot.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.Snapshot(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.filesystemUsedBytes = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Snapshot message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.Snapshot} Snapshot
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Snapshot.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Snapshot message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Snapshot.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.filesystemUsedBytes != null && message.hasOwnProperty("filesystemUsedBytes"))
+                                if (!$util.isInteger(message.filesystemUsedBytes) && !(message.filesystemUsedBytes && $util.isInteger(message.filesystemUsedBytes.low) && $util.isInteger(message.filesystemUsedBytes.high)))
+                                    return "filesystemUsedBytes: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Snapshot message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.Snapshot} Snapshot
+                         */
+                        Snapshot.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.Snapshot)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.Snapshot();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1.Snapshot.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1.Snapshot.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.filesystemUsedBytes != null)
+                                if ($util.Long)
+                                    (message.filesystemUsedBytes = $util.Long.fromValue(object.filesystemUsedBytes)).unsigned = false;
+                                else if (typeof object.filesystemUsedBytes === "string")
+                                    message.filesystemUsedBytes = parseInt(object.filesystemUsedBytes, 10);
+                                else if (typeof object.filesystemUsedBytes === "number")
+                                    message.filesystemUsedBytes = object.filesystemUsedBytes;
+                                else if (typeof object.filesystemUsedBytes === "object")
+                                    message.filesystemUsedBytes = new $util.LongBits(object.filesystemUsedBytes.low >>> 0, object.filesystemUsedBytes.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Snapshot message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {google.cloud.filestore.v1.Snapshot} message Snapshot
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Snapshot.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.filesystemUsedBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.filesystemUsedBytes = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.filestore.v1.Snapshot.State[message.state] === undefined ? message.state : $root.google.cloud.filestore.v1.Snapshot.State[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.filesystemUsedBytes != null && message.hasOwnProperty("filesystemUsedBytes"))
+                                if (typeof message.filesystemUsedBytes === "number")
+                                    object.filesystemUsedBytes = options.longs === String ? String(message.filesystemUsedBytes) : message.filesystemUsedBytes;
+                                else
+                                    object.filesystemUsedBytes = options.longs === String ? $util.Long.prototype.toString.call(message.filesystemUsedBytes) : options.longs === Number ? new $util.LongBits(message.filesystemUsedBytes.low >>> 0, message.filesystemUsedBytes.high >>> 0).toNumber() : message.filesystemUsedBytes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Snapshot to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Snapshot.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Snapshot
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.Snapshot
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Snapshot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.Snapshot";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.filestore.v1.Snapshot.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} DELETING=3 DELETING value
+                         */
+                        Snapshot.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            return values;
+                        })();
+    
+                        return Snapshot;
+                    })();
+    
+                    v1.CreateSnapshotRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface ICreateSnapshotRequest
+                         * @property {string|null} [parent] CreateSnapshotRequest parent
+                         * @property {string|null} [snapshotId] CreateSnapshotRequest snapshotId
+                         * @property {google.cloud.filestore.v1.ISnapshot|null} [snapshot] CreateSnapshotRequest snapshot
+                         */
+    
+                        /**
+                         * Constructs a new CreateSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a CreateSnapshotRequest.
+                         * @implements ICreateSnapshotRequest
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.ICreateSnapshotRequest=} [properties] Properties to set
+                         */
+                        function CreateSnapshotRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSnapshotRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @instance
+                         */
+                        CreateSnapshotRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSnapshotRequest snapshotId.
+                         * @member {string} snapshotId
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @instance
+                         */
+                        CreateSnapshotRequest.prototype.snapshotId = "";
+    
+                        /**
+                         * CreateSnapshotRequest snapshot.
+                         * @member {google.cloud.filestore.v1.ISnapshot|null|undefined} snapshot
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @instance
+                         */
+                        CreateSnapshotRequest.prototype.snapshot = null;
+    
+                        /**
+                         * Creates a new CreateSnapshotRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.ICreateSnapshotRequest=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.CreateSnapshotRequest} CreateSnapshotRequest instance
+                         */
+                        CreateSnapshotRequest.create = function create(properties) {
+                            return new CreateSnapshotRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1.CreateSnapshotRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.ICreateSnapshotRequest} message CreateSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSnapshotRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.snapshotId != null && Object.hasOwnProperty.call(message, "snapshotId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.snapshotId);
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                                $root.google.cloud.filestore.v1.Snapshot.encode(message.snapshot, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.CreateSnapshotRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.ICreateSnapshotRequest} message CreateSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSnapshotRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.CreateSnapshotRequest} CreateSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSnapshotRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.CreateSnapshotRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.snapshotId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.snapshot = $root.google.cloud.filestore.v1.Snapshot.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSnapshotRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.CreateSnapshotRequest} CreateSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSnapshotRequest message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSnapshotRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.snapshotId != null && message.hasOwnProperty("snapshotId"))
+                                if (!$util.isString(message.snapshotId))
+                                    return "snapshotId: string expected";
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                                var error = $root.google.cloud.filestore.v1.Snapshot.verify(message.snapshot);
+                                if (error)
+                                    return "snapshot." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.CreateSnapshotRequest} CreateSnapshotRequest
+                         */
+                        CreateSnapshotRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.CreateSnapshotRequest)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.CreateSnapshotRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.snapshotId != null)
+                                message.snapshotId = String(object.snapshotId);
+                            if (object.snapshot != null) {
+                                if (typeof object.snapshot !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1.CreateSnapshotRequest.snapshot: object expected");
+                                message.snapshot = $root.google.cloud.filestore.v1.Snapshot.fromObject(object.snapshot);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSnapshotRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.CreateSnapshotRequest} message CreateSnapshotRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSnapshotRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.snapshotId = "";
+                                object.snapshot = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.snapshotId != null && message.hasOwnProperty("snapshotId"))
+                                object.snapshotId = message.snapshotId;
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot"))
+                                object.snapshot = $root.google.cloud.filestore.v1.Snapshot.toObject(message.snapshot, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSnapshotRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSnapshotRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSnapshotRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.CreateSnapshotRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.CreateSnapshotRequest";
+                        };
+    
+                        return CreateSnapshotRequest;
+                    })();
+    
+                    v1.GetSnapshotRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface IGetSnapshotRequest
+                         * @property {string|null} [name] GetSnapshotRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a GetSnapshotRequest.
+                         * @implements IGetSnapshotRequest
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.IGetSnapshotRequest=} [properties] Properties to set
+                         */
+                        function GetSnapshotRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSnapshotRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @instance
+                         */
+                        GetSnapshotRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSnapshotRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IGetSnapshotRequest=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.GetSnapshotRequest} GetSnapshotRequest instance
+                         */
+                        GetSnapshotRequest.create = function create(properties) {
+                            return new GetSnapshotRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1.GetSnapshotRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IGetSnapshotRequest} message GetSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSnapshotRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.GetSnapshotRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IGetSnapshotRequest} message GetSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSnapshotRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.GetSnapshotRequest} GetSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSnapshotRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.GetSnapshotRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSnapshotRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.GetSnapshotRequest} GetSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSnapshotRequest message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSnapshotRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.GetSnapshotRequest} GetSnapshotRequest
+                         */
+                        GetSnapshotRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.GetSnapshotRequest)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.GetSnapshotRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSnapshotRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.GetSnapshotRequest} message GetSnapshotRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSnapshotRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSnapshotRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSnapshotRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSnapshotRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.GetSnapshotRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.GetSnapshotRequest";
+                        };
+    
+                        return GetSnapshotRequest;
+                    })();
+    
+                    v1.DeleteSnapshotRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface IDeleteSnapshotRequest
+                         * @property {string|null} [name] DeleteSnapshotRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a DeleteSnapshotRequest.
+                         * @implements IDeleteSnapshotRequest
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.IDeleteSnapshotRequest=} [properties] Properties to set
+                         */
+                        function DeleteSnapshotRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSnapshotRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @instance
+                         */
+                        DeleteSnapshotRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSnapshotRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IDeleteSnapshotRequest=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.DeleteSnapshotRequest} DeleteSnapshotRequest instance
+                         */
+                        DeleteSnapshotRequest.create = function create(properties) {
+                            return new DeleteSnapshotRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1.DeleteSnapshotRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IDeleteSnapshotRequest} message DeleteSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSnapshotRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.DeleteSnapshotRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IDeleteSnapshotRequest} message DeleteSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSnapshotRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.DeleteSnapshotRequest} DeleteSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSnapshotRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.DeleteSnapshotRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSnapshotRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.DeleteSnapshotRequest} DeleteSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSnapshotRequest message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSnapshotRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.DeleteSnapshotRequest} DeleteSnapshotRequest
+                         */
+                        DeleteSnapshotRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.DeleteSnapshotRequest)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.DeleteSnapshotRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSnapshotRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.DeleteSnapshotRequest} message DeleteSnapshotRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSnapshotRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSnapshotRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSnapshotRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSnapshotRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.DeleteSnapshotRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.DeleteSnapshotRequest";
+                        };
+    
+                        return DeleteSnapshotRequest;
+                    })();
+    
+                    v1.UpdateSnapshotRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface IUpdateSnapshotRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSnapshotRequest updateMask
+                         * @property {google.cloud.filestore.v1.ISnapshot|null} [snapshot] UpdateSnapshotRequest snapshot
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSnapshotRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents an UpdateSnapshotRequest.
+                         * @implements IUpdateSnapshotRequest
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.IUpdateSnapshotRequest=} [properties] Properties to set
+                         */
+                        function UpdateSnapshotRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSnapshotRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @instance
+                         */
+                        UpdateSnapshotRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateSnapshotRequest snapshot.
+                         * @member {google.cloud.filestore.v1.ISnapshot|null|undefined} snapshot
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @instance
+                         */
+                        UpdateSnapshotRequest.prototype.snapshot = null;
+    
+                        /**
+                         * Creates a new UpdateSnapshotRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IUpdateSnapshotRequest=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.UpdateSnapshotRequest} UpdateSnapshotRequest instance
+                         */
+                        UpdateSnapshotRequest.create = function create(properties) {
+                            return new UpdateSnapshotRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1.UpdateSnapshotRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IUpdateSnapshotRequest} message UpdateSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSnapshotRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                                $root.google.cloud.filestore.v1.Snapshot.encode(message.snapshot, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.UpdateSnapshotRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IUpdateSnapshotRequest} message UpdateSnapshotRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSnapshotRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.UpdateSnapshotRequest} UpdateSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSnapshotRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.UpdateSnapshotRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.snapshot = $root.google.cloud.filestore.v1.Snapshot.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSnapshotRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.UpdateSnapshotRequest} UpdateSnapshotRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSnapshotRequest message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSnapshotRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                                var error = $root.google.cloud.filestore.v1.Snapshot.verify(message.snapshot);
+                                if (error)
+                                    return "snapshot." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.UpdateSnapshotRequest} UpdateSnapshotRequest
+                         */
+                        UpdateSnapshotRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.UpdateSnapshotRequest)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.UpdateSnapshotRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1.UpdateSnapshotRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.snapshot != null) {
+                                if (typeof object.snapshot !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1.UpdateSnapshotRequest.snapshot: object expected");
+                                message.snapshot = $root.google.cloud.filestore.v1.Snapshot.fromObject(object.snapshot);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSnapshotRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.UpdateSnapshotRequest} message UpdateSnapshotRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSnapshotRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.snapshot = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot"))
+                                object.snapshot = $root.google.cloud.filestore.v1.Snapshot.toObject(message.snapshot, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSnapshotRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSnapshotRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSnapshotRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.UpdateSnapshotRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.UpdateSnapshotRequest";
+                        };
+    
+                        return UpdateSnapshotRequest;
+                    })();
+    
+                    v1.ListSnapshotsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSnapshotsRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface IListSnapshotsRequest
+                         * @property {string|null} [parent] ListSnapshotsRequest parent
+                         * @property {number|null} [pageSize] ListSnapshotsRequest pageSize
+                         * @property {string|null} [pageToken] ListSnapshotsRequest pageToken
+                         * @property {string|null} [orderBy] ListSnapshotsRequest orderBy
+                         * @property {string|null} [filter] ListSnapshotsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListSnapshotsRequest.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a ListSnapshotsRequest.
+                         * @implements IListSnapshotsRequest
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.IListSnapshotsRequest=} [properties] Properties to set
+                         */
+                        function ListSnapshotsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSnapshotsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @instance
+                         */
+                        ListSnapshotsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSnapshotsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @instance
+                         */
+                        ListSnapshotsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSnapshotsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @instance
+                         */
+                        ListSnapshotsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSnapshotsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @instance
+                         */
+                        ListSnapshotsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListSnapshotsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @instance
+                         */
+                        ListSnapshotsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListSnapshotsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IListSnapshotsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsRequest} ListSnapshotsRequest instance
+                         */
+                        ListSnapshotsRequest.create = function create(properties) {
+                            return new ListSnapshotsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSnapshotsRequest message. Does not implicitly {@link google.cloud.filestore.v1.ListSnapshotsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IListSnapshotsRequest} message ListSnapshotsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSnapshotsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSnapshotsRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.ListSnapshotsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.IListSnapshotsRequest} message ListSnapshotsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSnapshotsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSnapshotsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsRequest} ListSnapshotsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSnapshotsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.ListSnapshotsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSnapshotsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsRequest} ListSnapshotsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSnapshotsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSnapshotsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSnapshotsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSnapshotsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsRequest} ListSnapshotsRequest
+                         */
+                        ListSnapshotsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.ListSnapshotsRequest)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.ListSnapshotsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSnapshotsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {google.cloud.filestore.v1.ListSnapshotsRequest} message ListSnapshotsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSnapshotsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSnapshotsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSnapshotsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSnapshotsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSnapshotsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.ListSnapshotsRequest";
+                        };
+    
+                        return ListSnapshotsRequest;
+                    })();
+    
+                    v1.ListSnapshotsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSnapshotsResponse.
+                         * @memberof google.cloud.filestore.v1
+                         * @interface IListSnapshotsResponse
+                         * @property {Array.<google.cloud.filestore.v1.ISnapshot>|null} [snapshots] ListSnapshotsResponse snapshots
+                         * @property {string|null} [nextPageToken] ListSnapshotsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSnapshotsResponse.
+                         * @memberof google.cloud.filestore.v1
+                         * @classdesc Represents a ListSnapshotsResponse.
+                         * @implements IListSnapshotsResponse
+                         * @constructor
+                         * @param {google.cloud.filestore.v1.IListSnapshotsResponse=} [properties] Properties to set
+                         */
+                        function ListSnapshotsResponse(properties) {
+                            this.snapshots = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSnapshotsResponse snapshots.
+                         * @member {Array.<google.cloud.filestore.v1.ISnapshot>} snapshots
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @instance
+                         */
+                        ListSnapshotsResponse.prototype.snapshots = $util.emptyArray;
+    
+                        /**
+                         * ListSnapshotsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @instance
+                         */
+                        ListSnapshotsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSnapshotsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {google.cloud.filestore.v1.IListSnapshotsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsResponse} ListSnapshotsResponse instance
+                         */
+                        ListSnapshotsResponse.create = function create(properties) {
+                            return new ListSnapshotsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSnapshotsResponse message. Does not implicitly {@link google.cloud.filestore.v1.ListSnapshotsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {google.cloud.filestore.v1.IListSnapshotsResponse} message ListSnapshotsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSnapshotsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.snapshots != null && message.snapshots.length)
+                                for (var i = 0; i < message.snapshots.length; ++i)
+                                    $root.google.cloud.filestore.v1.Snapshot.encode(message.snapshots[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSnapshotsResponse message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.ListSnapshotsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {google.cloud.filestore.v1.IListSnapshotsResponse} message ListSnapshotsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSnapshotsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSnapshotsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsResponse} ListSnapshotsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSnapshotsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1.ListSnapshotsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.snapshots && message.snapshots.length))
+                                            message.snapshots = [];
+                                        message.snapshots.push($root.google.cloud.filestore.v1.Snapshot.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSnapshotsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsResponse} ListSnapshotsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSnapshotsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSnapshotsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSnapshotsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.snapshots != null && message.hasOwnProperty("snapshots")) {
+                                if (!Array.isArray(message.snapshots))
+                                    return "snapshots: array expected";
+                                for (var i = 0; i < message.snapshots.length; ++i) {
+                                    var error = $root.google.cloud.filestore.v1.Snapshot.verify(message.snapshots[i]);
+                                    if (error)
+                                        return "snapshots." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSnapshotsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1.ListSnapshotsResponse} ListSnapshotsResponse
+                         */
+                        ListSnapshotsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1.ListSnapshotsResponse)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1.ListSnapshotsResponse();
+                            if (object.snapshots) {
+                                if (!Array.isArray(object.snapshots))
+                                    throw TypeError(".google.cloud.filestore.v1.ListSnapshotsResponse.snapshots: array expected");
+                                message.snapshots = [];
+                                for (var i = 0; i < object.snapshots.length; ++i) {
+                                    if (typeof object.snapshots[i] !== "object")
+                                        throw TypeError(".google.cloud.filestore.v1.ListSnapshotsResponse.snapshots: object expected");
+                                    message.snapshots[i] = $root.google.cloud.filestore.v1.Snapshot.fromObject(object.snapshots[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSnapshotsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {google.cloud.filestore.v1.ListSnapshotsResponse} message ListSnapshotsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSnapshotsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.snapshots = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.snapshots && message.snapshots.length) {
+                                object.snapshots = [];
+                                for (var j = 0; j < message.snapshots.length; ++j)
+                                    object.snapshots[j] = $root.google.cloud.filestore.v1.Snapshot.toObject(message.snapshots[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSnapshotsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSnapshotsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSnapshotsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1.ListSnapshotsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSnapshotsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1.ListSnapshotsResponse";
+                        };
+    
+                        return ListSnapshotsResponse;
+                    })();
+    
                     v1.Backup = (function() {
     
                         /**
@@ -4347,6 +6593,7 @@
                          * @property {google.cloud.filestore.v1.Instance.Tier|null} [sourceInstanceTier] Backup sourceInstanceTier
                          * @property {number|Long|null} [downloadBytes] Backup downloadBytes
                          * @property {google.protobuf.IBoolValue|null} [satisfiesPzs] Backup satisfiesPzs
+                         * @property {string|null} [kmsKey] Backup kmsKey
                          */
     
                         /**
@@ -4462,6 +6709,14 @@
                         Backup.prototype.satisfiesPzs = null;
     
                         /**
+                         * Backup kmsKey.
+                         * @member {string} kmsKey
+                         * @memberof google.cloud.filestore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.kmsKey = "";
+    
+                        /**
                          * Creates a new Backup instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.filestore.v1.Backup
@@ -4510,6 +6765,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int64(message.downloadBytes);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 $root.google.protobuf.BoolValue.encode(message.satisfiesPzs, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.kmsKey);
                             return writer;
                         };
     
@@ -4611,6 +6868,10 @@
                                         message.satisfiesPzs = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 13: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4698,6 +6959,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.downloadBytes != null && message.hasOwnProperty("downloadBytes"))
@@ -4708,6 +6970,9 @@
                                 if (error)
                                     return "satisfiesPzs." + error;
                             }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
                             return null;
                         };
     
@@ -4820,6 +7085,10 @@
                             case 5:
                                 message.sourceInstanceTier = 5;
                                 break;
+                            case "ENTERPRISE":
+                            case 6:
+                                message.sourceInstanceTier = 6;
+                                break;
                             }
                             if (object.downloadBytes != null)
                                 if ($util.Long)
@@ -4835,6 +7104,8 @@
                                     throw TypeError(".google.cloud.filestore.v1.Backup.satisfiesPzs: object expected");
                                 message.satisfiesPzs = $root.google.protobuf.BoolValue.fromObject(object.satisfiesPzs);
                             }
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
                             return message;
                         };
     
@@ -4877,6 +7148,7 @@
                                 } else
                                     object.downloadBytes = options.longs === String ? "0" : 0;
                                 object.satisfiesPzs = null;
+                                object.kmsKey = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4915,6 +7187,8 @@
                                     object.downloadBytes = options.longs === String ? $util.Long.prototype.toString.call(message.downloadBytes) : options.longs === Number ? new $util.LongBits(message.downloadBytes.low >>> 0, message.downloadBytes.high >>> 0).toNumber() : message.downloadBytes;
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = $root.google.protobuf.BoolValue.toObject(message.satisfiesPzs, options);
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                object.kmsKey = message.kmsKey;
                             return object;
                         };
     
