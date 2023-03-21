@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "google-auth-library": "^8.0.2",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {

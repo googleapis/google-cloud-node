@@ -55,7 +55,7 @@
     "@google-cloud/promisify": "^3.0.0",
     "arrify": "^2.0.0",
     "extend": "^3.0.2",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "is-html": "^2.0.0"
   },
   "devDependencies": {
