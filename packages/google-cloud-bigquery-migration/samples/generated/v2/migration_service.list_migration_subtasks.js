@@ -38,21 +38,21 @@ function main(parent) {
    */
   // const readMask = {}
   /**
-   *  Optional. The maximum number of migration tasks to return. The service may return
-   *  fewer than this number.
+   *  Optional. The maximum number of migration tasks to return. The service may
+   *  return fewer than this number.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from previous `ListMigrationSubtasks` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. A page token, received from previous `ListMigrationSubtasks`
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to `ListMigrationSubtasks`
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. The filter to apply. This can be used to get the subtasks of a specific
-   *  tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the
-   *  task ID (not the name in the named map).
+   *  Optional. The filter to apply. This can be used to get the subtasks of a
+   *  specific tasks in a workflow, e.g. `migration_task = "ab012"` where
+   *  `"ab012"` is the task ID (not the name in the named map).
    */
   // const filter = 'abc123'
 

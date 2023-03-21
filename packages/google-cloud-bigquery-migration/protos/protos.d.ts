@@ -478,7 +478,8 @@ export namespace google {
                             RUNNING = 2,
                             SUCCEEDED = 3,
                             FAILED = 4,
-                            PAUSED = 5
+                            PAUSED = 5,
+                            PENDING_DEPENDENCY = 6
                         }
                     }
 
@@ -1251,17 +1252,20 @@ export namespace google {
                         /** TranslationConfigDetails gcsTargetPath */
                         gcsTargetPath?: (string|null);
 
+                        /** TranslationConfigDetails nameMappingList */
+                        nameMappingList?: (google.cloud.bigquery.migration.v2.IObjectNameMappingList|null);
+
                         /** TranslationConfigDetails sourceDialect */
                         sourceDialect?: (google.cloud.bigquery.migration.v2.IDialect|null);
 
                         /** TranslationConfigDetails targetDialect */
                         targetDialect?: (google.cloud.bigquery.migration.v2.IDialect|null);
 
-                        /** TranslationConfigDetails nameMappingList */
-                        nameMappingList?: (google.cloud.bigquery.migration.v2.IObjectNameMappingList|null);
-
                         /** TranslationConfigDetails sourceEnv */
                         sourceEnv?: (google.cloud.bigquery.migration.v2.ISourceEnv|null);
+
+                        /** TranslationConfigDetails requestSource */
+                        requestSource?: (string|null);
                     }
 
                     /** Represents a TranslationConfigDetails. */
@@ -1279,17 +1283,20 @@ export namespace google {
                         /** TranslationConfigDetails gcsTargetPath. */
                         public gcsTargetPath?: (string|null);
 
+                        /** TranslationConfigDetails nameMappingList. */
+                        public nameMappingList?: (google.cloud.bigquery.migration.v2.IObjectNameMappingList|null);
+
                         /** TranslationConfigDetails sourceDialect. */
                         public sourceDialect?: (google.cloud.bigquery.migration.v2.IDialect|null);
 
                         /** TranslationConfigDetails targetDialect. */
                         public targetDialect?: (google.cloud.bigquery.migration.v2.IDialect|null);
 
-                        /** TranslationConfigDetails nameMappingList. */
-                        public nameMappingList?: (google.cloud.bigquery.migration.v2.IObjectNameMappingList|null);
-
                         /** TranslationConfigDetails sourceEnv. */
                         public sourceEnv?: (google.cloud.bigquery.migration.v2.ISourceEnv|null);
+
+                        /** TranslationConfigDetails requestSource. */
+                        public requestSource: string;
 
                         /** TranslationConfigDetails sourceLocation. */
                         public sourceLocation?: "gcsSourcePath";

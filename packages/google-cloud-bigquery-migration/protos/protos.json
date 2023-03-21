@@ -198,7 +198,8 @@
                                 "RUNNING": 2,
                                 "SUCCEEDED": 3,
                                 "FAILED": 4,
-                                "PAUSED": 5
+                                "PAUSED": 5,
+                                "PENDING_DEPENDENCY": 6
                               }
                             }
                           }
@@ -390,6 +391,10 @@
                               "type": "string",
                               "id": 2
                             },
+                            "nameMappingList": {
+                              "type": "ObjectNameMappingList",
+                              "id": 5
+                            },
                             "sourceDialect": {
                               "type": "Dialect",
                               "id": 3
@@ -398,13 +403,13 @@
                               "type": "Dialect",
                               "id": 4
                             },
-                            "nameMappingList": {
-                              "type": "ObjectNameMappingList",
-                              "id": 5
-                            },
                             "sourceEnv": {
                               "type": "SourceEnv",
                               "id": 6
+                            },
+                            "requestSource": {
+                              "type": "string",
+                              "id": 8
                             }
                           }
                         },

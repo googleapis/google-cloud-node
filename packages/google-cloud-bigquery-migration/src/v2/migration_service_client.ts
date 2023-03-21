@@ -1083,18 +1083,18 @@ export class MigrationServiceClient {
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. The list of fields to be retrieved.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of migration tasks to return. The service may return
-   *   fewer than this number.
+   *   Optional. The maximum number of migration tasks to return. The service may
+   *   return fewer than this number.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from previous `ListMigrationSubtasks` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from previous `ListMigrationSubtasks`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListMigrationSubtasks`
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. The filter to apply. This can be used to get the subtasks of a specific
-   *   tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the
-   *   task ID (not the name in the named map).
+   *   Optional. The filter to apply. This can be used to get the subtasks of a
+   *   specific tasks in a workflow, e.g. `migration_task = "ab012"` where
+   *   `"ab012"` is the task ID (not the name in the named map).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1193,18 +1193,18 @@ export class MigrationServiceClient {
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. The list of fields to be retrieved.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of migration tasks to return. The service may return
-   *   fewer than this number.
+   *   Optional. The maximum number of migration tasks to return. The service may
+   *   return fewer than this number.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from previous `ListMigrationSubtasks` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from previous `ListMigrationSubtasks`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListMigrationSubtasks`
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. The filter to apply. This can be used to get the subtasks of a specific
-   *   tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the
-   *   task ID (not the name in the named map).
+   *   Optional. The filter to apply. This can be used to get the subtasks of a
+   *   specific tasks in a workflow, e.g. `migration_task = "ab012"` where
+   *   `"ab012"` is the task ID (not the name in the named map).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1251,18 +1251,18 @@ export class MigrationServiceClient {
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. The list of fields to be retrieved.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of migration tasks to return. The service may return
-   *   fewer than this number.
+   *   Optional. The maximum number of migration tasks to return. The service may
+   *   return fewer than this number.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from previous `ListMigrationSubtasks` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from previous `ListMigrationSubtasks`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListMigrationSubtasks`
    *   must match the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. The filter to apply. This can be used to get the subtasks of a specific
-   *   tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the
-   *   task ID (not the name in the named map).
+   *   Optional. The filter to apply. This can be used to get the subtasks of a
+   *   specific tasks in a workflow, e.g. `migration_task = "ab012"` where
+   *   `"ab012"` is the task ID (not the name in the named map).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

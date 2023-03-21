@@ -1244,6 +1244,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.processingError != null && message.hasOwnProperty("processingError")) {
@@ -1333,6 +1334,10 @@
                                 case "PAUSED":
                                 case 5:
                                     message.state = 5;
+                                    break;
+                                case "PENDING_DEPENDENCY":
+                                case 6:
+                                    message.state = 6;
                                     break;
                                 }
                                 if (object.processingError != null) {
@@ -1467,6 +1472,7 @@
                              * @property {number} SUCCEEDED=3 SUCCEEDED value
                              * @property {number} FAILED=4 FAILED value
                              * @property {number} PAUSED=5 PAUSED value
+                             * @property {number} PENDING_DEPENDENCY=6 PENDING_DEPENDENCY value
                              */
                             MigrationSubtask.State = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -1476,6 +1482,7 @@
                                 values[valuesById[3] = "SUCCEEDED"] = 3;
                                 values[valuesById[4] = "FAILED"] = 4;
                                 values[valuesById[5] = "PAUSED"] = 5;
+                                values[valuesById[6] = "PENDING_DEPENDENCY"] = 6;
                                 return values;
                             })();
     
@@ -3426,10 +3433,11 @@
                              * @interface ITranslationConfigDetails
                              * @property {string|null} [gcsSourcePath] TranslationConfigDetails gcsSourcePath
                              * @property {string|null} [gcsTargetPath] TranslationConfigDetails gcsTargetPath
+                             * @property {google.cloud.bigquery.migration.v2.IObjectNameMappingList|null} [nameMappingList] TranslationConfigDetails nameMappingList
                              * @property {google.cloud.bigquery.migration.v2.IDialect|null} [sourceDialect] TranslationConfigDetails sourceDialect
                              * @property {google.cloud.bigquery.migration.v2.IDialect|null} [targetDialect] TranslationConfigDetails targetDialect
-                             * @property {google.cloud.bigquery.migration.v2.IObjectNameMappingList|null} [nameMappingList] TranslationConfigDetails nameMappingList
                              * @property {google.cloud.bigquery.migration.v2.ISourceEnv|null} [sourceEnv] TranslationConfigDetails sourceEnv
+                             * @property {string|null} [requestSource] TranslationConfigDetails requestSource
                              */
     
                             /**
@@ -3464,6 +3472,14 @@
                             TranslationConfigDetails.prototype.gcsTargetPath = null;
     
                             /**
+                             * TranslationConfigDetails nameMappingList.
+                             * @member {google.cloud.bigquery.migration.v2.IObjectNameMappingList|null|undefined} nameMappingList
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationConfigDetails
+                             * @instance
+                             */
+                            TranslationConfigDetails.prototype.nameMappingList = null;
+    
+                            /**
                              * TranslationConfigDetails sourceDialect.
                              * @member {google.cloud.bigquery.migration.v2.IDialect|null|undefined} sourceDialect
                              * @memberof google.cloud.bigquery.migration.v2.TranslationConfigDetails
@@ -3480,20 +3496,20 @@
                             TranslationConfigDetails.prototype.targetDialect = null;
     
                             /**
-                             * TranslationConfigDetails nameMappingList.
-                             * @member {google.cloud.bigquery.migration.v2.IObjectNameMappingList|null|undefined} nameMappingList
-                             * @memberof google.cloud.bigquery.migration.v2.TranslationConfigDetails
-                             * @instance
-                             */
-                            TranslationConfigDetails.prototype.nameMappingList = null;
-    
-                            /**
                              * TranslationConfigDetails sourceEnv.
                              * @member {google.cloud.bigquery.migration.v2.ISourceEnv|null|undefined} sourceEnv
                              * @memberof google.cloud.bigquery.migration.v2.TranslationConfigDetails
                              * @instance
                              */
                             TranslationConfigDetails.prototype.sourceEnv = null;
+    
+                            /**
+                             * TranslationConfigDetails requestSource.
+                             * @member {string} requestSource
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationConfigDetails
+                             * @instance
+                             */
+                            TranslationConfigDetails.prototype.requestSource = "";
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -3567,6 +3583,8 @@
                                     $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.encode(message.nameMappingList, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.sourceEnv != null && Object.hasOwnProperty.call(message, "sourceEnv"))
                                     $root.google.cloud.bigquery.migration.v2.SourceEnv.encode(message.sourceEnv, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.requestSource != null && Object.hasOwnProperty.call(message, "requestSource"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.requestSource);
                                 return writer;
                             };
     
@@ -3609,6 +3627,10 @@
                                             message.gcsTargetPath = reader.string();
                                             break;
                                         }
+                                    case 5: {
+                                            message.nameMappingList = $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 3: {
                                             message.sourceDialect = $root.google.cloud.bigquery.migration.v2.Dialect.decode(reader, reader.uint32());
                                             break;
@@ -3617,12 +3639,12 @@
                                             message.targetDialect = $root.google.cloud.bigquery.migration.v2.Dialect.decode(reader, reader.uint32());
                                             break;
                                         }
-                                    case 5: {
-                                            message.nameMappingList = $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.decode(reader, reader.uint32());
-                                            break;
-                                        }
                                     case 6: {
                                             message.sourceEnv = $root.google.cloud.bigquery.migration.v2.SourceEnv.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.requestSource = reader.string();
                                             break;
                                         }
                                     default:
@@ -3671,6 +3693,14 @@
                                     if (!$util.isString(message.gcsTargetPath))
                                         return "gcsTargetPath: string expected";
                                 }
+                                if (message.nameMappingList != null && message.hasOwnProperty("nameMappingList")) {
+                                    properties.outputNameMapping = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.verify(message.nameMappingList);
+                                        if (error)
+                                            return "nameMappingList." + error;
+                                    }
+                                }
                                 if (message.sourceDialect != null && message.hasOwnProperty("sourceDialect")) {
                                     var error = $root.google.cloud.bigquery.migration.v2.Dialect.verify(message.sourceDialect);
                                     if (error)
@@ -3681,19 +3711,14 @@
                                     if (error)
                                         return "targetDialect." + error;
                                 }
-                                if (message.nameMappingList != null && message.hasOwnProperty("nameMappingList")) {
-                                    properties.outputNameMapping = 1;
-                                    {
-                                        var error = $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.verify(message.nameMappingList);
-                                        if (error)
-                                            return "nameMappingList." + error;
-                                    }
-                                }
                                 if (message.sourceEnv != null && message.hasOwnProperty("sourceEnv")) {
                                     var error = $root.google.cloud.bigquery.migration.v2.SourceEnv.verify(message.sourceEnv);
                                     if (error)
                                         return "sourceEnv." + error;
                                 }
+                                if (message.requestSource != null && message.hasOwnProperty("requestSource"))
+                                    if (!$util.isString(message.requestSource))
+                                        return "requestSource: string expected";
                                 return null;
                             };
     
@@ -3713,6 +3738,11 @@
                                     message.gcsSourcePath = String(object.gcsSourcePath);
                                 if (object.gcsTargetPath != null)
                                     message.gcsTargetPath = String(object.gcsTargetPath);
+                                if (object.nameMappingList != null) {
+                                    if (typeof object.nameMappingList !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationConfigDetails.nameMappingList: object expected");
+                                    message.nameMappingList = $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.fromObject(object.nameMappingList);
+                                }
                                 if (object.sourceDialect != null) {
                                     if (typeof object.sourceDialect !== "object")
                                         throw TypeError(".google.cloud.bigquery.migration.v2.TranslationConfigDetails.sourceDialect: object expected");
@@ -3723,16 +3753,13 @@
                                         throw TypeError(".google.cloud.bigquery.migration.v2.TranslationConfigDetails.targetDialect: object expected");
                                     message.targetDialect = $root.google.cloud.bigquery.migration.v2.Dialect.fromObject(object.targetDialect);
                                 }
-                                if (object.nameMappingList != null) {
-                                    if (typeof object.nameMappingList !== "object")
-                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationConfigDetails.nameMappingList: object expected");
-                                    message.nameMappingList = $root.google.cloud.bigquery.migration.v2.ObjectNameMappingList.fromObject(object.nameMappingList);
-                                }
                                 if (object.sourceEnv != null) {
                                     if (typeof object.sourceEnv !== "object")
                                         throw TypeError(".google.cloud.bigquery.migration.v2.TranslationConfigDetails.sourceEnv: object expected");
                                     message.sourceEnv = $root.google.cloud.bigquery.migration.v2.SourceEnv.fromObject(object.sourceEnv);
                                 }
+                                if (object.requestSource != null)
+                                    message.requestSource = String(object.requestSource);
                                 return message;
                             };
     
@@ -3753,6 +3780,7 @@
                                     object.sourceDialect = null;
                                     object.targetDialect = null;
                                     object.sourceEnv = null;
+                                    object.requestSource = "";
                                 }
                                 if (message.gcsSourcePath != null && message.hasOwnProperty("gcsSourcePath")) {
                                     object.gcsSourcePath = message.gcsSourcePath;
@@ -3775,6 +3803,8 @@
                                 }
                                 if (message.sourceEnv != null && message.hasOwnProperty("sourceEnv"))
                                     object.sourceEnv = $root.google.cloud.bigquery.migration.v2.SourceEnv.toObject(message.sourceEnv, options);
+                                if (message.requestSource != null && message.hasOwnProperty("requestSource"))
+                                    object.requestSource = message.requestSource;
                                 return object;
                             };
     
