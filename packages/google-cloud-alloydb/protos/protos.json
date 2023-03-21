@@ -14,7 +14,7 @@
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.alloydb.v1",
                     "php_namespace": "Google\\Cloud\\AlloyDb\\V1",
-                    "ruby_package": "Google::Cloud::AlloyDb::V1",
+                    "ruby_package": "Google::Cloud::AlloyDB::V1",
                     "(google.api.resource_definition).type": "compute.googleapis.com/Network",
                     "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
@@ -2268,7 +2268,7 @@
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.alloydb.v1alpha",
                     "php_namespace": "Google\\Cloud\\AlloyDb\\V1alpha",
-                    "ruby_package": "Google::Cloud::AlloyDb::V1alpha",
+                    "ruby_package": "Google::Cloud::AlloyDB::V1alpha",
                     "(google.api.resource_definition).type": "compute.googleapis.com/Network",
                     "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
@@ -4951,7 +4951,7 @@
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.alloydb.v1beta",
                     "php_namespace": "Google\\Cloud\\AlloyDb\\V1beta",
-                    "ruby_package": "Google::Cloud::AlloyDb::V1beta",
+                    "ruby_package": "Google::Cloud::AlloyDB::V1beta",
                     "(google.api.resource_definition).type": "compute.googleapis.com/Network",
                     "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
