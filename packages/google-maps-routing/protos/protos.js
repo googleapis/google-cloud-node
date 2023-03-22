@@ -17568,11 +17568,11 @@
     
                         /**
                          * SpeedReadingInterval speed.
-                         * @member {google.maps.routing.v2.SpeedReadingInterval.Speed} speed
+                         * @member {google.maps.routing.v2.SpeedReadingInterval.Speed|null|undefined} speed
                          * @memberof google.maps.routing.v2.SpeedReadingInterval
                          * @instance
                          */
-                        SpeedReadingInterval.prototype.speed = 0;
+                        SpeedReadingInterval.prototype.speed = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -17596,6 +17596,17 @@
                          */
                         Object.defineProperty(SpeedReadingInterval.prototype, "_endPolylinePointIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["endPolylinePointIndex"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SpeedReadingInterval speedType.
+                         * @member {"speed"|undefined} speedType
+                         * @memberof google.maps.routing.v2.SpeedReadingInterval
+                         * @instance
+                         */
+                        Object.defineProperty(SpeedReadingInterval.prototype, "speedType", {
+                            get: $util.oneOfGetter($oneOfFields = ["speed"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17721,7 +17732,8 @@
                                 if (!$util.isInteger(message.endPolylinePointIndex))
                                     return "endPolylinePointIndex: integer expected";
                             }
-                            if (message.speed != null && message.hasOwnProperty("speed"))
+                            if (message.speed != null && message.hasOwnProperty("speed")) {
+                                properties.speedType = 1;
                                 switch (message.speed) {
                                 default:
                                     return "speed: enum value expected";
@@ -17731,6 +17743,7 @@
                                 case 3:
                                     break;
                                 }
+                            }
                             return null;
                         };
     
@@ -17790,8 +17803,6 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.speed = options.enums === String ? "SPEED_UNSPECIFIED" : 0;
                             if (message.startPolylinePointIndex != null && message.hasOwnProperty("startPolylinePointIndex")) {
                                 object.startPolylinePointIndex = message.startPolylinePointIndex;
                                 if (options.oneofs)
@@ -17802,8 +17813,11 @@
                                 if (options.oneofs)
                                     object._endPolylinePointIndex = "endPolylinePointIndex";
                             }
-                            if (message.speed != null && message.hasOwnProperty("speed"))
+                            if (message.speed != null && message.hasOwnProperty("speed")) {
                                 object.speed = options.enums === String ? $root.google.maps.routing.v2.SpeedReadingInterval.Speed[message.speed] === undefined ? message.speed : $root.google.maps.routing.v2.SpeedReadingInterval.Speed[message.speed] : message.speed;
+                                if (options.oneofs)
+                                    object.speedType = "speed";
+                            }
                             return object;
                         };
     
@@ -18376,6 +18390,7 @@
                                     case 34:
                                     case 35:
                                     case 36:
+                                    case 94:
                                     case 37:
                                     case 38:
                                     case 39:
@@ -18678,6 +18693,10 @@
                                     case 36:
                                         message.tollPasses[i] = 36;
                                         break;
+                                    case "US_MI_BCPASS":
+                                    case 94:
+                                        message.tollPasses[i] = 94;
+                                        break;
                                     case "US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG":
                                     case 37:
                                         message.tollPasses[i] = 37;
@@ -18956,6 +18975,7 @@
                      * @property {number} US_MD_EZPASSMD=34 US_MD_EZPASSMD value
                      * @property {number} US_ME_EZPASSME=35 US_ME_EZPASSME value
                      * @property {number} US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD=36 US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD value
+                     * @property {number} US_MI_BCPASS=94 US_MI_BCPASS value
                      * @property {number} US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG=37 US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG value
                      * @property {number} US_MI_IQ_PROX_CARD=38 US_MI_IQ_PROX_CARD value
                      * @property {number} US_MI_MACKINAC_BRIDGE_MAC_PASS=39 US_MI_MACKINAC_BRIDGE_MAC_PASS value
@@ -19051,6 +19071,7 @@
                         values[valuesById[34] = "US_MD_EZPASSMD"] = 34;
                         values[valuesById[35] = "US_ME_EZPASSME"] = 35;
                         values[valuesById[36] = "US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD"] = 36;
+                        values[valuesById[94] = "US_MI_BCPASS"] = 94;
                         values[valuesById[37] = "US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG"] = 37;
                         values[valuesById[38] = "US_MI_IQ_PROX_CARD"] = 38;
                         values[valuesById[39] = "US_MI_MACKINAC_BRIDGE_MAC_PASS"] = 39;
