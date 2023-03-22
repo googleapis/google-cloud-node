@@ -1,0 +1,18 @@
+createTime: '2022-12-22T21:33:14.641417894Z'
+description: Presubmit unit with node 12
+filename: ci/cloudbuild.yaml
+github:
+  name: google-cloud-node
+  owner: googleapis
+  pullRequest:
+    branch: ^main$
+    commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
+id: 492f377a-73d6-4b52-9269-1a3e3dbb6721
+includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
+name: unit-presubmit-node12
+serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+substitutions:
+  _BUILD_TYPE: presubmit
+  _LOGS_BUCKET: cloud-node-public-logs
+  _NODE_VERSION: '12'
+  _TEST_TYPE: units
