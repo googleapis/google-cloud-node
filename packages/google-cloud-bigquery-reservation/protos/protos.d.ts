@@ -506,6 +506,9 @@ export namespace google {
                         /** Reservation ignoreIdleSlots */
                         ignoreIdleSlots?: (boolean|null);
 
+                        /** Reservation autoscale */
+                        autoscale?: (google.cloud.bigquery.reservation.v1.Reservation.IAutoscale|null);
+
                         /** Reservation concurrency */
                         concurrency?: (number|Long|string|null);
 
@@ -517,6 +520,9 @@ export namespace google {
 
                         /** Reservation multiRegionAuxiliary */
                         multiRegionAuxiliary?: (boolean|null);
+
+                        /** Reservation edition */
+                        edition?: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition|null);
                     }
 
                     /** Represents a Reservation. */
@@ -537,6 +543,9 @@ export namespace google {
                         /** Reservation ignoreIdleSlots. */
                         public ignoreIdleSlots: boolean;
 
+                        /** Reservation autoscale. */
+                        public autoscale?: (google.cloud.bigquery.reservation.v1.Reservation.IAutoscale|null);
+
                         /** Reservation concurrency. */
                         public concurrency: (number|Long|string);
 
@@ -548,6 +557,9 @@ export namespace google {
 
                         /** Reservation multiRegionAuxiliary. */
                         public multiRegionAuxiliary: boolean;
+
+                        /** Reservation edition. */
+                        public edition: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition);
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -627,6 +639,112 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    namespace Reservation {
+
+                        /** Properties of an Autoscale. */
+                        interface IAutoscale {
+
+                            /** Autoscale currentSlots */
+                            currentSlots?: (number|Long|string|null);
+
+                            /** Autoscale maxSlots */
+                            maxSlots?: (number|Long|string|null);
+                        }
+
+                        /** Represents an Autoscale. */
+                        class Autoscale implements IAutoscale {
+
+                            /**
+                             * Constructs a new Autoscale.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.reservation.v1.Reservation.IAutoscale);
+
+                            /** Autoscale currentSlots. */
+                            public currentSlots: (number|Long|string);
+
+                            /** Autoscale maxSlots. */
+                            public maxSlots: (number|Long|string);
+
+                            /**
+                             * Creates a new Autoscale instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Autoscale instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.reservation.v1.Reservation.IAutoscale): google.cloud.bigquery.reservation.v1.Reservation.Autoscale;
+
+                            /**
+                             * Encodes the specified Autoscale message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.Autoscale.verify|verify} messages.
+                             * @param message Autoscale message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.reservation.v1.Reservation.IAutoscale, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Autoscale message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.Autoscale.verify|verify} messages.
+                             * @param message Autoscale message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.Reservation.IAutoscale, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Autoscale message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Autoscale
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.Reservation.Autoscale;
+
+                            /**
+                             * Decodes an Autoscale message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Autoscale
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.Reservation.Autoscale;
+
+                            /**
+                             * Verifies an Autoscale message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Autoscale message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Autoscale
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.Reservation.Autoscale;
+
+                            /**
+                             * Creates a plain object from an Autoscale message. Also converts values to other types if specified.
+                             * @param message Autoscale
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.reservation.v1.Reservation.Autoscale, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Autoscale to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Autoscale
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
                     /** Properties of a CapacityCommitment. */
                     interface ICapacityCommitment {
 
@@ -656,6 +774,9 @@ export namespace google {
 
                         /** CapacityCommitment multiRegionAuxiliary */
                         multiRegionAuxiliary?: (boolean|null);
+
+                        /** CapacityCommitment edition */
+                        edition?: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition|null);
                     }
 
                     /** Represents a CapacityCommitment. */
@@ -693,6 +814,9 @@ export namespace google {
 
                         /** CapacityCommitment multiRegionAuxiliary. */
                         public multiRegionAuxiliary: boolean;
+
+                        /** CapacityCommitment edition. */
+                        public edition: (google.cloud.bigquery.reservation.v1.Edition|keyof typeof google.cloud.bigquery.reservation.v1.Edition);
 
                         /**
                          * Creates a new CapacityCommitment instance using the specified properties.
@@ -778,9 +902,14 @@ export namespace google {
                         enum CommitmentPlan {
                             COMMITMENT_PLAN_UNSPECIFIED = 0,
                             FLEX = 3,
+                            FLEX_FLAT_RATE = 7,
                             TRIAL = 5,
                             MONTHLY = 2,
-                            ANNUAL = 4
+                            MONTHLY_FLAT_RATE = 8,
+                            ANNUAL = 4,
+                            ANNUAL_FLAT_RATE = 9,
+                            THREE_YEAR = 10,
+                            NONE = 6
                         }
 
                         /** State enum. */
@@ -2471,7 +2600,8 @@ export namespace google {
                             JOB_TYPE_UNSPECIFIED = 0,
                             PIPELINE = 1,
                             QUERY = 2,
-                            ML_EXTERNAL = 3
+                            ML_EXTERNAL = 3,
+                            BACKGROUND = 4
                         }
 
                         /** State enum. */
@@ -3344,6 +3474,9 @@ export namespace google {
 
                         /** MoveAssignmentRequest destinationId */
                         destinationId?: (string|null);
+
+                        /** MoveAssignmentRequest assignmentId */
+                        assignmentId?: (string|null);
                     }
 
                     /** Represents a MoveAssignmentRequest. */
@@ -3360,6 +3493,9 @@ export namespace google {
 
                         /** MoveAssignmentRequest destinationId. */
                         public destinationId: string;
+
+                        /** MoveAssignmentRequest assignmentId. */
+                        public assignmentId: string;
 
                         /**
                          * Creates a new MoveAssignmentRequest instance using the specified properties.
@@ -3964,6 +4100,14 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Edition enum. */
+                    enum Edition {
+                        EDITION_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        ENTERPRISE = 2,
+                        ENTERPRISE_PLUS = 3
                     }
                 }
             }

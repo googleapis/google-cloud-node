@@ -39,6 +39,13 @@ function main(name) {
    *    `projects/myotherproject/locations/US/reservations/team2-prod`
    */
   // const destinationId = 'abc123'
+  /**
+   *  The optional assignment ID. A new assignment name is generated if this
+   *  field is empty.
+   *  This field can contain only lowercase alphanumeric characters or dashes.
+   *  Max length is 64 characters.
+   */
+  // const assignmentId = 'abc123'
 
   // Imports the Reservation library
   const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;
