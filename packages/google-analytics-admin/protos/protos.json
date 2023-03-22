@@ -1930,13 +1930,19 @@
                           "responseType": "RunAccessReportResponse",
                           "options": {
                             "(google.api.http).post": "/v1alpha/{entity=properties/*}:runAccessReport",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{entity=accounts/*}:runAccessReport",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1alpha/{entity=properties/*}:runAccessReport",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{entity=accounts/*}:runAccessReport",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -2302,6 +2308,92 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEnhancedMeasurementSettings": {
+                          "requestType": "GetEnhancedMeasurementSettingsRequest",
+                          "responseType": "EnhancedMeasurementSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataStreams/*/enhancedMeasurementSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataStreams/*/enhancedMeasurementSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateEnhancedMeasurementSettings": {
+                          "requestType": "UpdateEnhancedMeasurementSettingsRequest",
+                          "responseType": "EnhancedMeasurementSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/dataStreams/*/enhancedMeasurementSettings}",
+                            "(google.api.http).body": "enhanced_measurement_settings",
+                            "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/dataStreams/*/enhancedMeasurementSettings}",
+                                "body": "enhanced_measurement_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "CreateConnectedSiteTag": {
+                          "requestType": "CreateConnectedSiteTagRequest",
+                          "responseType": "CreateConnectedSiteTagResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:createConnectedSiteTag",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:createConnectedSiteTag",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConnectedSiteTag": {
+                          "requestType": "DeleteConnectedSiteTagRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:deleteConnectedSiteTag",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:deleteConnectedSiteTag",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ListConnectedSiteTags": {
+                          "requestType": "ListConnectedSiteTagsRequest",
+                          "responseType": "ListConnectedSiteTagsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:listConnectedSiteTags",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:listConnectedSiteTags",
+                                "body": "*"
+                              }
                             }
                           ]
                         }
@@ -4392,6 +4484,83 @@
                         }
                       }
                     },
+                    "GetEnhancedMeasurementSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EnhancedMeasurementSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEnhancedMeasurementSettingsRequest": {
+                      "fields": {
+                        "enhancedMeasurementSettings": {
+                          "type": "EnhancedMeasurementSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectedSiteTagRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "connectedSiteTag": {
+                          "type": "ConnectedSiteTag",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectedSiteTagResponse": {
+                      "fields": {}
+                    },
+                    "DeleteConnectedSiteTagRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tagId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListConnectedSiteTagsRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListConnectedSiteTagsResponse": {
+                      "fields": {
+                        "connectedSiteTags": {
+                          "rule": "repeated",
+                          "type": "ConnectedSiteTag",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AudienceFilterScope": {
                       "values": {
                         "AUDIENCE_FILTER_SCOPE_UNSPECIFIED": 0,
@@ -5100,7 +5269,8 @@
                         "DATA_STREAM": 18,
                         "ATTRIBUTION_SETTINGS": 20,
                         "EXPANDED_DATA_SET": 21,
-                        "CHANNEL_GROUP": 22
+                        "CHANNEL_GROUP": 22,
+                        "ENHANCED_MEASUREMENT_SETTINGS": 24
                       }
                     },
                     "GoogleSignalsState": {
@@ -5754,7 +5924,8 @@
                                 "dataStream",
                                 "attributionSettings",
                                 "expandedDataSet",
-                                "bigqueryLink"
+                                "bigqueryLink",
+                                "enhancedMeasurementSettings"
                               ]
                             }
                           },
@@ -5826,6 +5997,10 @@
                             "bigqueryLink": {
                               "type": "BigQueryLink",
                               "id": 23
+                            },
+                            "enhancedMeasurementSettings": {
+                              "type": "EnhancedMeasurementSettings",
+                              "id": 24
                             }
                           }
                         }
@@ -6400,6 +6575,10 @@
                           "type": "bool",
                           "id": 5
                         },
+                        "intradayExportEnabled": {
+                          "type": "bool",
+                          "id": 9
+                        },
                         "includeAdvertisingId": {
                           "type": "bool",
                           "id": 6
@@ -6413,6 +6592,82 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 8
+                        }
+                      }
+                    },
+                    "EnhancedMeasurementSettings": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/EnhancedMeasurementSettings",
+                        "(google.api.resource).pattern": "properties/{property}/dataStreams/{data_stream}/enhancedMeasurementSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "streamEnabled": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "scrollsEnabled": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "outboundClicksEnabled": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "siteSearchEnabled": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "videoEngagementEnabled": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "fileDownloadsEnabled": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "pageChangesEnabled": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "formInteractionsEnabled": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "searchQueryParameter": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "uriQueryParameter": {
+                          "type": "string",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "ConnectedSiteTag": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     }

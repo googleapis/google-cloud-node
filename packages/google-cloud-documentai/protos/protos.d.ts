@@ -29087,6 +29087,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listEvaluations(request: google.cloud.documentai.v1beta3.IListEvaluationsRequest): Promise<google.cloud.documentai.v1beta3.ListEvaluationsResponse>;
+
+                    /**
+                     * Calls ImportProcessorVersion.
+                     * @param request ImportProcessorVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importProcessorVersion(request: google.cloud.documentai.v1beta3.IImportProcessorVersionRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.ImportProcessorVersionCallback): void;
+
+                    /**
+                     * Calls ImportProcessorVersion.
+                     * @param request ImportProcessorVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importProcessorVersion(request: google.cloud.documentai.v1beta3.IImportProcessorVersionRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DocumentProcessorService {
@@ -29244,6 +29258,13 @@ export namespace google {
                      * @param [response] ListEvaluationsResponse
                      */
                     type ListEvaluationsCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.ListEvaluationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService|importProcessorVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportProcessorVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ProcessOptions. */
@@ -34984,6 +35005,306 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListEvaluationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportProcessorVersionRequest. */
+                interface IImportProcessorVersionRequest {
+
+                    /** ImportProcessorVersionRequest processorVersionSource */
+                    processorVersionSource?: (string|null);
+
+                    /** ImportProcessorVersionRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents an ImportProcessorVersionRequest. */
+                class ImportProcessorVersionRequest implements IImportProcessorVersionRequest {
+
+                    /**
+                     * Constructs a new ImportProcessorVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IImportProcessorVersionRequest);
+
+                    /** ImportProcessorVersionRequest processorVersionSource. */
+                    public processorVersionSource?: (string|null);
+
+                    /** ImportProcessorVersionRequest parent. */
+                    public parent: string;
+
+                    /** ImportProcessorVersionRequest source. */
+                    public source?: "processorVersionSource";
+
+                    /**
+                     * Creates a new ImportProcessorVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportProcessorVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IImportProcessorVersionRequest): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest;
+
+                    /**
+                     * Encodes the specified ImportProcessorVersionRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.verify|verify} messages.
+                     * @param message ImportProcessorVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IImportProcessorVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportProcessorVersionRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.verify|verify} messages.
+                     * @param message ImportProcessorVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IImportProcessorVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportProcessorVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportProcessorVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest;
+
+                    /**
+                     * Decodes an ImportProcessorVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportProcessorVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest;
+
+                    /**
+                     * Verifies an ImportProcessorVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportProcessorVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportProcessorVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportProcessorVersionRequest;
+
+                    /**
+                     * Creates a plain object from an ImportProcessorVersionRequest message. Also converts values to other types if specified.
+                     * @param message ImportProcessorVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ImportProcessorVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportProcessorVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportProcessorVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportProcessorVersionResponse. */
+                interface IImportProcessorVersionResponse {
+
+                    /** ImportProcessorVersionResponse processorVersion */
+                    processorVersion?: (string|null);
+                }
+
+                /** Represents an ImportProcessorVersionResponse. */
+                class ImportProcessorVersionResponse implements IImportProcessorVersionResponse {
+
+                    /**
+                     * Constructs a new ImportProcessorVersionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IImportProcessorVersionResponse);
+
+                    /** ImportProcessorVersionResponse processorVersion. */
+                    public processorVersion: string;
+
+                    /**
+                     * Creates a new ImportProcessorVersionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportProcessorVersionResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IImportProcessorVersionResponse): google.cloud.documentai.v1beta3.ImportProcessorVersionResponse;
+
+                    /**
+                     * Encodes the specified ImportProcessorVersionResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionResponse.verify|verify} messages.
+                     * @param message ImportProcessorVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IImportProcessorVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportProcessorVersionResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionResponse.verify|verify} messages.
+                     * @param message ImportProcessorVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IImportProcessorVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportProcessorVersionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportProcessorVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportProcessorVersionResponse;
+
+                    /**
+                     * Decodes an ImportProcessorVersionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportProcessorVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportProcessorVersionResponse;
+
+                    /**
+                     * Verifies an ImportProcessorVersionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportProcessorVersionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportProcessorVersionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportProcessorVersionResponse;
+
+                    /**
+                     * Creates a plain object from an ImportProcessorVersionResponse message. Also converts values to other types if specified.
+                     * @param message ImportProcessorVersionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ImportProcessorVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportProcessorVersionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportProcessorVersionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportProcessorVersionMetadata. */
+                interface IImportProcessorVersionMetadata {
+
+                    /** ImportProcessorVersionMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+                }
+
+                /** Represents an ImportProcessorVersionMetadata. */
+                class ImportProcessorVersionMetadata implements IImportProcessorVersionMetadata {
+
+                    /**
+                     * Constructs a new ImportProcessorVersionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IImportProcessorVersionMetadata);
+
+                    /** ImportProcessorVersionMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /**
+                     * Creates a new ImportProcessorVersionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportProcessorVersionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IImportProcessorVersionMetadata): google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata;
+
+                    /**
+                     * Encodes the specified ImportProcessorVersionMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata.verify|verify} messages.
+                     * @param message ImportProcessorVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IImportProcessorVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportProcessorVersionMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata.verify|verify} messages.
+                     * @param message ImportProcessorVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IImportProcessorVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportProcessorVersionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportProcessorVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata;
+
+                    /**
+                     * Decodes an ImportProcessorVersionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportProcessorVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata;
+
+                    /**
+                     * Verifies an ImportProcessorVersionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportProcessorVersionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportProcessorVersionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportProcessorVersionMetadata message. Also converts values to other types if specified.
+                     * @param message ImportProcessorVersionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportProcessorVersionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportProcessorVersionMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

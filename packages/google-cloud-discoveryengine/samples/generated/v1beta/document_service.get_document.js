@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. Full resource name of
    *  Document google.cloud.discoveryengine.v1beta.Document, such as
-   *  `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
    *  If the caller does not have permission to access the
    *  Document google.cloud.discoveryengine.v1beta.Document, regardless of
    *  whether or not it exists, a PERMISSION_DENIED error is returned.

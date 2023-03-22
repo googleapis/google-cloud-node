@@ -13,7 +13,9 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Cloud_deploy.abandon_release](#cloud_deploy.abandon_release)
+  * [Cloud_deploy.advance_rollout](#cloud_deploy.advance_rollout)
   * [Cloud_deploy.approve_rollout](#cloud_deploy.approve_rollout)
+  * [Cloud_deploy.cancel_rollout](#cloud_deploy.cancel_rollout)
   * [Cloud_deploy.create_delivery_pipeline](#cloud_deploy.create_delivery_pipeline)
   * [Cloud_deploy.create_release](#cloud_deploy.create_release)
   * [Cloud_deploy.create_rollout](#cloud_deploy.create_rollout)
@@ -26,12 +28,14 @@
   * [Cloud_deploy.get_release](#cloud_deploy.get_release)
   * [Cloud_deploy.get_rollout](#cloud_deploy.get_rollout)
   * [Cloud_deploy.get_target](#cloud_deploy.get_target)
+  * [Cloud_deploy.ignore_job](#cloud_deploy.ignore_job)
   * [Cloud_deploy.list_delivery_pipelines](#cloud_deploy.list_delivery_pipelines)
   * [Cloud_deploy.list_job_runs](#cloud_deploy.list_job_runs)
   * [Cloud_deploy.list_releases](#cloud_deploy.list_releases)
   * [Cloud_deploy.list_rollouts](#cloud_deploy.list_rollouts)
   * [Cloud_deploy.list_targets](#cloud_deploy.list_targets)
   * [Cloud_deploy.retry_job](#cloud_deploy.retry_job)
+  * [Cloud_deploy.terminate_job_run](#cloud_deploy.terminate_job_run)
   * [Cloud_deploy.update_delivery_pipeline](#cloud_deploy.update_delivery_pipeline)
   * [Cloud_deploy.update_target](#cloud_deploy.update_target)
   * [Quickstart](#quickstart)
@@ -69,6 +73,23 @@ __Usage:__
 
 
 
+### Cloud_deploy.advance_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.advance_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.advance_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.advance_rollout.js`
+
+
+-----
+
+
+
+
 ### Cloud_deploy.approve_rollout
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.approve_rollout.js).
@@ -79,6 +100,23 @@ __Usage:__
 
 
 `node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.approve_rollout.js`
+
+
+-----
+
+
+
+
+### Cloud_deploy.cancel_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_rollout.js`
 
 
 -----
@@ -290,6 +328,23 @@ __Usage:__
 
 
 
+### Cloud_deploy.ignore_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.ignore_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.ignore_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.ignore_job.js`
+
+
+-----
+
+
+
+
 ### Cloud_deploy.list_delivery_pipelines
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_delivery_pipelines.js).
@@ -385,6 +440,23 @@ __Usage:__
 
 
 `node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.retry_job.js`
+
+
+-----
+
+
+
+
+### Cloud_deploy.terminate_job_run
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.terminate_job_run.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.terminate_job_run.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.terminate_job_run.js`
 
 
 -----

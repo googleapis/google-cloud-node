@@ -3634,7 +3634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 126,
+                    "end": 131,
                     "type": "FULL"
                 }
             ],
@@ -4014,7 +4014,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -4472,6 +4472,218 @@
                 "method": {
                     "shortName": "ListBigQueryLinks",
                     "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListBigQueryLinks",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEnhancedMeasurementSettings_async",
+            "title": "AnalyticsAdminService getEnhancedMeasurementSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the enhanced measurement settings for this data stream. Note that the stream must enable enhanced measurement for these settings to take effect.",
+            "canonical": true,
+            "file": "analytics_admin_service.get_enhanced_measurement_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetEnhancedMeasurementSettings",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetEnhancedMeasurementSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.EnhancedMeasurementSettings",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetEnhancedMeasurementSettings",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetEnhancedMeasurementSettings",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEnhancedMeasurementSettings_async",
+            "title": "AnalyticsAdminService updateEnhancedMeasurementSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the enhanced measurement settings for this data stream. Note that the stream must enable enhanced measurement for these settings to take effect.",
+            "canonical": true,
+            "file": "analytics_admin_service.update_enhanced_measurement_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateEnhancedMeasurementSettings",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEnhancedMeasurementSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "enhanced_measurement_settings",
+                        "type": ".google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.EnhancedMeasurementSettings",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateEnhancedMeasurementSettings",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEnhancedMeasurementSettings",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateConnectedSiteTag_async",
+            "title": "AnalyticsAdminService createConnectedSiteTag Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a connected site tag for a Universal Analytics property. You can create a maximum of 20 connected site tags per property. Note: This API cannot be used on GA4 properties.",
+            "canonical": true,
+            "file": "analytics_admin_service.create_connected_site_tag.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateConnectedSiteTag",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTag",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "property",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "connected_site_tag",
+                        "type": ".google.analytics.admin.v1alpha.ConnectedSiteTag"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateConnectedSiteTag",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTag",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteConnectedSiteTag_async",
+            "title": "AnalyticsAdminService deleteConnectedSiteTag Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a connected site tag for a Universal Analytics property. Note: this has no effect on GA4 properties.",
+            "canonical": true,
+            "file": "analytics_admin_service.delete_connected_site_tag.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteConnectedSiteTag",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTag",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "property",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tag_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteConnectedSiteTag",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTag",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async",
+            "title": "AnalyticsAdminService listConnectedSiteTags Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the connected site tags for a Universal Analytics property. A maximum of 20 connected site tags will be returned. Note: this has no effect on GA4 property.",
+            "canonical": true,
+            "file": "analytics_admin_service.list_connected_site_tags.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListConnectedSiteTags",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTags",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "property",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListConnectedSiteTags",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTags",
                     "service": {
                         "shortName": "AnalyticsAdminService",
                         "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"

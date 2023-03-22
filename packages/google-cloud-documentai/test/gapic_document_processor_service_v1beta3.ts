@@ -3639,6 +3639,221 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
     });
   });
 
+  describe('importProcessorVersion', () => {
+    it('invokes importProcessorVersion without error', async () => {
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importProcessorVersion =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importProcessorVersion(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importProcessorVersion without error using callback', async () => {
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importProcessorVersion =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importProcessorVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.documentai.v1beta3.IImportProcessorVersionResponse,
+              protos.google.cloud.documentai.v1beta3.IImportProcessorVersionMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportProcessorVersionResponse,
+        protos.google.cloud.documentai.v1beta3.IImportProcessorVersionMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importProcessorVersion with call error', async () => {
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importProcessorVersion = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.importProcessorVersion(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importProcessorVersion with LRO error', async () => {
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importProcessorVersion = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importProcessorVersion(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkImportProcessorVersionProgress without error', async () => {
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportProcessorVersionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportProcessorVersionProgress with error', async () => {
+      const client =
+        new documentprocessorserviceModule.v1beta3.DocumentProcessorServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportProcessorVersionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listProcessorTypes', () => {
     it('invokes listProcessorTypes without error', async () => {
       const client =

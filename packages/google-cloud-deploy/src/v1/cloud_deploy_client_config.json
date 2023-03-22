@@ -107,6 +107,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AdvanceRollout": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelRollout": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListRollouts": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -118,6 +128,11 @@
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
         "CreateRollout": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "IgnoreJob": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -136,6 +151,11 @@
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "TerminateJobRun": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         },
         "GetConfig": {
           "timeout_millis": 60000,

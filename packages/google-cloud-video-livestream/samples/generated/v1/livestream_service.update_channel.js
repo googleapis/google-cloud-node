@@ -32,13 +32,20 @@ function main(channel) {
    *  Field mask is used to specify the fields to be overwritten in the Channel
    *  resource by the update. You can only update the following fields:
    *  * `inputAttachments` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputattachment)
+   *  * `inputConfig` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputconfig)
    *  * `output` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#output)
-   *  * `elementaryStreams` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#ElementaryStream)
+   *  * `elementaryStreams` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#elementarystream)
    *  * `muxStreams` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#muxstream)
-   *  * `manifests` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#Manifest)
-   *  * `spritesheets` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+   *  * `manifests` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#manifest)
+   *  * `spriteSheets` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+   *  * `logConfig` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#logconfig)
+   *  * `timecodeConfig` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#timecodeconfig)
+   *  * `encryptions` (https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#encryption)
    *  The fields specified in the update_mask are relative to the resource, not
    *  the full request. A field will be overwritten if it is in the mask.
+   *  If the mask is not present, then each field from the list above is updated
+   *  if the field appears in the request payload. To unset a field, add the
+   *  field to the update mask and remove it from the request payload.
    */
   // const updateMask = {}
   /**

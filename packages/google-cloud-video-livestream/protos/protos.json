@@ -16,7 +16,9 @@
                         "java_outer_classname": "ServiceProto",
                         "java_package": "com.google.cloud.video.livestream.v1",
                         "php_namespace": "Google\\Cloud\\Video\\LiveStream\\V1",
-                        "ruby_package": "Google::Cloud::Video::LiveStream::V1"
+                        "ruby_package": "Google::Cloud::Video::LiveStream::V1",
+                        "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
+                        "(google.api.resource_definition).pattern": "projects/{project}/secrets/{secret}/versions/{version}"
                       },
                       "nested": {
                         "ElementaryStream": {
@@ -66,6 +68,10 @@
                             "segmentSettings": {
                               "type": "SegmentSettings",
                               "id": 5
+                            },
+                            "encryptionId": {
+                              "type": "string",
+                              "id": 6
                             }
                           }
                         },
@@ -97,6 +103,10 @@
                             "segmentKeepDuration": {
                               "type": "google.protobuf.Duration",
                               "id": 5
+                            },
+                            "useTimecodeAsTimeline": {
+                              "type": "bool",
+                              "id": 6
                             }
                           },
                           "nested": {
@@ -156,6 +166,10 @@
                         },
                         "PreprocessingConfig": {
                           "fields": {
+                            "audio": {
+                              "type": "Audio",
+                              "id": 1
+                            },
                             "crop": {
                               "type": "Crop",
                               "id": 2
@@ -166,6 +180,14 @@
                             }
                           },
                           "nested": {
+                            "Audio": {
+                              "fields": {
+                                "lufs": {
+                                  "type": "double",
+                                  "id": 1
+                                }
+                              }
+                            },
                             "Crop": {
                               "fields": {
                                 "topPixels": {
@@ -369,6 +391,10 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
+                                },
+                                "gainDb": {
+                                  "type": "double",
+                                  "id": 5
                                 }
                               }
                             }
@@ -390,6 +416,39 @@
                             "segmentDuration": {
                               "type": "google.protobuf.Duration",
                               "id": 1
+                            }
+                          }
+                        },
+                        "TimecodeConfig": {
+                          "oneofs": {
+                            "timeOffset": {
+                              "oneof": [
+                                "utcOffset",
+                                "timeZone"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "source": {
+                              "type": "TimecodeSource",
+                              "id": 1
+                            },
+                            "utcOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "timeZone": {
+                              "type": "google.type.TimeZone",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "TimecodeSource": {
+                              "values": {
+                                "TIMECODE_SOURCE_UNSPECIFIED": 0,
+                                "MEDIA_TIMESTAMP": 1,
+                                "EMBEDDED_TIMECODE": 2
+                              }
                             }
                           }
                         },
@@ -565,6 +624,19 @@
                             "logConfig": {
                               "type": "LogConfig",
                               "id": 19
+                            },
+                            "timecodeConfig": {
+                              "type": "TimecodeConfig",
+                              "id": 21
+                            },
+                            "encryptions": {
+                              "rule": "repeated",
+                              "type": "Encryption",
+                              "id": 24
+                            },
+                            "inputConfig": {
+                              "type": "InputConfig",
+                              "id": 25
                             }
                           },
                           "nested": {
@@ -586,6 +658,23 @@
                                 "STOPPED": 6,
                                 "STARTING": 7,
                                 "STOPPING": 8
+                              }
+                            }
+                          }
+                        },
+                        "InputConfig": {
+                          "fields": {
+                            "inputSwitchMode": {
+                              "type": "InputSwitchMode",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "InputSwitchMode": {
+                              "values": {
+                                "INPUT_SWITCH_MODE_UNSPECIFIED": 0,
+                                "FAILOVER_PREFER_PRIMARY": 1,
+                                "MANUAL": 3
                               }
                             }
                           }
@@ -727,7 +816,11 @@
                           "oneofs": {
                             "task": {
                               "oneof": [
-                                "adBreak"
+                                "inputSwitch",
+                                "adBreak",
+                                "returnToProgram",
+                                "mute",
+                                "unmute"
                               ]
                             }
                           },
@@ -755,9 +848,37 @@
                               "type": "string",
                               "id": 4
                             },
+                            "inputSwitch": {
+                              "type": "InputSwitchTask",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
                             "adBreak": {
                               "type": "AdBreakTask",
                               "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "returnToProgram": {
+                              "type": "ReturnToProgramTask",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "mute": {
+                              "type": "MuteTask",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "unmute": {
+                              "type": "UnmuteTask",
+                              "id": 16,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
@@ -786,6 +907,14 @@
                             }
                           },
                           "nested": {
+                            "InputSwitchTask": {
+                              "fields": {
+                                "inputKey": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
                             "AdBreakTask": {
                               "fields": {
                                 "duration": {
@@ -793,6 +922,20 @@
                                   "id": 1
                                 }
                               }
+                            },
+                            "ReturnToProgramTask": {
+                              "fields": {}
+                            },
+                            "MuteTask": {
+                              "fields": {
+                                "duration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "UnmuteTask": {
+                              "fields": {}
                             },
                             "State": {
                               "values": {
@@ -803,6 +946,117 @@
                                 "FAILED": 4,
                                 "PENDING": 5,
                                 "STOPPED": 6
+                              }
+                            }
+                          }
+                        },
+                        "Encryption": {
+                          "oneofs": {
+                            "secretSource": {
+                              "oneof": [
+                                "secretManagerKeySource"
+                              ]
+                            },
+                            "encryptionMode": {
+                              "oneof": [
+                                "aes128",
+                                "sampleAes",
+                                "mpegCenc"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "secretManagerKeySource": {
+                              "type": "SecretManagerSource",
+                              "id": 7
+                            },
+                            "drmSystems": {
+                              "type": "DrmSystems",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "aes128": {
+                              "type": "Aes128Encryption",
+                              "id": 4
+                            },
+                            "sampleAes": {
+                              "type": "SampleAesEncryption",
+                              "id": 5
+                            },
+                            "mpegCenc": {
+                              "type": "MpegCommonEncryption",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "SecretManagerSource": {
+                              "fields": {
+                                "secretVersion": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                  }
+                                }
+                              }
+                            },
+                            "Widevine": {
+                              "fields": {}
+                            },
+                            "Fairplay": {
+                              "fields": {}
+                            },
+                            "Playready": {
+                              "fields": {}
+                            },
+                            "Clearkey": {
+                              "fields": {}
+                            },
+                            "DrmSystems": {
+                              "fields": {
+                                "widevine": {
+                                  "type": "Widevine",
+                                  "id": 1
+                                },
+                                "fairplay": {
+                                  "type": "Fairplay",
+                                  "id": 2
+                                },
+                                "playready": {
+                                  "type": "Playready",
+                                  "id": 3
+                                },
+                                "clearkey": {
+                                  "type": "Clearkey",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "Aes128Encryption": {
+                              "fields": {}
+                            },
+                            "SampleAesEncryption": {
+                              "fields": {}
+                            },
+                            "MpegCommonEncryption": {
+                              "fields": {
+                                "scheme": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
                             }
                           }
@@ -2810,6 +3064,78 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/datetime;datetime",
+            "java_multiple_files": true,
+            "java_outer_classname": "DateTimeProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "DateTime": {
+              "oneofs": {
+                "timeOffset": {
+                  "oneof": [
+                    "utcOffset",
+                    "timeZone"
+                  ]
+                }
+              },
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "hours": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "utcOffset": {
+                  "type": "google.protobuf.Duration",
+                  "id": 8
+                },
+                "timeZone": {
+                  "type": "TimeZone",
+                  "id": 9
+                }
+              }
+            },
+            "TimeZone": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             }
