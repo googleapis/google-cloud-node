@@ -21357,13 +21357,6 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
-                        },
-                        "largeModelReference": {
-                          "type": "LargeModelReference",
-                          "id": 45,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
                         }
                       },
                       "nested": {
@@ -21403,17 +21396,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
-                              }
-                            }
-                          }
-                        },
-                        "LargeModelReference": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
