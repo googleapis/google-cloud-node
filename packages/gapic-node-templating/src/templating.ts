@@ -39,7 +39,7 @@ export async function compileTemplates(
       compileTemplates(readName, writeName, vars);
     } else {
       const compiledTemplate = nj.render(readName, vars);
-      fs.writeFileSync(writeName, compiledTemplate);
+      fs.writeFileSync(writeName.replace('.njk', ''), compiledTemplate);
       console.log(writeName + ' generated');
     }
   });

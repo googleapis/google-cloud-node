@@ -97,7 +97,24 @@ describe('tests for templates', () => {
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),
-      readdirSync(templateDirWrite)
+      [
+        '.OwlBot.yaml',
+        '.repo-metadata.json.njk',
+        'LICENSE',
+        'package.json',
+        'samples'
+      ]   
+    );
+
+    assert.deepStrictEqual(
+      readdirSync(templateDirWrite),
+      [
+        '.OwlBot.yaml',
+        '.repo-metadata.json',
+        'LICENSE',
+        'package.json',
+        'samples'
+      ]   
     );
   });
 });
