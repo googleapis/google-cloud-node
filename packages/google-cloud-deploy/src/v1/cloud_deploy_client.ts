@@ -224,6 +224,9 @@ export class CloudDeployClient {
       rolloutPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/releases/{release}/rollouts/{rollout}'
       ),
+      servicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/services/{service}'
+      ),
       targetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/targets/{target}'
       ),
@@ -504,12 +507,16 @@ export class CloudDeployClient {
       'createRelease',
       'abandonRelease',
       'approveRollout',
+      'advanceRollout',
+      'cancelRollout',
       'listRollouts',
       'getRollout',
       'createRollout',
+      'ignoreJob',
       'retryJob',
       'listJobRuns',
       'getJobRun',
+      'terminateJobRun',
       'getConfig',
     ];
     for (const methodName of cloudDeployStubMethods) {
@@ -1034,6 +1041,182 @@ export class CloudDeployClient {
     return this.innerApiCalls.approveRollout(request, options, callback);
   }
   /**
+   * Advances a Rollout in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the Rollout. Format is
+   *   projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
+   *   releases/{release}/rollouts/{rollout}.
+   * @param {string} request.phaseId
+   *   Required. The phase ID to advance the `Rollout` to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.AdvanceRolloutResponse | AdvanceRolloutResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.advance_rollout.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_AdvanceRollout_async
+   */
+  advanceRollout(
+    request?: protos.google.cloud.deploy.v1.IAdvanceRolloutRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
+      protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  advanceRollout(
+    request: protos.google.cloud.deploy.v1.IAdvanceRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
+      protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  advanceRollout(
+    request: protos.google.cloud.deploy.v1.IAdvanceRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
+      protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  advanceRollout(
+    request?: protos.google.cloud.deploy.v1.IAdvanceRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
+          | protos.google.cloud.deploy.v1.IAdvanceRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
+      protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
+      protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.advanceRollout(request, options, callback);
+  }
+  /**
+   * Cancels a Rollout in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the Rollout. Format is
+   *   projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
+   *   releases/{release}/rollouts/{rollout}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.CancelRolloutResponse | CancelRolloutResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.cancel_rollout.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_CancelRollout_async
+   */
+  cancelRollout(
+    request?: protos.google.cloud.deploy.v1.ICancelRolloutRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ICancelRolloutResponse,
+      protos.google.cloud.deploy.v1.ICancelRolloutRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  cancelRollout(
+    request: protos.google.cloud.deploy.v1.ICancelRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.ICancelRolloutResponse,
+      protos.google.cloud.deploy.v1.ICancelRolloutRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelRollout(
+    request: protos.google.cloud.deploy.v1.ICancelRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.ICancelRolloutResponse,
+      protos.google.cloud.deploy.v1.ICancelRolloutRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelRollout(
+    request?: protos.google.cloud.deploy.v1.ICancelRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.deploy.v1.ICancelRolloutResponse,
+          | protos.google.cloud.deploy.v1.ICancelRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.deploy.v1.ICancelRolloutResponse,
+      protos.google.cloud.deploy.v1.ICancelRolloutRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ICancelRolloutResponse,
+      protos.google.cloud.deploy.v1.ICancelRolloutRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelRollout(request, options, callback);
+  }
+  /**
    * Gets details of a single Rollout.
    *
    * @param {Object} request
@@ -1116,6 +1299,95 @@ export class CloudDeployClient {
       });
     this.initialize();
     return this.innerApiCalls.getRollout(request, options, callback);
+  }
+  /**
+   * Ignores the specified Job in a Rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.rollout
+   *   Required. Name of the Rollout. Format is
+   *   projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
+   *   releases/{release}/rollouts/{rollout}.
+   * @param {string} request.phaseId
+   *   Required. The phase ID the Job to ignore belongs to.
+   * @param {string} request.jobId
+   *   Required. The job ID for the Job to ignore.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.IgnoreJobResponse | IgnoreJobResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.ignore_job.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_IgnoreJob_async
+   */
+  ignoreJob(
+    request?: protos.google.cloud.deploy.v1.IIgnoreJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.IIgnoreJobResponse,
+      protos.google.cloud.deploy.v1.IIgnoreJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  ignoreJob(
+    request: protos.google.cloud.deploy.v1.IIgnoreJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.IIgnoreJobResponse,
+      protos.google.cloud.deploy.v1.IIgnoreJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  ignoreJob(
+    request: protos.google.cloud.deploy.v1.IIgnoreJobRequest,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.IIgnoreJobResponse,
+      protos.google.cloud.deploy.v1.IIgnoreJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  ignoreJob(
+    request?: protos.google.cloud.deploy.v1.IIgnoreJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.deploy.v1.IIgnoreJobResponse,
+          protos.google.cloud.deploy.v1.IIgnoreJobRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.deploy.v1.IIgnoreJobResponse,
+      protos.google.cloud.deploy.v1.IIgnoreJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.IIgnoreJobResponse,
+      protos.google.cloud.deploy.v1.IIgnoreJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        rollout: request.rollout ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.ignoreJob(request, options, callback);
   }
   /**
    * Retries the specified Job in a Rollout.
@@ -1291,6 +1563,93 @@ export class CloudDeployClient {
     return this.innerApiCalls.getJobRun(request, options, callback);
   }
   /**
+   * Terminates a Job Run in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the `JobRun`. Format must be
+   *   projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
+   *   releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.TerminateJobRunResponse | TerminateJobRunResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_deploy.terminate_job_run.js</caption>
+   * region_tag:clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async
+   */
+  terminateJobRun(
+    request?: protos.google.cloud.deploy.v1.ITerminateJobRunRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
+      protos.google.cloud.deploy.v1.ITerminateJobRunRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  terminateJobRun(
+    request: protos.google.cloud.deploy.v1.ITerminateJobRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
+      protos.google.cloud.deploy.v1.ITerminateJobRunRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  terminateJobRun(
+    request: protos.google.cloud.deploy.v1.ITerminateJobRunRequest,
+    callback: Callback<
+      protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
+      protos.google.cloud.deploy.v1.ITerminateJobRunRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  terminateJobRun(
+    request?: protos.google.cloud.deploy.v1.ITerminateJobRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
+          | protos.google.cloud.deploy.v1.ITerminateJobRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
+      protos.google.cloud.deploy.v1.ITerminateJobRunRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
+      protos.google.cloud.deploy.v1.ITerminateJobRunRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.terminateJobRun(request, options, callback);
+  }
+  /**
    * Gets the configuration for a location.
    *
    * @param {Object} request
@@ -1380,8 +1739,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `DeliveryPipeline` should be created.
-   *   Format should be projects/{project_id}/locations/{location_name}.
+   *   Required. The parent collection in which the `DeliveryPipeline` should be
+   *   created. Format should be projects/{project_id}/locations/{location_name}.
    * @param {string} request.deliveryPipelineId
    *   Required. ID of the `DeliveryPipeline`.
    * @param {google.cloud.deploy.v1.DeliveryPipeline} request.deliveryPipeline
@@ -1401,8 +1760,8 @@ export class CloudDeployClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, the request is validated and the user is provided with
-   *   an expected result, but no actual change is made.
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1566,11 +1925,11 @@ export class CloudDeployClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.allowMissing]
-   *   Optional. If set to true, updating a `DeliveryPipeline` that does not exist will
-   *   result in the creation of a new `DeliveryPipeline`.
+   *   Optional. If set to true, updating a `DeliveryPipeline` that does not exist
+   *   will result in the creation of a new `DeliveryPipeline`.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, the request is validated and the user is provided with
-   *   an expected result, but no actual change is made.
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1732,15 +2091,15 @@ export class CloudDeployClient {
    *   Optional. If set to true, then deleting an already deleted or non-existing
    *   `DeliveryPipeline` will succeed.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not actually
-   *   post it.
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually post it.
    * @param {boolean} [request.force]
-   *   Optional. If set to true, all child resources under this pipeline will also be
-   *   deleted. Otherwise, the request will only work if the pipeline has
-   *   no child resources.
+   *   Optional. If set to true, all child resources under this pipeline will also
+   *   be deleted. Otherwise, the request will only work if the pipeline has no
+   *   child resources.
    * @param {string} [request.etag]
-   *   Optional. This checksum is computed by the server based on the value of other
-   *   fields, and may be sent on update and delete requests to ensure the
+   *   Optional. This checksum is computed by the server based on the value of
+   *   other fields, and may be sent on update and delete requests to ensure the
    *   client has an up-to-date value before proceeding.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1905,8 +2264,8 @@ export class CloudDeployClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, the request is validated and the user is provided with
-   *   an expected result, but no actual change is made.
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2069,8 +2428,8 @@ export class CloudDeployClient {
    *   Optional. If set to true, updating a `Target` that does not exist will
    *   result in the creation of a new `Target`.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, the request is validated and the user is provided with
-   *   an expected result, but no actual change is made.
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2228,11 +2587,11 @@ export class CloudDeployClient {
    *   Optional. If set to true, then deleting an already deleted or non-existing
    *   DeliveryPipeline will succeed.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not actually
-   *   post it.
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually post it.
    * @param {string} [request.etag]
-   *   Optional. This checksum is computed by the server based on the value of other
-   *   fields, and may be sent on update and delete requests to ensure the
+   *   Optional. This checksum is computed by the server based on the value of
+   *   other fields, and may be sent on update and delete requests to ensure the
    *   client has an up-to-date value before proceeding.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2393,8 +2752,8 @@ export class CloudDeployClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, the request is validated and the user is provided with
-   *   an expected result, but no actual change is made.
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2554,8 +2913,11 @@ export class CloudDeployClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set to true, the request is validated and the user is provided with
-   *   an expected result, but no actual change is made.
+   *   Optional. If set to true, the request is validated and the user is provided
+   *   with an expected result, but no actual change is made.
+   * @param {string} [request.startingPhaseId]
+   *   Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
+   *   will start at the first phase.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2693,8 +3055,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of pipelines. Format must be
-   *   projects/{project_id}/locations/{location_name}.
+   *   Required. The parent, which owns this collection of pipelines. Format must
+   *   be projects/{project_id}/locations/{location_name}.
    * @param {number} request.pageSize
    *   The maximum number of pipelines to return. The service may return
    *   fewer than this value. If unspecified, at most 50 pipelines will
@@ -2804,8 +3166,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of pipelines. Format must be
-   *   projects/{project_id}/locations/{location_name}.
+   *   Required. The parent, which owns this collection of pipelines. Format must
+   *   be projects/{project_id}/locations/{location_name}.
    * @param {number} request.pageSize
    *   The maximum number of pipelines to return. The service may return
    *   fewer than this value. If unspecified, at most 50 pipelines will
@@ -2863,8 +3225,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns this collection of pipelines. Format must be
-   *   projects/{project_id}/locations/{location_name}.
+   *   Required. The parent, which owns this collection of pipelines. Format must
+   *   be projects/{project_id}/locations/{location_name}.
    * @param {number} request.pageSize
    *   The maximum number of pipelines to return. The service may return
    *   fewer than this value. If unspecified, at most 50 pipelines will
@@ -2924,9 +3286,10 @@ export class CloudDeployClient {
    *   Required. The parent, which owns this collection of targets. Format must be
    *   projects/{project_id}/locations/{location_name}.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Target` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Target` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Target` objects to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 `Target` objects
+   *   will be returned. The maximum value is 1000; values above 1000 will be set
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListTargets` call.
    *   Provide this to retrieve the subsequent page.
@@ -2934,10 +3297,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for
+   *   more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3026,9 +3390,10 @@ export class CloudDeployClient {
    *   Required. The parent, which owns this collection of targets. Format must be
    *   projects/{project_id}/locations/{location_name}.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Target` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Target` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Target` objects to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 `Target` objects
+   *   will be returned. The maximum value is 1000; values above 1000 will be set
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListTargets` call.
    *   Provide this to retrieve the subsequent page.
@@ -3036,10 +3401,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for
+   *   more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3084,9 +3450,10 @@ export class CloudDeployClient {
    *   Required. The parent, which owns this collection of targets. Format must be
    *   projects/{project_id}/locations/{location_name}.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Target` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Target` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Target` objects to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 `Target` objects
+   *   will be returned. The maximum value is 1000; values above 1000 will be set
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListTargets` call.
    *   Provide this to retrieve the subsequent page.
@@ -3094,10 +3461,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter targets to be returned. See https://google.aip.dev/160 for
+   *   more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3138,11 +3506,13 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The `DeliveryPipeline` which owns this collection of `Release` objects.
+   *   Required. The `DeliveryPipeline` which owns this collection of `Release`
+   *   objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Release` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Release` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Release` objects to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 `Release`
+   *   objects will be returned. The maximum value is 1000; values above 1000 will
+   *   be set to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListReleases` call.
    *   Provide this to retrieve the subsequent page.
@@ -3150,10 +3520,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter releases to be returned. See https://google.aip.dev/160
+   *   for more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3241,11 +3612,13 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The `DeliveryPipeline` which owns this collection of `Release` objects.
+   *   Required. The `DeliveryPipeline` which owns this collection of `Release`
+   *   objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Release` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Release` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Release` objects to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 `Release`
+   *   objects will be returned. The maximum value is 1000; values above 1000 will
+   *   be set to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListReleases` call.
    *   Provide this to retrieve the subsequent page.
@@ -3253,10 +3626,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter releases to be returned. See https://google.aip.dev/160
+   *   for more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3298,11 +3672,13 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The `DeliveryPipeline` which owns this collection of `Release` objects.
+   *   Required. The `DeliveryPipeline` which owns this collection of `Release`
+   *   objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Release` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Release` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Release` objects to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 `Release`
+   *   objects will be returned. The maximum value is 1000; values above 1000 will
+   *   be set to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListReleases` call.
    *   Provide this to retrieve the subsequent page.
@@ -3310,10 +3686,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter releases to be returned. See https://google.aip.dev/160
+   *   for more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3356,9 +3733,10 @@ export class CloudDeployClient {
    * @param {string} request.parent
    *   Required. The `Release` which owns this collection of `Rollout` objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Rollout` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Rollout` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Rollout` objects to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 `Rollout`
+   *   objects will be returned. The maximum value is 1000; values above 1000 will
+   *   be set to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListRollouts` call.
    *   Provide this to retrieve the subsequent page.
@@ -3366,10 +3744,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160
+   *   for more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3459,9 +3838,10 @@ export class CloudDeployClient {
    * @param {string} request.parent
    *   Required. The `Release` which owns this collection of `Rollout` objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Rollout` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Rollout` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Rollout` objects to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 `Rollout`
+   *   objects will be returned. The maximum value is 1000; values above 1000 will
+   *   be set to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListRollouts` call.
    *   Provide this to retrieve the subsequent page.
@@ -3469,10 +3849,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160
+   *   for more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3516,9 +3897,10 @@ export class CloudDeployClient {
    * @param {string} request.parent
    *   Required. The `Release` which owns this collection of `Rollout` objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Rollout` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Rollout` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `Rollout` objects to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 `Rollout`
+   *   objects will be returned. The maximum value is 1000; values above 1000 will
+   *   be set to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListRollouts` call.
    *   Provide this to retrieve the subsequent page.
@@ -3526,10 +3908,11 @@ export class CloudDeployClient {
    *   When paginating, all other provided parameters match
    *   the call that provided the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter rollouts to be returned. See https://google.aip.dev/160
+   *   for more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3572,20 +3955,22 @@ export class CloudDeployClient {
    * @param {string} request.parent
    *   Required. The `Rollout` which owns this collection of `JobRun` objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `JobRun` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `JobRun` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `JobRun` objects to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 `JobRun` objects
+   *   will be returned. The maximum value is 1000; values above 1000 will be set
+   *   to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListJobRuns` call. Provide this
-   *   to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListJobRuns` call.
+   *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters match the call that provided
    *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter results to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter results to be returned. See https://google.aip.dev/160 for
+   *   more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3673,20 +4058,22 @@ export class CloudDeployClient {
    * @param {string} request.parent
    *   Required. The `Rollout` which owns this collection of `JobRun` objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `JobRun` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `JobRun` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `JobRun` objects to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 `JobRun` objects
+   *   will be returned. The maximum value is 1000; values above 1000 will be set
+   *   to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListJobRuns` call. Provide this
-   *   to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListJobRuns` call.
+   *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters match the call that provided
    *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter results to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter results to be returned. See https://google.aip.dev/160 for
+   *   more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3730,20 +4117,22 @@ export class CloudDeployClient {
    * @param {string} request.parent
    *   Required. The `Rollout` which owns this collection of `JobRun` objects.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `JobRun` objects to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `JobRun` objects will be
-   *   returned. The maximum value is 1000; values above 1000 will be set to 1000.
+   *   Optional. The maximum number of `JobRun` objects to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 `JobRun` objects
+   *   will be returned. The maximum value is 1000; values above 1000 will be set
+   *   to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListJobRuns` call. Provide this
-   *   to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListJobRuns` call.
+   *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other provided parameters match the call that provided
    *   the page token.
    * @param {string} [request.filter]
-   *   Optional. Filter results to be returned. See https://google.aip.dev/160 for more
-   *   details.
+   *   Optional. Filter results to be returned. See https://google.aip.dev/160 for
+   *   more details.
    * @param {string} [request.orderBy]
-   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   *   Optional. Field to sort by. See https://google.aip.dev/132#ordering for
+   *   more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4725,6 +5114,55 @@ export class CloudDeployClient {
    */
   matchRolloutFromRolloutName(rolloutName: string) {
     return this.pathTemplates.rolloutPathTemplate.match(rolloutName).rollout;
+  }
+
+  /**
+   * Return a fully-qualified service resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  servicePath(project: string, location: string, service: string) {
+    return this.pathTemplates.servicePathTemplate.render({
+      project: project,
+      location: location,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the project from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).project;
+  }
+
+  /**
+   * Parse the location from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).location;
+  }
+
+  /**
+   * Parse the service from Service resource.
+   *
+   * @param {string} serviceName
+   *   A fully-qualified path representing Service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromServiceName(serviceName: string) {
+    return this.pathTemplates.servicePathTemplate.match(serviceName).service;
   }
 
   /**

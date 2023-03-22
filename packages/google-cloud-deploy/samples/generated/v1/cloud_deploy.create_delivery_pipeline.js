@@ -29,8 +29,8 @@ function main(parent, deliveryPipelineId, deliveryPipeline) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `DeliveryPipeline` should be created.
-   *  Format should be projects/{project_id}/locations/{location_name}.
+   *  Required. The parent collection in which the `DeliveryPipeline` should be
+   *  created. Format should be projects/{project_id}/locations/{location_name}.
    */
   // const parent = 'abc123'
   /**
@@ -56,8 +56,8 @@ function main(parent, deliveryPipelineId, deliveryPipeline) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, the request is validated and the user is provided with
-   *  an expected result, but no actual change is made.
+   *  Optional. If set to true, the request is validated and the user is provided
+   *  with an expected result, but no actual change is made.
    */
   // const validateOnly = true
 

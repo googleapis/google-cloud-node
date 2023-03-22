@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START clouddeploy_v1_generated_CloudDeploy_ListDeliveryPipelines_async]
+function main(name) {
+  // [START clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent, which owns this collection of pipelines. Format must
-   *  be projects/{project_id}/locations/{location_name}.
+   *  Required. Name of the `JobRun`. Format must be
+   *  projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
+   *  releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of pipelines to return. The service may return
-   *  fewer than this value. If unspecified, at most 50 pipelines will
-   *  be returned. The maximum value is 1000; values above 1000 will be set
-   *  to 1000.
-   */
-  // const pageSize = 1234
-  /**
-   *  A page token, received from a previous `ListDeliveryPipelines` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other provided parameters match
-   *  the call that provided the page token.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Filter pipelines to be returned. See https://google.aip.dev/160 for more
-   *  details.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Field to sort by. See https://google.aip.dev/132#ordering for more details.
-   */
-  // const orderBy = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -63,21 +41,19 @@ function main(parent) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callListDeliveryPipelines() {
+  async function callTerminateJobRun() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = await deployClient.listDeliveryPipelinesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await deployClient.terminateJobRun(request);
+    console.log(response);
   }
 
-  callListDeliveryPipelines();
-  // [END clouddeploy_v1_generated_CloudDeploy_ListDeliveryPipelines_async]
+  callTerminateJobRun();
+  // [END clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
 }
 
 process.on('unhandledRejection', err => {
