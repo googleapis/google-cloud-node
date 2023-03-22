@@ -594,7 +594,7 @@ export class SubnetworksClient {
       );
   }
   /**
-   * Returns the specified subnetwork. Gets a list of available subnetworks list() request.
+   * Returns the specified subnetwork.
    *
    * @param {Object} request
    *   The request object that will be sent.

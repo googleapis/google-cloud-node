@@ -30,7 +30,7 @@ function main(parent, document, documentId) {
    */
   /**
    *  Required. The parent resource name, such as
-   *  `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}`.
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    */
   // const parent = 'abc123'
   /**

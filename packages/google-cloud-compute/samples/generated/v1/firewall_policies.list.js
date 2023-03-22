@@ -45,7 +45,7 @@ function main() {
    */
   // const pageToken = 'abc123'
   /**
-   *  Parent ID for this request.
+   *  Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
    */
   // const parentId = 'abc123'
   /**

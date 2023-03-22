@@ -3701,6 +3701,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listBigQueryLinks(request: google.analytics.admin.v1alpha.IListBigQueryLinksRequest): Promise<google.analytics.admin.v1alpha.ListBigQueryLinksResponse>;
+
+                    /**
+                     * Calls GetEnhancedMeasurementSettings.
+                     * @param request GetEnhancedMeasurementSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EnhancedMeasurementSettings
+                     */
+                    public getEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetEnhancedMeasurementSettingsCallback): void;
+
+                    /**
+                     * Calls GetEnhancedMeasurementSettings.
+                     * @param request GetEnhancedMeasurementSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest): Promise<google.analytics.admin.v1alpha.EnhancedMeasurementSettings>;
+
+                    /**
+                     * Calls UpdateEnhancedMeasurementSettings.
+                     * @param request UpdateEnhancedMeasurementSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EnhancedMeasurementSettings
+                     */
+                    public updateEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEnhancedMeasurementSettingsCallback): void;
+
+                    /**
+                     * Calls UpdateEnhancedMeasurementSettings.
+                     * @param request UpdateEnhancedMeasurementSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest): Promise<google.analytics.admin.v1alpha.EnhancedMeasurementSettings>;
+
+                    /**
+                     * Calls CreateConnectedSiteTag.
+                     * @param request CreateConnectedSiteTagRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CreateConnectedSiteTagResponse
+                     */
+                    public createConnectedSiteTag(request: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTagCallback): void;
+
+                    /**
+                     * Calls CreateConnectedSiteTag.
+                     * @param request CreateConnectedSiteTagRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConnectedSiteTag(request: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest): Promise<google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse>;
+
+                    /**
+                     * Calls DeleteConnectedSiteTag.
+                     * @param request DeleteConnectedSiteTagRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteConnectedSiteTag(request: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTagCallback): void;
+
+                    /**
+                     * Calls DeleteConnectedSiteTag.
+                     * @param request DeleteConnectedSiteTagRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConnectedSiteTag(request: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListConnectedSiteTags.
+                     * @param request ListConnectedSiteTagsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConnectedSiteTagsResponse
+                     */
+                    public listConnectedSiteTags(request: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTagsCallback): void;
+
+                    /**
+                     * Calls ListConnectedSiteTags.
+                     * @param request ListConnectedSiteTagsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConnectedSiteTags(request: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest): Promise<google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -4418,6 +4488,41 @@ export namespace google {
                      * @param [response] ListBigQueryLinksResponse
                      */
                     type ListBigQueryLinksCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListBigQueryLinksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getEnhancedMeasurementSettings}.
+                     * @param error Error, if any
+                     * @param [response] EnhancedMeasurementSettings
+                     */
+                    type GetEnhancedMeasurementSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.EnhancedMeasurementSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateEnhancedMeasurementSettings}.
+                     * @param error Error, if any
+                     * @param [response] EnhancedMeasurementSettings
+                     */
+                    type UpdateEnhancedMeasurementSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.EnhancedMeasurementSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createConnectedSiteTag}.
+                     * @param error Error, if any
+                     * @param [response] CreateConnectedSiteTagResponse
+                     */
+                    type CreateConnectedSiteTagCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteConnectedSiteTag}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteConnectedSiteTagCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listConnectedSiteTags}.
+                     * @param error Error, if any
+                     * @param [response] ListConnectedSiteTagsResponse
+                     */
+                    type ListConnectedSiteTagsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse) => void;
                 }
 
                 /** Properties of a RunAccessReportRequest. */
@@ -18132,6 +18237,697 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetEnhancedMeasurementSettingsRequest. */
+                interface IGetEnhancedMeasurementSettingsRequest {
+
+                    /** GetEnhancedMeasurementSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEnhancedMeasurementSettingsRequest. */
+                class GetEnhancedMeasurementSettingsRequest implements IGetEnhancedMeasurementSettingsRequest {
+
+                    /**
+                     * Constructs a new GetEnhancedMeasurementSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest);
+
+                    /** GetEnhancedMeasurementSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEnhancedMeasurementSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEnhancedMeasurementSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetEnhancedMeasurementSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest.verify|verify} messages.
+                     * @param message GetEnhancedMeasurementSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEnhancedMeasurementSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest.verify|verify} messages.
+                     * @param message GetEnhancedMeasurementSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEnhancedMeasurementSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEnhancedMeasurementSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Decodes a GetEnhancedMeasurementSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEnhancedMeasurementSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Verifies a GetEnhancedMeasurementSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEnhancedMeasurementSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEnhancedMeasurementSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetEnhancedMeasurementSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetEnhancedMeasurementSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEnhancedMeasurementSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEnhancedMeasurementSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateEnhancedMeasurementSettingsRequest. */
+                interface IUpdateEnhancedMeasurementSettingsRequest {
+
+                    /** UpdateEnhancedMeasurementSettingsRequest enhancedMeasurementSettings */
+                    enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
+
+                    /** UpdateEnhancedMeasurementSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateEnhancedMeasurementSettingsRequest. */
+                class UpdateEnhancedMeasurementSettingsRequest implements IUpdateEnhancedMeasurementSettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateEnhancedMeasurementSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest);
+
+                    /** UpdateEnhancedMeasurementSettingsRequest enhancedMeasurementSettings. */
+                    public enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
+
+                    /** UpdateEnhancedMeasurementSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateEnhancedMeasurementSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateEnhancedMeasurementSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateEnhancedMeasurementSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest.verify|verify} messages.
+                     * @param message UpdateEnhancedMeasurementSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateEnhancedMeasurementSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest.verify|verify} messages.
+                     * @param message UpdateEnhancedMeasurementSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateEnhancedMeasurementSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateEnhancedMeasurementSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Decodes an UpdateEnhancedMeasurementSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateEnhancedMeasurementSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Verifies an UpdateEnhancedMeasurementSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateEnhancedMeasurementSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateEnhancedMeasurementSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateEnhancedMeasurementSettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateEnhancedMeasurementSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateEnhancedMeasurementSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateEnhancedMeasurementSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConnectedSiteTagRequest. */
+                interface ICreateConnectedSiteTagRequest {
+
+                    /** CreateConnectedSiteTagRequest property */
+                    property?: (string|null);
+
+                    /** CreateConnectedSiteTagRequest connectedSiteTag */
+                    connectedSiteTag?: (google.analytics.admin.v1alpha.IConnectedSiteTag|null);
+                }
+
+                /** Represents a CreateConnectedSiteTagRequest. */
+                class CreateConnectedSiteTagRequest implements ICreateConnectedSiteTagRequest {
+
+                    /**
+                     * Constructs a new CreateConnectedSiteTagRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest);
+
+                    /** CreateConnectedSiteTagRequest property. */
+                    public property: string;
+
+                    /** CreateConnectedSiteTagRequest connectedSiteTag. */
+                    public connectedSiteTag?: (google.analytics.admin.v1alpha.IConnectedSiteTag|null);
+
+                    /**
+                     * Creates a new CreateConnectedSiteTagRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConnectedSiteTagRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
+
+                    /**
+                     * Encodes the specified CreateConnectedSiteTagRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.verify|verify} messages.
+                     * @param message CreateConnectedSiteTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConnectedSiteTagRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.verify|verify} messages.
+                     * @param message CreateConnectedSiteTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConnectedSiteTagRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConnectedSiteTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
+
+                    /**
+                     * Decodes a CreateConnectedSiteTagRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConnectedSiteTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
+
+                    /**
+                     * Verifies a CreateConnectedSiteTagRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConnectedSiteTagRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConnectedSiteTagRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConnectedSiteTagRequest message. Also converts values to other types if specified.
+                     * @param message CreateConnectedSiteTagRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConnectedSiteTagRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConnectedSiteTagRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConnectedSiteTagResponse. */
+                interface ICreateConnectedSiteTagResponse {
+                }
+
+                /** Represents a CreateConnectedSiteTagResponse. */
+                class CreateConnectedSiteTagResponse implements ICreateConnectedSiteTagResponse {
+
+                    /**
+                     * Constructs a new CreateConnectedSiteTagResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse);
+
+                    /**
+                     * Creates a new CreateConnectedSiteTagResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConnectedSiteTagResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
+
+                    /**
+                     * Encodes the specified CreateConnectedSiteTagResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse.verify|verify} messages.
+                     * @param message CreateConnectedSiteTagResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConnectedSiteTagResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse.verify|verify} messages.
+                     * @param message CreateConnectedSiteTagResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConnectedSiteTagResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConnectedSiteTagResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
+
+                    /**
+                     * Decodes a CreateConnectedSiteTagResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConnectedSiteTagResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
+
+                    /**
+                     * Verifies a CreateConnectedSiteTagResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConnectedSiteTagResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConnectedSiteTagResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
+
+                    /**
+                     * Creates a plain object from a CreateConnectedSiteTagResponse message. Also converts values to other types if specified.
+                     * @param message CreateConnectedSiteTagResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConnectedSiteTagResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConnectedSiteTagResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteConnectedSiteTagRequest. */
+                interface IDeleteConnectedSiteTagRequest {
+
+                    /** DeleteConnectedSiteTagRequest property */
+                    property?: (string|null);
+
+                    /** DeleteConnectedSiteTagRequest tagId */
+                    tagId?: (string|null);
+                }
+
+                /** Represents a DeleteConnectedSiteTagRequest. */
+                class DeleteConnectedSiteTagRequest implements IDeleteConnectedSiteTagRequest {
+
+                    /**
+                     * Constructs a new DeleteConnectedSiteTagRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest);
+
+                    /** DeleteConnectedSiteTagRequest property. */
+                    public property: string;
+
+                    /** DeleteConnectedSiteTagRequest tagId. */
+                    public tagId: string;
+
+                    /**
+                     * Creates a new DeleteConnectedSiteTagRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConnectedSiteTagRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
+
+                    /**
+                     * Encodes the specified DeleteConnectedSiteTagRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest.verify|verify} messages.
+                     * @param message DeleteConnectedSiteTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConnectedSiteTagRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest.verify|verify} messages.
+                     * @param message DeleteConnectedSiteTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConnectedSiteTagRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConnectedSiteTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
+
+                    /**
+                     * Decodes a DeleteConnectedSiteTagRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConnectedSiteTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
+
+                    /**
+                     * Verifies a DeleteConnectedSiteTagRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConnectedSiteTagRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConnectedSiteTagRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConnectedSiteTagRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConnectedSiteTagRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConnectedSiteTagRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteConnectedSiteTagRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectedSiteTagsRequest. */
+                interface IListConnectedSiteTagsRequest {
+
+                    /** ListConnectedSiteTagsRequest property */
+                    property?: (string|null);
+                }
+
+                /** Represents a ListConnectedSiteTagsRequest. */
+                class ListConnectedSiteTagsRequest implements IListConnectedSiteTagsRequest {
+
+                    /**
+                     * Constructs a new ListConnectedSiteTagsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest);
+
+                    /** ListConnectedSiteTagsRequest property. */
+                    public property: string;
+
+                    /**
+                     * Creates a new ListConnectedSiteTagsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectedSiteTagsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
+
+                    /**
+                     * Encodes the specified ListConnectedSiteTagsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest.verify|verify} messages.
+                     * @param message ListConnectedSiteTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectedSiteTagsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest.verify|verify} messages.
+                     * @param message ListConnectedSiteTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectedSiteTagsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectedSiteTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
+
+                    /**
+                     * Decodes a ListConnectedSiteTagsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectedSiteTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
+
+                    /**
+                     * Verifies a ListConnectedSiteTagsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectedSiteTagsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectedSiteTagsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConnectedSiteTagsRequest message. Also converts values to other types if specified.
+                     * @param message ListConnectedSiteTagsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectedSiteTagsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectedSiteTagsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectedSiteTagsResponse. */
+                interface IListConnectedSiteTagsResponse {
+
+                    /** ListConnectedSiteTagsResponse connectedSiteTags */
+                    connectedSiteTags?: (google.analytics.admin.v1alpha.IConnectedSiteTag[]|null);
+                }
+
+                /** Represents a ListConnectedSiteTagsResponse. */
+                class ListConnectedSiteTagsResponse implements IListConnectedSiteTagsResponse {
+
+                    /**
+                     * Constructs a new ListConnectedSiteTagsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse);
+
+                    /** ListConnectedSiteTagsResponse connectedSiteTags. */
+                    public connectedSiteTags: google.analytics.admin.v1alpha.IConnectedSiteTag[];
+
+                    /**
+                     * Creates a new ListConnectedSiteTagsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectedSiteTagsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
+
+                    /**
+                     * Encodes the specified ListConnectedSiteTagsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.verify|verify} messages.
+                     * @param message ListConnectedSiteTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectedSiteTagsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.verify|verify} messages.
+                     * @param message ListConnectedSiteTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectedSiteTagsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectedSiteTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
+
+                    /**
+                     * Decodes a ListConnectedSiteTagsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectedSiteTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
+
+                    /**
+                     * Verifies a ListConnectedSiteTagsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectedSiteTagsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectedSiteTagsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConnectedSiteTagsResponse message. Also converts values to other types if specified.
+                     * @param message ListConnectedSiteTagsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectedSiteTagsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectedSiteTagsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** AudienceFilterScope enum. */
                 enum AudienceFilterScope {
                     AUDIENCE_FILTER_SCOPE_UNSPECIFIED = 0,
@@ -20617,7 +21413,8 @@ export namespace google {
                     DATA_STREAM = 18,
                     ATTRIBUTION_SETTINGS = 20,
                     EXPANDED_DATA_SET = 21,
-                    CHANNEL_GROUP = 22
+                    CHANNEL_GROUP = 22,
+                    ENHANCED_MEASUREMENT_SETTINGS = 24
                 }
 
                 /** GoogleSignalsState enum. */
@@ -22756,6 +23553,9 @@ export namespace google {
 
                         /** ChangeHistoryResource bigqueryLink */
                         bigqueryLink?: (google.analytics.admin.v1alpha.IBigQueryLink|null);
+
+                        /** ChangeHistoryResource enhancedMeasurementSettings */
+                        enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -22818,8 +23618,11 @@ export namespace google {
                         /** ChangeHistoryResource bigqueryLink. */
                         public bigqueryLink?: (google.analytics.admin.v1alpha.IBigQueryLink|null);
 
+                        /** ChangeHistoryResource enhancedMeasurementSettings. */
+                        public enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"bigqueryLink");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"bigqueryLink"|"enhancedMeasurementSettings");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -24336,6 +25139,9 @@ export namespace google {
                     /** BigQueryLink streamingExportEnabled */
                     streamingExportEnabled?: (boolean|null);
 
+                    /** BigQueryLink intradayExportEnabled */
+                    intradayExportEnabled?: (boolean|null);
+
                     /** BigQueryLink includeAdvertisingId */
                     includeAdvertisingId?: (boolean|null);
 
@@ -24369,6 +25175,9 @@ export namespace google {
 
                     /** BigQueryLink streamingExportEnabled. */
                     public streamingExportEnabled: boolean;
+
+                    /** BigQueryLink intradayExportEnabled. */
+                    public intradayExportEnabled: boolean;
 
                     /** BigQueryLink includeAdvertisingId. */
                     public includeAdvertisingId: boolean;
@@ -24451,6 +25260,266 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryLink
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnhancedMeasurementSettings. */
+                interface IEnhancedMeasurementSettings {
+
+                    /** EnhancedMeasurementSettings name */
+                    name?: (string|null);
+
+                    /** EnhancedMeasurementSettings streamEnabled */
+                    streamEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings scrollsEnabled */
+                    scrollsEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings outboundClicksEnabled */
+                    outboundClicksEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings siteSearchEnabled */
+                    siteSearchEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings videoEngagementEnabled */
+                    videoEngagementEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings fileDownloadsEnabled */
+                    fileDownloadsEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings pageChangesEnabled */
+                    pageChangesEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings formInteractionsEnabled */
+                    formInteractionsEnabled?: (boolean|null);
+
+                    /** EnhancedMeasurementSettings searchQueryParameter */
+                    searchQueryParameter?: (string|null);
+
+                    /** EnhancedMeasurementSettings uriQueryParameter */
+                    uriQueryParameter?: (string|null);
+                }
+
+                /** Represents an EnhancedMeasurementSettings. */
+                class EnhancedMeasurementSettings implements IEnhancedMeasurementSettings {
+
+                    /**
+                     * Constructs a new EnhancedMeasurementSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings);
+
+                    /** EnhancedMeasurementSettings name. */
+                    public name: string;
+
+                    /** EnhancedMeasurementSettings streamEnabled. */
+                    public streamEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings scrollsEnabled. */
+                    public scrollsEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings outboundClicksEnabled. */
+                    public outboundClicksEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings siteSearchEnabled. */
+                    public siteSearchEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings videoEngagementEnabled. */
+                    public videoEngagementEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings fileDownloadsEnabled. */
+                    public fileDownloadsEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings pageChangesEnabled. */
+                    public pageChangesEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings formInteractionsEnabled. */
+                    public formInteractionsEnabled: boolean;
+
+                    /** EnhancedMeasurementSettings searchQueryParameter. */
+                    public searchQueryParameter: string;
+
+                    /** EnhancedMeasurementSettings uriQueryParameter. */
+                    public uriQueryParameter: string;
+
+                    /**
+                     * Creates a new EnhancedMeasurementSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnhancedMeasurementSettings instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
+
+                    /**
+                     * Encodes the specified EnhancedMeasurementSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings.verify|verify} messages.
+                     * @param message EnhancedMeasurementSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnhancedMeasurementSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.EnhancedMeasurementSettings.verify|verify} messages.
+                     * @param message EnhancedMeasurementSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IEnhancedMeasurementSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnhancedMeasurementSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnhancedMeasurementSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
+
+                    /**
+                     * Decodes an EnhancedMeasurementSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnhancedMeasurementSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
+
+                    /**
+                     * Verifies an EnhancedMeasurementSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnhancedMeasurementSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnhancedMeasurementSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.EnhancedMeasurementSettings;
+
+                    /**
+                     * Creates a plain object from an EnhancedMeasurementSettings message. Also converts values to other types if specified.
+                     * @param message EnhancedMeasurementSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.EnhancedMeasurementSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnhancedMeasurementSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnhancedMeasurementSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConnectedSiteTag. */
+                interface IConnectedSiteTag {
+
+                    /** ConnectedSiteTag displayName */
+                    displayName?: (string|null);
+
+                    /** ConnectedSiteTag tagId */
+                    tagId?: (string|null);
+                }
+
+                /** Represents a ConnectedSiteTag. */
+                class ConnectedSiteTag implements IConnectedSiteTag {
+
+                    /**
+                     * Constructs a new ConnectedSiteTag.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IConnectedSiteTag);
+
+                    /** ConnectedSiteTag displayName. */
+                    public displayName: string;
+
+                    /** ConnectedSiteTag tagId. */
+                    public tagId: string;
+
+                    /**
+                     * Creates a new ConnectedSiteTag instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectedSiteTag instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IConnectedSiteTag): google.analytics.admin.v1alpha.ConnectedSiteTag;
+
+                    /**
+                     * Encodes the specified ConnectedSiteTag message. Does not implicitly {@link google.analytics.admin.v1alpha.ConnectedSiteTag.verify|verify} messages.
+                     * @param message ConnectedSiteTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IConnectedSiteTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectedSiteTag message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ConnectedSiteTag.verify|verify} messages.
+                     * @param message ConnectedSiteTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IConnectedSiteTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectedSiteTag message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectedSiteTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ConnectedSiteTag;
+
+                    /**
+                     * Decodes a ConnectedSiteTag message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectedSiteTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ConnectedSiteTag;
+
+                    /**
+                     * Verifies a ConnectedSiteTag message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectedSiteTag message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectedSiteTag
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ConnectedSiteTag;
+
+                    /**
+                     * Creates a plain object from a ConnectedSiteTag message. Also converts values to other types if specified.
+                     * @param message ConnectedSiteTag
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ConnectedSiteTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectedSiteTag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectedSiteTag
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

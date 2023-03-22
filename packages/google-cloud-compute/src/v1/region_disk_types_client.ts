@@ -321,7 +321,7 @@ export class RegionDiskTypesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
+   * Returns the specified regional disk type.
    *
    * @param {Object} request
    *   The request object that will be sent.

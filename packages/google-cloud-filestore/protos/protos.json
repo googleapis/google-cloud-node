@@ -226,6 +226,124 @@
                             }
                           ]
                         },
+                        "ListSnapshots": {
+                          "requestType": "ListSnapshotsRequest",
+                          "responseType": "ListSnapshotsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/snapshots",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/snapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetSnapshot": {
+                          "requestType": "GetSnapshotRequest",
+                          "responseType": "Snapshot",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/snapshots/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/snapshots/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateSnapshot": {
+                          "requestType": "CreateSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*}/snapshots",
+                            "(google.api.http).body": "snapshot",
+                            "(google.api.method_signature)": "parent,snapshot,snapshot_id",
+                            "(google.longrunning.operation_info).response_type": "Snapshot",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*}/snapshots",
+                                "body": "snapshot"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,snapshot,snapshot_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Snapshot",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteSnapshot": {
+                          "requestType": "DeleteSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*/snapshots/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*/snapshots/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateSnapshot": {
+                          "requestType": "UpdateSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{snapshot.name=projects/*/locations/*/instances/*/snapshots/*}",
+                            "(google.api.http).body": "snapshot",
+                            "(google.api.method_signature)": "snapshot,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Snapshot",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{snapshot.name=projects/*/locations/*/instances/*/snapshots/*}",
+                                "body": "snapshot"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "snapshot,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Snapshot",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListBackups": {
                           "requestType": "ListBackupsRequest",
                           "responseType": "ListBackupsResponse",
@@ -368,6 +486,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "connectMode": {
+                          "type": "ConnectMode",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -375,6 +497,13 @@
                           "values": {
                             "ADDRESS_MODE_UNSPECIFIED": 0,
                             "MODE_IPV4": 1
+                          }
+                        },
+                        "ConnectMode": {
+                          "values": {
+                            "CONNECT_MODE_UNSPECIFIED": 0,
+                            "DIRECT_PEERING": 1,
+                            "PRIVATE_SERVICE_ACCESS": 2
                           }
                         }
                       }
@@ -518,6 +647,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "suspensionReasons": {
+                          "rule": "repeated",
+                          "type": "SuspensionReason",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -529,7 +670,10 @@
                             "REPAIRING": 3,
                             "DELETING": 4,
                             "ERROR": 6,
-                            "RESTORING": 7
+                            "RESTORING": 7,
+                            "SUSPENDED": 8,
+                            "SUSPENDING": 9,
+                            "RESUMING": 10
                           }
                         },
                         "Tier": {
@@ -539,7 +683,14 @@
                             "PREMIUM": 2,
                             "BASIC_HDD": 3,
                             "BASIC_SSD": 4,
-                            "HIGH_SCALE_SSD": 5
+                            "HIGH_SCALE_SSD": 5,
+                            "ENTERPRISE": 6
+                          }
+                        },
+                        "SuspensionReason": {
+                          "values": {
+                            "SUSPENSION_REASON_UNSPECIFIED": 0,
+                            "KMS_KEY_ISSUE": 1
                           }
                         }
                       }
@@ -636,6 +787,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "file.googleapis.com/Instance"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -682,6 +837,170 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "Snapshot": {
+                      "options": {
+                        "(google.api.resource).type": "file.googleapis.com/Snapshot",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/snapshots/{snapshot}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "filesystemUsedBytes": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3
+                          }
+                        }
+                      }
+                    },
+                    "CreateSnapshotRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "snapshotId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "Snapshot",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Snapshot"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Snapshot"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSnapshotRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "Snapshot",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListSnapshotsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListSnapshotsResponse": {
+                      "fields": {
+                        "snapshots": {
+                          "rule": "repeated",
+                          "type": "Snapshot",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -765,6 +1084,13 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       },

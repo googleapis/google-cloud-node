@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-livestream",
-        "version": "0.4.0",
+        "version": "0.4.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -218,7 +218,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -546,7 +546,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],

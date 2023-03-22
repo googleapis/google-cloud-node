@@ -35,9 +35,24 @@
                 "approveRollout"
               ]
             },
+            "AdvanceRollout": {
+              "methods": [
+                "advanceRollout"
+              ]
+            },
+            "CancelRollout": {
+              "methods": [
+                "cancelRollout"
+              ]
+            },
             "GetRollout": {
               "methods": [
                 "getRollout"
+              ]
+            },
+            "IgnoreJob": {
+              "methods": [
+                "ignoreJob"
               ]
             },
             "RetryJob": {
@@ -48,6 +63,11 @@
             "GetJobRun": {
               "methods": [
                 "getJobRun"
+              ]
+            },
+            "TerminateJobRun": {
+              "methods": [
+                "terminateJobRun"
               ]
             },
             "GetConfig": {
@@ -160,9 +180,24 @@
                 "approveRollout"
               ]
             },
+            "AdvanceRollout": {
+              "methods": [
+                "advanceRollout"
+              ]
+            },
+            "CancelRollout": {
+              "methods": [
+                "cancelRollout"
+              ]
+            },
             "GetRollout": {
               "methods": [
                 "getRollout"
+              ]
+            },
+            "IgnoreJob": {
+              "methods": [
+                "ignoreJob"
               ]
             },
             "RetryJob": {
@@ -173,6 +208,11 @@
             "GetJobRun": {
               "methods": [
                 "getJobRun"
+              ]
+            },
+            "TerminateJobRun": {
+              "methods": [
+                "terminateJobRun"
               ]
             },
             "GetConfig": {

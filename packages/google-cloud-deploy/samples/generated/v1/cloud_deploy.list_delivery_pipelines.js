@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent, which owns this collection of pipelines. Format must be
-   *  projects/{project_id}/locations/{location_name}.
+   *  Required. The parent, which owns this collection of pipelines. Format must
+   *  be projects/{project_id}/locations/{location_name}.
    */
   // const parent = 'abc123'
   /**

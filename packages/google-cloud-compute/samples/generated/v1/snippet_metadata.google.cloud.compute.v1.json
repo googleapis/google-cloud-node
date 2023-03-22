@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-compute",
-        "version": "3.8.0",
+        "version": "3.8.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -643,7 +643,7 @@
             "regionTag": "compute_v1_generated_Autoscalers_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.",
+            "description": " Returns the specified autoscaler resource.",
             "canonical": true,
             "file": "autoscalers.get.js",
             "language": "JAVASCRIPT",
@@ -1071,7 +1071,7 @@
             "regionTag": "compute_v1_generated_BackendBuckets_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.",
+            "description": " Returns the specified BackendBucket resource.",
             "canonical": true,
             "file": "backend_buckets.get.js",
             "language": "JAVASCRIPT",
@@ -1595,7 +1595,7 @@
             "regionTag": "compute_v1_generated_BackendServices_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified BackendService resource. Gets a list of available backend services.",
+            "description": " Returns the specified BackendService resource.",
             "canonical": true,
             "file": "backend_services.get.js",
             "language": "JAVASCRIPT",
@@ -2331,7 +2331,7 @@
             "regionTag": "compute_v1_generated_Disks_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.",
+            "description": " Returns the specified persistent disk.",
             "canonical": true,
             "file": "disks.get.js",
             "language": "JAVASCRIPT",
@@ -2820,6 +2820,70 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Disks_Update_async",
+            "title": "AcceleratorTypes update Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the specified disk with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.",
+            "canonical": true,
+            "file": "disks.update.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Update",
+                "fullName": "google.cloud.compute.v1.Disks.Update",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "disk",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "disk_resource",
+                        "type": ".google.cloud.compute.v1.Disk"
+                    },
+                    {
+                        "name": "paths",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "DisksClient",
+                    "fullName": "google.cloud.compute.v1.DisksClient"
+                },
+                "method": {
+                    "shortName": "Update",
+                    "fullName": "google.cloud.compute.v1.Disks.Update",
+                    "service": {
+                        "shortName": "Disks",
+                        "fullName": "google.cloud.compute.v1.Disks"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_DiskTypes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -2887,7 +2951,7 @@
             "regionTag": "compute_v1_generated_DiskTypes_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified disk type. Gets a list of available disk types by making a list() request.",
+            "description": " Returns the specified disk type.",
             "canonical": true,
             "file": "disk_types.get.js",
             "language": "JAVASCRIPT",
@@ -4939,7 +5003,7 @@
             "regionTag": "compute_v1_generated_GlobalAddresses_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified address resource. Gets a list of available addresses by making a list() request.",
+            "description": " Returns the specified address resource.",
             "canonical": true,
             "file": "global_addresses.get.js",
             "language": "JAVASCRIPT",
@@ -5643,7 +5707,7 @@
             "regionTag": "compute_v1_generated_GlobalNetworkEndpointGroups_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+            "description": " Returns the specified network endpoint group.",
             "canonical": true,
             "file": "global_network_endpoint_groups.get.js",
             "language": "JAVASCRIPT",
@@ -6627,7 +6691,7 @@
             "regionTag": "compute_v1_generated_HealthChecks_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.",
+            "description": " Returns the specified HealthCheck resource.",
             "canonical": true,
             "file": "health_checks.get.js",
             "language": "JAVASCRIPT",
@@ -7031,7 +7095,7 @@
             "regionTag": "compute_v1_generated_Images_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified image. Gets a list of available images by making a list() request.",
+            "description": " Returns the specified image.",
             "canonical": true,
             "file": "images.get.js",
             "language": "JAVASCRIPT",
@@ -7075,7 +7139,7 @@
             "regionTag": "compute_v1_generated_Images_GetFromFamily_async",
             "title": "AcceleratorTypes getFromFamily Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the latest image that is part of an image family and is not deprecated.",
+            "description": " Returns the latest image that is part of an image family and is not deprecated. For more information on image families, see Public image families documentation.",
             "canonical": true,
             "file": "images.get_from_family.js",
             "language": "JAVASCRIPT",
@@ -7863,7 +7927,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.",
+            "description": " Returns all of the details about the specified managed instance group.",
             "canonical": true,
             "file": "instance_group_managers.get.js",
             "language": "JAVASCRIPT",
@@ -9603,7 +9667,7 @@
             "regionTag": "compute_v1_generated_Instances_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified Instance resource. Gets a list of available instances by making a list() request.",
+            "description": " Returns the specified Instance resource.",
             "canonical": true,
             "file": "instances.get.js",
             "language": "JAVASCRIPT",
@@ -10808,6 +10872,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Instances_SetName_async",
+            "title": "AcceleratorTypes setName Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets name of an instance.",
+            "canonical": true,
+            "file": "instances.set_name.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetName",
+                "fullName": "google.cloud.compute.v1.Instances.SetName",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances_set_name_request_resource",
+                        "type": ".google.cloud.compute.v1.InstancesSetNameRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstancesClient",
+                    "fullName": "google.cloud.compute.v1.InstancesClient"
+                },
+                "method": {
+                    "shortName": "SetName",
+                    "fullName": "google.cloud.compute.v1.Instances.SetName",
+                    "service": {
+                        "shortName": "Instances",
+                        "fullName": "google.cloud.compute.v1.Instances"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Instances_SetScheduling_async",
             "title": "AcceleratorTypes setScheduling Sample",
             "origin": "API_DEFINITION",
@@ -11648,6 +11768,70 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_InstanceTemplates_AggregatedList_async",
+            "title": "AcceleratorTypes aggregatedList Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the list of all InstanceTemplates resources, regional and global, available to the specified project.",
+            "canonical": true,
+            "file": "instance_templates.aggregated_list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AggregatedList",
+                "fullName": "google.cloud.compute.v1.InstanceTemplates.AggregatedList",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_all_scopes",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstanceTemplateAggregatedList",
+                "client": {
+                    "shortName": "InstanceTemplatesClient",
+                    "fullName": "google.cloud.compute.v1.InstanceTemplatesClient"
+                },
+                "method": {
+                    "shortName": "AggregatedList",
+                    "fullName": "google.cloud.compute.v1.InstanceTemplates.AggregatedList",
+                    "service": {
+                        "shortName": "InstanceTemplates",
+                        "fullName": "google.cloud.compute.v1.InstanceTemplates"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_InstanceTemplates_Delete_async",
             "title": "AcceleratorTypes delete Sample",
             "origin": "API_DEFINITION",
@@ -11699,7 +11883,7 @@
             "regionTag": "compute_v1_generated_InstanceTemplates_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified instance template. Gets a list of available instance templates by making a list() request.",
+            "description": " Returns the specified instance template.",
             "canonical": true,
             "file": "instance_templates.get.js",
             "language": "JAVASCRIPT",
@@ -13323,7 +13507,7 @@
             "regionTag": "compute_v1_generated_MachineImages_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified machine image. Gets a list of available machine images by making a list() request.",
+            "description": " Returns the specified machine image.",
             "canonical": true,
             "file": "machine_images.get.js",
             "language": "JAVASCRIPT",
@@ -13687,7 +13871,7 @@
             "regionTag": "compute_v1_generated_MachineTypes_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified machine type. Gets a list of available machine types by making a list() request.",
+            "description": " Returns the specified machine type.",
             "canonical": true,
             "file": "machine_types.get.js",
             "language": "JAVASCRIPT",
@@ -14747,7 +14931,7 @@
             "regionTag": "compute_v1_generated_NetworkEndpointGroups_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+            "description": " Returns the specified network endpoint group.",
             "canonical": true,
             "file": "network_endpoint_groups.get.js",
             "language": "JAVASCRIPT",
@@ -15955,7 +16139,7 @@
             "regionTag": "compute_v1_generated_Networks_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified network. Gets a list of available networks by making a list() request.",
+            "description": " Returns the specified network.",
             "canonical": true,
             "file": "networks.get.js",
             "language": "JAVASCRIPT",
@@ -17108,6 +17292,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NodeGroups_SimulateMaintenanceEvent_async",
+            "title": "AcceleratorTypes simulateMaintenanceEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Simulates maintenance event on specified nodes from the node group.",
+            "canonical": true,
+            "file": "node_groups.simulate_maintenance_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SimulateMaintenanceEvent",
+                "fullName": "google.cloud.compute.v1.NodeGroups.SimulateMaintenanceEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "node_group",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "node_groups_simulate_maintenance_event_request_resource",
+                        "type": ".google.cloud.compute.v1.NodeGroupsSimulateMaintenanceEventRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NodeGroupsClient",
+                    "fullName": "google.cloud.compute.v1.NodeGroupsClient"
+                },
+                "method": {
+                    "shortName": "SimulateMaintenanceEvent",
+                    "fullName": "google.cloud.compute.v1.NodeGroups.SimulateMaintenanceEvent",
+                    "service": {
+                        "shortName": "NodeGroups",
+                        "fullName": "google.cloud.compute.v1.NodeGroups"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NodeGroups_TestIamPermissions_async",
             "title": "AcceleratorTypes testIamPermissions Sample",
             "origin": "API_DEFINITION",
@@ -17279,7 +17519,7 @@
             "regionTag": "compute_v1_generated_NodeTemplates_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified node template. Gets a list of available node templates by making a list() request.",
+            "description": " Returns the specified node template.",
             "canonical": true,
             "file": "node_templates.get.js",
             "language": "JAVASCRIPT",
@@ -17663,7 +17903,7 @@
             "regionTag": "compute_v1_generated_NodeTypes_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified node type. Gets a list of available node types by making a list() request.",
+            "description": " Returns the specified node type.",
             "canonical": true,
             "file": "node_types.get.js",
             "language": "JAVASCRIPT",
@@ -20255,7 +20495,7 @@
             "regionTag": "compute_v1_generated_RegionCommitments_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified commitment resource. Gets a list of available commitments by making a list() request.",
+            "description": " Returns the specified commitment resource.",
             "canonical": true,
             "file": "region_commitments.get.js",
             "language": "JAVASCRIPT",
@@ -21136,10 +21376,74 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionDisks_Update_async",
+            "title": "AcceleratorTypes update Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license.",
+            "canonical": true,
+            "file": "region_disks.update.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Update",
+                "fullName": "google.cloud.compute.v1.RegionDisks.Update",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "disk",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "disk_resource",
+                        "type": ".google.cloud.compute.v1.Disk"
+                    },
+                    {
+                        "name": "paths",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionDisksClient",
+                    "fullName": "google.cloud.compute.v1.RegionDisksClient"
+                },
+                "method": {
+                    "shortName": "Update",
+                    "fullName": "google.cloud.compute.v1.RegionDisks.Update",
+                    "service": {
+                        "shortName": "RegionDisks",
+                        "fullName": "google.cloud.compute.v1.RegionDisks"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionDiskTypes_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified regional disk type. Gets a list of available disk types by making a list() request.",
+            "description": " Returns the specified regional disk type.",
             "canonical": true,
             "file": "region_disk_types.get.js",
             "language": "JAVASCRIPT",
@@ -21303,7 +21607,7 @@
             "regionTag": "compute_v1_generated_RegionHealthChecks_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.",
+            "description": " Returns the specified HealthCheck resource.",
             "canonical": true,
             "file": "region_health_checks.get.js",
             "language": "JAVASCRIPT",
@@ -23224,6 +23528,222 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionInstanceTemplates_Delete_async",
+            "title": "AcceleratorTypes delete Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone.",
+            "canonical": true,
+            "file": "region_instance_templates.delete.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Delete",
+                "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.Delete",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance_template",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionInstanceTemplatesClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplatesClient"
+                },
+                "method": {
+                    "shortName": "Delete",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.Delete",
+                    "service": {
+                        "shortName": "RegionInstanceTemplates",
+                        "fullName": "google.cloud.compute.v1.RegionInstanceTemplates"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstanceTemplates_Get_async",
+            "title": "AcceleratorTypes get Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the specified instance template.",
+            "canonical": true,
+            "file": "region_instance_templates.get.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Get",
+                "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.Get",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance_template",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstanceTemplate",
+                "client": {
+                    "shortName": "RegionInstanceTemplatesClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplatesClient"
+                },
+                "method": {
+                    "shortName": "Get",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.Get",
+                    "service": {
+                        "shortName": "RegionInstanceTemplates",
+                        "fullName": "google.cloud.compute.v1.RegionInstanceTemplates"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstanceTemplates_Insert_async",
+            "title": "AcceleratorTypes insert Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an instance template in the specified project and region using the global instance template whose URL is included in the request.",
+            "canonical": true,
+            "file": "region_instance_templates.insert.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Insert",
+                "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.Insert",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance_template_resource",
+                        "type": ".google.cloud.compute.v1.InstanceTemplate"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionInstanceTemplatesClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplatesClient"
+                },
+                "method": {
+                    "shortName": "Insert",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.Insert",
+                    "service": {
+                        "shortName": "RegionInstanceTemplates",
+                        "fullName": "google.cloud.compute.v1.RegionInstanceTemplates"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstanceTemplates_List_async",
+            "title": "AcceleratorTypes list Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of instance templates that are contained within the specified project and region.",
+            "canonical": true,
+            "file": "region_instance_templates.list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "List",
+                "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.List",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstanceTemplateList",
+                "client": {
+                    "shortName": "RegionInstanceTemplatesClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplatesClient"
+                },
+                "method": {
+                    "shortName": "List",
+                    "fullName": "google.cloud.compute.v1.RegionInstanceTemplates.List",
+                    "service": {
+                        "shortName": "RegionInstanceTemplates",
+                        "fullName": "google.cloud.compute.v1.RegionInstanceTemplates"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_Delete_async",
             "title": "AcceleratorTypes delete Sample",
             "origin": "API_DEFINITION",
@@ -23279,7 +23799,7 @@
             "regionTag": "compute_v1_generated_RegionNetworkEndpointGroups_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+            "description": " Returns the specified network endpoint group.",
             "canonical": true,
             "file": "region_network_endpoint_groups.get.js",
             "language": "JAVASCRIPT",
@@ -24799,7 +25319,7 @@
             "regionTag": "compute_v1_generated_Regions_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified Region resource. Gets a list of available regions by making a list() request. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.",
+            "description": " Returns the specified Region resource. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.",
             "canonical": true,
             "file": "regions.get.js",
             "language": "JAVASCRIPT",
@@ -25783,7 +26303,7 @@
             "regionTag": "compute_v1_generated_RegionTargetHttpProxies_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetHttpProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.",
+            "description": " Returns the specified TargetHttpProxy resource in the specified region.",
             "canonical": true,
             "file": "region_target_http_proxies.get.js",
             "language": "JAVASCRIPT",
@@ -26055,7 +26575,7 @@
             "regionTag": "compute_v1_generated_RegionTargetHttpsProxies_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetHttpsProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.",
+            "description": " Returns the specified TargetHttpsProxy resource in the specified region.",
             "canonical": true,
             "file": "region_target_https_proxies.get.js",
             "language": "JAVASCRIPT",
@@ -26655,7 +27175,7 @@
             "regionTag": "compute_v1_generated_RegionUrlMaps_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.",
+            "description": " Returns the specified UrlMap resource.",
             "canonical": true,
             "file": "region_url_maps.get.js",
             "language": "JAVASCRIPT",
@@ -28091,7 +28611,7 @@
             "regionTag": "compute_v1_generated_Routers_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified Router resource. Gets a list of available routers by making a list() request.",
+            "description": " Returns the specified Router resource.",
             "canonical": true,
             "file": "routers.get.js",
             "language": "JAVASCRIPT",
@@ -28583,7 +29103,7 @@
             "regionTag": "compute_v1_generated_Routes_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified Route resource. Gets a list of available routes by making a list() request.",
+            "description": " Returns the specified Route resource.",
             "canonical": true,
             "file": "routes.get.js",
             "language": "JAVASCRIPT",
@@ -29907,7 +30427,7 @@
             "regionTag": "compute_v1_generated_Snapshots_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.",
+            "description": " Returns the specified Snapshot resource.",
             "canonical": true,
             "file": "snapshots.get.js",
             "language": "JAVASCRIPT",
@@ -30363,7 +30883,7 @@
             "regionTag": "compute_v1_generated_SslCertificates_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.",
+            "description": " Returns the specified SslCertificate resource.",
             "canonical": true,
             "file": "ssl_certificates.get.js",
             "language": "JAVASCRIPT",
@@ -30671,7 +31191,7 @@
             "regionTag": "compute_v1_generated_SslPolicies_Insert_async",
             "title": "AcceleratorTypes insert Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.",
+            "description": " Returns the specified SSL policy resource.",
             "canonical": true,
             "file": "ssl_policies.insert.js",
             "language": "JAVASCRIPT",
@@ -31063,7 +31583,7 @@
             "regionTag": "compute_v1_generated_Subnetworks_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified subnetwork. Gets a list of available subnetworks list() request.",
+            "description": " Returns the specified subnetwork.",
             "canonical": true,
             "file": "subnetworks.get.js",
             "language": "JAVASCRIPT",
@@ -31923,7 +32443,7 @@
             "regionTag": "compute_v1_generated_TargetHttpProxies_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetHttpProxy resource. Gets a list of available target HTTP proxies by making a list() request.",
+            "description": " Returns the specified TargetHttpProxy resource.",
             "canonical": true,
             "file": "target_http_proxies.get.js",
             "language": "JAVASCRIPT",
@@ -32291,7 +32811,7 @@
             "regionTag": "compute_v1_generated_TargetHttpsProxies_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.",
+            "description": " Returns the specified TargetHttpsProxy resource.",
             "canonical": true,
             "file": "target_https_proxies.get.js",
             "language": "JAVASCRIPT",
@@ -32871,7 +33391,7 @@
             "regionTag": "compute_v1_generated_TargetInstances_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.",
+            "description": " Returns the specified TargetInstance resource.",
             "canonical": true,
             "file": "target_instances.get.js",
             "language": "JAVASCRIPT",
@@ -33263,7 +33783,7 @@
             "regionTag": "compute_v1_generated_TargetPools_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified target pool. Gets a list of available target pools by making a list() request.",
+            "description": " Returns the specified target pool.",
             "canonical": true,
             "file": "target_pools.get.js",
             "language": "JAVASCRIPT",
@@ -33699,7 +34219,7 @@
             "regionTag": "compute_v1_generated_TargetSslProxies_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.",
+            "description": " Returns the specified TargetSslProxy resource.",
             "canonical": true,
             "file": "target_ssl_proxies.get.js",
             "language": "JAVASCRIPT",
@@ -34223,7 +34743,7 @@
             "regionTag": "compute_v1_generated_TargetTcpProxies_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.",
+            "description": " Returns the specified TargetTcpProxy resource.",
             "canonical": true,
             "file": "target_tcp_proxies.get.js",
             "language": "JAVASCRIPT",
@@ -34595,7 +35115,7 @@
             "regionTag": "compute_v1_generated_TargetVpnGateways_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.",
+            "description": " Returns the specified target VPN gateway.",
             "canonical": true,
             "file": "target_vpn_gateways.get.js",
             "language": "JAVASCRIPT",
@@ -34927,7 +35447,7 @@
             "regionTag": "compute_v1_generated_UrlMaps_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.",
+            "description": " Returns the specified UrlMap resource.",
             "canonical": true,
             "file": "url_maps.get.js",
             "language": "JAVASCRIPT",
@@ -35399,7 +35919,7 @@
             "regionTag": "compute_v1_generated_VpnGateways_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.",
+            "description": " Returns the specified VPN gateway.",
             "canonical": true,
             "file": "vpn_gateways.get.js",
             "language": "JAVASCRIPT",
@@ -35835,7 +36355,7 @@
             "regionTag": "compute_v1_generated_VpnTunnels_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.",
+            "description": " Returns the specified VpnTunnel resource.",
             "canonical": true,
             "file": "vpn_tunnels.get.js",
             "language": "JAVASCRIPT",
@@ -36263,7 +36783,7 @@
             "regionTag": "compute_v1_generated_Zones_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the specified Zone resource. Gets a list of available zones by making a list() request.",
+            "description": " Returns the specified Zone resource.",
             "canonical": true,
             "file": "zones.get.js",
             "language": "JAVASCRIPT",

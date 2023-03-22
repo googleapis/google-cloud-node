@@ -1725,6 +1725,183 @@ describe('v1.NodeGroupsClient', () => {
     });
   });
 
+  describe('simulateMaintenanceEvent', () => {
+    it('invokes simulateMaintenanceEvent without error', async () => {
+      const client = new nodegroupsModule.v1.NodeGroupsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['nodeGroup']
+      );
+      request.nodeGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.simulateMaintenanceEvent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.simulateMaintenanceEvent(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes simulateMaintenanceEvent without error using callback', async () => {
+      const client = new nodegroupsModule.v1.NodeGroupsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['nodeGroup']
+      );
+      request.nodeGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.simulateMaintenanceEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.simulateMaintenanceEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes simulateMaintenanceEvent with error', async () => {
+      const client = new nodegroupsModule.v1.NodeGroupsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['nodeGroup']
+      );
+      request.nodeGroup = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.simulateMaintenanceEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.simulateMaintenanceEvent(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes simulateMaintenanceEvent with closed client', async () => {
+      const client = new nodegroupsModule.v1.NodeGroupsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SimulateMaintenanceEventNodeGroupRequest',
+        ['nodeGroup']
+      );
+      request.nodeGroup = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.simulateMaintenanceEvent(request),
+        expectedError
+      );
+    });
+  });
+
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new nodegroupsModule.v1.NodeGroupsClient({

@@ -3084,6 +3084,12 @@ export namespace google {
 
                     /** Function stateMessages */
                     stateMessages?: (google.cloud.functions.v2.IStateMessage[]|null);
+
+                    /** Function kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** Function url */
+                    url?: (string|null);
                 }
 
                 /** Represents a Function. */
@@ -3124,6 +3130,12 @@ export namespace google {
 
                     /** Function stateMessages. */
                     public stateMessages: google.cloud.functions.v2.IStateMessage[];
+
+                    /** Function kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** Function url. */
+                    public url: string;
 
                     /**
                      * Creates a new Function instance using the specified properties.
@@ -3814,6 +3826,9 @@ export namespace google {
                     /** BuildConfig environmentVariables */
                     environmentVariables?: ({ [k: string]: string }|null);
 
+                    /** BuildConfig dockerRegistry */
+                    dockerRegistry?: (google.cloud.functions.v2.BuildConfig.DockerRegistry|keyof typeof google.cloud.functions.v2.BuildConfig.DockerRegistry|null);
+
                     /** BuildConfig dockerRepository */
                     dockerRepository?: (string|null);
                 }
@@ -3847,6 +3862,9 @@ export namespace google {
 
                     /** BuildConfig environmentVariables. */
                     public environmentVariables: { [k: string]: string };
+
+                    /** BuildConfig dockerRegistry. */
+                    public dockerRegistry: (google.cloud.functions.v2.BuildConfig.DockerRegistry|keyof typeof google.cloud.functions.v2.BuildConfig.DockerRegistry);
 
                     /** BuildConfig dockerRepository. */
                     public dockerRepository: string;
@@ -3929,6 +3947,16 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace BuildConfig {
+
+                    /** DockerRegistry enum. */
+                    enum DockerRegistry {
+                        DOCKER_REGISTRY_UNSPECIFIED = 0,
+                        CONTAINER_REGISTRY = 1,
+                        ARTIFACT_REGISTRY = 2
+                    }
+                }
+
                 /** Properties of a ServiceConfig. */
                 interface IServiceConfig {
 
@@ -3940,6 +3968,9 @@ export namespace google {
 
                     /** ServiceConfig availableMemory */
                     availableMemory?: (string|null);
+
+                    /** ServiceConfig availableCpu */
+                    availableCpu?: (string|null);
 
                     /** ServiceConfig environmentVariables */
                     environmentVariables?: ({ [k: string]: string }|null);
@@ -3976,6 +4007,12 @@ export namespace google {
 
                     /** ServiceConfig revision */
                     revision?: (string|null);
+
+                    /** ServiceConfig maxInstanceRequestConcurrency */
+                    maxInstanceRequestConcurrency?: (number|null);
+
+                    /** ServiceConfig securityLevel */
+                    securityLevel?: (google.cloud.functions.v2.ServiceConfig.SecurityLevel|keyof typeof google.cloud.functions.v2.ServiceConfig.SecurityLevel|null);
                 }
 
                 /** Represents a ServiceConfig. */
@@ -3995,6 +4032,9 @@ export namespace google {
 
                     /** ServiceConfig availableMemory. */
                     public availableMemory: string;
+
+                    /** ServiceConfig availableCpu. */
+                    public availableCpu: string;
 
                     /** ServiceConfig environmentVariables. */
                     public environmentVariables: { [k: string]: string };
@@ -4031,6 +4071,12 @@ export namespace google {
 
                     /** ServiceConfig revision. */
                     public revision: string;
+
+                    /** ServiceConfig maxInstanceRequestConcurrency. */
+                    public maxInstanceRequestConcurrency: number;
+
+                    /** ServiceConfig securityLevel. */
+                    public securityLevel: (google.cloud.functions.v2.ServiceConfig.SecurityLevel|keyof typeof google.cloud.functions.v2.ServiceConfig.SecurityLevel);
 
                     /**
                      * Creates a new ServiceConfig instance using the specified properties.
@@ -4125,6 +4171,13 @@ export namespace google {
                         ALLOW_ALL = 1,
                         ALLOW_INTERNAL_ONLY = 2,
                         ALLOW_INTERNAL_AND_GCLB = 3
+                    }
+
+                    /** SecurityLevel enum. */
+                    enum SecurityLevel {
+                        SECURITY_LEVEL_UNSPECIFIED = 0,
+                        SECURE_ALWAYS = 1,
+                        SECURE_OPTIONAL = 2
                     }
                 }
 
@@ -5363,6 +5416,9 @@ export namespace google {
 
                     /** GenerateUploadUrlRequest parent */
                     parent?: (string|null);
+
+                    /** GenerateUploadUrlRequest kmsKeyName */
+                    kmsKeyName?: (string|null);
                 }
 
                 /** Represents a GenerateUploadUrlRequest. */
@@ -5376,6 +5432,9 @@ export namespace google {
 
                     /** GenerateUploadUrlRequest parent. */
                     public parent: string;
+
+                    /** GenerateUploadUrlRequest kmsKeyName. */
+                    public kmsKeyName: string;
 
                     /**
                      * Creates a new GenerateUploadUrlRequest instance using the specified properties.

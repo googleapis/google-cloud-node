@@ -33,7 +33,7 @@ function main(parent) {
    */
   // const inlineSource = {}
   /**
-   *  Google Cloud Storage location for the input content.
+   *  Cloud Storage location for the input content.
    */
   // const gcsSource = {}
   /**
@@ -42,7 +42,7 @@ function main(parent) {
   // const bigquerySource = {}
   /**
    *  Required. The parent branch resource name, such as
-   *  `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}`.
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    *  Requires create/update permission.
    */
   // const parent = 'abc123'

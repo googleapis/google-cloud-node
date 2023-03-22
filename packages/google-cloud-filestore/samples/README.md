@@ -14,15 +14,20 @@
 * [Samples](#samples)
   * [Cloud_filestore_manager.create_backup](#cloud_filestore_manager.create_backup)
   * [Cloud_filestore_manager.create_instance](#cloud_filestore_manager.create_instance)
+  * [Cloud_filestore_manager.create_snapshot](#cloud_filestore_manager.create_snapshot)
   * [Cloud_filestore_manager.delete_backup](#cloud_filestore_manager.delete_backup)
   * [Cloud_filestore_manager.delete_instance](#cloud_filestore_manager.delete_instance)
+  * [Cloud_filestore_manager.delete_snapshot](#cloud_filestore_manager.delete_snapshot)
   * [Cloud_filestore_manager.get_backup](#cloud_filestore_manager.get_backup)
   * [Cloud_filestore_manager.get_instance](#cloud_filestore_manager.get_instance)
+  * [Cloud_filestore_manager.get_snapshot](#cloud_filestore_manager.get_snapshot)
   * [Cloud_filestore_manager.list_backups](#cloud_filestore_manager.list_backups)
   * [Cloud_filestore_manager.list_instances](#cloud_filestore_manager.list_instances)
+  * [Cloud_filestore_manager.list_snapshots](#cloud_filestore_manager.list_snapshots)
   * [Cloud_filestore_manager.restore_instance](#cloud_filestore_manager.restore_instance)
   * [Cloud_filestore_manager.update_backup](#cloud_filestore_manager.update_backup)
   * [Cloud_filestore_manager.update_instance](#cloud_filestore_manager.update_instance)
+  * [Cloud_filestore_manager.update_snapshot](#cloud_filestore_manager.update_snapshot)
   * [Cloud_filestore_manager.create_backup](#cloud_filestore_manager.create_backup)
   * [Cloud_filestore_manager.create_instance](#cloud_filestore_manager.create_instance)
   * [Cloud_filestore_manager.create_share](#cloud_filestore_manager.create_share)
@@ -97,6 +102,23 @@ __Usage:__
 
 
 
+### Cloud_filestore_manager.create_snapshot
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_snapshot.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_snapshot.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_snapshot.js`
+
+
+-----
+
+
+
+
 ### Cloud_filestore_manager.delete_backup
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_backup.js).
@@ -124,6 +146,23 @@ __Usage:__
 
 
 `node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_instance.js`
+
+
+-----
+
+
+
+
+### Cloud_filestore_manager.delete_snapshot
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_snapshot.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_snapshot.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_snapshot.js`
 
 
 -----
@@ -165,6 +204,23 @@ __Usage:__
 
 
 
+### Cloud_filestore_manager.get_snapshot
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_snapshot.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_snapshot.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_snapshot.js`
+
+
+-----
+
+
+
+
 ### Cloud_filestore_manager.list_backups
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_backups.js).
@@ -192,6 +248,23 @@ __Usage:__
 
 
 `node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_instances.js`
+
+
+-----
+
+
+
+
+### Cloud_filestore_manager.list_snapshots
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js`
 
 
 -----
@@ -243,6 +316,23 @@ __Usage:__
 
 
 `node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_instance.js`
+
+
+-----
+
+
+
+
+### Cloud_filestore_manager.update_snapshot
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js`
 
 
 -----

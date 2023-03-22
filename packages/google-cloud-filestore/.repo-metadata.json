@@ -1,6 +1,6 @@
 {
   "name": "file",
-  "api_shortname": "filestore",
+  "api_shortname": "file",
   "name_pretty": "Filestore",
   "product_documentation": "https://cloud.google.com/filestore/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/filestore/latest",

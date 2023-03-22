@@ -17,7 +17,7 @@
                     "php_namespace": "Google\\Cloud\\DiscoveryEngine\\V1beta",
                     "ruby_package": "Google::Cloud::DiscoveryEngine::V1beta",
                     "(google.api.resource_definition).type": "discoveryengine.googleapis.com/ServingConfig",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}"
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}"
                   },
                   "nested": {
                     "CustomAttribute": {
@@ -49,7 +49,7 @@
                     "Document": {
                       "options": {
                         "(google.api.resource).type": "discoveryengine.googleapis.com/Document",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}"
                       },
                       "oneofs": {
                         "data": {
@@ -84,10 +84,7 @@
                         },
                         "schemaId": {
                           "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 3
                         },
                         "parentDocumentId": {
                           "type": "string",
@@ -106,12 +103,16 @@
                           "responseType": "Document",
                           "options": {
                             "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/documents/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/documents/*}"
+                                "get": "/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/documents/*}",
+                                "additional_bindings": {
+                                  "get": "/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}"
+                                }
                               }
                             },
                             {
@@ -124,12 +125,16 @@
                           "responseType": "ListDocumentsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents"
+                                "get": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents",
+                                "additional_bindings": {
+                                  "get": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents"
+                                }
                               }
                             },
                             {
@@ -143,13 +148,19 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents",
                             "(google.api.http).body": "document",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents",
+                            "(google.api.http).additional_bindings.body": "document",
                             "(google.api.method_signature)": "parent,document,document_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents",
-                                "body": "document"
+                                "body": "document",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents",
+                                  "body": "document"
+                                }
                               }
                             },
                             {
@@ -162,13 +173,19 @@
                           "responseType": "Document",
                           "options": {
                             "(google.api.http).patch": "/v1beta/{document.name=projects/*/locations/*/dataStores/*/branches/*/documents/*}",
-                            "(google.api.http).body": "document"
+                            "(google.api.http).body": "document",
+                            "(google.api.http).additional_bindings.patch": "/v1beta/{document.name=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}",
+                            "(google.api.http).additional_bindings.body": "document"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1beta/{document.name=projects/*/locations/*/dataStores/*/branches/*/documents/*}",
-                                "body": "document"
+                                "body": "document",
+                                "additional_bindings": {
+                                  "patch": "/v1beta/{document.name=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}",
+                                  "body": "document"
+                                }
                               }
                             }
                           ]
@@ -178,12 +195,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/documents/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/documents/*}"
+                                "delete": "/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/documents/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}"
+                                }
                               }
                             },
                             {
@@ -197,6 +218,8 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents:import",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents:import",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.discoveryengine.v1beta.ImportDocumentsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata"
                           },
@@ -204,7 +227,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents:import",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents:import",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -911,13 +938,19 @@
                           "responseType": "RecommendResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:recommend",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:recommend",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:recommend",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:recommend",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -1017,13 +1050,19 @@
                           "responseType": "UserEvent",
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:write",
-                            "(google.api.http).body": "user_event"
+                            "(google.api.http).body": "user_event",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:write",
+                            "(google.api.http).additional_bindings.body": "user_event"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:write",
-                                "body": "user_event"
+                                "body": "user_event",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:write",
+                                  "body": "user_event"
+                                }
                               }
                             }
                           ]
@@ -1032,12 +1071,16 @@
                           "requestType": "CollectUserEventRequest",
                           "responseType": "google.api.HttpBody",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:collect"
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:collect"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:collect"
+                                "get": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:collect",
+                                "additional_bindings": {
+                                  "get": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:collect"
+                                }
                               }
                             }
                           ]
@@ -1048,6 +1091,8 @@
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:import",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:import",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "google.cloud.discoveryengine.v1beta.ImportUserEventsResponse",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.discoveryengine.v1beta.ImportUserEventsMetadata"
                           },
@@ -1055,7 +1100,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta/{parent=projects/*/locations/*/dataStores/*}/userEvents:import",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:import",
+                                  "body": "*"
+                                }
                               }
                             },
                             {

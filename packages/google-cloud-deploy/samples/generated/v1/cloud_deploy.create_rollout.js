@@ -57,10 +57,15 @@ function main(parent, rolloutId, rollout) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, the request is validated and the user is provided with
-   *  an expected result, but no actual change is made.
+   *  Optional. If set to true, the request is validated and the user is provided
+   *  with an expected result, but no actual change is made.
    */
   // const validateOnly = true
+  /**
+   *  Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
+   *  will start at the first phase.
+   */
+  // const startingPhaseId = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;

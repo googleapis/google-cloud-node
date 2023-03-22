@@ -872,6 +872,9 @@ export namespace google {
                         /** Connection cloudResource */
                         cloudResource?: (google.cloud.bigquery.connection.v1.ICloudResourceProperties|null);
 
+                        /** Connection spark */
+                        spark?: (google.cloud.bigquery.connection.v1.ISparkProperties|null);
+
                         /** Connection creationTime */
                         creationTime?: (number|Long|string|null);
 
@@ -915,6 +918,9 @@ export namespace google {
                         /** Connection cloudResource. */
                         public cloudResource?: (google.cloud.bigquery.connection.v1.ICloudResourceProperties|null);
 
+                        /** Connection spark. */
+                        public spark?: (google.cloud.bigquery.connection.v1.ISparkProperties|null);
+
                         /** Connection creationTime. */
                         public creationTime: (number|Long|string);
 
@@ -925,7 +931,7 @@ export namespace google {
                         public hasCredential: boolean;
 
                         /** Connection properties. */
-                        public properties?: ("cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource");
+                        public properties?: ("cloudSql"|"aws"|"azure"|"cloudSpanner"|"cloudResource"|"spark");
 
                         /**
                          * Creates a new Connection instance using the specified properties.
@@ -1896,6 +1902,309 @@ export namespace google {
 
                         /**
                          * Gets the default type url for CloudResourceProperties
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MetastoreServiceConfig. */
+                    interface IMetastoreServiceConfig {
+
+                        /** MetastoreServiceConfig metastoreService */
+                        metastoreService?: (string|null);
+                    }
+
+                    /** Represents a MetastoreServiceConfig. */
+                    class MetastoreServiceConfig implements IMetastoreServiceConfig {
+
+                        /**
+                         * Constructs a new MetastoreServiceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.IMetastoreServiceConfig);
+
+                        /** MetastoreServiceConfig metastoreService. */
+                        public metastoreService: string;
+
+                        /**
+                         * Creates a new MetastoreServiceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MetastoreServiceConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.IMetastoreServiceConfig): google.cloud.bigquery.connection.v1.MetastoreServiceConfig;
+
+                        /**
+                         * Encodes the specified MetastoreServiceConfig message. Does not implicitly {@link google.cloud.bigquery.connection.v1.MetastoreServiceConfig.verify|verify} messages.
+                         * @param message MetastoreServiceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.IMetastoreServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MetastoreServiceConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.MetastoreServiceConfig.verify|verify} messages.
+                         * @param message MetastoreServiceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.IMetastoreServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MetastoreServiceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MetastoreServiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.MetastoreServiceConfig;
+
+                        /**
+                         * Decodes a MetastoreServiceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MetastoreServiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.MetastoreServiceConfig;
+
+                        /**
+                         * Verifies a MetastoreServiceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MetastoreServiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MetastoreServiceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.MetastoreServiceConfig;
+
+                        /**
+                         * Creates a plain object from a MetastoreServiceConfig message. Also converts values to other types if specified.
+                         * @param message MetastoreServiceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.MetastoreServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MetastoreServiceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MetastoreServiceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SparkHistoryServerConfig. */
+                    interface ISparkHistoryServerConfig {
+
+                        /** SparkHistoryServerConfig dataprocCluster */
+                        dataprocCluster?: (string|null);
+                    }
+
+                    /** Represents a SparkHistoryServerConfig. */
+                    class SparkHistoryServerConfig implements ISparkHistoryServerConfig {
+
+                        /**
+                         * Constructs a new SparkHistoryServerConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig);
+
+                        /** SparkHistoryServerConfig dataprocCluster. */
+                        public dataprocCluster: string;
+
+                        /**
+                         * Creates a new SparkHistoryServerConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SparkHistoryServerConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig): google.cloud.bigquery.connection.v1.SparkHistoryServerConfig;
+
+                        /**
+                         * Encodes the specified SparkHistoryServerConfig message. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.verify|verify} messages.
+                         * @param message SparkHistoryServerConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SparkHistoryServerConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkHistoryServerConfig.verify|verify} messages.
+                         * @param message SparkHistoryServerConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SparkHistoryServerConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SparkHistoryServerConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.SparkHistoryServerConfig;
+
+                        /**
+                         * Decodes a SparkHistoryServerConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SparkHistoryServerConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.SparkHistoryServerConfig;
+
+                        /**
+                         * Verifies a SparkHistoryServerConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SparkHistoryServerConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SparkHistoryServerConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.SparkHistoryServerConfig;
+
+                        /**
+                         * Creates a plain object from a SparkHistoryServerConfig message. Also converts values to other types if specified.
+                         * @param message SparkHistoryServerConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.SparkHistoryServerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SparkHistoryServerConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SparkHistoryServerConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SparkProperties. */
+                    interface ISparkProperties {
+
+                        /** SparkProperties serviceAccountId */
+                        serviceAccountId?: (string|null);
+
+                        /** SparkProperties metastoreServiceConfig */
+                        metastoreServiceConfig?: (google.cloud.bigquery.connection.v1.IMetastoreServiceConfig|null);
+
+                        /** SparkProperties sparkHistoryServerConfig */
+                        sparkHistoryServerConfig?: (google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig|null);
+                    }
+
+                    /** Represents a SparkProperties. */
+                    class SparkProperties implements ISparkProperties {
+
+                        /**
+                         * Constructs a new SparkProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.ISparkProperties);
+
+                        /** SparkProperties serviceAccountId. */
+                        public serviceAccountId: string;
+
+                        /** SparkProperties metastoreServiceConfig. */
+                        public metastoreServiceConfig?: (google.cloud.bigquery.connection.v1.IMetastoreServiceConfig|null);
+
+                        /** SparkProperties sparkHistoryServerConfig. */
+                        public sparkHistoryServerConfig?: (google.cloud.bigquery.connection.v1.ISparkHistoryServerConfig|null);
+
+                        /**
+                         * Creates a new SparkProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SparkProperties instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.ISparkProperties): google.cloud.bigquery.connection.v1.SparkProperties;
+
+                        /**
+                         * Encodes the specified SparkProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkProperties.verify|verify} messages.
+                         * @param message SparkProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.ISparkProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SparkProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.SparkProperties.verify|verify} messages.
+                         * @param message SparkProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.ISparkProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SparkProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SparkProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.SparkProperties;
+
+                        /**
+                         * Decodes a SparkProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SparkProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.SparkProperties;
+
+                        /**
+                         * Verifies a SparkProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SparkProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SparkProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.SparkProperties;
+
+                        /**
+                         * Creates a plain object from a SparkProperties message. Also converts values to other types if specified.
+                         * @param message SparkProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.SparkProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SparkProperties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SparkProperties
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

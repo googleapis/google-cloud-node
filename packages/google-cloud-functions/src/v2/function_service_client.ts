@@ -207,6 +207,9 @@ export class FunctionServiceClient {
       connectorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/connectors/{connector}'
       ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
       functionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/functions/{function}'
       ),
@@ -580,8 +583,24 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location in which the Google Cloud Storage signed URL
-   *   should be generated, specified in the format `projects/* /locations/*`.
+   *   Required. The project and location in which the Google Cloud Storage signed
+   *   URL should be generated, specified in the format `projects/* /locations/*`.
+   * @param {string} request.kmsKeyName
+   *   Resource name of a KMS crypto key (managed by the user) used to
+   *   encrypt/decrypt function source code objects in intermediate Cloud Storage
+   *   buckets. When you generate an upload url and upload your source code, it
+   *   gets copied to an intermediate Cloud Storage bucket. The source code is
+   *   then copied to a versioned directory in the sources bucket in the consumer
+   *   project during the function deployment.
+   *
+   *   It must match the pattern
+   *   `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+   *
+   *   The Google Cloud Functions service account
+   *   (service-{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+   *   granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+   *   (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+   *   Key/KeyRing/Project/Organization (least access preferred).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -676,8 +695,8 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of function for which source code Google Cloud Storage signed
-   *   URL should be generated.
+   *   Required. The name of function for which source code Google Cloud Storage
+   *   signed URL should be generated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -768,8 +787,8 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the runtimes should be listed,
-   *   specified in the format `projects/* /locations/*`
+   *   Required. The project and location from which the runtimes should be
+   *   listed, specified in the format `projects/* /locations/*`
    * @param {string} request.filter
    *   The filter for Runtimes that match the filter expression,
    *   following the syntax outlined in https://google.aip.dev/160.
@@ -860,8 +879,8 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location in which the function should be created, specified
-   *   in the format `projects/* /locations/*`
+   *   Required. The project and location in which the function should be created,
+   *   specified in the format `projects/* /locations/*`
    * @param {google.cloud.functions.v2.Function} request.function
    *   Required. Function to be created.
    * @param {string} request.functionId
@@ -1289,14 +1308,17 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the function should be listed,
-   *   specified in the format `projects/* /locations/*`
-   *   If you want to list functions in all locations, use "-" in place of a
-   *   location. When listing functions in all locations, if one or more
-   *   location(s) are unreachable, the response will contain functions from all
-   *   reachable locations along with the names of any unreachable locations.
+   *   Required. The project and location from which the function should be
+   *   listed, specified in the format `projects/* /locations/*` If you want to
+   *   list functions in all locations, use "-" in place of a location. When
+   *   listing functions in all locations, if one or more location(s) are
+   *   unreachable, the response will contain functions from all reachable
+   *   locations along with the names of any unreachable locations.
    * @param {number} request.pageSize
-   *   Maximum number of functions to return per call.
+   *   Maximum number of functions to return per call. The largest allowed
+   *   page_size is 1,000, if the page_size is omitted or specified as greater
+   *   than 1,000 then it will be replaced as 1,000. The size of the list
+   *   response can be less than specified when used with filters.
    * @param {string} request.pageToken
    *   The value returned by the last
    *   `ListFunctionsResponse`; indicates that
@@ -1402,14 +1424,17 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the function should be listed,
-   *   specified in the format `projects/* /locations/*`
-   *   If you want to list functions in all locations, use "-" in place of a
-   *   location. When listing functions in all locations, if one or more
-   *   location(s) are unreachable, the response will contain functions from all
-   *   reachable locations along with the names of any unreachable locations.
+   *   Required. The project and location from which the function should be
+   *   listed, specified in the format `projects/* /locations/*` If you want to
+   *   list functions in all locations, use "-" in place of a location. When
+   *   listing functions in all locations, if one or more location(s) are
+   *   unreachable, the response will contain functions from all reachable
+   *   locations along with the names of any unreachable locations.
    * @param {number} request.pageSize
-   *   Maximum number of functions to return per call.
+   *   Maximum number of functions to return per call. The largest allowed
+   *   page_size is 1,000, if the page_size is omitted or specified as greater
+   *   than 1,000 then it will be replaced as 1,000. The size of the list
+   *   response can be less than specified when used with filters.
    * @param {string} request.pageToken
    *   The value returned by the last
    *   `ListFunctionsResponse`; indicates that
@@ -1463,14 +1488,17 @@ export class FunctionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the function should be listed,
-   *   specified in the format `projects/* /locations/*`
-   *   If you want to list functions in all locations, use "-" in place of a
-   *   location. When listing functions in all locations, if one or more
-   *   location(s) are unreachable, the response will contain functions from all
-   *   reachable locations along with the names of any unreachable locations.
+   *   Required. The project and location from which the function should be
+   *   listed, specified in the format `projects/* /locations/*` If you want to
+   *   list functions in all locations, use "-" in place of a location. When
+   *   listing functions in all locations, if one or more location(s) are
+   *   unreachable, the response will contain functions from all reachable
+   *   locations along with the names of any unreachable locations.
    * @param {number} request.pageSize
-   *   Maximum number of functions to return per call.
+   *   Maximum number of functions to return per call. The largest allowed
+   *   page_size is 1,000, if the page_size is omitted or specified as greater
+   *   than 1,000 then it will be replaced as 1,000. The size of the list
+   *   response can be less than specified when used with filters.
    * @param {string} request.pageToken
    *   The value returned by the last
    *   `ListFunctionsResponse`; indicates that
@@ -2064,6 +2092,77 @@ export class FunctionServiceClient {
   matchConnectorFromConnectorName(connectorName: string) {
     return this.pathTemplates.connectorPathTemplate.match(connectorName)
       .connector;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**

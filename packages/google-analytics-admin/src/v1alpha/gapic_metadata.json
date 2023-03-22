@@ -420,6 +420,31 @@
                 "getBigQueryLink"
               ]
             },
+            "GetEnhancedMeasurementSettings": {
+              "methods": [
+                "getEnhancedMeasurementSettings"
+              ]
+            },
+            "UpdateEnhancedMeasurementSettings": {
+              "methods": [
+                "updateEnhancedMeasurementSettings"
+              ]
+            },
+            "CreateConnectedSiteTag": {
+              "methods": [
+                "createConnectedSiteTag"
+              ]
+            },
+            "DeleteConnectedSiteTag": {
+              "methods": [
+                "deleteConnectedSiteTag"
+              ]
+            },
+            "ListConnectedSiteTags": {
+              "methods": [
+                "listConnectedSiteTags"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -973,6 +998,31 @@
             "GetBigQueryLink": {
               "methods": [
                 "getBigQueryLink"
+              ]
+            },
+            "GetEnhancedMeasurementSettings": {
+              "methods": [
+                "getEnhancedMeasurementSettings"
+              ]
+            },
+            "UpdateEnhancedMeasurementSettings": {
+              "methods": [
+                "updateEnhancedMeasurementSettings"
+              ]
+            },
+            "CreateConnectedSiteTag": {
+              "methods": [
+                "createConnectedSiteTag"
+              ]
+            },
+            "DeleteConnectedSiteTag": {
+              "methods": [
+                "deleteConnectedSiteTag"
+              ]
+            },
+            "ListConnectedSiteTags": {
+              "methods": [
+                "listConnectedSiteTags"
               ]
             },
             "ListAccounts": {

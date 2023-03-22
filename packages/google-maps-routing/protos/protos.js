@@ -19485,6 +19485,7 @@
                          * @property {boolean|null} [computeAlternativeRoutes] ComputeRoutesRequest computeAlternativeRoutes
                          * @property {google.maps.routing.v2.IRouteModifiers|null} [routeModifiers] ComputeRoutesRequest routeModifiers
                          * @property {string|null} [languageCode] ComputeRoutesRequest languageCode
+                         * @property {string|null} [regionCode] ComputeRoutesRequest regionCode
                          * @property {google.maps.routing.v2.Units|null} [units] ComputeRoutesRequest units
                          * @property {Array.<google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute>|null} [requestedReferenceRoutes] ComputeRoutesRequest requestedReferenceRoutes
                          * @property {Array.<google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation>|null} [extraComputations] ComputeRoutesRequest extraComputations
@@ -19597,6 +19598,14 @@
                         ComputeRoutesRequest.prototype.languageCode = "";
     
                         /**
+                         * ComputeRoutesRequest regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.maps.routing.v2.ComputeRoutesRequest
+                         * @instance
+                         */
+                        ComputeRoutesRequest.prototype.regionCode = "";
+    
+                        /**
                          * ComputeRoutesRequest units.
                          * @member {google.maps.routing.v2.Units} units
                          * @memberof google.maps.routing.v2.ComputeRoutesRequest
@@ -19681,6 +19690,8 @@
                                     writer.int32(message.extraComputations[i]);
                                 writer.ldelim();
                             }
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.regionCode);
                             return writer;
                         };
     
@@ -19759,6 +19770,10 @@
                                     }
                                 case 10: {
                                         message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.regionCode = reader.string();
                                         break;
                                     }
                                 case 11: {
@@ -19896,6 +19911,9 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
                             if (message.units != null && message.hasOwnProperty("units"))
                                 switch (message.units) {
                                 default:
@@ -20072,6 +20090,8 @@
                             }
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
                             switch (object.units) {
                             default:
                                 if (typeof object.units === "number") {
@@ -20175,6 +20195,7 @@
                                 object.languageCode = "";
                                 object.units = options.enums === String ? "UNITS_UNSPECIFIED" : 0;
                                 object.polylineEncoding = options.enums === String ? "POLYLINE_ENCODING_UNSPECIFIED" : 0;
+                                object.regionCode = "";
                             }
                             if (message.origin != null && message.hasOwnProperty("origin"))
                                 object.origin = $root.google.maps.routing.v2.Waypoint.toObject(message.origin, options);
@@ -20213,6 +20234,8 @@
                                 for (var j = 0; j < message.extraComputations.length; ++j)
                                     object.extraComputations[j] = options.enums === String ? $root.google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation[message.extraComputations[j]] === undefined ? message.extraComputations[j] : $root.google.maps.routing.v2.ComputeRoutesRequest.ExtraComputation[message.extraComputations[j]] : message.extraComputations[j];
                             }
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
                             return object;
                         };
     
@@ -20570,6 +20593,8 @@
                          * @property {google.maps.routing.v2.RouteTravelMode|null} [travelMode] ComputeRouteMatrixRequest travelMode
                          * @property {google.maps.routing.v2.RoutingPreference|null} [routingPreference] ComputeRouteMatrixRequest routingPreference
                          * @property {google.protobuf.ITimestamp|null} [departureTime] ComputeRouteMatrixRequest departureTime
+                         * @property {string|null} [languageCode] ComputeRouteMatrixRequest languageCode
+                         * @property {string|null} [regionCode] ComputeRouteMatrixRequest regionCode
                          * @property {Array.<google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation>|null} [extraComputations] ComputeRouteMatrixRequest extraComputations
                          */
     
@@ -20632,6 +20657,22 @@
                         ComputeRouteMatrixRequest.prototype.departureTime = null;
     
                         /**
+                         * ComputeRouteMatrixRequest languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
+                         * @instance
+                         */
+                        ComputeRouteMatrixRequest.prototype.languageCode = "";
+    
+                        /**
+                         * ComputeRouteMatrixRequest regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
+                         * @instance
+                         */
+                        ComputeRouteMatrixRequest.prototype.regionCode = "";
+    
+                        /**
                          * ComputeRouteMatrixRequest extraComputations.
                          * @member {Array.<google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation>} extraComputations
                          * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
@@ -20675,12 +20716,16 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.routingPreference);
                             if (message.departureTime != null && Object.hasOwnProperty.call(message, "departureTime"))
                                 $root.google.protobuf.Timestamp.encode(message.departureTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.languageCode);
                             if (message.extraComputations != null && message.extraComputations.length) {
                                 writer.uint32(/* id 8, wireType 2 =*/66).fork();
                                 for (var i = 0; i < message.extraComputations.length; ++i)
                                     writer.int32(message.extraComputations[i]);
                                 writer.ldelim();
                             }
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.regionCode);
                             return writer;
                         };
     
@@ -20737,6 +20782,14 @@
                                     }
                                 case 5: {
                                         message.departureTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.regionCode = reader.string();
                                         break;
                                     }
                                 case 8: {
@@ -20829,6 +20882,12 @@
                                 if (error)
                                     return "departureTime." + error;
                             }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
                             if (message.extraComputations != null && message.hasOwnProperty("extraComputations")) {
                                 if (!Array.isArray(message.extraComputations))
                                     return "extraComputations: array expected";
@@ -20933,6 +20992,10 @@
                                     throw TypeError(".google.maps.routing.v2.ComputeRouteMatrixRequest.departureTime: object expected");
                                 message.departureTime = $root.google.protobuf.Timestamp.fromObject(object.departureTime);
                             }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
                             if (object.extraComputations) {
                                 if (!Array.isArray(object.extraComputations))
                                     throw TypeError(".google.maps.routing.v2.ComputeRouteMatrixRequest.extraComputations: array expected");
@@ -20979,6 +21042,8 @@
                                 object.travelMode = options.enums === String ? "TRAVEL_MODE_UNSPECIFIED" : 0;
                                 object.routingPreference = options.enums === String ? "ROUTING_PREFERENCE_UNSPECIFIED" : 0;
                                 object.departureTime = null;
+                                object.languageCode = "";
+                                object.regionCode = "";
                             }
                             if (message.origins && message.origins.length) {
                                 object.origins = [];
@@ -20996,11 +21061,15 @@
                                 object.routingPreference = options.enums === String ? $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] === undefined ? message.routingPreference : $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] : message.routingPreference;
                             if (message.departureTime != null && message.hasOwnProperty("departureTime"))
                                 object.departureTime = $root.google.protobuf.Timestamp.toObject(message.departureTime, options);
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
                             if (message.extraComputations && message.extraComputations.length) {
                                 object.extraComputations = [];
                                 for (var j = 0; j < message.extraComputations.length; ++j)
                                     object.extraComputations[j] = options.enums === String ? $root.google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[message.extraComputations[j]] === undefined ? message.extraComputations[j] : $root.google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[message.extraComputations[j]] : message.extraComputations[j];
                             }
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
                             return object;
                         };
     

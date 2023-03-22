@@ -29,9 +29,13 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Data Access Report is requested for this property.
-   *  For example if "123" is your GA4 property ID, then entity should be
-   *  "properties/123".
+   *  The Data Access Report supports requesting at the property level or account
+   *  level. If requested at the account level, Data Access Reports include all
+   *  access for all properties under that account.
+   *  To request at the property level, entity should be for example
+   *  'properties/123' if "123" is your GA4 property ID. To request at the
+   *  account level, entity should be for example 'accounts/1234' if "1234" is
+   *  your GA4 Account ID.
    */
   // const entity = 'abc123'
   /**
@@ -103,7 +107,8 @@ function main() {
   // const orderBys = 1234
   /**
    *  Toggles whether to return the current state of this Analytics Property's
-   *  quota. Quota is returned in AccessQuota (#AccessQuota).
+   *  quota. Quota is returned in AccessQuota (#AccessQuota). For account-level
+   *  requests, this field must be false.
    */
   // const returnEntityQuota = true
 

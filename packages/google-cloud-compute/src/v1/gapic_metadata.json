@@ -561,6 +561,11 @@
                 "testIamPermissions"
               ]
             },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -633,6 +638,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "AggregatedList": {
@@ -2331,6 +2341,11 @@
                 "setMinCpuPlatform"
               ]
             },
+            "SetName": {
+              "methods": [
+                "setName"
+              ]
+            },
             "SetScheduling": {
               "methods": [
                 "setScheduling"
@@ -2567,6 +2582,11 @@
                 "setMinCpuPlatform"
               ]
             },
+            "SetName": {
+              "methods": [
+                "setName"
+              ]
+            },
             "SetScheduling": {
               "methods": [
                 "setScheduling"
@@ -2702,6 +2722,13 @@
                 "testIamPermissions"
               ]
             },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -2742,6 +2769,13 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
               ]
             },
             "List": {
@@ -3881,6 +3915,11 @@
                 "setNodeTemplate"
               ]
             },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulateMaintenanceEvent"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -3955,6 +3994,11 @@
             "SetNodeTemplate": {
               "methods": [
                 "setNodeTemplate"
+              ]
+            },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulateMaintenanceEvent"
               ]
             },
             "TestIamPermissions": {
@@ -4853,6 +4897,11 @@
                 "testIamPermissions"
               ]
             },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -4918,6 +4967,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "List": {
@@ -5415,6 +5469,64 @@
             "BulkInsert": {
               "methods": [
                 "bulkInsert"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionInstanceTemplates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionInstanceTemplatesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionInstanceTemplatesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
               ]
             }
           }
