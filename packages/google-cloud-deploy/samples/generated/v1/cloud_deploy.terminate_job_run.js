@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(inlineSource, gcsSource, bigquerySource, parent) {
-  // [START discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async]
+function main(name) {
+  // [START clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,51 +29,31 @@ function main(inlineSource, gcsSource, bigquerySource, parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Inline source for the input content for UserEvents.
+   *  Required. Name of the `JobRun`. Format must be
+   *  projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/
+   *  releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}.
    */
-  // const inlineSource = {}
-  /**
-   *  Required. Cloud Storage location for the input content.
-   */
-  // const gcsSource = {}
-  /**
-   *  Required. BigQuery input source.
-   */
-  // const bigquerySource = {}
-  /**
-   *  Required. Parent DataStore resource name, of the form
-   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
-   */
-  // const parent = 'abc123'
-  /**
-   *  The desired location of errors incurred during the Import. Cannot be set
-   *  for inline user event imports.
-   */
-  // const errorConfig = {}
+  // const name = 'abc123'
 
-  // Imports the Discoveryengine library
-  const {UserEventServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  // Imports the Deploy library
+  const {CloudDeployClient} = require('@google-cloud/deploy').v1;
 
   // Instantiates a client
-  const discoveryengineClient = new UserEventServiceClient();
+  const deployClient = new CloudDeployClient();
 
-  async function callImportUserEvents() {
+  async function callTerminateJobRun() {
     // Construct request
     const request = {
-      inlineSource,
-      gcsSource,
-      bigquerySource,
-      parent,
+      name,
     };
 
     // Run request
-    const [operation] = await discoveryengineClient.importUserEvents(request);
-    const [response] = await operation.promise();
+    const response = await deployClient.terminateJobRun(request);
     console.log(response);
   }
 
-  callImportUserEvents();
-  // [END discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_async]
+  callTerminateJobRun();
+  // [END clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
 }
 
 process.on('unhandledRejection', err => {

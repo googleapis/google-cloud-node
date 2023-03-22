@@ -55,13 +55,13 @@ function main(updateMask, deliveryPipeline) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, updating a `DeliveryPipeline` that does not exist will
-   *  result in the creation of a new `DeliveryPipeline`.
+   *  Optional. If set to true, updating a `DeliveryPipeline` that does not exist
+   *  will result in the creation of a new `DeliveryPipeline`.
    */
   // const allowMissing = true
   /**
-   *  Optional. If set to true, the request is validated and the user is provided with
-   *  an expected result, but no actual change is made.
+   *  Optional. If set to true, the request is validated and the user is provided
+   *  with an expected result, but no actual change is made.
    */
   // const validateOnly = true
 
