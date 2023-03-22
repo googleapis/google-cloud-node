@@ -179,12 +179,21 @@ export class UserEventServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      dataStorePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationCollectionDataStorePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+        ),
+      projectLocationCollectionDataStoreBranchDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
-      documentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-      ),
+      projectLocationDataStoreBranchDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -200,8 +209,20 @@ export class UserEventServiceClient {
       lroOptions.httpRules = [
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
+          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
           additional_bindings: [
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/operations/*}',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
+            },
             {
               get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
             },
@@ -214,8 +235,20 @@ export class UserEventServiceClient {
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
+          get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
           additional_bindings: [
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
+            },
             {
               get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
@@ -390,7 +423,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent DataStore resource name, such as
-   *   `projects/{project}/locations/{location}/dataStores/{data_store}`.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    * @param {google.cloud.discoveryengine.v1beta.UserEvent} request.userEvent
    *   Required. User event to write.
    * @param {object} [options]
@@ -494,7 +527,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent DataStore resource name, such as
-   *   `projects/{project}/locations/{location}/dataStores/{data_store}`.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    * @param {string} request.userEvent
    *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
    *   characters.
@@ -612,12 +645,12 @@ export class UserEventServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.ImportUserEventsRequest.InlineSource} request.inlineSource
    *   Required. The Inline source for the input content for UserEvents.
    * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
-   *   Required. Google Cloud Storage location for the input content.
+   *   Required. Cloud Storage location for the input content.
    * @param {google.cloud.discoveryengine.v1beta.BigQuerySource} request.bigquerySource
    *   Required. BigQuery input source.
    * @param {string} request.parent
    *   Required. Parent DataStore resource name, of the form
-   *   `projects/{project}/locations/{location}/dataStores/{data_store}`
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
    * @param {google.cloud.discoveryengine.v1beta.ImportErrorConfig} request.errorConfig
    *   The desired location of errors incurred during the Import. Cannot be set
    *   for inline user event imports.
@@ -932,15 +965,225 @@ export class UserEventServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified dataStore resource name string.
+   * Return a fully-qualified projectLocationCollectionDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStorePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreBranchDocument resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreBranchDocumentPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreBranchDocument resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreBranchDocument resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreBranchDocument resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreBranchDocument resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationCollectionDataStoreBranchDocument resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationCollectionDataStoreBranchDocument resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  dataStorePath(project: string, location: string, dataStore: string) {
-    return this.pathTemplates.dataStorePathTemplate.render({
+  projectLocationDataStorePath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.render({
       project: project,
       location: location,
       data_store: dataStore,
@@ -948,43 +1191,52 @@ export class UserEventServiceClient {
   }
 
   /**
-   * Parse the project from DataStore resource.
+   * Parse the project from ProjectLocationDataStore resource.
    *
-   * @param {string} dataStoreName
-   *   A fully-qualified path representing DataStore resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDataStoreName(dataStoreName: string) {
-    return this.pathTemplates.dataStorePathTemplate.match(dataStoreName)
-      .project;
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).project;
   }
 
   /**
-   * Parse the location from DataStore resource.
+   * Parse the location from ProjectLocationDataStore resource.
    *
-   * @param {string} dataStoreName
-   *   A fully-qualified path representing DataStore resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDataStoreName(dataStoreName: string) {
-    return this.pathTemplates.dataStorePathTemplate.match(dataStoreName)
-      .location;
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).location;
   }
 
   /**
-   * Parse the data_store from DataStore resource.
+   * Parse the data_store from ProjectLocationDataStore resource.
    *
-   * @param {string} dataStoreName
-   *   A fully-qualified path representing DataStore resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromDataStoreName(dataStoreName: string) {
-    return this.pathTemplates.dataStorePathTemplate.match(dataStoreName)
-      .data_store;
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).data_store;
   }
 
   /**
-   * Return a fully-qualified document resource name string.
+   * Return a fully-qualified projectLocationDataStoreBranchDocument resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -993,76 +1245,97 @@ export class UserEventServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(
+  projectLocationDataStoreBranchDocumentPath(
     project: string,
     location: string,
     dataStore: string,
     branch: string,
     document: string
   ) {
-    return this.pathTemplates.documentPathTemplate.render({
-      project: project,
-      location: location,
-      data_store: dataStore,
-      branch: branch,
-      document: document,
-    });
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+      }
+    );
   }
 
   /**
-   * Parse the project from Document resource.
+   * Parse the project from ProjectLocationDataStoreBranchDocument resource.
    *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
+   * @param {string} projectLocationDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName).project;
+  matchProjectFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).project;
   }
 
   /**
-   * Parse the location from Document resource.
+   * Parse the location from ProjectLocationDataStoreBranchDocument resource.
    *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
+   * @param {string} projectLocationDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName).location;
+  matchLocationFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).location;
   }
 
   /**
-   * Parse the data_store from Document resource.
+   * Parse the data_store from ProjectLocationDataStoreBranchDocument resource.
    *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
+   * @param {string} projectLocationDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName)
-      .data_store;
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).data_store;
   }
 
   /**
-   * Parse the branch from Document resource.
+   * Parse the branch from ProjectLocationDataStoreBranchDocument resource.
    *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
+   * @param {string} projectLocationDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName).branch;
+  matchBranchFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).branch;
   }
 
   /**
-   * Parse the document from Document resource.
+   * Parse the document from ProjectLocationDataStoreBranchDocument resource.
    *
-   * @param {string} documentName
-   *   A fully-qualified path representing Document resource.
+   * @param {string} projectLocationDataStoreBranchDocumentName
+   *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromDocumentName(documentName: string) {
-    return this.pathTemplates.documentPathTemplate.match(documentName).document;
+  matchDocumentFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).document;
   }
 
   /**
