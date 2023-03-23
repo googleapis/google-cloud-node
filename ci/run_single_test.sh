@@ -39,7 +39,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-npm install
+npm install --unsafe-perm
+whoami
 
 retval=0
 
