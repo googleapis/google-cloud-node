@@ -159,6 +159,21 @@ describe('subscriptions', () => {
     assert.strictEqual(subscriptions[0].name, fullSubName(subName));
   });
 
+  it('should create a subscription with a retry policy', async () => {
+    const testId = 'sub_w_retry';
+    const topic = await createTopic(testId);
+    const subName = reserveSub(testId);
+    const output = execSync(
+      `${commandFor('createSubscriptionWithRetryPolicy')} ${
+        topic.name
+      } ${subName}`
+    );
+    console.log('create retry policy', output);
+    assert.include(output, `Created subscription ${subName} with retry policy`);
+    const [subscriptions] = await pubsub.topic(topic.name).getSubscriptions();
+    assert.strictEqual(subscriptions[0].name, fullSubName(subName));
+  });
+
   it('should create a push subscription', async () => {
     const testId = 'push_sub';
     const topic = await createTopic(testId);
