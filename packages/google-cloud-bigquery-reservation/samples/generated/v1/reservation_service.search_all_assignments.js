@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name with location (project name could be the wildcard '-'),
-   *  e.g.:
+   *  Required. The resource name with location (project name could be the
+   *  wildcard '-'), e.g.:
    *    `projects/-/locations/US`.
    */
   // const parent = 'abc123'
