@@ -95,9 +95,20 @@ describe('tests for templates', () => {
       'packages/google-cloud-keymanagement'
     );
 
-    assert.deepStrictEqual(
-      readdirSync(templateDirRead),
-      readdirSync(templateDirWrite)
-    );
+    assert.deepStrictEqual(readdirSync(templateDirRead), [
+      '.OwlBot.yaml',
+      '.repo-metadata.json.njk',
+      'LICENSE',
+      'package.json',
+      'samples',
+    ]);
+
+    assert.deepStrictEqual(readdirSync(templateDirWrite), [
+      '.OwlBot.yaml',
+      '.repo-metadata.json',
+      'LICENSE',
+      'package.json',
+      'samples',
+    ]);
   });
 });
