@@ -1,4 +1,4 @@
-createTime: '2022-12-22T21:33:14.641417894Z'
+createTime: '2023-03-22T22:44:59.896784337Z'
 description: Presubmit unit with node 12
 filename: ci/cloudbuild.yaml
 github:
@@ -7,9 +7,10 @@ github:
   pullRequest:
     branch: ^main$
     commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
-id: 492f377a-73d6-4b52-9269-1a3e3dbb6721
+id: 2a30298b-f453-459f-9f90-415527d051f2
 includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
 name: unit-presubmit-node12
+resourceName: projects/long-door-651/locations/global/triggers/2a30298b-f453-459f-9f90-415527d051f2
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: presubmit
