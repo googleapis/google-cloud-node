@@ -1722,6 +1722,12 @@ export class ReservationServiceClient {
    * @param {string} request.destinationId
    *   The new reservation ID, e.g.:
    *     `projects/myotherproject/locations/US/reservations/team2-prod`
+   * @param {string} request.assignmentId
+   *   The optional assignment ID. A new assignment name is generated if this
+   *   field is empty.
+   *
+   *   This field can contain only lowercase alphanumeric characters or dashes.
+   *   Max length is 64 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2761,8 +2767,8 @@ export class ReservationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the admin project(containing project and location),
-   *   e.g.:
+   *   Required. The resource name of the admin project(containing project and
+   *   location), e.g.:
    *     `projects/myproject/locations/US`.
    * @param {string} request.query
    *   Please specify resource name as assignee in the query.
@@ -2875,8 +2881,8 @@ export class ReservationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the admin project(containing project and location),
-   *   e.g.:
+   *   Required. The resource name of the admin project(containing project and
+   *   location), e.g.:
    *     `projects/myproject/locations/US`.
    * @param {string} request.query
    *   Please specify resource name as assignee in the query.
@@ -2937,8 +2943,8 @@ export class ReservationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the admin project(containing project and location),
-   *   e.g.:
+   *   Required. The resource name of the admin project(containing project and
+   *   location), e.g.:
    *     `projects/myproject/locations/US`.
    * @param {string} request.query
    *   Please specify resource name as assignee in the query.
@@ -3017,8 +3023,8 @@ export class ReservationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name with location (project name could be the wildcard '-'),
-   *   e.g.:
+   *   Required. The resource name with location (project name could be the
+   *   wildcard '-'), e.g.:
    *     `projects/-/locations/US`.
    * @param {string} request.query
    *   Please specify resource name as assignee in the query.
@@ -3125,8 +3131,8 @@ export class ReservationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name with location (project name could be the wildcard '-'),
-   *   e.g.:
+   *   Required. The resource name with location (project name could be the
+   *   wildcard '-'), e.g.:
    *     `projects/-/locations/US`.
    * @param {string} request.query
    *   Please specify resource name as assignee in the query.
@@ -3181,8 +3187,8 @@ export class ReservationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name with location (project name could be the wildcard '-'),
-   *   e.g.:
+   *   Required. The resource name with location (project name could be the
+   *   wildcard '-'), e.g.:
    *     `projects/-/locations/US`.
    * @param {string} request.query
    *   Please specify resource name as assignee in the query.

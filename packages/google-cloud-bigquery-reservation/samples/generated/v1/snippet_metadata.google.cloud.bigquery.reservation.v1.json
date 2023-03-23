@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-reservation",
-        "version": "2.1.0",
+        "version": "2.1.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -798,7 +798,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -813,6 +813,10 @@
                     },
                     {
                         "name": "destination_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "assignment_id",
                         "type": "TYPE_STRING"
                     }
                 ],
