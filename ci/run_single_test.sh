@@ -40,7 +40,6 @@ fi
 
 # Install dependencies
 npm install --unsafe-perm
-whoami
 
 retval=0
 
