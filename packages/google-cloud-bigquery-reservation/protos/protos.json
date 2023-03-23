@@ -446,6 +446,10 @@
                               "type": "bool",
                               "id": 4
                             },
+                            "autoscale": {
+                              "type": "Autoscale",
+                              "id": 7
+                            },
                             "concurrency": {
                               "type": "int64",
                               "id": 16
@@ -467,6 +471,27 @@
                             "multiRegionAuxiliary": {
                               "type": "bool",
                               "id": 14
+                            },
+                            "edition": {
+                              "type": "Edition",
+                              "id": 17
+                            }
+                          },
+                          "nested": {
+                            "Autoscale": {
+                              "fields": {
+                                "currentSlots": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "maxSlots": {
+                                  "type": "int64",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -526,6 +551,10 @@
                             "multiRegionAuxiliary": {
                               "type": "bool",
                               "id": 10
+                            },
+                            "edition": {
+                              "type": "Edition",
+                              "id": 12
                             }
                           },
                           "nested": {
@@ -533,9 +562,14 @@
                               "values": {
                                 "COMMITMENT_PLAN_UNSPECIFIED": 0,
                                 "FLEX": 3,
+                                "FLEX_FLAT_RATE": 7,
                                 "TRIAL": 5,
                                 "MONTHLY": 2,
-                                "ANNUAL": 4
+                                "MONTHLY_FLAT_RATE": 8,
+                                "ANNUAL": 4,
+                                "ANNUAL_FLAT_RATE": 9,
+                                "THREE_YEAR": 10,
+                                "NONE": 6
                               }
                             },
                             "State": {
@@ -813,7 +847,8 @@
                                 "JOB_TYPE_UNSPECIFIED": 0,
                                 "PIPELINE": 1,
                                 "QUERY": 2,
-                                "ML_EXTERNAL": 3
+                                "ML_EXTERNAL": 3,
+                                "BACKGROUND": 4
                               }
                             },
                             "State": {
@@ -980,6 +1015,10 @@
                               "options": {
                                 "(google.api.resource_reference).child_type": "bigqueryreservation.googleapis.com/Assignment"
                               }
+                            },
+                            "assignmentId": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         },
@@ -1061,6 +1100,14 @@
                               "type": "google.protobuf.FieldMask",
                               "id": 2
                             }
+                          }
+                        },
+                        "Edition": {
+                          "values": {
+                            "EDITION_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "ENTERPRISE": 2,
+                            "ENTERPRISE_PLUS": 3
                           }
                         }
                       }
