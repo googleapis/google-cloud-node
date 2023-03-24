@@ -60,7 +60,6 @@ system)
 units)
     # Skipping Node 12 tests for typeless-sample bot, since it doesn't run on Node12
     if [[ ${PROJECT} != "typeless-sample-bot" ]] || [[ ${NODE_VERSION} != "12" ]]; then
-        echo "whatsap"
         npm test
         retval=$?
     fi
