@@ -17,7 +17,7 @@
 
 import loggers from './loggers.js';
 import {treeWalk} from './tree-walk.js';
-import {promises as fs} from 'fs/promises';
+import {readFile, writeFile} from 'fs/promises';
 import babel from '@babel/core';
 import path from 'node:path';
 import {typescript as presetTypescript} from './preset-loader.js';
@@ -72,7 +72,7 @@ export async function* filterByContents(
   filenames: AsyncIterable<string>
 ): AsyncIterable<Sample> {
   for await (const fn of filenames) {
-    const contents = (await fs.readFile(fn)).toString();
+    const contents = (await readFile(fn)).toString();
     if (sampleChecker.test(contents)) {
       yield {
         filename: fn,
@@ -124,7 +124,7 @@ export async function* writeSamples(
       : s.filename;
 
     loggers.verbose('writing new sample', newName);
-    await fs.writeFile(newName, s.contents);
+    await writeFile(newName, s.contents);
 
     yield {
       filename: newName,
