@@ -47,7 +47,8 @@ function main(name) {
     };
 
     // Run request
-    const response = await stitcherClient.deleteSlate(request);
+    const [operation] = await stitcherClient.deleteSlate(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 

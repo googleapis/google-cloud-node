@@ -1822,6 +1822,497 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** AdTracking enum. */
+                    enum AdTracking {
+                        AD_TRACKING_UNSPECIFIED = 0,
+                        CLIENT = 1,
+                        SERVER = 2
+                    }
+
+                    /** Properties of a LiveConfig. */
+                    interface ILiveConfig {
+
+                        /** LiveConfig name */
+                        name?: (string|null);
+
+                        /** LiveConfig sourceUri */
+                        sourceUri?: (string|null);
+
+                        /** LiveConfig adTagUri */
+                        adTagUri?: (string|null);
+
+                        /** LiveConfig gamLiveConfig */
+                        gamLiveConfig?: (google.cloud.video.stitcher.v1.IGamLiveConfig|null);
+
+                        /** LiveConfig state */
+                        state?: (google.cloud.video.stitcher.v1.LiveConfig.State|keyof typeof google.cloud.video.stitcher.v1.LiveConfig.State|null);
+
+                        /** LiveConfig adTracking */
+                        adTracking?: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking|null);
+
+                        /** LiveConfig defaultSlate */
+                        defaultSlate?: (string|null);
+
+                        /** LiveConfig stitchingPolicy */
+                        stitchingPolicy?: (google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy|keyof typeof google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy|null);
+
+                        /** LiveConfig prefetchConfig */
+                        prefetchConfig?: (google.cloud.video.stitcher.v1.IPrefetchConfig|null);
+
+                        /** LiveConfig defaultAdBreakDuration */
+                        defaultAdBreakDuration?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a LiveConfig. */
+                    class LiveConfig implements ILiveConfig {
+
+                        /**
+                         * Constructs a new LiveConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.ILiveConfig);
+
+                        /** LiveConfig name. */
+                        public name: string;
+
+                        /** LiveConfig sourceUri. */
+                        public sourceUri: string;
+
+                        /** LiveConfig adTagUri. */
+                        public adTagUri: string;
+
+                        /** LiveConfig gamLiveConfig. */
+                        public gamLiveConfig?: (google.cloud.video.stitcher.v1.IGamLiveConfig|null);
+
+                        /** LiveConfig state. */
+                        public state: (google.cloud.video.stitcher.v1.LiveConfig.State|keyof typeof google.cloud.video.stitcher.v1.LiveConfig.State);
+
+                        /** LiveConfig adTracking. */
+                        public adTracking: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking);
+
+                        /** LiveConfig defaultSlate. */
+                        public defaultSlate: string;
+
+                        /** LiveConfig stitchingPolicy. */
+                        public stitchingPolicy: (google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy|keyof typeof google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy);
+
+                        /** LiveConfig prefetchConfig. */
+                        public prefetchConfig?: (google.cloud.video.stitcher.v1.IPrefetchConfig|null);
+
+                        /** LiveConfig defaultAdBreakDuration. */
+                        public defaultAdBreakDuration?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new LiveConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LiveConfig instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.ILiveConfig): google.cloud.video.stitcher.v1.LiveConfig;
+
+                        /**
+                         * Encodes the specified LiveConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveConfig.verify|verify} messages.
+                         * @param message LiveConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.ILiveConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LiveConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveConfig.verify|verify} messages.
+                         * @param message LiveConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.ILiveConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LiveConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LiveConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.LiveConfig;
+
+                        /**
+                         * Decodes a LiveConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LiveConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.LiveConfig;
+
+                        /**
+                         * Verifies a LiveConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LiveConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LiveConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.LiveConfig;
+
+                        /**
+                         * Creates a plain object from a LiveConfig message. Also converts values to other types if specified.
+                         * @param message LiveConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.LiveConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LiveConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LiveConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LiveConfig {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CREATING = 1,
+                            READY = 2,
+                            DELETING = 3
+                        }
+
+                        /** StitchingPolicy enum. */
+                        enum StitchingPolicy {
+                            STITCHING_POLICY_UNSPECIFIED = 0,
+                            CUT_CURRENT = 1,
+                            COMPLETE_AD = 2
+                        }
+                    }
+
+                    /** Properties of a PrefetchConfig. */
+                    interface IPrefetchConfig {
+
+                        /** PrefetchConfig enabled */
+                        enabled?: (boolean|null);
+
+                        /** PrefetchConfig initialAdRequestDuration */
+                        initialAdRequestDuration?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a PrefetchConfig. */
+                    class PrefetchConfig implements IPrefetchConfig {
+
+                        /**
+                         * Constructs a new PrefetchConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IPrefetchConfig);
+
+                        /** PrefetchConfig enabled. */
+                        public enabled: boolean;
+
+                        /** PrefetchConfig initialAdRequestDuration. */
+                        public initialAdRequestDuration?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new PrefetchConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrefetchConfig instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IPrefetchConfig): google.cloud.video.stitcher.v1.PrefetchConfig;
+
+                        /**
+                         * Encodes the specified PrefetchConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.PrefetchConfig.verify|verify} messages.
+                         * @param message PrefetchConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IPrefetchConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrefetchConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.PrefetchConfig.verify|verify} messages.
+                         * @param message PrefetchConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IPrefetchConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrefetchConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrefetchConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.PrefetchConfig;
+
+                        /**
+                         * Decodes a PrefetchConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrefetchConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.PrefetchConfig;
+
+                        /**
+                         * Verifies a PrefetchConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrefetchConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrefetchConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.PrefetchConfig;
+
+                        /**
+                         * Creates a plain object from a PrefetchConfig message. Also converts values to other types if specified.
+                         * @param message PrefetchConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.PrefetchConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrefetchConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrefetchConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GamLiveConfig. */
+                    interface IGamLiveConfig {
+
+                        /** GamLiveConfig networkCode */
+                        networkCode?: (string|null);
+
+                        /** GamLiveConfig assetKey */
+                        assetKey?: (string|null);
+
+                        /** GamLiveConfig customAssetKey */
+                        customAssetKey?: (string|null);
+                    }
+
+                    /** Represents a GamLiveConfig. */
+                    class GamLiveConfig implements IGamLiveConfig {
+
+                        /**
+                         * Constructs a new GamLiveConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IGamLiveConfig);
+
+                        /** GamLiveConfig networkCode. */
+                        public networkCode: string;
+
+                        /** GamLiveConfig assetKey. */
+                        public assetKey: string;
+
+                        /** GamLiveConfig customAssetKey. */
+                        public customAssetKey: string;
+
+                        /**
+                         * Creates a new GamLiveConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GamLiveConfig instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IGamLiveConfig): google.cloud.video.stitcher.v1.GamLiveConfig;
+
+                        /**
+                         * Encodes the specified GamLiveConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamLiveConfig.verify|verify} messages.
+                         * @param message GamLiveConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IGamLiveConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GamLiveConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamLiveConfig.verify|verify} messages.
+                         * @param message GamLiveConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IGamLiveConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GamLiveConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GamLiveConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.GamLiveConfig;
+
+                        /**
+                         * Decodes a GamLiveConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GamLiveConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.GamLiveConfig;
+
+                        /**
+                         * Verifies a GamLiveConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GamLiveConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GamLiveConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.GamLiveConfig;
+
+                        /**
+                         * Creates a plain object from a GamLiveConfig message. Also converts values to other types if specified.
+                         * @param message GamLiveConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.GamLiveConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GamLiveConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GamLiveConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GamVodConfig. */
+                    interface IGamVodConfig {
+
+                        /** GamVodConfig networkCode */
+                        networkCode?: (string|null);
+
+                        /** GamVodConfig streamId */
+                        streamId?: (string|null);
+                    }
+
+                    /** Represents a GamVodConfig. */
+                    class GamVodConfig implements IGamVodConfig {
+
+                        /**
+                         * Constructs a new GamVodConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IGamVodConfig);
+
+                        /** GamVodConfig networkCode. */
+                        public networkCode: string;
+
+                        /** GamVodConfig streamId. */
+                        public streamId: string;
+
+                        /**
+                         * Creates a new GamVodConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GamVodConfig instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IGamVodConfig): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Encodes the specified GamVodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
+                         * @param message GamVodConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IGamVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GamVodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
+                         * @param message GamVodConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IGamVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GamVodConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GamVodConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Decodes a GamVodConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GamVodConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Verifies a GamVodConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GamVodConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GamVodConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Creates a plain object from a GamVodConfig message. Also converts values to other types if specified.
+                         * @param message GamVodConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.GamVodConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GamVodConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GamVodConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a VodSession. */
                     interface IVodSession {
 
@@ -1843,14 +2334,17 @@ export namespace google {
                         /** VodSession adTagMacroMap */
                         adTagMacroMap?: ({ [k: string]: string }|null);
 
-                        /** VodSession clientAdTracking */
-                        clientAdTracking?: (boolean|null);
-
                         /** VodSession manifestOptions */
                         manifestOptions?: (google.cloud.video.stitcher.v1.IManifestOptions|null);
 
                         /** VodSession assetId */
                         assetId?: (string|null);
+
+                        /** VodSession adTracking */
+                        adTracking?: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking|null);
+
+                        /** VodSession gamVodConfig */
+                        gamVodConfig?: (google.cloud.video.stitcher.v1.IGamVodConfig|null);
                     }
 
                     /** Represents a VodSession. */
@@ -1880,14 +2374,17 @@ export namespace google {
                         /** VodSession adTagMacroMap. */
                         public adTagMacroMap: { [k: string]: string };
 
-                        /** VodSession clientAdTracking. */
-                        public clientAdTracking: boolean;
-
                         /** VodSession manifestOptions. */
                         public manifestOptions?: (google.cloud.video.stitcher.v1.IManifestOptions|null);
 
                         /** VodSession assetId. */
                         public assetId: string;
+
+                        /** VodSession adTracking. */
+                        public adTracking: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking);
+
+                        /** VodSession gamVodConfig. */
+                        public gamVodConfig?: (google.cloud.video.stitcher.v1.IGamVodConfig|null);
 
                         /**
                          * Creates a new VodSession instance using the specified properties.
@@ -2400,32 +2897,17 @@ export namespace google {
                         /** LiveSession playUri */
                         playUri?: (string|null);
 
-                        /** LiveSession sourceUri */
-                        sourceUri?: (string|null);
-
-                        /** LiveSession defaultAdTagId */
-                        defaultAdTagId?: (string|null);
-
-                        /** LiveSession adTagMap */
-                        adTagMap?: ({ [k: string]: google.cloud.video.stitcher.v1.IAdTag }|null);
-
                         /** LiveSession adTagMacros */
                         adTagMacros?: ({ [k: string]: string }|null);
-
-                        /** LiveSession clientAdTracking */
-                        clientAdTracking?: (boolean|null);
-
-                        /** LiveSession defaultSlateId */
-                        defaultSlateId?: (string|null);
-
-                        /** LiveSession stitchingPolicy */
-                        stitchingPolicy?: (google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy|keyof typeof google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy|null);
 
                         /** LiveSession manifestOptions */
                         manifestOptions?: (google.cloud.video.stitcher.v1.IManifestOptions|null);
 
-                        /** LiveSession streamId */
-                        streamId?: (string|null);
+                        /** LiveSession gamSettings */
+                        gamSettings?: (google.cloud.video.stitcher.v1.LiveSession.IGamSettings|null);
+
+                        /** LiveSession liveConfig */
+                        liveConfig?: (string|null);
                     }
 
                     /** Represents a LiveSession. */
@@ -2443,32 +2925,17 @@ export namespace google {
                         /** LiveSession playUri. */
                         public playUri: string;
 
-                        /** LiveSession sourceUri. */
-                        public sourceUri: string;
-
-                        /** LiveSession defaultAdTagId. */
-                        public defaultAdTagId: string;
-
-                        /** LiveSession adTagMap. */
-                        public adTagMap: { [k: string]: google.cloud.video.stitcher.v1.IAdTag };
-
                         /** LiveSession adTagMacros. */
                         public adTagMacros: { [k: string]: string };
-
-                        /** LiveSession clientAdTracking. */
-                        public clientAdTracking: boolean;
-
-                        /** LiveSession defaultSlateId. */
-                        public defaultSlateId: string;
-
-                        /** LiveSession stitchingPolicy. */
-                        public stitchingPolicy: (google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy|keyof typeof google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy);
 
                         /** LiveSession manifestOptions. */
                         public manifestOptions?: (google.cloud.video.stitcher.v1.IManifestOptions|null);
 
-                        /** LiveSession streamId. */
-                        public streamId: string;
+                        /** LiveSession gamSettings. */
+                        public gamSettings?: (google.cloud.video.stitcher.v1.LiveSession.IGamSettings|null);
+
+                        /** LiveSession liveConfig. */
+                        public liveConfig: string;
 
                         /**
                          * Creates a new LiveSession instance using the specified properties.
@@ -2550,109 +3017,308 @@ export namespace google {
 
                     namespace LiveSession {
 
-                        /** StitchingPolicy enum. */
-                        enum StitchingPolicy {
-                            STITCHING_POLICY_UNSPECIFIED = 0,
-                            COMPLETE_AD = 1,
-                            CUT_CURRENT = 3
+                        /** Properties of a GamSettings. */
+                        interface IGamSettings {
+
+                            /** GamSettings gamHls */
+                            gamHls?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls|null);
+
+                            /** GamSettings gamDash */
+                            gamDash?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash|null);
+
+                            /** GamSettings streamId */
+                            streamId?: (string|null);
                         }
-                    }
 
-                    /** Properties of an AdTag. */
-                    interface IAdTag {
+                        /** Represents a GamSettings. */
+                        class GamSettings implements IGamSettings {
 
-                        /** AdTag uri */
-                        uri?: (string|null);
-                    }
+                            /**
+                             * Constructs a new GamSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.stitcher.v1.LiveSession.IGamSettings);
 
-                    /** Represents an AdTag. */
-                    class AdTag implements IAdTag {
+                            /** GamSettings gamHls. */
+                            public gamHls?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls|null);
 
-                        /**
-                         * Constructs a new AdTag.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.video.stitcher.v1.IAdTag);
+                            /** GamSettings gamDash. */
+                            public gamDash?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash|null);
 
-                        /** AdTag uri. */
-                        public uri: string;
+                            /** GamSettings streamId. */
+                            public streamId: string;
 
-                        /**
-                         * Creates a new AdTag instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns AdTag instance
-                         */
-                        public static create(properties?: google.cloud.video.stitcher.v1.IAdTag): google.cloud.video.stitcher.v1.AdTag;
+                            /** GamSettings manifestFields. */
+                            public manifestFields?: ("gamHls"|"gamDash");
 
-                        /**
-                         * Encodes the specified AdTag message. Does not implicitly {@link google.cloud.video.stitcher.v1.AdTag.verify|verify} messages.
-                         * @param message AdTag message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.video.stitcher.v1.IAdTag, writer?: $protobuf.Writer): $protobuf.Writer;
+                            /**
+                             * Creates a new GamSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GamSettings instance
+                             */
+                            public static create(properties?: google.cloud.video.stitcher.v1.LiveSession.IGamSettings): google.cloud.video.stitcher.v1.LiveSession.GamSettings;
 
-                        /**
-                         * Encodes the specified AdTag message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.AdTag.verify|verify} messages.
-                         * @param message AdTag message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IAdTag, writer?: $protobuf.Writer): $protobuf.Writer;
+                            /**
+                             * Encodes the specified GamSettings message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.verify|verify} messages.
+                             * @param message GamSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.stitcher.v1.LiveSession.IGamSettings, writer?: $protobuf.Writer): $protobuf.Writer;
 
-                        /**
-                         * Decodes an AdTag message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns AdTag
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.AdTag;
+                            /**
+                             * Encodes the specified GamSettings message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.verify|verify} messages.
+                             * @param message GamSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.stitcher.v1.LiveSession.IGamSettings, writer?: $protobuf.Writer): $protobuf.Writer;
 
-                        /**
-                         * Decodes an AdTag message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns AdTag
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.AdTag;
+                            /**
+                             * Decodes a GamSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GamSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.LiveSession.GamSettings;
 
-                        /**
-                         * Verifies an AdTag message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
+                            /**
+                             * Decodes a GamSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GamSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.LiveSession.GamSettings;
 
-                        /**
-                         * Creates an AdTag message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns AdTag
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.AdTag;
+                            /**
+                             * Verifies a GamSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
 
-                        /**
-                         * Creates a plain object from an AdTag message. Also converts values to other types if specified.
-                         * @param message AdTag
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.video.stitcher.v1.AdTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                            /**
+                             * Creates a GamSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GamSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.LiveSession.GamSettings;
 
-                        /**
-                         * Converts this AdTag to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
+                            /**
+                             * Creates a plain object from a GamSettings message. Also converts values to other types if specified.
+                             * @param message GamSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
-                        /**
-                         * Gets the default type url for AdTag
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                            /**
+                             * Converts this GamSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GamSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GamSettings {
+
+                            /** Properties of a GamHls. */
+                            interface IGamHls {
+                            }
+
+                            /** Represents a GamHls. */
+                            class GamHls implements IGamHls {
+
+                                /**
+                                 * Constructs a new GamHls.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls);
+
+                                /**
+                                 * Creates a new GamHls instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GamHls instance
+                                 */
+                                public static create(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
+
+                                /**
+                                 * Encodes the specified GamHls message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify|verify} messages.
+                                 * @param message GamHls message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GamHls message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify|verify} messages.
+                                 * @param message GamHls message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GamHls message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GamHls
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
+
+                                /**
+                                 * Decodes a GamHls message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GamHls
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
+
+                                /**
+                                 * Verifies a GamHls message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GamHls message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GamHls
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
+
+                                /**
+                                 * Creates a plain object from a GamHls message. Also converts values to other types if specified.
+                                 * @param message GamHls
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GamHls to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GamHls
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a GamDash. */
+                            interface IGamDash {
+
+                                /** GamDash periodTemplateUri */
+                                periodTemplateUri?: (string|null);
+                            }
+
+                            /** Represents a GamDash. */
+                            class GamDash implements IGamDash {
+
+                                /**
+                                 * Constructs a new GamDash.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash);
+
+                                /** GamDash periodTemplateUri. */
+                                public periodTemplateUri: string;
+
+                                /**
+                                 * Creates a new GamDash instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GamDash instance
+                                 */
+                                public static create(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
+
+                                /**
+                                 * Encodes the specified GamDash message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify|verify} messages.
+                                 * @param message GamDash message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GamDash message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify|verify} messages.
+                                 * @param message GamDash message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GamDash message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GamDash
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
+
+                                /**
+                                 * Decodes a GamDash message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GamDash
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
+
+                                /**
+                                 * Verifies a GamDash message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GamDash message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GamDash
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
+
+                                /**
+                                 * Creates a plain object from a GamDash message. Also converts values to other types if specified.
+                                 * @param message GamDash
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GamDash to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GamDash
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
 
                     /** Properties of a ManifestOptions. */
@@ -2879,6 +3545,9 @@ export namespace google {
 
                         /** Slate uri */
                         uri?: (string|null);
+
+                        /** Slate gamSlate */
+                        gamSlate?: (google.cloud.video.stitcher.v1.Slate.IGamSlate|null);
                     }
 
                     /** Represents a Slate. */
@@ -2895,6 +3564,9 @@ export namespace google {
 
                         /** Slate uri. */
                         public uri: string;
+
+                        /** Slate gamSlate. */
+                        public gamSlate?: (google.cloud.video.stitcher.v1.Slate.IGamSlate|null);
 
                         /**
                          * Creates a new Slate instance using the specified properties.
@@ -2972,6 +3644,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Slate {
+
+                        /** Properties of a GamSlate. */
+                        interface IGamSlate {
+
+                            /** GamSlate networkCode */
+                            networkCode?: (string|null);
+
+                            /** GamSlate gamSlateId */
+                            gamSlateId?: (number|Long|string|null);
+                        }
+
+                        /** Represents a GamSlate. */
+                        class GamSlate implements IGamSlate {
+
+                            /**
+                             * Constructs a new GamSlate.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.stitcher.v1.Slate.IGamSlate);
+
+                            /** GamSlate networkCode. */
+                            public networkCode: string;
+
+                            /** GamSlate gamSlateId. */
+                            public gamSlateId: (number|Long|string);
+
+                            /**
+                             * Creates a new GamSlate instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GamSlate instance
+                             */
+                            public static create(properties?: google.cloud.video.stitcher.v1.Slate.IGamSlate): google.cloud.video.stitcher.v1.Slate.GamSlate;
+
+                            /**
+                             * Encodes the specified GamSlate message. Does not implicitly {@link google.cloud.video.stitcher.v1.Slate.GamSlate.verify|verify} messages.
+                             * @param message GamSlate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.stitcher.v1.Slate.IGamSlate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GamSlate message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.Slate.GamSlate.verify|verify} messages.
+                             * @param message GamSlate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.stitcher.v1.Slate.IGamSlate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GamSlate message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GamSlate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.Slate.GamSlate;
+
+                            /**
+                             * Decodes a GamSlate message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GamSlate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.Slate.GamSlate;
+
+                            /**
+                             * Verifies a GamSlate message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GamSlate message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GamSlate
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.Slate.GamSlate;
+
+                            /**
+                             * Creates a plain object from a GamSlate message. Also converts values to other types if specified.
+                             * @param message GamSlate
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.stitcher.v1.Slate.GamSlate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GamSlate to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GamSlate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a VodStitchDetail. */
@@ -3221,7 +3999,7 @@ export namespace google {
                         /**
                          * Calls CreateCdnKey.
                          * @param request CreateCdnKeyRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and CdnKey
+                         * @param callback Node-style callback called with the error, if any, and Operation
                          */
                         public createCdnKey(request: google.cloud.video.stitcher.v1.ICreateCdnKeyRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.CreateCdnKeyCallback): void;
 
@@ -3230,7 +4008,7 @@ export namespace google {
                          * @param request CreateCdnKeyRequest message or plain object
                          * @returns Promise
                          */
-                        public createCdnKey(request: google.cloud.video.stitcher.v1.ICreateCdnKeyRequest): Promise<google.cloud.video.stitcher.v1.CdnKey>;
+                        public createCdnKey(request: google.cloud.video.stitcher.v1.ICreateCdnKeyRequest): Promise<google.longrunning.Operation>;
 
                         /**
                          * Calls ListCdnKeys.
@@ -3263,7 +4041,7 @@ export namespace google {
                         /**
                          * Calls DeleteCdnKey.
                          * @param request DeleteCdnKeyRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Empty
+                         * @param callback Node-style callback called with the error, if any, and Operation
                          */
                         public deleteCdnKey(request: google.cloud.video.stitcher.v1.IDeleteCdnKeyRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.DeleteCdnKeyCallback): void;
 
@@ -3272,12 +4050,12 @@ export namespace google {
                          * @param request DeleteCdnKeyRequest message or plain object
                          * @returns Promise
                          */
-                        public deleteCdnKey(request: google.cloud.video.stitcher.v1.IDeleteCdnKeyRequest): Promise<google.protobuf.Empty>;
+                        public deleteCdnKey(request: google.cloud.video.stitcher.v1.IDeleteCdnKeyRequest): Promise<google.longrunning.Operation>;
 
                         /**
                          * Calls UpdateCdnKey.
                          * @param request UpdateCdnKeyRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and CdnKey
+                         * @param callback Node-style callback called with the error, if any, and Operation
                          */
                         public updateCdnKey(request: google.cloud.video.stitcher.v1.IUpdateCdnKeyRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.UpdateCdnKeyCallback): void;
 
@@ -3286,7 +4064,7 @@ export namespace google {
                          * @param request UpdateCdnKeyRequest message or plain object
                          * @returns Promise
                          */
-                        public updateCdnKey(request: google.cloud.video.stitcher.v1.IUpdateCdnKeyRequest): Promise<google.cloud.video.stitcher.v1.CdnKey>;
+                        public updateCdnKey(request: google.cloud.video.stitcher.v1.IUpdateCdnKeyRequest): Promise<google.longrunning.Operation>;
 
                         /**
                          * Calls CreateVodSession.
@@ -3403,7 +4181,7 @@ export namespace google {
                         /**
                          * Calls CreateSlate.
                          * @param request CreateSlateRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Slate
+                         * @param callback Node-style callback called with the error, if any, and Operation
                          */
                         public createSlate(request: google.cloud.video.stitcher.v1.ICreateSlateRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.CreateSlateCallback): void;
 
@@ -3412,7 +4190,7 @@ export namespace google {
                          * @param request CreateSlateRequest message or plain object
                          * @returns Promise
                          */
-                        public createSlate(request: google.cloud.video.stitcher.v1.ICreateSlateRequest): Promise<google.cloud.video.stitcher.v1.Slate>;
+                        public createSlate(request: google.cloud.video.stitcher.v1.ICreateSlateRequest): Promise<google.longrunning.Operation>;
 
                         /**
                          * Calls ListSlates.
@@ -3445,7 +4223,7 @@ export namespace google {
                         /**
                          * Calls UpdateSlate.
                          * @param request UpdateSlateRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Slate
+                         * @param callback Node-style callback called with the error, if any, and Operation
                          */
                         public updateSlate(request: google.cloud.video.stitcher.v1.IUpdateSlateRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.UpdateSlateCallback): void;
 
@@ -3454,12 +4232,12 @@ export namespace google {
                          * @param request UpdateSlateRequest message or plain object
                          * @returns Promise
                          */
-                        public updateSlate(request: google.cloud.video.stitcher.v1.IUpdateSlateRequest): Promise<google.cloud.video.stitcher.v1.Slate>;
+                        public updateSlate(request: google.cloud.video.stitcher.v1.IUpdateSlateRequest): Promise<google.longrunning.Operation>;
 
                         /**
                          * Calls DeleteSlate.
                          * @param request DeleteSlateRequest message or plain object
-                         * @param callback Node-style callback called with the error, if any, and Empty
+                         * @param callback Node-style callback called with the error, if any, and Operation
                          */
                         public deleteSlate(request: google.cloud.video.stitcher.v1.IDeleteSlateRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.DeleteSlateCallback): void;
 
@@ -3468,7 +4246,7 @@ export namespace google {
                          * @param request DeleteSlateRequest message or plain object
                          * @returns Promise
                          */
-                        public deleteSlate(request: google.cloud.video.stitcher.v1.IDeleteSlateRequest): Promise<google.protobuf.Empty>;
+                        public deleteSlate(request: google.cloud.video.stitcher.v1.IDeleteSlateRequest): Promise<google.longrunning.Operation>;
 
                         /**
                          * Calls CreateLiveSession.
@@ -3497,6 +4275,62 @@ export namespace google {
                          * @returns Promise
                          */
                         public getLiveSession(request: google.cloud.video.stitcher.v1.IGetLiveSessionRequest): Promise<google.cloud.video.stitcher.v1.LiveSession>;
+
+                        /**
+                         * Calls CreateLiveConfig.
+                         * @param request CreateLiveConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createLiveConfig(request: google.cloud.video.stitcher.v1.ICreateLiveConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.CreateLiveConfigCallback): void;
+
+                        /**
+                         * Calls CreateLiveConfig.
+                         * @param request CreateLiveConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createLiveConfig(request: google.cloud.video.stitcher.v1.ICreateLiveConfigRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListLiveConfigs.
+                         * @param request ListLiveConfigsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListLiveConfigsResponse
+                         */
+                        public listLiveConfigs(request: google.cloud.video.stitcher.v1.IListLiveConfigsRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.ListLiveConfigsCallback): void;
+
+                        /**
+                         * Calls ListLiveConfigs.
+                         * @param request ListLiveConfigsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listLiveConfigs(request: google.cloud.video.stitcher.v1.IListLiveConfigsRequest): Promise<google.cloud.video.stitcher.v1.ListLiveConfigsResponse>;
+
+                        /**
+                         * Calls GetLiveConfig.
+                         * @param request GetLiveConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and LiveConfig
+                         */
+                        public getLiveConfig(request: google.cloud.video.stitcher.v1.IGetLiveConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.GetLiveConfigCallback): void;
+
+                        /**
+                         * Calls GetLiveConfig.
+                         * @param request GetLiveConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getLiveConfig(request: google.cloud.video.stitcher.v1.IGetLiveConfigRequest): Promise<google.cloud.video.stitcher.v1.LiveConfig>;
+
+                        /**
+                         * Calls DeleteLiveConfig.
+                         * @param request DeleteLiveConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteLiveConfig(request: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.DeleteLiveConfigCallback): void;
+
+                        /**
+                         * Calls DeleteLiveConfig.
+                         * @param request DeleteLiveConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteLiveConfig(request: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace VideoStitcherService {
@@ -3504,9 +4338,9 @@ export namespace google {
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createCdnKey}.
                          * @param error Error, if any
-                         * @param [response] CdnKey
+                         * @param [response] Operation
                          */
-                        type CreateCdnKeyCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.CdnKey) => void;
+                        type CreateCdnKeyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|listCdnKeys}.
@@ -3525,16 +4359,16 @@ export namespace google {
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|deleteCdnKey}.
                          * @param error Error, if any
-                         * @param [response] Empty
+                         * @param [response] Operation
                          */
-                        type DeleteCdnKeyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                        type DeleteCdnKeyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|updateCdnKey}.
                          * @param error Error, if any
-                         * @param [response] CdnKey
+                         * @param [response] Operation
                          */
-                        type UpdateCdnKeyCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.CdnKey) => void;
+                        type UpdateCdnKeyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createVodSession}.
@@ -3595,9 +4429,9 @@ export namespace google {
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createSlate}.
                          * @param error Error, if any
-                         * @param [response] Slate
+                         * @param [response] Operation
                          */
-                        type CreateSlateCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.Slate) => void;
+                        type CreateSlateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|listSlates}.
@@ -3616,16 +4450,16 @@ export namespace google {
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|updateSlate}.
                          * @param error Error, if any
-                         * @param [response] Slate
+                         * @param [response] Operation
                          */
-                        type UpdateSlateCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.Slate) => void;
+                        type UpdateSlateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|deleteSlate}.
                          * @param error Error, if any
-                         * @param [response] Empty
+                         * @param [response] Operation
                          */
-                        type DeleteSlateCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                        type DeleteSlateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createLiveSession}.
@@ -3640,6 +4474,34 @@ export namespace google {
                          * @param [response] LiveSession
                          */
                         type GetLiveSessionCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.LiveSession) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createLiveConfig}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateLiveConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|listLiveConfigs}.
+                         * @param error Error, if any
+                         * @param [response] ListLiveConfigsResponse
+                         */
+                        type ListLiveConfigsCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.ListLiveConfigsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|getLiveConfig}.
+                         * @param error Error, if any
+                         * @param [response] LiveConfig
+                         */
+                        type GetLiveConfigCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.LiveConfig) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|deleteLiveConfig}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteLiveConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                     }
 
                     /** Properties of a CreateCdnKeyRequest. */
@@ -5416,6 +6278,9 @@ export namespace google {
 
                         /** CreateSlateRequest slate */
                         slate?: (google.cloud.video.stitcher.v1.ISlate|null);
+
+                        /** CreateSlateRequest requestId */
+                        requestId?: (string|null);
                     }
 
                     /** Represents a CreateSlateRequest. */
@@ -5435,6 +6300,9 @@ export namespace google {
 
                         /** CreateSlateRequest slate. */
                         public slate?: (google.cloud.video.stitcher.v1.ISlate|null);
+
+                        /** CreateSlateRequest requestId. */
+                        public requestId: string;
 
                         /**
                          * Creates a new CreateSlateRequest instance using the specified properties.
@@ -6235,6 +7103,660 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GetLiveSessionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateLiveConfigRequest. */
+                    interface ICreateLiveConfigRequest {
+
+                        /** CreateLiveConfigRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateLiveConfigRequest liveConfigId */
+                        liveConfigId?: (string|null);
+
+                        /** CreateLiveConfigRequest liveConfig */
+                        liveConfig?: (google.cloud.video.stitcher.v1.ILiveConfig|null);
+
+                        /** CreateLiveConfigRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateLiveConfigRequest. */
+                    class CreateLiveConfigRequest implements ICreateLiveConfigRequest {
+
+                        /**
+                         * Constructs a new CreateLiveConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.ICreateLiveConfigRequest);
+
+                        /** CreateLiveConfigRequest parent. */
+                        public parent: string;
+
+                        /** CreateLiveConfigRequest liveConfigId. */
+                        public liveConfigId: string;
+
+                        /** CreateLiveConfigRequest liveConfig. */
+                        public liveConfig?: (google.cloud.video.stitcher.v1.ILiveConfig|null);
+
+                        /** CreateLiveConfigRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateLiveConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateLiveConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.ICreateLiveConfigRequest): google.cloud.video.stitcher.v1.CreateLiveConfigRequest;
+
+                        /**
+                         * Encodes the specified CreateLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateLiveConfigRequest.verify|verify} messages.
+                         * @param message CreateLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.ICreateLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateLiveConfigRequest.verify|verify} messages.
+                         * @param message CreateLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.ICreateLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateLiveConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.CreateLiveConfigRequest;
+
+                        /**
+                         * Decodes a CreateLiveConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.CreateLiveConfigRequest;
+
+                        /**
+                         * Verifies a CreateLiveConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateLiveConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.CreateLiveConfigRequest;
+
+                        /**
+                         * Creates a plain object from a CreateLiveConfigRequest message. Also converts values to other types if specified.
+                         * @param message CreateLiveConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.CreateLiveConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateLiveConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateLiveConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListLiveConfigsRequest. */
+                    interface IListLiveConfigsRequest {
+
+                        /** ListLiveConfigsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListLiveConfigsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListLiveConfigsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListLiveConfigsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListLiveConfigsRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListLiveConfigsRequest. */
+                    class ListLiveConfigsRequest implements IListLiveConfigsRequest {
+
+                        /**
+                         * Constructs a new ListLiveConfigsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IListLiveConfigsRequest);
+
+                        /** ListLiveConfigsRequest parent. */
+                        public parent: string;
+
+                        /** ListLiveConfigsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListLiveConfigsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListLiveConfigsRequest filter. */
+                        public filter: string;
+
+                        /** ListLiveConfigsRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListLiveConfigsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListLiveConfigsRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IListLiveConfigsRequest): google.cloud.video.stitcher.v1.ListLiveConfigsRequest;
+
+                        /**
+                         * Encodes the specified ListLiveConfigsRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsRequest.verify|verify} messages.
+                         * @param message ListLiveConfigsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IListLiveConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListLiveConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsRequest.verify|verify} messages.
+                         * @param message ListLiveConfigsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IListLiveConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListLiveConfigsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListLiveConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.ListLiveConfigsRequest;
+
+                        /**
+                         * Decodes a ListLiveConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListLiveConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.ListLiveConfigsRequest;
+
+                        /**
+                         * Verifies a ListLiveConfigsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListLiveConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListLiveConfigsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.ListLiveConfigsRequest;
+
+                        /**
+                         * Creates a plain object from a ListLiveConfigsRequest message. Also converts values to other types if specified.
+                         * @param message ListLiveConfigsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.ListLiveConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListLiveConfigsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListLiveConfigsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListLiveConfigsResponse. */
+                    interface IListLiveConfigsResponse {
+
+                        /** ListLiveConfigsResponse liveConfigs */
+                        liveConfigs?: (google.cloud.video.stitcher.v1.ILiveConfig[]|null);
+
+                        /** ListLiveConfigsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListLiveConfigsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListLiveConfigsResponse. */
+                    class ListLiveConfigsResponse implements IListLiveConfigsResponse {
+
+                        /**
+                         * Constructs a new ListLiveConfigsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IListLiveConfigsResponse);
+
+                        /** ListLiveConfigsResponse liveConfigs. */
+                        public liveConfigs: google.cloud.video.stitcher.v1.ILiveConfig[];
+
+                        /** ListLiveConfigsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListLiveConfigsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListLiveConfigsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListLiveConfigsResponse instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IListLiveConfigsResponse): google.cloud.video.stitcher.v1.ListLiveConfigsResponse;
+
+                        /**
+                         * Encodes the specified ListLiveConfigsResponse message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsResponse.verify|verify} messages.
+                         * @param message ListLiveConfigsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IListLiveConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListLiveConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListLiveConfigsResponse.verify|verify} messages.
+                         * @param message ListLiveConfigsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IListLiveConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListLiveConfigsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListLiveConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.ListLiveConfigsResponse;
+
+                        /**
+                         * Decodes a ListLiveConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListLiveConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.ListLiveConfigsResponse;
+
+                        /**
+                         * Verifies a ListLiveConfigsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListLiveConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListLiveConfigsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.ListLiveConfigsResponse;
+
+                        /**
+                         * Creates a plain object from a ListLiveConfigsResponse message. Also converts values to other types if specified.
+                         * @param message ListLiveConfigsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.ListLiveConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListLiveConfigsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListLiveConfigsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetLiveConfigRequest. */
+                    interface IGetLiveConfigRequest {
+
+                        /** GetLiveConfigRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetLiveConfigRequest. */
+                    class GetLiveConfigRequest implements IGetLiveConfigRequest {
+
+                        /**
+                         * Constructs a new GetLiveConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IGetLiveConfigRequest);
+
+                        /** GetLiveConfigRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetLiveConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetLiveConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IGetLiveConfigRequest): google.cloud.video.stitcher.v1.GetLiveConfigRequest;
+
+                        /**
+                         * Encodes the specified GetLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.GetLiveConfigRequest.verify|verify} messages.
+                         * @param message GetLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IGetLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GetLiveConfigRequest.verify|verify} messages.
+                         * @param message GetLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IGetLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetLiveConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.GetLiveConfigRequest;
+
+                        /**
+                         * Decodes a GetLiveConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.GetLiveConfigRequest;
+
+                        /**
+                         * Verifies a GetLiveConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetLiveConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.GetLiveConfigRequest;
+
+                        /**
+                         * Creates a plain object from a GetLiveConfigRequest message. Also converts values to other types if specified.
+                         * @param message GetLiveConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.GetLiveConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetLiveConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetLiveConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteLiveConfigRequest. */
+                    interface IDeleteLiveConfigRequest {
+
+                        /** DeleteLiveConfigRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteLiveConfigRequest. */
+                    class DeleteLiveConfigRequest implements IDeleteLiveConfigRequest {
+
+                        /**
+                         * Constructs a new DeleteLiveConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest);
+
+                        /** DeleteLiveConfigRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteLiveConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteLiveConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest): google.cloud.video.stitcher.v1.DeleteLiveConfigRequest;
+
+                        /**
+                         * Encodes the specified DeleteLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteLiveConfigRequest.verify|verify} messages.
+                         * @param message DeleteLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteLiveConfigRequest.verify|verify} messages.
+                         * @param message DeleteLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteLiveConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.DeleteLiveConfigRequest;
+
+                        /**
+                         * Decodes a DeleteLiveConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.DeleteLiveConfigRequest;
+
+                        /**
+                         * Verifies a DeleteLiveConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteLiveConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.DeleteLiveConfigRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteLiveConfigRequest message. Also converts values to other types if specified.
+                         * @param message DeleteLiveConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.DeleteLiveConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteLiveConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteLiveConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OperationMetadata. */
+                    interface IOperationMetadata {
+
+                        /** OperationMetadata createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata target */
+                        target?: (string|null);
+
+                        /** OperationMetadata verb */
+                        verb?: (string|null);
+                    }
+
+                    /** Represents an OperationMetadata. */
+                    class OperationMetadata implements IOperationMetadata {
+
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IOperationMetadata);
+
+                        /** OperationMetadata createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata target. */
+                        public target: string;
+
+                        /** OperationMetadata verb. */
+                        public verb: string;
+
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OperationMetadata instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IOperationMetadata): google.cloud.video.stitcher.v1.OperationMetadata;
+
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.video.stitcher.v1.OperationMetadata.verify|verify} messages.
+                         * @param message OperationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.OperationMetadata.verify|verify} messages.
+                         * @param message OperationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.OperationMetadata;
+
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.OperationMetadata;
+
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OperationMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.OperationMetadata;
+
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @param message OperationMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OperationMetadata
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -9420,6 +10942,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -10651,6 +12176,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -10833,6 +12461,1194 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace longrunning. */
+    namespace longrunning {
+
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
+        }
+
+        namespace Operations {
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperation);
+
+            /** Operation name. */
+            public name: string;
+
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Operation instance
+             */
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
+
+            /**
+             * Verifies an Operation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Operation
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Operation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
