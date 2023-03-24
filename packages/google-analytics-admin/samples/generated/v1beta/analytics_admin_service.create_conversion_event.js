@@ -33,8 +33,8 @@ function main(conversionEvent, parent) {
    */
   // const conversionEvent = {}
   /**
-   *  Required. The resource name of the parent property where this conversion event will
-   *  be created. Format: properties/123
+   *  Required. The resource name of the parent property where this conversion
+   *  event will be created. Format: properties/123
    */
   // const parent = 'abc123'
 
