@@ -37,22 +37,19 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/vizier_service_client_config.json`.
+ * `src/v1beta1/schedule_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './vizier_service_client_config.json';
+import * as gapicConfig from './schedule_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Vertex AI Vizier API.
- *
- *  Vertex AI Vizier is a service to solve blackbox optimization problems,
- *  such as tuning machine learning hyperparameters and searching over deep
- *  learning architectures.
+ *  A service for creating and managing Vertex AI's Schedule resources to
+ *  periodically launch shceudled runs to make API calls.
  * @class
  * @memberof v1beta1
  */
-export class VizierServiceClient {
+export class ScheduleServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -73,10 +70,10 @@ export class VizierServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  vizierServiceStub?: Promise<{[name: string]: Function}>;
+  scheduleServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of VizierServiceClient.
+   * Construct an instance of ScheduleServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -112,7 +109,7 @@ export class VizierServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new VizierServiceClient({fallback: 'rest'}, gax);
+   *     const client = new ScheduleServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -120,7 +117,7 @@ export class VizierServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof VizierServiceClient;
+    const staticMembers = this.constructor as typeof ScheduleServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -315,15 +312,10 @@ export class VizierServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listStudies: new this._gaxModule.PageDescriptor(
+      listSchedules: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'studies'
-      ),
-      listTrials: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'trials'
+        'schedules'
       ),
     };
 
@@ -1389,39 +1381,24 @@ export class VizierServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const suggestTrialsResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.SuggestTrialsResponse'
+    const deleteScheduleResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const suggestTrialsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata'
-    ) as gax.protobuf.Type;
-    const checkTrialEarlyStoppingStateResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse'
-    ) as gax.protobuf.Type;
-    const checkTrialEarlyStoppingStateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata'
+    const deleteScheduleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      suggestTrials: new this._gaxModule.LongrunningDescriptor(
+      deleteSchedule: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        suggestTrialsResponse.decode.bind(suggestTrialsResponse),
-        suggestTrialsMetadata.decode.bind(suggestTrialsMetadata)
-      ),
-      checkTrialEarlyStoppingState: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        checkTrialEarlyStoppingStateResponse.decode.bind(
-          checkTrialEarlyStoppingStateResponse
-        ),
-        checkTrialEarlyStoppingStateMetadata.decode.bind(
-          checkTrialEarlyStoppingStateMetadata
-        )
+        deleteScheduleResponse.decode.bind(deleteScheduleResponse),
+        deleteScheduleMetadata.decode.bind(deleteScheduleMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.VizierService',
+      'google.cloud.aiplatform.v1beta1.ScheduleService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -1449,44 +1426,35 @@ export class VizierServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.vizierServiceStub) {
-      return this.vizierServiceStub;
+    if (this.scheduleServiceStub) {
+      return this.scheduleServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.aiplatform.v1beta1.VizierService.
-    this.vizierServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.aiplatform.v1beta1.ScheduleService.
+    this.scheduleServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.VizierService'
+            'google.cloud.aiplatform.v1beta1.ScheduleService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1beta1.VizierService,
+          (this._protos as any).google.cloud.aiplatform.v1beta1.ScheduleService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vizierServiceStubMethods = [
-      'createStudy',
-      'getStudy',
-      'listStudies',
-      'deleteStudy',
-      'lookupStudy',
-      'suggestTrials',
-      'createTrial',
-      'getTrial',
-      'listTrials',
-      'addTrialMeasurement',
-      'completeTrial',
-      'deleteTrial',
-      'checkTrialEarlyStoppingState',
-      'stopTrial',
-      'listOptimalTrials',
+    const scheduleServiceStubMethods = [
+      'createSchedule',
+      'deleteSchedule',
+      'getSchedule',
+      'listSchedules',
+      'pauseSchedule',
+      'resumeSchedule',
     ];
-    for (const methodName of vizierServiceStubMethods) {
-      const callPromise = this.vizierServiceStub.then(
+    for (const methodName of scheduleServiceStubMethods) {
+      const callPromise = this.scheduleServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -1514,7 +1482,7 @@ export class VizierServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.vizierServiceStub;
+    return this.scheduleServiceStub;
   }
 
   /**
@@ -1571,79 +1539,78 @@ export class VizierServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a Study. A resource name will be generated after creation of the
-   * Study.
+   * Creates a Schedule.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to create the CustomJob in.
+   *   Required. The resource name of the Location to create the Schedule in.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.Study} request.study
-   *   Required. The Study configuration used to create the Study.
+   * @param {google.cloud.aiplatform.v1beta1.Schedule} request.schedule
+   *   Required. The Schedule to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Study | Study}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.create_study.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_CreateStudy_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.create_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_CreateSchedule_async
    */
-  createStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
+  createSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest | undefined,
       {} | undefined
     ]
   >;
-  createStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
+  createSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
+  createSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
+  createSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IStudy,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest
+          protos.google.cloud.aiplatform.v1beta1.ISchedule,
+          | protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1663,79 +1630,80 @@ export class VizierServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createStudy(request, options, callback);
+    return this.innerApiCalls.createSchedule(request, options, callback);
   }
   /**
-   * Gets a Study by name.
+   * Gets a Schedule.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Study resource.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
+   *   Required. The name of the Schedule resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Study | Study}.
+   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.get_study.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_GetStudy_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.get_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_GetSchedule_async
    */
-  getStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
+  getSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest | undefined,
       {} | undefined
     ]
   >;
-  getStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
+  getSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
+  getSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
+  getSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IStudy,
-          | protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest
+          protos.google.cloud.aiplatform.v1beta1.ISchedule,
+          | protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      | protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ISchedule,
+      protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1755,16 +1723,20 @@ export class VizierServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getStudy(request, options, callback);
+    return this.innerApiCalls.getSchedule(request, options, callback);
   }
   /**
-   * Deletes a Study.
+   * Pauses a Schedule. Will mark
+   * {@link google.cloud.aiplatform.v1beta1.Schedule.state|Schedule.state} to
+   * 'PAUSED'. If the schedule is paused, no new runs will be created. Already
+   * created runs will NOT be paused or canceled.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Study resource to be deleted.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
+   *   Required. The name of the Schedule resource to be paused.
+   *   Format:
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1772,54 +1744,54 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.delete_study.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_DeleteStudy_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.pause_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_PauseSchedule_async
    */
-  deleteStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
+  pauseSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest | undefined,
       {} | undefined
     ]
   >;
-  deleteStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
+  pauseSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest
+      | protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
+  pauseSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest
+      | protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
+  pauseSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest
+          | protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest
+      | protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest
       | null
       | undefined,
       {} | null | undefined
@@ -1827,7 +1799,7 @@ export class VizierServiceClient {
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1847,504 +1819,30 @@ export class VizierServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteStudy(request, options, callback);
+    return this.innerApiCalls.pauseSchedule(request, options, callback);
   }
   /**
-   * Looks a study up using the user-defined display_name field instead of the
-   * fully qualified resource name.
+   * Resumes a paused Schedule to start scheduling new runs. Will mark
+   * {@link google.cloud.aiplatform.v1beta1.Schedule.state|Schedule.state} to
+   * 'ACTIVE'. Only paused Schedule can be resumed.
    *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to get the Study from.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.displayName
-   *   Required. The user-defined display name of the Study
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Study | Study}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.lookup_study.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_LookupStudy_async
-   */
-  lookupStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  lookupStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupStudy(
-    request?: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IStudy,
-          | protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      | protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IStudy,
-      protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.lookupStudy(request, options, callback);
-  }
-  /**
-   * Adds a user provided Trial to a Study.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Study to create the Trial in.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
-   * @param {google.cloud.aiplatform.v1beta1.Trial} request.trial
-   *   Required. The Trial to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Trial | Trial}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.create_trial.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_CreateTrial_async
-   */
-  createTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrial,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createTrial(request, options, callback);
-  }
-  /**
-   * Gets a Trial.
+   * When the Schedule is resumed, new runs will be scheduled starting from the
+   * next execution time after the current time based on the time_specification
+   * in the Schedule. If {@link |Schedule.catchUp} is set up true, all
+   * missed runs will be scheduled for backfill first.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Trial resource.
+   *   Required. The name of the Schedule resource to be resumed.
    *   Format:
-   *   `projects/{project}/locations/{location}/studies/{study}/trials/{trial}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Trial | Trial}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.get_trial.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_GetTrial_async
-   */
-  getTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrial,
-          | protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getTrial(request, options, callback);
-  }
-  /**
-   * Adds a measurement of the objective metrics to a Trial. This measurement
-   * is assumed to have been taken before the Trial is complete.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.trialName
-   *   Required. The name of the trial to add measurement.
-   *   Format:
-   *   `projects/{project}/locations/{location}/studies/{study}/trials/{trial}`
-   * @param {google.cloud.aiplatform.v1beta1.Measurement} request.measurement
-   *   Required. The measurement to be added to a Trial.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Trial | Trial}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.add_trial_measurement.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_AddTrialMeasurement_async
-   */
-  addTrialMeasurement(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  addTrialMeasurement(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addTrialMeasurement(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addTrialMeasurement(
-    request?: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrial,
-          | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        trial_name: request.trialName ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.addTrialMeasurement(request, options, callback);
-  }
-  /**
-   * Marks a Trial as complete.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The Trial's name.
-   *   Format:
-   *   `projects/{project}/locations/{location}/studies/{study}/trials/{trial}`
-   * @param {google.cloud.aiplatform.v1beta1.Measurement} [request.finalMeasurement]
-   *   Optional. If provided, it will be used as the completed Trial's
-   *   final_measurement; Otherwise, the service will auto-select a
-   *   previously reported measurement as the final-measurement
-   * @param {boolean} [request.trialInfeasible]
-   *   Optional. True if the Trial cannot be run with the given Parameter, and
-   *   final_measurement will be ignored.
-   * @param {string} [request.infeasibleReason]
-   *   Optional. A human readable reason why the trial was infeasible. This should
-   *   only be provided if `trial_infeasible` is true.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Trial | Trial}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.complete_trial.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_CompleteTrial_async
-   */
-  completeTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  completeTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrial,
-          | protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.completeTrial(request, options, callback);
-  }
-  /**
-   * Deletes a Trial.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The Trial's name.
-   *   Format:
-   *   `projects/{project}/locations/{location}/studies/{study}/trials/{trial}`
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
+   * @param {boolean} [request.catchUp]
+   *   Optional. Whether to backfill missed runs when the schedule is resumed from
+   *   PAUSED state. If set to true, all missed runs will be scheduled. New runs
+   *   will be scheduled after the backfill is complete. This will also update
+   *   {@link google.cloud.aiplatform.v1beta1.Schedule.catch_up|Schedule.catch_up}
+   *   field. Default to false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2352,54 +1850,54 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.delete_trial.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_DeleteTrial_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.resume_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_ResumeSchedule_async
    */
-  deleteTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
+  resumeSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest | undefined,
       {} | undefined
     ]
   >;
-  deleteTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
+  resumeSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest
+      | protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
+  resumeSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest
+      | protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
+  resumeSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest
+          | protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest
+      | protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest
       | null
       | undefined,
       {} | null | undefined
@@ -2407,7 +1905,7 @@ export class VizierServiceClient {
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -2427,365 +1925,18 @@ export class VizierServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTrial(request, options, callback);
-  }
-  /**
-   * Stops a Trial.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The Trial's name.
-   *   Format:
-   *   `projects/{project}/locations/{location}/studies/{study}/trials/{trial}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Trial | Trial}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.stop_trial.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_StopTrial_async
-   */
-  stopTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  stopTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  stopTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  stopTrial(
-    request?: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrial,
-          | protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      | protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial,
-      protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.stopTrial(request, options, callback);
-  }
-  /**
-   * Lists the pareto-optimal Trials for multi-objective Study or the
-   * optimal Trials for single-objective Study. The definition of
-   * pareto-optimal can be checked in wiki page.
-   * https://en.wikipedia.org/wiki/Pareto_efficiency
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the Study that the optimal Trial belongs to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse | ListOptimalTrialsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_optimal_trials.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_ListOptimalTrials_async
-   */
-  listOptimalTrials(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  listOptimalTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listOptimalTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listOptimalTrials(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse,
-      | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsResponse,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listOptimalTrials(request, options, callback);
+    return this.innerApiCalls.resumeSchedule(request, options, callback);
   }
 
   /**
-   * Adds one or more Trials to a Study, with parameter values
-   * suggested by Vertex AI Vizier. Returns a long-running
-   * operation associated with the generation of Trial suggestions.
-   * When this long-running operation succeeds, it will contain
-   * a {@link google.cloud.ml.v1.SuggestTrialsResponse|SuggestTrialsResponse}.
+   * Deletes a Schedule.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location that the Study belongs to.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
-   * @param {number} request.suggestionCount
-   *   Required. The number of suggestions requested. It must be positive.
-   * @param {string} request.clientId
-   *   Required. The identifier of the client that is requesting the suggestion.
-   *
-   *   If multiple SuggestTrialsRequests have the same `client_id`,
-   *   the service will return the identical suggested Trial if the Trial is
-   *   pending, and provide a new Trial if the last suggested Trial was completed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.suggest_trials.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_SuggestTrials_async
-   */
-  suggestTrials(
-    request?: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse,
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  suggestTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse,
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  suggestTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse,
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  suggestTrials(
-    request?: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse,
-            protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse,
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsResponse,
-        protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.suggestTrials(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `suggestTrials()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.suggest_trials.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_SuggestTrials_async
-   */
-  async checkSuggestTrialsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.SuggestTrialsResponse,
-      protos.google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.suggestTrials,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.SuggestTrialsResponse,
-      protos.google.cloud.aiplatform.v1beta1.SuggestTrialsMetadata
-    >;
-  }
-  /**
-   * Checks  whether a Trial should stop or not. Returns a
-   * long-running operation. When the operation is successful,
-   * it will contain a
-   * {@link google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse|CheckTrialEarlyStoppingStateResponse}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.trialName
-   *   Required. The Trial's name.
+   * @param {string} request.name
+   *   Required. The name of the Schedule resource to be deleted.
    *   Format:
-   *   `projects/{project}/locations/{location}/studies/{study}/trials/{trial}`
+   *   `projects/{project}/locations/{location}/schedules/{schedule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2795,61 +1946,61 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_CheckTrialEarlyStoppingState_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.delete_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_DeleteSchedule_async
    */
-  checkTrialEarlyStoppingState(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
+  deleteSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteScheduleRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
-  checkTrialEarlyStoppingState(
-    request: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
+  deleteSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteScheduleRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  checkTrialEarlyStoppingState(
-    request: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
+  deleteSchedule(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteScheduleRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  checkTrialEarlyStoppingState(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
+  deleteSchedule(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteScheduleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse,
-            protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2857,8 +2008,8 @@ export class VizierServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateMetatdata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2877,17 +2028,13 @@ export class VizierServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        trial_name: request.trialName ?? '',
+        name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkTrialEarlyStoppingState(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.deleteSchedule(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `checkTrialEarlyStoppingState()`.
+   * Check the status of the long running operation returned by `deleteSchedule()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
@@ -2895,15 +2042,15 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_CheckTrialEarlyStoppingState_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.delete_schedule.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_DeleteSchedule_async
    */
-  async checkCheckTrialEarlyStoppingStateProgress(
+  async checkDeleteScheduleProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse,
-      protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
     const request =
@@ -2913,95 +2060,147 @@ export class VizierServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.checkTrialEarlyStoppingState,
+      this.descriptors.longrunning.deleteSchedule,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateResponse,
-      protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateMetatdata
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
   /**
-   * Lists all the studies in a region for an associated project.
+   * Lists Schedules in a Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the Study from.
+   *   Required. The resource name of the Location to list the Schedules from.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.pageToken]
-   *   Optional. A page token to request the next page of results.
-   *   If unspecified, there are no subsequent pages.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of studies to return per "page" of results.
-   *   If unspecified, service will pick an appropriate default.
+   * @param {string} request.filter
+   *   Lists the Schedules that match the filter expression. The following
+   *   fields are supported:
+   *
+   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   * `state`: Supports `=` and `!=` comparisons.
+   *   * `request`: Supports existence of the <request_type> check.
+   *         (e.g. `create_pipeline_job_request:*` --> Schedule has
+   *         create_pipeline_job_request).
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `start_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, `>=` comparisons and `:*`
+   *         existence check. Values must be in RFC 3339 format.
+   *   * `next_run_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=`
+   *         comparisons. Values must be in RFC 3339 format.
+   *
+   *
+   *   Filter expressions can be combined together using logical operators
+   *   (`NOT`, `AND` & `OR`).
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `state="ACTIVE" AND display_name:"my_schedule_*"`
+   *   * `NOT display_name="my_schedule"`
+   *   * `create_time>"2021-05-18T00:00:00Z"`
+   *   * `end_time>"2021-05-18T00:00:00Z" OR NOT end_time:*`
+   *   * `create_pipeline_job_request:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   Default to 100 if not specified.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
+   *   call.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by. The default sort order is in
+   *   ascending order. Use "desc" after a field name for descending. You can have
+   *   multiple order_by fields provided.
+   *
+   *   For example, using "create_time desc, end_time" will order results by
+   *   create time in descending order, and if there are multiple schedules having
+   *   the same create time, order them by the end time in ascending order.
+   *
+   *   If order_by is not specified, it will order by default with create_time in
+   *   descending order.
+   *
+   *   Supported fields:
+   *     * `create_time`
+   *     * `start_time`
+   *     * `end_time`
+   *     * `next_run_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.Study | Study}.
+   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listStudiesAsync()`
+   *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listStudies(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+  listSchedules(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IStudy[],
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
+      protos.google.cloud.aiplatform.v1beta1.ISchedule[],
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
     ]
   >;
-  listStudies(
-    request: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+  listSchedules(
+    request: protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IStudy
+      protos.google.cloud.aiplatform.v1beta1.ISchedule
     >
   ): void;
-  listStudies(
-    request: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+  listSchedules(
+    request: protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IStudy
+      protos.google.cloud.aiplatform.v1beta1.ISchedule
     >
   ): void;
-  listStudies(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+  listSchedules(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
+          protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
           | null
           | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IStudy
+          protos.google.cloud.aiplatform.v1beta1.ISchedule
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IStudy
+      protos.google.cloud.aiplatform.v1beta1.ISchedule
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IStudy[],
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListStudiesResponse
+      protos.google.cloud.aiplatform.v1beta1.ISchedule[],
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
     ]
   > | void {
     request = request || {};
@@ -3020,7 +2219,7 @@ export class VizierServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listStudies(request, options, callback);
+    return this.innerApiCalls.listSchedules(request, options, callback);
   }
 
   /**
@@ -3028,28 +2227,80 @@ export class VizierServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the Study from.
+   *   Required. The resource name of the Location to list the Schedules from.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.pageToken]
-   *   Optional. A page token to request the next page of results.
-   *   If unspecified, there are no subsequent pages.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of studies to return per "page" of results.
-   *   If unspecified, service will pick an appropriate default.
+   * @param {string} request.filter
+   *   Lists the Schedules that match the filter expression. The following
+   *   fields are supported:
+   *
+   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   * `state`: Supports `=` and `!=` comparisons.
+   *   * `request`: Supports existence of the <request_type> check.
+   *         (e.g. `create_pipeline_job_request:*` --> Schedule has
+   *         create_pipeline_job_request).
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `start_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, `>=` comparisons and `:*`
+   *         existence check. Values must be in RFC 3339 format.
+   *   * `next_run_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=`
+   *         comparisons. Values must be in RFC 3339 format.
+   *
+   *
+   *   Filter expressions can be combined together using logical operators
+   *   (`NOT`, `AND` & `OR`).
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `state="ACTIVE" AND display_name:"my_schedule_*"`
+   *   * `NOT display_name="my_schedule"`
+   *   * `create_time>"2021-05-18T00:00:00Z"`
+   *   * `end_time>"2021-05-18T00:00:00Z" OR NOT end_time:*`
+   *   * `create_pipeline_job_request:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   Default to 100 if not specified.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
+   *   call.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by. The default sort order is in
+   *   ascending order. Use "desc" after a field name for descending. You can have
+   *   multiple order_by fields provided.
+   *
+   *   For example, using "create_time desc, end_time" will order results by
+   *   create time in descending order, and if there are multiple schedules having
+   *   the same create time, order them by the end time in ascending order.
+   *
+   *   If order_by is not specified, it will order by default with create_time in
+   *   descending order.
+   *
+   *   Supported fields:
+   *     * `create_time`
+   *     * `start_time`
+   *     * `end_time`
+   *     * `next_run_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.Study | Study} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listStudiesAsync()`
+   *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listStudiesStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+  listSchedulesStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -3060,48 +2311,100 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listStudies'];
+    const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listStudies.createStream(
-      this.innerApiCalls.listStudies as GaxCall,
+    return this.descriptors.page.listSchedules.createStream(
+      this.innerApiCalls.listSchedules as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listStudies`, but returns an iterable object.
+   * Equivalent to `listSchedules`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the Study from.
+   *   Required. The resource name of the Location to list the Schedules from.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.pageToken]
-   *   Optional. A page token to request the next page of results.
-   *   If unspecified, there are no subsequent pages.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of studies to return per "page" of results.
-   *   If unspecified, service will pick an appropriate default.
+   * @param {string} request.filter
+   *   Lists the Schedules that match the filter expression. The following
+   *   fields are supported:
+   *
+   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   * `state`: Supports `=` and `!=` comparisons.
+   *   * `request`: Supports existence of the <request_type> check.
+   *         (e.g. `create_pipeline_job_request:*` --> Schedule has
+   *         create_pipeline_job_request).
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `start_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *         Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, `>=` comparisons and `:*`
+   *         existence check. Values must be in RFC 3339 format.
+   *   * `next_run_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=`
+   *         comparisons. Values must be in RFC 3339 format.
+   *
+   *
+   *   Filter expressions can be combined together using logical operators
+   *   (`NOT`, `AND` & `OR`).
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `state="ACTIVE" AND display_name:"my_schedule_*"`
+   *   * `NOT display_name="my_schedule"`
+   *   * `create_time>"2021-05-18T00:00:00Z"`
+   *   * `end_time>"2021-05-18T00:00:00Z" OR NOT end_time:*`
+   *   * `create_pipeline_job_request:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   *   Default to 100 if not specified.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
+   *   call.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by. The default sort order is in
+   *   ascending order. Use "desc" after a field name for descending. You can have
+   *   multiple order_by fields provided.
+   *
+   *   For example, using "create_time desc, end_time" will order results by
+   *   create time in descending order, and if there are multiple schedules having
+   *   the same create time, order them by the end time in ascending order.
+   *
+   *   If order_by is not specified, it will order by default with create_time in
+   *   descending order.
+   *
+   *   Supported fields:
+   *     * `create_time`
+   *     * `start_time`
+   *     * `end_time`
+   *     * `next_run_time`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.Study | Study}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_studies.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_ListStudies_async
+   * @example <caption>include:samples/generated/v1beta1/schedule_service.list_schedules.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ScheduleService_ListSchedules_async
    */
-  listStudiesAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+  listSchedulesAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IStudy> {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ISchedule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3110,212 +2413,14 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listStudies'];
+    const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listStudies.asyncIterate(
-      this.innerApiCalls['listStudies'] as GaxCall,
+    return this.descriptors.page.listSchedules.asyncIterate(
+      this.innerApiCalls['listSchedules'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IStudy>;
-  }
-  /**
-   * Lists the Trials associated with a Study.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Study to list the Trial from.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
-   * @param {string} [request.pageToken]
-   *   Optional. A page token to request the next page of results.
-   *   If unspecified, there are no subsequent pages.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of Trials to retrieve per "page" of results.
-   *   If unspecified, the service will pick an appropriate default.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.Trial | Trial}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTrialsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listTrials(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial[],
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
-    ]
-  >;
-  listTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITrial
-    >
-  ): void;
-  listTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITrial
-    >
-  ): void;
-  listTrials(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.ITrial
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITrial
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITrial[],
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrialsResponse
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listTrials(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Study to list the Trial from.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
-   * @param {string} [request.pageToken]
-   *   Optional. A page token to request the next page of results.
-   *   If unspecified, there are no subsequent pages.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of Trials to retrieve per "page" of results.
-   *   If unspecified, the service will pick an appropriate default.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.Trial | Trial} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTrialsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listTrialsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listTrials'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listTrials.createStream(
-      this.innerApiCalls.listTrials as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listTrials`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Study to list the Trial from.
-   *   Format: `projects/{project}/locations/{location}/studies/{study}`
-   * @param {string} [request.pageToken]
-   *   Optional. A page token to request the next page of results.
-   *   If unspecified, there are no subsequent pages.
-   * @param {number} [request.pageSize]
-   *   Optional. The number of Trials to retrieve per "page" of results.
-   *   If unspecified, the service will pick an appropriate default.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.Trial | Trial}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_trials.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_VizierService_ListTrials_async
-   */
-  listTrialsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrial> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listTrials'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listTrials.asyncIterate(
-      this.innerApiCalls['listTrials'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrial>;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ISchedule>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -6175,8 +5280,8 @@ export class VizierServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.vizierServiceStub && !this._terminated) {
-      return this.vizierServiceStub.then(stub => {
+    if (this.scheduleServiceStub && !this._terminated) {
+      return this.scheduleServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();
