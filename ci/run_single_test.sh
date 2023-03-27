@@ -61,7 +61,7 @@ units)
     echo ${PROJECT}
     echo ${NODE_VERSION}
     # Skipping Node 12 tests for typeless-sample bot, since it doesn't run on Node12
-    if [[ ${PROJECT} != "typeless-sample-bot" ]] || [[ ${NODE_VERSION} != "12" ]]; then
+    if [[ ${PROJECT} != "typeless-sample-bot" ]] || [[ ${NODE_VERSION} != "12.22.12" ]]; then
         npm test
         retval=$?
     fi
