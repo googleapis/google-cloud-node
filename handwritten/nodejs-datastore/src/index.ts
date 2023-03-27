@@ -42,7 +42,8 @@ import {Transform, pipeline} from 'stream';
 import {entity, Entities, Entity, EntityProto, ValueProto} from './entity';
 import Key = entity.Key;
 export {Entity, Key};
-
+import {PropertyFilter, and, or} from './filter';
+export {PropertyFilter, and, or};
 import {
   GetIndexesCallback,
   GetIndexesOptions,
