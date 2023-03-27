@@ -18,6 +18,7 @@
   * [Import](#import)
   * [Indexes.get](#indexes.get)
   * [Indexes.list](#indexes.list)
+  * [Create a union between two filters](#create-a-union-between-two-filters)
   * [Quickstart](#quickstart)
   * [Add Task](#add-task)
   * [Delete Task](#delete-task)
@@ -135,6 +136,25 @@ __Usage:__
 
 
 `node samples/indexes.list.js`
+
+
+-----
+
+
+
+
+### Create a union between two filters
+
+Create a union between two filters (logical OR operator)
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/queryFilterOr.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/queryFilterOr.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/queryFilterOr.js`
 
 
 -----
