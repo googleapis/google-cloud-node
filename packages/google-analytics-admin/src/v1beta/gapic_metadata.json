@@ -190,6 +190,11 @@
                 "getDataStream"
               ]
             },
+            "RunAccessReport": {
+              "methods": [
+                "runAccessReport"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -450,6 +455,11 @@
             "GetDataStream": {
               "methods": [
                 "getDataStream"
+              ]
+            },
+            "RunAccessReport": {
+              "methods": [
+                "runAccessReport"
               ]
             },
             "ListAccounts": {

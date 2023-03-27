@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the admin project(containing project and location),
-   *  e.g.:
+   *  Required. The resource name of the admin project(containing project and
+   *  location), e.g.:
    *    `projects/myproject/locations/US`.
    */
   // const parent = 'abc123'

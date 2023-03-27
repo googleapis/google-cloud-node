@@ -12,8 +12,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TargetNotificationPayloadProto",
                     "java_package": "com.google.cloud.deploy.v1",
-                    "(google.api.resource_definition).type": "gkehub.googleapis.com/Membership",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/memberships/{membership}"
+                    "(google.api.resource_definition).type": "run.googleapis.com/Service",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/services/{service}"
                   },
                   "nested": {
                     "CloudDeploy": {
@@ -362,6 +362,46 @@
                             }
                           ]
                         },
+                        "AdvanceRollout": {
+                          "requestType": "AdvanceRolloutRequest",
+                          "responseType": "AdvanceRolloutResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*}:advance",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,phase_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*}:advance",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,phase_id"
+                            }
+                          ]
+                        },
+                        "CancelRollout": {
+                          "requestType": "CancelRolloutRequest",
+                          "responseType": "CancelRolloutResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "ListRollouts": {
                           "requestType": "ListRolloutsRequest",
                           "responseType": "ListRolloutsResponse",
@@ -426,6 +466,26 @@
                             }
                           ]
                         },
+                        "IgnoreJob": {
+                          "requestType": "IgnoreJobRequest",
+                          "responseType": "IgnoreJobResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{rollout=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*}:ignoreJob",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "rollout,phase_id,job_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{rollout=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*}:ignoreJob",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rollout,phase_id,job_id"
+                            }
+                          ]
+                        },
                         "RetryJob": {
                           "requestType": "RetryJobRequest",
                           "responseType": "RetryJobResponse",
@@ -475,6 +535,26 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*/jobRuns/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "TerminateJobRun": {
+                          "requestType": "TerminateJobRunRequest",
+                          "responseType": "TerminateJobRunResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*/jobRuns/*}:terminate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/deliveryPipelines/*/releases/*/rollouts/*/jobRuns/*}:terminate",
+                                "body": "*"
                               }
                             },
                             {
@@ -611,7 +691,8 @@
                       "oneofs": {
                         "deploymentStrategy": {
                           "oneof": [
-                            "standard"
+                            "standard",
+                            "canary"
                           ]
                         }
                       },
@@ -619,6 +700,10 @@
                         "standard": {
                           "type": "Standard",
                           "id": 1
+                        },
+                        "canary": {
+                          "type": "Canary",
+                          "id": 2
                         }
                       }
                     },
@@ -627,6 +712,183 @@
                         "verify": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Canary": {
+                      "oneofs": {
+                        "mode": {
+                          "oneof": [
+                            "canaryDeployment",
+                            "customCanaryDeployment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "runtimeConfig": {
+                          "type": "RuntimeConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "canaryDeployment": {
+                          "type": "CanaryDeployment",
+                          "id": 2
+                        },
+                        "customCanaryDeployment": {
+                          "type": "CustomCanaryDeployment",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CanaryDeployment": {
+                      "fields": {
+                        "percentages": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "verify": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CustomCanaryDeployment": {
+                      "fields": {
+                        "phaseConfigs": {
+                          "rule": "repeated",
+                          "type": "PhaseConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PhaseConfig": {
+                          "fields": {
+                            "phaseId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "percentage": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "profiles": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "verify": {
+                              "type": "bool",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "KubernetesConfig": {
+                      "oneofs": {
+                        "serviceDefinition": {
+                          "oneof": [
+                            "gatewayServiceMesh",
+                            "serviceNetworking"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gatewayServiceMesh": {
+                          "type": "GatewayServiceMesh",
+                          "id": 1
+                        },
+                        "serviceNetworking": {
+                          "type": "ServiceNetworking",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GatewayServiceMesh": {
+                          "fields": {
+                            "httpRoute": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "service": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "deployment": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ServiceNetworking": {
+                          "fields": {
+                            "service": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "deployment": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CloudRunConfig": {
+                      "fields": {
+                        "automaticTrafficControl": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RuntimeConfig": {
+                      "oneofs": {
+                        "runtimeConfig": {
+                          "oneof": [
+                            "kubernetes",
+                            "cloudRun"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "kubernetes": {
+                          "type": "KubernetesConfig",
+                          "id": 1
+                        },
+                        "cloudRun": {
+                          "type": "CloudRunConfig",
+                          "id": 2
                         }
                       }
                     },
@@ -662,6 +924,18 @@
                         }
                       }
                     },
+                    "TargetsTypeCondition": {
+                      "fields": {
+                        "status": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "errorDetails": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "PipelineCondition": {
                       "fields": {
                         "pipelineReadyCondition": {
@@ -671,6 +945,10 @@
                         "targetsPresentCondition": {
                           "type": "TargetsPresentCondition",
                           "id": 3
+                        },
+                        "targetsTypeCondition": {
+                          "type": "TargetsTypeCondition",
+                          "id": 4
                         }
                       }
                     },
@@ -868,7 +1146,8 @@
                           "oneof": [
                             "gke",
                             "anthosCluster",
-                            "run"
+                            "run",
+                            "multiTarget"
                           ]
                         }
                       },
@@ -949,6 +1228,10 @@
                         "run": {
                           "type": "CloudRunLocation",
                           "id": 18
+                        },
+                        "multiTarget": {
+                          "type": "MultiTarget",
+                          "id": 19
                         },
                         "etag": {
                           "type": "string",
@@ -1118,6 +1401,18 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "MultiTarget": {
+                      "fields": {
+                        "targetIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1431,6 +1726,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "condition": {
+                          "type": "ReleaseCondition",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1455,6 +1757,13 @@
                             "renderingState": {
                               "type": "TargetRenderState",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "metadata": {
+                              "type": "RenderMetadata",
+                              "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -1487,8 +1796,49 @@
                               "values": {
                                 "FAILURE_CAUSE_UNSPECIFIED": 0,
                                 "CLOUD_BUILD_UNAVAILABLE": 1,
-                                "EXECUTION_FAILED": 2
+                                "EXECUTION_FAILED": 2,
+                                "CLOUD_BUILD_REQUEST_FAILED": 3
                               }
+                            }
+                          }
+                        },
+                        "ReleaseReadyCondition": {
+                          "fields": {
+                            "status": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "SkaffoldSupportedCondition": {
+                          "fields": {
+                            "status": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "skaffoldSupportState": {
+                              "type": "SkaffoldSupportState",
+                              "id": 2
+                            },
+                            "maintenanceModeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            },
+                            "supportExpirationTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ReleaseCondition": {
+                          "fields": {
+                            "releaseReadyCondition": {
+                              "type": "ReleaseReadyCondition",
+                              "id": 1
+                            },
+                            "skaffoldSupportedCondition": {
+                              "type": "SkaffoldSupportedCondition",
+                              "id": 2
                             }
                           }
                         }
@@ -1532,6 +1882,57 @@
                         "manifestPath": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "phaseArtifacts": {
+                          "keyType": "string",
+                          "type": "PhaseArtifact",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PhaseArtifact": {
+                          "fields": {
+                            "skaffoldConfigPath": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "manifestPath": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CloudRunRenderMetadata": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Service"
+                          }
+                        }
+                      }
+                    },
+                    "RenderMetadata": {
+                      "fields": {
+                        "cloudRun": {
+                          "type": "CloudRunRenderMetadata",
+                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1778,6 +2179,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "controllerRollout": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1799,7 +2207,10 @@
                             "PENDING_APPROVAL": 4,
                             "APPROVAL_REJECTED": 5,
                             "PENDING": 6,
-                            "PENDING_RELEASE": 7
+                            "PENDING_RELEASE": 7,
+                            "CANCELLING": 8,
+                            "CANCELLED": 9,
+                            "HALTED": 10
                           }
                         },
                         "FailureCause": {
@@ -1810,7 +2221,8 @@
                             "DEADLINE_EXCEEDED": 3,
                             "RELEASE_FAILED": 4,
                             "RELEASE_ABANDONED": 5,
-                            "VERIFICATION_CONFIG_NOT_FOUND": 6
+                            "VERIFICATION_CONFIG_NOT_FOUND": 6,
+                            "CLOUD_BUILD_REQUEST_FAILED": 7
                           }
                         }
                       }
@@ -1843,7 +2255,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Service"
                           }
                         },
                         "serviceUrls": {
@@ -1867,7 +2280,8 @@
                       "oneofs": {
                         "jobs": {
                           "oneof": [
-                            "deploymentJobs"
+                            "deploymentJobs",
+                            "childRolloutJobs"
                           ]
                         }
                       },
@@ -1886,9 +2300,23 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "skipMessage": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "deploymentJobs": {
                           "type": "DeploymentJobs",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "childRolloutJobs": {
+                          "type": "ChildRolloutJobs",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1902,7 +2330,8 @@
                             "IN_PROGRESS": 2,
                             "SUCCEEDED": 3,
                             "FAILED": 4,
-                            "ABORTED": 5
+                            "ABORTED": 5,
+                            "SKIPPED": 6
                           }
                         }
                       }
@@ -1925,12 +2354,34 @@
                         }
                       }
                     },
+                    "ChildRolloutJobs": {
+                      "fields": {
+                        "createRolloutJobs": {
+                          "rule": "repeated",
+                          "type": "Job",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advanceRolloutJobs": {
+                          "rule": "repeated",
+                          "type": "Job",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Job": {
                       "oneofs": {
                         "jobType": {
                           "oneof": [
                             "deployJob",
-                            "verifyJob"
+                            "verifyJob",
+                            "createChildRolloutJob",
+                            "advanceChildRolloutJob"
                           ]
                         }
                       },
@@ -1945,6 +2396,13 @@
                         "state": {
                           "type": "State",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "skipMessage": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1970,6 +2428,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "createChildRolloutJob": {
+                          "type": "CreateChildRolloutJob",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advanceChildRolloutJob": {
+                          "type": "AdvanceChildRolloutJob",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1981,7 +2453,9 @@
                             "IN_PROGRESS": 3,
                             "SUCCEEDED": 4,
                             "FAILED": 5,
-                            "ABORTED": 6
+                            "ABORTED": 6,
+                            "SKIPPED": 7,
+                            "IGNORED": 8
                           }
                         }
                       }
@@ -1990,6 +2464,12 @@
                       "fields": {}
                     },
                     "VerifyJob": {
+                      "fields": {}
+                    },
+                    "CreateChildRolloutJob": {
+                      "fields": {}
+                    },
+                    "AdvanceChildRolloutJob": {
                       "fields": {}
                     },
                     "ListRolloutsRequest": {
@@ -2099,6 +2579,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "startingPhaseId": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2177,6 +2664,72 @@
                     "ApproveRolloutResponse": {
                       "fields": {}
                     },
+                    "AdvanceRolloutRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/Rollout"
+                          }
+                        },
+                        "phaseId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AdvanceRolloutResponse": {
+                      "fields": {}
+                    },
+                    "CancelRolloutRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/Rollout"
+                          }
+                        }
+                      }
+                    },
+                    "CancelRolloutResponse": {
+                      "fields": {}
+                    },
+                    "IgnoreJobRequest": {
+                      "fields": {
+                        "rollout": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/Rollout"
+                          }
+                        },
+                        "phaseId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "IgnoreJobResponse": {
+                      "fields": {}
+                    },
                     "RetryJobRequest": {
                       "fields": {
                         "rollout": {
@@ -2230,7 +2783,9 @@
                         "jobRun": {
                           "oneof": [
                             "deployJobRun",
-                            "verifyJobRun"
+                            "verifyJobRun",
+                            "createChildRolloutJobRun",
+                            "advanceChildRolloutJobRun"
                           ]
                         }
                       },
@@ -2305,6 +2860,20 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "createChildRolloutJobRun": {
+                          "type": "CreateChildRolloutJobRun",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advanceChildRolloutJobRun": {
+                          "type": "AdvanceChildRolloutJobRun",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 11,
@@ -2319,7 +2888,9 @@
                             "STATE_UNSPECIFIED": 0,
                             "IN_PROGRESS": 1,
                             "SUCCEEDED": 2,
-                            "FAILED": 3
+                            "FAILED": 3,
+                            "TERMINATING": 4,
+                            "TERMINATED": 5
                           }
                         }
                       }
@@ -2362,7 +2933,9 @@
                             "FAILURE_CAUSE_UNSPECIFIED": 0,
                             "CLOUD_BUILD_UNAVAILABLE": 1,
                             "EXECUTION_FAILED": 2,
-                            "DEADLINE_EXCEEDED": 3
+                            "DEADLINE_EXCEEDED": 3,
+                            "MISSING_RESOURCES_FOR_CANARY": 4,
+                            "CLOUD_BUILD_REQUEST_FAILED": 5
                           }
                         }
                       }
@@ -2413,7 +2986,44 @@
                             "CLOUD_BUILD_UNAVAILABLE": 1,
                             "EXECUTION_FAILED": 2,
                             "DEADLINE_EXCEEDED": 3,
-                            "VERIFICATION_CONFIG_NOT_FOUND": 4
+                            "VERIFICATION_CONFIG_NOT_FOUND": 4,
+                            "CLOUD_BUILD_REQUEST_FAILED": 5
+                          }
+                        }
+                      }
+                    },
+                    "CreateChildRolloutJobRun": {
+                      "fields": {
+                        "rollout": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rolloutPhaseId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AdvanceChildRolloutJobRun": {
+                      "fields": {
+                        "rollout": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rolloutPhaseId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -2488,6 +3098,21 @@
                         }
                       }
                     },
+                    "TerminateJobRunRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "clouddeploy.googleapis.com/JobRun"
+                          }
+                        }
+                      }
+                    },
+                    "TerminateJobRunResponse": {
+                      "fields": {}
+                    },
                     "Config": {
                       "options": {
                         "(google.api.resource).type": "clouddeploy.googleapis.com/Config",
@@ -2501,17 +3126,11 @@
                         "supportedVersions": {
                           "rule": "repeated",
                           "type": "SkaffoldVersion",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 2
                         },
                         "defaultSkaffoldVersion": {
                           "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 3
                         }
                       }
                     },
@@ -2520,6 +3139,14 @@
                         "version": {
                           "type": "string",
                           "id": 1
+                        },
+                        "maintenanceModeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "supportExpirationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
                         },
                         "supportEndDate": {
                           "type": "google.type.Date",
@@ -2539,6 +3166,14 @@
                         }
                       }
                     },
+                    "SkaffoldSupportState": {
+                      "values": {
+                        "SKAFFOLD_SUPPORT_STATE_UNSPECIFIED": 0,
+                        "SKAFFOLD_SUPPORT_STATE_SUPPORTED": 1,
+                        "SKAFFOLD_SUPPORT_STATE_MAINTENANCE_MODE": 2,
+                        "SKAFFOLD_SUPPORT_STATE_UNSUPPORTED": 3
+                      }
+                    },
                     "DeliveryPipelineNotificationEvent": {
                       "fields": {
                         "message": {
@@ -2556,6 +3191,11 @@
                       }
                     },
                     "Type": {
+                      "valuesOptions": {
+                        "TYPE_RENDER_STATUES_CHANGE": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "TYPE_UNSPECIFIED": 0,
                         "TYPE_PUBSUB_NOTIFICATION_FAILURE": 1,

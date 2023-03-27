@@ -96,17 +96,18 @@ function main(origin, destination) {
   // const regionCode = 'abc123'
   /**
    *  Optional. Specifies the units of measure for the display fields. This
-   *  includes the `instruction` field in `NavigationInstruction`. The units of
-   *  measure used for the route, leg, step distance, and duration are not
-   *  affected by this value. If you don't provide this value, then the display
-   *  units are inferred from the location of the request.
+   *  includes the `instruction` field in
+   *  NavigationInstruction google.maps.routing.v2.NavigationInstruction. The
+   *  units of measure used for the route, leg, step distance, and duration are
+   *  not affected by this value. If you don't provide this value, then the
+   *  display units are inferred from the location of the request.
    */
   // const units = {}
   /**
    *  Optional. Specifies what reference routes to calculate as part of the
    *  request in addition to the default route. A reference route is a route with
    *  a different route calculation objective than the default route. For example
-   *  an FUEL_EFFICIENT reference route calculation takes into account various
+   *  a `FUEL_EFFICIENT` reference route calculation takes into account various
    *  parameters that would generate an optimal fuel efficient route.
    */
   // const requestedReferenceRoutes = 1234

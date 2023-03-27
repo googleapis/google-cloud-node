@@ -21638,6 +21638,7 @@
                             "MULTI_IP_SUBNET": 151776719,
                             "SECURE_BOOT": 376811194,
                             "SEV_CAPABLE": 87083793,
+                            "SEV_LIVE_MIGRATABLE": 392039820,
                             "SEV_SNP_CAPABLE": 426919,
                             "UEFI_COMPATIBLE": 195865408,
                             "VIRTIO_SCSI_MULTIQUEUE": 201597069,
@@ -45331,6 +45332,15 @@
                         }
                       }
                     },
+                    "NodeGroupsSimulateMaintenanceEventRequest": {
+                      "fields": {
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 104993457
+                        }
+                      }
+                    },
                     "NodeTemplate": {
                       "oneofs": {
                         "_cpuOvercommitType": {
@@ -62670,6 +62680,54 @@
                         }
                       }
                     },
+                    "SimulateMaintenanceEventNodeGroupRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "nodeGroup": {
+                          "type": "string",
+                          "id": 469958146,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nodeGroupsSimulateMaintenanceEventRequestResource": {
+                          "type": "NodeGroupsSimulateMaintenanceEventRequest",
+                          "id": 351468764,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "Snapshot": {
                       "oneofs": {
                         "_architecture": {
@@ -79657,6 +79715,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,node_group,node_groups_set_node_template_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "SimulateMaintenanceEvent": {
+                          "requestType": "SimulateMaintenanceEventNodeGroupRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "node_groups_simulate_maintenance_event_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/simulateMaintenanceEvent",
+                            "(google.api.method_signature)": "project,zone,node_group,node_groups_simulate_maintenance_event_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "node_groups_simulate_maintenance_event_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/simulateMaintenanceEvent"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,node_group,node_groups_simulate_maintenance_event_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "ZoneOperations"

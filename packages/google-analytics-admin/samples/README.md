@@ -29,6 +29,7 @@
   * [Analytics_admin_service.cancel_display_video360_advertiser_link_proposal](#analytics_admin_service.cancel_display_video360_advertiser_link_proposal)
   * [Analytics_admin_service.create_access_binding](#analytics_admin_service.create_access_binding)
   * [Analytics_admin_service.create_audience](#analytics_admin_service.create_audience)
+  * [Analytics_admin_service.create_connected_site_tag](#analytics_admin_service.create_connected_site_tag)
   * [Analytics_admin_service.create_conversion_event](#analytics_admin_service.create_conversion_event)
   * [Analytics_admin_service.create_custom_dimension](#analytics_admin_service.create_custom_dimension)
   * [Analytics_admin_service.create_custom_metric](#analytics_admin_service.create_custom_metric)
@@ -46,6 +47,7 @@
   * [Analytics_admin_service.delete_access_binding](#analytics_admin_service.delete_access_binding)
   * [Analytics_admin_service.delete_account](#analytics_admin_service.delete_account)
   * [Analytics_admin_service.delete_android_app_data_stream](#analytics_admin_service.delete_android_app_data_stream)
+  * [Analytics_admin_service.delete_connected_site_tag](#analytics_admin_service.delete_connected_site_tag)
   * [Analytics_admin_service.delete_conversion_event](#analytics_admin_service.delete_conversion_event)
   * [Analytics_admin_service.delete_data_stream](#analytics_admin_service.delete_data_stream)
   * [Analytics_admin_service.delete_display_video360_advertiser_link](#analytics_admin_service.delete_display_video360_advertiser_link)
@@ -90,6 +92,7 @@
   * [Analytics_admin_service.list_android_app_data_streams](#analytics_admin_service.list_android_app_data_streams)
   * [Analytics_admin_service.list_audiences](#analytics_admin_service.list_audiences)
   * [Analytics_admin_service.list_big_query_links](#analytics_admin_service.list_big_query_links)
+  * [Analytics_admin_service.list_connected_site_tags](#analytics_admin_service.list_connected_site_tags)
   * [Analytics_admin_service.list_conversion_events](#analytics_admin_service.list_conversion_events)
   * [Analytics_admin_service.list_custom_dimensions](#analytics_admin_service.list_custom_dimensions)
   * [Analytics_admin_service.list_custom_metrics](#analytics_admin_service.list_custom_metrics)
@@ -167,6 +170,7 @@
   * [Analytics_admin_service.list_measurement_protocol_secrets](#analytics_admin_service.list_measurement_protocol_secrets)
   * [Analytics_admin_service.list_properties](#analytics_admin_service.list_properties)
   * [Analytics_admin_service.provision_account_ticket](#analytics_admin_service.provision_account_ticket)
+  * [Analytics_admin_service.run_access_report](#analytics_admin_service.run_access_report)
   * [Analytics_admin_service.search_change_history_events](#analytics_admin_service.search_change_history_events)
   * [Analytics_admin_service.update_account](#analytics_admin_service.update_account)
   * [Analytics_admin_service.update_custom_dimension](#analytics_admin_service.update_custom_dimension)
@@ -483,6 +487,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.create_connected_site_tag
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_connected_site_tag.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_connected_site_tag.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_connected_site_tag.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.create_conversion_event
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_conversion_event.js).
@@ -765,6 +786,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_android_app_data_stream.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.delete_connected_site_tag
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_connected_site_tag.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_connected_site_tag.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_connected_site_tag.js`
 
 
 -----
@@ -1513,6 +1551,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_big_query_links.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.list_connected_site_tags
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_connected_site_tags.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_connected_site_tags.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_connected_site_tags.js`
 
 
 -----
@@ -2822,6 +2877,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.provision_account_ticket.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.run_access_report
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.run_access_report.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.run_access_report.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.run_access_report.js`
 
 
 -----

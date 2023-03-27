@@ -11426,6 +11426,576 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('getEnhancedMeasurementSettings', () => {
+    it('invokes getEnhancedMeasurementSettings without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EnhancedMeasurementSettings()
+      );
+      client.innerApiCalls.getEnhancedMeasurementSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getEnhancedMeasurementSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEnhancedMeasurementSettings without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EnhancedMeasurementSettings()
+      );
+      client.innerApiCalls.getEnhancedMeasurementSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEnhancedMeasurementSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEnhancedMeasurementSettings with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEnhancedMeasurementSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getEnhancedMeasurementSettings(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEnhancedMeasurementSettings with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getEnhancedMeasurementSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateEnhancedMeasurementSettings', () => {
+    it('invokes updateEnhancedMeasurementSettings without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest()
+      );
+      request.enhancedMeasurementSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest',
+        ['enhancedMeasurementSettings', 'name']
+      );
+      request.enhancedMeasurementSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `enhanced_measurement_settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EnhancedMeasurementSettings()
+      );
+      client.innerApiCalls.updateEnhancedMeasurementSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateEnhancedMeasurementSettings(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEnhancedMeasurementSettings without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest()
+      );
+      request.enhancedMeasurementSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest',
+        ['enhancedMeasurementSettings', 'name']
+      );
+      request.enhancedMeasurementSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `enhanced_measurement_settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.EnhancedMeasurementSettings()
+      );
+      client.innerApiCalls.updateEnhancedMeasurementSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateEnhancedMeasurementSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IEnhancedMeasurementSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEnhancedMeasurementSettings with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest()
+      );
+      request.enhancedMeasurementSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest',
+        ['enhancedMeasurementSettings', 'name']
+      );
+      request.enhancedMeasurementSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `enhanced_measurement_settings.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateEnhancedMeasurementSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateEnhancedMeasurementSettings(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateEnhancedMeasurementSettings with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest()
+      );
+      request.enhancedMeasurementSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest',
+        ['enhancedMeasurementSettings', 'name']
+      );
+      request.enhancedMeasurementSettings.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateEnhancedMeasurementSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createConnectedSiteTag', () => {
+    it('invokes createConnectedSiteTag without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse()
+      );
+      client.innerApiCalls.createConnectedSiteTag =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createConnectedSiteTag(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes createConnectedSiteTag without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse()
+      );
+      client.innerApiCalls.createConnectedSiteTag =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createConnectedSiteTag(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes createConnectedSiteTag with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createConnectedSiteTag = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createConnectedSiteTag(request),
+        expectedError
+      );
+    });
+
+    it('invokes createConnectedSiteTag with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createConnectedSiteTag(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteConnectedSiteTag', () => {
+    it('invokes deleteConnectedSiteTag without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteConnectedSiteTag =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteConnectedSiteTag(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes deleteConnectedSiteTag without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteConnectedSiteTag =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteConnectedSiteTag(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes deleteConnectedSiteTag with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteConnectedSiteTag = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteConnectedSiteTag(request),
+        expectedError
+      );
+    });
+
+    it('invokes deleteConnectedSiteTag with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteConnectedSiteTag(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('listConnectedSiteTags', () => {
+    it('invokes listConnectedSiteTags without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse()
+      );
+      client.innerApiCalls.listConnectedSiteTags =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listConnectedSiteTags(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listConnectedSiteTags without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse()
+      );
+      client.innerApiCalls.listConnectedSiteTags =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listConnectedSiteTags(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listConnectedSiteTags with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listConnectedSiteTags = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listConnectedSiteTags(request),
+        expectedError
+      );
+    });
+
+    it('invokes listConnectedSiteTags with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.listConnectedSiteTags(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listAccounts', () => {
     it('invokes listAccounts without error', async () => {
       const client =
@@ -18791,6 +19361,69 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           (
             client.pathTemplates
               .displayVideo360AdvertiserLinkProposalPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('enhancedMeasurementSettings', () => {
+      const fakePath = '/rendered/path/enhancedMeasurementSettings';
+      const expectedParameters = {
+        property: 'propertyValue',
+        data_stream: 'dataStreamValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.enhancedMeasurementSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.enhancedMeasurementSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('enhancedMeasurementSettingsPath', () => {
+        const result = client.enhancedMeasurementSettingsPath(
+          'propertyValue',
+          'dataStreamValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.enhancedMeasurementSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromEnhancedMeasurementSettingsName', () => {
+        const result =
+          client.matchPropertyFromEnhancedMeasurementSettingsName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates.enhancedMeasurementSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStreamFromEnhancedMeasurementSettingsName', () => {
+        const result =
+          client.matchDataStreamFromEnhancedMeasurementSettingsName(fakePath);
+        assert.strictEqual(result, 'dataStreamValue');
+        assert(
+          (
+            client.pathTemplates.enhancedMeasurementSettingsPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

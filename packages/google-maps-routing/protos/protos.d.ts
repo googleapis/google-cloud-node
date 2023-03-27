@@ -6676,13 +6676,16 @@ export namespace google {
                     public endPolylinePointIndex?: (number|null);
 
                     /** SpeedReadingInterval speed. */
-                    public speed: (google.maps.routing.v2.SpeedReadingInterval.Speed|keyof typeof google.maps.routing.v2.SpeedReadingInterval.Speed);
+                    public speed?: (google.maps.routing.v2.SpeedReadingInterval.Speed|keyof typeof google.maps.routing.v2.SpeedReadingInterval.Speed|null);
 
                     /** SpeedReadingInterval _startPolylinePointIndex. */
                     public _startPolylinePointIndex?: "startPolylinePointIndex";
 
                     /** SpeedReadingInterval _endPolylinePointIndex. */
                     public _endPolylinePointIndex?: "endPolylinePointIndex";
+
+                    /** SpeedReadingInterval speedType. */
+                    public speedType?: "speed";
 
                     /**
                      * Creates a new SpeedReadingInterval instance using the specified properties.
@@ -7055,6 +7058,7 @@ export namespace google {
                     US_MD_EZPASSMD = 34,
                     US_ME_EZPASSME = 35,
                     US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD = 36,
+                    US_MI_BCPASS = 94,
                     US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG = 37,
                     US_MI_IQ_PROX_CARD = 38,
                     US_MI_MACKINAC_BRIDGE_MAC_PASS = 39,

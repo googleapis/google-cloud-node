@@ -812,10 +812,12 @@
                              * @property {string|null} [name] Reservation name
                              * @property {number|Long|null} [slotCapacity] Reservation slotCapacity
                              * @property {boolean|null} [ignoreIdleSlots] Reservation ignoreIdleSlots
+                             * @property {google.cloud.bigquery.reservation.v1.Reservation.IAutoscale|null} [autoscale] Reservation autoscale
                              * @property {number|Long|null} [concurrency] Reservation concurrency
                              * @property {google.protobuf.ITimestamp|null} [creationTime] Reservation creationTime
                              * @property {google.protobuf.ITimestamp|null} [updateTime] Reservation updateTime
                              * @property {boolean|null} [multiRegionAuxiliary] Reservation multiRegionAuxiliary
+                             * @property {google.cloud.bigquery.reservation.v1.Edition|null} [edition] Reservation edition
                              */
     
                             /**
@@ -858,6 +860,14 @@
                             Reservation.prototype.ignoreIdleSlots = false;
     
                             /**
+                             * Reservation autoscale.
+                             * @member {google.cloud.bigquery.reservation.v1.Reservation.IAutoscale|null|undefined} autoscale
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.autoscale = null;
+    
+                            /**
                              * Reservation concurrency.
                              * @member {number|Long} concurrency
                              * @memberof google.cloud.bigquery.reservation.v1.Reservation
@@ -890,6 +900,14 @@
                             Reservation.prototype.multiRegionAuxiliary = false;
     
                             /**
+                             * Reservation edition.
+                             * @member {google.cloud.bigquery.reservation.v1.Edition} edition
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.edition = 0;
+    
+                            /**
                              * Creates a new Reservation instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.Reservation
@@ -919,6 +937,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.slotCapacity);
                                 if (message.ignoreIdleSlots != null && Object.hasOwnProperty.call(message, "ignoreIdleSlots"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.ignoreIdleSlots);
+                                if (message.autoscale != null && Object.hasOwnProperty.call(message, "autoscale"))
+                                    $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale.encode(message.autoscale, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.creationTime != null && Object.hasOwnProperty.call(message, "creationTime"))
                                     $root.google.protobuf.Timestamp.encode(message.creationTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
@@ -927,6 +947,8 @@
                                     writer.uint32(/* id 14, wireType 0 =*/112).bool(message.multiRegionAuxiliary);
                                 if (message.concurrency != null && Object.hasOwnProperty.call(message, "concurrency"))
                                     writer.uint32(/* id 16, wireType 0 =*/128).int64(message.concurrency);
+                                if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                                    writer.uint32(/* id 17, wireType 0 =*/136).int32(message.edition);
                                 return writer;
                             };
     
@@ -973,6 +995,10 @@
                                             message.ignoreIdleSlots = reader.bool();
                                             break;
                                         }
+                                    case 7: {
+                                            message.autoscale = $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 16: {
                                             message.concurrency = reader.int64();
                                             break;
@@ -987,6 +1013,10 @@
                                         }
                                     case 14: {
                                             message.multiRegionAuxiliary = reader.bool();
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.edition = reader.int32();
                                             break;
                                         }
                                     default:
@@ -1033,6 +1063,11 @@
                                 if (message.ignoreIdleSlots != null && message.hasOwnProperty("ignoreIdleSlots"))
                                     if (typeof message.ignoreIdleSlots !== "boolean")
                                         return "ignoreIdleSlots: boolean expected";
+                                if (message.autoscale != null && message.hasOwnProperty("autoscale")) {
+                                    var error = $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale.verify(message.autoscale);
+                                    if (error)
+                                        return "autoscale." + error;
+                                }
                                 if (message.concurrency != null && message.hasOwnProperty("concurrency"))
                                     if (!$util.isInteger(message.concurrency) && !(message.concurrency && $util.isInteger(message.concurrency.low) && $util.isInteger(message.concurrency.high)))
                                         return "concurrency: integer|Long expected";
@@ -1049,6 +1084,16 @@
                                 if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
                                     if (typeof message.multiRegionAuxiliary !== "boolean")
                                         return "multiRegionAuxiliary: boolean expected";
+                                if (message.edition != null && message.hasOwnProperty("edition"))
+                                    switch (message.edition) {
+                                    default:
+                                        return "edition: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -1077,6 +1122,11 @@
                                         message.slotCapacity = new $util.LongBits(object.slotCapacity.low >>> 0, object.slotCapacity.high >>> 0).toNumber();
                                 if (object.ignoreIdleSlots != null)
                                     message.ignoreIdleSlots = Boolean(object.ignoreIdleSlots);
+                                if (object.autoscale != null) {
+                                    if (typeof object.autoscale !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.autoscale: object expected");
+                                    message.autoscale = $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale.fromObject(object.autoscale);
+                                }
                                 if (object.concurrency != null)
                                     if ($util.Long)
                                         (message.concurrency = $util.Long.fromValue(object.concurrency)).unsigned = false;
@@ -1098,6 +1148,30 @@
                                 }
                                 if (object.multiRegionAuxiliary != null)
                                     message.multiRegionAuxiliary = Boolean(object.multiRegionAuxiliary);
+                                switch (object.edition) {
+                                default:
+                                    if (typeof object.edition === "number") {
+                                        message.edition = object.edition;
+                                        break;
+                                    }
+                                    break;
+                                case "EDITION_UNSPECIFIED":
+                                case 0:
+                                    message.edition = 0;
+                                    break;
+                                case "STANDARD":
+                                case 1:
+                                    message.edition = 1;
+                                    break;
+                                case "ENTERPRISE":
+                                case 2:
+                                    message.edition = 2;
+                                    break;
+                                case "ENTERPRISE_PLUS":
+                                case 3:
+                                    message.edition = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -1122,6 +1196,7 @@
                                     } else
                                         object.slotCapacity = options.longs === String ? "0" : 0;
                                     object.ignoreIdleSlots = false;
+                                    object.autoscale = null;
                                     object.creationTime = null;
                                     object.updateTime = null;
                                     object.multiRegionAuxiliary = false;
@@ -1130,6 +1205,7 @@
                                         object.concurrency = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                     } else
                                         object.concurrency = options.longs === String ? "0" : 0;
+                                    object.edition = options.enums === String ? "EDITION_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1140,6 +1216,8 @@
                                         object.slotCapacity = options.longs === String ? $util.Long.prototype.toString.call(message.slotCapacity) : options.longs === Number ? new $util.LongBits(message.slotCapacity.low >>> 0, message.slotCapacity.high >>> 0).toNumber() : message.slotCapacity;
                                 if (message.ignoreIdleSlots != null && message.hasOwnProperty("ignoreIdleSlots"))
                                     object.ignoreIdleSlots = message.ignoreIdleSlots;
+                                if (message.autoscale != null && message.hasOwnProperty("autoscale"))
+                                    object.autoscale = $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale.toObject(message.autoscale, options);
                                 if (message.creationTime != null && message.hasOwnProperty("creationTime"))
                                     object.creationTime = $root.google.protobuf.Timestamp.toObject(message.creationTime, options);
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -1151,6 +1229,8 @@
                                         object.concurrency = options.longs === String ? String(message.concurrency) : message.concurrency;
                                     else
                                         object.concurrency = options.longs === String ? $util.Long.prototype.toString.call(message.concurrency) : options.longs === Number ? new $util.LongBits(message.concurrency.low >>> 0, message.concurrency.high >>> 0).toNumber() : message.concurrency;
+                                if (message.edition != null && message.hasOwnProperty("edition"))
+                                    object.edition = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.Edition[message.edition] === undefined ? message.edition : $root.google.cloud.bigquery.reservation.v1.Edition[message.edition] : message.edition;
                                 return object;
                             };
     
@@ -1180,6 +1260,261 @@
                                 return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.Reservation";
                             };
     
+                            Reservation.Autoscale = (function() {
+    
+                                /**
+                                 * Properties of an Autoscale.
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                                 * @interface IAutoscale
+                                 * @property {number|Long|null} [currentSlots] Autoscale currentSlots
+                                 * @property {number|Long|null} [maxSlots] Autoscale maxSlots
+                                 */
+    
+                                /**
+                                 * Constructs a new Autoscale.
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                                 * @classdesc Represents an Autoscale.
+                                 * @implements IAutoscale
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IAutoscale=} [properties] Properties to set
+                                 */
+                                function Autoscale(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Autoscale currentSlots.
+                                 * @member {number|Long} currentSlots
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @instance
+                                 */
+                                Autoscale.prototype.currentSlots = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Autoscale maxSlots.
+                                 * @member {number|Long} maxSlots
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @instance
+                                 */
+                                Autoscale.prototype.maxSlots = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new Autoscale instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IAutoscale=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.Autoscale} Autoscale instance
+                                 */
+                                Autoscale.create = function create(properties) {
+                                    return new Autoscale(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Autoscale message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.Autoscale.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IAutoscale} message Autoscale message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Autoscale.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.currentSlots != null && Object.hasOwnProperty.call(message, "currentSlots"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.currentSlots);
+                                    if (message.maxSlots != null && Object.hasOwnProperty.call(message, "maxSlots"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.maxSlots);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Autoscale message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.Autoscale.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IAutoscale} message Autoscale message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Autoscale.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Autoscale message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.Autoscale} Autoscale
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Autoscale.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.currentSlots = reader.int64();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.maxSlots = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Autoscale message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.Autoscale} Autoscale
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Autoscale.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Autoscale message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Autoscale.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.currentSlots != null && message.hasOwnProperty("currentSlots"))
+                                        if (!$util.isInteger(message.currentSlots) && !(message.currentSlots && $util.isInteger(message.currentSlots.low) && $util.isInteger(message.currentSlots.high)))
+                                            return "currentSlots: integer|Long expected";
+                                    if (message.maxSlots != null && message.hasOwnProperty("maxSlots"))
+                                        if (!$util.isInteger(message.maxSlots) && !(message.maxSlots && $util.isInteger(message.maxSlots.low) && $util.isInteger(message.maxSlots.high)))
+                                            return "maxSlots: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Autoscale message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.Autoscale} Autoscale
+                                 */
+                                Autoscale.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.reservation.v1.Reservation.Autoscale();
+                                    if (object.currentSlots != null)
+                                        if ($util.Long)
+                                            (message.currentSlots = $util.Long.fromValue(object.currentSlots)).unsigned = false;
+                                        else if (typeof object.currentSlots === "string")
+                                            message.currentSlots = parseInt(object.currentSlots, 10);
+                                        else if (typeof object.currentSlots === "number")
+                                            message.currentSlots = object.currentSlots;
+                                        else if (typeof object.currentSlots === "object")
+                                            message.currentSlots = new $util.LongBits(object.currentSlots.low >>> 0, object.currentSlots.high >>> 0).toNumber();
+                                    if (object.maxSlots != null)
+                                        if ($util.Long)
+                                            (message.maxSlots = $util.Long.fromValue(object.maxSlots)).unsigned = false;
+                                        else if (typeof object.maxSlots === "string")
+                                            message.maxSlots = parseInt(object.maxSlots, 10);
+                                        else if (typeof object.maxSlots === "number")
+                                            message.maxSlots = object.maxSlots;
+                                        else if (typeof object.maxSlots === "object")
+                                            message.maxSlots = new $util.LongBits(object.maxSlots.low >>> 0, object.maxSlots.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Autoscale message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.Autoscale} message Autoscale
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Autoscale.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.currentSlots = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.currentSlots = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.maxSlots = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.maxSlots = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.currentSlots != null && message.hasOwnProperty("currentSlots"))
+                                        if (typeof message.currentSlots === "number")
+                                            object.currentSlots = options.longs === String ? String(message.currentSlots) : message.currentSlots;
+                                        else
+                                            object.currentSlots = options.longs === String ? $util.Long.prototype.toString.call(message.currentSlots) : options.longs === Number ? new $util.LongBits(message.currentSlots.low >>> 0, message.currentSlots.high >>> 0).toNumber() : message.currentSlots;
+                                    if (message.maxSlots != null && message.hasOwnProperty("maxSlots"))
+                                        if (typeof message.maxSlots === "number")
+                                            object.maxSlots = options.longs === String ? String(message.maxSlots) : message.maxSlots;
+                                        else
+                                            object.maxSlots = options.longs === String ? $util.Long.prototype.toString.call(message.maxSlots) : options.longs === Number ? new $util.LongBits(message.maxSlots.low >>> 0, message.maxSlots.high >>> 0).toNumber() : message.maxSlots;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Autoscale to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Autoscale.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Autoscale
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.Autoscale
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Autoscale.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.Reservation.Autoscale";
+                                };
+    
+                                return Autoscale;
+                            })();
+    
                             return Reservation;
                         })();
     
@@ -1198,6 +1533,7 @@
                              * @property {google.rpc.IStatus|null} [failureStatus] CapacityCommitment failureStatus
                              * @property {google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|null} [renewalPlan] CapacityCommitment renewalPlan
                              * @property {boolean|null} [multiRegionAuxiliary] CapacityCommitment multiRegionAuxiliary
+                             * @property {google.cloud.bigquery.reservation.v1.Edition|null} [edition] CapacityCommitment edition
                              */
     
                             /**
@@ -1288,6 +1624,14 @@
                             CapacityCommitment.prototype.multiRegionAuxiliary = false;
     
                             /**
+                             * CapacityCommitment edition.
+                             * @member {google.cloud.bigquery.reservation.v1.Edition} edition
+                             * @memberof google.cloud.bigquery.reservation.v1.CapacityCommitment
+                             * @instance
+                             */
+                            CapacityCommitment.prototype.edition = 0;
+    
+                            /**
                              * Creates a new CapacityCommitment instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.CapacityCommitment
@@ -1329,6 +1673,8 @@
                                     $root.google.protobuf.Timestamp.encode(message.commitmentStartTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 if (message.multiRegionAuxiliary != null && Object.hasOwnProperty.call(message, "multiRegionAuxiliary"))
                                     writer.uint32(/* id 10, wireType 0 =*/80).bool(message.multiRegionAuxiliary);
+                                if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int32(message.edition);
                                 return writer;
                             };
     
@@ -1399,6 +1745,10 @@
                                             message.multiRegionAuxiliary = reader.bool();
                                             break;
                                         }
+                                    case 12: {
+                                            message.edition = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1446,9 +1796,14 @@
                                         return "plan: enum value expected";
                                     case 0:
                                     case 3:
+                                    case 7:
                                     case 5:
                                     case 2:
+                                    case 8:
                                     case 4:
+                                    case 9:
+                                    case 10:
+                                    case 6:
                                         break;
                                     }
                                 if (message.state != null && message.hasOwnProperty("state"))
@@ -1482,14 +1837,29 @@
                                         return "renewalPlan: enum value expected";
                                     case 0:
                                     case 3:
+                                    case 7:
                                     case 5:
                                     case 2:
+                                    case 8:
                                     case 4:
+                                    case 9:
+                                    case 10:
+                                    case 6:
                                         break;
                                     }
                                 if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
                                     if (typeof message.multiRegionAuxiliary !== "boolean")
                                         return "multiRegionAuxiliary: boolean expected";
+                                if (message.edition != null && message.hasOwnProperty("edition"))
+                                    switch (message.edition) {
+                                    default:
+                                        return "edition: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -1531,6 +1901,10 @@
                                 case 3:
                                     message.plan = 3;
                                     break;
+                                case "FLEX_FLAT_RATE":
+                                case 7:
+                                    message.plan = 7;
+                                    break;
                                 case "TRIAL":
                                 case 5:
                                     message.plan = 5;
@@ -1539,9 +1913,25 @@
                                 case 2:
                                     message.plan = 2;
                                     break;
+                                case "MONTHLY_FLAT_RATE":
+                                case 8:
+                                    message.plan = 8;
+                                    break;
                                 case "ANNUAL":
                                 case 4:
                                     message.plan = 4;
+                                    break;
+                                case "ANNUAL_FLAT_RATE":
+                                case 9:
+                                    message.plan = 9;
+                                    break;
+                                case "THREE_YEAR":
+                                case 10:
+                                    message.plan = 10;
+                                    break;
+                                case "NONE":
+                                case 6:
+                                    message.plan = 6;
                                     break;
                                 }
                                 switch (object.state) {
@@ -1598,6 +1988,10 @@
                                 case 3:
                                     message.renewalPlan = 3;
                                     break;
+                                case "FLEX_FLAT_RATE":
+                                case 7:
+                                    message.renewalPlan = 7;
+                                    break;
                                 case "TRIAL":
                                 case 5:
                                     message.renewalPlan = 5;
@@ -1606,13 +2000,53 @@
                                 case 2:
                                     message.renewalPlan = 2;
                                     break;
+                                case "MONTHLY_FLAT_RATE":
+                                case 8:
+                                    message.renewalPlan = 8;
+                                    break;
                                 case "ANNUAL":
                                 case 4:
                                     message.renewalPlan = 4;
                                     break;
+                                case "ANNUAL_FLAT_RATE":
+                                case 9:
+                                    message.renewalPlan = 9;
+                                    break;
+                                case "THREE_YEAR":
+                                case 10:
+                                    message.renewalPlan = 10;
+                                    break;
+                                case "NONE":
+                                case 6:
+                                    message.renewalPlan = 6;
+                                    break;
                                 }
                                 if (object.multiRegionAuxiliary != null)
                                     message.multiRegionAuxiliary = Boolean(object.multiRegionAuxiliary);
+                                switch (object.edition) {
+                                default:
+                                    if (typeof object.edition === "number") {
+                                        message.edition = object.edition;
+                                        break;
+                                    }
+                                    break;
+                                case "EDITION_UNSPECIFIED":
+                                case 0:
+                                    message.edition = 0;
+                                    break;
+                                case "STANDARD":
+                                case 1:
+                                    message.edition = 1;
+                                    break;
+                                case "ENTERPRISE":
+                                case 2:
+                                    message.edition = 2;
+                                    break;
+                                case "ENTERPRISE_PLUS":
+                                case 3:
+                                    message.edition = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -1643,6 +2077,7 @@
                                     object.renewalPlan = options.enums === String ? "COMMITMENT_PLAN_UNSPECIFIED" : 0;
                                     object.commitmentStartTime = null;
                                     object.multiRegionAuxiliary = false;
+                                    object.edition = options.enums === String ? "EDITION_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1665,6 +2100,8 @@
                                     object.commitmentStartTime = $root.google.protobuf.Timestamp.toObject(message.commitmentStartTime, options);
                                 if (message.multiRegionAuxiliary != null && message.hasOwnProperty("multiRegionAuxiliary"))
                                     object.multiRegionAuxiliary = message.multiRegionAuxiliary;
+                                if (message.edition != null && message.hasOwnProperty("edition"))
+                                    object.edition = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.Edition[message.edition] === undefined ? message.edition : $root.google.cloud.bigquery.reservation.v1.Edition[message.edition] : message.edition;
                                 return object;
                             };
     
@@ -1700,17 +2137,27 @@
                              * @enum {number}
                              * @property {number} COMMITMENT_PLAN_UNSPECIFIED=0 COMMITMENT_PLAN_UNSPECIFIED value
                              * @property {number} FLEX=3 FLEX value
+                             * @property {number} FLEX_FLAT_RATE=7 FLEX_FLAT_RATE value
                              * @property {number} TRIAL=5 TRIAL value
                              * @property {number} MONTHLY=2 MONTHLY value
+                             * @property {number} MONTHLY_FLAT_RATE=8 MONTHLY_FLAT_RATE value
                              * @property {number} ANNUAL=4 ANNUAL value
+                             * @property {number} ANNUAL_FLAT_RATE=9 ANNUAL_FLAT_RATE value
+                             * @property {number} THREE_YEAR=10 THREE_YEAR value
+                             * @property {number} NONE=6 NONE value
                              */
                             CapacityCommitment.CommitmentPlan = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "COMMITMENT_PLAN_UNSPECIFIED"] = 0;
                                 values[valuesById[3] = "FLEX"] = 3;
+                                values[valuesById[7] = "FLEX_FLAT_RATE"] = 7;
                                 values[valuesById[5] = "TRIAL"] = 5;
                                 values[valuesById[2] = "MONTHLY"] = 2;
+                                values[valuesById[8] = "MONTHLY_FLAT_RATE"] = 8;
                                 values[valuesById[4] = "ANNUAL"] = 4;
+                                values[valuesById[9] = "ANNUAL_FLAT_RATE"] = 9;
+                                values[valuesById[10] = "THREE_YEAR"] = 10;
+                                values[valuesById[6] = "NONE"] = 6;
                                 return values;
                             })();
     
@@ -5485,6 +5932,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                                 if (message.state != null && message.hasOwnProperty("state"))
@@ -5537,6 +5985,10 @@
                                 case "ML_EXTERNAL":
                                 case 3:
                                     message.jobType = 3;
+                                    break;
+                                case "BACKGROUND":
+                                case 4:
+                                    message.jobType = 4;
                                     break;
                                 }
                                 switch (object.state) {
@@ -5626,6 +6078,7 @@
                              * @property {number} PIPELINE=1 PIPELINE value
                              * @property {number} QUERY=2 QUERY value
                              * @property {number} ML_EXTERNAL=3 ML_EXTERNAL value
+                             * @property {number} BACKGROUND=4 BACKGROUND value
                              */
                             Assignment.JobType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -5633,6 +6086,7 @@
                                 values[valuesById[1] = "PIPELINE"] = 1;
                                 values[valuesById[2] = "QUERY"] = 2;
                                 values[valuesById[3] = "ML_EXTERNAL"] = 3;
+                                values[valuesById[4] = "BACKGROUND"] = 4;
                                 return values;
                             })();
     
@@ -7661,6 +8115,7 @@
                              * @interface IMoveAssignmentRequest
                              * @property {string|null} [name] MoveAssignmentRequest name
                              * @property {string|null} [destinationId] MoveAssignmentRequest destinationId
+                             * @property {string|null} [assignmentId] MoveAssignmentRequest assignmentId
                              */
     
                             /**
@@ -7695,6 +8150,14 @@
                             MoveAssignmentRequest.prototype.destinationId = "";
     
                             /**
+                             * MoveAssignmentRequest assignmentId.
+                             * @member {string} assignmentId
+                             * @memberof google.cloud.bigquery.reservation.v1.MoveAssignmentRequest
+                             * @instance
+                             */
+                            MoveAssignmentRequest.prototype.assignmentId = "";
+    
+                            /**
                              * Creates a new MoveAssignmentRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.MoveAssignmentRequest
@@ -7722,6 +8185,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.destinationId != null && Object.hasOwnProperty.call(message, "destinationId"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.destinationId);
+                                if (message.assignmentId != null && Object.hasOwnProperty.call(message, "assignmentId"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.assignmentId);
                                 return writer;
                             };
     
@@ -7762,6 +8227,10 @@
                                         }
                                     case 3: {
                                             message.destinationId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.assignmentId = reader.string();
                                             break;
                                         }
                                     default:
@@ -7805,6 +8274,9 @@
                                 if (message.destinationId != null && message.hasOwnProperty("destinationId"))
                                     if (!$util.isString(message.destinationId))
                                         return "destinationId: string expected";
+                                if (message.assignmentId != null && message.hasOwnProperty("assignmentId"))
+                                    if (!$util.isString(message.assignmentId))
+                                        return "assignmentId: string expected";
                                 return null;
                             };
     
@@ -7824,6 +8296,8 @@
                                     message.name = String(object.name);
                                 if (object.destinationId != null)
                                     message.destinationId = String(object.destinationId);
+                                if (object.assignmentId != null)
+                                    message.assignmentId = String(object.assignmentId);
                                 return message;
                             };
     
@@ -7843,11 +8317,14 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.destinationId = "";
+                                    object.assignmentId = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.destinationId != null && message.hasOwnProperty("destinationId"))
                                     object.destinationId = message.destinationId;
+                                if (message.assignmentId != null && message.hasOwnProperty("assignmentId"))
+                                    object.assignmentId = message.assignmentId;
                                 return object;
                             };
     
@@ -9119,6 +9596,24 @@
                             };
     
                             return UpdateBiReservationRequest;
+                        })();
+    
+                        /**
+                         * Edition enum.
+                         * @name google.cloud.bigquery.reservation.v1.Edition
+                         * @enum {number}
+                         * @property {number} EDITION_UNSPECIFIED=0 EDITION_UNSPECIFIED value
+                         * @property {number} STANDARD=1 STANDARD value
+                         * @property {number} ENTERPRISE=2 ENTERPRISE value
+                         * @property {number} ENTERPRISE_PLUS=3 ENTERPRISE_PLUS value
+                         */
+                        v1.Edition = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EDITION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STANDARD"] = 1;
+                            values[valuesById[2] = "ENTERPRISE"] = 2;
+                            values[valuesById[3] = "ENTERPRISE_PLUS"] = 3;
+                            return values;
                         })();
     
                         return v1;

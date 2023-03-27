@@ -39,7 +39,7 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-npm install --only=dev; npm install --engine-strict --only=prod
+npm install --unsafe-perm --only=dev; npm install --unsafe-perm --engine-strict --only=prod
 
 retval=0
 
@@ -58,8 +58,13 @@ system)
     retval=$?
     ;;
 units)
-    npm test
-    retval=$?
+    echo ${PROJECT}
+    echo ${NODE_VERSION}
+    # Skipping Node 12 tests for typeless-sample bot, since it doesn't run on Node12
+    if [[ ${PROJECT} != "typeless-sample-bot" ]] || [[ ${NODE_VERSION} != "12.22.12" ]]; then
+        npm test
+        retval=$?
+    fi
     ;;
 *)
     ;;

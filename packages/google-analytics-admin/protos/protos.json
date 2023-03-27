@@ -1930,13 +1930,19 @@
                           "responseType": "RunAccessReportResponse",
                           "options": {
                             "(google.api.http).post": "/v1alpha/{entity=properties/*}:runAccessReport",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{entity=accounts/*}:runAccessReport",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1alpha/{entity=properties/*}:runAccessReport",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1alpha/{entity=accounts/*}:runAccessReport",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -2302,6 +2308,92 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEnhancedMeasurementSettings": {
+                          "requestType": "GetEnhancedMeasurementSettingsRequest",
+                          "responseType": "EnhancedMeasurementSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataStreams/*/enhancedMeasurementSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataStreams/*/enhancedMeasurementSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateEnhancedMeasurementSettings": {
+                          "requestType": "UpdateEnhancedMeasurementSettingsRequest",
+                          "responseType": "EnhancedMeasurementSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/dataStreams/*/enhancedMeasurementSettings}",
+                            "(google.api.http).body": "enhanced_measurement_settings",
+                            "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{enhanced_measurement_settings.name=properties/*/dataStreams/*/enhancedMeasurementSettings}",
+                                "body": "enhanced_measurement_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "enhanced_measurement_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "CreateConnectedSiteTag": {
+                          "requestType": "CreateConnectedSiteTagRequest",
+                          "responseType": "CreateConnectedSiteTagResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:createConnectedSiteTag",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:createConnectedSiteTag",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConnectedSiteTag": {
+                          "requestType": "DeleteConnectedSiteTagRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:deleteConnectedSiteTag",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:deleteConnectedSiteTag",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ListConnectedSiteTags": {
+                          "requestType": "ListConnectedSiteTagsRequest",
+                          "responseType": "ListConnectedSiteTagsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:listConnectedSiteTags",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:listConnectedSiteTags",
+                                "body": "*"
+                              }
                             }
                           ]
                         }
@@ -4392,6 +4484,83 @@
                         }
                       }
                     },
+                    "GetEnhancedMeasurementSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/EnhancedMeasurementSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateEnhancedMeasurementSettingsRequest": {
+                      "fields": {
+                        "enhancedMeasurementSettings": {
+                          "type": "EnhancedMeasurementSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectedSiteTagRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "connectedSiteTag": {
+                          "type": "ConnectedSiteTag",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectedSiteTagResponse": {
+                      "fields": {}
+                    },
+                    "DeleteConnectedSiteTagRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tagId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListConnectedSiteTagsRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListConnectedSiteTagsResponse": {
+                      "fields": {
+                        "connectedSiteTags": {
+                          "rule": "repeated",
+                          "type": "ConnectedSiteTag",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AudienceFilterScope": {
                       "values": {
                         "AUDIENCE_FILTER_SCOPE_UNSPECIFIED": 0,
@@ -5100,7 +5269,8 @@
                         "DATA_STREAM": 18,
                         "ATTRIBUTION_SETTINGS": 20,
                         "EXPANDED_DATA_SET": 21,
-                        "CHANNEL_GROUP": 22
+                        "CHANNEL_GROUP": 22,
+                        "ENHANCED_MEASUREMENT_SETTINGS": 24
                       }
                     },
                     "GoogleSignalsState": {
@@ -5754,7 +5924,8 @@
                                 "dataStream",
                                 "attributionSettings",
                                 "expandedDataSet",
-                                "bigqueryLink"
+                                "bigqueryLink",
+                                "enhancedMeasurementSettings"
                               ]
                             }
                           },
@@ -5826,6 +5997,10 @@
                             "bigqueryLink": {
                               "type": "BigQueryLink",
                               "id": 23
+                            },
+                            "enhancedMeasurementSettings": {
+                              "type": "EnhancedMeasurementSettings",
+                              "id": 24
                             }
                           }
                         }
@@ -6400,6 +6575,10 @@
                           "type": "bool",
                           "id": 5
                         },
+                        "intradayExportEnabled": {
+                          "type": "bool",
+                          "id": 9
+                        },
                         "includeAdvertisingId": {
                           "type": "bool",
                           "id": 6
@@ -6415,6 +6594,82 @@
                           "id": 8
                         }
                       }
+                    },
+                    "EnhancedMeasurementSettings": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/EnhancedMeasurementSettings",
+                        "(google.api.resource).pattern": "properties/{property}/dataStreams/{data_stream}/enhancedMeasurementSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "streamEnabled": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "scrollsEnabled": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "outboundClicksEnabled": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "siteSearchEnabled": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "videoEngagementEnabled": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "fileDownloadsEnabled": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "pageChangesEnabled": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "formInteractionsEnabled": {
+                          "type": "bool",
+                          "id": 9
+                        },
+                        "searchQueryParameter": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "uriQueryParameter": {
+                          "type": "string",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "ConnectedSiteTag": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -6426,6 +6681,343 @@
                     "java_package": "com.google.analytics.admin.v1beta"
                   },
                   "nested": {
+                    "AccessDimension": {
+                      "fields": {
+                        "dimensionName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetric": {
+                      "fields": {
+                        "metricName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessDateRange": {
+                      "fields": {
+                        "startDate": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "endDate": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessFilterExpression": {
+                      "oneofs": {
+                        "oneExpression": {
+                          "oneof": [
+                            "andGroup",
+                            "orGroup",
+                            "notExpression",
+                            "accessFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "andGroup": {
+                          "type": "AccessFilterExpressionList",
+                          "id": 1
+                        },
+                        "orGroup": {
+                          "type": "AccessFilterExpressionList",
+                          "id": 2
+                        },
+                        "notExpression": {
+                          "type": "AccessFilterExpression",
+                          "id": 3
+                        },
+                        "accessFilter": {
+                          "type": "AccessFilter",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AccessFilterExpressionList": {
+                      "fields": {
+                        "expressions": {
+                          "rule": "repeated",
+                          "type": "AccessFilterExpression",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessFilter": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "stringFilter",
+                            "inListFilter",
+                            "numericFilter",
+                            "betweenFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringFilter": {
+                          "type": "AccessStringFilter",
+                          "id": 2
+                        },
+                        "inListFilter": {
+                          "type": "AccessInListFilter",
+                          "id": 3
+                        },
+                        "numericFilter": {
+                          "type": "AccessNumericFilter",
+                          "id": 4
+                        },
+                        "betweenFilter": {
+                          "type": "AccessBetweenFilter",
+                          "id": 5
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessStringFilter": {
+                      "fields": {
+                        "matchType": {
+                          "type": "MatchType",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "caseSensitive": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "MatchType": {
+                          "values": {
+                            "MATCH_TYPE_UNSPECIFIED": 0,
+                            "EXACT": 1,
+                            "BEGINS_WITH": 2,
+                            "ENDS_WITH": 3,
+                            "CONTAINS": 4,
+                            "FULL_REGEXP": 5,
+                            "PARTIAL_REGEXP": 6
+                          }
+                        }
+                      }
+                    },
+                    "AccessInListFilter": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "caseSensitive": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessNumericFilter": {
+                      "fields": {
+                        "operation": {
+                          "type": "Operation",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "NumericValue",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Operation": {
+                          "values": {
+                            "OPERATION_UNSPECIFIED": 0,
+                            "EQUAL": 1,
+                            "LESS_THAN": 2,
+                            "LESS_THAN_OR_EQUAL": 3,
+                            "GREATER_THAN": 4,
+                            "GREATER_THAN_OR_EQUAL": 5
+                          }
+                        }
+                      }
+                    },
+                    "AccessBetweenFilter": {
+                      "fields": {
+                        "fromValue": {
+                          "type": "NumericValue",
+                          "id": 1
+                        },
+                        "toValue": {
+                          "type": "NumericValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NumericValue": {
+                      "oneofs": {
+                        "oneValue": {
+                          "oneof": [
+                            "int64Value",
+                            "doubleValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "int64Value": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "doubleValue": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessOrderBy": {
+                      "oneofs": {
+                        "oneOrderBy": {
+                          "oneof": [
+                            "metric",
+                            "dimension"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "metric": {
+                          "type": "MetricOrderBy",
+                          "id": 1
+                        },
+                        "dimension": {
+                          "type": "DimensionOrderBy",
+                          "id": 2
+                        },
+                        "desc": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "MetricOrderBy": {
+                          "fields": {
+                            "metricName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DimensionOrderBy": {
+                          "fields": {
+                            "dimensionName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "orderType": {
+                              "type": "OrderType",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "OrderType": {
+                              "values": {
+                                "ORDER_TYPE_UNSPECIFIED": 0,
+                                "ALPHANUMERIC": 1,
+                                "CASE_INSENSITIVE_ALPHANUMERIC": 2,
+                                "NUMERIC": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AccessDimensionHeader": {
+                      "fields": {
+                        "dimensionName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetricHeader": {
+                      "fields": {
+                        "metricName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessRow": {
+                      "fields": {
+                        "dimensionValues": {
+                          "rule": "repeated",
+                          "type": "AccessDimensionValue",
+                          "id": 1
+                        },
+                        "metricValues": {
+                          "rule": "repeated",
+                          "type": "AccessMetricValue",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AccessDimensionValue": {
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetricValue": {
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessQuota": {
+                      "fields": {
+                        "tokensPerDay": {
+                          "type": "AccessQuotaStatus",
+                          "id": 1
+                        },
+                        "tokensPerHour": {
+                          "type": "AccessQuotaStatus",
+                          "id": 2
+                        },
+                        "concurrentRequests": {
+                          "type": "AccessQuotaStatus",
+                          "id": 3
+                        },
+                        "serverErrorsPerProjectPerHour": {
+                          "type": "AccessQuotaStatus",
+                          "id": 4
+                        },
+                        "tokensPerProjectPerHour": {
+                          "type": "AccessQuotaStatus",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AccessQuotaStatus": {
+                      "fields": {
+                        "consumed": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "remaining": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
                     "AnalyticsAdminService": {
                       "options": {
                         "(google.api.default_host)": "analyticsadmin.googleapis.com",
@@ -7295,6 +7887,107 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "RunAccessReport": {
+                          "requestType": "RunAccessReportRequest",
+                          "responseType": "RunAccessReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{entity=properties/*}:runAccessReport",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{entity=accounts/*}:runAccessReport",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{entity=properties/*}:runAccessReport",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{entity=accounts/*}:runAccessReport",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RunAccessReportRequest": {
+                      "fields": {
+                        "entity": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "AccessDimension",
+                          "id": 2
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "AccessMetric",
+                          "id": 3
+                        },
+                        "dateRanges": {
+                          "rule": "repeated",
+                          "type": "AccessDateRange",
+                          "id": 4
+                        },
+                        "dimensionFilter": {
+                          "type": "AccessFilterExpression",
+                          "id": 5
+                        },
+                        "metricFilter": {
+                          "type": "AccessFilterExpression",
+                          "id": 6
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "orderBys": {
+                          "rule": "repeated",
+                          "type": "AccessOrderBy",
+                          "id": 10
+                        },
+                        "returnEntityQuota": {
+                          "type": "bool",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "RunAccessReportResponse": {
+                      "fields": {
+                        "dimensionHeaders": {
+                          "rule": "repeated",
+                          "type": "AccessDimensionHeader",
+                          "id": 1
+                        },
+                        "metricHeaders": {
+                          "rule": "repeated",
+                          "type": "AccessMetricHeader",
+                          "id": 2
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "AccessRow",
+                          "id": 3
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "quota": {
+                          "type": "AccessQuota",
+                          "id": 5
                         }
                       }
                     },

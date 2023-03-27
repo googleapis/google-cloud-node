@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-deploy",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -290,7 +290,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -554,7 +554,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -780,6 +780,90 @@
             }
         },
         {
+            "regionTag": "clouddeploy_v1_generated_CloudDeploy_AdvanceRollout_async",
+            "title": "CloudDeploy advanceRollout Sample",
+            "origin": "API_DEFINITION",
+            "description": " Advances a Rollout in a given project and location.",
+            "canonical": true,
+            "file": "cloud_deploy.advance_rollout.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AdvanceRollout",
+                "fullName": "google.cloud.deploy.v1.CloudDeploy.AdvanceRollout",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "phase_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.deploy.v1.AdvanceRolloutResponse",
+                "client": {
+                    "shortName": "CloudDeployClient",
+                    "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+                },
+                "method": {
+                    "shortName": "AdvanceRollout",
+                    "fullName": "google.cloud.deploy.v1.CloudDeploy.AdvanceRollout",
+                    "service": {
+                        "shortName": "CloudDeploy",
+                        "fullName": "google.cloud.deploy.v1.CloudDeploy"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "clouddeploy_v1_generated_CloudDeploy_CancelRollout_async",
+            "title": "CloudDeploy cancelRollout Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels a Rollout in a given project and location.",
+            "canonical": true,
+            "file": "cloud_deploy.cancel_rollout.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelRollout",
+                "fullName": "google.cloud.deploy.v1.CloudDeploy.CancelRollout",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.deploy.v1.CancelRolloutResponse",
+                "client": {
+                    "shortName": "CloudDeployClient",
+                    "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+                },
+                "method": {
+                    "shortName": "CancelRollout",
+                    "fullName": "google.cloud.deploy.v1.CloudDeploy.CancelRollout",
+                    "service": {
+                        "shortName": "CloudDeploy",
+                        "fullName": "google.cloud.deploy.v1.CloudDeploy"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "clouddeploy_v1_generated_CloudDeploy_ListRollouts_async",
             "title": "CloudDeploy listRollouts Sample",
             "origin": "API_DEFINITION",
@@ -790,7 +874,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -886,7 +970,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 85,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -914,6 +998,10 @@
                     {
                         "name": "validate_only",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "starting_phase_id",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -924,6 +1012,54 @@
                 "method": {
                     "shortName": "CreateRollout",
                     "fullName": "google.cloud.deploy.v1.CloudDeploy.CreateRollout",
+                    "service": {
+                        "shortName": "CloudDeploy",
+                        "fullName": "google.cloud.deploy.v1.CloudDeploy"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "clouddeploy_v1_generated_CloudDeploy_IgnoreJob_async",
+            "title": "CloudDeploy ignoreJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Ignores the specified Job in a Rollout.",
+            "canonical": true,
+            "file": "cloud_deploy.ignore_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "IgnoreJob",
+                "fullName": "google.cloud.deploy.v1.CloudDeploy.IgnoreJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "rollout",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "phase_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "job_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.deploy.v1.IgnoreJobResponse",
+                "client": {
+                    "shortName": "CloudDeployClient",
+                    "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+                },
+                "method": {
+                    "shortName": "IgnoreJob",
+                    "fullName": "google.cloud.deploy.v1.CloudDeploy.IgnoreJob",
                     "service": {
                         "shortName": "CloudDeploy",
                         "fullName": "google.cloud.deploy.v1.CloudDeploy"
@@ -990,7 +1126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -1068,6 +1204,46 @@
                 "method": {
                     "shortName": "GetJobRun",
                     "fullName": "google.cloud.deploy.v1.CloudDeploy.GetJobRun",
+                    "service": {
+                        "shortName": "CloudDeploy",
+                        "fullName": "google.cloud.deploy.v1.CloudDeploy"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async",
+            "title": "CloudDeploy terminateJobRun Sample",
+            "origin": "API_DEFINITION",
+            "description": " Terminates a Job Run in a given project and location.",
+            "canonical": true,
+            "file": "cloud_deploy.terminate_job_run.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TerminateJobRun",
+                "fullName": "google.cloud.deploy.v1.CloudDeploy.TerminateJobRun",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.deploy.v1.TerminateJobRunResponse",
+                "client": {
+                    "shortName": "CloudDeployClient",
+                    "fullName": "google.cloud.deploy.v1.CloudDeployClient"
+                },
+                "method": {
+                    "shortName": "TerminateJobRun",
+                    "fullName": "google.cloud.deploy.v1.CloudDeploy.TerminateJobRun",
                     "service": {
                         "shortName": "CloudDeploy",
                         "fullName": "google.cloud.deploy.v1.CloudDeploy"

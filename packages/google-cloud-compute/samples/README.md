@@ -336,6 +336,7 @@
   * [Node_groups.patch](#node_groups.patch)
   * [Node_groups.set_iam_policy](#node_groups.set_iam_policy)
   * [Node_groups.set_node_template](#node_groups.set_node_template)
+  * [Node_groups.simulate_maintenance_event](#node_groups.simulate_maintenance_event)
   * [Node_groups.test_iam_permissions](#node_groups.test_iam_permissions)
   * [Node_templates.aggregated_list](#node_templates.aggregated_list)
   * [Node_templates.delete](#node_templates.delete)
@@ -6222,6 +6223,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/node_groups.set_node_template.js`
+
+
+-----
+
+
+
+
+### Node_groups.simulate_maintenance_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/node_groups.simulate_maintenance_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/node_groups.simulate_maintenance_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/node_groups.simulate_maintenance_event.js`
 
 
 -----

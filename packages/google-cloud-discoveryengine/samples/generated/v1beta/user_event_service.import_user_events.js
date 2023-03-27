@@ -33,7 +33,7 @@ function main(inlineSource, gcsSource, bigquerySource, parent) {
    */
   // const inlineSource = {}
   /**
-   *  Required. Google Cloud Storage location for the input content.
+   *  Required. Cloud Storage location for the input content.
    */
   // const gcsSource = {}
   /**
@@ -42,7 +42,7 @@ function main(inlineSource, gcsSource, bigquerySource, parent) {
   // const bigquerySource = {}
   /**
    *  Required. Parent DataStore resource name, of the form
-   *  `projects/{project}/locations/{location}/dataStores/{data_store}`
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
    */
   // const parent = 'abc123'
   /**
