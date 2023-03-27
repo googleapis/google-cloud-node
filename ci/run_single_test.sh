@@ -39,7 +39,7 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-npm install --unsafe-perm --only=dev; npm install --unsafe-perm --engine-strict --only=prod
+npm install --unsafe-perm --omit=prod; npm install --unsafe-perm --engine-strict --only=prod
 
 retval=0
 
