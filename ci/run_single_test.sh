@@ -40,7 +40,7 @@ fi
 
 # Install dependencies
 if [[ ${NODE_VERSION} == "12.22.12" ]]; then
-    npm install --unsafe-perm --ignore-scripts --engine-strict --only=dev; npm install --unsafe-perm
+    npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm
 else 
     npm install --ignore-scripts --engine-strict --omit=dev; npm install
 fi
