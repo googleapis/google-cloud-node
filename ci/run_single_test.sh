@@ -39,7 +39,11 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-npm install --unsafe-perm --ignore-scripts --engine-strict --omit=dev; npm install --unsafe-perm
+if [[ ${NODE_VERSION} == "12.22.12" ]]; then
+    npm install --unsafe-perm --ignore-scripts --engine-strict --only=dev; npm install --unsafe-perm
+else 
+    npm install --ignore-scripts --engine-strict --omit=dev; npm install
+fi
 
 retval=0
 
