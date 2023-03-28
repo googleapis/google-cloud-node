@@ -39,7 +39,7 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-if [[ ${NODE_VERSION} == "12.22.12" ]]; then
+if [[ ${NODE_VERSION} == "12.22.12" ]] && [[ ${PROJECT} != "gapic-node-templating" ]]; then
     npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm
 else 
     npm install --ignore-scripts --engine-strict --omit=dev; npm install
@@ -62,10 +62,8 @@ system)
     retval=$?
     ;;
 units)
-    echo ${PROJECT}
-    echo ${NODE_VERSION}
-    # Skipping Node 12 tests for typeless-sample bot, since it doesn't run on Node12
-    if [[ ${PROJECT} != "typeless-sample-bot" ]] || [[ ${NODE_VERSION} != "12.22.12" ]]; then
+    # Skipping Node 12 tests for typeless-sample bot and gapic-node-templating, since it doesn't run on Node12
+    if [[ ${PROJECT} != "typeless-sample-bot" ]] || [[ ${PROJECT} != "gapic-node-templating" ]] || [[ ${NODE_VERSION} != "12.22.12" ]]; then
         npm test
         retval=$?
     fi
