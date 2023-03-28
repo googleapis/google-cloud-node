@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.8.0...aiplatform-v2.8.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* Remove large_model_reference from Model in aiplatform v1beta1 model.proto ([#4098](https://github.com/googleapis/google-cloud-node/issues/4098)) ([3c1a0ee](https://github.com/googleapis/google-cloud-node/commit/3c1a0eec71a426a8b6bc31ad7b4b729ccafd500a))
+
 ## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.7.0...aiplatform-v2.8.0) (2023-03-06)
 
 

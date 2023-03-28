@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.5.0...cloudbuild-v3.5.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* [cloudbuild] change java package of Cloud Build v2 ([#4087](https://github.com/googleapis/google-cloud-node/issues/4087)) ([55efb27](https://github.com/googleapis/google-cloud-node/commit/55efb27141ba420ea9c181673708e8282382b0ff))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v3.4.0...cloudbuild-v3.5.0) (2023-03-13)
 
 

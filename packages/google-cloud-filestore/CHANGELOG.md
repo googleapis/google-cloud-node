@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/filestore-v2.3.1...filestore-v2.4.0) (2023-03-28)
+
+
+### Features
+
+* [filestore] updating the client to match the latest v1 API ([#4104](https://github.com/googleapis/google-cloud-node/issues/4104)) ([10afbc0](https://github.com/googleapis/google-cloud-node/commit/10afbc0b499d95e18886ee2f6a53cdd203a07542))
+
 ## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/filestore-v2.3.0...filestore-v2.3.1) (2023-02-15)
 
 
