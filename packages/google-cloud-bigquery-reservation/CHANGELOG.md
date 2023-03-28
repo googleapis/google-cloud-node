@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v2.1.1...bigquery-reservation-v2.2.0) (2023-03-28)
+
+
+### Features
+
+* [bigquery-reservation] add edition/autoscale related fields ([#4122](https://github.com/googleapis/google-cloud-node/issues/4122)) ([269a7e4](https://github.com/googleapis/google-cloud-node/commit/269a7e4b2a9542e7bd94eaf8cc1d4b78c2beeff0))
+
 ## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v2.1.0...bigquery-reservation-v2.1.1) (2023-02-15)
 
 
