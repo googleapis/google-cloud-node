@@ -5264,6 +5264,9 @@ export namespace google {
 
                 /** Cluster etag */
                 etag?: (string|null);
+
+                /** Cluster fleet */
+                fleet?: (google.container.v1.IFleet|null);
             }
 
             /** Represents a Cluster. */
@@ -5463,6 +5466,9 @@ export namespace google {
 
                 /** Cluster etag. */
                 public etag: string;
+
+                /** Cluster fleet. */
+                public fleet?: (google.container.v1.IFleet|null);
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -18596,6 +18602,115 @@ export namespace google {
 
                 /**
                  * Gets the default type url for ManagedPrometheusConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a Fleet. */
+            interface IFleet {
+
+                /** Fleet project */
+                project?: (string|null);
+
+                /** Fleet membership */
+                membership?: (string|null);
+
+                /** Fleet preRegistered */
+                preRegistered?: (boolean|null);
+            }
+
+            /** Represents a Fleet. */
+            class Fleet implements IFleet {
+
+                /**
+                 * Constructs a new Fleet.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IFleet);
+
+                /** Fleet project. */
+                public project: string;
+
+                /** Fleet membership. */
+                public membership: string;
+
+                /** Fleet preRegistered. */
+                public preRegistered: boolean;
+
+                /**
+                 * Creates a new Fleet instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Fleet instance
+                 */
+                public static create(properties?: google.container.v1.IFleet): google.container.v1.Fleet;
+
+                /**
+                 * Encodes the specified Fleet message. Does not implicitly {@link google.container.v1.Fleet.verify|verify} messages.
+                 * @param message Fleet message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Fleet message, length delimited. Does not implicitly {@link google.container.v1.Fleet.verify|verify} messages.
+                 * @param message Fleet message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Fleet message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Fleet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.Fleet;
+
+                /**
+                 * Decodes a Fleet message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Fleet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.Fleet;
+
+                /**
+                 * Verifies a Fleet message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Fleet message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Fleet
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.Fleet;
+
+                /**
+                 * Creates a plain object from a Fleet message. Also converts values to other types if specified.
+                 * @param message Fleet
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.Fleet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Fleet to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Fleet
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
