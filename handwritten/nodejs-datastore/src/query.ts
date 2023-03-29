@@ -18,7 +18,7 @@ import arrify = require('arrify');
 import {Key} from 'readline';
 import {Datastore} from '.';
 import {Entity} from './entity';
-import {EntityFilter, isFilter} from './filter';
+import {EntityFilter, isFilter, AllowedFilterValueType} from './filter';
 import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
 import {RunQueryStreamOptions} from '../src/request';
@@ -207,12 +207,20 @@ class Query {
    * const keyQuery = query.filter('__key__', key);
    * ```
    */
-  filter(propertyOrFilter: string | EntityFilter, value?: {} | null): Query;
-  filter(propertyOrFilter: string, operator: Operator, value: {} | null): Query;
-  filter(
-    propertyOrFilter: string | EntityFilter,
-    operatorOrValue?: Operator,
-    value?: {} | null
+  filter(filter: EntityFilter): Query;
+  filter<T extends string>(
+    property: T,
+    value: AllowedFilterValueType<T>
+  ): Query;
+  filter<T extends string>(
+    property: T,
+    operator: Operator,
+    value: AllowedFilterValueType<T>
+  ): Query;
+  filter<T extends string>(
+    propertyOrFilter: T | EntityFilter,
+    operatorOrValue?: Operator | AllowedFilterValueType<T>,
+    value?: AllowedFilterValueType<T>
   ): Query {
     if (isFilter(propertyOrFilter)) {
       this.entityFilters.push(propertyOrFilter);
@@ -223,7 +231,7 @@ class Query {
       );
       let operator = operatorOrValue as Operator;
       if (arguments.length === 2) {
-        value = operatorOrValue as {};
+        value = operatorOrValue as AllowedFilterValueType<T>;
         operator = '=';
       }
 

@@ -17,7 +17,7 @@ import {beforeEach, afterEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as sinon from 'sinon';
 import {Datastore} from '../src';
-import {Entity} from '../src/entity';
+import {Entity, entity as globalEntity} from '../src/entity';
 import {IntegerTypeCastOptions} from '../src/query';
 import {PropertyFilter, EntityFilter, and} from '../src/filter';
 
@@ -1873,7 +1873,7 @@ describe('entity', () => {
     };
 
     it('should support all configurations of a query', () => {
-      const ancestorKey = new entity.Key({
+      const ancestorKey = new globalEntity.Key({
         path: ['Kind2', 'somename'],
       });
 
@@ -1894,8 +1894,62 @@ describe('entity', () => {
       assert.deepStrictEqual(entity.queryToQueryProto(query), queryProto);
     });
 
+    it('should support using __key__ with array as value', () => {
+      const keyWithInQuery = {
+        distinctOn: [],
+        filter: {
+          compositeFilter: {
+            filters: [
+              {
+                propertyFilter: {
+                  op: 'IN',
+                  property: {
+                    name: '__key__',
+                  },
+                  value: {
+                    arrayValue: {
+                      values: [
+                        {
+                          keyValue: {
+                            path: [
+                              {
+                                kind: 'Kind1',
+                                name: 'key1',
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+            op: 'AND',
+          },
+        },
+        kind: [
+          {
+            name: 'Kind1',
+          },
+        ],
+        order: [],
+        projection: [],
+      };
+
+      const ds = new Datastore({projectId: 'project-id'});
+
+      const query = ds
+        .createQuery('Kind1')
+        .filter('__key__', 'IN', [
+          new globalEntity.Key({path: ['Kind1', 'key1']}),
+        ]);
+
+      assert.deepStrictEqual(entity.queryToQueryProto(query), keyWithInQuery);
+    });
+
     it('should support the filter method with Filter objects', () => {
-      const ancestorKey = new entity.Key({
+      const ancestorKey = new globalEntity.Key({
         path: ['Kind2', 'somename'],
       });
 
@@ -1916,7 +1970,7 @@ describe('entity', () => {
     });
 
     it('should support the filter method with AND', () => {
-      const ancestorKey = new entity.Key({
+      const ancestorKey = new globalEntity.Key({
         path: ['Kind2', 'somename'],
       });
 
