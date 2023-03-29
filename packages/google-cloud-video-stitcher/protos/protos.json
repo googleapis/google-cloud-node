@@ -482,10 +482,6 @@
                             "prefetchConfig": {
                               "type": "PrefetchConfig",
                               "id": 10
-                            },
-                            "defaultAdBreakDuration": {
-                              "type": "google.protobuf.Duration",
-                              "id": 11
                             }
                           },
                           "nested": {

@@ -1995,9 +1995,6 @@ export namespace google {
 
                         /** LiveConfig prefetchConfig */
                         prefetchConfig?: (google.cloud.video.stitcher.v1.IPrefetchConfig|null);
-
-                        /** LiveConfig defaultAdBreakDuration */
-                        defaultAdBreakDuration?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a LiveConfig. */
@@ -2035,9 +2032,6 @@ export namespace google {
 
                         /** LiveConfig prefetchConfig. */
                         public prefetchConfig?: (google.cloud.video.stitcher.v1.IPrefetchConfig|null);
-
-                        /** LiveConfig defaultAdBreakDuration. */
-                        public defaultAdBreakDuration?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new LiveConfig instance using the specified properties.

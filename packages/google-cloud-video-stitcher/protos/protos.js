@@ -4973,7 +4973,6 @@
                              * @property {string|null} [defaultSlate] LiveConfig defaultSlate
                              * @property {google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy|null} [stitchingPolicy] LiveConfig stitchingPolicy
                              * @property {google.cloud.video.stitcher.v1.IPrefetchConfig|null} [prefetchConfig] LiveConfig prefetchConfig
-                             * @property {google.protobuf.IDuration|null} [defaultAdBreakDuration] LiveConfig defaultAdBreakDuration
                              */
     
                             /**
@@ -5064,14 +5063,6 @@
                             LiveConfig.prototype.prefetchConfig = null;
     
                             /**
-                             * LiveConfig defaultAdBreakDuration.
-                             * @member {google.protobuf.IDuration|null|undefined} defaultAdBreakDuration
-                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
-                             * @instance
-                             */
-                            LiveConfig.prototype.defaultAdBreakDuration = null;
-    
-                            /**
                              * Creates a new LiveConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.LiveConfig
@@ -5113,8 +5104,6 @@
                                     writer.uint32(/* id 8, wireType 0 =*/64).int32(message.stitchingPolicy);
                                 if (message.prefetchConfig != null && Object.hasOwnProperty.call(message, "prefetchConfig"))
                                     $root.google.cloud.video.stitcher.v1.PrefetchConfig.encode(message.prefetchConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                                if (message.defaultAdBreakDuration != null && Object.hasOwnProperty.call(message, "defaultAdBreakDuration"))
-                                    $root.google.protobuf.Duration.encode(message.defaultAdBreakDuration, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
                             };
     
@@ -5183,10 +5172,6 @@
                                         }
                                     case 10: {
                                             message.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 11: {
-                                            message.defaultAdBreakDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -5273,11 +5258,6 @@
                                     var error = $root.google.cloud.video.stitcher.v1.PrefetchConfig.verify(message.prefetchConfig);
                                     if (error)
                                         return "prefetchConfig." + error;
-                                }
-                                if (message.defaultAdBreakDuration != null && message.hasOwnProperty("defaultAdBreakDuration")) {
-                                    var error = $root.google.protobuf.Duration.verify(message.defaultAdBreakDuration);
-                                    if (error)
-                                        return "defaultAdBreakDuration." + error;
                                 }
                                 return null;
                             };
@@ -5376,11 +5356,6 @@
                                         throw TypeError(".google.cloud.video.stitcher.v1.LiveConfig.prefetchConfig: object expected");
                                     message.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.fromObject(object.prefetchConfig);
                                 }
-                                if (object.defaultAdBreakDuration != null) {
-                                    if (typeof object.defaultAdBreakDuration !== "object")
-                                        throw TypeError(".google.cloud.video.stitcher.v1.LiveConfig.defaultAdBreakDuration: object expected");
-                                    message.defaultAdBreakDuration = $root.google.protobuf.Duration.fromObject(object.defaultAdBreakDuration);
-                                }
                                 return message;
                             };
     
@@ -5407,7 +5382,6 @@
                                     object.defaultSlate = "";
                                     object.stitchingPolicy = options.enums === String ? "STITCHING_POLICY_UNSPECIFIED" : 0;
                                     object.prefetchConfig = null;
-                                    object.defaultAdBreakDuration = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -5427,8 +5401,6 @@
                                     object.stitchingPolicy = options.enums === String ? $root.google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy[message.stitchingPolicy] === undefined ? message.stitchingPolicy : $root.google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy[message.stitchingPolicy] : message.stitchingPolicy;
                                 if (message.prefetchConfig != null && message.hasOwnProperty("prefetchConfig"))
                                     object.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.toObject(message.prefetchConfig, options);
-                                if (message.defaultAdBreakDuration != null && message.hasOwnProperty("defaultAdBreakDuration"))
-                                    object.defaultAdBreakDuration = $root.google.protobuf.Duration.toObject(message.defaultAdBreakDuration, options);
                                 return object;
                             };
     

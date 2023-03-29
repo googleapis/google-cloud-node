@@ -1,1 +1,0 @@
-Stitcher: Nodejs Client
