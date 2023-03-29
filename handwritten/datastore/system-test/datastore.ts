@@ -22,6 +22,8 @@ import {google} from '../protos/protos';
 import {Storage} from '@google-cloud/storage';
 import {AggregateField} from '../src/aggregate';
 import {PropertyFilter, EntityFilter, and, or} from '../src/filter';
+import {entity} from '../src/entity';
+import KEY_SYMBOL = entity.KEY_SYMBOL;
 
 describe('Datastore', () => {
   const testKinds: string[] = [];
@@ -792,6 +794,38 @@ describe('Datastore', () => {
         .filter('appearances', 'IN', [9, 25]);
       const [entities] = await datastore.runQuery(q);
       assert.strictEqual(entities!.length, 3);
+    });
+
+    it('should filter queries with __key__ and IN', async () => {
+      const key1 = datastore.key(['Book', 'GoT', 'Character', 'Rickard']);
+      const key2 = datastore.key([
+        'Book',
+        'GoT',
+        'Character',
+        'Rickard',
+        'Character',
+        'Eddard',
+        'Character',
+        'Sansa',
+      ]);
+      const key3 = datastore.key([
+        'Book',
+        'GoT',
+        'Character',
+        'Rickard',
+        'Character',
+        'Eddard',
+      ]);
+      const value = [key1, key2, key3];
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('__key__', 'IN', value);
+      const [entities] = await datastore.runQuery(q);
+      assert.strictEqual(entities!.length, 3);
+      assert.deepStrictEqual(entities[0][KEY_SYMBOL], key1);
+      assert.deepStrictEqual(entities[1][KEY_SYMBOL], key3);
+      assert.deepStrictEqual(entities[2][KEY_SYMBOL], key2);
     });
 
     it('should filter queries with NOT_IN', async () => {

@@ -14,6 +14,7 @@
 
 import {Operator, Filter as IFilter} from './query';
 import {entity} from './entity';
+import Key = entity.Key;
 
 const OP_TO_OPERATOR = new Map([
   ['=', 'EQUAL'],
@@ -56,6 +57,10 @@ export abstract class EntityFilter {
   abstract toProto(): any;
 }
 
+export type AllowedFilterValueType<T> = T extends '__key__'
+  ? Key | Key[]
+  : unknown;
+
 /**
  * A PropertyFilter is a filter that gets applied to a query directly.
  *
@@ -63,12 +68,10 @@ export abstract class EntityFilter {
  *
  * @class
  */
-export class PropertyFilter extends EntityFilter implements IFilter {
-  name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  val: any;
-  op: Operator;
-
+export class PropertyFilter<T extends string>
+  extends EntityFilter
+  implements IFilter
+{
   /**
    * Build a Property Filter object.
    *
@@ -76,22 +79,12 @@ export class PropertyFilter extends EntityFilter implements IFilter {
    * @param {Operator} operator
    * @param {any} val
    */
-  constructor(property: string, operator: Operator, val: any) {
+  constructor(
+    public name: T,
+    public op: Operator,
+    public val: AllowedFilterValueType<T>
+  ) {
     super();
-    this.name = property;
-    this.op = operator;
-    this.val = val;
-  }
-
-  private encodedValue(): any {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let value: any = {};
-    if (this.name === '__key__') {
-      value.keyValue = entity.keyToKeyProto(this.val);
-    } else {
-      value = entity.encodeValue(this.val, this.name);
-    }
-    return value;
   }
 
   /**
@@ -100,18 +93,13 @@ export class PropertyFilter extends EntityFilter implements IFilter {
    */
   // eslint-disable-next-line
   toProto(): any {
-    const value = new PropertyFilter(
-      this.name,
-      this.op,
-      this.val
-    ).encodedValue();
     return {
       propertyFilter: {
         property: {
           name: this.name,
         },
         op: OP_TO_OPERATOR.get(this.op),
-        value,
+        value: entity.encodeValue(this.val, this.name),
       },
     };
   }
@@ -156,5 +144,5 @@ class CompositeFilter extends EntityFilter {
 }
 
 export function isFilter(filter: any): filter is EntityFilter {
-  return (filter as EntityFilter).toProto !== undefined;
+  return filter instanceof EntityFilter;
 }
