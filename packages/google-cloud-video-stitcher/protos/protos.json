@@ -4,6 +4,68 @@
       "nested": {
         "cloud": {
           "nested": {
+            "common": {
+              "options": {
+                "go_package": "google.golang.org/genproto/googleapis/cloud/common;common",
+                "java_multiple_files": true,
+                "java_package": "com.google.cloud.common"
+              },
+              "nested": {
+                "OperationMetadata": {
+                  "fields": {
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "target": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "verb": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "statusDetail": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "cancelRequested": {
+                      "type": "bool",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "apiVersion": {
+                      "type": "string",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "video": {
               "nested": {
                 "stitcher": {
@@ -868,7 +930,7 @@
                                 "(google.api.http).body": "cdn_key",
                                 "(google.api.method_signature)": "parent,cdn_key,cdn_key_id",
                                 "(google.longrunning.operation_info).response_type": "CdnKey",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -883,7 +945,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "CdnKey",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -931,7 +993,7 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/cdnKeys/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -945,7 +1007,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "google.protobuf.Empty",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -958,7 +1020,7 @@
                                 "(google.api.http).body": "cdn_key",
                                 "(google.api.method_signature)": "cdn_key,update_mask",
                                 "(google.longrunning.operation_info).response_type": "CdnKey",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -973,7 +1035,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "CdnKey",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1132,7 +1194,7 @@
                                 "(google.api.http).body": "slate",
                                 "(google.api.method_signature)": "parent,slate,slate_id",
                                 "(google.longrunning.operation_info).response_type": "Slate",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1147,7 +1209,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "Slate",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1196,7 +1258,7 @@
                                 "(google.api.http).body": "slate",
                                 "(google.api.method_signature)": "slate,update_mask",
                                 "(google.longrunning.operation_info).response_type": "Slate",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1211,7 +1273,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "Slate",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1223,7 +1285,7 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/slates/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1237,7 +1299,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "google.protobuf.Empty",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1288,7 +1350,7 @@
                                 "(google.api.http).body": "live_config",
                                 "(google.api.method_signature)": "parent,live_config,live_config_id",
                                 "(google.longrunning.operation_info).response_type": "LiveConfig",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1303,7 +1365,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "LiveConfig",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1351,7 +1413,7 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/liveConfigs/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1365,7 +1427,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "google.protobuf.Empty",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.common.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1906,26 +1968,6 @@
                               }
                             }
                           }
-                        },
-                        "OperationMetadata": {
-                          "fields": {
-                            "createTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
-                            "endTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 2
-                            },
-                            "target": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "verb": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
                         }
                       }
                     }
@@ -1937,14 +1979,32 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
             "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -2020,24 +2080,6 @@
                   "type": "string",
                   "id": 2
                 }
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
               }
             },
             "http": {
@@ -3076,6 +3118,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -3172,18 +3226,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             }

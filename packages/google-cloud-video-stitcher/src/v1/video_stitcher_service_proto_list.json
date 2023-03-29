@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/common/operation_metadata.proto",
   "../../protos/google/cloud/video/stitcher/v1/ad_tag_details.proto",
   "../../protos/google/cloud/video/stitcher/v1/cdn_keys.proto",
   "../../protos/google/cloud/video/stitcher/v1/companions.proto",
