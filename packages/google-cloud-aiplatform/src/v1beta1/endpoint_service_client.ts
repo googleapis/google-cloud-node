@@ -350,10 +350,16 @@ export class EndpointServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -367,11 +373,19 @@ export class EndpointServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -385,10 +399,16 @@ export class EndpointServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
           ],
         },
@@ -446,6 +466,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -539,6 +562,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -655,6 +681,10 @@ export class EndpointServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               delete:
@@ -776,6 +806,10 @@ export class EndpointServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {
@@ -885,6 +919,9 @@ export class EndpointServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
@@ -968,6 +1005,9 @@ export class EndpointServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
@@ -1059,6 +1099,9 @@ export class EndpointServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
@@ -1142,6 +1185,9 @@ export class EndpointServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
@@ -1241,6 +1287,9 @@ export class EndpointServiceClient {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
             },
             {
@@ -1330,6 +1379,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
@@ -1774,10 +1826,16 @@ export class EndpointServiceClient {
    *   component of the endpoint resource name.
    *   If not provided, Vertex AI will generate a value for this ID.
    *
-   *   This value should be 1-10 characters, and valid characters are /[0-9]/.
-   *   When using HTTP/JSON, this field is populated based on a query string
-   *   argument, such as `?endpoint_id=12345`. This is the fallback for fields
-   *   that are not included in either the URI or the body.
+   *   If the first character is a letter, this value may be up to 63 characters,
+   *   and valid characters are `[a-z0-9-]`. The last character must be a letter
+   *   or number.
+   *
+   *   If the first character is a number, this value may be up to 9 characters,
+   *   and valid characters are `[0-9]` with no leading zeros.
+   *
+   *   When using HTTP/JSON, this field is populated
+   *   based on a query string argument, such as `?endpoint_id=12345`. This is the
+   *   fallback for fields that are not included in either the URI or the body.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

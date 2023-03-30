@@ -365,10 +365,16 @@ export class ModelServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -382,11 +388,19 @@ export class ModelServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -400,10 +414,16 @@ export class ModelServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
           ],
         },
@@ -461,6 +481,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -554,6 +577,9 @@ export class ModelServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -670,6 +696,10 @@ export class ModelServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               delete:
@@ -791,6 +821,10 @@ export class ModelServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {
@@ -900,6 +934,9 @@ export class ModelServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
@@ -983,6 +1020,9 @@ export class ModelServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
@@ -1074,6 +1114,9 @@ export class ModelServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
@@ -1157,6 +1200,9 @@ export class ModelServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
@@ -1256,6 +1302,9 @@ export class ModelServiceClient {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
             },
             {
@@ -1345,6 +1394,9 @@ export class ModelServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',

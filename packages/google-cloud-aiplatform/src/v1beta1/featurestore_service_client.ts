@@ -368,10 +368,16 @@ export class FeaturestoreServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -385,11 +391,19 @@ export class FeaturestoreServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -403,10 +417,16 @@ export class FeaturestoreServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
           ],
         },
@@ -464,6 +484,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -557,6 +580,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -673,6 +699,10 @@ export class FeaturestoreServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               delete:
@@ -794,6 +824,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {
@@ -903,6 +937,9 @@ export class FeaturestoreServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
@@ -986,6 +1023,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
@@ -1077,6 +1117,9 @@ export class FeaturestoreServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
@@ -1160,6 +1203,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
@@ -1259,6 +1305,9 @@ export class FeaturestoreServiceClient {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
             },
             {
@@ -1348,6 +1397,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
@@ -3629,10 +3681,7 @@ export class FeaturestoreServiceClient {
    *   passed as opaque bytes.
    * @param {number[]} request.entityTypeSpecs
    *   Required. Specifies EntityType grouping Features to read values of and
-   *   settings. Each EntityType referenced in
-   *   [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
-   *   specifying entity IDs in the EntityType in
-   *   {@link |BatchReadFeatureValuesRequest.request} .
+   *   settings.
    * @param {google.protobuf.Timestamp} [request.startTime]
    *   Optional. Excludes Feature values with feature generation timestamp before
    *   this timestamp. If not set, retrieve oldest values kept in Feature Store.
