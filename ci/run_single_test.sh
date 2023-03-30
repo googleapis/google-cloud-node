@@ -41,11 +41,14 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} != "12.22.12" ]]; then
+if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]]; then
+    echo "npm install --unsafe-perm"
+    npm install --unsafe-perm
+elif [[ ${NODE_VERSION} == "12.22.12" ]]; then
     echo "npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm"
     npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm
 else
-    echo "install --ignore-scripts --engine-strict --omit=dev; npm install"
+    echo "npm install --ignore-scripts --engine-strict --omit=dev; npm install"
     npm install --ignore-scripts --engine-strict --omit=dev; npm install
 fi
 
