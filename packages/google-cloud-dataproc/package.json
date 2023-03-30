@@ -44,7 +44,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "precompile": "gts clean"
   },
   "dependencies": {
