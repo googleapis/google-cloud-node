@@ -671,6 +671,7 @@ export class Util {
         const authLibraryError = err;
         const autoAuthFailed =
           err &&
+          typeof err.message === 'string' &&
           err.message.indexOf('Could not load the default credentials') > -1;
 
         if (autoAuthFailed) {
