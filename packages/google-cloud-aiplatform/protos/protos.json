@@ -1756,6 +1756,10 @@
                         "sourceType": {
                           "type": "ModelSourceType",
                           "id": 1
+                        },
+                        "copy": {
+                          "type": "bool",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -1764,7 +1768,8 @@
                             "MODEL_SOURCE_TYPE_UNSPECIFIED": 0,
                             "AUTOML": 1,
                             "CUSTOM": 2,
-                            "BQML": 3
+                            "BQML": 3,
+                            "MODEL_GARDEN": 4
                           }
                         }
                       }
@@ -7500,6 +7505,20 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publicEndpointEnabled": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publicEndpointDomainName": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -21505,6 +21524,10 @@
                         "sourceType": {
                           "type": "ModelSourceType",
                           "id": 1
+                        },
+                        "copy": {
+                          "type": "bool",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -21513,7 +21536,8 @@
                             "MODEL_SOURCE_TYPE_UNSPECIFIED": 0,
                             "AUTOML": 1,
                             "CUSTOM": 2,
-                            "BQML": 3
+                            "BQML": 3,
+                            "MODEL_GARDEN": 4
                           }
                         }
                       }
@@ -27609,6 +27633,20 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publicEndpointEnabled": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publicEndpointDomainName": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
