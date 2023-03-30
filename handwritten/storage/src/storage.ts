@@ -280,6 +280,9 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
     }
 
     if (typeof err.code === 'string') {
+      if (['408', '429', '500', '502', '503', '504'].indexOf(err.code) !== -1) {
+        return true;
+      }
       const reason = (err.code as string).toLowerCase();
       if (isConnectionProblem(reason)) {
         return true;
