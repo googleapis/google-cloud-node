@@ -63,7 +63,7 @@
     "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
