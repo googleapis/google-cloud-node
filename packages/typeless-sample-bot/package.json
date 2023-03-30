@@ -12,8 +12,7 @@
   "main": "./build/src/app.js",
   "type": "module",
   "files": [
-    "build/src",
-    "!build/src/**/*.map"
+    "build/src"
   ],
   "scripts": {
     "compile": "tsc -p .",
