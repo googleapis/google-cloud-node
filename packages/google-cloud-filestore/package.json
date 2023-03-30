@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
@@ -38,7 +38,7 @@
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
+    "prepare": "npm run compile-protos && npm run compile ",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "test": "c8 mocha build/test"

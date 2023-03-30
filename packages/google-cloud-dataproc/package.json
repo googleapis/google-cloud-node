@@ -42,9 +42,9 @@
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile && npm run minify-proto-json",
+    "prepare": "npm run compile-protos && npm run compile ",
     "precompile": "gts clean"
   },
   "dependencies": {

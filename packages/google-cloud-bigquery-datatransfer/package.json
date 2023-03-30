@@ -42,9 +42,9 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile && npm run minify-proto-json",
+    "prepare": "npm run compile-protos && npm run compile ",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
