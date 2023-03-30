@@ -5,7 +5,7 @@
   "bin": "./build/src/cli.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p .",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
