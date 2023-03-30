@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.9.5](https://github.com/googleapis/nodejs-storage/compare/v6.9.4...v6.9.5) (2023-03-30)
+
+
+### Bug Fixes
+
+* Check that err.message is a string before attempting indexOf ([#2173](https://github.com/googleapis/nodejs-storage/issues/2173)) ([130818d](https://github.com/googleapis/nodejs-storage/commit/130818d291a0004e5d36e5ee72a8c0687b9db181))
+* V4 Signing Errors with exactly 7 day expiry ([#2170](https://github.com/googleapis/nodejs-storage/issues/2170)) ([f930998](https://github.com/googleapis/nodejs-storage/commit/f9309985d130a574dd23ecf7b6fb5b58b01d42a0))
+
 ## [6.9.4](https://github.com/googleapis/nodejs-storage/compare/v6.9.3...v6.9.4) (2023-03-02)
 
 
