@@ -1665,7 +1665,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.video.stitcher.v1.ICdnKey,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1678,7 +1678,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1861,7 +1861,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -1874,7 +1874,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2059,7 +2059,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.video.stitcher.v1.ICdnKey,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2072,7 +2072,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2257,7 +2257,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.video.stitcher.v1.ISlate,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2270,7 +2270,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2455,7 +2455,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.video.stitcher.v1.ISlate,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2468,7 +2468,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2653,7 +2653,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2666,7 +2666,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2850,7 +2850,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.video.stitcher.v1.ILiveConfig,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -2863,7 +2863,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3050,7 +3050,7 @@ describe('v1.VideoStitcherServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.cloud.common.IOperationMetadata
+              protos.google.cloud.video.stitcher.v1.IOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -3063,7 +3063,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);

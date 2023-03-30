@@ -48,370 +48,6 @@
              */
             var cloud = {};
     
-            cloud.common = (function() {
-    
-                /**
-                 * Namespace common.
-                 * @memberof google.cloud
-                 * @namespace
-                 */
-                var common = {};
-    
-                common.OperationMetadata = (function() {
-    
-                    /**
-                     * Properties of an OperationMetadata.
-                     * @memberof google.cloud.common
-                     * @interface IOperationMetadata
-                     * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
-                     * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
-                     * @property {string|null} [target] OperationMetadata target
-                     * @property {string|null} [verb] OperationMetadata verb
-                     * @property {string|null} [statusDetail] OperationMetadata statusDetail
-                     * @property {boolean|null} [cancelRequested] OperationMetadata cancelRequested
-                     * @property {string|null} [apiVersion] OperationMetadata apiVersion
-                     */
-    
-                    /**
-                     * Constructs a new OperationMetadata.
-                     * @memberof google.cloud.common
-                     * @classdesc Represents an OperationMetadata.
-                     * @implements IOperationMetadata
-                     * @constructor
-                     * @param {google.cloud.common.IOperationMetadata=} [properties] Properties to set
-                     */
-                    function OperationMetadata(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * OperationMetadata createTime.
-                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.createTime = null;
-    
-                    /**
-                     * OperationMetadata endTime.
-                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.endTime = null;
-    
-                    /**
-                     * OperationMetadata target.
-                     * @member {string} target
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.target = "";
-    
-                    /**
-                     * OperationMetadata verb.
-                     * @member {string} verb
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.verb = "";
-    
-                    /**
-                     * OperationMetadata statusDetail.
-                     * @member {string} statusDetail
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.statusDetail = "";
-    
-                    /**
-                     * OperationMetadata cancelRequested.
-                     * @member {boolean} cancelRequested
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.cancelRequested = false;
-    
-                    /**
-                     * OperationMetadata apiVersion.
-                     * @member {string} apiVersion
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     */
-                    OperationMetadata.prototype.apiVersion = "";
-    
-                    /**
-                     * Creates a new OperationMetadata instance using the specified properties.
-                     * @function create
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {google.cloud.common.IOperationMetadata=} [properties] Properties to set
-                     * @returns {google.cloud.common.OperationMetadata} OperationMetadata instance
-                     */
-                    OperationMetadata.create = function create(properties) {
-                        return new OperationMetadata(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.common.OperationMetadata.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {google.cloud.common.IOperationMetadata} message OperationMetadata message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    OperationMetadata.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
-                        if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
-                        if (message.statusDetail != null && Object.hasOwnProperty.call(message, "statusDetail"))
-                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusDetail);
-                        if (message.cancelRequested != null && Object.hasOwnProperty.call(message, "cancelRequested"))
-                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.cancelRequested);
-                        if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
-                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.common.OperationMetadata.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {google.cloud.common.IOperationMetadata} message OperationMetadata message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.cloud.common.OperationMetadata} OperationMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    OperationMetadata.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.common.OperationMetadata();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 3: {
-                                    message.target = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.verb = reader.string();
-                                    break;
-                                }
-                            case 5: {
-                                    message.statusDetail = reader.string();
-                                    break;
-                                }
-                            case 6: {
-                                    message.cancelRequested = reader.bool();
-                                    break;
-                                }
-                            case 7: {
-                                    message.apiVersion = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.cloud.common.OperationMetadata} OperationMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an OperationMetadata message.
-                     * @function verify
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    OperationMetadata.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                            if (error)
-                                return "createTime." + error;
-                        }
-                        if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.endTime);
-                            if (error)
-                                return "endTime." + error;
-                        }
-                        if (message.target != null && message.hasOwnProperty("target"))
-                            if (!$util.isString(message.target))
-                                return "target: string expected";
-                        if (message.verb != null && message.hasOwnProperty("verb"))
-                            if (!$util.isString(message.verb))
-                                return "verb: string expected";
-                        if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
-                            if (!$util.isString(message.statusDetail))
-                                return "statusDetail: string expected";
-                        if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
-                            if (typeof message.cancelRequested !== "boolean")
-                                return "cancelRequested: boolean expected";
-                        if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
-                            if (!$util.isString(message.apiVersion))
-                                return "apiVersion: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.cloud.common.OperationMetadata} OperationMetadata
-                     */
-                    OperationMetadata.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.cloud.common.OperationMetadata)
-                            return object;
-                        var message = new $root.google.cloud.common.OperationMetadata();
-                        if (object.createTime != null) {
-                            if (typeof object.createTime !== "object")
-                                throw TypeError(".google.cloud.common.OperationMetadata.createTime: object expected");
-                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                        }
-                        if (object.endTime != null) {
-                            if (typeof object.endTime !== "object")
-                                throw TypeError(".google.cloud.common.OperationMetadata.endTime: object expected");
-                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
-                        }
-                        if (object.target != null)
-                            message.target = String(object.target);
-                        if (object.verb != null)
-                            message.verb = String(object.verb);
-                        if (object.statusDetail != null)
-                            message.statusDetail = String(object.statusDetail);
-                        if (object.cancelRequested != null)
-                            message.cancelRequested = Boolean(object.cancelRequested);
-                        if (object.apiVersion != null)
-                            message.apiVersion = String(object.apiVersion);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {google.cloud.common.OperationMetadata} message OperationMetadata
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    OperationMetadata.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.createTime = null;
-                            object.endTime = null;
-                            object.target = "";
-                            object.verb = "";
-                            object.statusDetail = "";
-                            object.cancelRequested = false;
-                            object.apiVersion = "";
-                        }
-                        if (message.createTime != null && message.hasOwnProperty("createTime"))
-                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                        if (message.endTime != null && message.hasOwnProperty("endTime"))
-                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
-                        if (message.target != null && message.hasOwnProperty("target"))
-                            object.target = message.target;
-                        if (message.verb != null && message.hasOwnProperty("verb"))
-                            object.verb = message.verb;
-                        if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
-                            object.statusDetail = message.statusDetail;
-                        if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
-                            object.cancelRequested = message.cancelRequested;
-                        if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
-                            object.apiVersion = message.apiVersion;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this OperationMetadata to JSON.
-                     * @function toJSON
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    OperationMetadata.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for OperationMetadata
-                     * @function getTypeUrl
-                     * @memberof google.cloud.common.OperationMetadata
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.cloud.common.OperationMetadata";
-                    };
-    
-                    return OperationMetadata;
-                })();
-    
-                return common;
-            })();
-    
             cloud.video = (function() {
     
                 /**
@@ -18419,6 +18055,289 @@
                             return DeleteLiveConfigRequest;
                         })();
     
+                        v1.OperationMetadata = (function() {
+    
+                            /**
+                             * Properties of an OperationMetadata.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IOperationMetadata
+                             * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                             * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                             * @property {string|null} [target] OperationMetadata target
+                             * @property {string|null} [verb] OperationMetadata verb
+                             */
+    
+                            /**
+                             * Constructs a new OperationMetadata.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents an OperationMetadata.
+                             * @implements IOperationMetadata
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata=} [properties] Properties to set
+                             */
+                            function OperationMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OperationMetadata createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.createTime = null;
+    
+                            /**
+                             * OperationMetadata endTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.endTime = null;
+    
+                            /**
+                             * OperationMetadata target.
+                             * @member {string} target
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.target = "";
+    
+                            /**
+                             * OperationMetadata verb.
+                             * @member {string} verb
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             */
+                            OperationMetadata.prototype.verb = "";
+    
+                            /**
+                             * Creates a new OperationMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata instance
+                             */
+                            OperationMetadata.create = function create(properties) {
+                                return new OperationMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.video.stitcher.v1.OperationMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OperationMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                                if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.OperationMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OperationMetadata.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.OperationMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.target = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.verb = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OperationMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OperationMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                    if (error)
+                                        return "endTime." + error;
+                                }
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    if (!$util.isString(message.target))
+                                        return "target: string expected";
+                                if (message.verb != null && message.hasOwnProperty("verb"))
+                                    if (!$util.isString(message.verb))
+                                        return "verb: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.OperationMetadata} OperationMetadata
+                             */
+                            OperationMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.OperationMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.OperationMetadata();
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.OperationMetadata.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.endTime != null) {
+                                    if (typeof object.endTime !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.OperationMetadata.endTime: object expected");
+                                    message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                }
+                                if (object.target != null)
+                                    message.target = String(object.target);
+                                if (object.verb != null)
+                                    message.verb = String(object.verb);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.OperationMetadata} message OperationMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OperationMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.createTime = null;
+                                    object.endTime = null;
+                                    object.target = "";
+                                    object.verb = "";
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                    object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    object.target = message.target;
+                                if (message.verb != null && message.hasOwnProperty("verb"))
+                                    object.verb = message.verb;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OperationMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OperationMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OperationMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.OperationMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.OperationMetadata";
+                            };
+    
+                            return OperationMetadata;
+                        })();
+    
                         return v1;
                     })();
     
@@ -18439,32 +18358,6 @@
              * @namespace
              */
             var api = {};
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
     
             api.ResourceDescriptor = (function() {
     
@@ -19148,6 +19041,32 @@
                 };
     
                 return ResourceReference;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
             })();
     
             api.Http = (function() {
@@ -25701,8 +25620,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  */
     
                 /**
@@ -25787,20 +25706,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.fieldBehavior.
-                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
-    
-                /**
                  * FieldOptions .google.api.resourceReference.
                  * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
+                 * FieldOptions .google.api.fieldBehavior.
+                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -25919,6 +25838,10 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 1052: {
                                 if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                     message[".google.api.fieldBehavior"] = [];
@@ -25928,10 +25851,6 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
-                                break;
-                            }
-                        case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -26011,6 +25930,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
+                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -26028,11 +25952,6 @@
                             case 7:
                                 break;
                             }
-                    }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -26109,6 +26028,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -26153,11 +26077,6 @@
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
                             }
-                    }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };
@@ -29525,247 +29444,6 @@
                 return GeneratedCodeInfo;
             })();
     
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
-            })();
-    
             protobuf.Duration = (function() {
     
                 /**
@@ -31508,6 +31186,247 @@
                 };
     
                 return FieldMask;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
             })();
     
             return protobuf;

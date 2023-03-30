@@ -290,49 +290,49 @@ export class VideoStitcherServiceClient {
       '.google.cloud.video.stitcher.v1.CdnKey'
     ) as gax.protobuf.Type;
     const createCdnKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteCdnKeyResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteCdnKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateCdnKeyResponse = protoFilesRoot.lookup(
       '.google.cloud.video.stitcher.v1.CdnKey'
     ) as gax.protobuf.Type;
     const updateCdnKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createSlateResponse = protoFilesRoot.lookup(
       '.google.cloud.video.stitcher.v1.Slate'
     ) as gax.protobuf.Type;
     const createSlateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateSlateResponse = protoFilesRoot.lookup(
       '.google.cloud.video.stitcher.v1.Slate'
     ) as gax.protobuf.Type;
     const updateSlateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteSlateResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteSlateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createLiveConfigResponse = protoFilesRoot.lookup(
       '.google.cloud.video.stitcher.v1.LiveConfig'
     ) as gax.protobuf.Type;
     const createLiveConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteLiveConfigResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteLiveConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.common.OperationMetadata'
+      '.google.cloud.video.stitcher.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -1530,7 +1530,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1542,7 +1542,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1553,7 +1553,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1566,7 +1566,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.video.stitcher.v1.ICdnKey,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1574,7 +1574,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1583,7 +1583,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1624,7 +1624,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.video.stitcher.v1.CdnKey,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -1639,7 +1639,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.stitcher.v1.CdnKey,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -1669,7 +1669,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1681,7 +1681,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1692,7 +1692,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1705,7 +1705,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1713,7 +1713,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1722,7 +1722,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1763,7 +1763,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -1778,7 +1778,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -1812,7 +1812,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1824,7 +1824,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1835,7 +1835,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1848,7 +1848,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.video.stitcher.v1.ICdnKey,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1856,7 +1856,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1865,7 +1865,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ICdnKey,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1906,7 +1906,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.video.stitcher.v1.CdnKey,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -1921,7 +1921,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.stitcher.v1.CdnKey,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -1972,7 +1972,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1984,7 +1984,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1995,7 +1995,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2008,7 +2008,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.video.stitcher.v1.ISlate,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2016,7 +2016,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2025,7 +2025,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2066,7 +2066,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.video.stitcher.v1.Slate,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -2081,7 +2081,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.stitcher.v1.Slate,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -2112,7 +2112,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2124,7 +2124,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2135,7 +2135,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2148,7 +2148,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.video.stitcher.v1.ISlate,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2156,7 +2156,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2165,7 +2165,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ISlate,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2206,7 +2206,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.video.stitcher.v1.Slate,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -2221,7 +2221,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.stitcher.v1.Slate,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -2251,7 +2251,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2263,7 +2263,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2274,7 +2274,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2287,7 +2287,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2295,7 +2295,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2304,7 +2304,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2345,7 +2345,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -2360,7 +2360,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -2409,7 +2409,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2421,7 +2421,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2432,7 +2432,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2445,7 +2445,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.video.stitcher.v1.ILiveConfig,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2453,7 +2453,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2462,7 +2462,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.cloud.video.stitcher.v1.ILiveConfig,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2503,7 +2503,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.video.stitcher.v1.LiveConfig,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -2518,7 +2518,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.video.stitcher.v1.LiveConfig,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
@@ -2548,7 +2548,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2560,7 +2560,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2571,7 +2571,7 @@ export class VideoStitcherServiceClient {
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2584,7 +2584,7 @@ export class VideoStitcherServiceClient {
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.common.IOperationMetadata
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2592,7 +2592,7 @@ export class VideoStitcherServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2601,7 +2601,7 @@ export class VideoStitcherServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.common.IOperationMetadata
+        protos.google.cloud.video.stitcher.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2642,7 +2642,7 @@ export class VideoStitcherServiceClient {
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
     const request =
@@ -2657,7 +2657,7 @@ export class VideoStitcherServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.common.OperationMetadata
+      protos.google.cloud.video.stitcher.v1.OperationMetadata
     >;
   }
   /**
