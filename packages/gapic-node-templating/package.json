@@ -8,7 +8,7 @@
     "compile": "tsc -p . && minifyProtoJson && minifyProtoJson",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile ",
+    "prepare": "npm run compile ",
     "pretest": "npm run compile",
     "samples-test": "echo 'FIXME: no sample tests'",
     "system-test": "echo 'FIXME: no system tests'",
