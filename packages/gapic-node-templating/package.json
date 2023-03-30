@@ -5,7 +5,7 @@
   "bin": "./build/src/cli.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && minifyProtoJson && minifyProtoJson",
+    "compile": "tsc -p . && minifyProtoJson",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile ",

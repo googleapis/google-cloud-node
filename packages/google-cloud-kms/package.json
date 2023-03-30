@@ -34,7 +34,7 @@
   "scripts": {
     "clean": "gts clean",
     "compile-protos": "compileProtos src",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
+    "compile": "tsc -p . && minifyProtoJson",
     "docs-test": "linkinator docs",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",

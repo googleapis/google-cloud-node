@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
+    "compile": "tsc -p . && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "docs": "NODE_OPTIONS=--max-old-space-size=8192 jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",

@@ -57,7 +57,7 @@
     "docs-test": "linkinator docs",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
+    "compile": "tsc -p . && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile ",
     "pretest": "npm run compile",

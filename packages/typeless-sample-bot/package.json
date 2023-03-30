@@ -16,7 +16,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "compile": "tsc -p . && minifyProtoJson && minifyProtoJson",
+    "compile": "tsc -p . && minifyProtoJson",
     "prepare": "npm run compile-protos && npm run compile ",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",

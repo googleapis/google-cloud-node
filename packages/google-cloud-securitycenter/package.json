@@ -20,7 +20,7 @@
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson && minifyProtoJson",
+    "compile": "tsc -p . && minifyProtoJson",
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "fix": "gts fix",
