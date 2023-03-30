@@ -16,8 +16,8 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
-    "prepare": "npm run compile-protos && npm run compile",
+    "compile": "tsc -p .",
+    "prepare": "npm run compile",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
