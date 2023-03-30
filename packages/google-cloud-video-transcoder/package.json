@@ -41,7 +41,8 @@
     "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "test": "c8 mocha build/test"
+    "test": "c8 mocha build/test",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "dependencies": {
     "@google-cloud/video-transcoder": "^2.0.0",

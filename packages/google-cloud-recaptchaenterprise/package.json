@@ -65,7 +65,8 @@
     "predocs-test": "npm run docs",
     "prepare": "npm run compile && npm run minify-proto-json",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "license": "Apache-2.0",
   "engines": {

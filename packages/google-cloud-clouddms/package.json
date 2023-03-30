@@ -44,7 +44,8 @@
     "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "dependencies": {
     "google-gax": "^3.5.2"

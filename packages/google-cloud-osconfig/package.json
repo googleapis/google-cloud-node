@@ -29,7 +29,8 @@
     "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "test": "c8 mocha build/test",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "dependencies": {
     "google-gax": "^3.5.2"

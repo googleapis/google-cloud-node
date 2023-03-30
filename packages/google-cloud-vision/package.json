@@ -47,7 +47,8 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile && npm run minify-proto-json",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "dependencies": {
     "@google-cloud/promisify": "^3.0.0",

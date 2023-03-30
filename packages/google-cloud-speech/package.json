@@ -48,7 +48,8 @@
     "pretest": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "dependencies": {
     "@google-cloud/common": "^4.0.0",

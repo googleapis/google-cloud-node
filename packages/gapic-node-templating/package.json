@@ -15,7 +15,8 @@
     "test:snap": "SNAPSHOT_UPDATE=1 npm test",
     "test": "cross-env c8 mocha --exit build/test",
     "prelint": "npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "minify-proto-json": "node ./build/tools/minify.js"
   },
   "author": "Google LLC",
   "license": "Apache-2.0",
