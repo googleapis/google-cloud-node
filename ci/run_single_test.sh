@@ -19,7 +19,7 @@ set -e
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 
-tests_without_node12="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/"
+tests_without_node12="typeless-sample-bot gapic-node-templating node-bootstrap-container"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing $BUILD_TYPE env var"
@@ -42,8 +42,10 @@ fi
 
 # Install dependencies
 if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} != "12.22.12" ]]; then
+    echo "npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm"
     npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm
-else 
+else
+    echo "install --ignore-scripts --engine-strict --omit=dev; npm install"
     npm install --ignore-scripts --engine-strict --omit=dev; npm install
 fi
 
