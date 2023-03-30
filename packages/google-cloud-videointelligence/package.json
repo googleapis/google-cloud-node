@@ -43,11 +43,10 @@
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile && npm run minify-proto-json",
-    "precompile": "gts clean",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^3.5.2"

@@ -20,7 +20,7 @@
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "fix": "gts fix",
@@ -31,8 +31,7 @@
     "test": "c8 mocha build/test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "precompile": "gts clean"
   },
   "keywords": [
     "google apis client",

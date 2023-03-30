@@ -35,7 +35,7 @@
     "lint": "gts check",
     "clean": "gts clean",
     "fix": "gts fix",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
@@ -45,8 +45,7 @@
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "precompile": "gts clean"
   },
   "license": "Apache-2.0",
   "engines": {

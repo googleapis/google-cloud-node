@@ -34,7 +34,7 @@
   "scripts": {
     "clean": "gts clean",
     "compile-protos": "compileProtos src",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "docs-test": "linkinator docs",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
@@ -45,8 +45,7 @@
     "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "test": "c8 mocha build/test"
   },
   "dependencies": {
     "google-gax": "^3.5.2"

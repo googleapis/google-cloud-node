@@ -39,7 +39,7 @@
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
@@ -49,8 +49,7 @@
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "precompile": "gts clean",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "@google-cloud/common": "^4.0.0",

@@ -5,7 +5,7 @@
   "bin": "./build/src/cli.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p .",
+    "compile": "tsc -p . && minifyProtoJson",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile && npm run minify-proto-json",
@@ -15,8 +15,7 @@
     "test:snap": "SNAPSHOT_UPDATE=1 npm test",
     "test": "cross-env c8 mocha --exit build/test",
     "prelint": "npm install",
-    "precompile": "gts clean",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "precompile": "gts clean"
   },
   "author": "Google LLC",
   "license": "Apache-2.0",

@@ -16,7 +16,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "compile": "tsc -p .",
+    "compile": "tsc -p . && minifyProtoJson",
     "prepare": "npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",
@@ -24,8 +24,7 @@
     "samples-test": "echo no system tests yet 🙀",
     "system-test": "echo no system tests yet 🙀",
     "lint": "gts check",
-    "fix": "gts fix",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "fix": "gts fix"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",

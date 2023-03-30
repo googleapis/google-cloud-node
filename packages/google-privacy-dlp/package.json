@@ -40,13 +40,12 @@
     "fix": "gts fix",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^3.5.2"

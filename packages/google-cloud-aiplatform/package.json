@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "docs": "NODE_OPTIONS=--max-old-space-size=8192 jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
@@ -49,8 +49,7 @@
     "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "test": "c8 node build/test/run.js",
-    "minify-proto-json": "node ./build/tools/minify.js"
+    "test": "c8 node build/test/run.js"
   },
   "dependencies": {
     "google-gax": "^3.5.2",
