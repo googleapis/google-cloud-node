@@ -117,10 +117,10 @@
     "docs": "node --max-old-space-size=8192 ./node_modules/.bin/jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
-    "prepare": "npm run compile-protos && npm run compile ",
+    "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
