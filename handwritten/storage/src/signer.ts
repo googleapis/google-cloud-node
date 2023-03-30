@@ -416,7 +416,7 @@ export class URLSigner {
       throw new Error(ExceptionMessages.EXPIRATION_DATE_PAST);
     }
 
-    return Math.round(expiresInMSeconds / 1000); // The API expects seconds.
+    return Math.floor(expiresInMSeconds / 1000); // The API expects seconds.
   }
 
   parseAccessibleAt(accessibleAt?: string | number | Date): number {

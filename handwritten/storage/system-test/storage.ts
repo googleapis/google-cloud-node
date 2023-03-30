@@ -3290,6 +3290,31 @@ describe('storage', () => {
       assert.strictEqual(body, localFile.toString());
     });
 
+    it('should not throw with expiration of exactly 7 days', async () => {
+      const ACCESSIBLE_AT = new Date().setMilliseconds(999).valueOf();
+      const SEVEN_DAYS_IN_SECONDS = 7 * 24 * 60 * 60;
+      const SEVEN_DAYS_IN_MS = SEVEN_DAYS_IN_SECONDS * 1000;
+      await assert.doesNotReject(
+        async () => {
+          await file.getSignedUrl({
+            version: 'v4',
+            action: 'read',
+            accessibleAt: ACCESSIBLE_AT,
+            expires: ACCESSIBLE_AT + SEVEN_DAYS_IN_MS,
+            virtualHostedStyle: true,
+          });
+        },
+        err => {
+          assert(err instanceof Error);
+          assert.strictEqual(
+            err.message,
+            `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS} seconds).`
+          );
+          return true;
+        }
+      );
+    });
+
     it('should create a signed read url with accessibleAt in the past', async () => {
       const [signedReadUrl] = await file.getSignedUrl({
         version: 'v4',
