@@ -17,6 +17,7 @@
   "files": [
     "build/src",
     "build/protos",
+    "!build/src/**/*.map",
     "!build/src/**/*.map"
   ],
   "keywords": [
@@ -41,7 +42,7 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
     "presystem-test": "npm run compile",
     "docs-test": "linkinator docs",

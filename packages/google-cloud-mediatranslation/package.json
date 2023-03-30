@@ -11,7 +11,8 @@
   "author": "Google LLC",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "main": "build/src/index.js",
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-mediatranslation",
@@ -22,7 +23,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prepare": "npm run compile && npm run compile-protos && npm run compile",
+    "prepare": "npm run compile && npm run compile-protos && npm run compile && npm run minify-proto-json",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "fix": "gts fix",

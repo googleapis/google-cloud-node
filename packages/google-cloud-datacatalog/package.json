@@ -13,7 +13,8 @@
     "build/src",
     "build/protos",
     "AUTHORS",
-    "COPYING"
+    "COPYING",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -58,7 +59,7 @@
     "system-test": "npm run compile && c8 mocha build/system-test",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",

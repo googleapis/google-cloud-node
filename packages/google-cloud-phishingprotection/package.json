@@ -12,7 +12,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/protos",
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -62,7 +63,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile && npm run minify-proto-json",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },

@@ -13,7 +13,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "scripts": {
     "clean": "gts clean",
@@ -25,7 +26,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm install",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "test": "c8 mocha build/test",

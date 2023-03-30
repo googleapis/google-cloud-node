@@ -8,7 +8,7 @@
     "compile": "tsc -p .",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
     "samples-test": "echo 'FIXME: no sample tests'",
     "system-test": "echo 'FIXME: no system tests'",

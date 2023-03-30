@@ -12,11 +12,12 @@
   "main": "./build/src/app.js",
   "type": "module",
   "files": [
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "scripts": {
     "compile": "tsc -p .",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",

@@ -12,7 +12,8 @@
   "browser": "src/browser.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -50,7 +51,7 @@
     "fix": "gts fix",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile-protos && npm run compile && npm run minify-proto-json",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test",
     "system-test": "npm run compile && c8 mocha build/system-test",

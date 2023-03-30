@@ -19,7 +19,8 @@
     "build/src",
     "AUTHORS",
     "CONTRIBUTORS",
-    "LICENSE"
+    "LICENSE",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -46,7 +47,7 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile && npm run minify-proto-json",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
