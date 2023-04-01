@@ -5043,7 +5043,7 @@
             "v1beta1": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Container.V1Beta1",
-                "go_package": "google.golang.org/genproto/googleapis/container/v1beta1;container",
+                "go_package": "cloud.google.com/go/container/apiv1beta1/containerpb;containerpb",
                 "java_multiple_files": true,
                 "java_outer_classname": "ClusterServiceProto",
                 "java_package": "com.google.container.v1beta1",
