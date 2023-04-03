@@ -610,7 +610,7 @@ export class AssetServiceClient {
    *   Required. The name of the project/folder/organization where this feed
    *   should be created in. It can only be an organization number (such as
    *   "organizations/123"), a folder number (such as "folders/123"), a project ID
-   *   (such as "projects/my-project-id")", or a project number (such as
+   *   (such as "projects/my-project-id"), or a project number (such as
    *   "projects/12345").
    * @param {string} request.feedId
    *   Required. This is the client-assigned asset feed identifier and it needs to
@@ -1417,8 +1417,8 @@ export class AssetServiceClient {
    *   Required. The name of the project/folder/organization where this
    *   saved_query should be created in. It can only be an organization number
    *   (such as "organizations/123"), a folder number (such as "folders/123"), a
-   *   project ID (such as "projects/my-project-id")", or a project number (such
-   *   as "projects/12345").
+   *   project ID (such as "projects/my-project-id"), or a project number (such as
+   *   "projects/12345").
    * @param {google.cloud.asset.v1.SavedQuery} request.savedQuery
    *   Required. The saved_query details. The `name` field must be empty as it
    *   will be generated based on the parent and saved_query_id.
@@ -3703,8 +3703,8 @@ export class AssetServiceClient {
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of saved queries to return per page. The
    *   service may return fewer than this value. If unspecified, at most 50 will
-   *   be returned.
-   *    The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSavedQueries` call.
    *   Provide this to retrieve the subsequent page.
@@ -3812,8 +3812,8 @@ export class AssetServiceClient {
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of saved queries to return per page. The
    *   service may return fewer than this value. If unspecified, at most 50 will
-   *   be returned.
-   *    The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSavedQueries` call.
    *   Provide this to retrieve the subsequent page.
@@ -3875,8 +3875,8 @@ export class AssetServiceClient {
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of saved queries to return per page. The
    *   service may return fewer than this value. If unspecified, at most 50 will
-   *   be returned.
-   *    The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous `ListSavedQueries` call.
    *   Provide this to retrieve the subsequent page.

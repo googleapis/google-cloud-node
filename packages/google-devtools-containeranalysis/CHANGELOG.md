@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.5.0...containeranalysis-v4.6.0) (2023-03-28)
+
+
+### Features
+
+* [containeranalysis] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments ([#4070](https://github.com/googleapis/google-cloud-node/issues/4070)) ([ec484a6](https://github.com/googleapis/google-cloud-node/commit/ec484a6f369d2df6dc73a798501c8937caf5634b))
+* [containeranalysis] remove the unimplemented ScanConfig API method and resources ([a3b26fc](https://github.com/googleapis/google-cloud-node/commit/a3b26fc4052a72858f837a45237c9df88289fb75))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.4.2...containeranalysis-v4.5.0) (2023-03-13)
 
 

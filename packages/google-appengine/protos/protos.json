@@ -988,7 +988,7 @@
             "v1": {
               "options": {
                 "csharp_namespace": "Google.Cloud.AppEngine.V1",
-                "go_package": "google.golang.org/genproto/googleapis/appengine/v1;appengine",
+                "go_package": "cloud.google.com/go/appengine/apiv1/appenginepb;appenginepb",
                 "java_multiple_files": true,
                 "java_outer_classname": "OperationProto",
                 "java_package": "com.google.appengine.v1",

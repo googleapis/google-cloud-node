@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.4.0...routing-v0.5.0) (2023-03-28)
+
+
+### Features
+
+* [routing] adds support for specifying region_code in the ComputeRoutesRequest ([#4103](https://github.com/googleapis/google-cloud-node/issues/4103)) ([1106a82](https://github.com/googleapis/google-cloud-node/commit/1106a824dbddc7296f069a0a3e063b0ec9fc914f))
+* [routing] moved speed in SpeedReadingInterval into a oneof speed_type, this is a breaking change for Go client libraries ([#4121](https://github.com/googleapis/google-cloud-node/issues/4121)) ([9878d72](https://github.com/googleapis/google-cloud-node/commit/9878d722f634f356590014ea8f2f035bb1b134db))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.3.1...routing-v0.4.0) (2023-03-13)
 
 
