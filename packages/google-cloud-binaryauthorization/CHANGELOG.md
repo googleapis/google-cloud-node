@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.3.0...binary-authorization-v2.4.0) (2023-03-28)
+
+
+### Features
+
+* [binaryauthorization] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments ([#4071](https://github.com/googleapis/google-cloud-node/issues/4071)) ([671757d](https://github.com/googleapis/google-cloud-node/commit/671757d28e2ed57c8586005bb4143cf4fb1545b0))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.2.1...binary-authorization-v2.3.0) (2023-03-06)
 
 

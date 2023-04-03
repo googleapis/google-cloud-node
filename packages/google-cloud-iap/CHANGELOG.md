@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/iap-v2.2.1...iap-v2.3.0) (2023-03-28)
+
+
+### Features
+
+* [iap] add an enum ENROLLED_SECOND_FACTORS under IapSettings ([#4081](https://github.com/googleapis/google-cloud-node/issues/4081)) ([b246145](https://github.com/googleapis/google-cloud-node/commit/b246145a5c4bb18b0fa605460077c314134f6b37))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/iap-v2.2.0...iap-v2.2.1) (2023-02-15)
 
 
