@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.3.0...grafeas-v4.4.0) (2023-03-28)
+
+
+### Features
+
+* [grafeas] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments ([#4069](https://github.com/googleapis/google-cloud-node/issues/4069)) ([c0d401d](https://github.com/googleapis/google-cloud-node/commit/c0d401de0df43b36c4b2d1511c436eb90a7cf446))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.2.2...grafeas-v4.3.0) (2023-03-06)
 
 

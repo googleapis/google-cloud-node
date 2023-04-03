@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v2.1.1...bigquery-connection-v2.2.0) (2023-03-28)
+
+
+### Features
+
+* [bigquery-connection] add spark connection properties type ([#4096](https://github.com/googleapis/google-cloud-node/issues/4096)) ([b7e6cad](https://github.com/googleapis/google-cloud-node/commit/b7e6cad1cb83d9b35063e12ffd81316f06537428))
+
 ## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v2.1.0...bigquery-connection-v2.1.1) (2023-02-15)
 
 

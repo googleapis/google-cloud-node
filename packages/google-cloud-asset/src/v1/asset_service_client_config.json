@@ -123,15 +123,18 @@
           "retry_params_name": "default"
         },
         "AnalyzeOrgPolicies": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "AnalyzeOrgPolicyGovernedContainers": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "AnalyzeOrgPolicyGovernedAssets": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         }
       }

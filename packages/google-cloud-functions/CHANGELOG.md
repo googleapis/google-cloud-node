@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/functions-v2.3.1...functions-v2.4.0) (2023-03-28)
+
+
+### Features
+
+* [functions] add `available_cpu ` field ([#4092](https://github.com/googleapis/google-cloud-node/issues/4092)) ([6873012](https://github.com/googleapis/google-cloud-node/commit/687301241b381cb414e7a2161797f53b247a8386))
+
 ## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/functions-v2.3.0...functions-v2.3.1) (2023-02-15)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.6.0...admin-v4.7.0) (2023-03-28)
+
+
+### Features
+
+* [analytics-admin] add `RunAccessReport` method (with bindings for account and property resources) to the Admin API v1beta ([#4128](https://github.com/googleapis/google-cloud-node/issues/4128)) ([d66f33c](https://github.com/googleapis/google-cloud-node/commit/d66f33c7518719ba6e2b8d460e51d0bfea8179e3))
+* [analytics-admin] add account-level binding for the`RunAccessReport` method (example: /v1alpha/accounts/1234567:runAccessReport) ([#4112](https://github.com/googleapis/google-cloud-node/issues/4112)) ([623b203](https://github.com/googleapis/google-cloud-node/commit/623b2037f2e2ced5ba6ecde1c3606997983d9036))
+
 ## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.5.1...admin-v4.6.0) (2023-02-28)
 
 

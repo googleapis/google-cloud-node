@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.4.1...channel-v2.5.0) (2023-03-28)
+
+
+### Features
+
+* [channel] add show_future_offers to ListOffers ([#4079](https://github.com/googleapis/google-cloud-node/issues/4079)) ([e7b8d25](https://github.com/googleapis/google-cloud-node/commit/e7b8d25437573247f2b790304e7f2f152d00a872))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/channel-v2.4.0...channel-v2.4.1) (2023-02-15)
 
 
