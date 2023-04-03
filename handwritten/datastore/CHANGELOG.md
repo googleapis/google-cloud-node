@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.5.0](https://github.com/googleapis/nodejs-datastore/compare/v7.4.0...v7.5.0) (2023-03-29)
+
+
+### Features
+
+* Add SUM/AVG aggregation query support in the preview branch and improve query API documentation ([#1094](https://github.com/googleapis/nodejs-datastore/issues/1094)) ([d14f87e](https://github.com/googleapis/nodejs-datastore/commit/d14f87ed4aaef42090673fbe78b23992093925ad))
+
+
+### Bug Fixes
+
+* Allow IN queries on __key__ ([#1085](https://github.com/googleapis/nodejs-datastore/issues/1085)) ([dd2d5f4](https://github.com/googleapis/nodejs-datastore/commit/dd2d5f4d15f714b3f3586250802fb6822b7e01ff))
+
 ## [7.4.0](https://github.com/googleapis/nodejs-datastore/compare/v7.3.2...v7.4.0) (2023-03-09)
 
 
