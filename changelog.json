@@ -5,6 +5,420 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "d47d3a39ed23a9a01b2f2790c63db9c22b3589c3",
+          "message": "Add initial files for google.cloud.workstations.v1beta",
+          "issues": [
+            "4100"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "47f6c169-44fb-4c7a-82ba-36f7a60bf48d",
+      "createTime": "2023-03-28T16:48:01.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c0d401de0df43b36c4b2d1511c436eb90a7cf446",
+          "message": "[grafeas] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments",
+          "issues": [
+            "4069"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "1c8cd2ca-702b-4c35-8ad9-60ae3a427f14",
+      "createTime": "2023-03-28T16:48:01.312Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9878d722f634f356590014ea8f2f035bb1b134db",
+          "message": "[routing] moved speed in SpeedReadingInterval into a oneof speed_type, this is a breaking change for Go client libraries",
+          "issues": [
+            "4121"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1106a824dbddc7296f069a0a3e063b0ec9fc914f",
+          "message": "[routing] adds support for specifying region_code in the ComputeRoutesRequest",
+          "issues": [
+            "4103"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "f946fdb1-9ce9-4390-8ce9-37e7f5744c7d",
+      "createTime": "2023-03-28T16:48:01.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a3b26fc4052a72858f837a45237c9df88289fb75",
+          "message": "[containeranalysis] remove the unimplemented ScanConfig API method and resources",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "ec484a6f369d2df6dc73a798501c8937caf5634b",
+          "message": "[containeranalysis] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments",
+          "issues": [
+            "4070"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "0e317661-db03-4273-91d7-9bb065422523",
+      "createTime": "2023-03-28T16:48:01.306Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "55efb27141ba420ea9c181673708e8282382b0ff",
+          "message": "[cloudbuild] change java package of Cloud Build v2",
+          "issues": [
+            "4087"
+          ]
+        }
+      ],
+      "version": "3.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "65875dbf-4669-41e0-aa39-64251c949014",
+      "createTime": "2023-03-28T16:48:01.304Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a0bb2b2d9618e9385c20a6e9afa34a547009bd05",
+          "message": "[video] added TimecodeConfig for specifying the source of timecode used in media workflow synchronization",
+          "issues": [
+            "4114"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "7d3e9ff0-7c0f-445a-9307-ef3434ce41bd",
+      "createTime": "2023-03-28T16:48:01.303Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6f04cb4a1a2cb0244d72a4e3a3046e2f8413de5",
+          "message": "[recaptchaenterprise] add reCAPTCHA Enterprise Fraud Prevention API",
+          "issues": [
+            "4095"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "3791c73b-27d1-4137-a330-95a74596e8d9",
+      "createTime": "2023-03-28T16:48:01.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b246145a5c4bb18b0fa605460077c314134f6b37",
+          "message": "[iap] add an enum ENROLLED_SECOND_FACTORS under IapSettings",
+          "issues": [
+            "4081"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "62301bee-35f9-491c-b5be-e4c996050e9e",
+      "createTime": "2023-03-28T16:48:01.299Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "687301241b381cb414e7a2161797f53b247a8386",
+          "message": "[functions] add `available_cpu ` field",
+          "issues": [
+            "4092"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "08cf2096-40c8-471f-ab98-48363410a471",
+      "createTime": "2023-03-28T16:48:01.297Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "10afbc0b499d95e18886ee2f6a53cdd203a07542",
+          "message": "[filestore] updating the client to match the latest v1 API",
+          "issues": [
+            "4104"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "3e91a3b0-b378-4a6d-9d77-15134c589674",
+      "createTime": "2023-03-28T16:48:01.296Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "764faca7cad111d0fea1cb26678b4139e861f5ae",
+          "message": "[documentai] Add ImportProcessorVersion in v1beta3",
+          "issues": [
+            "4109"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "33597b54-d3da-41aa-af21-927e2392d80c",
+      "createTime": "2023-03-28T16:48:01.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0fe6ff44b808fa9afc4c452402bc013805f74a97",
+          "message": "[discoveryengine] add additional resource path with collections",
+          "issues": [
+            "4120"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "f683a49f-bdba-4fcf-a200-40da75712d8a",
+      "createTime": "2023-03-28T16:48:01.293Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2965feabbec63b308d7e1c36f98ba3405f879cfb",
+          "message": "[deploy] added supported for Cloud Deploy Progressive Deployment Strategy",
+          "issues": [
+            "4118"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "35b85b8c-383a-4d55-9aeb-455a4eb326d3",
+      "createTime": "2023-03-28T16:48:01.291Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "65ee10e09d7c69e00bdfd7be2a591c866873ceda",
+          "message": "Revert package.json version",
+          "issues": []
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "e772c922-d0d3-4c2e-82ba-415656dcfc5e",
+      "createTime": "2023-03-28T16:48:01.288Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a9a831cf17b8555f55f6a6b0189efb308b7f7f6d",
+          "message": "Add support for entries associated with Looker and CloudSQL",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "a9a831cf17b8555f55f6a6b0189efb308b7f7f6d",
+          "message": "Add support for a ReconcileTags() API method",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "a9a831cf17b8555f55f6a6b0189efb308b7f7f6d",
+          "message": "[datacatalog] add support for new ImportEntries() API, including format of the dump",
+          "issues": [
+            "4082"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "74cd1bdd-79b3-4b56-a3f2-4640df8c6c4e",
+      "createTime": "2023-03-28T16:48:01.283Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bea24784eb5e11113f452d50ee9c604df4d0e534",
+          "message": "[compute] Update Compute Engine API to revision 20230307 (#786)",
+          "issues": [
+            "4113"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "e6a35a6ba7ad8f4f21ba0eca8bc19349808cd09f",
+          "message": "[compute] Update Compute Engine API to revision 20230307 (#770)",
+          "issues": [
+            "4091"
+          ]
+        }
+      ],
+      "version": "3.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "e92c36d7-1d8a-4763-86fb-afa0ac7d1b6a",
+      "createTime": "2023-03-28T16:48:01.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7b8d25437573247f2b790304e7f2f152d00a872",
+          "message": "[channel] add show_future_offers to ListOffers",
+          "issues": [
+            "4079"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "cd21589d-01a4-4d40-a1f1-0641cbe9e6d8",
+      "createTime": "2023-03-28T16:48:01.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "671757d28e2ed57c8586005bb4143cf4fb1545b0",
+          "message": "[binaryauthorization] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments",
+          "issues": [
+            "4071"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "1df37fb9-c9d1-4e72-94a4-504339b686d8",
+      "createTime": "2023-03-28T16:48:01.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "269a7e4b2a9542e7bd94eaf8cc1d4b78c2beeff0",
+          "message": "[bigquery-reservation] add edition/autoscale related fields",
+          "issues": [
+            "4122"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "a4507c85-76e6-4a28-8ada-f6abd0e8dad1",
+      "createTime": "2023-03-28T16:48:01.277Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b7e6cad1cb83d9b35063e12ffd81316f06537428",
+          "message": "[bigquery-connection] add spark connection properties type",
+          "issues": [
+            "4096"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "87df4751-25d9-4628-962a-e41ccb11cec6",
+      "createTime": "2023-03-28T16:48:01.275Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3c1a0eec71a426a8b6bc31ad7b4b729ccafd500a",
+          "message": "Remove large_model_reference from Model in aiplatform v1beta1 model.proto",
+          "issues": [
+            "4098"
+          ]
+        }
+      ],
+      "version": "2.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "5f0b2a44-c61f-49fb-bf3d-fb140b72e981",
+      "createTime": "2023-03-28T16:48:01.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d66f33c7518719ba6e2b8d460e51d0bfea8179e3",
+          "message": "[analytics-admin] add `RunAccessReport` method (with bindings for account and property resources) to the Admin API v1beta",
+          "issues": [
+            "4128"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "623b2037f2e2ced5ba6ecde1c3606997983d9036",
+          "message": "[analytics-admin] add account-level binding for the`RunAccessReport` method (example: /v1alpha/accounts/1234567:runAccessReport)",
+          "issues": [
+            "4112"
+          ]
+        }
+      ],
+      "version": "4.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "987ef268-537b-4320-9082-97e27fc831e6",
+      "createTime": "2023-03-28T16:48:01.270Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b04c77858f6d807c11a31a3fb7e3adc3289ff581",
           "message": "Add initial files for google.cloud.alloydb.v1",
           "issues": [
@@ -4621,5 +5035,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-03-13T17:28:30.813Z"
+  "updateTime": "2023-03-28T16:48:01.314Z"
 }

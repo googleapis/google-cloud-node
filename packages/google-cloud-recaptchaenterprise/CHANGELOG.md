@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v3.3.1...recaptcha-enterprise-v3.4.0) (2023-03-28)
+
+
+### Features
+
+* [recaptchaenterprise] add reCAPTCHA Enterprise Fraud Prevention API ([#4095](https://github.com/googleapis/google-cloud-node/issues/4095)) ([d6f04cb](https://github.com/googleapis/google-cloud-node/commit/d6f04cb4a1a2cb0244d72a4e3a3046e2f8413de5))
+
 ## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v3.3.0...recaptcha-enterprise-v3.3.1) (2023-02-15)
 
 

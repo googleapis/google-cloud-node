@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.3.1...deploy-v2.4.0) (2023-03-28)
+
+
+### Features
+
+* [deploy] added supported for Cloud Deploy Progressive Deployment Strategy ([#4118](https://github.com/googleapis/google-cloud-node/issues/4118)) ([2965fea](https://github.com/googleapis/google-cloud-node/commit/2965feabbec63b308d7e1c36f98ba3405f879cfb))
+
 ## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.3.0...deploy-v2.3.1) (2023-02-15)
 
 

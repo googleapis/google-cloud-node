@@ -201,6 +201,22 @@
                         return values;
                     })();
     
+                    /**
+                     * NotificationType enum.
+                     * @name google.cloud.advisorynotifications.v1.NotificationType
+                     * @enum {number}
+                     * @property {number} NOTIFICATION_TYPE_UNSPECIFIED=0 NOTIFICATION_TYPE_UNSPECIFIED value
+                     * @property {number} NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY=1 NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY value
+                     * @property {number} NOTIFICATION_TYPE_SENSITIVE_ACTIONS=2 NOTIFICATION_TYPE_SENSITIVE_ACTIONS value
+                     */
+                    v1.NotificationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NOTIFICATION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY"] = 1;
+                        values[valuesById[2] = "NOTIFICATION_TYPE_SENSITIVE_ACTIONS"] = 2;
+                        return values;
+                    })();
+    
                     v1.Notification = (function() {
     
                         /**
@@ -211,6 +227,7 @@
                          * @property {google.cloud.advisorynotifications.v1.ISubject|null} [subject] Notification subject
                          * @property {Array.<google.cloud.advisorynotifications.v1.IMessage>|null} [messages] Notification messages
                          * @property {google.protobuf.ITimestamp|null} [createTime] Notification createTime
+                         * @property {google.cloud.advisorynotifications.v1.NotificationType|null} [notificationType] Notification notificationType
                          */
     
                         /**
@@ -262,6 +279,14 @@
                         Notification.prototype.createTime = null;
     
                         /**
+                         * Notification notificationType.
+                         * @member {google.cloud.advisorynotifications.v1.NotificationType} notificationType
+                         * @memberof google.cloud.advisorynotifications.v1.Notification
+                         * @instance
+                         */
+                        Notification.prototype.notificationType = 0;
+    
+                        /**
                          * Creates a new Notification instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.advisorynotifications.v1.Notification
@@ -294,6 +319,8 @@
                                     $root.google.cloud.advisorynotifications.v1.Message.encode(message.messages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.notificationType != null && Object.hasOwnProperty.call(message, "notificationType"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.notificationType);
                             return writer;
                         };
     
@@ -344,6 +371,10 @@
                                     }
                                 case 4: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.notificationType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -403,6 +434,15 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.notificationType != null && message.hasOwnProperty("notificationType"))
+                                switch (message.notificationType) {
+                                default:
+                                    return "notificationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -440,6 +480,26 @@
                                     throw TypeError(".google.cloud.advisorynotifications.v1.Notification.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
+                            switch (object.notificationType) {
+                            default:
+                                if (typeof object.notificationType === "number") {
+                                    message.notificationType = object.notificationType;
+                                    break;
+                                }
+                                break;
+                            case "NOTIFICATION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.notificationType = 0;
+                                break;
+                            case "NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY":
+                            case 1:
+                                message.notificationType = 1;
+                                break;
+                            case "NOTIFICATION_TYPE_SENSITIVE_ACTIONS":
+                            case 2:
+                                message.notificationType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -462,6 +522,7 @@
                                 object.name = "";
                                 object.subject = null;
                                 object.createTime = null;
+                                object.notificationType = options.enums === String ? "NOTIFICATION_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -474,6 +535,8 @@
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.notificationType != null && message.hasOwnProperty("notificationType"))
+                                object.notificationType = options.enums === String ? $root.google.cloud.advisorynotifications.v1.NotificationType[message.notificationType] === undefined ? message.notificationType : $root.google.cloud.advisorynotifications.v1.NotificationType[message.notificationType] : message.notificationType;
                             return object;
                         };
     

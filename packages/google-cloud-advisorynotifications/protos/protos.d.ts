@@ -107,6 +107,13 @@ export namespace google {
                     LOCALIZATION_STATE_COMPLETED = 3
                 }
 
+                /** NotificationType enum. */
+                enum NotificationType {
+                    NOTIFICATION_TYPE_UNSPECIFIED = 0,
+                    NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY = 1,
+                    NOTIFICATION_TYPE_SENSITIVE_ACTIONS = 2
+                }
+
                 /** Properties of a Notification. */
                 interface INotification {
 
@@ -121,6 +128,9 @@ export namespace google {
 
                     /** Notification createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Notification notificationType */
+                    notificationType?: (google.cloud.advisorynotifications.v1.NotificationType|keyof typeof google.cloud.advisorynotifications.v1.NotificationType|null);
                 }
 
                 /** Represents a Notification. */
@@ -143,6 +153,9 @@ export namespace google {
 
                     /** Notification createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Notification notificationType. */
+                    public notificationType: (google.cloud.advisorynotifications.v1.NotificationType|keyof typeof google.cloud.advisorynotifications.v1.NotificationType);
 
                     /**
                      * Creates a new Notification instance using the specified properties.

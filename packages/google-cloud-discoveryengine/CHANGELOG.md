@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.3.1...discoveryengine-v0.4.0) (2023-03-28)
+
+
+### Features
+
+* [discoveryengine] add additional resource path with collections ([#4120](https://github.com/googleapis/google-cloud-node/issues/4120)) ([0fe6ff4](https://github.com/googleapis/google-cloud-node/commit/0fe6ff44b808fa9afc4c452402bc013805f74a97))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.3.0...discoveryengine-v0.3.1) (2023-02-15)
 
 
