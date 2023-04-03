@@ -7,7 +7,7 @@
             "v1": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Container.V1",
-                "go_package": "google.golang.org/genproto/googleapis/container/v1;container",
+                "go_package": "cloud.google.com/go/container/apiv1/containerpb;containerpb",
                 "java_multiple_files": true,
                 "java_outer_classname": "ClusterServiceProto",
                 "java_package": "com.google.container.v1",
@@ -2000,6 +2000,10 @@
                     "etag": {
                       "type": "string",
                       "id": 139
+                    },
+                    "fleet": {
+                      "type": "Fleet",
+                      "id": 140
                     }
                   },
                   "nested": {
@@ -4988,6 +4992,22 @@
                     }
                   }
                 },
+                "Fleet": {
+                  "fields": {
+                    "project": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "membership": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "preRegistered": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
+                },
                 "StackType": {
                   "values": {
                     "STACK_TYPE_UNSPECIFIED": 0,
@@ -5023,7 +5043,7 @@
             "v1beta1": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Container.V1Beta1",
-                "go_package": "google.golang.org/genproto/googleapis/container/v1beta1;container",
+                "go_package": "cloud.google.com/go/container/apiv1beta1/containerpb;containerpb",
                 "java_multiple_files": true,
                 "java_outer_classname": "ClusterServiceProto",
                 "java_package": "com.google.container.v1beta1",
@@ -7171,6 +7191,10 @@
                     "etag": {
                       "type": "string",
                       "id": 139
+                    },
+                    "fleet": {
+                      "type": "Fleet",
+                      "id": 140
                     }
                   },
                   "nested": {
@@ -10549,6 +10573,22 @@
                     "DATAPATH_PROVIDER_UNSPECIFIED": 0,
                     "LEGACY_DATAPATH": 1,
                     "ADVANCED_DATAPATH": 2
+                  }
+                },
+                "Fleet": {
+                  "fields": {
+                    "project": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "membership": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "preRegistered": {
+                      "type": "bool",
+                      "id": 3
+                    }
                   }
                 },
                 "StackType": {
