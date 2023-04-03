@@ -46,8 +46,8 @@ function main(parent) {
   /**
    *  Optional. The maximum number of saved queries to return per page. The
    *  service may return fewer than this value. If unspecified, at most 50 will
-   *  be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  be returned. The maximum value is 1000; values above 1000 will be coerced
+   *  to 1000.
    */
   // const pageSize = 1234
   /**
