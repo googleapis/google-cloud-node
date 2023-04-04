@@ -10,6 +10,7 @@ github:
 id: 7a1731ed-56ef-41b2-ad8e-d24d28b2c789
 includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
 name: samples-presubmit-node14
+resourceName: projects/long-door-651/locations/global/triggers/7a1731ed-56ef-41b2-ad8e-d24d28b2c789
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: presubmit

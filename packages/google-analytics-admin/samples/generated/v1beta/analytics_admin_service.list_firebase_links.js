@@ -43,7 +43,7 @@ function main(parent) {
   /**
    *  A page token, received from a previous `ListFirebaseLinks` call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListProperties` must
+   *  When paginating, all other parameters provided to `ListFirebaseLinks` must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'

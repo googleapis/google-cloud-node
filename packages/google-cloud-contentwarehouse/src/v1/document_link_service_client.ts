@@ -355,8 +355,8 @@ export class DocumentLinkServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the document, for which all target links are returned.
-   *   Format:
+   *   Required. The name of the document, for which all target links are
+   *   returned. Format:
    *   projects/{project_number}/locations/{location}/documents/{target_document_id}.
    * @param {google.cloud.contentwarehouse.v1.RequestMetadata} request.requestMetadata
    *   The meta information collected about the document creator, used to enforce
@@ -462,7 +462,8 @@ export class DocumentLinkServiceClient {
    *   Format:
    *   projects/{project_number}/locations/{location}/documents/{source_document_id}.
    * @param {google.cloud.contentwarehouse.v1.DocumentLink} request.documentLink
-   *   Required. Document links associated with the source documents (source_document_id).
+   *   Required. Document links associated with the source documents
+   *   (source_document_id).
    * @param {google.cloud.contentwarehouse.v1.RequestMetadata} request.requestMetadata
    *   The meta information collected about the document creator, used to enforce
    *   access control for the service.
@@ -665,8 +666,8 @@ export class DocumentLinkServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the document, for which all source links are returned.
-   *   Format:
+   *   Required. The name of the document, for which all source links are
+   *   returned. Format:
    *   projects/{project_number}/locations/{location}/documents/{source_document_id}.
    * @param {number} request.pageSize
    *   The maximum number of document-links to return. The service may return
@@ -776,8 +777,8 @@ export class DocumentLinkServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the document, for which all source links are returned.
-   *   Format:
+   *   Required. The name of the document, for which all source links are
+   *   returned. Format:
    *   projects/{project_number}/locations/{location}/documents/{source_document_id}.
    * @param {number} request.pageSize
    *   The maximum number of document-links to return. The service may return
@@ -835,8 +836,8 @@ export class DocumentLinkServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the document, for which all source links are returned.
-   *   Format:
+   *   Required. The name of the document, for which all source links are
+   *   returned. Format:
    *   projects/{project_number}/locations/{location}/documents/{source_document_id}.
    * @param {number} request.pageSize
    *   The maximum number of document-links to return. The service may return

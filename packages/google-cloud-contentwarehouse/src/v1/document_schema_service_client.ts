@@ -456,9 +456,10 @@ export class DocumentSchemaServiceClient {
    * Updates a Document Schema. Returns INVALID_ARGUMENT if the name of the
    * Document Schema is non-empty and does not equal the existing name.
    * Supports only appending new properties, adding new ENUM possible values,
-   * and updating the {@link google.cloud.contentwarehouse.v1.EnumTypeOptions.validation_check_disabled|EnumTypeOptions.validation_check_disabled} flag for
-   * ENUM possible values. Updating existing properties will result into
-   * INVALID_ARGUMENT.
+   * and updating the
+   * {@link google.cloud.contentwarehouse.v1.EnumTypeOptions.validation_check_disabled|EnumTypeOptions.validation_check_disabled}
+   * flag for ENUM possible values. Updating existing properties will result
+   * into INVALID_ARGUMENT.
    *
    * @param {Object} request
    *   The request object that will be sent.

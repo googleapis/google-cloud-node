@@ -2268,7 +2268,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in.
+   *   Required. The project and location you want search in the format `projects/* /locations/*`
    * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.source]
    *   Optional. Send asset information in the **source** field to retrieve all
    *   links that lead from the specified asset to downstream assets.
@@ -2381,7 +2381,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in.
+   *   Required. The project and location you want search in the format `projects/* /locations/*`
    * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.source]
    *   Optional. Send asset information in the **source** field to retrieve all
    *   links that lead from the specified asset to downstream assets.
@@ -2442,7 +2442,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in.
+   *   Required. The project and location you want search in the format `projects/* /locations/*`
    * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.source]
    *   Optional. Send asset information in the **source** field to retrieve all
    *   links that lead from the specified asset to downstream assets.
@@ -2515,7 +2515,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location where you want to search.
+   *   Required. The project and location you want search in the format `projects/* /locations/*`
    * @param {string[]} request.links
    *   Required. An array of links to check for their associated LineageProcesses.
    *
@@ -2631,7 +2631,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location where you want to search.
+   *   Required. The project and location you want search in the format `projects/* /locations/*`
    * @param {string[]} request.links
    *   Required. An array of links to check for their associated LineageProcesses.
    *
@@ -2691,7 +2691,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location where you want to search.
+   *   Required. The project and location you want search in the format `projects/* /locations/*`
    * @param {string[]} request.links
    *   Required. An array of links to check for their associated LineageProcesses.
    *

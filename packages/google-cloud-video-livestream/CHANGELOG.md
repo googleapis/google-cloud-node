@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v0.4.1...livestream-v0.5.0) (2023-03-28)
+
+
+### Features
+
+* [video] added TimecodeConfig for specifying the source of timecode used in media workflow synchronization ([#4114](https://github.com/googleapis/google-cloud-node/issues/4114)) ([a0bb2b2](https://github.com/googleapis/google-cloud-node/commit/a0bb2b2d9618e9385c20a6e9afa34a547009bd05))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/livestream-v0.4.0...livestream-v0.4.1) (2023-02-15)
 
 

@@ -376,6 +376,7 @@ export class AnalyticsAdminServiceClient {
       'updateDataStream',
       'listDataStreams',
       'getDataStream',
+      'runAccessReport',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -667,9 +668,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The account to update.
    *   The account's `name` field is used to identify the account.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (for example, "field_to_update"). Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -763,7 +765,7 @@ export class AnalyticsAdminServiceClient {
    *   The account to create.
    * @param {string} request.redirectUri
    *   Redirect URI where the user will be sent after accepting Terms of Service.
-   *   Must be configured in Developers Console as a Redirect URI
+   *   Must be configured in Cloud Console as a Redirect URI.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1046,7 +1048,7 @@ export class AnalyticsAdminServiceClient {
    * will be permanently purged.
    * https://support.google.com/analytics/answer/6154772
    *
-   * Returns an error if the target is not found, or is not an GA4 Property.
+   * Returns an error if the target is not found, or is not a GA4 Property.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1148,9 +1150,10 @@ export class AnalyticsAdminServiceClient {
    *   The property's `name` field is used to identify the property to be
    *   updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1542,9 +1545,10 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1beta.GoogleAdsLink} request.googleAdsLink
    *   The GoogleAdsLink to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2254,15 +2258,16 @@ export class AnalyticsAdminServiceClient {
    * Acknowledges the terms of user data collection for the specified property.
    *
    * This acknowledgement must be completed (either in the Google Analytics UI
-   * or via this API) before MeasurementProtocolSecret resources may be created.
+   * or through this API) before MeasurementProtocolSecret resources may be
+   * created.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
    *   Required. The property for which to acknowledge user data collection.
    * @param {string} request.acknowledgement
-   *   Required. An acknowledgement that the caller of this method understands the terms
-   *   of user data collection.
+   *   Required. An acknowledgement that the caller of this method understands the
+   *   terms of user data collection.
    *
    *   This field must contain the exact value:
    *   "I acknowledge that I have the necessary privacy disclosures and rights
@@ -2371,8 +2376,8 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1beta.ConversionEvent} request.conversionEvent
    *   Required. The conversion event to create.
    * @param {string} request.parent
-   *   Required. The resource name of the parent property where this conversion event will
-   *   be created. Format: properties/123
+   *   Required. The resource name of the parent property where this conversion
+   *   event will be created. Format: properties/123
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2768,9 +2773,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1beta.CustomDimension} request.customDimension
    *   The CustomDimension to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3168,9 +3173,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1beta.CustomMetric} request.customMetric
    *   The CustomMetric to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3564,9 +3569,10 @@ export class AnalyticsAdminServiceClient {
    *   Required. The settings to update.
    *   The `name` field is used to identify the settings to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Field names must be in snake case
-   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-   *   the entire entity, use one path with the string "*" to match all fields.
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3855,9 +3861,9 @@ export class AnalyticsAdminServiceClient {
    * @param {google.analytics.admin.v1beta.DataStream} request.dataStream
    *   The DataStream to update
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated. Omitted fields will not be updated.
-   *   To replace the entire entity, use one path with the string "*" to match
-   *   all fields.
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4033,6 +4039,173 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getDataStream(request, options, callback);
+  }
+  /**
+   * Returns a customized report of data access records. The report provides
+   * records of each time a user reads Google Analytics reporting data. Access
+   * records are retained for up to 2 years.
+   *
+   * Data Access Reports can be requested for a property. The property must be
+   * in Google Analytics 360. This method is only available to Administrators.
+   *
+   * These data access records include GA4 UI Reporting, GA4 UI Explorations,
+   * GA4 Data API, and other products like Firebase & Admob that can retrieve
+   * data from Google Analytics through a linkage. These records don't include
+   * property configuration changes like adding a stream or changing a
+   * property's time zone. For configuration change history, see
+   * [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.entity
+   *   The Data Access Report supports requesting at the property level or account
+   *   level. If requested at the account level, Data Access Reports include all
+   *   access for all properties under that account.
+   *
+   *   To request at the property level, entity should be for example
+   *   'properties/123' if "123" is your GA4 property ID. To request at the
+   *   account level, entity should be for example 'accounts/1234' if "1234" is
+   *   your GA4 Account ID.
+   * @param {number[]} request.dimensions
+   *   The dimensions requested and displayed in the response. Requests are
+   *   allowed up to 9 dimensions.
+   * @param {number[]} request.metrics
+   *   The metrics requested and displayed in the response. Requests are allowed
+   *   up to 10 metrics.
+   * @param {number[]} request.dateRanges
+   *   Date ranges of access records to read. If multiple date ranges are
+   *   requested, each response row will contain a zero based date range index. If
+   *   two date ranges overlap, the access records for the overlapping days is
+   *   included in the response rows for both date ranges. Requests are allowed up
+   *   to 2 date ranges.
+   * @param {google.analytics.admin.v1beta.AccessFilterExpression} request.dimensionFilter
+   *   Dimension filters let you restrict report response to specific
+   *   dimension values which match the filter. For example, filtering on access
+   *   records of a single user. To learn more, see [Fundamentals of Dimension
+   *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+   *   for examples. Metrics cannot be used in this filter.
+   * @param {google.analytics.admin.v1beta.AccessFilterExpression} request.metricFilter
+   *   Metric filters allow you to restrict report response to specific metric
+   *   values which match the filter. Metric filters are applied after aggregating
+   *   the report's rows, similar to SQL having-clause. Dimensions cannot be used
+   *   in this filter.
+   * @param {number} request.offset
+   *   The row count of the start row. The first row is counted as row 0. If
+   *   offset is unspecified, it is treated as 0. If offset is zero, then this
+   *   method will return the first page of results with `limit` entries.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} request.limit
+   *   The number of rows to return. If unspecified, 10,000 rows are returned. The
+   *   API returns a maximum of 100,000 rows per request, no matter how many you
+   *   ask for. `limit` must be positive.
+   *
+   *   The API may return fewer rows than the requested `limit`, if there aren't
+   *   as many remaining rows as the `limit`. For instance, there are fewer than
+   *   300 possible values for the dimension `country`, so when reporting on only
+   *   `country`, you can't get more than 300 rows, even if you set `limit` to a
+   *   higher value.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {string} request.timeZone
+   *   This request's time zone if specified. If unspecified, the property's time
+   *   zone is used. The request's time zone is used to interpret the start & end
+   *   dates of the report.
+   *
+   *   Formatted as strings from the IANA Time Zone database
+   *   (https://www.iana.org/time-zones); for example "America/New_York" or
+   *   "Asia/Tokyo".
+   * @param {number[]} request.orderBys
+   *   Specifies how rows are ordered in the response.
+   * @param {boolean} request.returnEntityQuota
+   *   Toggles whether to return the current state of this Analytics Property's
+   *   quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+   *   requests, this field must be false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1beta.RunAccessReportResponse | RunAccessReportResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/analytics_admin_service.run_access_report.js</caption>
+   * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_RunAccessReport_async
+   */
+  runAccessReport(
+    request?: protos.google.analytics.admin.v1beta.IRunAccessReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IRunAccessReportResponse,
+      protos.google.analytics.admin.v1beta.IRunAccessReportRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  runAccessReport(
+    request: protos.google.analytics.admin.v1beta.IRunAccessReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IRunAccessReportResponse,
+      | protos.google.analytics.admin.v1beta.IRunAccessReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runAccessReport(
+    request: protos.google.analytics.admin.v1beta.IRunAccessReportRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IRunAccessReportResponse,
+      | protos.google.analytics.admin.v1beta.IRunAccessReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runAccessReport(
+    request?: protos.google.analytics.admin.v1beta.IRunAccessReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1beta.IRunAccessReportResponse,
+          | protos.google.analytics.admin.v1beta.IRunAccessReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1beta.IRunAccessReportResponse,
+      | protos.google.analytics.admin.v1beta.IRunAccessReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IRunAccessReportResponse,
+      protos.google.analytics.admin.v1beta.IRunAccessReportRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        entity: request.entity ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.runAccessReport(request, options, callback);
   }
 
   /**
@@ -4703,7 +4876,7 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListFirebaseLinks` call.
    *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListProperties` must
+   *   When paginating, all other parameters provided to `ListFirebaseLinks` must
    *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4808,7 +4981,7 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListFirebaseLinks` call.
    *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListProperties` must
+   *   When paginating, all other parameters provided to `ListFirebaseLinks` must
    *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4861,7 +5034,7 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListFirebaseLinks` call.
    *   Provide this to retrieve the subsequent page.
-   *   When paginating, all other parameters provided to `ListProperties` must
+   *   When paginating, all other parameters provided to `ListFirebaseLinks` must
    *   match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5328,18 +5501,20 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
-   *   Required. The account resource for which to return change history resources.
+   *   Required. The account resource for which to return change history
+   *   resources.
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
    * @param {number[]} [request.resourceType]
-   *   Optional. If set, only return changes if they are for a resource that matches at
-   *   least one of these types.
+   *   Optional. If set, only return changes if they are for a resource that
+   *   matches at least one of these types.
    * @param {number[]} [request.action]
-   *   Optional. If set, only return changes that match one or more of these types of
-   *   actions.
+   *   Optional. If set, only return changes that match one or more of these types
+   *   of actions.
    * @param {string[]} [request.actorEmail]
-   *   Optional. If set, only return changes if they are made by a user in this list.
+   *   Optional. If set, only return changes if they are made by a user in this
+   *   list.
    * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
    *   Optional. If set, only return changes made after this time (inclusive).
    * @param {google.protobuf.Timestamp} [request.latestChangeTime]
@@ -5350,10 +5525,11 @@ export class AnalyticsAdminServiceClient {
    *   pages. If unspecified, at most 50 items will be returned.
    *   The maximum value is 200 (higher values will be coerced to the maximum).
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *   provided the page token.
+   *   Optional. A page token, received from a previous
+   *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `SearchChangeHistoryEvents` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5451,18 +5627,20 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
-   *   Required. The account resource for which to return change history resources.
+   *   Required. The account resource for which to return change history
+   *   resources.
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
    * @param {number[]} [request.resourceType]
-   *   Optional. If set, only return changes if they are for a resource that matches at
-   *   least one of these types.
+   *   Optional. If set, only return changes if they are for a resource that
+   *   matches at least one of these types.
    * @param {number[]} [request.action]
-   *   Optional. If set, only return changes that match one or more of these types of
-   *   actions.
+   *   Optional. If set, only return changes that match one or more of these types
+   *   of actions.
    * @param {string[]} [request.actorEmail]
-   *   Optional. If set, only return changes if they are made by a user in this list.
+   *   Optional. If set, only return changes if they are made by a user in this
+   *   list.
    * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
    *   Optional. If set, only return changes made after this time (inclusive).
    * @param {google.protobuf.Timestamp} [request.latestChangeTime]
@@ -5473,10 +5651,11 @@ export class AnalyticsAdminServiceClient {
    *   pages. If unspecified, at most 50 items will be returned.
    *   The maximum value is 200 (higher values will be coerced to the maximum).
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *   provided the page token.
+   *   Optional. A page token, received from a previous
+   *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `SearchChangeHistoryEvents` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5518,18 +5697,20 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
-   *   Required. The account resource for which to return change history resources.
+   *   Required. The account resource for which to return change history
+   *   resources.
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
    * @param {number[]} [request.resourceType]
-   *   Optional. If set, only return changes if they are for a resource that matches at
-   *   least one of these types.
+   *   Optional. If set, only return changes if they are for a resource that
+   *   matches at least one of these types.
    * @param {number[]} [request.action]
-   *   Optional. If set, only return changes that match one or more of these types of
-   *   actions.
+   *   Optional. If set, only return changes that match one or more of these types
+   *   of actions.
    * @param {string[]} [request.actorEmail]
-   *   Optional. If set, only return changes if they are made by a user in this list.
+   *   Optional. If set, only return changes if they are made by a user in this
+   *   list.
    * @param {google.protobuf.Timestamp} [request.earliestChangeTime]
    *   Optional. If set, only return changes made after this time (inclusive).
    * @param {google.protobuf.Timestamp} [request.latestChangeTime]
@@ -5540,10 +5721,11 @@ export class AnalyticsAdminServiceClient {
    *   pages. If unspecified, at most 50 items will be returned.
    *   The maximum value is 200 (higher values will be coerced to the maximum).
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters provided to `SearchChangeHistoryEvents` must match the call that
-   *   provided the page token.
+   *   Optional. A page token, received from a previous
+   *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+   *   page. When paginating, all other parameters provided to
+   *   `SearchChangeHistoryEvents` must match the call that provided the page
+   *   token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

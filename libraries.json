@@ -442,7 +442,6 @@
   },
   {
     "name": "clouddms",
-    "aoi_shortname": "datamigration",
     "name_pretty": "Database Migration Service",
     "product_documentation": "https://cloud.google.com/database-migration/",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dms/latest",
@@ -454,7 +453,7 @@
     "api_id": "datamigration.googleapis.com",
     "requires_billing": true,
     "default_version": "v1",
-    "api_shortname": "clouddms",
+    "api_shortname": "datamigration",
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-clouddms",
     "support_documentation": "https://cloud.google.com/database-migration/docs/getting-support"
@@ -680,7 +679,7 @@
     "product_documentation": "cloud.google.com/document-warehouse/",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/contentwarehouse/latest",
     "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-    "release_level": "ga",
+    "release_level": "stable",
     "language": "nodejs",
     "repo": "googleapis/google-cloud-node",
     "distribution_name": "@google-cloud/contentwarehouse",
@@ -784,7 +783,7 @@
   },
   {
     "name": "file",
-    "api_shortname": "filestore",
+    "api_shortname": "file",
     "name_pretty": "Filestore",
     "product_documentation": "https://cloud.google.com/filestore/",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/filestore/latest",
@@ -1633,6 +1632,7 @@
     "default_version": "v2",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
+    "api_shortname": "run",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-run",
     "support_documentation": "https://cloud.google.com/run/docs/getting-support"
   },
@@ -2038,6 +2038,7 @@
     "default_version": "v1",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
+    "api_shortname": "videostitcher",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-video-stitcher",
     "support_documentation": "https://cloud.google.com/video-stitcher/docs/getting-support"
   },
@@ -2187,6 +2188,24 @@
     "support_documentation": "https://cloud.google.com/advisory-notifications/docs/getting-support"
   },
   {
+    "name": "alloydb",
+    "name_pretty": "AlloyDB API",
+    "product_documentation": "https://cloud.google.com/alloydb/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/alloydb/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/alloydb",
+    "api_id": "alloydb.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "alloydb",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-alloydb",
+    "support_documentation": "https://cloud.google.com/alloydb/docs/getting-support"
+  },
+  {
     "name": "analyticshub",
     "name_pretty": "Analytics Hub API",
     "product_documentation": "https://cloud.google.com/analytics-hub",
@@ -2295,7 +2314,7 @@
   {
     "name": "batch",
     "name_pretty": "Batch",
-    "product_documentation": "cloud.google.com/batch/",
+    "product_documentation": "https://cloud.google.com/batch/docs",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/batch/latest",
     "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
     "release_level": "preview",
@@ -2499,6 +2518,7 @@
     "default_version": "v1beta1",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
+    "api_shortname": "dataform",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataform",
     "support_documentation": "https://dataform.co/docs/getting-support"
   },
@@ -2607,7 +2627,7 @@
     "default_version": "v2",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
-    "api_shortname": "routing",
+    "api_shortname": "routes",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-routing"
   },
   {
@@ -2714,6 +2734,7 @@
     "default_version": "v1beta1",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
+    "api_shortname": "publicca",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-security-publicca",
     "support_documentation": "https://cloud.google.com/certificate-manager/docs/getting-support"
   },
@@ -2733,5 +2754,23 @@
     "library_type": "AGENT",
     "linkToRepoHomepage": "https://github.com/googleapis/cloud-trace-nodejs",
     "support_documentation": "https://cloud.google.com/trace/docs/getting-support"
+  },
+  {
+    "name": "workstations",
+    "name_pretty": "Workstations API",
+    "product_documentation": "https://cloud.google.com/workstations/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workstations/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/workstations",
+    "api_id": "workstations.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "workstations",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workstations",
+    "support_documentation": "https://cloud.google.com/workstations/docs/getting-support"
   }
 ]
