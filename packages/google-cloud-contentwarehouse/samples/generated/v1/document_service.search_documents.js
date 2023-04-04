@@ -45,7 +45,9 @@ function main(parent) {
   /**
    *  An integer that specifies the current offset (that is, starting result
    *  location, amongst the documents deemed by the API as relevant) in search
-   *  results. This field is only considered if page_token google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token  is unset.
+   *  results. This field is only considered if
+   *  page_token google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token 
+   *  is unset.
    *  The maximum allowed value is 5000. Otherwise an error is thrown.
    *  For example, 0 means to  return results starting from the first matching
    *  document, and 10 means to return from the 11th document. This can be used
@@ -61,8 +63,9 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  The token specifying the current offset within search results.
-   *  See SearchDocumentsResponse.next_page_token google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token  for an explanation of how
-   *  to obtain the next set of query results.
+   *  See
+   *  SearchDocumentsResponse.next_page_token google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token 
+   *  for an explanation of how to obtain the next set of query results.
    */
   // const pageToken = 'abc123'
   /**
@@ -76,6 +79,9 @@ function main(parent) {
    *  * `"upload_date"`: By upload date ascending.
    *  * `"update_date desc"`: By last updated date descending.
    *  * `"update_date"`: By last updated date ascending.
+   *  * `"retrieval_importance desc"`: By retrieval importance of properties
+   *    descending. This feature is still under development, please do not use
+   *    unless otherwise instructed to do so.
    */
   // const orderBy = 'abc123'
   /**
@@ -105,14 +111,21 @@ function main(parent) {
    */
   // const histogramQueries = 1234
   /**
-   *  Optional. Controls if the search document request requires the return of a total size
-   *  of matched documents. See SearchDocumentsResponse.total_size google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size.
+   *  Controls if the search document request requires the return of a total size
+   *  of matched documents. See
+   *  SearchDocumentsResponse.total_size google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size.
    *  Enabling this flag may adversely impact performance. Hint: If this is
    *  used with pagination, set this flag on the initial query but set this
    *  to false on subsequent page calls (keep the total count locally).
    *  Defaults to false.
    */
   // const requireTotalSize = true
+  /**
+   *  Controls if the search document request requires the return of a total size
+   *  of matched documents. See
+   *  SearchDocumentsResponse.total_size google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size.
+   */
+  // const totalResultSize = {}
   /**
    *  Experimental, do not use.
    *  The limit on the number of documents returned for the question-answering
