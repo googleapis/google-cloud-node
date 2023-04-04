@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(resource) {
-  // [START contentwarehouse_v1_generated_DocumentService_FetchAcl_async]
+function main(name) {
+  // [START contentwarehouse_v1_generated_DocumentService_LockDocument_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,24 +29,19 @@ function main(resource) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. REQUIRED: The resource for which the policy is being requested.
-   *  Format for document:
-   *  projects/{project_number}/locations/{location}/documents/{document_id}.
-   *  Format for collection:
-   *  projects/{project_number}/locations/{location}/collections/{collection_id}.
-   *  Format for project: projects/{project_number}.
+   *  Required. The name of the document to lock.
+   *  Format:
+   *  projects/{project_number}/locations/{location}/documents/{document}.
    */
-  // const resource = 'abc123'
+  // const name = 'abc123'
   /**
-   *  The meta information collected about the end user, used to enforce access
-   *  control for the service.
+   *  The collection the document connects to.
    */
-  // const requestMetadata = {}
+  // const collectionId = 'abc123'
   /**
-   *  For Get Project ACL only. Authorization check for end user will be ignored
-   *  when project_owner=true.
+   *  The user information who locks the document.
    */
-  // const projectOwner = true
+  // const lockingUser = {}
 
   // Imports the Contentwarehouse library
   const {DocumentServiceClient} = require('@google-cloud/contentwarehouse').v1;
@@ -54,19 +49,19 @@ function main(resource) {
   // Instantiates a client
   const contentwarehouseClient = new DocumentServiceClient();
 
-  async function callFetchAcl() {
+  async function callLockDocument() {
     // Construct request
     const request = {
-      resource,
+      name,
     };
 
     // Run request
-    const response = await contentwarehouseClient.fetchAcl(request);
+    const response = await contentwarehouseClient.lockDocument(request);
     console.log(response);
   }
 
-  callFetchAcl();
-  // [END contentwarehouse_v1_generated_DocumentService_FetchAcl_async]
+  callLockDocument();
+  // [END contentwarehouse_v1_generated_DocumentService_LockDocument_async]
 }
 
 process.on('unhandledRejection', err => {

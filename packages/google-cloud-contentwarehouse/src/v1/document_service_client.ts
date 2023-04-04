@@ -266,6 +266,7 @@ export class DocumentServiceClient {
       'updateDocument',
       'deleteDocument',
       'searchDocuments',
+      'lockDocument',
       'fetchAcl',
       'setAcl',
     ];
@@ -365,16 +366,21 @@ export class DocumentServiceClient {
    *   The meta information collected about the end user, used to enforce access
    *   control for the service.
    * @param {google.iam.v1.Policy} request.policy
-   *   Default document policy during creation. Conditions defined in the policy
-   *   will be ignored.
+   *   Default document policy during creation.
+   *   This refers to an Identity and Access (IAM) policy, which specifies access
+   *   controls for the Document.
+   *   Conditions defined in the policy will be ignored.
    * @param {google.cloud.contentwarehouse.v1.CloudAIDocumentOption} request.cloudAiDocumentOption
-   *   Request Option for processing Cloud AI Document in CW Document.
+   *   Request Option for processing Cloud AI Document in Document Warehouse.
+   *   This field offers limited support for mapping entities from Cloud AI
+   *   Document to Warehouse Document. Please consult with product team before
+   *   using this field and other available options.
    * @param {google.protobuf.FieldMask} request.createMask
    *   Field mask for creating Document fields. If mask path is empty,
    *   it means all fields are masked.
    *   For the `FieldMask` definition,
    *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -580,7 +586,10 @@ export class DocumentServiceClient {
    *   The meta information collected about the end user, used to enforce access
    *   control for the service.
    * @param {google.cloud.contentwarehouse.v1.CloudAIDocumentOption} request.cloudAiDocumentOption
-   *   Request Option for processing Cloud AI Document in CW Document.
+   *   Request Option for processing Cloud AI Document in Document Warehouse.
+   *   This field offers limited support for mapping entities from Cloud AI
+   *   Document to Warehouse Document. Please consult with product team before
+   *   using this field and other available options.
    * @param {google.cloud.contentwarehouse.v1.UpdateOptions} request.updateOptions
    *   Options for the update operation.
    * @param {object} [options]
@@ -778,6 +787,103 @@ export class DocumentServiceClient {
     return this.innerApiCalls.deleteDocument(request, options, callback);
   }
   /**
+   * Lock the document so the document cannot be updated by other users.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the document to lock.
+   *   Format:
+   *   projects/{project_number}/locations/{location}/documents/{document}.
+   * @param {string} request.collectionId
+   *   The collection the document connects to.
+   * @param {google.cloud.contentwarehouse.v1.UserInfo} request.lockingUser
+   *   The user information who locks the document.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.contentwarehouse.v1.Document | Document}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/document_service.lock_document.js</caption>
+   * region_tag:contentwarehouse_v1_generated_DocumentService_LockDocument_async
+   */
+  lockDocument(
+    request?: protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contentwarehouse.v1.IDocument,
+      protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  lockDocument(
+    request: protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contentwarehouse.v1.IDocument,
+      | protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  lockDocument(
+    request: protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest,
+    callback: Callback<
+      protos.google.cloud.contentwarehouse.v1.IDocument,
+      | protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  lockDocument(
+    request?: protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocument,
+          | protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contentwarehouse.v1.IDocument,
+      | protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contentwarehouse.v1.IDocument,
+      protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.lockDocument(request, options, callback);
+  }
+  /**
    * Gets the access control policy for a resource. Returns NOT_FOUND error if
    * the resource does not exist. Returns an empty policy if the resource exists
    * but does not have a policy set.
@@ -788,6 +894,8 @@ export class DocumentServiceClient {
    *   Required. REQUIRED: The resource for which the policy is being requested.
    *   Format for document:
    *   projects/{project_number}/locations/{location}/documents/{document_id}.
+   *   Format for collection:
+   *   projects/{project_number}/locations/{location}/collections/{collection_id}.
    *   Format for project: projects/{project_number}.
    * @param {google.cloud.contentwarehouse.v1.RequestMetadata} request.requestMetadata
    *   The meta information collected about the end user, used to enforce access
@@ -889,10 +997,29 @@ export class DocumentServiceClient {
    *   Required. REQUIRED: The resource for which the policy is being requested.
    *   Format for document:
    *   projects/{project_number}/locations/{location}/documents/{document_id}.
+   *   Format for collection:
+   *   projects/{project_number}/locations/{location}/collections/{collection_id}.
    *   Format for project: projects/{project_number}.
    * @param {google.iam.v1.Policy} request.policy
-   *   Required. REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB.
+   *   Required. REQUIRED: The complete policy to be applied to the `resource`.
+   *   The size of the policy is limited to a few 10s of KB. This refers to an
+   *   Identity and Access (IAM) policy, which specifies access controls for the
+   *   Document.
+   *
+   *   You can set ACL with condition for projects only.
+   *
+   *   Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where
+   *   the left of the operator is `DocumentSchemaId` or property name and the
+   *   right of the operator is a number or a quoted string. You must escape
+   *   backslash (\\) and quote (\") characters.
+   *
+   *   Boolean expressions (AND/OR) are supported up to 3 levels of nesting (for
+   *   example, "((A AND B AND C) OR D) AND E"), a maximum of 10 comparisons are
+   *   allowed in the expression. The expression must be < 6000 bytes in length.
+   *
+   *   Sample condition:
+   *       `"DocumentSchemaId = \"some schema id\" OR SchemaId.floatPropertyName
+   *       >= 10"`
    * @param {google.cloud.contentwarehouse.v1.RequestMetadata} request.requestMetadata
    *   The meta information collected about the end user, used to enforce access
    *   control for the service.
@@ -979,7 +1106,8 @@ export class DocumentServiceClient {
   }
 
   /**
-   * Searches for documents using provided {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest|SearchDocumentsRequest}.
+   * Searches for documents using provided
+   * {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest|SearchDocumentsRequest}.
    * This call only returns documents that the caller has permission to search
    * against.
    *
@@ -996,7 +1124,9 @@ export class DocumentServiceClient {
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the documents deemed by the API as relevant) in search
-   *   results. This field is only considered if {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token|page_token} is unset.
+   *   results. This field is only considered if
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token|page_token}
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -1010,8 +1140,9 @@ export class DocumentServiceClient {
    *   response time. The value can be between 1 and 100.
    * @param {string} request.pageToken
    *   The token specifying the current offset within search results.
-   *   See {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token|SearchDocumentsResponse.next_page_token} for an explanation of how
-   *   to obtain the next set of query results.
+   *   See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token|SearchDocumentsResponse.next_page_token}
+   *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. For non-empty
    *   query, default is `"relevance desc"`. For empty query, default is
@@ -1025,6 +1156,9 @@ export class DocumentServiceClient {
    *   * `"upload_date"`: By upload date ascending.
    *   * `"update_date desc"`: By last updated date descending.
    *   * `"update_date"`: By last updated date ascending.
+   *   * `"retrieval_importance desc"`: By retrieval importance of properties
+   *     descending. This feature is still under development, please do not use
+   *     unless otherwise instructed to do so.
    * @param {number[]} request.histogramQueries
    *   An expression specifying a histogram request against matching
    *   documents. Expression syntax is an aggregation function call with
@@ -1057,14 +1191,19 @@ export class DocumentServiceClient {
    *   * For schema id, abc123, get the counts for MORTGAGE_TYPE:
    *     count('abc123.MORTGAGE_TYPE')
    * @param {boolean} request.requireTotalSize
-   *   Optional. Controls if the search document request requires the return of a total size
-   *   of matched documents. See {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
+   *   Controls if the search document request requires the return of a total size
+   *   of matched documents. See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
    *
    *   Enabling this flag may adversely impact performance. Hint: If this is
    *   used with pagination, set this flag on the initial query but set this
    *   to false on subsequent page calls (keep the total count locally).
    *
    *   Defaults to false.
+   * @param {google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize} request.totalResultSize
+   *   Controls if the search document request requires the return of a total size
+   *   of matched documents. See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
    * @param {number} request.qaSizeLimit
    *   Experimental, do not use.
    *   The limit on the number of documents returned for the question-answering
@@ -1173,7 +1312,9 @@ export class DocumentServiceClient {
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the documents deemed by the API as relevant) in search
-   *   results. This field is only considered if {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token|page_token} is unset.
+   *   results. This field is only considered if
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token|page_token}
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -1187,8 +1328,9 @@ export class DocumentServiceClient {
    *   response time. The value can be between 1 and 100.
    * @param {string} request.pageToken
    *   The token specifying the current offset within search results.
-   *   See {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token|SearchDocumentsResponse.next_page_token} for an explanation of how
-   *   to obtain the next set of query results.
+   *   See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token|SearchDocumentsResponse.next_page_token}
+   *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. For non-empty
    *   query, default is `"relevance desc"`. For empty query, default is
@@ -1202,6 +1344,9 @@ export class DocumentServiceClient {
    *   * `"upload_date"`: By upload date ascending.
    *   * `"update_date desc"`: By last updated date descending.
    *   * `"update_date"`: By last updated date ascending.
+   *   * `"retrieval_importance desc"`: By retrieval importance of properties
+   *     descending. This feature is still under development, please do not use
+   *     unless otherwise instructed to do so.
    * @param {number[]} request.histogramQueries
    *   An expression specifying a histogram request against matching
    *   documents. Expression syntax is an aggregation function call with
@@ -1234,14 +1379,19 @@ export class DocumentServiceClient {
    *   * For schema id, abc123, get the counts for MORTGAGE_TYPE:
    *     count('abc123.MORTGAGE_TYPE')
    * @param {boolean} request.requireTotalSize
-   *   Optional. Controls if the search document request requires the return of a total size
-   *   of matched documents. See {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
+   *   Controls if the search document request requires the return of a total size
+   *   of matched documents. See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
    *
    *   Enabling this flag may adversely impact performance. Hint: If this is
    *   used with pagination, set this flag on the initial query but set this
    *   to false on subsequent page calls (keep the total count locally).
    *
    *   Defaults to false.
+   * @param {google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize} request.totalResultSize
+   *   Controls if the search document request requires the return of a total size
+   *   of matched documents. See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
    * @param {number} request.qaSizeLimit
    *   Experimental, do not use.
    *   The limit on the number of documents returned for the question-answering
@@ -1298,7 +1448,9 @@ export class DocumentServiceClient {
    * @param {number} request.offset
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the documents deemed by the API as relevant) in search
-   *   results. This field is only considered if {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token|page_token} is unset.
+   *   results. This field is only considered if
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsRequest.page_token|page_token}
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -1312,8 +1464,9 @@ export class DocumentServiceClient {
    *   response time. The value can be between 1 and 100.
    * @param {string} request.pageToken
    *   The token specifying the current offset within search results.
-   *   See {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token|SearchDocumentsResponse.next_page_token} for an explanation of how
-   *   to obtain the next set of query results.
+   *   See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.next_page_token|SearchDocumentsResponse.next_page_token}
+   *   for an explanation of how to obtain the next set of query results.
    * @param {string} request.orderBy
    *   The criteria determining how search results are sorted. For non-empty
    *   query, default is `"relevance desc"`. For empty query, default is
@@ -1327,6 +1480,9 @@ export class DocumentServiceClient {
    *   * `"upload_date"`: By upload date ascending.
    *   * `"update_date desc"`: By last updated date descending.
    *   * `"update_date"`: By last updated date ascending.
+   *   * `"retrieval_importance desc"`: By retrieval importance of properties
+   *     descending. This feature is still under development, please do not use
+   *     unless otherwise instructed to do so.
    * @param {number[]} request.histogramQueries
    *   An expression specifying a histogram request against matching
    *   documents. Expression syntax is an aggregation function call with
@@ -1359,14 +1515,19 @@ export class DocumentServiceClient {
    *   * For schema id, abc123, get the counts for MORTGAGE_TYPE:
    *     count('abc123.MORTGAGE_TYPE')
    * @param {boolean} request.requireTotalSize
-   *   Optional. Controls if the search document request requires the return of a total size
-   *   of matched documents. See {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
+   *   Controls if the search document request requires the return of a total size
+   *   of matched documents. See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
    *
    *   Enabling this flag may adversely impact performance. Hint: If this is
    *   used with pagination, set this flag on the initial query but set this
    *   to false on subsequent page calls (keep the total count locally).
    *
    *   Defaults to false.
+   * @param {google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize} request.totalResultSize
+   *   Controls if the search document request requires the return of a total size
+   *   of matched documents. See
+   *   {@link google.cloud.contentwarehouse.v1.SearchDocumentsResponse.total_size|SearchDocumentsResponse.total_size}.
    * @param {number} request.qaSizeLimit
    *   Experimental, do not use.
    *   The limit on the number of documents returned for the question-answering
