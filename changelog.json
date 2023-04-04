@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "f519b3246995fe9077fa245e734d0f735f5aca16",
+          "message": "[advisorynotifications] updating Cloud Client Libraries with new field NotificationType for advisorynotifications.googleapis.com",
+          "issues": [
+            "4141"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "79ceb61e-eb93-4046-b870-09ef95544110",
+      "createTime": "2023-04-04T20:22:18.424Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a438ccf0cfba0750332bc6b33ad824176e246df4",
+          "message": "[contentwarehouse] add php, csharp, ruby client library API support",
+          "issues": [
+            "4151"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "099a3575-08dd-467f-ae65-a9523d09e72b",
+      "createTime": "2023-04-04T20:22:18.421Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "8073ac00bad1baadfcbfc09715a0590895582010",
+          "message": "[asset] Change retry configuration for API calls",
+          "issues": [
+            "4144"
+          ]
+        }
+      ],
+      "version": "4.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "6dafa648-4799-4c0d-85fd-f66294d70095",
+      "createTime": "2023-04-04T20:22:18.419Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "d47d3a39ed23a9a01b2f2790c63db9c22b3589c3",
           "message": "Add initial files for google.cloud.workstations.v1beta",
           "issues": [
@@ -5035,5 +5086,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-03-28T16:48:01.314Z"
+  "updateTime": "2023-04-04T20:22:18.424Z"
 }
