@@ -25,6 +25,7 @@
   * [Document_service.delete_document](#document_service.delete_document)
   * [Document_service.fetch_acl](#document_service.fetch_acl)
   * [Document_service.get_document](#document_service.get_document)
+  * [Document_service.lock_document](#document_service.lock_document)
   * [Document_service.search_documents](#document_service.search_documents)
   * [Document_service.set_acl](#document_service.set_acl)
   * [Document_service.update_document](#document_service.update_document)
@@ -270,6 +271,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.get_document.js`
+
+
+-----
+
+
+
+
+### Document_service.lock_document
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.lock_document.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.lock_document.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contentwarehouse/samples/generated/v1/document_service.lock_document.js`
 
 
 -----

@@ -1241,6 +1241,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
@@ -1298,6 +1299,10 @@
                             case "UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES":
                             case 5:
                                 message.updateType = 5;
+                                break;
+                            case "UPDATE_TYPE_MERGE_AND_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES":
+                            case 6:
+                                message.updateType = 6;
                                 break;
                             }
                             if (object.updateMask != null) {
@@ -1638,6 +1643,7 @@
                      * @property {number} UPDATE_TYPE_INSERT_PROPERTIES_BY_NAMES=3 UPDATE_TYPE_INSERT_PROPERTIES_BY_NAMES value
                      * @property {number} UPDATE_TYPE_REPLACE_PROPERTIES_BY_NAMES=4 UPDATE_TYPE_REPLACE_PROPERTIES_BY_NAMES value
                      * @property {number} UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES=5 UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES value
+                     * @property {number} UPDATE_TYPE_MERGE_AND_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES=6 UPDATE_TYPE_MERGE_AND_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES value
                      */
                     v1.UpdateType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -1647,6 +1653,7 @@
                         values[valuesById[3] = "UPDATE_TYPE_INSERT_PROPERTIES_BY_NAMES"] = 3;
                         values[valuesById[4] = "UPDATE_TYPE_REPLACE_PROPERTIES_BY_NAMES"] = 4;
                         values[valuesById[5] = "UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES"] = 5;
+                        values[valuesById[6] = "UPDATE_TYPE_MERGE_AND_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES"] = 6;
                         return values;
                     })();
     
@@ -1684,6 +1691,24 @@
                         return values;
                     })();
     
+                    /**
+                     * DocumentCreatorDefaultRole enum.
+                     * @name google.cloud.contentwarehouse.v1.DocumentCreatorDefaultRole
+                     * @enum {number}
+                     * @property {number} DOCUMENT_CREATOR_DEFAULT_ROLE_UNSPECIFIED=0 DOCUMENT_CREATOR_DEFAULT_ROLE_UNSPECIFIED value
+                     * @property {number} DOCUMENT_ADMIN=1 DOCUMENT_ADMIN value
+                     * @property {number} DOCUMENT_EDITOR=2 DOCUMENT_EDITOR value
+                     * @property {number} DOCUMENT_VIEWER=3 DOCUMENT_VIEWER value
+                     */
+                    v1.DocumentCreatorDefaultRole = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DOCUMENT_CREATOR_DEFAULT_ROLE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DOCUMENT_ADMIN"] = 1;
+                        values[valuesById[2] = "DOCUMENT_EDITOR"] = 2;
+                        values[valuesById[3] = "DOCUMENT_VIEWER"] = 3;
+                        return values;
+                    })();
+    
                     v1.Document = (function() {
     
                         /**
@@ -1706,7 +1731,9 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Document createTime
                          * @property {google.cloud.contentwarehouse.v1.RawDocumentFileType|null} [rawDocumentFileType] Document rawDocumentFileType
                          * @property {boolean|null} [asyncEnabled] Document asyncEnabled
+                         * @property {google.cloud.contentwarehouse.v1.ContentCategory|null} [contentCategory] Document contentCategory
                          * @property {boolean|null} [textExtractionDisabled] Document textExtractionDisabled
+                         * @property {boolean|null} [textExtractionEnabled] Document textExtractionEnabled
                          * @property {string|null} [creator] Document creator
                          * @property {string|null} [updater] Document updater
                          */
@@ -1856,12 +1883,28 @@
                         Document.prototype.asyncEnabled = false;
     
                         /**
+                         * Document contentCategory.
+                         * @member {google.cloud.contentwarehouse.v1.ContentCategory} contentCategory
+                         * @memberof google.cloud.contentwarehouse.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.contentCategory = 0;
+    
+                        /**
                          * Document textExtractionDisabled.
                          * @member {boolean} textExtractionDisabled
                          * @memberof google.cloud.contentwarehouse.v1.Document
                          * @instance
                          */
                         Document.prototype.textExtractionDisabled = false;
+    
+                        /**
+                         * Document textExtractionEnabled.
+                         * @member {boolean} textExtractionEnabled
+                         * @memberof google.cloud.contentwarehouse.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.textExtractionEnabled = false;
     
                         /**
                          * Document creator.
@@ -1967,6 +2010,10 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.title);
                             if (message.textExtractionDisabled != null && Object.hasOwnProperty.call(message, "textExtractionDisabled"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.textExtractionDisabled);
+                            if (message.contentCategory != null && Object.hasOwnProperty.call(message, "contentCategory"))
+                                writer.uint32(/* id 20, wireType 0 =*/160).int32(message.contentCategory);
+                            if (message.textExtractionEnabled != null && Object.hasOwnProperty.call(message, "textExtractionEnabled"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).bool(message.textExtractionEnabled);
                             return writer;
                         };
     
@@ -2067,8 +2114,16 @@
                                         message.asyncEnabled = reader.bool();
                                         break;
                                     }
+                                case 20: {
+                                        message.contentCategory = reader.int32();
+                                        break;
+                                    }
                                 case 19: {
                                         message.textExtractionDisabled = reader.bool();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.textExtractionEnabled = reader.bool();
                                         break;
                                     }
                                 case 13: {
@@ -2192,14 +2247,28 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.asyncEnabled != null && message.hasOwnProperty("asyncEnabled"))
                                 if (typeof message.asyncEnabled !== "boolean")
                                     return "asyncEnabled: boolean expected";
+                            if (message.contentCategory != null && message.hasOwnProperty("contentCategory"))
+                                switch (message.contentCategory) {
+                                default:
+                                    return "contentCategory: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             if (message.textExtractionDisabled != null && message.hasOwnProperty("textExtractionDisabled"))
                                 if (typeof message.textExtractionDisabled !== "boolean")
                                     return "textExtractionDisabled: boolean expected";
+                            if (message.textExtractionEnabled != null && message.hasOwnProperty("textExtractionEnabled"))
+                                if (typeof message.textExtractionEnabled !== "boolean")
+                                    return "textExtractionEnabled: boolean expected";
                             if (message.creator != null && message.hasOwnProperty("creator"))
                                 if (!$util.isString(message.creator))
                                     return "creator: string expected";
@@ -2300,11 +2369,41 @@
                             case 5:
                                 message.rawDocumentFileType = 5;
                                 break;
+                            case "RAW_DOCUMENT_FILE_TYPE_TIFF":
+                            case 6:
+                                message.rawDocumentFileType = 6;
+                                break;
                             }
                             if (object.asyncEnabled != null)
                                 message.asyncEnabled = Boolean(object.asyncEnabled);
+                            switch (object.contentCategory) {
+                            default:
+                                if (typeof object.contentCategory === "number") {
+                                    message.contentCategory = object.contentCategory;
+                                    break;
+                                }
+                                break;
+                            case "CONTENT_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.contentCategory = 0;
+                                break;
+                            case "CONTENT_CATEGORY_IMAGE":
+                            case 1:
+                                message.contentCategory = 1;
+                                break;
+                            case "CONTENT_CATEGORY_AUDIO":
+                            case 2:
+                                message.contentCategory = 2;
+                                break;
+                            case "CONTENT_CATEGORY_VIDEO":
+                            case 3:
+                                message.contentCategory = 3;
+                                break;
+                            }
                             if (object.textExtractionDisabled != null)
                                 message.textExtractionDisabled = Boolean(object.textExtractionDisabled);
+                            if (object.textExtractionEnabled != null)
+                                message.textExtractionEnabled = Boolean(object.textExtractionEnabled);
                             if (object.creator != null)
                                 message.creator = String(object.creator);
                             if (object.updater != null)
@@ -2342,6 +2441,8 @@
                                 object.displayUri = "";
                                 object.title = "";
                                 object.textExtractionDisabled = false;
+                                object.contentCategory = options.enums === String ? "CONTENT_CATEGORY_UNSPECIFIED" : 0;
+                                object.textExtractionEnabled = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2396,6 +2497,10 @@
                                 object.title = message.title;
                             if (message.textExtractionDisabled != null && message.hasOwnProperty("textExtractionDisabled"))
                                 object.textExtractionDisabled = message.textExtractionDisabled;
+                            if (message.contentCategory != null && message.hasOwnProperty("contentCategory"))
+                                object.contentCategory = options.enums === String ? $root.google.cloud.contentwarehouse.v1.ContentCategory[message.contentCategory] === undefined ? message.contentCategory : $root.google.cloud.contentwarehouse.v1.ContentCategory[message.contentCategory] : message.contentCategory;
+                            if (message.textExtractionEnabled != null && message.hasOwnProperty("textExtractionEnabled"))
+                                object.textExtractionEnabled = message.textExtractionEnabled;
                             return object;
                         };
     
@@ -5972,6 +6077,7 @@
                      * @property {number} RAW_DOCUMENT_FILE_TYPE_XLSX=3 RAW_DOCUMENT_FILE_TYPE_XLSX value
                      * @property {number} RAW_DOCUMENT_FILE_TYPE_PPTX=4 RAW_DOCUMENT_FILE_TYPE_PPTX value
                      * @property {number} RAW_DOCUMENT_FILE_TYPE_TEXT=5 RAW_DOCUMENT_FILE_TYPE_TEXT value
+                     * @property {number} RAW_DOCUMENT_FILE_TYPE_TIFF=6 RAW_DOCUMENT_FILE_TYPE_TIFF value
                      */
                     v1.RawDocumentFileType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -5981,6 +6087,25 @@
                         values[valuesById[3] = "RAW_DOCUMENT_FILE_TYPE_XLSX"] = 3;
                         values[valuesById[4] = "RAW_DOCUMENT_FILE_TYPE_PPTX"] = 4;
                         values[valuesById[5] = "RAW_DOCUMENT_FILE_TYPE_TEXT"] = 5;
+                        values[valuesById[6] = "RAW_DOCUMENT_FILE_TYPE_TIFF"] = 6;
+                        return values;
+                    })();
+    
+                    /**
+                     * ContentCategory enum.
+                     * @name google.cloud.contentwarehouse.v1.ContentCategory
+                     * @enum {number}
+                     * @property {number} CONTENT_CATEGORY_UNSPECIFIED=0 CONTENT_CATEGORY_UNSPECIFIED value
+                     * @property {number} CONTENT_CATEGORY_IMAGE=1 CONTENT_CATEGORY_IMAGE value
+                     * @property {number} CONTENT_CATEGORY_AUDIO=2 CONTENT_CATEGORY_AUDIO value
+                     * @property {number} CONTENT_CATEGORY_VIDEO=3 CONTENT_CATEGORY_VIDEO value
+                     */
+                    v1.ContentCategory = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONTENT_CATEGORY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CONTENT_CATEGORY_IMAGE"] = 1;
+                        values[valuesById[2] = "CONTENT_CATEGORY_AUDIO"] = 2;
+                        values[valuesById[3] = "CONTENT_CATEGORY_VIDEO"] = 3;
                         return values;
                     })();
     
@@ -8438,6 +8563,7 @@
                          * @property {boolean|null} [isSearchable] PropertyDefinition isSearchable
                          * @property {boolean|null} [isMetadata] PropertyDefinition isMetadata
                          * @property {boolean|null} [isRequired] PropertyDefinition isRequired
+                         * @property {google.cloud.contentwarehouse.v1.PropertyDefinition.RetrievalImportance|null} [retrievalImportance] PropertyDefinition retrievalImportance
                          * @property {google.cloud.contentwarehouse.v1.IIntegerTypeOptions|null} [integerTypeOptions] PropertyDefinition integerTypeOptions
                          * @property {google.cloud.contentwarehouse.v1.IFloatTypeOptions|null} [floatTypeOptions] PropertyDefinition floatTypeOptions
                          * @property {google.cloud.contentwarehouse.v1.ITextTypeOptions|null} [textTypeOptions] PropertyDefinition textTypeOptions
@@ -8446,6 +8572,7 @@
                          * @property {google.cloud.contentwarehouse.v1.IDateTimeTypeOptions|null} [dateTimeTypeOptions] PropertyDefinition dateTimeTypeOptions
                          * @property {google.cloud.contentwarehouse.v1.IMapTypeOptions|null} [mapTypeOptions] PropertyDefinition mapTypeOptions
                          * @property {google.cloud.contentwarehouse.v1.ITimestampTypeOptions|null} [timestampTypeOptions] PropertyDefinition timestampTypeOptions
+                         * @property {Array.<google.cloud.contentwarehouse.v1.PropertyDefinition.ISchemaSource>|null} [schemaSources] PropertyDefinition schemaSources
                          */
     
                         /**
@@ -8457,6 +8584,7 @@
                          * @param {google.cloud.contentwarehouse.v1.IPropertyDefinition=} [properties] Properties to set
                          */
                         function PropertyDefinition(properties) {
+                            this.schemaSources = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8518,6 +8646,14 @@
                          * @instance
                          */
                         PropertyDefinition.prototype.isRequired = false;
+    
+                        /**
+                         * PropertyDefinition retrievalImportance.
+                         * @member {google.cloud.contentwarehouse.v1.PropertyDefinition.RetrievalImportance} retrievalImportance
+                         * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition
+                         * @instance
+                         */
+                        PropertyDefinition.prototype.retrievalImportance = 0;
     
                         /**
                          * PropertyDefinition integerTypeOptions.
@@ -8582,6 +8718,14 @@
                          * @instance
                          */
                         PropertyDefinition.prototype.timestampTypeOptions = null;
+    
+                        /**
+                         * PropertyDefinition schemaSources.
+                         * @member {Array.<google.cloud.contentwarehouse.v1.PropertyDefinition.ISchemaSource>} schemaSources
+                         * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition
+                         * @instance
+                         */
+                        PropertyDefinition.prototype.schemaSources = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -8651,6 +8795,11 @@
                                 $root.google.cloud.contentwarehouse.v1.MapTypeOptions.encode(message.mapTypeOptions, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             if (message.timestampTypeOptions != null && Object.hasOwnProperty.call(message, "timestampTypeOptions"))
                                 $root.google.cloud.contentwarehouse.v1.TimestampTypeOptions.encode(message.timestampTypeOptions, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.retrievalImportance != null && Object.hasOwnProperty.call(message, "retrievalImportance"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).int32(message.retrievalImportance);
+                            if (message.schemaSources != null && message.schemaSources.length)
+                                for (var i = 0; i < message.schemaSources.length; ++i)
+                                    $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.encode(message.schemaSources[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -8713,6 +8862,10 @@
                                         message.isRequired = reader.bool();
                                         break;
                                     }
+                                case 18: {
+                                        message.retrievalImportance = reader.int32();
+                                        break;
+                                    }
                                 case 7: {
                                         message.integerTypeOptions = $root.google.cloud.contentwarehouse.v1.IntegerTypeOptions.decode(reader, reader.uint32());
                                         break;
@@ -8743,6 +8896,12 @@
                                     }
                                 case 16: {
                                         message.timestampTypeOptions = $root.google.cloud.contentwarehouse.v1.TimestampTypeOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        if (!(message.schemaSources && message.schemaSources.length))
+                                            message.schemaSources = [];
+                                        message.schemaSources.push($root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -8802,6 +8961,19 @@
                             if (message.isRequired != null && message.hasOwnProperty("isRequired"))
                                 if (typeof message.isRequired !== "boolean")
                                     return "isRequired: boolean expected";
+                            if (message.retrievalImportance != null && message.hasOwnProperty("retrievalImportance"))
+                                switch (message.retrievalImportance) {
+                                default:
+                                    return "retrievalImportance: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
                             if (message.integerTypeOptions != null && message.hasOwnProperty("integerTypeOptions")) {
                                 properties.valueTypeOptions = 1;
                                 {
@@ -8880,6 +9052,15 @@
                                         return "timestampTypeOptions." + error;
                                 }
                             }
+                            if (message.schemaSources != null && message.hasOwnProperty("schemaSources")) {
+                                if (!Array.isArray(message.schemaSources))
+                                    return "schemaSources: array expected";
+                                for (var i = 0; i < message.schemaSources.length; ++i) {
+                                    var error = $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.verify(message.schemaSources[i]);
+                                    if (error)
+                                        return "schemaSources." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -8909,6 +9090,42 @@
                                 message.isMetadata = Boolean(object.isMetadata);
                             if (object.isRequired != null)
                                 message.isRequired = Boolean(object.isRequired);
+                            switch (object.retrievalImportance) {
+                            default:
+                                if (typeof object.retrievalImportance === "number") {
+                                    message.retrievalImportance = object.retrievalImportance;
+                                    break;
+                                }
+                                break;
+                            case "RETRIEVAL_IMPORTANCE_UNSPECIFIED":
+                            case 0:
+                                message.retrievalImportance = 0;
+                                break;
+                            case "HIGHEST":
+                            case 1:
+                                message.retrievalImportance = 1;
+                                break;
+                            case "HIGHER":
+                            case 2:
+                                message.retrievalImportance = 2;
+                                break;
+                            case "HIGH":
+                            case 3:
+                                message.retrievalImportance = 3;
+                                break;
+                            case "MEDIUM":
+                            case 4:
+                                message.retrievalImportance = 4;
+                                break;
+                            case "LOW":
+                            case 5:
+                                message.retrievalImportance = 5;
+                                break;
+                            case "LOWEST":
+                            case 6:
+                                message.retrievalImportance = 6;
+                                break;
+                            }
                             if (object.integerTypeOptions != null) {
                                 if (typeof object.integerTypeOptions !== "object")
                                     throw TypeError(".google.cloud.contentwarehouse.v1.PropertyDefinition.integerTypeOptions: object expected");
@@ -8949,6 +9166,16 @@
                                     throw TypeError(".google.cloud.contentwarehouse.v1.PropertyDefinition.timestampTypeOptions: object expected");
                                 message.timestampTypeOptions = $root.google.cloud.contentwarehouse.v1.TimestampTypeOptions.fromObject(object.timestampTypeOptions);
                             }
+                            if (object.schemaSources) {
+                                if (!Array.isArray(object.schemaSources))
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.PropertyDefinition.schemaSources: array expected");
+                                message.schemaSources = [];
+                                for (var i = 0; i < object.schemaSources.length; ++i) {
+                                    if (typeof object.schemaSources[i] !== "object")
+                                        throw TypeError(".google.cloud.contentwarehouse.v1.PropertyDefinition.schemaSources: object expected");
+                                    message.schemaSources[i] = $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.fromObject(object.schemaSources[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -8965,6 +9192,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.schemaSources = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.isRepeatable = false;
@@ -8973,6 +9202,7 @@
                                 object.isMetadata = false;
                                 object.displayName = "";
                                 object.isRequired = false;
+                                object.retrievalImportance = options.enums === String ? "RETRIEVAL_IMPORTANCE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -9028,6 +9258,13 @@
                                 if (options.oneofs)
                                     object.valueTypeOptions = "timestampTypeOptions";
                             }
+                            if (message.retrievalImportance != null && message.hasOwnProperty("retrievalImportance"))
+                                object.retrievalImportance = options.enums === String ? $root.google.cloud.contentwarehouse.v1.PropertyDefinition.RetrievalImportance[message.retrievalImportance] === undefined ? message.retrievalImportance : $root.google.cloud.contentwarehouse.v1.PropertyDefinition.RetrievalImportance[message.retrievalImportance] : message.retrievalImportance;
+                            if (message.schemaSources && message.schemaSources.length) {
+                                object.schemaSources = [];
+                                for (var j = 0; j < message.schemaSources.length; ++j)
+                                    object.schemaSources[j] = $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.toObject(message.schemaSources[j], options);
+                            }
                             return object;
                         };
     
@@ -9056,6 +9293,257 @@
                             }
                             return typeUrlPrefix + "/google.cloud.contentwarehouse.v1.PropertyDefinition";
                         };
+    
+                        /**
+                         * RetrievalImportance enum.
+                         * @name google.cloud.contentwarehouse.v1.PropertyDefinition.RetrievalImportance
+                         * @enum {number}
+                         * @property {number} RETRIEVAL_IMPORTANCE_UNSPECIFIED=0 RETRIEVAL_IMPORTANCE_UNSPECIFIED value
+                         * @property {number} HIGHEST=1 HIGHEST value
+                         * @property {number} HIGHER=2 HIGHER value
+                         * @property {number} HIGH=3 HIGH value
+                         * @property {number} MEDIUM=4 MEDIUM value
+                         * @property {number} LOW=5 LOW value
+                         * @property {number} LOWEST=6 LOWEST value
+                         */
+                        PropertyDefinition.RetrievalImportance = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RETRIEVAL_IMPORTANCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HIGHEST"] = 1;
+                            values[valuesById[2] = "HIGHER"] = 2;
+                            values[valuesById[3] = "HIGH"] = 3;
+                            values[valuesById[4] = "MEDIUM"] = 4;
+                            values[valuesById[5] = "LOW"] = 5;
+                            values[valuesById[6] = "LOWEST"] = 6;
+                            return values;
+                        })();
+    
+                        PropertyDefinition.SchemaSource = (function() {
+    
+                            /**
+                             * Properties of a SchemaSource.
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition
+                             * @interface ISchemaSource
+                             * @property {string|null} [name] SchemaSource name
+                             * @property {string|null} [processorType] SchemaSource processorType
+                             */
+    
+                            /**
+                             * Constructs a new SchemaSource.
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition
+                             * @classdesc Represents a SchemaSource.
+                             * @implements ISchemaSource
+                             * @constructor
+                             * @param {google.cloud.contentwarehouse.v1.PropertyDefinition.ISchemaSource=} [properties] Properties to set
+                             */
+                            function SchemaSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SchemaSource name.
+                             * @member {string} name
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @instance
+                             */
+                            SchemaSource.prototype.name = "";
+    
+                            /**
+                             * SchemaSource processorType.
+                             * @member {string} processorType
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @instance
+                             */
+                            SchemaSource.prototype.processorType = "";
+    
+                            /**
+                             * Creates a new SchemaSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {google.cloud.contentwarehouse.v1.PropertyDefinition.ISchemaSource=} [properties] Properties to set
+                             * @returns {google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource} SchemaSource instance
+                             */
+                            SchemaSource.create = function create(properties) {
+                                return new SchemaSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaSource message. Does not implicitly {@link google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {google.cloud.contentwarehouse.v1.PropertyDefinition.ISchemaSource} message SchemaSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.processorType != null && Object.hasOwnProperty.call(message, "processorType"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.processorType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaSource message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {google.cloud.contentwarehouse.v1.PropertyDefinition.ISchemaSource} message SchemaSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SchemaSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource} SchemaSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.processorType = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SchemaSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource} SchemaSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SchemaSource message.
+                             * @function verify
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SchemaSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.processorType != null && message.hasOwnProperty("processorType"))
+                                    if (!$util.isString(message.processorType))
+                                        return "processorType: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SchemaSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource} SchemaSource
+                             */
+                            SchemaSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource)
+                                    return object;
+                                var message = new $root.google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.processorType != null)
+                                    message.processorType = String(object.processorType);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SchemaSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource} message SchemaSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SchemaSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.processorType = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.processorType != null && message.hasOwnProperty("processorType"))
+                                    object.processorType = message.processorType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SchemaSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SchemaSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SchemaSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SchemaSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contentwarehouse.v1.PropertyDefinition.SchemaSource";
+                            };
+    
+                            return SchemaSource;
+                        })();
     
                         return PropertyDefinition;
                     })();
@@ -12343,6 +12831,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contentwarehouse.v1.DocumentService|lockDocument}.
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentService
+                         * @typedef LockDocumentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.contentwarehouse.v1.Document} [response] Document
+                         */
+    
+                        /**
+                         * Calls LockDocument.
+                         * @function lockDocument
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentService
+                         * @instance
+                         * @param {google.cloud.contentwarehouse.v1.ILockDocumentRequest} request LockDocumentRequest message or plain object
+                         * @param {google.cloud.contentwarehouse.v1.DocumentService.LockDocumentCallback} callback Node-style callback called with the error, if any, and Document
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DocumentService.prototype.lockDocument = function lockDocument(request, callback) {
+                            return this.rpcCall(lockDocument, $root.google.cloud.contentwarehouse.v1.LockDocumentRequest, $root.google.cloud.contentwarehouse.v1.Document, request, callback);
+                        }, "name", { value: "LockDocument" });
+    
+                        /**
+                         * Calls LockDocument.
+                         * @function lockDocument
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentService
+                         * @instance
+                         * @param {google.cloud.contentwarehouse.v1.ILockDocumentRequest} request LockDocumentRequest message or plain object
+                         * @returns {Promise<google.cloud.contentwarehouse.v1.Document>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contentwarehouse.v1.DocumentService|fetchAcl}.
                          * @memberof google.cloud.contentwarehouse.v1.DocumentService
                          * @typedef FetchAclCallback
@@ -12420,6 +12941,7 @@
                          * @property {google.cloud.contentwarehouse.v1.IDocument|null} [document] CreateDocumentResponse document
                          * @property {google.cloud.contentwarehouse.v1.IRuleEngineOutput|null} [ruleEngineOutput] CreateDocumentResponse ruleEngineOutput
                          * @property {google.cloud.contentwarehouse.v1.IResponseMetadata|null} [metadata] CreateDocumentResponse metadata
+                         * @property {Array.<google.longrunning.IOperation>|null} [longRunningOperations] CreateDocumentResponse longRunningOperations
                          */
     
                         /**
@@ -12431,6 +12953,7 @@
                          * @param {google.cloud.contentwarehouse.v1.ICreateDocumentResponse=} [properties] Properties to set
                          */
                         function CreateDocumentResponse(properties) {
+                            this.longRunningOperations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12462,6 +12985,14 @@
                         CreateDocumentResponse.prototype.metadata = null;
     
                         /**
+                         * CreateDocumentResponse longRunningOperations.
+                         * @member {Array.<google.longrunning.IOperation>} longRunningOperations
+                         * @memberof google.cloud.contentwarehouse.v1.CreateDocumentResponse
+                         * @instance
+                         */
+                        CreateDocumentResponse.prototype.longRunningOperations = $util.emptyArray;
+    
+                        /**
                          * Creates a new CreateDocumentResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contentwarehouse.v1.CreateDocumentResponse
@@ -12491,6 +13022,9 @@
                                 $root.google.cloud.contentwarehouse.v1.RuleEngineOutput.encode(message.ruleEngineOutput, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                                 $root.google.cloud.contentwarehouse.v1.ResponseMetadata.encode(message.metadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.longRunningOperations != null && message.longRunningOperations.length)
+                                for (var i = 0; i < message.longRunningOperations.length; ++i)
+                                    $root.google.longrunning.Operation.encode(message.longRunningOperations[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -12535,6 +13069,12 @@
                                     }
                                 case 3: {
                                         message.metadata = $root.google.cloud.contentwarehouse.v1.ResponseMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.longRunningOperations && message.longRunningOperations.length))
+                                            message.longRunningOperations = [];
+                                        message.longRunningOperations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -12587,6 +13127,15 @@
                                 if (error)
                                     return "metadata." + error;
                             }
+                            if (message.longRunningOperations != null && message.hasOwnProperty("longRunningOperations")) {
+                                if (!Array.isArray(message.longRunningOperations))
+                                    return "longRunningOperations: array expected";
+                                for (var i = 0; i < message.longRunningOperations.length; ++i) {
+                                    var error = $root.google.longrunning.Operation.verify(message.longRunningOperations[i]);
+                                    if (error)
+                                        return "longRunningOperations." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -12617,6 +13166,16 @@
                                     throw TypeError(".google.cloud.contentwarehouse.v1.CreateDocumentResponse.metadata: object expected");
                                 message.metadata = $root.google.cloud.contentwarehouse.v1.ResponseMetadata.fromObject(object.metadata);
                             }
+                            if (object.longRunningOperations) {
+                                if (!Array.isArray(object.longRunningOperations))
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.CreateDocumentResponse.longRunningOperations: array expected");
+                                message.longRunningOperations = [];
+                                for (var i = 0; i < object.longRunningOperations.length; ++i) {
+                                    if (typeof object.longRunningOperations[i] !== "object")
+                                        throw TypeError(".google.cloud.contentwarehouse.v1.CreateDocumentResponse.longRunningOperations: object expected");
+                                    message.longRunningOperations[i] = $root.google.longrunning.Operation.fromObject(object.longRunningOperations[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -12633,6 +13192,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.longRunningOperations = [];
                             if (options.defaults) {
                                 object.document = null;
                                 object.ruleEngineOutput = null;
@@ -12644,6 +13205,11 @@
                                 object.ruleEngineOutput = $root.google.cloud.contentwarehouse.v1.RuleEngineOutput.toObject(message.ruleEngineOutput, options);
                             if (message.metadata != null && message.hasOwnProperty("metadata"))
                                 object.metadata = $root.google.cloud.contentwarehouse.v1.ResponseMetadata.toObject(message.metadata, options);
+                            if (message.longRunningOperations && message.longRunningOperations.length) {
+                                object.longRunningOperations = [];
+                                for (var j = 0; j < message.longRunningOperations.length; ++j)
+                                    object.longRunningOperations[j] = $root.google.longrunning.Operation.toObject(message.longRunningOperations[j], options);
+                            }
                             return object;
                         };
     
@@ -15896,6 +16462,7 @@
                          * @property {string|null} [orderBy] SearchDocumentsRequest orderBy
                          * @property {Array.<google.cloud.contentwarehouse.v1.IHistogramQuery>|null} [histogramQueries] SearchDocumentsRequest histogramQueries
                          * @property {boolean|null} [requireTotalSize] SearchDocumentsRequest requireTotalSize
+                         * @property {google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize|null} [totalResultSize] SearchDocumentsRequest totalResultSize
                          * @property {number|null} [qaSizeLimit] SearchDocumentsRequest qaSizeLimit
                          */
     
@@ -15988,6 +16555,14 @@
                         SearchDocumentsRequest.prototype.requireTotalSize = false;
     
                         /**
+                         * SearchDocumentsRequest totalResultSize.
+                         * @member {google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize} totalResultSize
+                         * @memberof google.cloud.contentwarehouse.v1.SearchDocumentsRequest
+                         * @instance
+                         */
+                        SearchDocumentsRequest.prototype.totalResultSize = 0;
+    
+                        /**
                          * SearchDocumentsRequest qaSizeLimit.
                          * @member {number} qaSizeLimit
                          * @memberof google.cloud.contentwarehouse.v1.SearchDocumentsRequest
@@ -16040,6 +16615,8 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.requireTotalSize);
                             if (message.qaSizeLimit != null && Object.hasOwnProperty.call(message, "qaSizeLimit"))
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.qaSizeLimit);
+                            if (message.totalResultSize != null && Object.hasOwnProperty.call(message, "totalResultSize"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.totalResultSize);
                             return writer;
                         };
     
@@ -16110,6 +16687,10 @@
                                     }
                                 case 10: {
                                         message.requireTotalSize = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.totalResultSize = reader.int32();
                                         break;
                                     }
                                 case 11: {
@@ -16188,6 +16769,15 @@
                             if (message.requireTotalSize != null && message.hasOwnProperty("requireTotalSize"))
                                 if (typeof message.requireTotalSize !== "boolean")
                                     return "requireTotalSize: boolean expected";
+                            if (message.totalResultSize != null && message.hasOwnProperty("totalResultSize"))
+                                switch (message.totalResultSize) {
+                                default:
+                                    return "totalResultSize: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.qaSizeLimit != null && message.hasOwnProperty("qaSizeLimit"))
                                 if (!$util.isInteger(message.qaSizeLimit))
                                     return "qaSizeLimit: integer expected";
@@ -16238,6 +16828,26 @@
                             }
                             if (object.requireTotalSize != null)
                                 message.requireTotalSize = Boolean(object.requireTotalSize);
+                            switch (object.totalResultSize) {
+                            default:
+                                if (typeof object.totalResultSize === "number") {
+                                    message.totalResultSize = object.totalResultSize;
+                                    break;
+                                }
+                                break;
+                            case "TOTAL_RESULT_SIZE_UNSPECIFIED":
+                            case 0:
+                                message.totalResultSize = 0;
+                                break;
+                            case "ESTIMATED_SIZE":
+                            case 1:
+                                message.totalResultSize = 1;
+                                break;
+                            case "ACTUAL_SIZE":
+                            case 2:
+                                message.totalResultSize = 2;
+                                break;
+                            }
                             if (object.qaSizeLimit != null)
                                 message.qaSizeLimit = object.qaSizeLimit | 0;
                             return message;
@@ -16268,6 +16878,7 @@
                                 object.orderBy = "";
                                 object.requireTotalSize = false;
                                 object.qaSizeLimit = 0;
+                                object.totalResultSize = options.enums === String ? "TOTAL_RESULT_SIZE_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -16292,6 +16903,8 @@
                                 object.requireTotalSize = message.requireTotalSize;
                             if (message.qaSizeLimit != null && message.hasOwnProperty("qaSizeLimit"))
                                 object.qaSizeLimit = message.qaSizeLimit;
+                            if (message.totalResultSize != null && message.hasOwnProperty("totalResultSize"))
+                                object.totalResultSize = options.enums === String ? $root.google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize[message.totalResultSize] === undefined ? message.totalResultSize : $root.google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize[message.totalResultSize] : message.totalResultSize;
                             return object;
                         };
     
@@ -16321,7 +16934,278 @@
                             return typeUrlPrefix + "/google.cloud.contentwarehouse.v1.SearchDocumentsRequest";
                         };
     
+                        /**
+                         * TotalResultSize enum.
+                         * @name google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize
+                         * @enum {number}
+                         * @property {number} TOTAL_RESULT_SIZE_UNSPECIFIED=0 TOTAL_RESULT_SIZE_UNSPECIFIED value
+                         * @property {number} ESTIMATED_SIZE=1 ESTIMATED_SIZE value
+                         * @property {number} ACTUAL_SIZE=2 ACTUAL_SIZE value
+                         */
+                        SearchDocumentsRequest.TotalResultSize = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TOTAL_RESULT_SIZE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ESTIMATED_SIZE"] = 1;
+                            values[valuesById[2] = "ACTUAL_SIZE"] = 2;
+                            return values;
+                        })();
+    
                         return SearchDocumentsRequest;
+                    })();
+    
+                    v1.LockDocumentRequest = (function() {
+    
+                        /**
+                         * Properties of a LockDocumentRequest.
+                         * @memberof google.cloud.contentwarehouse.v1
+                         * @interface ILockDocumentRequest
+                         * @property {string|null} [name] LockDocumentRequest name
+                         * @property {string|null} [collectionId] LockDocumentRequest collectionId
+                         * @property {google.cloud.contentwarehouse.v1.IUserInfo|null} [lockingUser] LockDocumentRequest lockingUser
+                         */
+    
+                        /**
+                         * Constructs a new LockDocumentRequest.
+                         * @memberof google.cloud.contentwarehouse.v1
+                         * @classdesc Represents a LockDocumentRequest.
+                         * @implements ILockDocumentRequest
+                         * @constructor
+                         * @param {google.cloud.contentwarehouse.v1.ILockDocumentRequest=} [properties] Properties to set
+                         */
+                        function LockDocumentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LockDocumentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @instance
+                         */
+                        LockDocumentRequest.prototype.name = "";
+    
+                        /**
+                         * LockDocumentRequest collectionId.
+                         * @member {string} collectionId
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @instance
+                         */
+                        LockDocumentRequest.prototype.collectionId = "";
+    
+                        /**
+                         * LockDocumentRequest lockingUser.
+                         * @member {google.cloud.contentwarehouse.v1.IUserInfo|null|undefined} lockingUser
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @instance
+                         */
+                        LockDocumentRequest.prototype.lockingUser = null;
+    
+                        /**
+                         * Creates a new LockDocumentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.ILockDocumentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contentwarehouse.v1.LockDocumentRequest} LockDocumentRequest instance
+                         */
+                        LockDocumentRequest.create = function create(properties) {
+                            return new LockDocumentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LockDocumentRequest message. Does not implicitly {@link google.cloud.contentwarehouse.v1.LockDocumentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.ILockDocumentRequest} message LockDocumentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LockDocumentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.collectionId != null && Object.hasOwnProperty.call(message, "collectionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.collectionId);
+                            if (message.lockingUser != null && Object.hasOwnProperty.call(message, "lockingUser"))
+                                $root.google.cloud.contentwarehouse.v1.UserInfo.encode(message.lockingUser, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LockDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.LockDocumentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.ILockDocumentRequest} message LockDocumentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LockDocumentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LockDocumentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contentwarehouse.v1.LockDocumentRequest} LockDocumentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LockDocumentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contentwarehouse.v1.LockDocumentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.collectionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.lockingUser = $root.google.cloud.contentwarehouse.v1.UserInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LockDocumentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contentwarehouse.v1.LockDocumentRequest} LockDocumentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LockDocumentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LockDocumentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LockDocumentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.collectionId != null && message.hasOwnProperty("collectionId"))
+                                if (!$util.isString(message.collectionId))
+                                    return "collectionId: string expected";
+                            if (message.lockingUser != null && message.hasOwnProperty("lockingUser")) {
+                                var error = $root.google.cloud.contentwarehouse.v1.UserInfo.verify(message.lockingUser);
+                                if (error)
+                                    return "lockingUser." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LockDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contentwarehouse.v1.LockDocumentRequest} LockDocumentRequest
+                         */
+                        LockDocumentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contentwarehouse.v1.LockDocumentRequest)
+                                return object;
+                            var message = new $root.google.cloud.contentwarehouse.v1.LockDocumentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.collectionId != null)
+                                message.collectionId = String(object.collectionId);
+                            if (object.lockingUser != null) {
+                                if (typeof object.lockingUser !== "object")
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.LockDocumentRequest.lockingUser: object expected");
+                                message.lockingUser = $root.google.cloud.contentwarehouse.v1.UserInfo.fromObject(object.lockingUser);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LockDocumentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.LockDocumentRequest} message LockDocumentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LockDocumentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.collectionId = "";
+                                object.lockingUser = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.collectionId != null && message.hasOwnProperty("collectionId"))
+                                object.collectionId = message.collectionId;
+                            if (message.lockingUser != null && message.hasOwnProperty("lockingUser"))
+                                object.lockingUser = $root.google.cloud.contentwarehouse.v1.UserInfo.toObject(message.lockingUser, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LockDocumentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LockDocumentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LockDocumentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contentwarehouse.v1.LockDocumentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LockDocumentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contentwarehouse.v1.LockDocumentRequest";
+                        };
+    
+                        return LockDocumentRequest;
                     })();
     
                     v1.FetchAclRequest = (function() {
@@ -16878,6 +17762,7 @@
                          * @property {string|null} [folderNameFilter] DocumentQuery folderNameFilter
                          * @property {Array.<string>|null} [queryContext] DocumentQuery queryContext
                          * @property {Array.<string>|null} [documentCreatorFilter] DocumentQuery documentCreatorFilter
+                         * @property {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata|null} [customWeightsMetadata] DocumentQuery customWeightsMetadata
                          */
     
                         /**
@@ -16981,6 +17866,14 @@
                         DocumentQuery.prototype.documentCreatorFilter = $util.emptyArray;
     
                         /**
+                         * DocumentQuery customWeightsMetadata.
+                         * @member {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata|null|undefined} customWeightsMetadata
+                         * @memberof google.cloud.contentwarehouse.v1.DocumentQuery
+                         * @instance
+                         */
+                        DocumentQuery.prototype.customWeightsMetadata = null;
+    
+                        /**
                          * Creates a new DocumentQuery instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contentwarehouse.v1.DocumentQuery
@@ -17029,6 +17922,8 @@
                                     writer.uint32(/* id 11, wireType 2 =*/90).string(message.documentCreatorFilter[i]);
                             if (message.isNlQuery != null && Object.hasOwnProperty.call(message, "isNlQuery"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.isNlQuery);
+                            if (message.customWeightsMetadata != null && Object.hasOwnProperty.call(message, "customWeightsMetadata"))
+                                $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.encode(message.customWeightsMetadata, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -17111,6 +18006,10 @@
                                         if (!(message.documentCreatorFilter && message.documentCreatorFilter.length))
                                             message.documentCreatorFilter = [];
                                         message.documentCreatorFilter.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.customWeightsMetadata = $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -17204,6 +18103,11 @@
                                     if (!$util.isString(message.documentCreatorFilter[i]))
                                         return "documentCreatorFilter: string[] expected";
                             }
+                            if (message.customWeightsMetadata != null && message.hasOwnProperty("customWeightsMetadata")) {
+                                var error = $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.verify(message.customWeightsMetadata);
+                                if (error)
+                                    return "customWeightsMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -17273,6 +18177,11 @@
                                 for (var i = 0; i < object.documentCreatorFilter.length; ++i)
                                     message.documentCreatorFilter[i] = String(object.documentCreatorFilter[i]);
                             }
+                            if (object.customWeightsMetadata != null) {
+                                if (typeof object.customWeightsMetadata !== "object")
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.DocumentQuery.customWeightsMetadata: object expected");
+                                message.customWeightsMetadata = $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.fromObject(object.customWeightsMetadata);
+                            }
                             return message;
                         };
     
@@ -17302,6 +18211,7 @@
                                 object.fileTypeFilter = null;
                                 object.folderNameFilter = "";
                                 object.isNlQuery = false;
+                                object.customWeightsMetadata = null;
                             }
                             if (message.query != null && message.hasOwnProperty("query"))
                                 object.query = message.query;
@@ -17338,6 +18248,8 @@
                             }
                             if (message.isNlQuery != null && message.hasOwnProperty("isNlQuery"))
                                 object.isNlQuery = message.isNlQuery;
+                            if (message.customWeightsMetadata != null && message.hasOwnProperty("customWeightsMetadata"))
+                                object.customWeightsMetadata = $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata.toObject(message.customWeightsMetadata, options);
                             return object;
                         };
     
@@ -18117,6 +19029,473 @@
                         })();
     
                         return FileTypeFilter;
+                    })();
+    
+                    v1.CustomWeightsMetadata = (function() {
+    
+                        /**
+                         * Properties of a CustomWeightsMetadata.
+                         * @memberof google.cloud.contentwarehouse.v1
+                         * @interface ICustomWeightsMetadata
+                         * @property {Array.<google.cloud.contentwarehouse.v1.IWeightedSchemaProperty>|null} [weightedSchemaProperties] CustomWeightsMetadata weightedSchemaProperties
+                         */
+    
+                        /**
+                         * Constructs a new CustomWeightsMetadata.
+                         * @memberof google.cloud.contentwarehouse.v1
+                         * @classdesc Represents a CustomWeightsMetadata.
+                         * @implements ICustomWeightsMetadata
+                         * @constructor
+                         * @param {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata=} [properties] Properties to set
+                         */
+                        function CustomWeightsMetadata(properties) {
+                            this.weightedSchemaProperties = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomWeightsMetadata weightedSchemaProperties.
+                         * @member {Array.<google.cloud.contentwarehouse.v1.IWeightedSchemaProperty>} weightedSchemaProperties
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @instance
+                         */
+                        CustomWeightsMetadata.prototype.weightedSchemaProperties = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CustomWeightsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contentwarehouse.v1.CustomWeightsMetadata} CustomWeightsMetadata instance
+                         */
+                        CustomWeightsMetadata.create = function create(properties) {
+                            return new CustomWeightsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomWeightsMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.CustomWeightsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata} message CustomWeightsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomWeightsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.weightedSchemaProperties != null && message.weightedSchemaProperties.length)
+                                for (var i = 0; i < message.weightedSchemaProperties.length; ++i)
+                                    $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty.encode(message.weightedSchemaProperties[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomWeightsMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.CustomWeightsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.ICustomWeightsMetadata} message CustomWeightsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomWeightsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomWeightsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contentwarehouse.v1.CustomWeightsMetadata} CustomWeightsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomWeightsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.weightedSchemaProperties && message.weightedSchemaProperties.length))
+                                            message.weightedSchemaProperties = [];
+                                        message.weightedSchemaProperties.push($root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomWeightsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contentwarehouse.v1.CustomWeightsMetadata} CustomWeightsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomWeightsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomWeightsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomWeightsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.weightedSchemaProperties != null && message.hasOwnProperty("weightedSchemaProperties")) {
+                                if (!Array.isArray(message.weightedSchemaProperties))
+                                    return "weightedSchemaProperties: array expected";
+                                for (var i = 0; i < message.weightedSchemaProperties.length; ++i) {
+                                    var error = $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty.verify(message.weightedSchemaProperties[i]);
+                                    if (error)
+                                        return "weightedSchemaProperties." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomWeightsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contentwarehouse.v1.CustomWeightsMetadata} CustomWeightsMetadata
+                         */
+                        CustomWeightsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contentwarehouse.v1.CustomWeightsMetadata();
+                            if (object.weightedSchemaProperties) {
+                                if (!Array.isArray(object.weightedSchemaProperties))
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.CustomWeightsMetadata.weightedSchemaProperties: array expected");
+                                message.weightedSchemaProperties = [];
+                                for (var i = 0; i < object.weightedSchemaProperties.length; ++i) {
+                                    if (typeof object.weightedSchemaProperties[i] !== "object")
+                                        throw TypeError(".google.cloud.contentwarehouse.v1.CustomWeightsMetadata.weightedSchemaProperties: object expected");
+                                    message.weightedSchemaProperties[i] = $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty.fromObject(object.weightedSchemaProperties[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomWeightsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.CustomWeightsMetadata} message CustomWeightsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomWeightsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.weightedSchemaProperties = [];
+                            if (message.weightedSchemaProperties && message.weightedSchemaProperties.length) {
+                                object.weightedSchemaProperties = [];
+                                for (var j = 0; j < message.weightedSchemaProperties.length; ++j)
+                                    object.weightedSchemaProperties[j] = $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty.toObject(message.weightedSchemaProperties[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomWeightsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomWeightsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomWeightsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contentwarehouse.v1.CustomWeightsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomWeightsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contentwarehouse.v1.CustomWeightsMetadata";
+                        };
+    
+                        return CustomWeightsMetadata;
+                    })();
+    
+                    v1.WeightedSchemaProperty = (function() {
+    
+                        /**
+                         * Properties of a WeightedSchemaProperty.
+                         * @memberof google.cloud.contentwarehouse.v1
+                         * @interface IWeightedSchemaProperty
+                         * @property {string|null} [documentSchemaName] WeightedSchemaProperty documentSchemaName
+                         * @property {Array.<string>|null} [propertyNames] WeightedSchemaProperty propertyNames
+                         */
+    
+                        /**
+                         * Constructs a new WeightedSchemaProperty.
+                         * @memberof google.cloud.contentwarehouse.v1
+                         * @classdesc Represents a WeightedSchemaProperty.
+                         * @implements IWeightedSchemaProperty
+                         * @constructor
+                         * @param {google.cloud.contentwarehouse.v1.IWeightedSchemaProperty=} [properties] Properties to set
+                         */
+                        function WeightedSchemaProperty(properties) {
+                            this.propertyNames = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WeightedSchemaProperty documentSchemaName.
+                         * @member {string} documentSchemaName
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @instance
+                         */
+                        WeightedSchemaProperty.prototype.documentSchemaName = "";
+    
+                        /**
+                         * WeightedSchemaProperty propertyNames.
+                         * @member {Array.<string>} propertyNames
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @instance
+                         */
+                        WeightedSchemaProperty.prototype.propertyNames = $util.emptyArray;
+    
+                        /**
+                         * Creates a new WeightedSchemaProperty instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.IWeightedSchemaProperty=} [properties] Properties to set
+                         * @returns {google.cloud.contentwarehouse.v1.WeightedSchemaProperty} WeightedSchemaProperty instance
+                         */
+                        WeightedSchemaProperty.create = function create(properties) {
+                            return new WeightedSchemaProperty(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WeightedSchemaProperty message. Does not implicitly {@link google.cloud.contentwarehouse.v1.WeightedSchemaProperty.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.IWeightedSchemaProperty} message WeightedSchemaProperty message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeightedSchemaProperty.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.documentSchemaName != null && Object.hasOwnProperty.call(message, "documentSchemaName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.documentSchemaName);
+                            if (message.propertyNames != null && message.propertyNames.length)
+                                for (var i = 0; i < message.propertyNames.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.propertyNames[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WeightedSchemaProperty message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.WeightedSchemaProperty.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.IWeightedSchemaProperty} message WeightedSchemaProperty message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeightedSchemaProperty.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WeightedSchemaProperty message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contentwarehouse.v1.WeightedSchemaProperty} WeightedSchemaProperty
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeightedSchemaProperty.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.documentSchemaName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.propertyNames && message.propertyNames.length))
+                                            message.propertyNames = [];
+                                        message.propertyNames.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WeightedSchemaProperty message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contentwarehouse.v1.WeightedSchemaProperty} WeightedSchemaProperty
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeightedSchemaProperty.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WeightedSchemaProperty message.
+                         * @function verify
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WeightedSchemaProperty.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.documentSchemaName != null && message.hasOwnProperty("documentSchemaName"))
+                                if (!$util.isString(message.documentSchemaName))
+                                    return "documentSchemaName: string expected";
+                            if (message.propertyNames != null && message.hasOwnProperty("propertyNames")) {
+                                if (!Array.isArray(message.propertyNames))
+                                    return "propertyNames: array expected";
+                                for (var i = 0; i < message.propertyNames.length; ++i)
+                                    if (!$util.isString(message.propertyNames[i]))
+                                        return "propertyNames: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WeightedSchemaProperty message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contentwarehouse.v1.WeightedSchemaProperty} WeightedSchemaProperty
+                         */
+                        WeightedSchemaProperty.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty)
+                                return object;
+                            var message = new $root.google.cloud.contentwarehouse.v1.WeightedSchemaProperty();
+                            if (object.documentSchemaName != null)
+                                message.documentSchemaName = String(object.documentSchemaName);
+                            if (object.propertyNames) {
+                                if (!Array.isArray(object.propertyNames))
+                                    throw TypeError(".google.cloud.contentwarehouse.v1.WeightedSchemaProperty.propertyNames: array expected");
+                                message.propertyNames = [];
+                                for (var i = 0; i < object.propertyNames.length; ++i)
+                                    message.propertyNames[i] = String(object.propertyNames[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WeightedSchemaProperty message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {google.cloud.contentwarehouse.v1.WeightedSchemaProperty} message WeightedSchemaProperty
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WeightedSchemaProperty.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.propertyNames = [];
+                            if (options.defaults)
+                                object.documentSchemaName = "";
+                            if (message.documentSchemaName != null && message.hasOwnProperty("documentSchemaName"))
+                                object.documentSchemaName = message.documentSchemaName;
+                            if (message.propertyNames && message.propertyNames.length) {
+                                object.propertyNames = [];
+                                for (var j = 0; j < message.propertyNames.length; ++j)
+                                    object.propertyNames[j] = message.propertyNames[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WeightedSchemaProperty to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WeightedSchemaProperty.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WeightedSchemaProperty
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contentwarehouse.v1.WeightedSchemaProperty
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WeightedSchemaProperty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contentwarehouse.v1.WeightedSchemaProperty";
+                        };
+    
+                        return WeightedSchemaProperty;
                     })();
     
                     v1.HistogramQuery = (function() {
@@ -48371,6 +49750,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
                 /**
@@ -48431,6 +49811,14 @@
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
     
                 /**
+                 * MethodOptions .google.longrunning.operationInfo.
+                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -48461,6 +49849,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                        $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork()).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
@@ -48522,6 +49912,10 @@
                                 if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                     message[".google.api.methodSignature"] = [];
                                 message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -48592,6 +49986,11 @@
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        if (error)
+                            return ".google.longrunning.operationInfo." + error;
+                    }
                     return null;
                 };
     
@@ -48651,6 +50050,11 @@
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                     }
+                    if (object[".google.longrunning.operationInfo"] != null) {
+                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
+                    }
                     return message;
                 };
     
@@ -48674,6 +50078,7 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object[".google.longrunning.operationInfo"] = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -48685,6 +50090,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
+                        object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options);
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
@@ -58294,6 +59701,2145 @@
             })();
     
             return iam;
+        })();
+    
+        google.longrunning = (function() {
+    
+            /**
+             * Namespace longrunning.
+             * @memberof google
+             * @namespace
+             */
+            var longrunning = {};
+    
+            longrunning.Operations = (function() {
+    
+                /**
+                 * Constructs a new Operations service.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operations
+                 * @extends $protobuf.rpc.Service
+                 * @constructor
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 */
+                function Operations(rpcImpl, requestDelimited, responseDelimited) {
+                    $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                }
+    
+                (Operations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Operations;
+    
+                /**
+                 * Creates new Operations service using the specified rpc implementation.
+                 * @function create
+                 * @memberof google.longrunning.Operations
+                 * @static
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 * @returns {Operations} RPC service. Useful where requests and/or responses are streamed.
+                 */
+                Operations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                    return new this(rpcImpl, requestDelimited, responseDelimited);
+                };
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef ListOperationsCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.ListOperationsResponse} [response] ListOperationsResponse
+                 */
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @param {google.longrunning.Operations.ListOperationsCallback} callback Node-style callback called with the error, if any, and ListOperationsResponse
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
+                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                }, "name", { value: "ListOperations" });
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @returns {Promise<google.longrunning.ListOperationsResponse>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef GetOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.GetOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
+                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "GetOperation" });
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef DeleteOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.DeleteOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
+                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "DeleteOperation" });
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef CancelOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.CancelOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
+                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "CancelOperation" });
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef WaitOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.WaitOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
+                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "WaitOperation" });
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                return Operations;
+            })();
+    
+            longrunning.Operation = (function() {
+    
+                /**
+                 * Properties of an Operation.
+                 * @memberof google.longrunning
+                 * @interface IOperation
+                 * @property {string|null} [name] Operation name
+                 * @property {google.protobuf.IAny|null} [metadata] Operation metadata
+                 * @property {boolean|null} [done] Operation done
+                 * @property {google.rpc.IStatus|null} [error] Operation error
+                 * @property {google.protobuf.IAny|null} [response] Operation response
+                 */
+    
+                /**
+                 * Constructs a new Operation.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operation.
+                 * @implements IOperation
+                 * @constructor
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 */
+                function Operation(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Operation name.
+                 * @member {string} name
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.name = "";
+    
+                /**
+                 * Operation metadata.
+                 * @member {google.protobuf.IAny|null|undefined} metadata
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.metadata = null;
+    
+                /**
+                 * Operation done.
+                 * @member {boolean} done
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.done = false;
+    
+                /**
+                 * Operation error.
+                 * @member {google.rpc.IStatus|null|undefined} error
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.error = null;
+    
+                /**
+                 * Operation response.
+                 * @member {google.protobuf.IAny|null|undefined} response
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.response = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Operation result.
+                 * @member {"error"|"response"|undefined} result
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Object.defineProperty(Operation.prototype, "result", {
+                    get: $util.oneOfGetter($oneOfFields = ["error", "response"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Operation instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 * @returns {google.longrunning.Operation} Operation instance
+                 */
+                Operation.create = function create(properties) {
+                    return new Operation(properties);
+                };
+    
+                /**
+                 * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.google.protobuf.Any.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.done);
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                        $root.google.protobuf.Any.encode(message.response, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Operation.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Operation message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.Operation} Operation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Operation.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Operation message.
+                 * @function verify
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Operation.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.google.protobuf.Any.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        if (typeof message.done !== "boolean")
+                            return "done: boolean expected";
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        properties.result = 1;
+                        {
+                            var error = $root.google.rpc.Status.verify(message.error);
+                            if (error)
+                                return "error." + error;
+                        }
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        if (properties.result === 1)
+                            return "result: multiple values";
+                        properties.result = 1;
+                        {
+                            var error = $root.google.protobuf.Any.verify(message.response);
+                            if (error)
+                                return "response." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.Operation} Operation
+                 */
+                Operation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.Operation)
+                        return object;
+                    var message = new $root.google.longrunning.Operation();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".google.longrunning.Operation.metadata: object expected");
+                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata);
+                    }
+                    if (object.done != null)
+                        message.done = Boolean(object.done);
+                    if (object.error != null) {
+                        if (typeof object.error !== "object")
+                            throw TypeError(".google.longrunning.Operation.error: object expected");
+                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                    }
+                    if (object.response != null) {
+                        if (typeof object.response !== "object")
+                            throw TypeError(".google.longrunning.Operation.response: object expected");
+                        message.response = $root.google.protobuf.Any.fromObject(object.response);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Operation message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {google.longrunning.Operation} message Operation
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Operation.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.metadata = null;
+                        object.done = false;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options);
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        object.done = message.done;
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                        if (options.oneofs)
+                            object.result = "error";
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        object.response = $root.google.protobuf.Any.toObject(message.response, options);
+                        if (options.oneofs)
+                            object.result = "response";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Operation to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Operation.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Operation
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.Operation
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.Operation";
+                };
+    
+                return Operation;
+            })();
+    
+            longrunning.GetOperationRequest = (function() {
+    
+                /**
+                 * Properties of a GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IGetOperationRequest
+                 * @property {string|null} [name] GetOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a GetOperationRequest.
+                 * @implements IGetOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 */
+                function GetOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GetOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 */
+                GetOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new GetOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest instance
+                 */
+                GetOperationRequest.create = function create(properties) {
+                    return new GetOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GetOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 */
+                GetOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.GetOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.GetOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.GetOperationRequest} message GetOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this GetOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
+                };
+    
+                return GetOperationRequest;
+            })();
+    
+            longrunning.ListOperationsRequest = (function() {
+    
+                /**
+                 * Properties of a ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsRequest
+                 * @property {string|null} [name] ListOperationsRequest name
+                 * @property {string|null} [filter] ListOperationsRequest filter
+                 * @property {number|null} [pageSize] ListOperationsRequest pageSize
+                 * @property {string|null} [pageToken] ListOperationsRequest pageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsRequest.
+                 * @implements IListOperationsRequest
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 */
+                function ListOperationsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.name = "";
+    
+                /**
+                 * ListOperationsRequest filter.
+                 * @member {string} filter
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.filter = "";
+    
+                /**
+                 * ListOperationsRequest pageSize.
+                 * @member {number} pageSize
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageSize = 0;
+    
+                /**
+                 * ListOperationsRequest pageToken.
+                 * @member {string} pageToken
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest instance
+                 */
+                ListOperationsRequest.create = function create(properties) {
+                    return new ListOperationsRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (!$util.isString(message.filter))
+                            return "filter: string expected";
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (!$util.isInteger(message.pageSize))
+                            return "pageSize: integer expected";
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (!$util.isString(message.pageToken))
+                            return "pageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 */
+                ListOperationsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsRequest)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.filter != null)
+                        message.filter = String(object.filter);
+                    if (object.pageSize != null)
+                        message.pageSize = object.pageSize | 0;
+                    if (object.pageToken != null)
+                        message.pageToken = String(object.pageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.ListOperationsRequest} message ListOperationsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.filter = "";
+                        object.pageSize = 0;
+                        object.pageToken = "";
+                        object.name = "";
+                    }
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        object.filter = message.filter;
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        object.pageSize = message.pageSize;
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        object.pageToken = message.pageToken;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
+                return ListOperationsRequest;
+            })();
+    
+            longrunning.ListOperationsResponse = (function() {
+    
+                /**
+                 * Properties of a ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsResponse
+                 * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
+                 * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsResponse.
+                 * @implements IListOperationsResponse
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 */
+                function ListOperationsResponse(properties) {
+                    this.operations = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsResponse operations.
+                 * @member {Array.<google.longrunning.IOperation>} operations
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.operations = $util.emptyArray;
+    
+                /**
+                 * ListOperationsResponse nextPageToken.
+                 * @member {string} nextPageToken
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsResponse instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse instance
+                 */
+                ListOperationsResponse.create = function create(properties) {
+                    return new ListOperationsResponse(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.operations != null && message.operations.length)
+                        for (var i = 0; i < message.operations.length; ++i)
+                            $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsResponse message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.operations != null && message.hasOwnProperty("operations")) {
+                        if (!Array.isArray(message.operations))
+                            return "operations: array expected";
+                        for (var i = 0; i < message.operations.length; ++i) {
+                            var error = $root.google.longrunning.Operation.verify(message.operations[i]);
+                            if (error)
+                                return "operations." + error;
+                        }
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (!$util.isString(message.nextPageToken))
+                            return "nextPageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 */
+                ListOperationsResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsResponse)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsResponse();
+                    if (object.operations) {
+                        if (!Array.isArray(object.operations))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
+                        message.operations = [];
+                        for (var i = 0; i < object.operations.length; ++i) {
+                            if (typeof object.operations[i] !== "object")
+                                throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
+                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i]);
+                        }
+                    }
+                    if (object.nextPageToken != null)
+                        message.nextPageToken = String(object.nextPageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.ListOperationsResponse} message ListOperationsResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.operations = [];
+                    if (options.defaults)
+                        object.nextPageToken = "";
+                    if (message.operations && message.operations.length) {
+                        object.operations = [];
+                        for (var j = 0; j < message.operations.length; ++j)
+                            object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options);
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        object.nextPageToken = message.nextPageToken;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsResponse to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
+                return ListOperationsResponse;
+            })();
+    
+            longrunning.CancelOperationRequest = (function() {
+    
+                /**
+                 * Properties of a CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface ICancelOperationRequest
+                 * @property {string|null} [name] CancelOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a CancelOperationRequest.
+                 * @implements ICancelOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 */
+                function CancelOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * CancelOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 */
+                CancelOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new CancelOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest instance
+                 */
+                CancelOperationRequest.create = function create(properties) {
+                    return new CancelOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a CancelOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CancelOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 */
+                CancelOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.CancelOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.CancelOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.CancelOperationRequest} message CancelOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CancelOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this CancelOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CancelOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
+                };
+    
+                return CancelOperationRequest;
+            })();
+    
+            longrunning.DeleteOperationRequest = (function() {
+    
+                /**
+                 * Properties of a DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IDeleteOperationRequest
+                 * @property {string|null} [name] DeleteOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a DeleteOperationRequest.
+                 * @implements IDeleteOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 */
+                function DeleteOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DeleteOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 */
+                DeleteOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new DeleteOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest instance
+                 */
+                DeleteOperationRequest.create = function create(properties) {
+                    return new DeleteOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DeleteOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DeleteOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 */
+                DeleteOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.DeleteOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.DeleteOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.DeleteOperationRequest} message DeleteOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DeleteOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DeleteOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DeleteOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
+                };
+    
+                return DeleteOperationRequest;
+            })();
+    
+            longrunning.WaitOperationRequest = (function() {
+    
+                /**
+                 * Properties of a WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IWaitOperationRequest
+                 * @property {string|null} [name] WaitOperationRequest name
+                 * @property {google.protobuf.IDuration|null} [timeout] WaitOperationRequest timeout
+                 */
+    
+                /**
+                 * Constructs a new WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a WaitOperationRequest.
+                 * @implements IWaitOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 */
+                function WaitOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WaitOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.name = "";
+    
+                /**
+                 * WaitOperationRequest timeout.
+                 * @member {google.protobuf.IDuration|null|undefined} timeout
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.timeout = null;
+    
+                /**
+                 * Creates a new WaitOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest instance
+                 */
+                WaitOperationRequest.create = function create(properties) {
+                    return new WaitOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                        $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WaitOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WaitOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                        var error = $root.google.protobuf.Duration.verify(message.timeout);
+                        if (error)
+                            return "timeout." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 */
+                WaitOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.WaitOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.WaitOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.timeout != null) {
+                        if (typeof object.timeout !== "object")
+                            throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
+                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.WaitOperationRequest} message WaitOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WaitOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.timeout = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.timeout != null && message.hasOwnProperty("timeout"))
+                        object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WaitOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WaitOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
+                };
+    
+                return WaitOperationRequest;
+            })();
+    
+            longrunning.OperationInfo = (function() {
+    
+                /**
+                 * Properties of an OperationInfo.
+                 * @memberof google.longrunning
+                 * @interface IOperationInfo
+                 * @property {string|null} [responseType] OperationInfo responseType
+                 * @property {string|null} [metadataType] OperationInfo metadataType
+                 */
+    
+                /**
+                 * Constructs a new OperationInfo.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an OperationInfo.
+                 * @implements IOperationInfo
+                 * @constructor
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 */
+                function OperationInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OperationInfo responseType.
+                 * @member {string} responseType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.responseType = "";
+    
+                /**
+                 * OperationInfo metadataType.
+                 * @member {string} metadataType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.metadataType = "";
+    
+                /**
+                 * Creates a new OperationInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 * @returns {google.longrunning.OperationInfo} OperationInfo instance
+                 */
+                OperationInfo.create = function create(properties) {
+                    return new OperationInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.responseType);
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OperationInfo message.
+                 * @function verify
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OperationInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        if (!$util.isString(message.responseType))
+                            return "responseType: string expected";
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        if (!$util.isString(message.metadataType))
+                            return "metadataType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 */
+                OperationInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.OperationInfo)
+                        return object;
+                    var message = new $root.google.longrunning.OperationInfo();
+                    if (object.responseType != null)
+                        message.responseType = String(object.responseType);
+                    if (object.metadataType != null)
+                        message.metadataType = String(object.metadataType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.OperationInfo} message OperationInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OperationInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.responseType = "";
+                        object.metadataType = "";
+                    }
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        object.responseType = message.responseType;
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        object.metadataType = message.metadataType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this OperationInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OperationInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
+                };
+    
+                return OperationInfo;
+            })();
+    
+            return longrunning;
         })();
     
         return google;

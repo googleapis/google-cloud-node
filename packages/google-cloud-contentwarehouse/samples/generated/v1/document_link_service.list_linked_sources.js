@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the document, for which all source links are returned.
-   *  Format:
+   *  Required. The name of the document, for which all source links are
+   *  returned. Format:
    *  projects/{project_number}/locations/{location}/documents/{source_document_id}.
    */
   // const parent = 'abc123'

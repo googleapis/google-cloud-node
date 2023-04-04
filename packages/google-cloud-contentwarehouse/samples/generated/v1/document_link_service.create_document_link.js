@@ -36,7 +36,8 @@ function main(parent, documentLink) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Document links associated with the source documents (source_document_id).
+   *  Required. Document links associated with the source documents
+   *  (source_document_id).
    */
   // const documentLink = {}
   /**

@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -426,7 +426,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -530,7 +530,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -630,7 +630,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 143,
+                    "end": 156,
                     "type": "FULL"
                 }
             ],
@@ -676,6 +676,10 @@
                         "type": "TYPE_BOOL"
                     },
                     {
+                        "name": "total_result_size",
+                        "type": ".google.cloud.contentwarehouse.v1.SearchDocumentsRequest.TotalResultSize"
+                    },
+                    {
                         "name": "qa_size_limit",
                         "type": "TYPE_INT32"
                     }
@@ -696,6 +700,54 @@
             }
         },
         {
+            "regionTag": "contentwarehouse_v1_generated_DocumentService_LockDocument_async",
+            "title": "DocumentLinkService lockDocument Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lock the document so the document cannot be updated by other users.",
+            "canonical": true,
+            "file": "document_service.lock_document.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "LockDocument",
+                "fullName": "google.cloud.contentwarehouse.v1.DocumentService.LockDocument",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "collection_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "locking_user",
+                        "type": ".google.cloud.contentwarehouse.v1.UserInfo"
+                    }
+                ],
+                "resultType": ".google.cloud.contentwarehouse.v1.Document",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.contentwarehouse.v1.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "LockDocument",
+                    "fullName": "google.cloud.contentwarehouse.v1.DocumentService.LockDocument",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.contentwarehouse.v1.DocumentService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "contentwarehouse_v1_generated_DocumentService_FetchAcl_async",
             "title": "DocumentLinkService fetchAcl Sample",
             "origin": "API_DEFINITION",
@@ -706,7 +758,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -754,7 +806,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
