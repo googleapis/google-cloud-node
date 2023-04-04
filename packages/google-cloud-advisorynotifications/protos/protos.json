@@ -10,11 +10,11 @@
                   "options": {
                     "csharp_namespace": "Google.Cloud.AdvisoryNotifications.V1",
                     "go_package": "cloud.google.com/go/advisorynotifications/apiv1/advisorynotificationspb;advisorynotificationspb",
-                    "php_namespace": "Google\\Cloud\\AdvisoryNotifications\\V1",
-                    "ruby_package": "Google::Cloud::AdvisoryNotifications::V1",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.advisorynotifications.v1",
+                    "php_namespace": "Google\\Cloud\\AdvisoryNotifications\\V1",
+                    "ruby_package": "Google::Cloud::AdvisoryNotifications::V1",
                     "(google.api.resource_definition).type": "advisorynotifications.googleapis.com/Location",
                     "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
@@ -78,6 +78,13 @@
                         "LOCALIZATION_STATE_COMPLETED": 3
                       }
                     },
+                    "NotificationType": {
+                      "values": {
+                        "NOTIFICATION_TYPE_UNSPECIFIED": 0,
+                        "NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY": 1,
+                        "NOTIFICATION_TYPE_SENSITIVE_ACTIONS": 2
+                      }
+                    },
                     "Notification": {
                       "options": {
                         "(google.api.resource).type": "advisorynotifications.googleapis.com/Notification",
@@ -103,6 +110,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "notificationType": {
+                          "type": "NotificationType",
+                          "id": 12
                         }
                       }
                     },
