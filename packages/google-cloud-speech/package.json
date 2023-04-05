@@ -53,7 +53,7 @@
   "dependencies": {
     "@google-cloud/common": "^4.0.0",
     "@types/pumpify": "^1.4.1",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4",
     "uuid": "^9.0.0"

@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/asset",
   "description": "Cloud Asset API client for Node.js",
-  "version": "4.6.1",
+  "version": "4.6.2",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -49,7 +49,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

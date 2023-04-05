@@ -747,6 +747,136 @@ describe('v1.DocumentServiceClient', () => {
     });
   });
 
+  describe('lockDocument', () => {
+    it('invokes lockDocument without error', async () => {
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contentwarehouse.v1.LockDocumentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contentwarehouse.v1.Document()
+      );
+      client.innerApiCalls.lockDocument = stubSimpleCall(expectedResponse);
+      const [response] = await client.lockDocument(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.lockDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lockDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes lockDocument without error using callback', async () => {
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contentwarehouse.v1.LockDocumentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contentwarehouse.v1.Document()
+      );
+      client.innerApiCalls.lockDocument =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.lockDocument(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contentwarehouse.v1.IDocument | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.lockDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lockDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes lockDocument with error', async () => {
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contentwarehouse.v1.LockDocumentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.lockDocument = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.lockDocument(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.lockDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lockDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes lockDocument with closed client', async () => {
+      const client = new documentserviceModule.v1.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contentwarehouse.v1.LockDocumentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.lockDocument(request), expectedError);
+    });
+  });
+
   describe('fetchAcl', () => {
     it('invokes fetchAcl without error', async () => {
       const client = new documentserviceModule.v1.DocumentServiceClient({

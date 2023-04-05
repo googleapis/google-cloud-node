@@ -45,7 +45,7 @@
     "pretest": "npm run prepare"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

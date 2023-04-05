@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/advisorynotifications",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Advisory Notifications API client for Node.js",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
