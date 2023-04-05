@@ -49,6 +49,7 @@
   * [Contact_center_insights.update_phrase_matcher](#contact_center_insights.update_phrase_matcher)
   * [Contact_center_insights.update_settings](#contact_center_insights.update_settings)
   * [Contact_center_insights.update_view](#contact_center_insights.update_view)
+  * [Contact_center_insights.upload_conversation](#contact_center_insights.upload_conversation)
   * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
@@ -689,6 +690,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_view.js`
+
+
+-----
+
+
+
+
+### Contact_center_insights.upload_conversation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js`
 
 
 -----
