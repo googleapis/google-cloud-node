@@ -6135,6 +6135,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "podCidrOverprovisionConfig": {
+                      "type": "PodCIDROverprovisionConfig",
+                      "id": 13
                     }
                   },
                   "nested": {
@@ -6680,6 +6684,14 @@
                     }
                   }
                 },
+                "PodCIDROverprovisionConfig": {
+                  "fields": {
+                    "disable": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "IPAllocationPolicy": {
                   "fields": {
                     "useIpAliases": {
@@ -6754,6 +6766,10 @@
                     "ipv6AccessType": {
                       "type": "IPv6AccessType",
                       "id": 17
+                    },
+                    "podCidrOverprovisionConfig": {
+                      "type": "PodCIDROverprovisionConfig",
+                      "id": 21
                     },
                     "subnetIpv6CidrBlock": {
                       "type": "string",
