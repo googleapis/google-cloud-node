@@ -9,7 +9,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Dlp.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/privacy/dlp/v2;dlp",
+                    "go_package": "cloud.google.com/go/dlp/apiv2/dlppb;dlppb",
                     "java_multiple_files": true,
                     "java_outer_classname": "DlpStorage",
                     "java_package": "com.google.privacy.dlp.v2",

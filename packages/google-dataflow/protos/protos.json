@@ -7,7 +7,7 @@
             "v1beta3": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Dataflow.V1Beta3",
-                "go_package": "google.golang.org/genproto/googleapis/dataflow/v1beta3;dataflow",
+                "go_package": "cloud.google.com/go/dataflow/apiv1beta3/dataflowpb;dataflowpb",
                 "java_multiple_files": true,
                 "java_outer_classname": "TemplatesProto",
                 "java_package": "com.google.dataflow.v1beta3",

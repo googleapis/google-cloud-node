@@ -8,7 +8,7 @@
               "nested": {
                 "v1alpha": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/analytics/admin/v1alpha;admin",
+                    "go_package": "cloud.google.com/go/analytics/admin/apiv1alpha/adminpb;adminpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ResourcesProto",
                     "java_package": "com.google.analytics.admin.v1alpha"
