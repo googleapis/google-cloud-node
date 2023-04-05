@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.6.2](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.1...asset-v4.6.2) (2023-04-04)
+
+
+### Bug Fixes
+
+* [asset] Change retry configuration for API calls ([#4144](https://github.com/googleapis/google-cloud-node/issues/4144)) ([8073ac0](https://github.com/googleapis/google-cloud-node/commit/8073ac00bad1baadfcbfc09715a0590895582010))
+
 ## [4.6.1](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.0...asset-v4.6.1) (2023-02-15)
 
 
