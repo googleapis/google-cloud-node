@@ -30,7 +30,7 @@ import * as extend from 'extend';
 const v1 = require('../src/v1/index.js');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fakeEntity: any = {
+const fakeEntityInit: any = {
   KEY_SYMBOL: Symbol('fake key symbol'),
   Int: class {
     value: {};
@@ -81,6 +81,8 @@ const fakeEntity: any = {
   findLargeProperties_: entity.findLargeProperties_,
   URLSafeKey: entity.URLSafeKey,
 };
+
+const fakeEntity: any = {};
 
 let googleAuthOverride: Function | null;
 function fakeGoogleAuth(...args: Array<{}>) {
@@ -157,6 +159,7 @@ describe('Datastore', () => {
   };
 
   before(() => {
+    Object.assign(fakeEntity, fakeEntityInit);
     Datastore = proxyquire('../src', {
       './entity.js': {entity: fakeEntity},
       './index-class.js': {Index: FakeIndex},
@@ -171,6 +174,8 @@ describe('Datastore', () => {
   });
 
   beforeEach(() => {
+    Object.assign(fakeEntity, fakeEntityInit);
+
     createInsecureOverride = null;
     googleAuthOverride = null;
 
