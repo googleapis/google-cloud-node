@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Datastore.Admin.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/datastore/admin/v1;admin",
+                    "go_package": "cloud.google.com/go/datastore/admin/apiv1/adminpb;adminpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "MigrationProto",
                     "java_package": "com.google.datastore.admin.v1",
