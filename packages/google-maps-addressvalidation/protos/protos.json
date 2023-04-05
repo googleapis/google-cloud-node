@@ -111,7 +111,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Maps.AddressValidation.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/maps/addressvalidation/v1;addressvalidation",
+                    "go_package": "cloud.google.com/go/maps/addressvalidation/apiv1/addressvalidationpb;addressvalidationpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "UspsDataProto",
                     "java_package": "com.google.maps.addressvalidation.v1",
