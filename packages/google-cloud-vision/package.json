@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@google-cloud/promisify": "^3.0.0",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "is": "^3.3.0"
   },
   "devDependencies": {
