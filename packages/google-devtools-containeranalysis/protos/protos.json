@@ -2991,7 +2991,7 @@
           "nested": {
             "attestation": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/attestation;attestation",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.attestation",
                 "objc_class_prefix": "GRA"
@@ -3139,7 +3139,7 @@
             },
             "build": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/build;build",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.build",
                 "objc_class_prefix": "GRA"
@@ -3202,7 +3202,7 @@
             },
             "provenance": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/provenance;provenance",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.provenance",
                 "objc_class_prefix": "GRA"
@@ -3370,7 +3370,7 @@
             },
             "source": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/source;source",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.source",
                 "objc_class_prefix": "GRA"
@@ -3528,7 +3528,7 @@
             },
             "vulnerability": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/vulnerability;vulnerability",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.vulnerability",
                 "objc_class_prefix": "GRA"
@@ -3825,7 +3825,7 @@
             },
             "deployment": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/deployment;deployment",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.deployment",
                 "objc_class_prefix": "GRA"
@@ -3895,7 +3895,7 @@
             },
             "discovery": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/discovery;discovery",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.discovery",
                 "objc_class_prefix": "GRA"
@@ -4648,7 +4648,7 @@
             },
             "image": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/image;image",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.image",
                 "objc_class_prefix": "GRA"
@@ -4752,7 +4752,7 @@
             },
             "package": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/package",
+                "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.pkg",
                 "objc_class_prefix": "GRA"
@@ -5051,7 +5051,7 @@
                 },
                 "v1beta1": {
                   "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1;containeranalysis",
+                    "go_package": "cloud.google.com/go/containeranalysis/apiv1beta1/containeranalysispb;containeranalysispb",
                     "java_multiple_files": true,
                     "java_package": "com.google.containeranalysis.v1beta1",
                     "objc_class_prefix": "GCA"

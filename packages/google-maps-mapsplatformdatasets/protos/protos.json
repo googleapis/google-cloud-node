@@ -9,7 +9,7 @@
                 "v1alpha": {
                   "options": {
                     "csharp_namespace": "Google.Maps.MapsPlatformDatasets.V1Alpha",
-                    "go_package": "google.golang.org/genproto/googleapis/maps/mapsplatformdatasets/v1alpha;mapsplatformdatasets",
+                    "go_package": "cloud.google.com/go/maps/mapsplatformdatasets/apiv1alpha/mapsplatformdatasetspb;mapsplatformdatasetspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "MapsPlatformDatasetsV1AlphaServiceProto",
                     "java_package": "com.google.maps.mapsplatformdatasets.v1alpha",
