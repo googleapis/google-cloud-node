@@ -49,6 +49,8 @@ for NODE_VERSION in ${NODE_VERSIONS[@]}; do
 done
 
 # Since we don't want to run nightly, and continuous for node 16 and node 18, adding these outside of the loop
+echo "importing presubmit unit build for node12 unit tests"
+gcloud beta builds triggers import --source "ci/export/unit-presubmit-node12.yaml"
 echo "importing presubmit unit build for node16 unit tests"
 gcloud beta builds triggers import --source "ci/export/unit-presubmit-node16.yaml"
 echo "importing presubmit unit build for node18 unit tests"

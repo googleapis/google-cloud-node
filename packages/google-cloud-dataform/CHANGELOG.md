@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.0.1...dataform-v0.4.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* Revert package.json version ([65ee10e](https://github.com/googleapis/google-cloud-node/commit/65ee10e09d7c69e00bdfd7be2a591c866873ceda))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.0.0...dataform-v1.0.1) (2023-03-06)
 
 

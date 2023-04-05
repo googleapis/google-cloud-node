@@ -156,6 +156,11 @@
                 "deleteDocument"
               ]
             },
+            "LockDocument": {
+              "methods": [
+                "lockDocument"
+              ]
+            },
             "FetchAcl": {
               "methods": [
                 "fetchAcl"
@@ -196,6 +201,11 @@
             "DeleteDocument": {
               "methods": [
                 "deleteDocument"
+              ]
+            },
+            "LockDocument": {
+              "methods": [
+                "lockDocument"
               ]
             },
             "FetchAcl": {

@@ -10,7 +10,8 @@ github:
 id: 182e003f-4636-4cc4-beda-811e6ad960f1
 includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
 name: unit-presubmit-node16
-serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
+resourceName: projects/long-door-651/locations/global/triggers/182e003f-4636-4cc4-beda-811e6ad960f1
+serviceAccount: projects/-/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
   _BUILD_TYPE: presubmit
   _LOGS_BUCKET: cloud-node-public-logs

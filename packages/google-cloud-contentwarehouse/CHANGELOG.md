@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.4.0...contentwarehouse-v0.5.0) (2023-04-04)
+
+
+### Features
+
+* [contentwarehouse] add php, csharp, ruby client library API support ([#4151](https://github.com/googleapis/google-cloud-node/issues/4151)) ([a438ccf](https://github.com/googleapis/google-cloud-node/commit/a438ccf0cfba0750332bc6b33ad824176e246df4))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.3.1...contentwarehouse-v0.4.0) (2023-02-22)
 
 

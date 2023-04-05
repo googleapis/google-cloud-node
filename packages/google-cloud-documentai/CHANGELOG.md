@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.2.0...documentai-v7.3.0) (2023-03-28)
+
+
+### Features
+
+* [documentai] Add ImportProcessorVersion in v1beta3 ([#4109](https://github.com/googleapis/google-cloud-node/issues/4109)) ([764faca](https://github.com/googleapis/google-cloud-node/commit/764faca7cad111d0fea1cb26678b4139e861f5ae))
+
 ## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v7.1.0...documentai-v7.2.0) (2023-03-13)
 
 

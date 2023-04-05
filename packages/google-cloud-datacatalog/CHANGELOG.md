@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.2.1...datacatalog-v3.3.0) (2023-03-28)
+
+
+### Features
+
+* [datacatalog] add support for new ImportEntries() API, including format of the dump ([#4082](https://github.com/googleapis/google-cloud-node/issues/4082)) ([a9a831c](https://github.com/googleapis/google-cloud-node/commit/a9a831cf17b8555f55f6a6b0189efb308b7f7f6d))
+* Add support for a ReconcileTags() API method ([a9a831c](https://github.com/googleapis/google-cloud-node/commit/a9a831cf17b8555f55f6a6b0189efb308b7f7f6d))
+* Add support for entries associated with Looker and CloudSQL ([a9a831c](https://github.com/googleapis/google-cloud-node/commit/a9a831cf17b8555f55f6a6b0189efb308b7f7f6d))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.2.0...datacatalog-v3.2.1) (2023-02-15)
 
 
