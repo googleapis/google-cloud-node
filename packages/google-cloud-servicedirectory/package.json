@@ -31,7 +31,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "json-schema": "^0.4.0"
   },
   "devDependencies": {

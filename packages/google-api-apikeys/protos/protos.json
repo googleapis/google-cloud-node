@@ -17,7 +17,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ApiKeys.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/api/apikeys/v2;apikeys",
+                    "go_package": "cloud.google.com/go/apikeys/apiv2/apikeyspb;apikeyspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ResourcesProto",
                     "java_package": "com.google.api.apikeys.v2",
