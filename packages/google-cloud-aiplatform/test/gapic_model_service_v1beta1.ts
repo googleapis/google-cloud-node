@@ -6786,6 +6786,70 @@ describe('v1beta1.ModelServiceClient', () => {
       });
     });
 
+    describe('schedule', () => {
+      const fakePath = '/rendered/path/schedule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        schedule: 'scheduleValue',
+      };
+      const client = new modelserviceModule.v1beta1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.schedulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.schedulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('schedulePath', () => {
+        const result = client.schedulePath(
+          'projectValue',
+          'locationValue',
+          'scheduleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.schedulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromScheduleName', () => {
+        const result = client.matchProjectFromScheduleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromScheduleName', () => {
+        const result = client.matchLocationFromScheduleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchScheduleFromScheduleName', () => {
+        const result = client.matchScheduleFromScheduleName(fakePath);
+        assert.strictEqual(result, 'scheduleValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('specialistPool', () => {
       const fakePath = '/rendered/path/specialistPool';
       const expectedParameters = {

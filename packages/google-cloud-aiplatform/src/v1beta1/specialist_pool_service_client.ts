@@ -284,6 +284,9 @@ export class SpecialistPoolServiceClient {
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
+      schedulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/schedules/{schedule}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
@@ -353,10 +356,16 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
           ],
         },
@@ -370,11 +379,19 @@ export class SpecialistPoolServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -388,10 +405,16 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
           ],
         },
@@ -449,6 +472,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -542,6 +568,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -658,6 +687,10 @@ export class SpecialistPoolServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               delete:
@@ -779,6 +812,10 @@ export class SpecialistPoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {
@@ -888,6 +925,9 @@ export class SpecialistPoolServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
@@ -971,6 +1011,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
@@ -1062,6 +1105,9 @@ export class SpecialistPoolServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
@@ -1145,6 +1191,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
@@ -1244,6 +1293,9 @@ export class SpecialistPoolServiceClient {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
             },
             {
@@ -1333,6 +1385,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
@@ -4531,6 +4586,55 @@ export class SpecialistPoolServiceClient {
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
     return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
       .saved_query;
+  }
+
+  /**
+   * Return a fully-qualified schedule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} schedule
+   * @returns {string} Resource name string.
+   */
+  schedulePath(project: string, location: string, schedule: string) {
+    return this.pathTemplates.schedulePathTemplate.render({
+      project: project,
+      location: location,
+      schedule: schedule,
+    });
+  }
+
+  /**
+   * Parse the project from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).project;
+  }
+
+  /**
+   * Parse the location from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).location;
+  }
+
+  /**
+   * Parse the schedule from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the schedule.
+   */
+  matchScheduleFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).schedule;
   }
 
   /**
