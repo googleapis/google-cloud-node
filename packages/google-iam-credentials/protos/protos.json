@@ -10,7 +10,7 @@
                   "options": {
                     "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Iam.Credentials.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/iam/credentials/v1;credentials",
+                    "go_package": "cloud.google.com/go/iam/credentials/apiv1/credentialspb;credentialspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "IAMCredentialsProto",
                     "java_package": "com.google.cloud.iam.credentials.v1",

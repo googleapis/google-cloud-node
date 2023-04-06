@@ -8,7 +8,7 @@
               "options": {
                 "cc_enable_arenas": true,
                 "csharp_namespace": "Google.Cloud.StorageTransfer.V1",
-                "go_package": "google.golang.org/genproto/googleapis/storagetransfer/v1;storagetransfer",
+                "go_package": "cloud.google.com/go/storagetransfer/apiv1/storagetransferpb;storagetransferpb",
                 "java_outer_classname": "TransferTypes",
                 "java_package": "com.google.storagetransfer.v1.proto",
                 "php_namespace": "Google\\Cloud\\StorageTransfer\\V1",
