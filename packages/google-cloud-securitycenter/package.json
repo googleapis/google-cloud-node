@@ -14,12 +14,13 @@
   },
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "fix": "gts fix",
@@ -46,7 +47,7 @@
     "Security Command Center API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -67,3 +68,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-securitycenter"
 }
+

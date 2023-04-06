@@ -11,7 +11,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -34,9 +35,9 @@
     "lint": "gts check",
     "clean": "gts clean",
     "fix": "gts fix",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test",
     "system-test": "npm run compile && c8 mocha build/system-test",
@@ -51,7 +52,8 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-billing-budgets"
 }
+

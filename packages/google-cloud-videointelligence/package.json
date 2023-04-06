@@ -16,7 +16,8 @@
   "files": [
     "build/protos",
     "build/src",
-    "LICENSE"
+    "LICENSE",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -42,13 +43,13 @@
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -71,3 +72,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-videointelligence"
 }
+

@@ -13,7 +13,8 @@
     "build/src",
     "build/protos",
     "AUTHORS",
-    "COPYING"
+    "COPYING",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -29,7 +30,7 @@
     "Google Cloud Data Catalog API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -56,7 +57,7 @@
     "docs-test": "linkinator docs",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
@@ -70,3 +71,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog"
 }
+

@@ -49,7 +49,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Identity.AccessContextManager.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/identity/accesscontextmanager/v1;accesscontextmanager",
+                    "go_package": "cloud.google.com/go/accesscontextmanager/apiv1/accesscontextmanagerpb;accesscontextmanagerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServicePerimeterProto",
                     "java_package": "com.google.identity.accesscontextmanager.v1",

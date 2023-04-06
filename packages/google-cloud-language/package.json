@@ -19,7 +19,8 @@
     "build/src",
     "AUTHORS",
     "CONTRIBUTORS",
-    "LICENSE"
+    "LICENSE",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -43,7 +44,7 @@
     "fix": "gts fix",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile",
@@ -51,7 +52,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -74,3 +75,4 @@
     "webpack-cli": "^5.0.0"
   }
 }
+

@@ -11,7 +11,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/protos",
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -27,7 +28,7 @@
     "Web Risk API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
@@ -61,7 +62,7 @@
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
@@ -74,3 +75,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk"
 }
+
