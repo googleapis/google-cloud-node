@@ -77,7 +77,7 @@ async function performRangedReadTest(): Promise<TestResult[]> {
   const results: TestResult[] = [];
   const fileSizeRange = getLowHighFileSize(argv.object_size);
   const fileName = generateRandomFileName(TEST_NAME_STRING);
-  const sizeInBytes = generateRandomFile(
+  generateRandomFile(
     fileName,
     fileSizeRange.low,
     fileSizeRange.high,
@@ -89,7 +89,7 @@ async function performRangedReadTest(): Promise<TestResult[]> {
 
   const iterationResult: TestResult = {
     op: 'READ[0]',
-    objectSize: sizeInBytes,
+    objectSize: argv.range_read_size,
     appBufferSize: NODE_DEFAULT_HIGHWATER_MARK_BYTES,
     crc32cEnabled: false,
     md5Enabled: false,
@@ -170,6 +170,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
 
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
     results.push(iterationResult);
+    cleanupFile(fileName);
   }
 
   const iterationResult: TestResult = {
