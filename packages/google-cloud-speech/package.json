@@ -17,7 +17,8 @@
     "build/protos",
     "build/src",
     "AUTHORS",
-    "LICENSE"
+    "LICENSE",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -41,7 +42,7 @@
     "fix": "gts fix",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "compile": "tsc -p . && cp system-test/*.js build/system-test/ && cp -r protos build/",
+    "compile": "tsc -p . && cp system-test/*.js build/system-test/ && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
@@ -79,3 +80,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-speech"
 }
+
