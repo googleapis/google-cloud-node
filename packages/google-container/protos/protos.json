@@ -1721,6 +1721,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "additionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 24,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -2236,8 +2243,19 @@
                     "desiredStackType": {
                       "type": "StackType",
                       "id": 119
+                    },
+                    "additionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 120
+                    },
+                    "removedAdditionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 121
                     }
                   }
+                },
+                "AdditionalPodRangesConfig": {
+                  "fields": {}
                 },
                 "Operation": {
                   "fields": {
