@@ -9030,8 +9030,8 @@
                     "objc_class_prefix": "RETAIL",
                     "php_namespace": "Google\\Cloud\\Retail\\V2beta",
                     "ruby_package": "Google::Cloud::Retail::V2beta",
-                    "(google.api.resource_definition).type": "retail.googleapis.com/Branch",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}"
+                    "(google.api.resource_definition).type": "retail.googleapis.com/Experiment",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}"
                   },
                   "nested": {
                     "ProductLevelConfig": {
@@ -10461,6 +10461,10 @@
                         "pageViewId": {
                           "type": "string",
                           "id": 15
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 23
                         }
                       }
                     },
@@ -11085,6 +11089,10 @@
                         "maxSuggestions": {
                           "type": "int32",
                           "id": 5
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -11332,6 +11340,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 38
                         }
                       },
                       "nested": {
@@ -11571,6 +11583,11 @@
                           "rule": "repeated",
                           "type": "SearchRequest.BoostSpec.ConditionBoostSpec",
                           "id": 14
+                        },
+                        "experimentInfo": {
+                          "rule": "repeated",
+                          "type": "ExperimentInfo",
+                          "id": 17
                         }
                       },
                       "nested": {
@@ -11665,6 +11682,48 @@
                             "pinnedResultCount": {
                               "type": "int64",
                               "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExperimentInfo": {
+                      "oneofs": {
+                        "experimentMetadata": {
+                          "oneof": [
+                            "servingConfigExperiment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "servingConfigExperiment": {
+                          "type": "ServingConfigExperiment",
+                          "id": 2
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Experiment"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ServingConfigExperiment": {
+                          "fields": {
+                            "originalServingConfig": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            },
+                            "experimentServingConfig": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
                             }
                           }
                         }
@@ -12163,6 +12222,24 @@
                             }
                           ]
                         },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v2beta/{name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta/{name=projects/*/locations/*/catalogs/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "PauseModel": {
                           "requestType": "PauseModelRequest",
                           "responseType": "Model",
@@ -12329,6 +12406,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
                           }
                         }
                       }

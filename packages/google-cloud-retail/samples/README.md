@@ -128,6 +128,7 @@
   * [Control_service.update_control](#control_service.update_control)
   * [Model_service.create_model](#model_service.create_model)
   * [Model_service.delete_model](#model_service.delete_model)
+  * [Model_service.get_model](#model_service.get_model)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.pause_model](#model_service.pause_model)
   * [Model_service.resume_model](#model_service.resume_model)
@@ -2141,6 +2142,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2beta/model_service.delete_model.js`
+
+
+-----
+
+
+
+
+### Model_service.get_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/model_service.get_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/model_service.get_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/model_service.get_model.js`
 
 
 -----

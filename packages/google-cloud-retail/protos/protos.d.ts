@@ -41006,6 +41006,9 @@ export namespace google {
 
                     /** UserEvent pageViewId */
                     pageViewId?: (string|null);
+
+                    /** UserEvent entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a UserEvent. */
@@ -41076,6 +41079,9 @@ export namespace google {
 
                     /** UserEvent pageViewId. */
                     public pageViewId: string;
+
+                    /** UserEvent entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new UserEvent instance using the specified properties.
@@ -43410,6 +43416,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions */
                     maxSuggestions?: (number|null);
+
+                    /** CompleteQueryRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -43441,6 +43450,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions. */
                     public maxSuggestions: number;
+
+                    /** CompleteQueryRequest entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -44078,6 +44090,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec */
                     spellCorrectionSpec?: (google.cloud.retail.v2beta.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -44151,6 +44166,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec. */
                     public spellCorrectionSpec?: (google.cloud.retail.v2beta.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
 
                     /** SearchRequest _spellCorrectionSpec. */
                     public _spellCorrectionSpec?: "spellCorrectionSpec";
@@ -45184,6 +45202,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs */
                     invalidConditionBoostSpecs?: (google.cloud.retail.v2beta.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                    /** SearchResponse experimentInfo */
+                    experimentInfo?: (google.cloud.retail.v2beta.IExperimentInfo[]|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -45224,6 +45245,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs. */
                     public invalidConditionBoostSpecs: google.cloud.retail.v2beta.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                    /** SearchResponse experimentInfo. */
+                    public experimentInfo: google.cloud.retail.v2beta.IExperimentInfo[];
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
@@ -45765,6 +45789,218 @@ export namespace google {
 
                         /**
                          * Gets the default type url for QueryExpansionInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExperimentInfo. */
+                interface IExperimentInfo {
+
+                    /** ExperimentInfo servingConfigExperiment */
+                    servingConfigExperiment?: (google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment */
+                    experiment?: (string|null);
+                }
+
+                /** Represents an ExperimentInfo. */
+                class ExperimentInfo implements IExperimentInfo {
+
+                    /**
+                     * Constructs a new ExperimentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExperimentInfo);
+
+                    /** ExperimentInfo servingConfigExperiment. */
+                    public servingConfigExperiment?: (google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment. */
+                    public experiment: string;
+
+                    /** ExperimentInfo experimentMetadata. */
+                    public experimentMetadata?: "servingConfigExperiment";
+
+                    /**
+                     * Creates a new ExperimentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentInfo instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExperimentInfo): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Verifies an ExperimentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
+                     * @param message ExperimentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentInfo {
+
+                    /** Properties of a ServingConfigExperiment. */
+                    interface IServingConfigExperiment {
+
+                        /** ServingConfigExperiment originalServingConfig */
+                        originalServingConfig?: (string|null);
+
+                        /** ServingConfigExperiment experimentServingConfig */
+                        experimentServingConfig?: (string|null);
+                    }
+
+                    /** Represents a ServingConfigExperiment. */
+                    class ServingConfigExperiment implements IServingConfigExperiment {
+
+                        /**
+                         * Constructs a new ServingConfigExperiment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment);
+
+                        /** ServingConfigExperiment originalServingConfig. */
+                        public originalServingConfig: string;
+
+                        /** ServingConfigExperiment experimentServingConfig. */
+                        public experimentServingConfig: string;
+
+                        /**
+                         * Creates a new ServingConfigExperiment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigExperiment instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Verifies a ServingConfigExperiment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigExperiment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
+                         * @param message ServingConfigExperiment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigExperiment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigExperiment
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -47589,6 +47825,20 @@ export namespace google {
                     public createModel(request: google.cloud.retail.v2beta.ICreateModelRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public getModel(request: google.cloud.retail.v2beta.IGetModelRequest, callback: google.cloud.retail.v2beta.ModelService.GetModelCallback): void;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getModel(request: google.cloud.retail.v2beta.IGetModelRequest): Promise<google.cloud.retail.v2beta.Model>;
+
+                    /**
                      * Calls PauseModel.
                      * @param request PauseModelRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Model
@@ -47681,6 +47931,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2beta.ModelService|getModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type GetModelCallback = (error: (Error|null), response?: google.cloud.retail.v2beta.Model) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.retail.v2beta.ModelService|pauseModel}.
@@ -47931,6 +48188,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetModelRequest. */
+                interface IGetModelRequest {
+
+                    /** GetModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetModelRequest. */
+                class GetModelRequest implements IGetModelRequest {
+
+                    /**
+                     * Constructs a new GetModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IGetModelRequest);
+
+                    /** GetModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IGetModelRequest): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.retail.v2beta.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Verifies a GetModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                     * @param message GetModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.GetModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetModelRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
