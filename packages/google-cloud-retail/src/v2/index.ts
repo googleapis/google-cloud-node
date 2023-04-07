@@ -19,6 +19,7 @@
 export {CatalogServiceClient} from './catalog_service_client';
 export {CompletionServiceClient} from './completion_service_client';
 export {ControlServiceClient} from './control_service_client';
+export {ModelServiceClient} from './model_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
 export {ProductServiceClient} from './product_service_client';
 export {SearchServiceClient} from './search_service_client';
