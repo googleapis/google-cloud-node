@@ -6,6 +6,1596 @@
           "nested": {
             "workstations": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "go_package": "cloud.google.com/go/workstations/apiv1/workstationspb;workstationspb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "WorkstationsProto",
+                    "java_package": "com.google.cloud.workstations.v1"
+                  },
+                  "nested": {
+                    "Workstations": {
+                      "options": {
+                        "(google.api.default_host)": "workstations.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetWorkstationCluster": {
+                          "requestType": "GetWorkstationClusterRequest",
+                          "responseType": "WorkstationCluster",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/workstationClusters/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/workstationClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListWorkstationClusters": {
+                          "requestType": "ListWorkstationClustersRequest",
+                          "responseType": "ListWorkstationClustersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/workstationClusters",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/workstationClusters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateWorkstationCluster": {
+                          "requestType": "CreateWorkstationClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/workstationClusters",
+                            "(google.api.http).body": "workstation_cluster",
+                            "(google.api.method_signature)": "parent,workstation_cluster,workstation_cluster_id",
+                            "(google.longrunning.operation_info).response_type": "WorkstationCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/workstationClusters",
+                                "body": "workstation_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,workstation_cluster,workstation_cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkstationCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateWorkstationCluster": {
+                          "requestType": "UpdateWorkstationClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{workstation_cluster.name=projects/*/locations/*/workstationClusters/*}",
+                            "(google.api.http).body": "workstation_cluster",
+                            "(google.api.method_signature)": "workstation_cluster,update_mask",
+                            "(google.longrunning.operation_info).response_type": "WorkstationCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{workstation_cluster.name=projects/*/locations/*/workstationClusters/*}",
+                                "body": "workstation_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workstation_cluster,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkstationCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWorkstationCluster": {
+                          "requestType": "DeleteWorkstationClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/workstationClusters/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "WorkstationCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/workstationClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkstationCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetWorkstationConfig": {
+                          "requestType": "GetWorkstationConfigRequest",
+                          "responseType": "WorkstationConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListWorkstationConfigs": {
+                          "requestType": "ListWorkstationConfigsRequest",
+                          "responseType": "ListWorkstationConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListUsableWorkstationConfigs": {
+                          "requestType": "ListUsableWorkstationConfigsRequest",
+                          "responseType": "ListUsableWorkstationConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs:listUsable",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs:listUsable"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateWorkstationConfig": {
+                          "requestType": "CreateWorkstationConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs",
+                            "(google.api.http).body": "workstation_config",
+                            "(google.api.method_signature)": "parent,workstation_config,workstation_config_id",
+                            "(google.longrunning.operation_info).response_type": "WorkstationConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs",
+                                "body": "workstation_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,workstation_config,workstation_config_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkstationConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateWorkstationConfig": {
+                          "requestType": "UpdateWorkstationConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{workstation_config.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}",
+                            "(google.api.http).body": "workstation_config",
+                            "(google.api.method_signature)": "workstation_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "WorkstationConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{workstation_config.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}",
+                                "body": "workstation_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workstation_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkstationConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWorkstationConfig": {
+                          "requestType": "DeleteWorkstationConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "WorkstationConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkstationConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetWorkstation": {
+                          "requestType": "GetWorkstationRequest",
+                          "responseType": "Workstation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListWorkstations": {
+                          "requestType": "ListWorkstationsRequest",
+                          "responseType": "ListWorkstationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListUsableWorkstations": {
+                          "requestType": "ListUsableWorkstationsRequest",
+                          "responseType": "ListUsableWorkstationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations:listUsable",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations:listUsable"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateWorkstation": {
+                          "requestType": "CreateWorkstationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations",
+                            "(google.api.http).body": "workstation",
+                            "(google.api.method_signature)": "parent,workstation,workstation_id",
+                            "(google.longrunning.operation_info).response_type": "Workstation",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations",
+                                "body": "workstation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,workstation,workstation_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workstation",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateWorkstation": {
+                          "requestType": "UpdateWorkstationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{workstation.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}",
+                            "(google.api.http).body": "workstation",
+                            "(google.api.method_signature)": "workstation,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Workstation",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{workstation.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}",
+                                "body": "workstation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workstation,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workstation",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWorkstation": {
+                          "requestType": "DeleteWorkstationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Workstation",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workstation",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StartWorkstation": {
+                          "requestType": "StartWorkstationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:start",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Workstation",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:start",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workstation",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StopWorkstation": {
+                          "requestType": "StopWorkstationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Workstation",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Workstation",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GenerateAccessToken": {
+                          "requestType": "GenerateAccessTokenRequest",
+                          "responseType": "GenerateAccessTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{workstation=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:generateAccessToken",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "workstation"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{workstation=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:generateAccessToken",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "workstation"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "WorkstationCluster": {
+                      "options": {
+                        "(google.api.resource).type": "workstations.googleapis.com/WorkstationCluster",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/workstationClusters/{workstation_cluster}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 15
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "subnetwork": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "privateClusterConfig": {
+                          "type": "PrivateClusterConfig",
+                          "id": 12
+                        },
+                        "degraded": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PrivateClusterConfig": {
+                          "fields": {
+                            "enablePrivateEndpoint": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "clusterHostname": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "serviceAttachmentUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "allowedProjects": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "WorkstationConfig": {
+                      "options": {
+                        "(google.api.resource).type": "workstations.googleapis.com/WorkstationConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/workstationClusters/{workstation_cluster}/workstationConfigs/{workstation_config}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 18
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "idleTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 10
+                        },
+                        "runningTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 11
+                        },
+                        "host": {
+                          "type": "Host",
+                          "id": 12
+                        },
+                        "persistentDirectories": {
+                          "rule": "repeated",
+                          "type": "PersistentDirectory",
+                          "id": 13
+                        },
+                        "container": {
+                          "type": "Container",
+                          "id": 14
+                        },
+                        "encryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 17
+                        },
+                        "degraded": {
+                          "type": "bool",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Host": {
+                          "oneofs": {
+                            "config": {
+                              "oneof": [
+                                "gceInstance"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gceInstance": {
+                              "type": "GceInstance",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "GceInstance": {
+                              "fields": {
+                                "machineType": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "serviceAccount": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "tags": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "poolSize": {
+                                  "type": "int32",
+                                  "id": 5
+                                },
+                                "disablePublicIpAddresses": {
+                                  "type": "bool",
+                                  "id": 6
+                                },
+                                "enableNestedVirtualization": {
+                                  "type": "bool",
+                                  "id": 7
+                                },
+                                "shieldedInstanceConfig": {
+                                  "type": "GceShieldedInstanceConfig",
+                                  "id": 8
+                                },
+                                "confidentialInstanceConfig": {
+                                  "type": "GceConfidentialInstanceConfig",
+                                  "id": 10
+                                },
+                                "bootDiskSizeGb": {
+                                  "type": "int32",
+                                  "id": 9
+                                }
+                              },
+                              "nested": {
+                                "GceShieldedInstanceConfig": {
+                                  "fields": {
+                                    "enableSecureBoot": {
+                                      "type": "bool",
+                                      "id": 1
+                                    },
+                                    "enableVtpm": {
+                                      "type": "bool",
+                                      "id": 2
+                                    },
+                                    "enableIntegrityMonitoring": {
+                                      "type": "bool",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "GceConfidentialInstanceConfig": {
+                                  "fields": {
+                                    "enableConfidentialCompute": {
+                                      "type": "bool",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "PersistentDirectory": {
+                          "oneofs": {
+                            "directoryType": {
+                              "oneof": [
+                                "gcePd"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcePd": {
+                              "type": "GceRegionalPersistentDisk",
+                              "id": 2
+                            },
+                            "mountPath": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "GceRegionalPersistentDisk": {
+                              "fields": {
+                                "sizeGb": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "fsType": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "diskType": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "sourceSnapshot": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "reclaimPolicy": {
+                                  "type": "ReclaimPolicy",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "ReclaimPolicy": {
+                                  "values": {
+                                    "RECLAIM_POLICY_UNSPECIFIED": 0,
+                                    "DELETE": 1,
+                                    "RETAIN": 2
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Container": {
+                          "fields": {
+                            "image": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "command": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "args": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "env": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "workingDir": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "runAsUser": {
+                              "type": "int32",
+                              "id": 6
+                            }
+                          }
+                        },
+                        "CustomerEncryptionKey": {
+                          "fields": {
+                            "kmsKey": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "kmsKeyServiceAccount": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Workstation": {
+                      "options": {
+                        "(google.api.resource).type": "workstations.googleapis.com/Workstation",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/workstationClusters/{workstation_cluster}/workstationConfigs/{workstation_config}/workstations/{workstation}",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 13
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STATE_STARTING": 1,
+                            "STATE_RUNNING": 2,
+                            "STATE_STOPPING": 3,
+                            "STATE_STOPPED": 4
+                          }
+                        }
+                      }
+                    },
+                    "GetWorkstationClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkstationClustersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListWorkstationClustersResponse": {
+                      "fields": {
+                        "workstationClusters": {
+                          "rule": "repeated",
+                          "type": "WorkstationCluster",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateWorkstationClusterRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        },
+                        "workstationClusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workstationCluster": {
+                          "type": "WorkstationCluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UpdateWorkstationClusterRequest": {
+                      "fields": {
+                        "workstationCluster": {
+                          "type": "WorkstationCluster",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteWorkstationClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetWorkstationConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkstationConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListWorkstationConfigsResponse": {
+                      "fields": {
+                        "workstationConfigs": {
+                          "rule": "repeated",
+                          "type": "WorkstationConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListUsableWorkstationConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListUsableWorkstationConfigsResponse": {
+                      "fields": {
+                        "workstationConfigs": {
+                          "rule": "repeated",
+                          "type": "WorkstationConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateWorkstationConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationCluster"
+                          }
+                        },
+                        "workstationConfigId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workstationConfig": {
+                          "type": "WorkstationConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UpdateWorkstationConfigRequest": {
+                      "fields": {
+                        "workstationConfig": {
+                          "type": "WorkstationConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteWorkstationConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationConfig"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetWorkstationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/Workstation"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkstationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListWorkstationsResponse": {
+                      "fields": {
+                        "workstations": {
+                          "rule": "repeated",
+                          "type": "Workstation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListUsableWorkstationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListUsableWorkstationsResponse": {
+                      "fields": {
+                        "workstations": {
+                          "rule": "repeated",
+                          "type": "Workstation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateWorkstationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/WorkstationConfig"
+                          }
+                        },
+                        "workstationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workstation": {
+                          "type": "Workstation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UpdateWorkstationRequest": {
+                      "fields": {
+                        "workstation": {
+                          "type": "Workstation",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteWorkstationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/Workstation"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StartWorkstationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/Workstation"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StopWorkstationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/Workstation"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GenerateAccessTokenRequest": {
+                      "oneofs": {
+                        "expiration": {
+                          "oneof": [
+                            "expireTime",
+                            "ttl"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "workstation": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workstations.googleapis.com/Workstation"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateAccessTokenResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta": {
                   "options": {
                     "go_package": "cloud.google.com/go/workstations/apiv1beta/workstationspb;workstationspb",

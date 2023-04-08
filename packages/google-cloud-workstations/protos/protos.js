@@ -57,6 +57,12435 @@
                  */
                 var workstations = {};
     
+                workstations.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.workstations
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.Workstations = (function() {
+    
+                        /**
+                         * Constructs a new Workstations service.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a Workstations
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function Workstations(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (Workstations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Workstations;
+    
+                        /**
+                         * Creates new Workstations service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {Workstations} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        Workstations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|getWorkstationCluster}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef GetWorkstationClusterCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.WorkstationCluster} [response] WorkstationCluster
+                         */
+    
+                        /**
+                         * Calls GetWorkstationCluster.
+                         * @function getWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGetWorkstationClusterRequest} request GetWorkstationClusterRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.GetWorkstationClusterCallback} callback Node-style callback called with the error, if any, and WorkstationCluster
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.getWorkstationCluster = function getWorkstationCluster(request, callback) {
+                            return this.rpcCall(getWorkstationCluster, $root.google.cloud.workstations.v1.GetWorkstationClusterRequest, $root.google.cloud.workstations.v1.WorkstationCluster, request, callback);
+                        }, "name", { value: "GetWorkstationCluster" });
+    
+                        /**
+                         * Calls GetWorkstationCluster.
+                         * @function getWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGetWorkstationClusterRequest} request GetWorkstationClusterRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.WorkstationCluster>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|listWorkstationClusters}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef ListWorkstationClustersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.ListWorkstationClustersResponse} [response] ListWorkstationClustersResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkstationClusters.
+                         * @function listWorkstationClusters
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersRequest} request ListWorkstationClustersRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.ListWorkstationClustersCallback} callback Node-style callback called with the error, if any, and ListWorkstationClustersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.listWorkstationClusters = function listWorkstationClusters(request, callback) {
+                            return this.rpcCall(listWorkstationClusters, $root.google.cloud.workstations.v1.ListWorkstationClustersRequest, $root.google.cloud.workstations.v1.ListWorkstationClustersResponse, request, callback);
+                        }, "name", { value: "ListWorkstationClusters" });
+    
+                        /**
+                         * Calls ListWorkstationClusters.
+                         * @function listWorkstationClusters
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersRequest} request ListWorkstationClustersRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.ListWorkstationClustersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|createWorkstationCluster}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef CreateWorkstationClusterCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateWorkstationCluster.
+                         * @function createWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationClusterRequest} request CreateWorkstationClusterRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.CreateWorkstationClusterCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.createWorkstationCluster = function createWorkstationCluster(request, callback) {
+                            return this.rpcCall(createWorkstationCluster, $root.google.cloud.workstations.v1.CreateWorkstationClusterRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateWorkstationCluster" });
+    
+                        /**
+                         * Calls CreateWorkstationCluster.
+                         * @function createWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationClusterRequest} request CreateWorkstationClusterRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|updateWorkstationCluster}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef UpdateWorkstationClusterCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateWorkstationCluster.
+                         * @function updateWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationClusterRequest} request UpdateWorkstationClusterRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.UpdateWorkstationClusterCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.updateWorkstationCluster = function updateWorkstationCluster(request, callback) {
+                            return this.rpcCall(updateWorkstationCluster, $root.google.cloud.workstations.v1.UpdateWorkstationClusterRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateWorkstationCluster" });
+    
+                        /**
+                         * Calls UpdateWorkstationCluster.
+                         * @function updateWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationClusterRequest} request UpdateWorkstationClusterRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|deleteWorkstationCluster}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef DeleteWorkstationClusterCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteWorkstationCluster.
+                         * @function deleteWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationClusterRequest} request DeleteWorkstationClusterRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.DeleteWorkstationClusterCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.deleteWorkstationCluster = function deleteWorkstationCluster(request, callback) {
+                            return this.rpcCall(deleteWorkstationCluster, $root.google.cloud.workstations.v1.DeleteWorkstationClusterRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteWorkstationCluster" });
+    
+                        /**
+                         * Calls DeleteWorkstationCluster.
+                         * @function deleteWorkstationCluster
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationClusterRequest} request DeleteWorkstationClusterRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|getWorkstationConfig}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef GetWorkstationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.WorkstationConfig} [response] WorkstationConfig
+                         */
+    
+                        /**
+                         * Calls GetWorkstationConfig.
+                         * @function getWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGetWorkstationConfigRequest} request GetWorkstationConfigRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.GetWorkstationConfigCallback} callback Node-style callback called with the error, if any, and WorkstationConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.getWorkstationConfig = function getWorkstationConfig(request, callback) {
+                            return this.rpcCall(getWorkstationConfig, $root.google.cloud.workstations.v1.GetWorkstationConfigRequest, $root.google.cloud.workstations.v1.WorkstationConfig, request, callback);
+                        }, "name", { value: "GetWorkstationConfig" });
+    
+                        /**
+                         * Calls GetWorkstationConfig.
+                         * @function getWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGetWorkstationConfigRequest} request GetWorkstationConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.WorkstationConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|listWorkstationConfigs}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef ListWorkstationConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.ListWorkstationConfigsResponse} [response] ListWorkstationConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkstationConfigs.
+                         * @function listWorkstationConfigs
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsRequest} request ListWorkstationConfigsRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.ListWorkstationConfigsCallback} callback Node-style callback called with the error, if any, and ListWorkstationConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.listWorkstationConfigs = function listWorkstationConfigs(request, callback) {
+                            return this.rpcCall(listWorkstationConfigs, $root.google.cloud.workstations.v1.ListWorkstationConfigsRequest, $root.google.cloud.workstations.v1.ListWorkstationConfigsResponse, request, callback);
+                        }, "name", { value: "ListWorkstationConfigs" });
+    
+                        /**
+                         * Calls ListWorkstationConfigs.
+                         * @function listWorkstationConfigs
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsRequest} request ListWorkstationConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.ListWorkstationConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|listUsableWorkstationConfigs}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef ListUsableWorkstationConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse} [response] ListUsableWorkstationConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListUsableWorkstationConfigs.
+                         * @function listUsableWorkstationConfigs
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest} request ListUsableWorkstationConfigsRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.ListUsableWorkstationConfigsCallback} callback Node-style callback called with the error, if any, and ListUsableWorkstationConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.listUsableWorkstationConfigs = function listUsableWorkstationConfigs(request, callback) {
+                            return this.rpcCall(listUsableWorkstationConfigs, $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest, $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse, request, callback);
+                        }, "name", { value: "ListUsableWorkstationConfigs" });
+    
+                        /**
+                         * Calls ListUsableWorkstationConfigs.
+                         * @function listUsableWorkstationConfigs
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest} request ListUsableWorkstationConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|createWorkstationConfig}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef CreateWorkstationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateWorkstationConfig.
+                         * @function createWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationConfigRequest} request CreateWorkstationConfigRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.CreateWorkstationConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.createWorkstationConfig = function createWorkstationConfig(request, callback) {
+                            return this.rpcCall(createWorkstationConfig, $root.google.cloud.workstations.v1.CreateWorkstationConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateWorkstationConfig" });
+    
+                        /**
+                         * Calls CreateWorkstationConfig.
+                         * @function createWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationConfigRequest} request CreateWorkstationConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|updateWorkstationConfig}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef UpdateWorkstationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateWorkstationConfig.
+                         * @function updateWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationConfigRequest} request UpdateWorkstationConfigRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.UpdateWorkstationConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.updateWorkstationConfig = function updateWorkstationConfig(request, callback) {
+                            return this.rpcCall(updateWorkstationConfig, $root.google.cloud.workstations.v1.UpdateWorkstationConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateWorkstationConfig" });
+    
+                        /**
+                         * Calls UpdateWorkstationConfig.
+                         * @function updateWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationConfigRequest} request UpdateWorkstationConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|deleteWorkstationConfig}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef DeleteWorkstationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteWorkstationConfig.
+                         * @function deleteWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationConfigRequest} request DeleteWorkstationConfigRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.DeleteWorkstationConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.deleteWorkstationConfig = function deleteWorkstationConfig(request, callback) {
+                            return this.rpcCall(deleteWorkstationConfig, $root.google.cloud.workstations.v1.DeleteWorkstationConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteWorkstationConfig" });
+    
+                        /**
+                         * Calls DeleteWorkstationConfig.
+                         * @function deleteWorkstationConfig
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationConfigRequest} request DeleteWorkstationConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|getWorkstation}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef GetWorkstationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.Workstation} [response] Workstation
+                         */
+    
+                        /**
+                         * Calls GetWorkstation.
+                         * @function getWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGetWorkstationRequest} request GetWorkstationRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.GetWorkstationCallback} callback Node-style callback called with the error, if any, and Workstation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.getWorkstation = function getWorkstation(request, callback) {
+                            return this.rpcCall(getWorkstation, $root.google.cloud.workstations.v1.GetWorkstationRequest, $root.google.cloud.workstations.v1.Workstation, request, callback);
+                        }, "name", { value: "GetWorkstation" });
+    
+                        /**
+                         * Calls GetWorkstation.
+                         * @function getWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGetWorkstationRequest} request GetWorkstationRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.Workstation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|listWorkstations}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef ListWorkstationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.ListWorkstationsResponse} [response] ListWorkstationsResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkstations.
+                         * @function listWorkstations
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListWorkstationsRequest} request ListWorkstationsRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.ListWorkstationsCallback} callback Node-style callback called with the error, if any, and ListWorkstationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.listWorkstations = function listWorkstations(request, callback) {
+                            return this.rpcCall(listWorkstations, $root.google.cloud.workstations.v1.ListWorkstationsRequest, $root.google.cloud.workstations.v1.ListWorkstationsResponse, request, callback);
+                        }, "name", { value: "ListWorkstations" });
+    
+                        /**
+                         * Calls ListWorkstations.
+                         * @function listWorkstations
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListWorkstationsRequest} request ListWorkstationsRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.ListWorkstationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|listUsableWorkstations}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef ListUsableWorkstationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.ListUsableWorkstationsResponse} [response] ListUsableWorkstationsResponse
+                         */
+    
+                        /**
+                         * Calls ListUsableWorkstations.
+                         * @function listUsableWorkstations
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsRequest} request ListUsableWorkstationsRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.ListUsableWorkstationsCallback} callback Node-style callback called with the error, if any, and ListUsableWorkstationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.listUsableWorkstations = function listUsableWorkstations(request, callback) {
+                            return this.rpcCall(listUsableWorkstations, $root.google.cloud.workstations.v1.ListUsableWorkstationsRequest, $root.google.cloud.workstations.v1.ListUsableWorkstationsResponse, request, callback);
+                        }, "name", { value: "ListUsableWorkstations" });
+    
+                        /**
+                         * Calls ListUsableWorkstations.
+                         * @function listUsableWorkstations
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsRequest} request ListUsableWorkstationsRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.ListUsableWorkstationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|createWorkstation}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef CreateWorkstationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateWorkstation.
+                         * @function createWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationRequest} request CreateWorkstationRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.CreateWorkstationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.createWorkstation = function createWorkstation(request, callback) {
+                            return this.rpcCall(createWorkstation, $root.google.cloud.workstations.v1.CreateWorkstationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateWorkstation" });
+    
+                        /**
+                         * Calls CreateWorkstation.
+                         * @function createWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationRequest} request CreateWorkstationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|updateWorkstation}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef UpdateWorkstationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateWorkstation.
+                         * @function updateWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationRequest} request UpdateWorkstationRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.UpdateWorkstationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.updateWorkstation = function updateWorkstation(request, callback) {
+                            return this.rpcCall(updateWorkstation, $root.google.cloud.workstations.v1.UpdateWorkstationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateWorkstation" });
+    
+                        /**
+                         * Calls UpdateWorkstation.
+                         * @function updateWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationRequest} request UpdateWorkstationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|deleteWorkstation}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef DeleteWorkstationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteWorkstation.
+                         * @function deleteWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationRequest} request DeleteWorkstationRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.DeleteWorkstationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.deleteWorkstation = function deleteWorkstation(request, callback) {
+                            return this.rpcCall(deleteWorkstation, $root.google.cloud.workstations.v1.DeleteWorkstationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteWorkstation" });
+    
+                        /**
+                         * Calls DeleteWorkstation.
+                         * @function deleteWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationRequest} request DeleteWorkstationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|startWorkstation}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef StartWorkstationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls StartWorkstation.
+                         * @function startWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IStartWorkstationRequest} request StartWorkstationRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.StartWorkstationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.startWorkstation = function startWorkstation(request, callback) {
+                            return this.rpcCall(startWorkstation, $root.google.cloud.workstations.v1.StartWorkstationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "StartWorkstation" });
+    
+                        /**
+                         * Calls StartWorkstation.
+                         * @function startWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IStartWorkstationRequest} request StartWorkstationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|stopWorkstation}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef StopWorkstationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls StopWorkstation.
+                         * @function stopWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IStopWorkstationRequest} request StopWorkstationRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.StopWorkstationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.stopWorkstation = function stopWorkstation(request, callback) {
+                            return this.rpcCall(stopWorkstation, $root.google.cloud.workstations.v1.StopWorkstationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "StopWorkstation" });
+    
+                        /**
+                         * Calls StopWorkstation.
+                         * @function stopWorkstation
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IStopWorkstationRequest} request StopWorkstationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.workstations.v1.Workstations|generateAccessToken}.
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @typedef GenerateAccessTokenCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workstations.v1.GenerateAccessTokenResponse} [response] GenerateAccessTokenResponse
+                         */
+    
+                        /**
+                         * Calls GenerateAccessToken.
+                         * @function generateAccessToken
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenRequest} request GenerateAccessTokenRequest message or plain object
+                         * @param {google.cloud.workstations.v1.Workstations.GenerateAccessTokenCallback} callback Node-style callback called with the error, if any, and GenerateAccessTokenResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workstations.prototype.generateAccessToken = function generateAccessToken(request, callback) {
+                            return this.rpcCall(generateAccessToken, $root.google.cloud.workstations.v1.GenerateAccessTokenRequest, $root.google.cloud.workstations.v1.GenerateAccessTokenResponse, request, callback);
+                        }, "name", { value: "GenerateAccessToken" });
+    
+                        /**
+                         * Calls GenerateAccessToken.
+                         * @function generateAccessToken
+                         * @memberof google.cloud.workstations.v1.Workstations
+                         * @instance
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenRequest} request GenerateAccessTokenRequest message or plain object
+                         * @returns {Promise<google.cloud.workstations.v1.GenerateAccessTokenResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return Workstations;
+                    })();
+    
+                    v1.WorkstationCluster = (function() {
+    
+                        /**
+                         * Properties of a WorkstationCluster.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IWorkstationCluster
+                         * @property {string|null} [name] WorkstationCluster name
+                         * @property {string|null} [displayName] WorkstationCluster displayName
+                         * @property {string|null} [uid] WorkstationCluster uid
+                         * @property {boolean|null} [reconciling] WorkstationCluster reconciling
+                         * @property {Object.<string,string>|null} [annotations] WorkstationCluster annotations
+                         * @property {Object.<string,string>|null} [labels] WorkstationCluster labels
+                         * @property {google.protobuf.ITimestamp|null} [createTime] WorkstationCluster createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] WorkstationCluster updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] WorkstationCluster deleteTime
+                         * @property {string|null} [etag] WorkstationCluster etag
+                         * @property {string|null} [network] WorkstationCluster network
+                         * @property {string|null} [subnetwork] WorkstationCluster subnetwork
+                         * @property {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null} [privateClusterConfig] WorkstationCluster privateClusterConfig
+                         * @property {boolean|null} [degraded] WorkstationCluster degraded
+                         * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationCluster conditions
+                         */
+    
+                        /**
+                         * Constructs a new WorkstationCluster.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a WorkstationCluster.
+                         * @implements IWorkstationCluster
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IWorkstationCluster=} [properties] Properties to set
+                         */
+                        function WorkstationCluster(properties) {
+                            this.annotations = {};
+                            this.labels = {};
+                            this.conditions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WorkstationCluster name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.name = "";
+    
+                        /**
+                         * WorkstationCluster displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.displayName = "";
+    
+                        /**
+                         * WorkstationCluster uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.uid = "";
+    
+                        /**
+                         * WorkstationCluster reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.reconciling = false;
+    
+                        /**
+                         * WorkstationCluster annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * WorkstationCluster labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * WorkstationCluster createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.createTime = null;
+    
+                        /**
+                         * WorkstationCluster updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.updateTime = null;
+    
+                        /**
+                         * WorkstationCluster deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.deleteTime = null;
+    
+                        /**
+                         * WorkstationCluster etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.etag = "";
+    
+                        /**
+                         * WorkstationCluster network.
+                         * @member {string} network
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.network = "";
+    
+                        /**
+                         * WorkstationCluster subnetwork.
+                         * @member {string} subnetwork
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.subnetwork = "";
+    
+                        /**
+                         * WorkstationCluster privateClusterConfig.
+                         * @member {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null|undefined} privateClusterConfig
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.privateClusterConfig = null;
+    
+                        /**
+                         * WorkstationCluster degraded.
+                         * @member {boolean} degraded
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.degraded = false;
+    
+                        /**
+                         * WorkstationCluster conditions.
+                         * @member {Array.<google.rpc.IStatus>} conditions
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.conditions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new WorkstationCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstationCluster=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.WorkstationCluster} WorkstationCluster instance
+                         */
+                        WorkstationCluster.create = function create(properties) {
+                            return new WorkstationCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WorkstationCluster message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstationCluster} message WorkstationCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkstationCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.uid);
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reconciling);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.etag);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.network);
+                            if (message.subnetwork != null && Object.hasOwnProperty.call(message, "subnetwork"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.subnetwork);
+                            if (message.privateClusterConfig != null && Object.hasOwnProperty.call(message, "privateClusterConfig"))
+                                $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.encode(message.privateClusterConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.degraded != null && Object.hasOwnProperty.call(message, "degraded"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.degraded);
+                            if (message.conditions != null && message.conditions.length)
+                                for (var i = 0; i < message.conditions.length; ++i)
+                                    $root.google.rpc.Status.encode(message.conditions[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WorkstationCluster message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstationCluster} message WorkstationCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkstationCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WorkstationCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.WorkstationCluster} WorkstationCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkstationCluster.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationCluster(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.reconciling = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 15: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.subnetwork = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.privateClusterConfig = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.degraded = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.conditions && message.conditions.length))
+                                            message.conditions = [];
+                                        message.conditions.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WorkstationCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.WorkstationCluster} WorkstationCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkstationCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WorkstationCluster message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WorkstationCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
+                                if (!$util.isString(message.subnetwork))
+                                    return "subnetwork: string expected";
+                            if (message.privateClusterConfig != null && message.hasOwnProperty("privateClusterConfig")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify(message.privateClusterConfig);
+                                if (error)
+                                    return "privateClusterConfig." + error;
+                            }
+                            if (message.degraded != null && message.hasOwnProperty("degraded"))
+                                if (typeof message.degraded !== "boolean")
+                                    return "degraded: boolean expected";
+                            if (message.conditions != null && message.hasOwnProperty("conditions")) {
+                                if (!Array.isArray(message.conditions))
+                                    return "conditions: array expected";
+                                for (var i = 0; i < message.conditions.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.conditions[i]);
+                                    if (error)
+                                        return "conditions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WorkstationCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.WorkstationCluster} WorkstationCluster
+                         */
+                        WorkstationCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.WorkstationCluster)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.WorkstationCluster();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.subnetwork != null)
+                                message.subnetwork = String(object.subnetwork);
+                            if (object.privateClusterConfig != null) {
+                                if (typeof object.privateClusterConfig !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.privateClusterConfig: object expected");
+                                message.privateClusterConfig = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.fromObject(object.privateClusterConfig);
+                            }
+                            if (object.degraded != null)
+                                message.degraded = Boolean(object.degraded);
+                            if (object.conditions) {
+                                if (!Array.isArray(object.conditions))
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.conditions: array expected");
+                                message.conditions = [];
+                                for (var i = 0; i < object.conditions.length; ++i) {
+                                    if (typeof object.conditions[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.conditions: object expected");
+                                    message.conditions[i] = $root.google.rpc.Status.fromObject(object.conditions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WorkstationCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {google.cloud.workstations.v1.WorkstationCluster} message WorkstationCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WorkstationCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.conditions = [];
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.uid = "";
+                                object.reconciling = false;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.etag = "";
+                                object.network = "";
+                                object.subnetwork = "";
+                                object.privateClusterConfig = null;
+                                object.degraded = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                object.network = message.network;
+                            if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
+                                object.subnetwork = message.subnetwork;
+                            if (message.privateClusterConfig != null && message.hasOwnProperty("privateClusterConfig"))
+                                object.privateClusterConfig = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.toObject(message.privateClusterConfig, options);
+                            if (message.degraded != null && message.hasOwnProperty("degraded"))
+                                object.degraded = message.degraded;
+                            if (message.conditions && message.conditions.length) {
+                                object.conditions = [];
+                                for (var j = 0; j < message.conditions.length; ++j)
+                                    object.conditions[j] = $root.google.rpc.Status.toObject(message.conditions[j], options);
+                            }
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WorkstationCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WorkstationCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WorkstationCluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WorkstationCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationCluster";
+                        };
+    
+                        WorkstationCluster.PrivateClusterConfig = (function() {
+    
+                            /**
+                             * Properties of a PrivateClusterConfig.
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster
+                             * @interface IPrivateClusterConfig
+                             * @property {boolean|null} [enablePrivateEndpoint] PrivateClusterConfig enablePrivateEndpoint
+                             * @property {string|null} [clusterHostname] PrivateClusterConfig clusterHostname
+                             * @property {string|null} [serviceAttachmentUri] PrivateClusterConfig serviceAttachmentUri
+                             * @property {Array.<string>|null} [allowedProjects] PrivateClusterConfig allowedProjects
+                             */
+    
+                            /**
+                             * Constructs a new PrivateClusterConfig.
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster
+                             * @classdesc Represents a PrivateClusterConfig.
+                             * @implements IPrivateClusterConfig
+                             * @constructor
+                             * @param {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig=} [properties] Properties to set
+                             */
+                            function PrivateClusterConfig(properties) {
+                                this.allowedProjects = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PrivateClusterConfig enablePrivateEndpoint.
+                             * @member {boolean} enablePrivateEndpoint
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @instance
+                             */
+                            PrivateClusterConfig.prototype.enablePrivateEndpoint = false;
+    
+                            /**
+                             * PrivateClusterConfig clusterHostname.
+                             * @member {string} clusterHostname
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @instance
+                             */
+                            PrivateClusterConfig.prototype.clusterHostname = "";
+    
+                            /**
+                             * PrivateClusterConfig serviceAttachmentUri.
+                             * @member {string} serviceAttachmentUri
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @instance
+                             */
+                            PrivateClusterConfig.prototype.serviceAttachmentUri = "";
+    
+                            /**
+                             * PrivateClusterConfig allowedProjects.
+                             * @member {Array.<string>} allowedProjects
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @instance
+                             */
+                            PrivateClusterConfig.prototype.allowedProjects = $util.emptyArray;
+    
+                            /**
+                             * Creates a new PrivateClusterConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig} PrivateClusterConfig instance
+                             */
+                            PrivateClusterConfig.create = function create(properties) {
+                                return new PrivateClusterConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrivateClusterConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig} message PrivateClusterConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrivateClusterConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enablePrivateEndpoint != null && Object.hasOwnProperty.call(message, "enablePrivateEndpoint"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enablePrivateEndpoint);
+                                if (message.clusterHostname != null && Object.hasOwnProperty.call(message, "clusterHostname"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.clusterHostname);
+                                if (message.serviceAttachmentUri != null && Object.hasOwnProperty.call(message, "serviceAttachmentUri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceAttachmentUri);
+                                if (message.allowedProjects != null && message.allowedProjects.length)
+                                    for (var i = 0; i < message.allowedProjects.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.allowedProjects[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrivateClusterConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig} message PrivateClusterConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrivateClusterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrivateClusterConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig} PrivateClusterConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrivateClusterConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enablePrivateEndpoint = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.clusterHostname = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.serviceAttachmentUri = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.allowedProjects && message.allowedProjects.length))
+                                                message.allowedProjects = [];
+                                            message.allowedProjects.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrivateClusterConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig} PrivateClusterConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrivateClusterConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrivateClusterConfig message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrivateClusterConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enablePrivateEndpoint != null && message.hasOwnProperty("enablePrivateEndpoint"))
+                                    if (typeof message.enablePrivateEndpoint !== "boolean")
+                                        return "enablePrivateEndpoint: boolean expected";
+                                if (message.clusterHostname != null && message.hasOwnProperty("clusterHostname"))
+                                    if (!$util.isString(message.clusterHostname))
+                                        return "clusterHostname: string expected";
+                                if (message.serviceAttachmentUri != null && message.hasOwnProperty("serviceAttachmentUri"))
+                                    if (!$util.isString(message.serviceAttachmentUri))
+                                        return "serviceAttachmentUri: string expected";
+                                if (message.allowedProjects != null && message.hasOwnProperty("allowedProjects")) {
+                                    if (!Array.isArray(message.allowedProjects))
+                                        return "allowedProjects: array expected";
+                                    for (var i = 0; i < message.allowedProjects.length; ++i)
+                                        if (!$util.isString(message.allowedProjects[i]))
+                                            return "allowedProjects: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrivateClusterConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig} PrivateClusterConfig
+                             */
+                            PrivateClusterConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig();
+                                if (object.enablePrivateEndpoint != null)
+                                    message.enablePrivateEndpoint = Boolean(object.enablePrivateEndpoint);
+                                if (object.clusterHostname != null)
+                                    message.clusterHostname = String(object.clusterHostname);
+                                if (object.serviceAttachmentUri != null)
+                                    message.serviceAttachmentUri = String(object.serviceAttachmentUri);
+                                if (object.allowedProjects) {
+                                    if (!Array.isArray(object.allowedProjects))
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.allowedProjects: array expected");
+                                    message.allowedProjects = [];
+                                    for (var i = 0; i < object.allowedProjects.length; ++i)
+                                        message.allowedProjects[i] = String(object.allowedProjects[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrivateClusterConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig} message PrivateClusterConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrivateClusterConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.allowedProjects = [];
+                                if (options.defaults) {
+                                    object.enablePrivateEndpoint = false;
+                                    object.clusterHostname = "";
+                                    object.serviceAttachmentUri = "";
+                                }
+                                if (message.enablePrivateEndpoint != null && message.hasOwnProperty("enablePrivateEndpoint"))
+                                    object.enablePrivateEndpoint = message.enablePrivateEndpoint;
+                                if (message.clusterHostname != null && message.hasOwnProperty("clusterHostname"))
+                                    object.clusterHostname = message.clusterHostname;
+                                if (message.serviceAttachmentUri != null && message.hasOwnProperty("serviceAttachmentUri"))
+                                    object.serviceAttachmentUri = message.serviceAttachmentUri;
+                                if (message.allowedProjects && message.allowedProjects.length) {
+                                    object.allowedProjects = [];
+                                    for (var j = 0; j < message.allowedProjects.length; ++j)
+                                        object.allowedProjects[j] = message.allowedProjects[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PrivateClusterConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrivateClusterConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrivateClusterConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrivateClusterConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig";
+                            };
+    
+                            return PrivateClusterConfig;
+                        })();
+    
+                        return WorkstationCluster;
+                    })();
+    
+                    v1.WorkstationConfig = (function() {
+    
+                        /**
+                         * Properties of a WorkstationConfig.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IWorkstationConfig
+                         * @property {string|null} [name] WorkstationConfig name
+                         * @property {string|null} [displayName] WorkstationConfig displayName
+                         * @property {string|null} [uid] WorkstationConfig uid
+                         * @property {boolean|null} [reconciling] WorkstationConfig reconciling
+                         * @property {Object.<string,string>|null} [annotations] WorkstationConfig annotations
+                         * @property {Object.<string,string>|null} [labels] WorkstationConfig labels
+                         * @property {google.protobuf.ITimestamp|null} [createTime] WorkstationConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] WorkstationConfig updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] WorkstationConfig deleteTime
+                         * @property {string|null} [etag] WorkstationConfig etag
+                         * @property {google.protobuf.IDuration|null} [idleTimeout] WorkstationConfig idleTimeout
+                         * @property {google.protobuf.IDuration|null} [runningTimeout] WorkstationConfig runningTimeout
+                         * @property {google.cloud.workstations.v1.WorkstationConfig.IHost|null} [host] WorkstationConfig host
+                         * @property {Array.<google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory>|null} [persistentDirectories] WorkstationConfig persistentDirectories
+                         * @property {google.cloud.workstations.v1.WorkstationConfig.IContainer|null} [container] WorkstationConfig container
+                         * @property {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null} [encryptionKey] WorkstationConfig encryptionKey
+                         * @property {boolean|null} [degraded] WorkstationConfig degraded
+                         * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationConfig conditions
+                         */
+    
+                        /**
+                         * Constructs a new WorkstationConfig.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a WorkstationConfig.
+                         * @implements IWorkstationConfig
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IWorkstationConfig=} [properties] Properties to set
+                         */
+                        function WorkstationConfig(properties) {
+                            this.annotations = {};
+                            this.labels = {};
+                            this.persistentDirectories = [];
+                            this.conditions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WorkstationConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.name = "";
+    
+                        /**
+                         * WorkstationConfig displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.displayName = "";
+    
+                        /**
+                         * WorkstationConfig uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.uid = "";
+    
+                        /**
+                         * WorkstationConfig reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.reconciling = false;
+    
+                        /**
+                         * WorkstationConfig annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * WorkstationConfig labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * WorkstationConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.createTime = null;
+    
+                        /**
+                         * WorkstationConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.updateTime = null;
+    
+                        /**
+                         * WorkstationConfig deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.deleteTime = null;
+    
+                        /**
+                         * WorkstationConfig etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.etag = "";
+    
+                        /**
+                         * WorkstationConfig idleTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} idleTimeout
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.idleTimeout = null;
+    
+                        /**
+                         * WorkstationConfig runningTimeout.
+                         * @member {google.protobuf.IDuration|null|undefined} runningTimeout
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.runningTimeout = null;
+    
+                        /**
+                         * WorkstationConfig host.
+                         * @member {google.cloud.workstations.v1.WorkstationConfig.IHost|null|undefined} host
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.host = null;
+    
+                        /**
+                         * WorkstationConfig persistentDirectories.
+                         * @member {Array.<google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory>} persistentDirectories
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.persistentDirectories = $util.emptyArray;
+    
+                        /**
+                         * WorkstationConfig container.
+                         * @member {google.cloud.workstations.v1.WorkstationConfig.IContainer|null|undefined} container
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.container = null;
+    
+                        /**
+                         * WorkstationConfig encryptionKey.
+                         * @member {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null|undefined} encryptionKey
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.encryptionKey = null;
+    
+                        /**
+                         * WorkstationConfig degraded.
+                         * @member {boolean} degraded
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.degraded = false;
+    
+                        /**
+                         * WorkstationConfig conditions.
+                         * @member {Array.<google.rpc.IStatus>} conditions
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.conditions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new WorkstationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.WorkstationConfig} WorkstationConfig instance
+                         */
+                        WorkstationConfig.create = function create(properties) {
+                            return new WorkstationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WorkstationConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstationConfig} message WorkstationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkstationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.uid);
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reconciling);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.etag);
+                            if (message.idleTimeout != null && Object.hasOwnProperty.call(message, "idleTimeout"))
+                                $root.google.protobuf.Duration.encode(message.idleTimeout, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.runningTimeout != null && Object.hasOwnProperty.call(message, "runningTimeout"))
+                                $root.google.protobuf.Duration.encode(message.runningTimeout, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                $root.google.cloud.workstations.v1.WorkstationConfig.Host.encode(message.host, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.persistentDirectories != null && message.persistentDirectories.length)
+                                for (var i = 0; i < message.persistentDirectories.length; ++i)
+                                    $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.encode(message.persistentDirectories[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.container != null && Object.hasOwnProperty.call(message, "container"))
+                                $root.google.cloud.workstations.v1.WorkstationConfig.Container.encode(message.container, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.degraded != null && Object.hasOwnProperty.call(message, "degraded"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.degraded);
+                            if (message.conditions != null && message.conditions.length)
+                                for (var i = 0; i < message.conditions.length; ++i)
+                                    $root.google.rpc.Status.encode(message.conditions[i], writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.encryptionKey != null && Object.hasOwnProperty.call(message, "encryptionKey"))
+                                $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.encode(message.encryptionKey, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 18, wireType 2 =*/146).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WorkstationConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstationConfig} message WorkstationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkstationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WorkstationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.WorkstationConfig} WorkstationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkstationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.reconciling = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 18: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.runningTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.host = $root.google.cloud.workstations.v1.WorkstationConfig.Host.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.persistentDirectories && message.persistentDirectories.length))
+                                            message.persistentDirectories = [];
+                                        message.persistentDirectories.push($root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 14: {
+                                        message.container = $root.google.cloud.workstations.v1.WorkstationConfig.Container.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.encryptionKey = $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.degraded = reader.bool();
+                                        break;
+                                    }
+                                case 16: {
+                                        if (!(message.conditions && message.conditions.length))
+                                            message.conditions = [];
+                                        message.conditions.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WorkstationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.WorkstationConfig} WorkstationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkstationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WorkstationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WorkstationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.idleTimeout);
+                                if (error)
+                                    return "idleTimeout." + error;
+                            }
+                            if (message.runningTimeout != null && message.hasOwnProperty("runningTimeout")) {
+                                var error = $root.google.protobuf.Duration.verify(message.runningTimeout);
+                                if (error)
+                                    return "runningTimeout." + error;
+                            }
+                            if (message.host != null && message.hasOwnProperty("host")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationConfig.Host.verify(message.host);
+                                if (error)
+                                    return "host." + error;
+                            }
+                            if (message.persistentDirectories != null && message.hasOwnProperty("persistentDirectories")) {
+                                if (!Array.isArray(message.persistentDirectories))
+                                    return "persistentDirectories: array expected";
+                                for (var i = 0; i < message.persistentDirectories.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.verify(message.persistentDirectories[i]);
+                                    if (error)
+                                        return "persistentDirectories." + error;
+                                }
+                            }
+                            if (message.container != null && message.hasOwnProperty("container")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationConfig.Container.verify(message.container);
+                                if (error)
+                                    return "container." + error;
+                            }
+                            if (message.encryptionKey != null && message.hasOwnProperty("encryptionKey")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.verify(message.encryptionKey);
+                                if (error)
+                                    return "encryptionKey." + error;
+                            }
+                            if (message.degraded != null && message.hasOwnProperty("degraded"))
+                                if (typeof message.degraded !== "boolean")
+                                    return "degraded: boolean expected";
+                            if (message.conditions != null && message.hasOwnProperty("conditions")) {
+                                if (!Array.isArray(message.conditions))
+                                    return "conditions: array expected";
+                                for (var i = 0; i < message.conditions.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.conditions[i]);
+                                    if (error)
+                                        return "conditions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WorkstationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.WorkstationConfig} WorkstationConfig
+                         */
+                        WorkstationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.WorkstationConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.idleTimeout != null) {
+                                if (typeof object.idleTimeout !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.idleTimeout: object expected");
+                                message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout);
+                            }
+                            if (object.runningTimeout != null) {
+                                if (typeof object.runningTimeout !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.runningTimeout: object expected");
+                                message.runningTimeout = $root.google.protobuf.Duration.fromObject(object.runningTimeout);
+                            }
+                            if (object.host != null) {
+                                if (typeof object.host !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.host: object expected");
+                                message.host = $root.google.cloud.workstations.v1.WorkstationConfig.Host.fromObject(object.host);
+                            }
+                            if (object.persistentDirectories) {
+                                if (!Array.isArray(object.persistentDirectories))
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.persistentDirectories: array expected");
+                                message.persistentDirectories = [];
+                                for (var i = 0; i < object.persistentDirectories.length; ++i) {
+                                    if (typeof object.persistentDirectories[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.persistentDirectories: object expected");
+                                    message.persistentDirectories[i] = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.fromObject(object.persistentDirectories[i]);
+                                }
+                            }
+                            if (object.container != null) {
+                                if (typeof object.container !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.container: object expected");
+                                message.container = $root.google.cloud.workstations.v1.WorkstationConfig.Container.fromObject(object.container);
+                            }
+                            if (object.encryptionKey != null) {
+                                if (typeof object.encryptionKey !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.encryptionKey: object expected");
+                                message.encryptionKey = $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.fromObject(object.encryptionKey);
+                            }
+                            if (object.degraded != null)
+                                message.degraded = Boolean(object.degraded);
+                            if (object.conditions) {
+                                if (!Array.isArray(object.conditions))
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.conditions: array expected");
+                                message.conditions = [];
+                                for (var i = 0; i < object.conditions.length; ++i) {
+                                    if (typeof object.conditions[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.conditions: object expected");
+                                    message.conditions[i] = $root.google.rpc.Status.fromObject(object.conditions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WorkstationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {google.cloud.workstations.v1.WorkstationConfig} message WorkstationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WorkstationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.persistentDirectories = [];
+                                object.conditions = [];
+                            }
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.uid = "";
+                                object.reconciling = false;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.etag = "";
+                                object.idleTimeout = null;
+                                object.runningTimeout = null;
+                                object.host = null;
+                                object.container = null;
+                                object.degraded = false;
+                                object.encryptionKey = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout"))
+                                object.idleTimeout = $root.google.protobuf.Duration.toObject(message.idleTimeout, options);
+                            if (message.runningTimeout != null && message.hasOwnProperty("runningTimeout"))
+                                object.runningTimeout = $root.google.protobuf.Duration.toObject(message.runningTimeout, options);
+                            if (message.host != null && message.hasOwnProperty("host"))
+                                object.host = $root.google.cloud.workstations.v1.WorkstationConfig.Host.toObject(message.host, options);
+                            if (message.persistentDirectories && message.persistentDirectories.length) {
+                                object.persistentDirectories = [];
+                                for (var j = 0; j < message.persistentDirectories.length; ++j)
+                                    object.persistentDirectories[j] = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.toObject(message.persistentDirectories[j], options);
+                            }
+                            if (message.container != null && message.hasOwnProperty("container"))
+                                object.container = $root.google.cloud.workstations.v1.WorkstationConfig.Container.toObject(message.container, options);
+                            if (message.degraded != null && message.hasOwnProperty("degraded"))
+                                object.degraded = message.degraded;
+                            if (message.conditions && message.conditions.length) {
+                                object.conditions = [];
+                                for (var j = 0; j < message.conditions.length; ++j)
+                                    object.conditions[j] = $root.google.rpc.Status.toObject(message.conditions[j], options);
+                            }
+                            if (message.encryptionKey != null && message.hasOwnProperty("encryptionKey"))
+                                object.encryptionKey = $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.toObject(message.encryptionKey, options);
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WorkstationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WorkstationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WorkstationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WorkstationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig";
+                        };
+    
+                        WorkstationConfig.Host = (function() {
+    
+                            /**
+                             * Properties of a Host.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @interface IHost
+                             * @property {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance|null} [gceInstance] Host gceInstance
+                             */
+    
+                            /**
+                             * Constructs a new Host.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @classdesc Represents a Host.
+                             * @implements IHost
+                             * @constructor
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IHost=} [properties] Properties to set
+                             */
+                            function Host(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Host gceInstance.
+                             * @member {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance|null|undefined} gceInstance
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @instance
+                             */
+                            Host.prototype.gceInstance = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Host config.
+                             * @member {"gceInstance"|undefined} config
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @instance
+                             */
+                            Object.defineProperty(Host.prototype, "config", {
+                                get: $util.oneOfGetter($oneOfFields = ["gceInstance"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Host instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IHost=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Host} Host instance
+                             */
+                            Host.create = function create(properties) {
+                                return new Host(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Host message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IHost} message Host message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Host.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gceInstance != null && Object.hasOwnProperty.call(message, "gceInstance"))
+                                    $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.encode(message.gceInstance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Host message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IHost} message Host message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Host.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Host message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Host} Host
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Host.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.gceInstance = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Host message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Host} Host
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Host.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Host message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Host.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.gceInstance != null && message.hasOwnProperty("gceInstance")) {
+                                    properties.config = 1;
+                                    {
+                                        var error = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.verify(message.gceInstance);
+                                        if (error)
+                                            return "gceInstance." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Host message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Host} Host
+                             */
+                            Host.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.Host)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host();
+                                if (object.gceInstance != null) {
+                                    if (typeof object.gceInstance !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Host.gceInstance: object expected");
+                                    message.gceInstance = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.fromObject(object.gceInstance);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Host message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.Host} message Host
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Host.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.gceInstance != null && message.hasOwnProperty("gceInstance")) {
+                                    object.gceInstance = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.toObject(message.gceInstance, options);
+                                    if (options.oneofs)
+                                        object.config = "gceInstance";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Host to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Host.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Host
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Host.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.Host";
+                            };
+    
+                            Host.GceInstance = (function() {
+    
+                                /**
+                                 * Properties of a GceInstance.
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                                 * @interface IGceInstance
+                                 * @property {string|null} [machineType] GceInstance machineType
+                                 * @property {string|null} [serviceAccount] GceInstance serviceAccount
+                                 * @property {Array.<string>|null} [tags] GceInstance tags
+                                 * @property {number|null} [poolSize] GceInstance poolSize
+                                 * @property {boolean|null} [disablePublicIpAddresses] GceInstance disablePublicIpAddresses
+                                 * @property {boolean|null} [enableNestedVirtualization] GceInstance enableNestedVirtualization
+                                 * @property {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null} [shieldedInstanceConfig] GceInstance shieldedInstanceConfig
+                                 * @property {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig|null} [confidentialInstanceConfig] GceInstance confidentialInstanceConfig
+                                 * @property {number|null} [bootDiskSizeGb] GceInstance bootDiskSizeGb
+                                 */
+    
+                                /**
+                                 * Constructs a new GceInstance.
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host
+                                 * @classdesc Represents a GceInstance.
+                                 * @implements IGceInstance
+                                 * @constructor
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance=} [properties] Properties to set
+                                 */
+                                function GceInstance(properties) {
+                                    this.tags = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GceInstance machineType.
+                                 * @member {string} machineType
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.machineType = "";
+    
+                                /**
+                                 * GceInstance serviceAccount.
+                                 * @member {string} serviceAccount
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.serviceAccount = "";
+    
+                                /**
+                                 * GceInstance tags.
+                                 * @member {Array.<string>} tags
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.tags = $util.emptyArray;
+    
+                                /**
+                                 * GceInstance poolSize.
+                                 * @member {number} poolSize
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.poolSize = 0;
+    
+                                /**
+                                 * GceInstance disablePublicIpAddresses.
+                                 * @member {boolean} disablePublicIpAddresses
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.disablePublicIpAddresses = false;
+    
+                                /**
+                                 * GceInstance enableNestedVirtualization.
+                                 * @member {boolean} enableNestedVirtualization
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.enableNestedVirtualization = false;
+    
+                                /**
+                                 * GceInstance shieldedInstanceConfig.
+                                 * @member {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null|undefined} shieldedInstanceConfig
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.shieldedInstanceConfig = null;
+    
+                                /**
+                                 * GceInstance confidentialInstanceConfig.
+                                 * @member {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig|null|undefined} confidentialInstanceConfig
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.confidentialInstanceConfig = null;
+    
+                                /**
+                                 * GceInstance bootDiskSizeGb.
+                                 * @member {number} bootDiskSizeGb
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.bootDiskSizeGb = 0;
+    
+                                /**
+                                 * Creates a new GceInstance instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance=} [properties] Properties to set
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance} GceInstance instance
+                                 */
+                                GceInstance.create = function create(properties) {
+                                    return new GceInstance(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GceInstance message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance} message GceInstance message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GceInstance.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.machineType != null && Object.hasOwnProperty.call(message, "machineType"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineType);
+                                    if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                                    if (message.tags != null && message.tags.length)
+                                        for (var i = 0; i < message.tags.length; ++i)
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.tags[i]);
+                                    if (message.poolSize != null && Object.hasOwnProperty.call(message, "poolSize"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.poolSize);
+                                    if (message.disablePublicIpAddresses != null && Object.hasOwnProperty.call(message, "disablePublicIpAddresses"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.disablePublicIpAddresses);
+                                    if (message.enableNestedVirtualization != null && Object.hasOwnProperty.call(message, "enableNestedVirtualization"))
+                                        writer.uint32(/* id 7, wireType 0 =*/56).bool(message.enableNestedVirtualization);
+                                    if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
+                                        $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    if (message.bootDiskSizeGb != null && Object.hasOwnProperty.call(message, "bootDiskSizeGb"))
+                                        writer.uint32(/* id 9, wireType 0 =*/72).int32(message.bootDiskSizeGb);
+                                    if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
+                                        $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GceInstance message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance} message GceInstance message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GceInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GceInstance message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance} GceInstance
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GceInstance.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.machineType = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.serviceAccount = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.tags && message.tags.length))
+                                                    message.tags = [];
+                                                message.tags.push(reader.string());
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.poolSize = reader.int32();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.disablePublicIpAddresses = reader.bool();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.enableNestedVirtualization = reader.bool();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.shieldedInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 10: {
+                                                message.confidentialInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.bootDiskSizeGb = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GceInstance message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance} GceInstance
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GceInstance.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GceInstance message.
+                                 * @function verify
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GceInstance.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                        if (!$util.isString(message.machineType))
+                                            return "machineType: string expected";
+                                    if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                        if (!$util.isString(message.serviceAccount))
+                                            return "serviceAccount: string expected";
+                                    if (message.tags != null && message.hasOwnProperty("tags")) {
+                                        if (!Array.isArray(message.tags))
+                                            return "tags: array expected";
+                                        for (var i = 0; i < message.tags.length; ++i)
+                                            if (!$util.isString(message.tags[i]))
+                                                return "tags: string[] expected";
+                                    }
+                                    if (message.poolSize != null && message.hasOwnProperty("poolSize"))
+                                        if (!$util.isInteger(message.poolSize))
+                                            return "poolSize: integer expected";
+                                    if (message.disablePublicIpAddresses != null && message.hasOwnProperty("disablePublicIpAddresses"))
+                                        if (typeof message.disablePublicIpAddresses !== "boolean")
+                                            return "disablePublicIpAddresses: boolean expected";
+                                    if (message.enableNestedVirtualization != null && message.hasOwnProperty("enableNestedVirtualization"))
+                                        if (typeof message.enableNestedVirtualization !== "boolean")
+                                            return "enableNestedVirtualization: boolean expected";
+                                    if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig")) {
+                                        var error = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.verify(message.shieldedInstanceConfig);
+                                        if (error)
+                                            return "shieldedInstanceConfig." + error;
+                                    }
+                                    if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig")) {
+                                        var error = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.verify(message.confidentialInstanceConfig);
+                                        if (error)
+                                            return "confidentialInstanceConfig." + error;
+                                    }
+                                    if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
+                                        if (!$util.isInteger(message.bootDiskSizeGb))
+                                            return "bootDiskSizeGb: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GceInstance message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance} GceInstance
+                                 */
+                                GceInstance.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance)
+                                        return object;
+                                    var message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance();
+                                    if (object.machineType != null)
+                                        message.machineType = String(object.machineType);
+                                    if (object.serviceAccount != null)
+                                        message.serviceAccount = String(object.serviceAccount);
+                                    if (object.tags) {
+                                        if (!Array.isArray(object.tags))
+                                            throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.tags: array expected");
+                                        message.tags = [];
+                                        for (var i = 0; i < object.tags.length; ++i)
+                                            message.tags[i] = String(object.tags[i]);
+                                    }
+                                    if (object.poolSize != null)
+                                        message.poolSize = object.poolSize | 0;
+                                    if (object.disablePublicIpAddresses != null)
+                                        message.disablePublicIpAddresses = Boolean(object.disablePublicIpAddresses);
+                                    if (object.enableNestedVirtualization != null)
+                                        message.enableNestedVirtualization = Boolean(object.enableNestedVirtualization);
+                                    if (object.shieldedInstanceConfig != null) {
+                                        if (typeof object.shieldedInstanceConfig !== "object")
+                                            throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.shieldedInstanceConfig: object expected");
+                                        message.shieldedInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
+                                    }
+                                    if (object.confidentialInstanceConfig != null) {
+                                        if (typeof object.confidentialInstanceConfig !== "object")
+                                            throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.confidentialInstanceConfig: object expected");
+                                        message.confidentialInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.fromObject(object.confidentialInstanceConfig);
+                                    }
+                                    if (object.bootDiskSizeGb != null)
+                                        message.bootDiskSizeGb = object.bootDiskSizeGb | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GceInstance message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance} message GceInstance
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GceInstance.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.tags = [];
+                                    if (options.defaults) {
+                                        object.machineType = "";
+                                        object.serviceAccount = "";
+                                        object.poolSize = 0;
+                                        object.disablePublicIpAddresses = false;
+                                        object.enableNestedVirtualization = false;
+                                        object.shieldedInstanceConfig = null;
+                                        object.bootDiskSizeGb = 0;
+                                        object.confidentialInstanceConfig = null;
+                                    }
+                                    if (message.machineType != null && message.hasOwnProperty("machineType"))
+                                        object.machineType = message.machineType;
+                                    if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                        object.serviceAccount = message.serviceAccount;
+                                    if (message.tags && message.tags.length) {
+                                        object.tags = [];
+                                        for (var j = 0; j < message.tags.length; ++j)
+                                            object.tags[j] = message.tags[j];
+                                    }
+                                    if (message.poolSize != null && message.hasOwnProperty("poolSize"))
+                                        object.poolSize = message.poolSize;
+                                    if (message.disablePublicIpAddresses != null && message.hasOwnProperty("disablePublicIpAddresses"))
+                                        object.disablePublicIpAddresses = message.disablePublicIpAddresses;
+                                    if (message.enableNestedVirtualization != null && message.hasOwnProperty("enableNestedVirtualization"))
+                                        object.enableNestedVirtualization = message.enableNestedVirtualization;
+                                    if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
+                                        object.shieldedInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
+                                    if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
+                                        object.bootDiskSizeGb = message.bootDiskSizeGb;
+                                    if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
+                                        object.confidentialInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GceInstance to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GceInstance.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GceInstance
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GceInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance";
+                                };
+    
+                                GceInstance.GceShieldedInstanceConfig = (function() {
+    
+                                    /**
+                                     * Properties of a GceShieldedInstanceConfig.
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                     * @interface IGceShieldedInstanceConfig
+                                     * @property {boolean|null} [enableSecureBoot] GceShieldedInstanceConfig enableSecureBoot
+                                     * @property {boolean|null} [enableVtpm] GceShieldedInstanceConfig enableVtpm
+                                     * @property {boolean|null} [enableIntegrityMonitoring] GceShieldedInstanceConfig enableIntegrityMonitoring
+                                     */
+    
+                                    /**
+                                     * Constructs a new GceShieldedInstanceConfig.
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                     * @classdesc Represents a GceShieldedInstanceConfig.
+                                     * @implements IGceShieldedInstanceConfig
+                                     * @constructor
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig=} [properties] Properties to set
+                                     */
+                                    function GceShieldedInstanceConfig(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * GceShieldedInstanceConfig enableSecureBoot.
+                                     * @member {boolean} enableSecureBoot
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @instance
+                                     */
+                                    GceShieldedInstanceConfig.prototype.enableSecureBoot = false;
+    
+                                    /**
+                                     * GceShieldedInstanceConfig enableVtpm.
+                                     * @member {boolean} enableVtpm
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @instance
+                                     */
+                                    GceShieldedInstanceConfig.prototype.enableVtpm = false;
+    
+                                    /**
+                                     * GceShieldedInstanceConfig enableIntegrityMonitoring.
+                                     * @member {boolean} enableIntegrityMonitoring
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @instance
+                                     */
+                                    GceShieldedInstanceConfig.prototype.enableIntegrityMonitoring = false;
+    
+                                    /**
+                                     * Creates a new GceShieldedInstanceConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig} GceShieldedInstanceConfig instance
+                                     */
+                                    GceShieldedInstanceConfig.create = function create(properties) {
+                                        return new GceShieldedInstanceConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GceShieldedInstanceConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig} message GceShieldedInstanceConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GceShieldedInstanceConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.enableSecureBoot != null && Object.hasOwnProperty.call(message, "enableSecureBoot"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableSecureBoot);
+                                        if (message.enableVtpm != null && Object.hasOwnProperty.call(message, "enableVtpm"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableVtpm);
+                                        if (message.enableIntegrityMonitoring != null && Object.hasOwnProperty.call(message, "enableIntegrityMonitoring"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableIntegrityMonitoring);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GceShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig} message GceShieldedInstanceConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GceShieldedInstanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a GceShieldedInstanceConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig} GceShieldedInstanceConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GceShieldedInstanceConfig.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.enableSecureBoot = reader.bool();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.enableVtpm = reader.bool();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.enableIntegrityMonitoring = reader.bool();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a GceShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig} GceShieldedInstanceConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GceShieldedInstanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a GceShieldedInstanceConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    GceShieldedInstanceConfig.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
+                                            if (typeof message.enableSecureBoot !== "boolean")
+                                                return "enableSecureBoot: boolean expected";
+                                        if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm"))
+                                            if (typeof message.enableVtpm !== "boolean")
+                                                return "enableVtpm: boolean expected";
+                                        if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
+                                            if (typeof message.enableIntegrityMonitoring !== "boolean")
+                                                return "enableIntegrityMonitoring: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a GceShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig} GceShieldedInstanceConfig
+                                     */
+                                    GceShieldedInstanceConfig.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig)
+                                            return object;
+                                        var message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig();
+                                        if (object.enableSecureBoot != null)
+                                            message.enableSecureBoot = Boolean(object.enableSecureBoot);
+                                        if (object.enableVtpm != null)
+                                            message.enableVtpm = Boolean(object.enableVtpm);
+                                        if (object.enableIntegrityMonitoring != null)
+                                            message.enableIntegrityMonitoring = Boolean(object.enableIntegrityMonitoring);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a GceShieldedInstanceConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig} message GceShieldedInstanceConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    GceShieldedInstanceConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.enableSecureBoot = false;
+                                            object.enableVtpm = false;
+                                            object.enableIntegrityMonitoring = false;
+                                        }
+                                        if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
+                                            object.enableSecureBoot = message.enableSecureBoot;
+                                        if (message.enableVtpm != null && message.hasOwnProperty("enableVtpm"))
+                                            object.enableVtpm = message.enableVtpm;
+                                        if (message.enableIntegrityMonitoring != null && message.hasOwnProperty("enableIntegrityMonitoring"))
+                                            object.enableIntegrityMonitoring = message.enableIntegrityMonitoring;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this GceShieldedInstanceConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    GceShieldedInstanceConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for GceShieldedInstanceConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    GceShieldedInstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig";
+                                    };
+    
+                                    return GceShieldedInstanceConfig;
+                                })();
+    
+                                GceInstance.GceConfidentialInstanceConfig = (function() {
+    
+                                    /**
+                                     * Properties of a GceConfidentialInstanceConfig.
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                     * @interface IGceConfidentialInstanceConfig
+                                     * @property {boolean|null} [enableConfidentialCompute] GceConfidentialInstanceConfig enableConfidentialCompute
+                                     */
+    
+                                    /**
+                                     * Constructs a new GceConfidentialInstanceConfig.
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                     * @classdesc Represents a GceConfidentialInstanceConfig.
+                                     * @implements IGceConfidentialInstanceConfig
+                                     * @constructor
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig=} [properties] Properties to set
+                                     */
+                                    function GceConfidentialInstanceConfig(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * GceConfidentialInstanceConfig enableConfidentialCompute.
+                                     * @member {boolean} enableConfidentialCompute
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @instance
+                                     */
+                                    GceConfidentialInstanceConfig.prototype.enableConfidentialCompute = false;
+    
+                                    /**
+                                     * Creates a new GceConfidentialInstanceConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig} GceConfidentialInstanceConfig instance
+                                     */
+                                    GceConfidentialInstanceConfig.create = function create(properties) {
+                                        return new GceConfidentialInstanceConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GceConfidentialInstanceConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig} message GceConfidentialInstanceConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GceConfidentialInstanceConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.enableConfidentialCompute != null && Object.hasOwnProperty.call(message, "enableConfidentialCompute"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableConfidentialCompute);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GceConfidentialInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig} message GceConfidentialInstanceConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GceConfidentialInstanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a GceConfidentialInstanceConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig} GceConfidentialInstanceConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GceConfidentialInstanceConfig.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.enableConfidentialCompute = reader.bool();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a GceConfidentialInstanceConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig} GceConfidentialInstanceConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GceConfidentialInstanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a GceConfidentialInstanceConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    GceConfidentialInstanceConfig.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
+                                            if (typeof message.enableConfidentialCompute !== "boolean")
+                                                return "enableConfidentialCompute: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a GceConfidentialInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig} GceConfidentialInstanceConfig
+                                     */
+                                    GceConfidentialInstanceConfig.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig)
+                                            return object;
+                                        var message = new $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig();
+                                        if (object.enableConfidentialCompute != null)
+                                            message.enableConfidentialCompute = Boolean(object.enableConfidentialCompute);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a GceConfidentialInstanceConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig} message GceConfidentialInstanceConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    GceConfidentialInstanceConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.enableConfidentialCompute = false;
+                                        if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
+                                            object.enableConfidentialCompute = message.enableConfidentialCompute;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this GceConfidentialInstanceConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    GceConfidentialInstanceConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for GceConfidentialInstanceConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    GceConfidentialInstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig";
+                                    };
+    
+                                    return GceConfidentialInstanceConfig;
+                                })();
+    
+                                return GceInstance;
+                            })();
+    
+                            return Host;
+                        })();
+    
+                        WorkstationConfig.PersistentDirectory = (function() {
+    
+                            /**
+                             * Properties of a PersistentDirectory.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @interface IPersistentDirectory
+                             * @property {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null} [gcePd] PersistentDirectory gcePd
+                             * @property {string|null} [mountPath] PersistentDirectory mountPath
+                             */
+    
+                            /**
+                             * Constructs a new PersistentDirectory.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @classdesc Represents a PersistentDirectory.
+                             * @implements IPersistentDirectory
+                             * @constructor
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory=} [properties] Properties to set
+                             */
+                            function PersistentDirectory(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PersistentDirectory gcePd.
+                             * @member {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null|undefined} gcePd
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @instance
+                             */
+                            PersistentDirectory.prototype.gcePd = null;
+    
+                            /**
+                             * PersistentDirectory mountPath.
+                             * @member {string} mountPath
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @instance
+                             */
+                            PersistentDirectory.prototype.mountPath = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * PersistentDirectory directoryType.
+                             * @member {"gcePd"|undefined} directoryType
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @instance
+                             */
+                            Object.defineProperty(PersistentDirectory.prototype, "directoryType", {
+                                get: $util.oneOfGetter($oneOfFields = ["gcePd"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PersistentDirectory instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory} PersistentDirectory instance
+                             */
+                            PersistentDirectory.create = function create(properties) {
+                                return new PersistentDirectory(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PersistentDirectory message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory} message PersistentDirectory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PersistentDirectory.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mountPath != null && Object.hasOwnProperty.call(message, "mountPath"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.mountPath);
+                                if (message.gcePd != null && Object.hasOwnProperty.call(message, "gcePd"))
+                                    $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.encode(message.gcePd, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PersistentDirectory message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory} message PersistentDirectory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PersistentDirectory.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PersistentDirectory message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory} PersistentDirectory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PersistentDirectory.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.gcePd = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.mountPath = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PersistentDirectory message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory} PersistentDirectory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PersistentDirectory.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PersistentDirectory message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PersistentDirectory.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.gcePd != null && message.hasOwnProperty("gcePd")) {
+                                    properties.directoryType = 1;
+                                    {
+                                        var error = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.verify(message.gcePd);
+                                        if (error)
+                                            return "gcePd." + error;
+                                    }
+                                }
+                                if (message.mountPath != null && message.hasOwnProperty("mountPath"))
+                                    if (!$util.isString(message.mountPath))
+                                        return "mountPath: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PersistentDirectory message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory} PersistentDirectory
+                             */
+                            PersistentDirectory.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory();
+                                if (object.gcePd != null) {
+                                    if (typeof object.gcePd !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.gcePd: object expected");
+                                    message.gcePd = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.fromObject(object.gcePd);
+                                }
+                                if (object.mountPath != null)
+                                    message.mountPath = String(object.mountPath);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PersistentDirectory message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory} message PersistentDirectory
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PersistentDirectory.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.mountPath = "";
+                                if (message.mountPath != null && message.hasOwnProperty("mountPath"))
+                                    object.mountPath = message.mountPath;
+                                if (message.gcePd != null && message.hasOwnProperty("gcePd")) {
+                                    object.gcePd = $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.toObject(message.gcePd, options);
+                                    if (options.oneofs)
+                                        object.directoryType = "gcePd";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PersistentDirectory to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PersistentDirectory.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PersistentDirectory
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PersistentDirectory.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory";
+                            };
+    
+                            PersistentDirectory.GceRegionalPersistentDisk = (function() {
+    
+                                /**
+                                 * Properties of a GceRegionalPersistentDisk.
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                                 * @interface IGceRegionalPersistentDisk
+                                 * @property {number|null} [sizeGb] GceRegionalPersistentDisk sizeGb
+                                 * @property {string|null} [fsType] GceRegionalPersistentDisk fsType
+                                 * @property {string|null} [diskType] GceRegionalPersistentDisk diskType
+                                 * @property {string|null} [sourceSnapshot] GceRegionalPersistentDisk sourceSnapshot
+                                 * @property {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|null} [reclaimPolicy] GceRegionalPersistentDisk reclaimPolicy
+                                 */
+    
+                                /**
+                                 * Constructs a new GceRegionalPersistentDisk.
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory
+                                 * @classdesc Represents a GceRegionalPersistentDisk.
+                                 * @implements IGceRegionalPersistentDisk
+                                 * @constructor
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk=} [properties] Properties to set
+                                 */
+                                function GceRegionalPersistentDisk(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GceRegionalPersistentDisk sizeGb.
+                                 * @member {number} sizeGb
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @instance
+                                 */
+                                GceRegionalPersistentDisk.prototype.sizeGb = 0;
+    
+                                /**
+                                 * GceRegionalPersistentDisk fsType.
+                                 * @member {string} fsType
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @instance
+                                 */
+                                GceRegionalPersistentDisk.prototype.fsType = "";
+    
+                                /**
+                                 * GceRegionalPersistentDisk diskType.
+                                 * @member {string} diskType
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @instance
+                                 */
+                                GceRegionalPersistentDisk.prototype.diskType = "";
+    
+                                /**
+                                 * GceRegionalPersistentDisk sourceSnapshot.
+                                 * @member {string} sourceSnapshot
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @instance
+                                 */
+                                GceRegionalPersistentDisk.prototype.sourceSnapshot = "";
+    
+                                /**
+                                 * GceRegionalPersistentDisk reclaimPolicy.
+                                 * @member {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy} reclaimPolicy
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @instance
+                                 */
+                                GceRegionalPersistentDisk.prototype.reclaimPolicy = 0;
+    
+                                /**
+                                 * Creates a new GceRegionalPersistentDisk instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk=} [properties] Properties to set
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk} GceRegionalPersistentDisk instance
+                                 */
+                                GceRegionalPersistentDisk.create = function create(properties) {
+                                    return new GceRegionalPersistentDisk(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GceRegionalPersistentDisk message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk} message GceRegionalPersistentDisk message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GceRegionalPersistentDisk.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.sizeGb != null && Object.hasOwnProperty.call(message, "sizeGb"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sizeGb);
+                                    if (message.fsType != null && Object.hasOwnProperty.call(message, "fsType"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.fsType);
+                                    if (message.diskType != null && Object.hasOwnProperty.call(message, "diskType"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.diskType);
+                                    if (message.reclaimPolicy != null && Object.hasOwnProperty.call(message, "reclaimPolicy"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.reclaimPolicy);
+                                    if (message.sourceSnapshot != null && Object.hasOwnProperty.call(message, "sourceSnapshot"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.sourceSnapshot);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GceRegionalPersistentDisk message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk} message GceRegionalPersistentDisk message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GceRegionalPersistentDisk.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GceRegionalPersistentDisk message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk} GceRegionalPersistentDisk
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GceRegionalPersistentDisk.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.sizeGb = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.fsType = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.diskType = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.sourceSnapshot = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.reclaimPolicy = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GceRegionalPersistentDisk message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk} GceRegionalPersistentDisk
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GceRegionalPersistentDisk.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GceRegionalPersistentDisk message.
+                                 * @function verify
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GceRegionalPersistentDisk.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.sizeGb != null && message.hasOwnProperty("sizeGb"))
+                                        if (!$util.isInteger(message.sizeGb))
+                                            return "sizeGb: integer expected";
+                                    if (message.fsType != null && message.hasOwnProperty("fsType"))
+                                        if (!$util.isString(message.fsType))
+                                            return "fsType: string expected";
+                                    if (message.diskType != null && message.hasOwnProperty("diskType"))
+                                        if (!$util.isString(message.diskType))
+                                            return "diskType: string expected";
+                                    if (message.sourceSnapshot != null && message.hasOwnProperty("sourceSnapshot"))
+                                        if (!$util.isString(message.sourceSnapshot))
+                                            return "sourceSnapshot: string expected";
+                                    if (message.reclaimPolicy != null && message.hasOwnProperty("reclaimPolicy"))
+                                        switch (message.reclaimPolicy) {
+                                        default:
+                                            return "reclaimPolicy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GceRegionalPersistentDisk message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk} GceRegionalPersistentDisk
+                                 */
+                                GceRegionalPersistentDisk.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk)
+                                        return object;
+                                    var message = new $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk();
+                                    if (object.sizeGb != null)
+                                        message.sizeGb = object.sizeGb | 0;
+                                    if (object.fsType != null)
+                                        message.fsType = String(object.fsType);
+                                    if (object.diskType != null)
+                                        message.diskType = String(object.diskType);
+                                    if (object.sourceSnapshot != null)
+                                        message.sourceSnapshot = String(object.sourceSnapshot);
+                                    switch (object.reclaimPolicy) {
+                                    default:
+                                        if (typeof object.reclaimPolicy === "number") {
+                                            message.reclaimPolicy = object.reclaimPolicy;
+                                            break;
+                                        }
+                                        break;
+                                    case "RECLAIM_POLICY_UNSPECIFIED":
+                                    case 0:
+                                        message.reclaimPolicy = 0;
+                                        break;
+                                    case "DELETE":
+                                    case 1:
+                                        message.reclaimPolicy = 1;
+                                        break;
+                                    case "RETAIN":
+                                    case 2:
+                                        message.reclaimPolicy = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GceRegionalPersistentDisk message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk} message GceRegionalPersistentDisk
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GceRegionalPersistentDisk.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.sizeGb = 0;
+                                        object.fsType = "";
+                                        object.diskType = "";
+                                        object.reclaimPolicy = options.enums === String ? "RECLAIM_POLICY_UNSPECIFIED" : 0;
+                                        object.sourceSnapshot = "";
+                                    }
+                                    if (message.sizeGb != null && message.hasOwnProperty("sizeGb"))
+                                        object.sizeGb = message.sizeGb;
+                                    if (message.fsType != null && message.hasOwnProperty("fsType"))
+                                        object.fsType = message.fsType;
+                                    if (message.diskType != null && message.hasOwnProperty("diskType"))
+                                        object.diskType = message.diskType;
+                                    if (message.reclaimPolicy != null && message.hasOwnProperty("reclaimPolicy"))
+                                        object.reclaimPolicy = options.enums === String ? $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy[message.reclaimPolicy] === undefined ? message.reclaimPolicy : $root.google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy[message.reclaimPolicy] : message.reclaimPolicy;
+                                    if (message.sourceSnapshot != null && message.hasOwnProperty("sourceSnapshot"))
+                                        object.sourceSnapshot = message.sourceSnapshot;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GceRegionalPersistentDisk to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GceRegionalPersistentDisk.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GceRegionalPersistentDisk
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GceRegionalPersistentDisk.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk";
+                                };
+    
+                                /**
+                                 * ReclaimPolicy enum.
+                                 * @name google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy
+                                 * @enum {number}
+                                 * @property {number} RECLAIM_POLICY_UNSPECIFIED=0 RECLAIM_POLICY_UNSPECIFIED value
+                                 * @property {number} DELETE=1 DELETE value
+                                 * @property {number} RETAIN=2 RETAIN value
+                                 */
+                                GceRegionalPersistentDisk.ReclaimPolicy = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "RECLAIM_POLICY_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "DELETE"] = 1;
+                                    values[valuesById[2] = "RETAIN"] = 2;
+                                    return values;
+                                })();
+    
+                                return GceRegionalPersistentDisk;
+                            })();
+    
+                            return PersistentDirectory;
+                        })();
+    
+                        WorkstationConfig.Container = (function() {
+    
+                            /**
+                             * Properties of a Container.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @interface IContainer
+                             * @property {string|null} [image] Container image
+                             * @property {Array.<string>|null} [command] Container command
+                             * @property {Array.<string>|null} [args] Container args
+                             * @property {Object.<string,string>|null} [env] Container env
+                             * @property {string|null} [workingDir] Container workingDir
+                             * @property {number|null} [runAsUser] Container runAsUser
+                             */
+    
+                            /**
+                             * Constructs a new Container.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @classdesc Represents a Container.
+                             * @implements IContainer
+                             * @constructor
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IContainer=} [properties] Properties to set
+                             */
+                            function Container(properties) {
+                                this.command = [];
+                                this.args = [];
+                                this.env = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Container image.
+                             * @member {string} image
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             */
+                            Container.prototype.image = "";
+    
+                            /**
+                             * Container command.
+                             * @member {Array.<string>} command
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             */
+                            Container.prototype.command = $util.emptyArray;
+    
+                            /**
+                             * Container args.
+                             * @member {Array.<string>} args
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             */
+                            Container.prototype.args = $util.emptyArray;
+    
+                            /**
+                             * Container env.
+                             * @member {Object.<string,string>} env
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             */
+                            Container.prototype.env = $util.emptyObject;
+    
+                            /**
+                             * Container workingDir.
+                             * @member {string} workingDir
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             */
+                            Container.prototype.workingDir = "";
+    
+                            /**
+                             * Container runAsUser.
+                             * @member {number} runAsUser
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             */
+                            Container.prototype.runAsUser = 0;
+    
+                            /**
+                             * Creates a new Container instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IContainer=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Container} Container instance
+                             */
+                            Container.create = function create(properties) {
+                                return new Container(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Container message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Container.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IContainer} message Container message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Container.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.image);
+                                if (message.command != null && message.command.length)
+                                    for (var i = 0; i < message.command.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.command[i]);
+                                if (message.args != null && message.args.length)
+                                    for (var i = 0; i < message.args.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.args[i]);
+                                if (message.env != null && Object.hasOwnProperty.call(message, "env"))
+                                    for (var keys = Object.keys(message.env), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.env[keys[i]]).ldelim();
+                                if (message.workingDir != null && Object.hasOwnProperty.call(message, "workingDir"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.workingDir);
+                                if (message.runAsUser != null && Object.hasOwnProperty.call(message, "runAsUser"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.runAsUser);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Container message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Container.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IContainer} message Container message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Container.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Container message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Container} Container
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Container.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.Container(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.image = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.command && message.command.length))
+                                                message.command = [];
+                                            message.command.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.args && message.args.length))
+                                                message.args = [];
+                                            message.args.push(reader.string());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (message.env === $util.emptyObject)
+                                                message.env = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.env[key] = value;
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.workingDir = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.runAsUser = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Container message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Container} Container
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Container.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Container message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Container.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.image != null && message.hasOwnProperty("image"))
+                                    if (!$util.isString(message.image))
+                                        return "image: string expected";
+                                if (message.command != null && message.hasOwnProperty("command")) {
+                                    if (!Array.isArray(message.command))
+                                        return "command: array expected";
+                                    for (var i = 0; i < message.command.length; ++i)
+                                        if (!$util.isString(message.command[i]))
+                                            return "command: string[] expected";
+                                }
+                                if (message.args != null && message.hasOwnProperty("args")) {
+                                    if (!Array.isArray(message.args))
+                                        return "args: array expected";
+                                    for (var i = 0; i < message.args.length; ++i)
+                                        if (!$util.isString(message.args[i]))
+                                            return "args: string[] expected";
+                                }
+                                if (message.env != null && message.hasOwnProperty("env")) {
+                                    if (!$util.isObject(message.env))
+                                        return "env: object expected";
+                                    var key = Object.keys(message.env);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.env[key[i]]))
+                                            return "env: string{k:string} expected";
+                                }
+                                if (message.workingDir != null && message.hasOwnProperty("workingDir"))
+                                    if (!$util.isString(message.workingDir))
+                                        return "workingDir: string expected";
+                                if (message.runAsUser != null && message.hasOwnProperty("runAsUser"))
+                                    if (!$util.isInteger(message.runAsUser))
+                                        return "runAsUser: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Container message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.Container} Container
+                             */
+                            Container.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.Container)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1.WorkstationConfig.Container();
+                                if (object.image != null)
+                                    message.image = String(object.image);
+                                if (object.command) {
+                                    if (!Array.isArray(object.command))
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Container.command: array expected");
+                                    message.command = [];
+                                    for (var i = 0; i < object.command.length; ++i)
+                                        message.command[i] = String(object.command[i]);
+                                }
+                                if (object.args) {
+                                    if (!Array.isArray(object.args))
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Container.args: array expected");
+                                    message.args = [];
+                                    for (var i = 0; i < object.args.length; ++i)
+                                        message.args[i] = String(object.args[i]);
+                                }
+                                if (object.env) {
+                                    if (typeof object.env !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Container.env: object expected");
+                                    message.env = {};
+                                    for (var keys = Object.keys(object.env), i = 0; i < keys.length; ++i)
+                                        message.env[keys[i]] = String(object.env[keys[i]]);
+                                }
+                                if (object.workingDir != null)
+                                    message.workingDir = String(object.workingDir);
+                                if (object.runAsUser != null)
+                                    message.runAsUser = object.runAsUser | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Container message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.Container} message Container
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Container.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.command = [];
+                                    object.args = [];
+                                }
+                                if (options.objects || options.defaults)
+                                    object.env = {};
+                                if (options.defaults) {
+                                    object.image = "";
+                                    object.workingDir = "";
+                                    object.runAsUser = 0;
+                                }
+                                if (message.image != null && message.hasOwnProperty("image"))
+                                    object.image = message.image;
+                                if (message.command && message.command.length) {
+                                    object.command = [];
+                                    for (var j = 0; j < message.command.length; ++j)
+                                        object.command[j] = message.command[j];
+                                }
+                                if (message.args && message.args.length) {
+                                    object.args = [];
+                                    for (var j = 0; j < message.args.length; ++j)
+                                        object.args[j] = message.args[j];
+                                }
+                                var keys2;
+                                if (message.env && (keys2 = Object.keys(message.env)).length) {
+                                    object.env = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.env[keys2[j]] = message.env[keys2[j]];
+                                }
+                                if (message.workingDir != null && message.hasOwnProperty("workingDir"))
+                                    object.workingDir = message.workingDir;
+                                if (message.runAsUser != null && message.hasOwnProperty("runAsUser"))
+                                    object.runAsUser = message.runAsUser;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Container to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Container.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Container
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.Container
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Container.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.Container";
+                            };
+    
+                            return Container;
+                        })();
+    
+                        WorkstationConfig.CustomerEncryptionKey = (function() {
+    
+                            /**
+                             * Properties of a CustomerEncryptionKey.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @interface ICustomerEncryptionKey
+                             * @property {string|null} [kmsKey] CustomerEncryptionKey kmsKey
+                             * @property {string|null} [kmsKeyServiceAccount] CustomerEncryptionKey kmsKeyServiceAccount
+                             */
+    
+                            /**
+                             * Constructs a new CustomerEncryptionKey.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @classdesc Represents a CustomerEncryptionKey.
+                             * @implements ICustomerEncryptionKey
+                             * @constructor
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey=} [properties] Properties to set
+                             */
+                            function CustomerEncryptionKey(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CustomerEncryptionKey kmsKey.
+                             * @member {string} kmsKey
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @instance
+                             */
+                            CustomerEncryptionKey.prototype.kmsKey = "";
+    
+                            /**
+                             * CustomerEncryptionKey kmsKeyServiceAccount.
+                             * @member {string} kmsKeyServiceAccount
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @instance
+                             */
+                            CustomerEncryptionKey.prototype.kmsKeyServiceAccount = "";
+    
+                            /**
+                             * Creates a new CustomerEncryptionKey instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey} CustomerEncryptionKey instance
+                             */
+                            CustomerEncryptionKey.create = function create(properties) {
+                                return new CustomerEncryptionKey(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CustomerEncryptionKey message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey} message CustomerEncryptionKey message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomerEncryptionKey.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKey);
+                                if (message.kmsKeyServiceAccount != null && Object.hasOwnProperty.call(message, "kmsKeyServiceAccount"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyServiceAccount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CustomerEncryptionKey message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey} message CustomerEncryptionKey message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomerEncryptionKey.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CustomerEncryptionKey message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey} CustomerEncryptionKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomerEncryptionKey.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.kmsKey = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.kmsKeyServiceAccount = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CustomerEncryptionKey message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey} CustomerEncryptionKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomerEncryptionKey.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CustomerEncryptionKey message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CustomerEncryptionKey.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                    if (!$util.isString(message.kmsKey))
+                                        return "kmsKey: string expected";
+                                if (message.kmsKeyServiceAccount != null && message.hasOwnProperty("kmsKeyServiceAccount"))
+                                    if (!$util.isString(message.kmsKeyServiceAccount))
+                                        return "kmsKeyServiceAccount: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CustomerEncryptionKey message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey} CustomerEncryptionKey
+                             */
+                            CustomerEncryptionKey.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey();
+                                if (object.kmsKey != null)
+                                    message.kmsKey = String(object.kmsKey);
+                                if (object.kmsKeyServiceAccount != null)
+                                    message.kmsKeyServiceAccount = String(object.kmsKeyServiceAccount);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CustomerEncryptionKey message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey} message CustomerEncryptionKey
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CustomerEncryptionKey.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.kmsKey = "";
+                                    object.kmsKeyServiceAccount = "";
+                                }
+                                if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                    object.kmsKey = message.kmsKey;
+                                if (message.kmsKeyServiceAccount != null && message.hasOwnProperty("kmsKeyServiceAccount"))
+                                    object.kmsKeyServiceAccount = message.kmsKeyServiceAccount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CustomerEncryptionKey to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CustomerEncryptionKey.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CustomerEncryptionKey
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CustomerEncryptionKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey";
+                            };
+    
+                            return CustomerEncryptionKey;
+                        })();
+    
+                        return WorkstationConfig;
+                    })();
+    
+                    v1.Workstation = (function() {
+    
+                        /**
+                         * Properties of a Workstation.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IWorkstation
+                         * @property {string|null} [name] Workstation name
+                         * @property {string|null} [displayName] Workstation displayName
+                         * @property {string|null} [uid] Workstation uid
+                         * @property {boolean|null} [reconciling] Workstation reconciling
+                         * @property {Object.<string,string>|null} [annotations] Workstation annotations
+                         * @property {Object.<string,string>|null} [labels] Workstation labels
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Workstation createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Workstation updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] Workstation deleteTime
+                         * @property {string|null} [etag] Workstation etag
+                         * @property {google.cloud.workstations.v1.Workstation.State|null} [state] Workstation state
+                         * @property {string|null} [host] Workstation host
+                         */
+    
+                        /**
+                         * Constructs a new Workstation.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a Workstation.
+                         * @implements IWorkstation
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IWorkstation=} [properties] Properties to set
+                         */
+                        function Workstation(properties) {
+                            this.annotations = {};
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Workstation name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.name = "";
+    
+                        /**
+                         * Workstation displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.displayName = "";
+    
+                        /**
+                         * Workstation uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.uid = "";
+    
+                        /**
+                         * Workstation reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.reconciling = false;
+    
+                        /**
+                         * Workstation annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Workstation labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Workstation createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.createTime = null;
+    
+                        /**
+                         * Workstation updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.updateTime = null;
+    
+                        /**
+                         * Workstation deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.deleteTime = null;
+    
+                        /**
+                         * Workstation etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.etag = "";
+    
+                        /**
+                         * Workstation state.
+                         * @member {google.cloud.workstations.v1.Workstation.State} state
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.state = 0;
+    
+                        /**
+                         * Workstation host.
+                         * @member {string} host
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.host = "";
+    
+                        /**
+                         * Creates a new Workstation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstation=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.Workstation} Workstation instance
+                         */
+                        Workstation.create = function create(properties) {
+                            return new Workstation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Workstation message. Does not implicitly {@link google.cloud.workstations.v1.Workstation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstation} message Workstation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Workstation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.uid);
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reconciling);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.etag);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.host);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Workstation message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.Workstation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {google.cloud.workstations.v1.IWorkstation} message Workstation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Workstation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Workstation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.Workstation} Workstation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Workstation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.Workstation(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.reconciling = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 13: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.host = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Workstation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.Workstation} Workstation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Workstation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Workstation message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Workstation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.host != null && message.hasOwnProperty("host"))
+                                if (!$util.isString(message.host))
+                                    return "host: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Workstation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.Workstation} Workstation
+                         */
+                        Workstation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.Workstation)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.Workstation();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.Workstation.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.Workstation.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.Workstation.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.Workstation.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.Workstation.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "STATE_STARTING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "STATE_RUNNING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "STATE_STOPPING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "STATE_STOPPED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.host != null)
+                                message.host = String(object.host);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Workstation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {google.cloud.workstations.v1.Workstation} message Workstation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Workstation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.uid = "";
+                                object.reconciling = false;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.etag = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.host = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.workstations.v1.Workstation.State[message.state] === undefined ? message.state : $root.google.cloud.workstations.v1.Workstation.State[message.state] : message.state;
+                            if (message.host != null && message.hasOwnProperty("host"))
+                                object.host = message.host;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Workstation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Workstation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Workstation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Workstation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.Workstation";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.workstations.v1.Workstation.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STATE_STARTING=1 STATE_STARTING value
+                         * @property {number} STATE_RUNNING=2 STATE_RUNNING value
+                         * @property {number} STATE_STOPPING=3 STATE_STOPPING value
+                         * @property {number} STATE_STOPPED=4 STATE_STOPPED value
+                         */
+                        Workstation.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STATE_STARTING"] = 1;
+                            values[valuesById[2] = "STATE_RUNNING"] = 2;
+                            values[valuesById[3] = "STATE_STOPPING"] = 3;
+                            values[valuesById[4] = "STATE_STOPPED"] = 4;
+                            return values;
+                        })();
+    
+                        return Workstation;
+                    })();
+    
+                    v1.GetWorkstationClusterRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IGetWorkstationClusterRequest
+                         * @property {string|null} [name] GetWorkstationClusterRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a GetWorkstationClusterRequest.
+                         * @implements IGetWorkstationClusterRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IGetWorkstationClusterRequest=} [properties] Properties to set
+                         */
+                        function GetWorkstationClusterRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWorkstationClusterRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @instance
+                         */
+                        GetWorkstationClusterRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWorkstationClusterRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationClusterRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.GetWorkstationClusterRequest} GetWorkstationClusterRequest instance
+                         */
+                        GetWorkstationClusterRequest.create = function create(properties) {
+                            return new GetWorkstationClusterRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationClusterRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationClusterRequest} message GetWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkstationClusterRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationClusterRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationClusterRequest} message GetWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkstationClusterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWorkstationClusterRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.GetWorkstationClusterRequest} GetWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkstationClusterRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.GetWorkstationClusterRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.GetWorkstationClusterRequest} GetWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkstationClusterRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWorkstationClusterRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWorkstationClusterRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.GetWorkstationClusterRequest} GetWorkstationClusterRequest
+                         */
+                        GetWorkstationClusterRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.GetWorkstationClusterRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.GetWorkstationClusterRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWorkstationClusterRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.GetWorkstationClusterRequest} message GetWorkstationClusterRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWorkstationClusterRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWorkstationClusterRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWorkstationClusterRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWorkstationClusterRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.GetWorkstationClusterRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWorkstationClusterRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.GetWorkstationClusterRequest";
+                        };
+    
+                        return GetWorkstationClusterRequest;
+                    })();
+    
+                    v1.ListWorkstationClustersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkstationClustersRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListWorkstationClustersRequest
+                         * @property {string|null} [parent] ListWorkstationClustersRequest parent
+                         * @property {number|null} [pageSize] ListWorkstationClustersRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkstationClustersRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkstationClustersRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListWorkstationClustersRequest.
+                         * @implements IListWorkstationClustersRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersRequest=} [properties] Properties to set
+                         */
+                        function ListWorkstationClustersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkstationClustersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @instance
+                         */
+                        ListWorkstationClustersRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWorkstationClustersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @instance
+                         */
+                        ListWorkstationClustersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkstationClustersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @instance
+                         */
+                        ListWorkstationClustersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkstationClustersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersRequest} ListWorkstationClustersRequest instance
+                         */
+                        ListWorkstationClustersRequest.create = function create(properties) {
+                            return new ListWorkstationClustersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationClustersRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersRequest} message ListWorkstationClustersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationClustersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationClustersRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersRequest} message ListWorkstationClustersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationClustersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationClustersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersRequest} ListWorkstationClustersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationClustersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListWorkstationClustersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationClustersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersRequest} ListWorkstationClustersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationClustersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkstationClustersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkstationClustersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkstationClustersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersRequest} ListWorkstationClustersRequest
+                         */
+                        ListWorkstationClustersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListWorkstationClustersRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListWorkstationClustersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkstationClustersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListWorkstationClustersRequest} message ListWorkstationClustersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkstationClustersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkstationClustersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkstationClustersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkstationClustersRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkstationClustersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListWorkstationClustersRequest";
+                        };
+    
+                        return ListWorkstationClustersRequest;
+                    })();
+    
+                    v1.ListWorkstationClustersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkstationClustersResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListWorkstationClustersResponse
+                         * @property {Array.<google.cloud.workstations.v1.IWorkstationCluster>|null} [workstationClusters] ListWorkstationClustersResponse workstationClusters
+                         * @property {string|null} [nextPageToken] ListWorkstationClustersResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkstationClustersResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkstationClustersResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListWorkstationClustersResponse.
+                         * @implements IListWorkstationClustersResponse
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersResponse=} [properties] Properties to set
+                         */
+                        function ListWorkstationClustersResponse(properties) {
+                            this.workstationClusters = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkstationClustersResponse workstationClusters.
+                         * @member {Array.<google.cloud.workstations.v1.IWorkstationCluster>} workstationClusters
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @instance
+                         */
+                        ListWorkstationClustersResponse.prototype.workstationClusters = $util.emptyArray;
+    
+                        /**
+                         * ListWorkstationClustersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @instance
+                         */
+                        ListWorkstationClustersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkstationClustersResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @instance
+                         */
+                        ListWorkstationClustersResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWorkstationClustersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersResponse} ListWorkstationClustersResponse instance
+                         */
+                        ListWorkstationClustersResponse.create = function create(properties) {
+                            return new ListWorkstationClustersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationClustersResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersResponse} message ListWorkstationClustersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationClustersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstationClusters != null && message.workstationClusters.length)
+                                for (var i = 0; i < message.workstationClusters.length; ++i)
+                                    $root.google.cloud.workstations.v1.WorkstationCluster.encode(message.workstationClusters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationClustersResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationClustersResponse} message ListWorkstationClustersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationClustersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationClustersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersResponse} ListWorkstationClustersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationClustersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListWorkstationClustersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workstationClusters && message.workstationClusters.length))
+                                            message.workstationClusters = [];
+                                        message.workstationClusters.push($root.google.cloud.workstations.v1.WorkstationCluster.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationClustersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersResponse} ListWorkstationClustersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationClustersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkstationClustersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkstationClustersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstationClusters != null && message.hasOwnProperty("workstationClusters")) {
+                                if (!Array.isArray(message.workstationClusters))
+                                    return "workstationClusters: array expected";
+                                for (var i = 0; i < message.workstationClusters.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.WorkstationCluster.verify(message.workstationClusters[i]);
+                                    if (error)
+                                        return "workstationClusters." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkstationClustersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListWorkstationClustersResponse} ListWorkstationClustersResponse
+                         */
+                        ListWorkstationClustersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListWorkstationClustersResponse)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListWorkstationClustersResponse();
+                            if (object.workstationClusters) {
+                                if (!Array.isArray(object.workstationClusters))
+                                    throw TypeError(".google.cloud.workstations.v1.ListWorkstationClustersResponse.workstationClusters: array expected");
+                                message.workstationClusters = [];
+                                for (var i = 0; i < object.workstationClusters.length; ++i) {
+                                    if (typeof object.workstationClusters[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.ListWorkstationClustersResponse.workstationClusters: object expected");
+                                    message.workstationClusters[i] = $root.google.cloud.workstations.v1.WorkstationCluster.fromObject(object.workstationClusters[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.workstations.v1.ListWorkstationClustersResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkstationClustersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListWorkstationClustersResponse} message ListWorkstationClustersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkstationClustersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workstationClusters = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workstationClusters && message.workstationClusters.length) {
+                                object.workstationClusters = [];
+                                for (var j = 0; j < message.workstationClusters.length; ++j)
+                                    object.workstationClusters[j] = $root.google.cloud.workstations.v1.WorkstationCluster.toObject(message.workstationClusters[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkstationClustersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkstationClustersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkstationClustersResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListWorkstationClustersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkstationClustersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListWorkstationClustersResponse";
+                        };
+    
+                        return ListWorkstationClustersResponse;
+                    })();
+    
+                    v1.CreateWorkstationClusterRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface ICreateWorkstationClusterRequest
+                         * @property {string|null} [parent] CreateWorkstationClusterRequest parent
+                         * @property {string|null} [workstationClusterId] CreateWorkstationClusterRequest workstationClusterId
+                         * @property {google.cloud.workstations.v1.IWorkstationCluster|null} [workstationCluster] CreateWorkstationClusterRequest workstationCluster
+                         * @property {boolean|null} [validateOnly] CreateWorkstationClusterRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a CreateWorkstationClusterRequest.
+                         * @implements ICreateWorkstationClusterRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationClusterRequest=} [properties] Properties to set
+                         */
+                        function CreateWorkstationClusterRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateWorkstationClusterRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @instance
+                         */
+                        CreateWorkstationClusterRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateWorkstationClusterRequest workstationClusterId.
+                         * @member {string} workstationClusterId
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @instance
+                         */
+                        CreateWorkstationClusterRequest.prototype.workstationClusterId = "";
+    
+                        /**
+                         * CreateWorkstationClusterRequest workstationCluster.
+                         * @member {google.cloud.workstations.v1.IWorkstationCluster|null|undefined} workstationCluster
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @instance
+                         */
+                        CreateWorkstationClusterRequest.prototype.workstationCluster = null;
+    
+                        /**
+                         * CreateWorkstationClusterRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @instance
+                         */
+                        CreateWorkstationClusterRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateWorkstationClusterRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationClusterRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationClusterRequest} CreateWorkstationClusterRequest instance
+                         */
+                        CreateWorkstationClusterRequest.create = function create(properties) {
+                            return new CreateWorkstationClusterRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationClusterRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationClusterRequest} message CreateWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkstationClusterRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.workstationClusterId != null && Object.hasOwnProperty.call(message, "workstationClusterId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.workstationClusterId);
+                            if (message.workstationCluster != null && Object.hasOwnProperty.call(message, "workstationCluster"))
+                                $root.google.cloud.workstations.v1.WorkstationCluster.encode(message.workstationCluster, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationClusterRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationClusterRequest} message CreateWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkstationClusterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkstationClusterRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationClusterRequest} CreateWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkstationClusterRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.CreateWorkstationClusterRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.workstationClusterId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.workstationCluster = $root.google.cloud.workstations.v1.WorkstationCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationClusterRequest} CreateWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkstationClusterRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateWorkstationClusterRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateWorkstationClusterRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.workstationClusterId != null && message.hasOwnProperty("workstationClusterId"))
+                                if (!$util.isString(message.workstationClusterId))
+                                    return "workstationClusterId: string expected";
+                            if (message.workstationCluster != null && message.hasOwnProperty("workstationCluster")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationCluster.verify(message.workstationCluster);
+                                if (error)
+                                    return "workstationCluster." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationClusterRequest} CreateWorkstationClusterRequest
+                         */
+                        CreateWorkstationClusterRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.CreateWorkstationClusterRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.CreateWorkstationClusterRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.workstationClusterId != null)
+                                message.workstationClusterId = String(object.workstationClusterId);
+                            if (object.workstationCluster != null) {
+                                if (typeof object.workstationCluster !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.CreateWorkstationClusterRequest.workstationCluster: object expected");
+                                message.workstationCluster = $root.google.cloud.workstations.v1.WorkstationCluster.fromObject(object.workstationCluster);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateWorkstationClusterRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.CreateWorkstationClusterRequest} message CreateWorkstationClusterRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateWorkstationClusterRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.workstationClusterId = "";
+                                object.workstationCluster = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.workstationClusterId != null && message.hasOwnProperty("workstationClusterId"))
+                                object.workstationClusterId = message.workstationClusterId;
+                            if (message.workstationCluster != null && message.hasOwnProperty("workstationCluster"))
+                                object.workstationCluster = $root.google.cloud.workstations.v1.WorkstationCluster.toObject(message.workstationCluster, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateWorkstationClusterRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateWorkstationClusterRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateWorkstationClusterRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationClusterRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateWorkstationClusterRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.CreateWorkstationClusterRequest";
+                        };
+    
+                        return CreateWorkstationClusterRequest;
+                    })();
+    
+                    v1.UpdateWorkstationClusterRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IUpdateWorkstationClusterRequest
+                         * @property {google.cloud.workstations.v1.IWorkstationCluster|null} [workstationCluster] UpdateWorkstationClusterRequest workstationCluster
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateWorkstationClusterRequest updateMask
+                         * @property {boolean|null} [validateOnly] UpdateWorkstationClusterRequest validateOnly
+                         * @property {boolean|null} [allowMissing] UpdateWorkstationClusterRequest allowMissing
+                         */
+    
+                        /**
+                         * Constructs a new UpdateWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents an UpdateWorkstationClusterRequest.
+                         * @implements IUpdateWorkstationClusterRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationClusterRequest=} [properties] Properties to set
+                         */
+                        function UpdateWorkstationClusterRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateWorkstationClusterRequest workstationCluster.
+                         * @member {google.cloud.workstations.v1.IWorkstationCluster|null|undefined} workstationCluster
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @instance
+                         */
+                        UpdateWorkstationClusterRequest.prototype.workstationCluster = null;
+    
+                        /**
+                         * UpdateWorkstationClusterRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @instance
+                         */
+                        UpdateWorkstationClusterRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateWorkstationClusterRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @instance
+                         */
+                        UpdateWorkstationClusterRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * UpdateWorkstationClusterRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @instance
+                         */
+                        UpdateWorkstationClusterRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * Creates a new UpdateWorkstationClusterRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationClusterRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationClusterRequest} UpdateWorkstationClusterRequest instance
+                         */
+                        UpdateWorkstationClusterRequest.create = function create(properties) {
+                            return new UpdateWorkstationClusterRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationClusterRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationClusterRequest} message UpdateWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkstationClusterRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstationCluster != null && Object.hasOwnProperty.call(message, "workstationCluster"))
+                                $root.google.cloud.workstations.v1.WorkstationCluster.encode(message.workstationCluster, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationClusterRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationClusterRequest} message UpdateWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkstationClusterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkstationClusterRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationClusterRequest} UpdateWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkstationClusterRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.UpdateWorkstationClusterRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.workstationCluster = $root.google.cloud.workstations.v1.WorkstationCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationClusterRequest} UpdateWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkstationClusterRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateWorkstationClusterRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateWorkstationClusterRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstationCluster != null && message.hasOwnProperty("workstationCluster")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationCluster.verify(message.workstationCluster);
+                                if (error)
+                                    return "workstationCluster." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationClusterRequest} UpdateWorkstationClusterRequest
+                         */
+                        UpdateWorkstationClusterRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.UpdateWorkstationClusterRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.UpdateWorkstationClusterRequest();
+                            if (object.workstationCluster != null) {
+                                if (typeof object.workstationCluster !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.UpdateWorkstationClusterRequest.workstationCluster: object expected");
+                                message.workstationCluster = $root.google.cloud.workstations.v1.WorkstationCluster.fromObject(object.workstationCluster);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.UpdateWorkstationClusterRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateWorkstationClusterRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.UpdateWorkstationClusterRequest} message UpdateWorkstationClusterRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateWorkstationClusterRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.workstationCluster = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                                object.allowMissing = false;
+                            }
+                            if (message.workstationCluster != null && message.hasOwnProperty("workstationCluster"))
+                                object.workstationCluster = $root.google.cloud.workstations.v1.WorkstationCluster.toObject(message.workstationCluster, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateWorkstationClusterRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateWorkstationClusterRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateWorkstationClusterRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationClusterRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateWorkstationClusterRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.UpdateWorkstationClusterRequest";
+                        };
+    
+                        return UpdateWorkstationClusterRequest;
+                    })();
+    
+                    v1.DeleteWorkstationClusterRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IDeleteWorkstationClusterRequest
+                         * @property {string|null} [name] DeleteWorkstationClusterRequest name
+                         * @property {boolean|null} [validateOnly] DeleteWorkstationClusterRequest validateOnly
+                         * @property {string|null} [etag] DeleteWorkstationClusterRequest etag
+                         * @property {boolean|null} [force] DeleteWorkstationClusterRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteWorkstationClusterRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a DeleteWorkstationClusterRequest.
+                         * @implements IDeleteWorkstationClusterRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationClusterRequest=} [properties] Properties to set
+                         */
+                        function DeleteWorkstationClusterRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteWorkstationClusterRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @instance
+                         */
+                        DeleteWorkstationClusterRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteWorkstationClusterRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @instance
+                         */
+                        DeleteWorkstationClusterRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteWorkstationClusterRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @instance
+                         */
+                        DeleteWorkstationClusterRequest.prototype.etag = "";
+    
+                        /**
+                         * DeleteWorkstationClusterRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @instance
+                         */
+                        DeleteWorkstationClusterRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteWorkstationClusterRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationClusterRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationClusterRequest} DeleteWorkstationClusterRequest instance
+                         */
+                        DeleteWorkstationClusterRequest.create = function create(properties) {
+                            return new DeleteWorkstationClusterRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationClusterRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationClusterRequest} message DeleteWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkstationClusterRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationClusterRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationClusterRequest} message DeleteWorkstationClusterRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkstationClusterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkstationClusterRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationClusterRequest} DeleteWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkstationClusterRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.DeleteWorkstationClusterRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationClusterRequest} DeleteWorkstationClusterRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkstationClusterRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteWorkstationClusterRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteWorkstationClusterRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationClusterRequest} DeleteWorkstationClusterRequest
+                         */
+                        DeleteWorkstationClusterRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.DeleteWorkstationClusterRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.DeleteWorkstationClusterRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteWorkstationClusterRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.DeleteWorkstationClusterRequest} message DeleteWorkstationClusterRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteWorkstationClusterRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteWorkstationClusterRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteWorkstationClusterRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteWorkstationClusterRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationClusterRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteWorkstationClusterRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.DeleteWorkstationClusterRequest";
+                        };
+    
+                        return DeleteWorkstationClusterRequest;
+                    })();
+    
+                    v1.GetWorkstationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IGetWorkstationConfigRequest
+                         * @property {string|null} [name] GetWorkstationConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a GetWorkstationConfigRequest.
+                         * @implements IGetWorkstationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IGetWorkstationConfigRequest=} [properties] Properties to set
+                         */
+                        function GetWorkstationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWorkstationConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @instance
+                         */
+                        GetWorkstationConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWorkstationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.GetWorkstationConfigRequest} GetWorkstationConfigRequest instance
+                         */
+                        GetWorkstationConfigRequest.create = function create(properties) {
+                            return new GetWorkstationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationConfigRequest} message GetWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkstationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationConfigRequest} message GetWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkstationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWorkstationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.GetWorkstationConfigRequest} GetWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkstationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.GetWorkstationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.GetWorkstationConfigRequest} GetWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkstationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWorkstationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWorkstationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.GetWorkstationConfigRequest} GetWorkstationConfigRequest
+                         */
+                        GetWorkstationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.GetWorkstationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.GetWorkstationConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWorkstationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.GetWorkstationConfigRequest} message GetWorkstationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWorkstationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWorkstationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWorkstationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWorkstationConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.GetWorkstationConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWorkstationConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.GetWorkstationConfigRequest";
+                        };
+    
+                        return GetWorkstationConfigRequest;
+                    })();
+    
+                    v1.ListWorkstationConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkstationConfigsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListWorkstationConfigsRequest
+                         * @property {string|null} [parent] ListWorkstationConfigsRequest parent
+                         * @property {number|null} [pageSize] ListWorkstationConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkstationConfigsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkstationConfigsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListWorkstationConfigsRequest.
+                         * @implements IListWorkstationConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListWorkstationConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkstationConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @instance
+                         */
+                        ListWorkstationConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWorkstationConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @instance
+                         */
+                        ListWorkstationConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkstationConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @instance
+                         */
+                        ListWorkstationConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkstationConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsRequest} ListWorkstationConfigsRequest instance
+                         */
+                        ListWorkstationConfigsRequest.create = function create(properties) {
+                            return new ListWorkstationConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationConfigsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsRequest} message ListWorkstationConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsRequest} message ListWorkstationConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsRequest} ListWorkstationConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListWorkstationConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsRequest} ListWorkstationConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkstationConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkstationConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkstationConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsRequest} ListWorkstationConfigsRequest
+                         */
+                        ListWorkstationConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListWorkstationConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListWorkstationConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkstationConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListWorkstationConfigsRequest} message ListWorkstationConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkstationConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkstationConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkstationConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkstationConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkstationConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListWorkstationConfigsRequest";
+                        };
+    
+                        return ListWorkstationConfigsRequest;
+                    })();
+    
+                    v1.ListWorkstationConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkstationConfigsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListWorkstationConfigsResponse
+                         * @property {Array.<google.cloud.workstations.v1.IWorkstationConfig>|null} [workstationConfigs] ListWorkstationConfigsResponse workstationConfigs
+                         * @property {string|null} [nextPageToken] ListWorkstationConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkstationConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkstationConfigsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListWorkstationConfigsResponse.
+                         * @implements IListWorkstationConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListWorkstationConfigsResponse(properties) {
+                            this.workstationConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkstationConfigsResponse workstationConfigs.
+                         * @member {Array.<google.cloud.workstations.v1.IWorkstationConfig>} workstationConfigs
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @instance
+                         */
+                        ListWorkstationConfigsResponse.prototype.workstationConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListWorkstationConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @instance
+                         */
+                        ListWorkstationConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkstationConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @instance
+                         */
+                        ListWorkstationConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWorkstationConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsResponse} ListWorkstationConfigsResponse instance
+                         */
+                        ListWorkstationConfigsResponse.create = function create(properties) {
+                            return new ListWorkstationConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationConfigsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsResponse} message ListWorkstationConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstationConfigs != null && message.workstationConfigs.length)
+                                for (var i = 0; i < message.workstationConfigs.length; ++i)
+                                    $root.google.cloud.workstations.v1.WorkstationConfig.encode(message.workstationConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationConfigsResponse} message ListWorkstationConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsResponse} ListWorkstationConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListWorkstationConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workstationConfigs && message.workstationConfigs.length))
+                                            message.workstationConfigs = [];
+                                        message.workstationConfigs.push($root.google.cloud.workstations.v1.WorkstationConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsResponse} ListWorkstationConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkstationConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkstationConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstationConfigs != null && message.hasOwnProperty("workstationConfigs")) {
+                                if (!Array.isArray(message.workstationConfigs))
+                                    return "workstationConfigs: array expected";
+                                for (var i = 0; i < message.workstationConfigs.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.WorkstationConfig.verify(message.workstationConfigs[i]);
+                                    if (error)
+                                        return "workstationConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkstationConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListWorkstationConfigsResponse} ListWorkstationConfigsResponse
+                         */
+                        ListWorkstationConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListWorkstationConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListWorkstationConfigsResponse();
+                            if (object.workstationConfigs) {
+                                if (!Array.isArray(object.workstationConfigs))
+                                    throw TypeError(".google.cloud.workstations.v1.ListWorkstationConfigsResponse.workstationConfigs: array expected");
+                                message.workstationConfigs = [];
+                                for (var i = 0; i < object.workstationConfigs.length; ++i) {
+                                    if (typeof object.workstationConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.ListWorkstationConfigsResponse.workstationConfigs: object expected");
+                                    message.workstationConfigs[i] = $root.google.cloud.workstations.v1.WorkstationConfig.fromObject(object.workstationConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.workstations.v1.ListWorkstationConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkstationConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListWorkstationConfigsResponse} message ListWorkstationConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkstationConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workstationConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workstationConfigs && message.workstationConfigs.length) {
+                                object.workstationConfigs = [];
+                                for (var j = 0; j < message.workstationConfigs.length; ++j)
+                                    object.workstationConfigs[j] = $root.google.cloud.workstations.v1.WorkstationConfig.toObject(message.workstationConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkstationConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkstationConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkstationConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListWorkstationConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkstationConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListWorkstationConfigsResponse";
+                        };
+    
+                        return ListWorkstationConfigsResponse;
+                    })();
+    
+                    v1.ListUsableWorkstationConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListUsableWorkstationConfigsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListUsableWorkstationConfigsRequest
+                         * @property {string|null} [parent] ListUsableWorkstationConfigsRequest parent
+                         * @property {number|null} [pageSize] ListUsableWorkstationConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListUsableWorkstationConfigsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListUsableWorkstationConfigsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListUsableWorkstationConfigsRequest.
+                         * @implements IListUsableWorkstationConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListUsableWorkstationConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListUsableWorkstationConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @instance
+                         */
+                        ListUsableWorkstationConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListUsableWorkstationConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @instance
+                         */
+                        ListUsableWorkstationConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListUsableWorkstationConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @instance
+                         */
+                        ListUsableWorkstationConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListUsableWorkstationConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest} ListUsableWorkstationConfigsRequest instance
+                         */
+                        ListUsableWorkstationConfigsRequest.create = function create(properties) {
+                            return new ListUsableWorkstationConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationConfigsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest} message ListUsableWorkstationConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest} message ListUsableWorkstationConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest} ListUsableWorkstationConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest} ListUsableWorkstationConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListUsableWorkstationConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListUsableWorkstationConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListUsableWorkstationConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest} ListUsableWorkstationConfigsRequest
+                         */
+                        ListUsableWorkstationConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListUsableWorkstationConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest} message ListUsableWorkstationConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListUsableWorkstationConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListUsableWorkstationConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListUsableWorkstationConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListUsableWorkstationConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListUsableWorkstationConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest";
+                        };
+    
+                        return ListUsableWorkstationConfigsRequest;
+                    })();
+    
+                    v1.ListUsableWorkstationConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListUsableWorkstationConfigsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListUsableWorkstationConfigsResponse
+                         * @property {Array.<google.cloud.workstations.v1.IWorkstationConfig>|null} [workstationConfigs] ListUsableWorkstationConfigsResponse workstationConfigs
+                         * @property {string|null} [nextPageToken] ListUsableWorkstationConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListUsableWorkstationConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListUsableWorkstationConfigsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListUsableWorkstationConfigsResponse.
+                         * @implements IListUsableWorkstationConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListUsableWorkstationConfigsResponse(properties) {
+                            this.workstationConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListUsableWorkstationConfigsResponse workstationConfigs.
+                         * @member {Array.<google.cloud.workstations.v1.IWorkstationConfig>} workstationConfigs
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @instance
+                         */
+                        ListUsableWorkstationConfigsResponse.prototype.workstationConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListUsableWorkstationConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @instance
+                         */
+                        ListUsableWorkstationConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListUsableWorkstationConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @instance
+                         */
+                        ListUsableWorkstationConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListUsableWorkstationConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse} ListUsableWorkstationConfigsResponse instance
+                         */
+                        ListUsableWorkstationConfigsResponse.create = function create(properties) {
+                            return new ListUsableWorkstationConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationConfigsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse} message ListUsableWorkstationConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstationConfigs != null && message.workstationConfigs.length)
+                                for (var i = 0; i < message.workstationConfigs.length; ++i)
+                                    $root.google.cloud.workstations.v1.WorkstationConfig.encode(message.workstationConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse} message ListUsableWorkstationConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse} ListUsableWorkstationConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workstationConfigs && message.workstationConfigs.length))
+                                            message.workstationConfigs = [];
+                                        message.workstationConfigs.push($root.google.cloud.workstations.v1.WorkstationConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse} ListUsableWorkstationConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListUsableWorkstationConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListUsableWorkstationConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstationConfigs != null && message.hasOwnProperty("workstationConfigs")) {
+                                if (!Array.isArray(message.workstationConfigs))
+                                    return "workstationConfigs: array expected";
+                                for (var i = 0; i < message.workstationConfigs.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.WorkstationConfig.verify(message.workstationConfigs[i]);
+                                    if (error)
+                                        return "workstationConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListUsableWorkstationConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse} ListUsableWorkstationConfigsResponse
+                         */
+                        ListUsableWorkstationConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse();
+                            if (object.workstationConfigs) {
+                                if (!Array.isArray(object.workstationConfigs))
+                                    throw TypeError(".google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.workstationConfigs: array expected");
+                                message.workstationConfigs = [];
+                                for (var i = 0; i < object.workstationConfigs.length; ++i) {
+                                    if (typeof object.workstationConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.workstationConfigs: object expected");
+                                    message.workstationConfigs[i] = $root.google.cloud.workstations.v1.WorkstationConfig.fromObject(object.workstationConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListUsableWorkstationConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse} message ListUsableWorkstationConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListUsableWorkstationConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workstationConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workstationConfigs && message.workstationConfigs.length) {
+                                object.workstationConfigs = [];
+                                for (var j = 0; j < message.workstationConfigs.length; ++j)
+                                    object.workstationConfigs[j] = $root.google.cloud.workstations.v1.WorkstationConfig.toObject(message.workstationConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListUsableWorkstationConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListUsableWorkstationConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListUsableWorkstationConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListUsableWorkstationConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse";
+                        };
+    
+                        return ListUsableWorkstationConfigsResponse;
+                    })();
+    
+                    v1.CreateWorkstationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface ICreateWorkstationConfigRequest
+                         * @property {string|null} [parent] CreateWorkstationConfigRequest parent
+                         * @property {string|null} [workstationConfigId] CreateWorkstationConfigRequest workstationConfigId
+                         * @property {google.cloud.workstations.v1.IWorkstationConfig|null} [workstationConfig] CreateWorkstationConfigRequest workstationConfig
+                         * @property {boolean|null} [validateOnly] CreateWorkstationConfigRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a CreateWorkstationConfigRequest.
+                         * @implements ICreateWorkstationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateWorkstationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateWorkstationConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @instance
+                         */
+                        CreateWorkstationConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateWorkstationConfigRequest workstationConfigId.
+                         * @member {string} workstationConfigId
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @instance
+                         */
+                        CreateWorkstationConfigRequest.prototype.workstationConfigId = "";
+    
+                        /**
+                         * CreateWorkstationConfigRequest workstationConfig.
+                         * @member {google.cloud.workstations.v1.IWorkstationConfig|null|undefined} workstationConfig
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @instance
+                         */
+                        CreateWorkstationConfigRequest.prototype.workstationConfig = null;
+    
+                        /**
+                         * CreateWorkstationConfigRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @instance
+                         */
+                        CreateWorkstationConfigRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateWorkstationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationConfigRequest} CreateWorkstationConfigRequest instance
+                         */
+                        CreateWorkstationConfigRequest.create = function create(properties) {
+                            return new CreateWorkstationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationConfigRequest} message CreateWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkstationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.workstationConfigId != null && Object.hasOwnProperty.call(message, "workstationConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.workstationConfigId);
+                            if (message.workstationConfig != null && Object.hasOwnProperty.call(message, "workstationConfig"))
+                                $root.google.cloud.workstations.v1.WorkstationConfig.encode(message.workstationConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationConfigRequest} message CreateWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkstationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkstationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationConfigRequest} CreateWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkstationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.CreateWorkstationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.workstationConfigId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.workstationConfig = $root.google.cloud.workstations.v1.WorkstationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationConfigRequest} CreateWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkstationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateWorkstationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateWorkstationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.workstationConfigId != null && message.hasOwnProperty("workstationConfigId"))
+                                if (!$util.isString(message.workstationConfigId))
+                                    return "workstationConfigId: string expected";
+                            if (message.workstationConfig != null && message.hasOwnProperty("workstationConfig")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationConfig.verify(message.workstationConfig);
+                                if (error)
+                                    return "workstationConfig." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationConfigRequest} CreateWorkstationConfigRequest
+                         */
+                        CreateWorkstationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.CreateWorkstationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.CreateWorkstationConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.workstationConfigId != null)
+                                message.workstationConfigId = String(object.workstationConfigId);
+                            if (object.workstationConfig != null) {
+                                if (typeof object.workstationConfig !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.CreateWorkstationConfigRequest.workstationConfig: object expected");
+                                message.workstationConfig = $root.google.cloud.workstations.v1.WorkstationConfig.fromObject(object.workstationConfig);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateWorkstationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.CreateWorkstationConfigRequest} message CreateWorkstationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateWorkstationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.workstationConfigId = "";
+                                object.workstationConfig = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.workstationConfigId != null && message.hasOwnProperty("workstationConfigId"))
+                                object.workstationConfigId = message.workstationConfigId;
+                            if (message.workstationConfig != null && message.hasOwnProperty("workstationConfig"))
+                                object.workstationConfig = $root.google.cloud.workstations.v1.WorkstationConfig.toObject(message.workstationConfig, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateWorkstationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateWorkstationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateWorkstationConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateWorkstationConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.CreateWorkstationConfigRequest";
+                        };
+    
+                        return CreateWorkstationConfigRequest;
+                    })();
+    
+                    v1.UpdateWorkstationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IUpdateWorkstationConfigRequest
+                         * @property {google.cloud.workstations.v1.IWorkstationConfig|null} [workstationConfig] UpdateWorkstationConfigRequest workstationConfig
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateWorkstationConfigRequest updateMask
+                         * @property {boolean|null} [validateOnly] UpdateWorkstationConfigRequest validateOnly
+                         * @property {boolean|null} [allowMissing] UpdateWorkstationConfigRequest allowMissing
+                         */
+    
+                        /**
+                         * Constructs a new UpdateWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents an UpdateWorkstationConfigRequest.
+                         * @implements IUpdateWorkstationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateWorkstationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateWorkstationConfigRequest workstationConfig.
+                         * @member {google.cloud.workstations.v1.IWorkstationConfig|null|undefined} workstationConfig
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @instance
+                         */
+                        UpdateWorkstationConfigRequest.prototype.workstationConfig = null;
+    
+                        /**
+                         * UpdateWorkstationConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @instance
+                         */
+                        UpdateWorkstationConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateWorkstationConfigRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @instance
+                         */
+                        UpdateWorkstationConfigRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * UpdateWorkstationConfigRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @instance
+                         */
+                        UpdateWorkstationConfigRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * Creates a new UpdateWorkstationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationConfigRequest} UpdateWorkstationConfigRequest instance
+                         */
+                        UpdateWorkstationConfigRequest.create = function create(properties) {
+                            return new UpdateWorkstationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationConfigRequest} message UpdateWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkstationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstationConfig != null && Object.hasOwnProperty.call(message, "workstationConfig"))
+                                $root.google.cloud.workstations.v1.WorkstationConfig.encode(message.workstationConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationConfigRequest} message UpdateWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkstationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkstationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationConfigRequest} UpdateWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkstationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.UpdateWorkstationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.workstationConfig = $root.google.cloud.workstations.v1.WorkstationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationConfigRequest} UpdateWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkstationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateWorkstationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateWorkstationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstationConfig != null && message.hasOwnProperty("workstationConfig")) {
+                                var error = $root.google.cloud.workstations.v1.WorkstationConfig.verify(message.workstationConfig);
+                                if (error)
+                                    return "workstationConfig." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationConfigRequest} UpdateWorkstationConfigRequest
+                         */
+                        UpdateWorkstationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.UpdateWorkstationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.UpdateWorkstationConfigRequest();
+                            if (object.workstationConfig != null) {
+                                if (typeof object.workstationConfig !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.UpdateWorkstationConfigRequest.workstationConfig: object expected");
+                                message.workstationConfig = $root.google.cloud.workstations.v1.WorkstationConfig.fromObject(object.workstationConfig);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.UpdateWorkstationConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateWorkstationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.UpdateWorkstationConfigRequest} message UpdateWorkstationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateWorkstationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.workstationConfig = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                                object.allowMissing = false;
+                            }
+                            if (message.workstationConfig != null && message.hasOwnProperty("workstationConfig"))
+                                object.workstationConfig = $root.google.cloud.workstations.v1.WorkstationConfig.toObject(message.workstationConfig, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateWorkstationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateWorkstationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateWorkstationConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateWorkstationConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.UpdateWorkstationConfigRequest";
+                        };
+    
+                        return UpdateWorkstationConfigRequest;
+                    })();
+    
+                    v1.DeleteWorkstationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IDeleteWorkstationConfigRequest
+                         * @property {string|null} [name] DeleteWorkstationConfigRequest name
+                         * @property {boolean|null} [validateOnly] DeleteWorkstationConfigRequest validateOnly
+                         * @property {string|null} [etag] DeleteWorkstationConfigRequest etag
+                         * @property {boolean|null} [force] DeleteWorkstationConfigRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteWorkstationConfigRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a DeleteWorkstationConfigRequest.
+                         * @implements IDeleteWorkstationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteWorkstationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteWorkstationConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @instance
+                         */
+                        DeleteWorkstationConfigRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteWorkstationConfigRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @instance
+                         */
+                        DeleteWorkstationConfigRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteWorkstationConfigRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @instance
+                         */
+                        DeleteWorkstationConfigRequest.prototype.etag = "";
+    
+                        /**
+                         * DeleteWorkstationConfigRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @instance
+                         */
+                        DeleteWorkstationConfigRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteWorkstationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationConfigRequest} DeleteWorkstationConfigRequest instance
+                         */
+                        DeleteWorkstationConfigRequest.create = function create(properties) {
+                            return new DeleteWorkstationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationConfigRequest} message DeleteWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkstationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationConfigRequest} message DeleteWorkstationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkstationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkstationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationConfigRequest} DeleteWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkstationConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.DeleteWorkstationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationConfigRequest} DeleteWorkstationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkstationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteWorkstationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteWorkstationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationConfigRequest} DeleteWorkstationConfigRequest
+                         */
+                        DeleteWorkstationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.DeleteWorkstationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.DeleteWorkstationConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteWorkstationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.DeleteWorkstationConfigRequest} message DeleteWorkstationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteWorkstationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteWorkstationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteWorkstationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteWorkstationConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteWorkstationConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.DeleteWorkstationConfigRequest";
+                        };
+    
+                        return DeleteWorkstationConfigRequest;
+                    })();
+    
+                    v1.GetWorkstationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IGetWorkstationRequest
+                         * @property {string|null} [name] GetWorkstationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a GetWorkstationRequest.
+                         * @implements IGetWorkstationRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IGetWorkstationRequest=} [properties] Properties to set
+                         */
+                        function GetWorkstationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWorkstationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @instance
+                         */
+                        GetWorkstationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWorkstationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.GetWorkstationRequest} GetWorkstationRequest instance
+                         */
+                        GetWorkstationRequest.create = function create(properties) {
+                            return new GetWorkstationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationRequest} message GetWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkstationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGetWorkstationRequest} message GetWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkstationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWorkstationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.GetWorkstationRequest} GetWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkstationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.GetWorkstationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWorkstationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.GetWorkstationRequest} GetWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkstationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWorkstationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWorkstationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.GetWorkstationRequest} GetWorkstationRequest
+                         */
+                        GetWorkstationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.GetWorkstationRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.GetWorkstationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWorkstationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.GetWorkstationRequest} message GetWorkstationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWorkstationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWorkstationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWorkstationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWorkstationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.GetWorkstationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWorkstationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.GetWorkstationRequest";
+                        };
+    
+                        return GetWorkstationRequest;
+                    })();
+    
+                    v1.ListWorkstationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkstationsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListWorkstationsRequest
+                         * @property {string|null} [parent] ListWorkstationsRequest parent
+                         * @property {number|null} [pageSize] ListWorkstationsRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkstationsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkstationsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListWorkstationsRequest.
+                         * @implements IListWorkstationsRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListWorkstationsRequest=} [properties] Properties to set
+                         */
+                        function ListWorkstationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkstationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @instance
+                         */
+                        ListWorkstationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWorkstationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @instance
+                         */
+                        ListWorkstationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkstationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @instance
+                         */
+                        ListWorkstationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkstationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsRequest} ListWorkstationsRequest instance
+                         */
+                        ListWorkstationsRequest.create = function create(properties) {
+                            return new ListWorkstationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationsRequest} message ListWorkstationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationsRequest} message ListWorkstationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsRequest} ListWorkstationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListWorkstationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsRequest} ListWorkstationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkstationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkstationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkstationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsRequest} ListWorkstationsRequest
+                         */
+                        ListWorkstationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListWorkstationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListWorkstationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkstationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListWorkstationsRequest} message ListWorkstationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkstationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkstationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkstationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkstationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkstationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListWorkstationsRequest";
+                        };
+    
+                        return ListWorkstationsRequest;
+                    })();
+    
+                    v1.ListWorkstationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkstationsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListWorkstationsResponse
+                         * @property {Array.<google.cloud.workstations.v1.IWorkstation>|null} [workstations] ListWorkstationsResponse workstations
+                         * @property {string|null} [nextPageToken] ListWorkstationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkstationsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkstationsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListWorkstationsResponse.
+                         * @implements IListWorkstationsResponse
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListWorkstationsResponse=} [properties] Properties to set
+                         */
+                        function ListWorkstationsResponse(properties) {
+                            this.workstations = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkstationsResponse workstations.
+                         * @member {Array.<google.cloud.workstations.v1.IWorkstation>} workstations
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @instance
+                         */
+                        ListWorkstationsResponse.prototype.workstations = $util.emptyArray;
+    
+                        /**
+                         * ListWorkstationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @instance
+                         */
+                        ListWorkstationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkstationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @instance
+                         */
+                        ListWorkstationsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWorkstationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsResponse} ListWorkstationsResponse instance
+                         */
+                        ListWorkstationsResponse.create = function create(properties) {
+                            return new ListWorkstationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationsResponse} message ListWorkstationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstations != null && message.workstations.length)
+                                for (var i = 0; i < message.workstations.length; ++i)
+                                    $root.google.cloud.workstations.v1.Workstation.encode(message.workstations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkstationsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListWorkstationsResponse} message ListWorkstationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkstationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsResponse} ListWorkstationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListWorkstationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workstations && message.workstations.length))
+                                            message.workstations = [];
+                                        message.workstations.push($root.google.cloud.workstations.v1.Workstation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkstationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsResponse} ListWorkstationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkstationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkstationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkstationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstations != null && message.hasOwnProperty("workstations")) {
+                                if (!Array.isArray(message.workstations))
+                                    return "workstations: array expected";
+                                for (var i = 0; i < message.workstations.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.Workstation.verify(message.workstations[i]);
+                                    if (error)
+                                        return "workstations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkstationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListWorkstationsResponse} ListWorkstationsResponse
+                         */
+                        ListWorkstationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListWorkstationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListWorkstationsResponse();
+                            if (object.workstations) {
+                                if (!Array.isArray(object.workstations))
+                                    throw TypeError(".google.cloud.workstations.v1.ListWorkstationsResponse.workstations: array expected");
+                                message.workstations = [];
+                                for (var i = 0; i < object.workstations.length; ++i) {
+                                    if (typeof object.workstations[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.ListWorkstationsResponse.workstations: object expected");
+                                    message.workstations[i] = $root.google.cloud.workstations.v1.Workstation.fromObject(object.workstations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.workstations.v1.ListWorkstationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkstationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListWorkstationsResponse} message ListWorkstationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkstationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workstations = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workstations && message.workstations.length) {
+                                object.workstations = [];
+                                for (var j = 0; j < message.workstations.length; ++j)
+                                    object.workstations[j] = $root.google.cloud.workstations.v1.Workstation.toObject(message.workstations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkstationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkstationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkstationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListWorkstationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkstationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListWorkstationsResponse";
+                        };
+    
+                        return ListWorkstationsResponse;
+                    })();
+    
+                    v1.ListUsableWorkstationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListUsableWorkstationsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListUsableWorkstationsRequest
+                         * @property {string|null} [parent] ListUsableWorkstationsRequest parent
+                         * @property {number|null} [pageSize] ListUsableWorkstationsRequest pageSize
+                         * @property {string|null} [pageToken] ListUsableWorkstationsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListUsableWorkstationsRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListUsableWorkstationsRequest.
+                         * @implements IListUsableWorkstationsRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsRequest=} [properties] Properties to set
+                         */
+                        function ListUsableWorkstationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListUsableWorkstationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @instance
+                         */
+                        ListUsableWorkstationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListUsableWorkstationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @instance
+                         */
+                        ListUsableWorkstationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListUsableWorkstationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @instance
+                         */
+                        ListUsableWorkstationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListUsableWorkstationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsRequest} ListUsableWorkstationsRequest instance
+                         */
+                        ListUsableWorkstationsRequest.create = function create(properties) {
+                            return new ListUsableWorkstationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsRequest} message ListUsableWorkstationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsRequest} message ListUsableWorkstationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsRequest} ListUsableWorkstationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListUsableWorkstationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsRequest} ListUsableWorkstationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListUsableWorkstationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListUsableWorkstationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListUsableWorkstationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsRequest} ListUsableWorkstationsRequest
+                         */
+                        ListUsableWorkstationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListUsableWorkstationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListUsableWorkstationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListUsableWorkstationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListUsableWorkstationsRequest} message ListUsableWorkstationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListUsableWorkstationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListUsableWorkstationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListUsableWorkstationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListUsableWorkstationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListUsableWorkstationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListUsableWorkstationsRequest";
+                        };
+    
+                        return ListUsableWorkstationsRequest;
+                    })();
+    
+                    v1.ListUsableWorkstationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListUsableWorkstationsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IListUsableWorkstationsResponse
+                         * @property {Array.<google.cloud.workstations.v1.IWorkstation>|null} [workstations] ListUsableWorkstationsResponse workstations
+                         * @property {string|null} [nextPageToken] ListUsableWorkstationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListUsableWorkstationsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListUsableWorkstationsResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a ListUsableWorkstationsResponse.
+                         * @implements IListUsableWorkstationsResponse
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsResponse=} [properties] Properties to set
+                         */
+                        function ListUsableWorkstationsResponse(properties) {
+                            this.workstations = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListUsableWorkstationsResponse workstations.
+                         * @member {Array.<google.cloud.workstations.v1.IWorkstation>} workstations
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @instance
+                         */
+                        ListUsableWorkstationsResponse.prototype.workstations = $util.emptyArray;
+    
+                        /**
+                         * ListUsableWorkstationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @instance
+                         */
+                        ListUsableWorkstationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListUsableWorkstationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @instance
+                         */
+                        ListUsableWorkstationsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListUsableWorkstationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsResponse} ListUsableWorkstationsResponse instance
+                         */
+                        ListUsableWorkstationsResponse.create = function create(properties) {
+                            return new ListUsableWorkstationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsResponse} message ListUsableWorkstationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstations != null && message.workstations.length)
+                                for (var i = 0; i < message.workstations.length; ++i)
+                                    $root.google.cloud.workstations.v1.Workstation.encode(message.workstations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsableWorkstationsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IListUsableWorkstationsResponse} message ListUsableWorkstationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsableWorkstationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsResponse} ListUsableWorkstationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.ListUsableWorkstationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workstations && message.workstations.length))
+                                            message.workstations = [];
+                                        message.workstations.push($root.google.cloud.workstations.v1.Workstation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListUsableWorkstationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsResponse} ListUsableWorkstationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsableWorkstationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListUsableWorkstationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListUsableWorkstationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstations != null && message.hasOwnProperty("workstations")) {
+                                if (!Array.isArray(message.workstations))
+                                    return "workstations: array expected";
+                                for (var i = 0; i < message.workstations.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.Workstation.verify(message.workstations[i]);
+                                    if (error)
+                                        return "workstations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListUsableWorkstationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.ListUsableWorkstationsResponse} ListUsableWorkstationsResponse
+                         */
+                        ListUsableWorkstationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.ListUsableWorkstationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.ListUsableWorkstationsResponse();
+                            if (object.workstations) {
+                                if (!Array.isArray(object.workstations))
+                                    throw TypeError(".google.cloud.workstations.v1.ListUsableWorkstationsResponse.workstations: array expected");
+                                message.workstations = [];
+                                for (var i = 0; i < object.workstations.length; ++i) {
+                                    if (typeof object.workstations[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.ListUsableWorkstationsResponse.workstations: object expected");
+                                    message.workstations[i] = $root.google.cloud.workstations.v1.Workstation.fromObject(object.workstations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.workstations.v1.ListUsableWorkstationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListUsableWorkstationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.ListUsableWorkstationsResponse} message ListUsableWorkstationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListUsableWorkstationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workstations = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workstations && message.workstations.length) {
+                                object.workstations = [];
+                                for (var j = 0; j < message.workstations.length; ++j)
+                                    object.workstations[j] = $root.google.cloud.workstations.v1.Workstation.toObject(message.workstations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListUsableWorkstationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListUsableWorkstationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListUsableWorkstationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.ListUsableWorkstationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListUsableWorkstationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.ListUsableWorkstationsResponse";
+                        };
+    
+                        return ListUsableWorkstationsResponse;
+                    })();
+    
+                    v1.CreateWorkstationRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface ICreateWorkstationRequest
+                         * @property {string|null} [parent] CreateWorkstationRequest parent
+                         * @property {string|null} [workstationId] CreateWorkstationRequest workstationId
+                         * @property {google.cloud.workstations.v1.IWorkstation|null} [workstation] CreateWorkstationRequest workstation
+                         * @property {boolean|null} [validateOnly] CreateWorkstationRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a CreateWorkstationRequest.
+                         * @implements ICreateWorkstationRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationRequest=} [properties] Properties to set
+                         */
+                        function CreateWorkstationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateWorkstationRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @instance
+                         */
+                        CreateWorkstationRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateWorkstationRequest workstationId.
+                         * @member {string} workstationId
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @instance
+                         */
+                        CreateWorkstationRequest.prototype.workstationId = "";
+    
+                        /**
+                         * CreateWorkstationRequest workstation.
+                         * @member {google.cloud.workstations.v1.IWorkstation|null|undefined} workstation
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @instance
+                         */
+                        CreateWorkstationRequest.prototype.workstation = null;
+    
+                        /**
+                         * CreateWorkstationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @instance
+                         */
+                        CreateWorkstationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateWorkstationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationRequest} CreateWorkstationRequest instance
+                         */
+                        CreateWorkstationRequest.create = function create(properties) {
+                            return new CreateWorkstationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationRequest} message CreateWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkstationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.workstationId != null && Object.hasOwnProperty.call(message, "workstationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.workstationId);
+                            if (message.workstation != null && Object.hasOwnProperty.call(message, "workstation"))
+                                $root.google.cloud.workstations.v1.Workstation.encode(message.workstation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.ICreateWorkstationRequest} message CreateWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateWorkstationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkstationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationRequest} CreateWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkstationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.CreateWorkstationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.workstationId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.workstation = $root.google.cloud.workstations.v1.Workstation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateWorkstationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationRequest} CreateWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateWorkstationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateWorkstationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateWorkstationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.workstationId != null && message.hasOwnProperty("workstationId"))
+                                if (!$util.isString(message.workstationId))
+                                    return "workstationId: string expected";
+                            if (message.workstation != null && message.hasOwnProperty("workstation")) {
+                                var error = $root.google.cloud.workstations.v1.Workstation.verify(message.workstation);
+                                if (error)
+                                    return "workstation." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.CreateWorkstationRequest} CreateWorkstationRequest
+                         */
+                        CreateWorkstationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.CreateWorkstationRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.CreateWorkstationRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.workstationId != null)
+                                message.workstationId = String(object.workstationId);
+                            if (object.workstation != null) {
+                                if (typeof object.workstation !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.CreateWorkstationRequest.workstation: object expected");
+                                message.workstation = $root.google.cloud.workstations.v1.Workstation.fromObject(object.workstation);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateWorkstationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.CreateWorkstationRequest} message CreateWorkstationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateWorkstationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.workstationId = "";
+                                object.workstation = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.workstationId != null && message.hasOwnProperty("workstationId"))
+                                object.workstationId = message.workstationId;
+                            if (message.workstation != null && message.hasOwnProperty("workstation"))
+                                object.workstation = $root.google.cloud.workstations.v1.Workstation.toObject(message.workstation, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateWorkstationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateWorkstationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateWorkstationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.CreateWorkstationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateWorkstationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.CreateWorkstationRequest";
+                        };
+    
+                        return CreateWorkstationRequest;
+                    })();
+    
+                    v1.UpdateWorkstationRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IUpdateWorkstationRequest
+                         * @property {google.cloud.workstations.v1.IWorkstation|null} [workstation] UpdateWorkstationRequest workstation
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateWorkstationRequest updateMask
+                         * @property {boolean|null} [validateOnly] UpdateWorkstationRequest validateOnly
+                         * @property {boolean|null} [allowMissing] UpdateWorkstationRequest allowMissing
+                         */
+    
+                        /**
+                         * Constructs a new UpdateWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents an UpdateWorkstationRequest.
+                         * @implements IUpdateWorkstationRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationRequest=} [properties] Properties to set
+                         */
+                        function UpdateWorkstationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateWorkstationRequest workstation.
+                         * @member {google.cloud.workstations.v1.IWorkstation|null|undefined} workstation
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @instance
+                         */
+                        UpdateWorkstationRequest.prototype.workstation = null;
+    
+                        /**
+                         * UpdateWorkstationRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @instance
+                         */
+                        UpdateWorkstationRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateWorkstationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @instance
+                         */
+                        UpdateWorkstationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * UpdateWorkstationRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @instance
+                         */
+                        UpdateWorkstationRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * Creates a new UpdateWorkstationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationRequest} UpdateWorkstationRequest instance
+                         */
+                        UpdateWorkstationRequest.create = function create(properties) {
+                            return new UpdateWorkstationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationRequest} message UpdateWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkstationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstation != null && Object.hasOwnProperty.call(message, "workstation"))
+                                $root.google.cloud.workstations.v1.Workstation.encode(message.workstation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IUpdateWorkstationRequest} message UpdateWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateWorkstationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkstationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationRequest} UpdateWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkstationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.UpdateWorkstationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.workstation = $root.google.cloud.workstations.v1.Workstation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateWorkstationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationRequest} UpdateWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateWorkstationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateWorkstationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateWorkstationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workstation != null && message.hasOwnProperty("workstation")) {
+                                var error = $root.google.cloud.workstations.v1.Workstation.verify(message.workstation);
+                                if (error)
+                                    return "workstation." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.UpdateWorkstationRequest} UpdateWorkstationRequest
+                         */
+                        UpdateWorkstationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.UpdateWorkstationRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.UpdateWorkstationRequest();
+                            if (object.workstation != null) {
+                                if (typeof object.workstation !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.UpdateWorkstationRequest.workstation: object expected");
+                                message.workstation = $root.google.cloud.workstations.v1.Workstation.fromObject(object.workstation);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.UpdateWorkstationRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateWorkstationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.UpdateWorkstationRequest} message UpdateWorkstationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateWorkstationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.workstation = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                                object.allowMissing = false;
+                            }
+                            if (message.workstation != null && message.hasOwnProperty("workstation"))
+                                object.workstation = $root.google.cloud.workstations.v1.Workstation.toObject(message.workstation, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateWorkstationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateWorkstationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateWorkstationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.UpdateWorkstationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateWorkstationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.UpdateWorkstationRequest";
+                        };
+    
+                        return UpdateWorkstationRequest;
+                    })();
+    
+                    v1.DeleteWorkstationRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IDeleteWorkstationRequest
+                         * @property {string|null} [name] DeleteWorkstationRequest name
+                         * @property {boolean|null} [validateOnly] DeleteWorkstationRequest validateOnly
+                         * @property {string|null} [etag] DeleteWorkstationRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a DeleteWorkstationRequest.
+                         * @implements IDeleteWorkstationRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationRequest=} [properties] Properties to set
+                         */
+                        function DeleteWorkstationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteWorkstationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @instance
+                         */
+                        DeleteWorkstationRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteWorkstationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @instance
+                         */
+                        DeleteWorkstationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteWorkstationRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @instance
+                         */
+                        DeleteWorkstationRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteWorkstationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationRequest} DeleteWorkstationRequest instance
+                         */
+                        DeleteWorkstationRequest.create = function create(properties) {
+                            return new DeleteWorkstationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationRequest} message DeleteWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkstationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IDeleteWorkstationRequest} message DeleteWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteWorkstationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkstationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationRequest} DeleteWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkstationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.DeleteWorkstationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteWorkstationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationRequest} DeleteWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteWorkstationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteWorkstationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteWorkstationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.DeleteWorkstationRequest} DeleteWorkstationRequest
+                         */
+                        DeleteWorkstationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.DeleteWorkstationRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.DeleteWorkstationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteWorkstationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.DeleteWorkstationRequest} message DeleteWorkstationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteWorkstationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteWorkstationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteWorkstationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteWorkstationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.DeleteWorkstationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteWorkstationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.DeleteWorkstationRequest";
+                        };
+    
+                        return DeleteWorkstationRequest;
+                    })();
+    
+                    v1.StartWorkstationRequest = (function() {
+    
+                        /**
+                         * Properties of a StartWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IStartWorkstationRequest
+                         * @property {string|null} [name] StartWorkstationRequest name
+                         * @property {boolean|null} [validateOnly] StartWorkstationRequest validateOnly
+                         * @property {string|null} [etag] StartWorkstationRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new StartWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a StartWorkstationRequest.
+                         * @implements IStartWorkstationRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IStartWorkstationRequest=} [properties] Properties to set
+                         */
+                        function StartWorkstationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StartWorkstationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @instance
+                         */
+                        StartWorkstationRequest.prototype.name = "";
+    
+                        /**
+                         * StartWorkstationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @instance
+                         */
+                        StartWorkstationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * StartWorkstationRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @instance
+                         */
+                        StartWorkstationRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new StartWorkstationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IStartWorkstationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.StartWorkstationRequest} StartWorkstationRequest instance
+                         */
+                        StartWorkstationRequest.create = function create(properties) {
+                            return new StartWorkstationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StartWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.StartWorkstationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IStartWorkstationRequest} message StartWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartWorkstationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StartWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.StartWorkstationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IStartWorkstationRequest} message StartWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartWorkstationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StartWorkstationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.StartWorkstationRequest} StartWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartWorkstationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.StartWorkstationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StartWorkstationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.StartWorkstationRequest} StartWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartWorkstationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StartWorkstationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StartWorkstationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StartWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.StartWorkstationRequest} StartWorkstationRequest
+                         */
+                        StartWorkstationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.StartWorkstationRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.StartWorkstationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StartWorkstationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.StartWorkstationRequest} message StartWorkstationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StartWorkstationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StartWorkstationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StartWorkstationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartWorkstationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.StartWorkstationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartWorkstationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.StartWorkstationRequest";
+                        };
+    
+                        return StartWorkstationRequest;
+                    })();
+    
+                    v1.StopWorkstationRequest = (function() {
+    
+                        /**
+                         * Properties of a StopWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IStopWorkstationRequest
+                         * @property {string|null} [name] StopWorkstationRequest name
+                         * @property {boolean|null} [validateOnly] StopWorkstationRequest validateOnly
+                         * @property {string|null} [etag] StopWorkstationRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new StopWorkstationRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a StopWorkstationRequest.
+                         * @implements IStopWorkstationRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IStopWorkstationRequest=} [properties] Properties to set
+                         */
+                        function StopWorkstationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StopWorkstationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @instance
+                         */
+                        StopWorkstationRequest.prototype.name = "";
+    
+                        /**
+                         * StopWorkstationRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @instance
+                         */
+                        StopWorkstationRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * StopWorkstationRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @instance
+                         */
+                        StopWorkstationRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new StopWorkstationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IStopWorkstationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.StopWorkstationRequest} StopWorkstationRequest instance
+                         */
+                        StopWorkstationRequest.create = function create(properties) {
+                            return new StopWorkstationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StopWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.StopWorkstationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IStopWorkstationRequest} message StopWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StopWorkstationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StopWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.StopWorkstationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IStopWorkstationRequest} message StopWorkstationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StopWorkstationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StopWorkstationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.StopWorkstationRequest} StopWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StopWorkstationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.StopWorkstationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StopWorkstationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.StopWorkstationRequest} StopWorkstationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StopWorkstationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StopWorkstationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StopWorkstationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StopWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.StopWorkstationRequest} StopWorkstationRequest
+                         */
+                        StopWorkstationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.StopWorkstationRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.StopWorkstationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StopWorkstationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.StopWorkstationRequest} message StopWorkstationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StopWorkstationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StopWorkstationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StopWorkstationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StopWorkstationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.StopWorkstationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StopWorkstationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.StopWorkstationRequest";
+                        };
+    
+                        return StopWorkstationRequest;
+                    })();
+    
+                    v1.GenerateAccessTokenRequest = (function() {
+    
+                        /**
+                         * Properties of a GenerateAccessTokenRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IGenerateAccessTokenRequest
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] GenerateAccessTokenRequest expireTime
+                         * @property {google.protobuf.IDuration|null} [ttl] GenerateAccessTokenRequest ttl
+                         * @property {string|null} [workstation] GenerateAccessTokenRequest workstation
+                         */
+    
+                        /**
+                         * Constructs a new GenerateAccessTokenRequest.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a GenerateAccessTokenRequest.
+                         * @implements IGenerateAccessTokenRequest
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenRequest=} [properties] Properties to set
+                         */
+                        function GenerateAccessTokenRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateAccessTokenRequest expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @instance
+                         */
+                        GenerateAccessTokenRequest.prototype.expireTime = null;
+    
+                        /**
+                         * GenerateAccessTokenRequest ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @instance
+                         */
+                        GenerateAccessTokenRequest.prototype.ttl = null;
+    
+                        /**
+                         * GenerateAccessTokenRequest workstation.
+                         * @member {string} workstation
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @instance
+                         */
+                        GenerateAccessTokenRequest.prototype.workstation = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * GenerateAccessTokenRequest expiration.
+                         * @member {"expireTime"|"ttl"|undefined} expiration
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @instance
+                         */
+                        Object.defineProperty(GenerateAccessTokenRequest.prototype, "expiration", {
+                            get: $util.oneOfGetter($oneOfFields = ["expireTime", "ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new GenerateAccessTokenRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenRequest} GenerateAccessTokenRequest instance
+                         */
+                        GenerateAccessTokenRequest.create = function create(properties) {
+                            return new GenerateAccessTokenRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateAccessTokenRequest message. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenRequest} message GenerateAccessTokenRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateAccessTokenRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workstation != null && Object.hasOwnProperty.call(message, "workstation"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.workstation);
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateAccessTokenRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenRequest} message GenerateAccessTokenRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateAccessTokenRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateAccessTokenRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenRequest} GenerateAccessTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateAccessTokenRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.GenerateAccessTokenRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.workstation = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateAccessTokenRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenRequest} GenerateAccessTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateAccessTokenRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateAccessTokenRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateAccessTokenRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                properties.expiration = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                if (properties.expiration === 1)
+                                    return "expiration: multiple values";
+                                properties.expiration = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.workstation != null && message.hasOwnProperty("workstation"))
+                                if (!$util.isString(message.workstation))
+                                    return "workstation: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateAccessTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenRequest} GenerateAccessTokenRequest
+                         */
+                        GenerateAccessTokenRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.GenerateAccessTokenRequest)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.GenerateAccessTokenRequest();
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.GenerateAccessTokenRequest.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.GenerateAccessTokenRequest.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.workstation != null)
+                                message.workstation = String(object.workstation);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateAccessTokenRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.workstations.v1.GenerateAccessTokenRequest} message GenerateAccessTokenRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateAccessTokenRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.workstation = "";
+                            if (message.workstation != null && message.hasOwnProperty("workstation"))
+                                object.workstation = message.workstation;
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                if (options.oneofs)
+                                    object.expiration = "expireTime";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                                if (options.oneofs)
+                                    object.expiration = "ttl";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateAccessTokenRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateAccessTokenRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateAccessTokenRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateAccessTokenRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.GenerateAccessTokenRequest";
+                        };
+    
+                        return GenerateAccessTokenRequest;
+                    })();
+    
+                    v1.GenerateAccessTokenResponse = (function() {
+    
+                        /**
+                         * Properties of a GenerateAccessTokenResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IGenerateAccessTokenResponse
+                         * @property {string|null} [accessToken] GenerateAccessTokenResponse accessToken
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] GenerateAccessTokenResponse expireTime
+                         */
+    
+                        /**
+                         * Constructs a new GenerateAccessTokenResponse.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents a GenerateAccessTokenResponse.
+                         * @implements IGenerateAccessTokenResponse
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenResponse=} [properties] Properties to set
+                         */
+                        function GenerateAccessTokenResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateAccessTokenResponse accessToken.
+                         * @member {string} accessToken
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @instance
+                         */
+                        GenerateAccessTokenResponse.prototype.accessToken = "";
+    
+                        /**
+                         * GenerateAccessTokenResponse expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @instance
+                         */
+                        GenerateAccessTokenResponse.prototype.expireTime = null;
+    
+                        /**
+                         * Creates a new GenerateAccessTokenResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenResponse} GenerateAccessTokenResponse instance
+                         */
+                        GenerateAccessTokenResponse.create = function create(properties) {
+                            return new GenerateAccessTokenResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateAccessTokenResponse message. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenResponse} message GenerateAccessTokenResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateAccessTokenResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accessToken != null && Object.hasOwnProperty.call(message, "accessToken"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.accessToken);
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateAccessTokenResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.IGenerateAccessTokenResponse} message GenerateAccessTokenResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateAccessTokenResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateAccessTokenResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenResponse} GenerateAccessTokenResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateAccessTokenResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.GenerateAccessTokenResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.accessToken = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateAccessTokenResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenResponse} GenerateAccessTokenResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateAccessTokenResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateAccessTokenResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateAccessTokenResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accessToken != null && message.hasOwnProperty("accessToken"))
+                                if (!$util.isString(message.accessToken))
+                                    return "accessToken: string expected";
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateAccessTokenResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.GenerateAccessTokenResponse} GenerateAccessTokenResponse
+                         */
+                        GenerateAccessTokenResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.GenerateAccessTokenResponse)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.GenerateAccessTokenResponse();
+                            if (object.accessToken != null)
+                                message.accessToken = String(object.accessToken);
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.GenerateAccessTokenResponse.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateAccessTokenResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.workstations.v1.GenerateAccessTokenResponse} message GenerateAccessTokenResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateAccessTokenResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.accessToken = "";
+                                object.expireTime = null;
+                            }
+                            if (message.accessToken != null && message.hasOwnProperty("accessToken"))
+                                object.accessToken = message.accessToken;
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateAccessTokenResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateAccessTokenResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateAccessTokenResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.GenerateAccessTokenResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateAccessTokenResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.GenerateAccessTokenResponse";
+                        };
+    
+                        return GenerateAccessTokenResponse;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.workstations.v1
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusMessage] OperationMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.workstations.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.workstations.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * OperationMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.workstations.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.workstations.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.workstations.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.workstations.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.workstations.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workstations.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workstations.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workstations.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workstations.v1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.workstations.v1.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.workstations.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workstations.v1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workstations.v1.OperationMetadata";
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    return v1;
+                })();
+    
                 workstations.v1beta = (function() {
     
                     /**
