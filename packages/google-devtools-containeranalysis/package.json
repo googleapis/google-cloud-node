@@ -8,7 +8,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -66,3 +67,4 @@
     "node": ">=v12"
   }
 }
+

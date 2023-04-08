@@ -17,7 +17,8 @@
   "types": "./build/src/index.d.ts",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -33,7 +34,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
@@ -70,3 +71,4 @@
     "webpack-cli": "^5.0.0"
   }
 }
+

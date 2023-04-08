@@ -18,7 +18,8 @@
     "build/protos",
     "build/src",
     "AUTHORS",
-    "COPYING"
+    "COPYING",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -43,7 +44,7 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
@@ -72,3 +73,4 @@
     "webpack-cli": "^5.0.0"
   }
 }
+

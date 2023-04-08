@@ -73,10 +73,7 @@ function main(featurestore, destination, entityTypeSpecs) {
   // const passThroughFields = 1234
   /**
    *  Required. Specifies EntityType grouping Features to read values of and
-   *  settings. Each EntityType referenced in
-   *  BatchReadFeatureValuesRequest.entity_type_specs  must have a column
-   *  specifying entity IDs in the EntityType in
-   *  BatchReadFeatureValuesRequest.request   .
+   *  settings.
    */
   // const entityTypeSpecs = 1234
   /**
