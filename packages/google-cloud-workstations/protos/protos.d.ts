@@ -23,6 +23,5033 @@ export namespace google {
         /** Namespace workstations. */
         namespace workstations {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents a Workstations */
+                class Workstations extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Workstations service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Workstations service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Workstations;
+
+                    /**
+                     * Calls GetWorkstationCluster.
+                     * @param request GetWorkstationClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and WorkstationCluster
+                     */
+                    public getWorkstationCluster(request: google.cloud.workstations.v1.IGetWorkstationClusterRequest, callback: google.cloud.workstations.v1.Workstations.GetWorkstationClusterCallback): void;
+
+                    /**
+                     * Calls GetWorkstationCluster.
+                     * @param request GetWorkstationClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkstationCluster(request: google.cloud.workstations.v1.IGetWorkstationClusterRequest): Promise<google.cloud.workstations.v1.WorkstationCluster>;
+
+                    /**
+                     * Calls ListWorkstationClusters.
+                     * @param request ListWorkstationClustersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkstationClustersResponse
+                     */
+                    public listWorkstationClusters(request: google.cloud.workstations.v1.IListWorkstationClustersRequest, callback: google.cloud.workstations.v1.Workstations.ListWorkstationClustersCallback): void;
+
+                    /**
+                     * Calls ListWorkstationClusters.
+                     * @param request ListWorkstationClustersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkstationClusters(request: google.cloud.workstations.v1.IListWorkstationClustersRequest): Promise<google.cloud.workstations.v1.ListWorkstationClustersResponse>;
+
+                    /**
+                     * Calls CreateWorkstationCluster.
+                     * @param request CreateWorkstationClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWorkstationCluster(request: google.cloud.workstations.v1.ICreateWorkstationClusterRequest, callback: google.cloud.workstations.v1.Workstations.CreateWorkstationClusterCallback): void;
+
+                    /**
+                     * Calls CreateWorkstationCluster.
+                     * @param request CreateWorkstationClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWorkstationCluster(request: google.cloud.workstations.v1.ICreateWorkstationClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateWorkstationCluster.
+                     * @param request UpdateWorkstationClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateWorkstationCluster(request: google.cloud.workstations.v1.IUpdateWorkstationClusterRequest, callback: google.cloud.workstations.v1.Workstations.UpdateWorkstationClusterCallback): void;
+
+                    /**
+                     * Calls UpdateWorkstationCluster.
+                     * @param request UpdateWorkstationClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWorkstationCluster(request: google.cloud.workstations.v1.IUpdateWorkstationClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteWorkstationCluster.
+                     * @param request DeleteWorkstationClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteWorkstationCluster(request: google.cloud.workstations.v1.IDeleteWorkstationClusterRequest, callback: google.cloud.workstations.v1.Workstations.DeleteWorkstationClusterCallback): void;
+
+                    /**
+                     * Calls DeleteWorkstationCluster.
+                     * @param request DeleteWorkstationClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWorkstationCluster(request: google.cloud.workstations.v1.IDeleteWorkstationClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetWorkstationConfig.
+                     * @param request GetWorkstationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and WorkstationConfig
+                     */
+                    public getWorkstationConfig(request: google.cloud.workstations.v1.IGetWorkstationConfigRequest, callback: google.cloud.workstations.v1.Workstations.GetWorkstationConfigCallback): void;
+
+                    /**
+                     * Calls GetWorkstationConfig.
+                     * @param request GetWorkstationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkstationConfig(request: google.cloud.workstations.v1.IGetWorkstationConfigRequest): Promise<google.cloud.workstations.v1.WorkstationConfig>;
+
+                    /**
+                     * Calls ListWorkstationConfigs.
+                     * @param request ListWorkstationConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkstationConfigsResponse
+                     */
+                    public listWorkstationConfigs(request: google.cloud.workstations.v1.IListWorkstationConfigsRequest, callback: google.cloud.workstations.v1.Workstations.ListWorkstationConfigsCallback): void;
+
+                    /**
+                     * Calls ListWorkstationConfigs.
+                     * @param request ListWorkstationConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkstationConfigs(request: google.cloud.workstations.v1.IListWorkstationConfigsRequest): Promise<google.cloud.workstations.v1.ListWorkstationConfigsResponse>;
+
+                    /**
+                     * Calls ListUsableWorkstationConfigs.
+                     * @param request ListUsableWorkstationConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListUsableWorkstationConfigsResponse
+                     */
+                    public listUsableWorkstationConfigs(request: google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest, callback: google.cloud.workstations.v1.Workstations.ListUsableWorkstationConfigsCallback): void;
+
+                    /**
+                     * Calls ListUsableWorkstationConfigs.
+                     * @param request ListUsableWorkstationConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listUsableWorkstationConfigs(request: google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest): Promise<google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse>;
+
+                    /**
+                     * Calls CreateWorkstationConfig.
+                     * @param request CreateWorkstationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWorkstationConfig(request: google.cloud.workstations.v1.ICreateWorkstationConfigRequest, callback: google.cloud.workstations.v1.Workstations.CreateWorkstationConfigCallback): void;
+
+                    /**
+                     * Calls CreateWorkstationConfig.
+                     * @param request CreateWorkstationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWorkstationConfig(request: google.cloud.workstations.v1.ICreateWorkstationConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateWorkstationConfig.
+                     * @param request UpdateWorkstationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateWorkstationConfig(request: google.cloud.workstations.v1.IUpdateWorkstationConfigRequest, callback: google.cloud.workstations.v1.Workstations.UpdateWorkstationConfigCallback): void;
+
+                    /**
+                     * Calls UpdateWorkstationConfig.
+                     * @param request UpdateWorkstationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWorkstationConfig(request: google.cloud.workstations.v1.IUpdateWorkstationConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteWorkstationConfig.
+                     * @param request DeleteWorkstationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteWorkstationConfig(request: google.cloud.workstations.v1.IDeleteWorkstationConfigRequest, callback: google.cloud.workstations.v1.Workstations.DeleteWorkstationConfigCallback): void;
+
+                    /**
+                     * Calls DeleteWorkstationConfig.
+                     * @param request DeleteWorkstationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWorkstationConfig(request: google.cloud.workstations.v1.IDeleteWorkstationConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetWorkstation.
+                     * @param request GetWorkstationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workstation
+                     */
+                    public getWorkstation(request: google.cloud.workstations.v1.IGetWorkstationRequest, callback: google.cloud.workstations.v1.Workstations.GetWorkstationCallback): void;
+
+                    /**
+                     * Calls GetWorkstation.
+                     * @param request GetWorkstationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkstation(request: google.cloud.workstations.v1.IGetWorkstationRequest): Promise<google.cloud.workstations.v1.Workstation>;
+
+                    /**
+                     * Calls ListWorkstations.
+                     * @param request ListWorkstationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkstationsResponse
+                     */
+                    public listWorkstations(request: google.cloud.workstations.v1.IListWorkstationsRequest, callback: google.cloud.workstations.v1.Workstations.ListWorkstationsCallback): void;
+
+                    /**
+                     * Calls ListWorkstations.
+                     * @param request ListWorkstationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkstations(request: google.cloud.workstations.v1.IListWorkstationsRequest): Promise<google.cloud.workstations.v1.ListWorkstationsResponse>;
+
+                    /**
+                     * Calls ListUsableWorkstations.
+                     * @param request ListUsableWorkstationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListUsableWorkstationsResponse
+                     */
+                    public listUsableWorkstations(request: google.cloud.workstations.v1.IListUsableWorkstationsRequest, callback: google.cloud.workstations.v1.Workstations.ListUsableWorkstationsCallback): void;
+
+                    /**
+                     * Calls ListUsableWorkstations.
+                     * @param request ListUsableWorkstationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listUsableWorkstations(request: google.cloud.workstations.v1.IListUsableWorkstationsRequest): Promise<google.cloud.workstations.v1.ListUsableWorkstationsResponse>;
+
+                    /**
+                     * Calls CreateWorkstation.
+                     * @param request CreateWorkstationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWorkstation(request: google.cloud.workstations.v1.ICreateWorkstationRequest, callback: google.cloud.workstations.v1.Workstations.CreateWorkstationCallback): void;
+
+                    /**
+                     * Calls CreateWorkstation.
+                     * @param request CreateWorkstationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWorkstation(request: google.cloud.workstations.v1.ICreateWorkstationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateWorkstation.
+                     * @param request UpdateWorkstationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateWorkstation(request: google.cloud.workstations.v1.IUpdateWorkstationRequest, callback: google.cloud.workstations.v1.Workstations.UpdateWorkstationCallback): void;
+
+                    /**
+                     * Calls UpdateWorkstation.
+                     * @param request UpdateWorkstationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWorkstation(request: google.cloud.workstations.v1.IUpdateWorkstationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteWorkstation.
+                     * @param request DeleteWorkstationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteWorkstation(request: google.cloud.workstations.v1.IDeleteWorkstationRequest, callback: google.cloud.workstations.v1.Workstations.DeleteWorkstationCallback): void;
+
+                    /**
+                     * Calls DeleteWorkstation.
+                     * @param request DeleteWorkstationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWorkstation(request: google.cloud.workstations.v1.IDeleteWorkstationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StartWorkstation.
+                     * @param request StartWorkstationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public startWorkstation(request: google.cloud.workstations.v1.IStartWorkstationRequest, callback: google.cloud.workstations.v1.Workstations.StartWorkstationCallback): void;
+
+                    /**
+                     * Calls StartWorkstation.
+                     * @param request StartWorkstationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startWorkstation(request: google.cloud.workstations.v1.IStartWorkstationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StopWorkstation.
+                     * @param request StopWorkstationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public stopWorkstation(request: google.cloud.workstations.v1.IStopWorkstationRequest, callback: google.cloud.workstations.v1.Workstations.StopWorkstationCallback): void;
+
+                    /**
+                     * Calls StopWorkstation.
+                     * @param request StopWorkstationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopWorkstation(request: google.cloud.workstations.v1.IStopWorkstationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GenerateAccessToken.
+                     * @param request GenerateAccessTokenRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateAccessTokenResponse
+                     */
+                    public generateAccessToken(request: google.cloud.workstations.v1.IGenerateAccessTokenRequest, callback: google.cloud.workstations.v1.Workstations.GenerateAccessTokenCallback): void;
+
+                    /**
+                     * Calls GenerateAccessToken.
+                     * @param request GenerateAccessTokenRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateAccessToken(request: google.cloud.workstations.v1.IGenerateAccessTokenRequest): Promise<google.cloud.workstations.v1.GenerateAccessTokenResponse>;
+                }
+
+                namespace Workstations {
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|getWorkstationCluster}.
+                     * @param error Error, if any
+                     * @param [response] WorkstationCluster
+                     */
+                    type GetWorkstationClusterCallback = (error: (Error|null), response?: google.cloud.workstations.v1.WorkstationCluster) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|listWorkstationClusters}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkstationClustersResponse
+                     */
+                    type ListWorkstationClustersCallback = (error: (Error|null), response?: google.cloud.workstations.v1.ListWorkstationClustersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|createWorkstationCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWorkstationClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|updateWorkstationCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateWorkstationClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|deleteWorkstationCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteWorkstationClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|getWorkstationConfig}.
+                     * @param error Error, if any
+                     * @param [response] WorkstationConfig
+                     */
+                    type GetWorkstationConfigCallback = (error: (Error|null), response?: google.cloud.workstations.v1.WorkstationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|listWorkstationConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkstationConfigsResponse
+                     */
+                    type ListWorkstationConfigsCallback = (error: (Error|null), response?: google.cloud.workstations.v1.ListWorkstationConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|listUsableWorkstationConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListUsableWorkstationConfigsResponse
+                     */
+                    type ListUsableWorkstationConfigsCallback = (error: (Error|null), response?: google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|createWorkstationConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWorkstationConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|updateWorkstationConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateWorkstationConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|deleteWorkstationConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteWorkstationConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|getWorkstation}.
+                     * @param error Error, if any
+                     * @param [response] Workstation
+                     */
+                    type GetWorkstationCallback = (error: (Error|null), response?: google.cloud.workstations.v1.Workstation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|listWorkstations}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkstationsResponse
+                     */
+                    type ListWorkstationsCallback = (error: (Error|null), response?: google.cloud.workstations.v1.ListWorkstationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|listUsableWorkstations}.
+                     * @param error Error, if any
+                     * @param [response] ListUsableWorkstationsResponse
+                     */
+                    type ListUsableWorkstationsCallback = (error: (Error|null), response?: google.cloud.workstations.v1.ListUsableWorkstationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|createWorkstation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWorkstationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|updateWorkstation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateWorkstationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|deleteWorkstation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteWorkstationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|startWorkstation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StartWorkstationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|stopWorkstation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StopWorkstationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.workstations.v1.Workstations|generateAccessToken}.
+                     * @param error Error, if any
+                     * @param [response] GenerateAccessTokenResponse
+                     */
+                    type GenerateAccessTokenCallback = (error: (Error|null), response?: google.cloud.workstations.v1.GenerateAccessTokenResponse) => void;
+                }
+
+                /** Properties of a WorkstationCluster. */
+                interface IWorkstationCluster {
+
+                    /** WorkstationCluster name */
+                    name?: (string|null);
+
+                    /** WorkstationCluster displayName */
+                    displayName?: (string|null);
+
+                    /** WorkstationCluster uid */
+                    uid?: (string|null);
+
+                    /** WorkstationCluster reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** WorkstationCluster annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** WorkstationCluster labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** WorkstationCluster createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationCluster updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationCluster deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationCluster etag */
+                    etag?: (string|null);
+
+                    /** WorkstationCluster network */
+                    network?: (string|null);
+
+                    /** WorkstationCluster subnetwork */
+                    subnetwork?: (string|null);
+
+                    /** WorkstationCluster privateClusterConfig */
+                    privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
+
+                    /** WorkstationCluster degraded */
+                    degraded?: (boolean|null);
+
+                    /** WorkstationCluster conditions */
+                    conditions?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a WorkstationCluster. */
+                class WorkstationCluster implements IWorkstationCluster {
+
+                    /**
+                     * Constructs a new WorkstationCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IWorkstationCluster);
+
+                    /** WorkstationCluster name. */
+                    public name: string;
+
+                    /** WorkstationCluster displayName. */
+                    public displayName: string;
+
+                    /** WorkstationCluster uid. */
+                    public uid: string;
+
+                    /** WorkstationCluster reconciling. */
+                    public reconciling: boolean;
+
+                    /** WorkstationCluster annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** WorkstationCluster labels. */
+                    public labels: { [k: string]: string };
+
+                    /** WorkstationCluster createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationCluster updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationCluster deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationCluster etag. */
+                    public etag: string;
+
+                    /** WorkstationCluster network. */
+                    public network: string;
+
+                    /** WorkstationCluster subnetwork. */
+                    public subnetwork: string;
+
+                    /** WorkstationCluster privateClusterConfig. */
+                    public privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
+
+                    /** WorkstationCluster degraded. */
+                    public degraded: boolean;
+
+                    /** WorkstationCluster conditions. */
+                    public conditions: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new WorkstationCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkstationCluster instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IWorkstationCluster): google.cloud.workstations.v1.WorkstationCluster;
+
+                    /**
+                     * Encodes the specified WorkstationCluster message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.verify|verify} messages.
+                     * @param message WorkstationCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IWorkstationCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkstationCluster message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.verify|verify} messages.
+                     * @param message WorkstationCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IWorkstationCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkstationCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkstationCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationCluster;
+
+                    /**
+                     * Decodes a WorkstationCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkstationCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationCluster;
+
+                    /**
+                     * Verifies a WorkstationCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkstationCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkstationCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationCluster;
+
+                    /**
+                     * Creates a plain object from a WorkstationCluster message. Also converts values to other types if specified.
+                     * @param message WorkstationCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.WorkstationCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkstationCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkstationCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace WorkstationCluster {
+
+                    /** Properties of a PrivateClusterConfig. */
+                    interface IPrivateClusterConfig {
+
+                        /** PrivateClusterConfig enablePrivateEndpoint */
+                        enablePrivateEndpoint?: (boolean|null);
+
+                        /** PrivateClusterConfig clusterHostname */
+                        clusterHostname?: (string|null);
+
+                        /** PrivateClusterConfig serviceAttachmentUri */
+                        serviceAttachmentUri?: (string|null);
+
+                        /** PrivateClusterConfig allowedProjects */
+                        allowedProjects?: (string[]|null);
+                    }
+
+                    /** Represents a PrivateClusterConfig. */
+                    class PrivateClusterConfig implements IPrivateClusterConfig {
+
+                        /**
+                         * Constructs a new PrivateClusterConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig);
+
+                        /** PrivateClusterConfig enablePrivateEndpoint. */
+                        public enablePrivateEndpoint: boolean;
+
+                        /** PrivateClusterConfig clusterHostname. */
+                        public clusterHostname: string;
+
+                        /** PrivateClusterConfig serviceAttachmentUri. */
+                        public serviceAttachmentUri: string;
+
+                        /** PrivateClusterConfig allowedProjects. */
+                        public allowedProjects: string[];
+
+                        /**
+                         * Creates a new PrivateClusterConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrivateClusterConfig instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig): google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig;
+
+                        /**
+                         * Encodes the specified PrivateClusterConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify|verify} messages.
+                         * @param message PrivateClusterConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrivateClusterConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify|verify} messages.
+                         * @param message PrivateClusterConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrivateClusterConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrivateClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig;
+
+                        /**
+                         * Decodes a PrivateClusterConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrivateClusterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig;
+
+                        /**
+                         * Verifies a PrivateClusterConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrivateClusterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrivateClusterConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig;
+
+                        /**
+                         * Creates a plain object from a PrivateClusterConfig message. Also converts values to other types if specified.
+                         * @param message PrivateClusterConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrivateClusterConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrivateClusterConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a WorkstationConfig. */
+                interface IWorkstationConfig {
+
+                    /** WorkstationConfig name */
+                    name?: (string|null);
+
+                    /** WorkstationConfig displayName */
+                    displayName?: (string|null);
+
+                    /** WorkstationConfig uid */
+                    uid?: (string|null);
+
+                    /** WorkstationConfig reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** WorkstationConfig annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** WorkstationConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** WorkstationConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationConfig deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationConfig etag */
+                    etag?: (string|null);
+
+                    /** WorkstationConfig idleTimeout */
+                    idleTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkstationConfig runningTimeout */
+                    runningTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkstationConfig host */
+                    host?: (google.cloud.workstations.v1.WorkstationConfig.IHost|null);
+
+                    /** WorkstationConfig persistentDirectories */
+                    persistentDirectories?: (google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory[]|null);
+
+                    /** WorkstationConfig container */
+                    container?: (google.cloud.workstations.v1.WorkstationConfig.IContainer|null);
+
+                    /** WorkstationConfig encryptionKey */
+                    encryptionKey?: (google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null);
+
+                    /** WorkstationConfig degraded */
+                    degraded?: (boolean|null);
+
+                    /** WorkstationConfig conditions */
+                    conditions?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a WorkstationConfig. */
+                class WorkstationConfig implements IWorkstationConfig {
+
+                    /**
+                     * Constructs a new WorkstationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IWorkstationConfig);
+
+                    /** WorkstationConfig name. */
+                    public name: string;
+
+                    /** WorkstationConfig displayName. */
+                    public displayName: string;
+
+                    /** WorkstationConfig uid. */
+                    public uid: string;
+
+                    /** WorkstationConfig reconciling. */
+                    public reconciling: boolean;
+
+                    /** WorkstationConfig annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** WorkstationConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** WorkstationConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationConfig deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkstationConfig etag. */
+                    public etag: string;
+
+                    /** WorkstationConfig idleTimeout. */
+                    public idleTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkstationConfig runningTimeout. */
+                    public runningTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkstationConfig host. */
+                    public host?: (google.cloud.workstations.v1.WorkstationConfig.IHost|null);
+
+                    /** WorkstationConfig persistentDirectories. */
+                    public persistentDirectories: google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory[];
+
+                    /** WorkstationConfig container. */
+                    public container?: (google.cloud.workstations.v1.WorkstationConfig.IContainer|null);
+
+                    /** WorkstationConfig encryptionKey. */
+                    public encryptionKey?: (google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null);
+
+                    /** WorkstationConfig degraded. */
+                    public degraded: boolean;
+
+                    /** WorkstationConfig conditions. */
+                    public conditions: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new WorkstationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkstationConfig instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IWorkstationConfig): google.cloud.workstations.v1.WorkstationConfig;
+
+                    /**
+                     * Encodes the specified WorkstationConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.verify|verify} messages.
+                     * @param message WorkstationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IWorkstationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkstationConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.verify|verify} messages.
+                     * @param message WorkstationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IWorkstationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkstationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkstationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig;
+
+                    /**
+                     * Decodes a WorkstationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkstationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig;
+
+                    /**
+                     * Verifies a WorkstationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkstationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkstationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig;
+
+                    /**
+                     * Creates a plain object from a WorkstationConfig message. Also converts values to other types if specified.
+                     * @param message WorkstationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.WorkstationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkstationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkstationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace WorkstationConfig {
+
+                    /** Properties of a Host. */
+                    interface IHost {
+
+                        /** Host gceInstance */
+                        gceInstance?: (google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance|null);
+                    }
+
+                    /** Represents a Host. */
+                    class Host implements IHost {
+
+                        /**
+                         * Constructs a new Host.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.IHost);
+
+                        /** Host gceInstance. */
+                        public gceInstance?: (google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance|null);
+
+                        /** Host config. */
+                        public config?: "gceInstance";
+
+                        /**
+                         * Creates a new Host instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Host instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.IHost): google.cloud.workstations.v1.WorkstationConfig.Host;
+
+                        /**
+                         * Encodes the specified Host message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.verify|verify} messages.
+                         * @param message Host message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.IHost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Host message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.verify|verify} messages.
+                         * @param message Host message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.IHost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Host message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Host
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Host;
+
+                        /**
+                         * Decodes a Host message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Host
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Host;
+
+                        /**
+                         * Verifies a Host message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Host message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Host
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Host;
+
+                        /**
+                         * Creates a plain object from a Host message. Also converts values to other types if specified.
+                         * @param message Host
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Host, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Host to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Host
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Host {
+
+                        /** Properties of a GceInstance. */
+                        interface IGceInstance {
+
+                            /** GceInstance machineType */
+                            machineType?: (string|null);
+
+                            /** GceInstance serviceAccount */
+                            serviceAccount?: (string|null);
+
+                            /** GceInstance tags */
+                            tags?: (string[]|null);
+
+                            /** GceInstance poolSize */
+                            poolSize?: (number|null);
+
+                            /** GceInstance disablePublicIpAddresses */
+                            disablePublicIpAddresses?: (boolean|null);
+
+                            /** GceInstance enableNestedVirtualization */
+                            enableNestedVirtualization?: (boolean|null);
+
+                            /** GceInstance shieldedInstanceConfig */
+                            shieldedInstanceConfig?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null);
+
+                            /** GceInstance confidentialInstanceConfig */
+                            confidentialInstanceConfig?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig|null);
+
+                            /** GceInstance bootDiskSizeGb */
+                            bootDiskSizeGb?: (number|null);
+                        }
+
+                        /** Represents a GceInstance. */
+                        class GceInstance implements IGceInstance {
+
+                            /**
+                             * Constructs a new GceInstance.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance);
+
+                            /** GceInstance machineType. */
+                            public machineType: string;
+
+                            /** GceInstance serviceAccount. */
+                            public serviceAccount: string;
+
+                            /** GceInstance tags. */
+                            public tags: string[];
+
+                            /** GceInstance poolSize. */
+                            public poolSize: number;
+
+                            /** GceInstance disablePublicIpAddresses. */
+                            public disablePublicIpAddresses: boolean;
+
+                            /** GceInstance enableNestedVirtualization. */
+                            public enableNestedVirtualization: boolean;
+
+                            /** GceInstance shieldedInstanceConfig. */
+                            public shieldedInstanceConfig?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null);
+
+                            /** GceInstance confidentialInstanceConfig. */
+                            public confidentialInstanceConfig?: (google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig|null);
+
+                            /** GceInstance bootDiskSizeGb. */
+                            public bootDiskSizeGb: number;
+
+                            /**
+                             * Creates a new GceInstance instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GceInstance instance
+                             */
+                            public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance;
+
+                            /**
+                             * Encodes the specified GceInstance message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.verify|verify} messages.
+                             * @param message GceInstance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GceInstance message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.verify|verify} messages.
+                             * @param message GceInstance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GceInstance message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GceInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance;
+
+                            /**
+                             * Decodes a GceInstance message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GceInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance;
+
+                            /**
+                             * Verifies a GceInstance message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GceInstance message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GceInstance
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance;
+
+                            /**
+                             * Creates a plain object from a GceInstance message. Also converts values to other types if specified.
+                             * @param message GceInstance
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GceInstance to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GceInstance
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GceInstance {
+
+                            /** Properties of a GceShieldedInstanceConfig. */
+                            interface IGceShieldedInstanceConfig {
+
+                                /** GceShieldedInstanceConfig enableSecureBoot */
+                                enableSecureBoot?: (boolean|null);
+
+                                /** GceShieldedInstanceConfig enableVtpm */
+                                enableVtpm?: (boolean|null);
+
+                                /** GceShieldedInstanceConfig enableIntegrityMonitoring */
+                                enableIntegrityMonitoring?: (boolean|null);
+                            }
+
+                            /** Represents a GceShieldedInstanceConfig. */
+                            class GceShieldedInstanceConfig implements IGceShieldedInstanceConfig {
+
+                                /**
+                                 * Constructs a new GceShieldedInstanceConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig);
+
+                                /** GceShieldedInstanceConfig enableSecureBoot. */
+                                public enableSecureBoot: boolean;
+
+                                /** GceShieldedInstanceConfig enableVtpm. */
+                                public enableVtpm: boolean;
+
+                                /** GceShieldedInstanceConfig enableIntegrityMonitoring. */
+                                public enableIntegrityMonitoring: boolean;
+
+                                /**
+                                 * Creates a new GceShieldedInstanceConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GceShieldedInstanceConfig instance
+                                 */
+                                public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig;
+
+                                /**
+                                 * Encodes the specified GceShieldedInstanceConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.verify|verify} messages.
+                                 * @param message GceShieldedInstanceConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GceShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig.verify|verify} messages.
+                                 * @param message GceShieldedInstanceConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GceShieldedInstanceConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GceShieldedInstanceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig;
+
+                                /**
+                                 * Decodes a GceShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GceShieldedInstanceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig;
+
+                                /**
+                                 * Verifies a GceShieldedInstanceConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GceShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GceShieldedInstanceConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig;
+
+                                /**
+                                 * Creates a plain object from a GceShieldedInstanceConfig message. Also converts values to other types if specified.
+                                 * @param message GceShieldedInstanceConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceShieldedInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GceShieldedInstanceConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GceShieldedInstanceConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a GceConfidentialInstanceConfig. */
+                            interface IGceConfidentialInstanceConfig {
+
+                                /** GceConfidentialInstanceConfig enableConfidentialCompute */
+                                enableConfidentialCompute?: (boolean|null);
+                            }
+
+                            /** Represents a GceConfidentialInstanceConfig. */
+                            class GceConfidentialInstanceConfig implements IGceConfidentialInstanceConfig {
+
+                                /**
+                                 * Constructs a new GceConfidentialInstanceConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig);
+
+                                /** GceConfidentialInstanceConfig enableConfidentialCompute. */
+                                public enableConfidentialCompute: boolean;
+
+                                /**
+                                 * Creates a new GceConfidentialInstanceConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GceConfidentialInstanceConfig instance
+                                 */
+                                public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig;
+
+                                /**
+                                 * Encodes the specified GceConfidentialInstanceConfig message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.verify|verify} messages.
+                                 * @param message GceConfidentialInstanceConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GceConfidentialInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.verify|verify} messages.
+                                 * @param message GceConfidentialInstanceConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceConfidentialInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GceConfidentialInstanceConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GceConfidentialInstanceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig;
+
+                                /**
+                                 * Decodes a GceConfidentialInstanceConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GceConfidentialInstanceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig;
+
+                                /**
+                                 * Verifies a GceConfidentialInstanceConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GceConfidentialInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GceConfidentialInstanceConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig;
+
+                                /**
+                                 * Creates a plain object from a GceConfidentialInstanceConfig message. Also converts values to other types if specified.
+                                 * @param message GceConfidentialInstanceConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GceConfidentialInstanceConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GceConfidentialInstanceConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of a PersistentDirectory. */
+                    interface IPersistentDirectory {
+
+                        /** PersistentDirectory gcePd */
+                        gcePd?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null);
+
+                        /** PersistentDirectory mountPath */
+                        mountPath?: (string|null);
+                    }
+
+                    /** Represents a PersistentDirectory. */
+                    class PersistentDirectory implements IPersistentDirectory {
+
+                        /**
+                         * Constructs a new PersistentDirectory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory);
+
+                        /** PersistentDirectory gcePd. */
+                        public gcePd?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null);
+
+                        /** PersistentDirectory mountPath. */
+                        public mountPath: string;
+
+                        /** PersistentDirectory directoryType. */
+                        public directoryType?: "gcePd";
+
+                        /**
+                         * Creates a new PersistentDirectory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PersistentDirectory instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory;
+
+                        /**
+                         * Encodes the specified PersistentDirectory message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.verify|verify} messages.
+                         * @param message PersistentDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PersistentDirectory message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.verify|verify} messages.
+                         * @param message PersistentDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PersistentDirectory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PersistentDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory;
+
+                        /**
+                         * Decodes a PersistentDirectory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PersistentDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory;
+
+                        /**
+                         * Verifies a PersistentDirectory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PersistentDirectory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PersistentDirectory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory;
+
+                        /**
+                         * Creates a plain object from a PersistentDirectory message. Also converts values to other types if specified.
+                         * @param message PersistentDirectory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PersistentDirectory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PersistentDirectory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PersistentDirectory {
+
+                        /** Properties of a GceRegionalPersistentDisk. */
+                        interface IGceRegionalPersistentDisk {
+
+                            /** GceRegionalPersistentDisk sizeGb */
+                            sizeGb?: (number|null);
+
+                            /** GceRegionalPersistentDisk fsType */
+                            fsType?: (string|null);
+
+                            /** GceRegionalPersistentDisk diskType */
+                            diskType?: (string|null);
+
+                            /** GceRegionalPersistentDisk sourceSnapshot */
+                            sourceSnapshot?: (string|null);
+
+                            /** GceRegionalPersistentDisk reclaimPolicy */
+                            reclaimPolicy?: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|keyof typeof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|null);
+                        }
+
+                        /** Represents a GceRegionalPersistentDisk. */
+                        class GceRegionalPersistentDisk implements IGceRegionalPersistentDisk {
+
+                            /**
+                             * Constructs a new GceRegionalPersistentDisk.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk);
+
+                            /** GceRegionalPersistentDisk sizeGb. */
+                            public sizeGb: number;
+
+                            /** GceRegionalPersistentDisk fsType. */
+                            public fsType: string;
+
+                            /** GceRegionalPersistentDisk diskType. */
+                            public diskType: string;
+
+                            /** GceRegionalPersistentDisk sourceSnapshot. */
+                            public sourceSnapshot: string;
+
+                            /** GceRegionalPersistentDisk reclaimPolicy. */
+                            public reclaimPolicy: (google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy|keyof typeof google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy);
+
+                            /**
+                             * Creates a new GceRegionalPersistentDisk instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GceRegionalPersistentDisk instance
+                             */
+                            public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk;
+
+                            /**
+                             * Encodes the specified GceRegionalPersistentDisk message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.verify|verify} messages.
+                             * @param message GceRegionalPersistentDisk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GceRegionalPersistentDisk message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.verify|verify} messages.
+                             * @param message GceRegionalPersistentDisk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GceRegionalPersistentDisk message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GceRegionalPersistentDisk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk;
+
+                            /**
+                             * Decodes a GceRegionalPersistentDisk message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GceRegionalPersistentDisk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk;
+
+                            /**
+                             * Verifies a GceRegionalPersistentDisk message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GceRegionalPersistentDisk message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GceRegionalPersistentDisk
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk;
+
+                            /**
+                             * Creates a plain object from a GceRegionalPersistentDisk message. Also converts values to other types if specified.
+                             * @param message GceRegionalPersistentDisk
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GceRegionalPersistentDisk to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GceRegionalPersistentDisk
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GceRegionalPersistentDisk {
+
+                            /** ReclaimPolicy enum. */
+                            enum ReclaimPolicy {
+                                RECLAIM_POLICY_UNSPECIFIED = 0,
+                                DELETE = 1,
+                                RETAIN = 2
+                            }
+                        }
+                    }
+
+                    /** Properties of a Container. */
+                    interface IContainer {
+
+                        /** Container image */
+                        image?: (string|null);
+
+                        /** Container command */
+                        command?: (string[]|null);
+
+                        /** Container args */
+                        args?: (string[]|null);
+
+                        /** Container env */
+                        env?: ({ [k: string]: string }|null);
+
+                        /** Container workingDir */
+                        workingDir?: (string|null);
+
+                        /** Container runAsUser */
+                        runAsUser?: (number|null);
+                    }
+
+                    /** Represents a Container. */
+                    class Container implements IContainer {
+
+                        /**
+                         * Constructs a new Container.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.IContainer);
+
+                        /** Container image. */
+                        public image: string;
+
+                        /** Container command. */
+                        public command: string[];
+
+                        /** Container args. */
+                        public args: string[];
+
+                        /** Container env. */
+                        public env: { [k: string]: string };
+
+                        /** Container workingDir. */
+                        public workingDir: string;
+
+                        /** Container runAsUser. */
+                        public runAsUser: number;
+
+                        /**
+                         * Creates a new Container instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Container instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.IContainer): google.cloud.workstations.v1.WorkstationConfig.Container;
+
+                        /**
+                         * Encodes the specified Container message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Container.verify|verify} messages.
+                         * @param message Container message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.IContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Container message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.Container.verify|verify} messages.
+                         * @param message Container message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.IContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Container message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Container
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.Container;
+
+                        /**
+                         * Decodes a Container message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Container
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.Container;
+
+                        /**
+                         * Verifies a Container message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Container message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Container
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.Container;
+
+                        /**
+                         * Creates a plain object from a Container message. Also converts values to other types if specified.
+                         * @param message Container
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.Container, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Container to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Container
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomerEncryptionKey. */
+                    interface ICustomerEncryptionKey {
+
+                        /** CustomerEncryptionKey kmsKey */
+                        kmsKey?: (string|null);
+
+                        /** CustomerEncryptionKey kmsKeyServiceAccount */
+                        kmsKeyServiceAccount?: (string|null);
+                    }
+
+                    /** Represents a CustomerEncryptionKey. */
+                    class CustomerEncryptionKey implements ICustomerEncryptionKey {
+
+                        /**
+                         * Constructs a new CustomerEncryptionKey.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey);
+
+                        /** CustomerEncryptionKey kmsKey. */
+                        public kmsKey: string;
+
+                        /** CustomerEncryptionKey kmsKeyServiceAccount. */
+                        public kmsKeyServiceAccount: string;
+
+                        /**
+                         * Creates a new CustomerEncryptionKey instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomerEncryptionKey instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey): google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey;
+
+                        /**
+                         * Encodes the specified CustomerEncryptionKey message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.verify|verify} messages.
+                         * @param message CustomerEncryptionKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomerEncryptionKey message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.verify|verify} messages.
+                         * @param message CustomerEncryptionKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomerEncryptionKey message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomerEncryptionKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey;
+
+                        /**
+                         * Decodes a CustomerEncryptionKey message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomerEncryptionKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey;
+
+                        /**
+                         * Verifies a CustomerEncryptionKey message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomerEncryptionKey message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomerEncryptionKey
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey;
+
+                        /**
+                         * Creates a plain object from a CustomerEncryptionKey message. Also converts values to other types if specified.
+                         * @param message CustomerEncryptionKey
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomerEncryptionKey to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomerEncryptionKey
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Workstation. */
+                interface IWorkstation {
+
+                    /** Workstation name */
+                    name?: (string|null);
+
+                    /** Workstation displayName */
+                    displayName?: (string|null);
+
+                    /** Workstation uid */
+                    uid?: (string|null);
+
+                    /** Workstation reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** Workstation annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** Workstation labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Workstation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation etag */
+                    etag?: (string|null);
+
+                    /** Workstation state */
+                    state?: (google.cloud.workstations.v1.Workstation.State|keyof typeof google.cloud.workstations.v1.Workstation.State|null);
+
+                    /** Workstation host */
+                    host?: (string|null);
+                }
+
+                /** Represents a Workstation. */
+                class Workstation implements IWorkstation {
+
+                    /**
+                     * Constructs a new Workstation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IWorkstation);
+
+                    /** Workstation name. */
+                    public name: string;
+
+                    /** Workstation displayName. */
+                    public displayName: string;
+
+                    /** Workstation uid. */
+                    public uid: string;
+
+                    /** Workstation reconciling. */
+                    public reconciling: boolean;
+
+                    /** Workstation annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** Workstation labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Workstation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation etag. */
+                    public etag: string;
+
+                    /** Workstation state. */
+                    public state: (google.cloud.workstations.v1.Workstation.State|keyof typeof google.cloud.workstations.v1.Workstation.State);
+
+                    /** Workstation host. */
+                    public host: string;
+
+                    /**
+                     * Creates a new Workstation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Workstation instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IWorkstation): google.cloud.workstations.v1.Workstation;
+
+                    /**
+                     * Encodes the specified Workstation message. Does not implicitly {@link google.cloud.workstations.v1.Workstation.verify|verify} messages.
+                     * @param message Workstation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IWorkstation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Workstation message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.Workstation.verify|verify} messages.
+                     * @param message Workstation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IWorkstation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Workstation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Workstation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.Workstation;
+
+                    /**
+                     * Decodes a Workstation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Workstation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.Workstation;
+
+                    /**
+                     * Verifies a Workstation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Workstation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Workstation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.Workstation;
+
+                    /**
+                     * Creates a plain object from a Workstation message. Also converts values to other types if specified.
+                     * @param message Workstation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.Workstation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Workstation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Workstation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Workstation {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STATE_STARTING = 1,
+                        STATE_RUNNING = 2,
+                        STATE_STOPPING = 3,
+                        STATE_STOPPED = 4
+                    }
+                }
+
+                /** Properties of a GetWorkstationClusterRequest. */
+                interface IGetWorkstationClusterRequest {
+
+                    /** GetWorkstationClusterRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkstationClusterRequest. */
+                class GetWorkstationClusterRequest implements IGetWorkstationClusterRequest {
+
+                    /**
+                     * Constructs a new GetWorkstationClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IGetWorkstationClusterRequest);
+
+                    /** GetWorkstationClusterRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkstationClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkstationClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IGetWorkstationClusterRequest): google.cloud.workstations.v1.GetWorkstationClusterRequest;
+
+                    /**
+                     * Encodes the specified GetWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationClusterRequest.verify|verify} messages.
+                     * @param message GetWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IGetWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationClusterRequest.verify|verify} messages.
+                     * @param message GetWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IGetWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkstationClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.GetWorkstationClusterRequest;
+
+                    /**
+                     * Decodes a GetWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.GetWorkstationClusterRequest;
+
+                    /**
+                     * Verifies a GetWorkstationClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkstationClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.GetWorkstationClusterRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkstationClusterRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkstationClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.GetWorkstationClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkstationClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWorkstationClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkstationClustersRequest. */
+                interface IListWorkstationClustersRequest {
+
+                    /** ListWorkstationClustersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWorkstationClustersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkstationClustersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkstationClustersRequest. */
+                class ListWorkstationClustersRequest implements IListWorkstationClustersRequest {
+
+                    /**
+                     * Constructs a new ListWorkstationClustersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListWorkstationClustersRequest);
+
+                    /** ListWorkstationClustersRequest parent. */
+                    public parent: string;
+
+                    /** ListWorkstationClustersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkstationClustersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListWorkstationClustersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkstationClustersRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListWorkstationClustersRequest): google.cloud.workstations.v1.ListWorkstationClustersRequest;
+
+                    /**
+                     * Encodes the specified ListWorkstationClustersRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersRequest.verify|verify} messages.
+                     * @param message ListWorkstationClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListWorkstationClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkstationClustersRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersRequest.verify|verify} messages.
+                     * @param message ListWorkstationClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListWorkstationClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkstationClustersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkstationClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListWorkstationClustersRequest;
+
+                    /**
+                     * Decodes a ListWorkstationClustersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkstationClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListWorkstationClustersRequest;
+
+                    /**
+                     * Verifies a ListWorkstationClustersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkstationClustersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkstationClustersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListWorkstationClustersRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkstationClustersRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkstationClustersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListWorkstationClustersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkstationClustersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkstationClustersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkstationClustersResponse. */
+                interface IListWorkstationClustersResponse {
+
+                    /** ListWorkstationClustersResponse workstationClusters */
+                    workstationClusters?: (google.cloud.workstations.v1.IWorkstationCluster[]|null);
+
+                    /** ListWorkstationClustersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListWorkstationClustersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListWorkstationClustersResponse. */
+                class ListWorkstationClustersResponse implements IListWorkstationClustersResponse {
+
+                    /**
+                     * Constructs a new ListWorkstationClustersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListWorkstationClustersResponse);
+
+                    /** ListWorkstationClustersResponse workstationClusters. */
+                    public workstationClusters: google.cloud.workstations.v1.IWorkstationCluster[];
+
+                    /** ListWorkstationClustersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListWorkstationClustersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListWorkstationClustersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkstationClustersResponse instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListWorkstationClustersResponse): google.cloud.workstations.v1.ListWorkstationClustersResponse;
+
+                    /**
+                     * Encodes the specified ListWorkstationClustersResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersResponse.verify|verify} messages.
+                     * @param message ListWorkstationClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListWorkstationClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkstationClustersResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationClustersResponse.verify|verify} messages.
+                     * @param message ListWorkstationClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListWorkstationClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkstationClustersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkstationClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListWorkstationClustersResponse;
+
+                    /**
+                     * Decodes a ListWorkstationClustersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkstationClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListWorkstationClustersResponse;
+
+                    /**
+                     * Verifies a ListWorkstationClustersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkstationClustersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkstationClustersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListWorkstationClustersResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkstationClustersResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkstationClustersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListWorkstationClustersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkstationClustersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkstationClustersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateWorkstationClusterRequest. */
+                interface ICreateWorkstationClusterRequest {
+
+                    /** CreateWorkstationClusterRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWorkstationClusterRequest workstationClusterId */
+                    workstationClusterId?: (string|null);
+
+                    /** CreateWorkstationClusterRequest workstationCluster */
+                    workstationCluster?: (google.cloud.workstations.v1.IWorkstationCluster|null);
+
+                    /** CreateWorkstationClusterRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateWorkstationClusterRequest. */
+                class CreateWorkstationClusterRequest implements ICreateWorkstationClusterRequest {
+
+                    /**
+                     * Constructs a new CreateWorkstationClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.ICreateWorkstationClusterRequest);
+
+                    /** CreateWorkstationClusterRequest parent. */
+                    public parent: string;
+
+                    /** CreateWorkstationClusterRequest workstationClusterId. */
+                    public workstationClusterId: string;
+
+                    /** CreateWorkstationClusterRequest workstationCluster. */
+                    public workstationCluster?: (google.cloud.workstations.v1.IWorkstationCluster|null);
+
+                    /** CreateWorkstationClusterRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateWorkstationClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWorkstationClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.ICreateWorkstationClusterRequest): google.cloud.workstations.v1.CreateWorkstationClusterRequest;
+
+                    /**
+                     * Encodes the specified CreateWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationClusterRequest.verify|verify} messages.
+                     * @param message CreateWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.ICreateWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationClusterRequest.verify|verify} messages.
+                     * @param message CreateWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.ICreateWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWorkstationClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.CreateWorkstationClusterRequest;
+
+                    /**
+                     * Decodes a CreateWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.CreateWorkstationClusterRequest;
+
+                    /**
+                     * Verifies a CreateWorkstationClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWorkstationClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.CreateWorkstationClusterRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWorkstationClusterRequest message. Also converts values to other types if specified.
+                     * @param message CreateWorkstationClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.CreateWorkstationClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWorkstationClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateWorkstationClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateWorkstationClusterRequest. */
+                interface IUpdateWorkstationClusterRequest {
+
+                    /** UpdateWorkstationClusterRequest workstationCluster */
+                    workstationCluster?: (google.cloud.workstations.v1.IWorkstationCluster|null);
+
+                    /** UpdateWorkstationClusterRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkstationClusterRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateWorkstationClusterRequest allowMissing */
+                    allowMissing?: (boolean|null);
+                }
+
+                /** Represents an UpdateWorkstationClusterRequest. */
+                class UpdateWorkstationClusterRequest implements IUpdateWorkstationClusterRequest {
+
+                    /**
+                     * Constructs a new UpdateWorkstationClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IUpdateWorkstationClusterRequest);
+
+                    /** UpdateWorkstationClusterRequest workstationCluster. */
+                    public workstationCluster?: (google.cloud.workstations.v1.IWorkstationCluster|null);
+
+                    /** UpdateWorkstationClusterRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkstationClusterRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateWorkstationClusterRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /**
+                     * Creates a new UpdateWorkstationClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateWorkstationClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IUpdateWorkstationClusterRequest): google.cloud.workstations.v1.UpdateWorkstationClusterRequest;
+
+                    /**
+                     * Encodes the specified UpdateWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationClusterRequest.verify|verify} messages.
+                     * @param message UpdateWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IUpdateWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationClusterRequest.verify|verify} messages.
+                     * @param message UpdateWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IUpdateWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateWorkstationClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.UpdateWorkstationClusterRequest;
+
+                    /**
+                     * Decodes an UpdateWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.UpdateWorkstationClusterRequest;
+
+                    /**
+                     * Verifies an UpdateWorkstationClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateWorkstationClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.UpdateWorkstationClusterRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateWorkstationClusterRequest message. Also converts values to other types if specified.
+                     * @param message UpdateWorkstationClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.UpdateWorkstationClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateWorkstationClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateWorkstationClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteWorkstationClusterRequest. */
+                interface IDeleteWorkstationClusterRequest {
+
+                    /** DeleteWorkstationClusterRequest name */
+                    name?: (string|null);
+
+                    /** DeleteWorkstationClusterRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteWorkstationClusterRequest etag */
+                    etag?: (string|null);
+
+                    /** DeleteWorkstationClusterRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteWorkstationClusterRequest. */
+                class DeleteWorkstationClusterRequest implements IDeleteWorkstationClusterRequest {
+
+                    /**
+                     * Constructs a new DeleteWorkstationClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IDeleteWorkstationClusterRequest);
+
+                    /** DeleteWorkstationClusterRequest name. */
+                    public name: string;
+
+                    /** DeleteWorkstationClusterRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteWorkstationClusterRequest etag. */
+                    public etag: string;
+
+                    /** DeleteWorkstationClusterRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteWorkstationClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWorkstationClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IDeleteWorkstationClusterRequest): google.cloud.workstations.v1.DeleteWorkstationClusterRequest;
+
+                    /**
+                     * Encodes the specified DeleteWorkstationClusterRequest message. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationClusterRequest.verify|verify} messages.
+                     * @param message DeleteWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IDeleteWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWorkstationClusterRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationClusterRequest.verify|verify} messages.
+                     * @param message DeleteWorkstationClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IDeleteWorkstationClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWorkstationClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.DeleteWorkstationClusterRequest;
+
+                    /**
+                     * Decodes a DeleteWorkstationClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWorkstationClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.DeleteWorkstationClusterRequest;
+
+                    /**
+                     * Verifies a DeleteWorkstationClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWorkstationClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWorkstationClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.DeleteWorkstationClusterRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWorkstationClusterRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWorkstationClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.DeleteWorkstationClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWorkstationClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteWorkstationClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetWorkstationConfigRequest. */
+                interface IGetWorkstationConfigRequest {
+
+                    /** GetWorkstationConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkstationConfigRequest. */
+                class GetWorkstationConfigRequest implements IGetWorkstationConfigRequest {
+
+                    /**
+                     * Constructs a new GetWorkstationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IGetWorkstationConfigRequest);
+
+                    /** GetWorkstationConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkstationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkstationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IGetWorkstationConfigRequest): google.cloud.workstations.v1.GetWorkstationConfigRequest;
+
+                    /**
+                     * Encodes the specified GetWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationConfigRequest.verify|verify} messages.
+                     * @param message GetWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IGetWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationConfigRequest.verify|verify} messages.
+                     * @param message GetWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IGetWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkstationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.GetWorkstationConfigRequest;
+
+                    /**
+                     * Decodes a GetWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.GetWorkstationConfigRequest;
+
+                    /**
+                     * Verifies a GetWorkstationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkstationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.GetWorkstationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkstationConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkstationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.GetWorkstationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkstationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWorkstationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkstationConfigsRequest. */
+                interface IListWorkstationConfigsRequest {
+
+                    /** ListWorkstationConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWorkstationConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkstationConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkstationConfigsRequest. */
+                class ListWorkstationConfigsRequest implements IListWorkstationConfigsRequest {
+
+                    /**
+                     * Constructs a new ListWorkstationConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListWorkstationConfigsRequest);
+
+                    /** ListWorkstationConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListWorkstationConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkstationConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListWorkstationConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkstationConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListWorkstationConfigsRequest): google.cloud.workstations.v1.ListWorkstationConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListWorkstationConfigsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsRequest.verify|verify} messages.
+                     * @param message ListWorkstationConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListWorkstationConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkstationConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsRequest.verify|verify} messages.
+                     * @param message ListWorkstationConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListWorkstationConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkstationConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkstationConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListWorkstationConfigsRequest;
+
+                    /**
+                     * Decodes a ListWorkstationConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkstationConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListWorkstationConfigsRequest;
+
+                    /**
+                     * Verifies a ListWorkstationConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkstationConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkstationConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListWorkstationConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkstationConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkstationConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListWorkstationConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkstationConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkstationConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkstationConfigsResponse. */
+                interface IListWorkstationConfigsResponse {
+
+                    /** ListWorkstationConfigsResponse workstationConfigs */
+                    workstationConfigs?: (google.cloud.workstations.v1.IWorkstationConfig[]|null);
+
+                    /** ListWorkstationConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListWorkstationConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListWorkstationConfigsResponse. */
+                class ListWorkstationConfigsResponse implements IListWorkstationConfigsResponse {
+
+                    /**
+                     * Constructs a new ListWorkstationConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListWorkstationConfigsResponse);
+
+                    /** ListWorkstationConfigsResponse workstationConfigs. */
+                    public workstationConfigs: google.cloud.workstations.v1.IWorkstationConfig[];
+
+                    /** ListWorkstationConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListWorkstationConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListWorkstationConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkstationConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListWorkstationConfigsResponse): google.cloud.workstations.v1.ListWorkstationConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListWorkstationConfigsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsResponse.verify|verify} messages.
+                     * @param message ListWorkstationConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListWorkstationConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkstationConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationConfigsResponse.verify|verify} messages.
+                     * @param message ListWorkstationConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListWorkstationConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkstationConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkstationConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListWorkstationConfigsResponse;
+
+                    /**
+                     * Decodes a ListWorkstationConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkstationConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListWorkstationConfigsResponse;
+
+                    /**
+                     * Verifies a ListWorkstationConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkstationConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkstationConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListWorkstationConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkstationConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkstationConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListWorkstationConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkstationConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkstationConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsableWorkstationConfigsRequest. */
+                interface IListUsableWorkstationConfigsRequest {
+
+                    /** ListUsableWorkstationConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListUsableWorkstationConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListUsableWorkstationConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListUsableWorkstationConfigsRequest. */
+                class ListUsableWorkstationConfigsRequest implements IListUsableWorkstationConfigsRequest {
+
+                    /**
+                     * Constructs a new ListUsableWorkstationConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest);
+
+                    /** ListUsableWorkstationConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListUsableWorkstationConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListUsableWorkstationConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListUsableWorkstationConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsableWorkstationConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest): google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationConfigsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest.verify|verify} messages.
+                     * @param message ListUsableWorkstationConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest.verify|verify} messages.
+                     * @param message ListUsableWorkstationConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListUsableWorkstationConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsableWorkstationConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsableWorkstationConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest;
+
+                    /**
+                     * Decodes a ListUsableWorkstationConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsableWorkstationConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest;
+
+                    /**
+                     * Verifies a ListUsableWorkstationConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsableWorkstationConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsableWorkstationConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListUsableWorkstationConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListUsableWorkstationConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListUsableWorkstationConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsableWorkstationConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsableWorkstationConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsableWorkstationConfigsResponse. */
+                interface IListUsableWorkstationConfigsResponse {
+
+                    /** ListUsableWorkstationConfigsResponse workstationConfigs */
+                    workstationConfigs?: (google.cloud.workstations.v1.IWorkstationConfig[]|null);
+
+                    /** ListUsableWorkstationConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListUsableWorkstationConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListUsableWorkstationConfigsResponse. */
+                class ListUsableWorkstationConfigsResponse implements IListUsableWorkstationConfigsResponse {
+
+                    /**
+                     * Constructs a new ListUsableWorkstationConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse);
+
+                    /** ListUsableWorkstationConfigsResponse workstationConfigs. */
+                    public workstationConfigs: google.cloud.workstations.v1.IWorkstationConfig[];
+
+                    /** ListUsableWorkstationConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListUsableWorkstationConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListUsableWorkstationConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsableWorkstationConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse): google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationConfigsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.verify|verify} messages.
+                     * @param message ListUsableWorkstationConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse.verify|verify} messages.
+                     * @param message ListUsableWorkstationConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListUsableWorkstationConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsableWorkstationConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsableWorkstationConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse;
+
+                    /**
+                     * Decodes a ListUsableWorkstationConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsableWorkstationConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse;
+
+                    /**
+                     * Verifies a ListUsableWorkstationConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsableWorkstationConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsableWorkstationConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListUsableWorkstationConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListUsableWorkstationConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListUsableWorkstationConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsableWorkstationConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsableWorkstationConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateWorkstationConfigRequest. */
+                interface ICreateWorkstationConfigRequest {
+
+                    /** CreateWorkstationConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWorkstationConfigRequest workstationConfigId */
+                    workstationConfigId?: (string|null);
+
+                    /** CreateWorkstationConfigRequest workstationConfig */
+                    workstationConfig?: (google.cloud.workstations.v1.IWorkstationConfig|null);
+
+                    /** CreateWorkstationConfigRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateWorkstationConfigRequest. */
+                class CreateWorkstationConfigRequest implements ICreateWorkstationConfigRequest {
+
+                    /**
+                     * Constructs a new CreateWorkstationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.ICreateWorkstationConfigRequest);
+
+                    /** CreateWorkstationConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateWorkstationConfigRequest workstationConfigId. */
+                    public workstationConfigId: string;
+
+                    /** CreateWorkstationConfigRequest workstationConfig. */
+                    public workstationConfig?: (google.cloud.workstations.v1.IWorkstationConfig|null);
+
+                    /** CreateWorkstationConfigRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateWorkstationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWorkstationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.ICreateWorkstationConfigRequest): google.cloud.workstations.v1.CreateWorkstationConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationConfigRequest.verify|verify} messages.
+                     * @param message CreateWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.ICreateWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationConfigRequest.verify|verify} messages.
+                     * @param message CreateWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.ICreateWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWorkstationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.CreateWorkstationConfigRequest;
+
+                    /**
+                     * Decodes a CreateWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.CreateWorkstationConfigRequest;
+
+                    /**
+                     * Verifies a CreateWorkstationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWorkstationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.CreateWorkstationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWorkstationConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateWorkstationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.CreateWorkstationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWorkstationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateWorkstationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateWorkstationConfigRequest. */
+                interface IUpdateWorkstationConfigRequest {
+
+                    /** UpdateWorkstationConfigRequest workstationConfig */
+                    workstationConfig?: (google.cloud.workstations.v1.IWorkstationConfig|null);
+
+                    /** UpdateWorkstationConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkstationConfigRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateWorkstationConfigRequest allowMissing */
+                    allowMissing?: (boolean|null);
+                }
+
+                /** Represents an UpdateWorkstationConfigRequest. */
+                class UpdateWorkstationConfigRequest implements IUpdateWorkstationConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateWorkstationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IUpdateWorkstationConfigRequest);
+
+                    /** UpdateWorkstationConfigRequest workstationConfig. */
+                    public workstationConfig?: (google.cloud.workstations.v1.IWorkstationConfig|null);
+
+                    /** UpdateWorkstationConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkstationConfigRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateWorkstationConfigRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /**
+                     * Creates a new UpdateWorkstationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateWorkstationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IUpdateWorkstationConfigRequest): google.cloud.workstations.v1.UpdateWorkstationConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationConfigRequest.verify|verify} messages.
+                     * @param message UpdateWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IUpdateWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationConfigRequest.verify|verify} messages.
+                     * @param message UpdateWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IUpdateWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateWorkstationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.UpdateWorkstationConfigRequest;
+
+                    /**
+                     * Decodes an UpdateWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.UpdateWorkstationConfigRequest;
+
+                    /**
+                     * Verifies an UpdateWorkstationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateWorkstationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.UpdateWorkstationConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateWorkstationConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateWorkstationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.UpdateWorkstationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateWorkstationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateWorkstationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteWorkstationConfigRequest. */
+                interface IDeleteWorkstationConfigRequest {
+
+                    /** DeleteWorkstationConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteWorkstationConfigRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteWorkstationConfigRequest etag */
+                    etag?: (string|null);
+
+                    /** DeleteWorkstationConfigRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteWorkstationConfigRequest. */
+                class DeleteWorkstationConfigRequest implements IDeleteWorkstationConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteWorkstationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IDeleteWorkstationConfigRequest);
+
+                    /** DeleteWorkstationConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteWorkstationConfigRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteWorkstationConfigRequest etag. */
+                    public etag: string;
+
+                    /** DeleteWorkstationConfigRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteWorkstationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWorkstationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IDeleteWorkstationConfigRequest): google.cloud.workstations.v1.DeleteWorkstationConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteWorkstationConfigRequest message. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationConfigRequest.verify|verify} messages.
+                     * @param message DeleteWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IDeleteWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWorkstationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationConfigRequest.verify|verify} messages.
+                     * @param message DeleteWorkstationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IDeleteWorkstationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWorkstationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.DeleteWorkstationConfigRequest;
+
+                    /**
+                     * Decodes a DeleteWorkstationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWorkstationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.DeleteWorkstationConfigRequest;
+
+                    /**
+                     * Verifies a DeleteWorkstationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWorkstationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWorkstationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.DeleteWorkstationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWorkstationConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWorkstationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.DeleteWorkstationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWorkstationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteWorkstationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetWorkstationRequest. */
+                interface IGetWorkstationRequest {
+
+                    /** GetWorkstationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkstationRequest. */
+                class GetWorkstationRequest implements IGetWorkstationRequest {
+
+                    /**
+                     * Constructs a new GetWorkstationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IGetWorkstationRequest);
+
+                    /** GetWorkstationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkstationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkstationRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IGetWorkstationRequest): google.cloud.workstations.v1.GetWorkstationRequest;
+
+                    /**
+                     * Encodes the specified GetWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationRequest.verify|verify} messages.
+                     * @param message GetWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IGetWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GetWorkstationRequest.verify|verify} messages.
+                     * @param message GetWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IGetWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkstationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.GetWorkstationRequest;
+
+                    /**
+                     * Decodes a GetWorkstationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.GetWorkstationRequest;
+
+                    /**
+                     * Verifies a GetWorkstationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkstationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.GetWorkstationRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkstationRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkstationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.GetWorkstationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkstationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWorkstationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkstationsRequest. */
+                interface IListWorkstationsRequest {
+
+                    /** ListWorkstationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWorkstationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkstationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkstationsRequest. */
+                class ListWorkstationsRequest implements IListWorkstationsRequest {
+
+                    /**
+                     * Constructs a new ListWorkstationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListWorkstationsRequest);
+
+                    /** ListWorkstationsRequest parent. */
+                    public parent: string;
+
+                    /** ListWorkstationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkstationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListWorkstationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkstationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListWorkstationsRequest): google.cloud.workstations.v1.ListWorkstationsRequest;
+
+                    /**
+                     * Encodes the specified ListWorkstationsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsRequest.verify|verify} messages.
+                     * @param message ListWorkstationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListWorkstationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkstationsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsRequest.verify|verify} messages.
+                     * @param message ListWorkstationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListWorkstationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkstationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkstationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListWorkstationsRequest;
+
+                    /**
+                     * Decodes a ListWorkstationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkstationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListWorkstationsRequest;
+
+                    /**
+                     * Verifies a ListWorkstationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkstationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkstationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListWorkstationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkstationsRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkstationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListWorkstationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkstationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkstationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkstationsResponse. */
+                interface IListWorkstationsResponse {
+
+                    /** ListWorkstationsResponse workstations */
+                    workstations?: (google.cloud.workstations.v1.IWorkstation[]|null);
+
+                    /** ListWorkstationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListWorkstationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListWorkstationsResponse. */
+                class ListWorkstationsResponse implements IListWorkstationsResponse {
+
+                    /**
+                     * Constructs a new ListWorkstationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListWorkstationsResponse);
+
+                    /** ListWorkstationsResponse workstations. */
+                    public workstations: google.cloud.workstations.v1.IWorkstation[];
+
+                    /** ListWorkstationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListWorkstationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListWorkstationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkstationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListWorkstationsResponse): google.cloud.workstations.v1.ListWorkstationsResponse;
+
+                    /**
+                     * Encodes the specified ListWorkstationsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsResponse.verify|verify} messages.
+                     * @param message ListWorkstationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListWorkstationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkstationsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListWorkstationsResponse.verify|verify} messages.
+                     * @param message ListWorkstationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListWorkstationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkstationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkstationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListWorkstationsResponse;
+
+                    /**
+                     * Decodes a ListWorkstationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkstationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListWorkstationsResponse;
+
+                    /**
+                     * Verifies a ListWorkstationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkstationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkstationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListWorkstationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkstationsResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkstationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListWorkstationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkstationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkstationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsableWorkstationsRequest. */
+                interface IListUsableWorkstationsRequest {
+
+                    /** ListUsableWorkstationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListUsableWorkstationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListUsableWorkstationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListUsableWorkstationsRequest. */
+                class ListUsableWorkstationsRequest implements IListUsableWorkstationsRequest {
+
+                    /**
+                     * Constructs a new ListUsableWorkstationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListUsableWorkstationsRequest);
+
+                    /** ListUsableWorkstationsRequest parent. */
+                    public parent: string;
+
+                    /** ListUsableWorkstationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListUsableWorkstationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListUsableWorkstationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsableWorkstationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListUsableWorkstationsRequest): google.cloud.workstations.v1.ListUsableWorkstationsRequest;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationsRequest message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsRequest.verify|verify} messages.
+                     * @param message ListUsableWorkstationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListUsableWorkstationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationsRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsRequest.verify|verify} messages.
+                     * @param message ListUsableWorkstationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListUsableWorkstationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsableWorkstationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsableWorkstationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListUsableWorkstationsRequest;
+
+                    /**
+                     * Decodes a ListUsableWorkstationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsableWorkstationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListUsableWorkstationsRequest;
+
+                    /**
+                     * Verifies a ListUsableWorkstationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsableWorkstationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsableWorkstationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListUsableWorkstationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListUsableWorkstationsRequest message. Also converts values to other types if specified.
+                     * @param message ListUsableWorkstationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListUsableWorkstationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsableWorkstationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsableWorkstationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsableWorkstationsResponse. */
+                interface IListUsableWorkstationsResponse {
+
+                    /** ListUsableWorkstationsResponse workstations */
+                    workstations?: (google.cloud.workstations.v1.IWorkstation[]|null);
+
+                    /** ListUsableWorkstationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListUsableWorkstationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListUsableWorkstationsResponse. */
+                class ListUsableWorkstationsResponse implements IListUsableWorkstationsResponse {
+
+                    /**
+                     * Constructs a new ListUsableWorkstationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IListUsableWorkstationsResponse);
+
+                    /** ListUsableWorkstationsResponse workstations. */
+                    public workstations: google.cloud.workstations.v1.IWorkstation[];
+
+                    /** ListUsableWorkstationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListUsableWorkstationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListUsableWorkstationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsableWorkstationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IListUsableWorkstationsResponse): google.cloud.workstations.v1.ListUsableWorkstationsResponse;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationsResponse message. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsResponse.verify|verify} messages.
+                     * @param message ListUsableWorkstationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IListUsableWorkstationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsableWorkstationsResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.ListUsableWorkstationsResponse.verify|verify} messages.
+                     * @param message ListUsableWorkstationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IListUsableWorkstationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsableWorkstationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsableWorkstationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.ListUsableWorkstationsResponse;
+
+                    /**
+                     * Decodes a ListUsableWorkstationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsableWorkstationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.ListUsableWorkstationsResponse;
+
+                    /**
+                     * Verifies a ListUsableWorkstationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsableWorkstationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsableWorkstationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.ListUsableWorkstationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListUsableWorkstationsResponse message. Also converts values to other types if specified.
+                     * @param message ListUsableWorkstationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.ListUsableWorkstationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsableWorkstationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsableWorkstationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateWorkstationRequest. */
+                interface ICreateWorkstationRequest {
+
+                    /** CreateWorkstationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWorkstationRequest workstationId */
+                    workstationId?: (string|null);
+
+                    /** CreateWorkstationRequest workstation */
+                    workstation?: (google.cloud.workstations.v1.IWorkstation|null);
+
+                    /** CreateWorkstationRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateWorkstationRequest. */
+                class CreateWorkstationRequest implements ICreateWorkstationRequest {
+
+                    /**
+                     * Constructs a new CreateWorkstationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.ICreateWorkstationRequest);
+
+                    /** CreateWorkstationRequest parent. */
+                    public parent: string;
+
+                    /** CreateWorkstationRequest workstationId. */
+                    public workstationId: string;
+
+                    /** CreateWorkstationRequest workstation. */
+                    public workstation?: (google.cloud.workstations.v1.IWorkstation|null);
+
+                    /** CreateWorkstationRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateWorkstationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWorkstationRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.ICreateWorkstationRequest): google.cloud.workstations.v1.CreateWorkstationRequest;
+
+                    /**
+                     * Encodes the specified CreateWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationRequest.verify|verify} messages.
+                     * @param message CreateWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.ICreateWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.CreateWorkstationRequest.verify|verify} messages.
+                     * @param message CreateWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.ICreateWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWorkstationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.CreateWorkstationRequest;
+
+                    /**
+                     * Decodes a CreateWorkstationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.CreateWorkstationRequest;
+
+                    /**
+                     * Verifies a CreateWorkstationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWorkstationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.CreateWorkstationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWorkstationRequest message. Also converts values to other types if specified.
+                     * @param message CreateWorkstationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.CreateWorkstationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWorkstationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateWorkstationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateWorkstationRequest. */
+                interface IUpdateWorkstationRequest {
+
+                    /** UpdateWorkstationRequest workstation */
+                    workstation?: (google.cloud.workstations.v1.IWorkstation|null);
+
+                    /** UpdateWorkstationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkstationRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateWorkstationRequest allowMissing */
+                    allowMissing?: (boolean|null);
+                }
+
+                /** Represents an UpdateWorkstationRequest. */
+                class UpdateWorkstationRequest implements IUpdateWorkstationRequest {
+
+                    /**
+                     * Constructs a new UpdateWorkstationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IUpdateWorkstationRequest);
+
+                    /** UpdateWorkstationRequest workstation. */
+                    public workstation?: (google.cloud.workstations.v1.IWorkstation|null);
+
+                    /** UpdateWorkstationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkstationRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateWorkstationRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /**
+                     * Creates a new UpdateWorkstationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateWorkstationRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IUpdateWorkstationRequest): google.cloud.workstations.v1.UpdateWorkstationRequest;
+
+                    /**
+                     * Encodes the specified UpdateWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationRequest.verify|verify} messages.
+                     * @param message UpdateWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IUpdateWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.UpdateWorkstationRequest.verify|verify} messages.
+                     * @param message UpdateWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IUpdateWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateWorkstationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.UpdateWorkstationRequest;
+
+                    /**
+                     * Decodes an UpdateWorkstationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.UpdateWorkstationRequest;
+
+                    /**
+                     * Verifies an UpdateWorkstationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateWorkstationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.UpdateWorkstationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateWorkstationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateWorkstationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.UpdateWorkstationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateWorkstationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateWorkstationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteWorkstationRequest. */
+                interface IDeleteWorkstationRequest {
+
+                    /** DeleteWorkstationRequest name */
+                    name?: (string|null);
+
+                    /** DeleteWorkstationRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteWorkstationRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteWorkstationRequest. */
+                class DeleteWorkstationRequest implements IDeleteWorkstationRequest {
+
+                    /**
+                     * Constructs a new DeleteWorkstationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IDeleteWorkstationRequest);
+
+                    /** DeleteWorkstationRequest name. */
+                    public name: string;
+
+                    /** DeleteWorkstationRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteWorkstationRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteWorkstationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWorkstationRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IDeleteWorkstationRequest): google.cloud.workstations.v1.DeleteWorkstationRequest;
+
+                    /**
+                     * Encodes the specified DeleteWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationRequest.verify|verify} messages.
+                     * @param message DeleteWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IDeleteWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.DeleteWorkstationRequest.verify|verify} messages.
+                     * @param message DeleteWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IDeleteWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWorkstationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.DeleteWorkstationRequest;
+
+                    /**
+                     * Decodes a DeleteWorkstationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.DeleteWorkstationRequest;
+
+                    /**
+                     * Verifies a DeleteWorkstationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWorkstationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.DeleteWorkstationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWorkstationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWorkstationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.DeleteWorkstationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWorkstationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteWorkstationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StartWorkstationRequest. */
+                interface IStartWorkstationRequest {
+
+                    /** StartWorkstationRequest name */
+                    name?: (string|null);
+
+                    /** StartWorkstationRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** StartWorkstationRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a StartWorkstationRequest. */
+                class StartWorkstationRequest implements IStartWorkstationRequest {
+
+                    /**
+                     * Constructs a new StartWorkstationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IStartWorkstationRequest);
+
+                    /** StartWorkstationRequest name. */
+                    public name: string;
+
+                    /** StartWorkstationRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** StartWorkstationRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new StartWorkstationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartWorkstationRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IStartWorkstationRequest): google.cloud.workstations.v1.StartWorkstationRequest;
+
+                    /**
+                     * Encodes the specified StartWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.StartWorkstationRequest.verify|verify} messages.
+                     * @param message StartWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IStartWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.StartWorkstationRequest.verify|verify} messages.
+                     * @param message StartWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IStartWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartWorkstationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.StartWorkstationRequest;
+
+                    /**
+                     * Decodes a StartWorkstationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.StartWorkstationRequest;
+
+                    /**
+                     * Verifies a StartWorkstationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartWorkstationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.StartWorkstationRequest;
+
+                    /**
+                     * Creates a plain object from a StartWorkstationRequest message. Also converts values to other types if specified.
+                     * @param message StartWorkstationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.StartWorkstationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartWorkstationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartWorkstationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StopWorkstationRequest. */
+                interface IStopWorkstationRequest {
+
+                    /** StopWorkstationRequest name */
+                    name?: (string|null);
+
+                    /** StopWorkstationRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** StopWorkstationRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a StopWorkstationRequest. */
+                class StopWorkstationRequest implements IStopWorkstationRequest {
+
+                    /**
+                     * Constructs a new StopWorkstationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IStopWorkstationRequest);
+
+                    /** StopWorkstationRequest name. */
+                    public name: string;
+
+                    /** StopWorkstationRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** StopWorkstationRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new StopWorkstationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopWorkstationRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IStopWorkstationRequest): google.cloud.workstations.v1.StopWorkstationRequest;
+
+                    /**
+                     * Encodes the specified StopWorkstationRequest message. Does not implicitly {@link google.cloud.workstations.v1.StopWorkstationRequest.verify|verify} messages.
+                     * @param message StopWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IStopWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopWorkstationRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.StopWorkstationRequest.verify|verify} messages.
+                     * @param message StopWorkstationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IStopWorkstationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopWorkstationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.StopWorkstationRequest;
+
+                    /**
+                     * Decodes a StopWorkstationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopWorkstationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.StopWorkstationRequest;
+
+                    /**
+                     * Verifies a StopWorkstationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopWorkstationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopWorkstationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.StopWorkstationRequest;
+
+                    /**
+                     * Creates a plain object from a StopWorkstationRequest message. Also converts values to other types if specified.
+                     * @param message StopWorkstationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.StopWorkstationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopWorkstationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopWorkstationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateAccessTokenRequest. */
+                interface IGenerateAccessTokenRequest {
+
+                    /** GenerateAccessTokenRequest expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenerateAccessTokenRequest ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** GenerateAccessTokenRequest workstation */
+                    workstation?: (string|null);
+                }
+
+                /** Represents a GenerateAccessTokenRequest. */
+                class GenerateAccessTokenRequest implements IGenerateAccessTokenRequest {
+
+                    /**
+                     * Constructs a new GenerateAccessTokenRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IGenerateAccessTokenRequest);
+
+                    /** GenerateAccessTokenRequest expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenerateAccessTokenRequest ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** GenerateAccessTokenRequest workstation. */
+                    public workstation: string;
+
+                    /** GenerateAccessTokenRequest expiration. */
+                    public expiration?: ("expireTime"|"ttl");
+
+                    /**
+                     * Creates a new GenerateAccessTokenRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateAccessTokenRequest instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IGenerateAccessTokenRequest): google.cloud.workstations.v1.GenerateAccessTokenRequest;
+
+                    /**
+                     * Encodes the specified GenerateAccessTokenRequest message. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenRequest.verify|verify} messages.
+                     * @param message GenerateAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IGenerateAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateAccessTokenRequest message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenRequest.verify|verify} messages.
+                     * @param message GenerateAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IGenerateAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateAccessTokenRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.GenerateAccessTokenRequest;
+
+                    /**
+                     * Decodes a GenerateAccessTokenRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.GenerateAccessTokenRequest;
+
+                    /**
+                     * Verifies a GenerateAccessTokenRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateAccessTokenRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateAccessTokenRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.GenerateAccessTokenRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateAccessTokenRequest message. Also converts values to other types if specified.
+                     * @param message GenerateAccessTokenRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.GenerateAccessTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateAccessTokenRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateAccessTokenRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateAccessTokenResponse. */
+                interface IGenerateAccessTokenResponse {
+
+                    /** GenerateAccessTokenResponse accessToken */
+                    accessToken?: (string|null);
+
+                    /** GenerateAccessTokenResponse expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GenerateAccessTokenResponse. */
+                class GenerateAccessTokenResponse implements IGenerateAccessTokenResponse {
+
+                    /**
+                     * Constructs a new GenerateAccessTokenResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IGenerateAccessTokenResponse);
+
+                    /** GenerateAccessTokenResponse accessToken. */
+                    public accessToken: string;
+
+                    /** GenerateAccessTokenResponse expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GenerateAccessTokenResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateAccessTokenResponse instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IGenerateAccessTokenResponse): google.cloud.workstations.v1.GenerateAccessTokenResponse;
+
+                    /**
+                     * Encodes the specified GenerateAccessTokenResponse message. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenResponse.verify|verify} messages.
+                     * @param message GenerateAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IGenerateAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateAccessTokenResponse message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.GenerateAccessTokenResponse.verify|verify} messages.
+                     * @param message GenerateAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IGenerateAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateAccessTokenResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.GenerateAccessTokenResponse;
+
+                    /**
+                     * Decodes a GenerateAccessTokenResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.GenerateAccessTokenResponse;
+
+                    /**
+                     * Verifies a GenerateAccessTokenResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateAccessTokenResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateAccessTokenResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.GenerateAccessTokenResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateAccessTokenResponse message. Also converts values to other types if specified.
+                     * @param message GenerateAccessTokenResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.GenerateAccessTokenResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateAccessTokenResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateAccessTokenResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.workstations.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.workstations.v1.IOperationMetadata): google.cloud.workstations.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.workstations.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.workstations.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.workstations.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.workstations.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 syntax = "proto3";
 
-package google.cloud.workstations.v1beta;
+package google.cloud.workstations.v1;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
@@ -26,10 +26,10 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
-option go_package = "cloud.google.com/go/workstations/apiv1beta/workstationspb;workstationspb";
+option go_package = "cloud.google.com/go/workstations/apiv1/workstationspb;workstationspb";
 option java_multiple_files = true;
 option java_outer_classname = "WorkstationsProto";
-option java_package = "com.google.cloud.workstations.v1beta";
+option java_package = "com.google.cloud.workstations.v1";
 
 // Service for interacting with Cloud Workstations.
 service Workstations {
@@ -41,7 +41,7 @@ service Workstations {
   rpc GetWorkstationCluster(GetWorkstationClusterRequest)
       returns (WorkstationCluster) {
     option (google.api.http) = {
-      get: "/v1beta/{name=projects/*/locations/*/workstationClusters/*}"
+      get: "/v1/{name=projects/*/locations/*/workstationClusters/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -50,7 +50,7 @@ service Workstations {
   rpc ListWorkstationClusters(ListWorkstationClustersRequest)
       returns (ListWorkstationClustersResponse) {
     option (google.api.http) = {
-      get: "/v1beta/{parent=projects/*/locations/*}/workstationClusters"
+      get: "/v1/{parent=projects/*/locations/*}/workstationClusters"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -59,7 +59,7 @@ service Workstations {
   rpc CreateWorkstationCluster(CreateWorkstationClusterRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{parent=projects/*/locations/*}/workstationClusters"
+      post: "/v1/{parent=projects/*/locations/*}/workstationClusters"
       body: "workstation_cluster"
     };
     option (google.api.method_signature) =
@@ -74,7 +74,7 @@ service Workstations {
   rpc UpdateWorkstationCluster(UpdateWorkstationClusterRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      patch: "/v1beta/{workstation_cluster.name=projects/*/locations/*/workstationClusters/*}"
+      patch: "/v1/{workstation_cluster.name=projects/*/locations/*/workstationClusters/*}"
       body: "workstation_cluster"
     };
     option (google.api.method_signature) = "workstation_cluster,update_mask";
@@ -88,7 +88,7 @@ service Workstations {
   rpc DeleteWorkstationCluster(DeleteWorkstationClusterRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      delete: "/v1beta/{name=projects/*/locations/*/workstationClusters/*}"
+      delete: "/v1/{name=projects/*/locations/*/workstationClusters/*}"
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -101,16 +101,16 @@ service Workstations {
   rpc GetWorkstationConfig(GetWorkstationConfigRequest)
       returns (WorkstationConfig) {
     option (google.api.http) = {
-      get: "/v1beta/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
+      get: "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
     };
     option (google.api.method_signature) = "name";
   }
 
-  // Returns all workstation configurations in the specified cluster.
+  // Returns all WorkstationConfigs in the specified cluster.
   rpc ListWorkstationConfigs(ListWorkstationConfigsRequest)
       returns (ListWorkstationConfigsResponse) {
     option (google.api.http) = {
-      get: "/v1beta/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs"
+      get: "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -120,7 +120,7 @@ service Workstations {
   rpc ListUsableWorkstationConfigs(ListUsableWorkstationConfigsRequest)
       returns (ListUsableWorkstationConfigsResponse) {
     option (google.api.http) = {
-      get: "/v1beta/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs:listUsable"
+      get: "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs:listUsable"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -129,7 +129,7 @@ service Workstations {
   rpc CreateWorkstationConfig(CreateWorkstationConfigRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs"
+      post: "/v1/{parent=projects/*/locations/*/workstationClusters/*}/workstationConfigs"
       body: "workstation_config"
     };
     option (google.api.method_signature) =
@@ -144,7 +144,7 @@ service Workstations {
   rpc UpdateWorkstationConfig(UpdateWorkstationConfigRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      patch: "/v1beta/{workstation_config.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
+      patch: "/v1/{workstation_config.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
       body: "workstation_config"
     };
     option (google.api.method_signature) = "workstation_config,update_mask";
@@ -158,7 +158,7 @@ service Workstations {
   rpc DeleteWorkstationConfig(DeleteWorkstationConfigRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      delete: "/v1beta/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
+      delete: "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}"
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -170,7 +170,7 @@ service Workstations {
   // Returns the requested workstation.
   rpc GetWorkstation(GetWorkstationRequest) returns (Workstation) {
     option (google.api.http) = {
-      get: "/v1beta/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
+      get: "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -179,7 +179,7 @@ service Workstations {
   rpc ListWorkstations(ListWorkstationsRequest)
       returns (ListWorkstationsResponse) {
     option (google.api.http) = {
-      get: "/v1beta/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations"
+      get: "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -189,7 +189,7 @@ service Workstations {
   rpc ListUsableWorkstations(ListUsableWorkstationsRequest)
       returns (ListUsableWorkstationsResponse) {
     option (google.api.http) = {
-      get: "/v1beta/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations:listUsable"
+      get: "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations:listUsable"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -198,7 +198,7 @@ service Workstations {
   rpc CreateWorkstation(CreateWorkstationRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations"
+      post: "/v1/{parent=projects/*/locations/*/workstationClusters/*/workstationConfigs/*}/workstations"
       body: "workstation"
     };
     option (google.api.method_signature) = "parent,workstation,workstation_id";
@@ -212,7 +212,7 @@ service Workstations {
   rpc UpdateWorkstation(UpdateWorkstationRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      patch: "/v1beta/{workstation.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
+      patch: "/v1/{workstation.name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
       body: "workstation"
     };
     option (google.api.method_signature) = "workstation,update_mask";
@@ -226,7 +226,7 @@ service Workstations {
   rpc DeleteWorkstation(DeleteWorkstationRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      delete: "/v1beta/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
+      delete: "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}"
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -239,7 +239,7 @@ service Workstations {
   rpc StartWorkstation(StartWorkstationRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:start"
+      post: "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:start"
       body: "*"
     };
     option (google.api.method_signature) = "name";
@@ -253,7 +253,7 @@ service Workstations {
   rpc StopWorkstation(StopWorkstationRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:stop"
+      post: "/v1/{name=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:stop"
       body: "*"
     };
     option (google.api.method_signature) = "name";
@@ -268,7 +268,7 @@ service Workstations {
   rpc GenerateAccessToken(GenerateAccessTokenRequest)
       returns (GenerateAccessTokenResponse) {
     option (google.api.http) = {
-      post: "/v1beta/{workstation=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:generateAccessToken"
+      post: "/v1/{workstation=projects/*/locations/*/workstationClusters/*/workstationConfigs/*/workstations/*}:generateAccessToken"
       body: "*"
     };
     option (google.api.method_signature) = "workstation";
@@ -403,10 +403,10 @@ message WorkstationConfig {
       // The name of a Compute Engine machine type.
       string machine_type = 1;
 
-      // Email address of the service account used on VM instances
-      // used to support this configuration. If not set, VMs run with a
+      // Email address of the service account that will be used on VM instances
+      // used to support this config. If not set, VMs will run with a
       // Google-managed service account. This service account must have
-      // permission to pull the specified container image; otherwise, the image
+      // permission to pull the specified container image, otherwise the image
       // must be publicly accessible.
       string service_account = 2;
 
@@ -420,13 +420,16 @@ message WorkstationConfig {
       // Whether instances have no public IP address.
       bool disable_public_ip_addresses = 6;
 
+      // Whether to enable nested virtualization on instances.
+      bool enable_nested_virtualization = 7;
+
       // A set of Compute Engine Shielded instance options.
       GceShieldedInstanceConfig shielded_instance_config = 8;
 
       // A set of Compute Engine Confidential VM instance options.
       GceConfidentialInstanceConfig confidential_instance_config = 10;
 
-      // Size of the boot disk in GB.
+      // Size of the boot disk in GB. Defaults to 50.
       int32 boot_disk_size_gb = 9;
     }
 
@@ -457,14 +460,15 @@ message WorkstationConfig {
       }
 
       // Size of the disk in GB. Must be empty if source_snapshot is set.
+      // Defaults to 200.
       int32 size_gb = 1;
 
       // Type of file system that the disk should be formatted with. The
       // workstation image must support this file system type. Must be empty
-      // if source_snapshot is set.
+      // if source_snapshot is set. Defaults to ext4.
       string fs_type = 2;
 
-      // Type of the disk to use.
+      // Type of the disk to use. Defaults to pd-standard.
       string disk_type = 3;
 
       // Name of the snapshot to use as the source for the disk. If set,
@@ -476,14 +480,14 @@ message WorkstationConfig {
       ReclaimPolicy reclaim_policy = 4;
     }
 
-    // Location of this directory in the running workstation.
-    string mount_path = 1;
-
     // How a persistent directory should be implemented.
     oneof directory_type {
       // A PersistentDirectory backed by a Compute Engine persistent disk.
       GceRegionalPersistentDisk gce_pd = 2;
     }
+
+    // Location of this directory in the running workstation.
+    string mount_path = 1;
   }
 
   // A Docker container.
@@ -600,9 +604,9 @@ message WorkstationConfig {
   // automatically be stopped within 7 hours.
   CustomerEncryptionKey encryption_key = 17;
 
-  // Output only. Whether this resource is in degraded mode, in which case it
-  // may require user action to restore full functionality. Details can be found
-  // in the `conditions` field.
+  // Output only. Whether this resource is degraded, in which case it may
+  // require user action to restore full functionality. See also the
+  // `conditions` field.
   bool degraded = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Status conditions describing the current resource state.
@@ -1095,15 +1099,6 @@ message StopWorkstationRequest {
 
 // Request message for GenerateAccessToken.
 message GenerateAccessTokenRequest {
-  // Required. Name of the workstation for which the access token should be
-  // generated.
-  string workstation = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "workstations.googleapis.com/Workstation"
-    }
-  ];
-
   // Desired expiration or lifetime of the access token.
   oneof expiration {
     // Desired expiration time of the access token. This value must
@@ -1117,6 +1112,15 @@ message GenerateAccessTokenRequest {
     // will be set to a default value of 1 hour.
     google.protobuf.Duration ttl = 3;
   }
+
+  // Required. Name of the workstation for which the access token should be
+  // generated.
+  string workstation = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "workstations.googleapis.com/Workstation"
+    }
+  ];
 }
 
 // Response message for GenerateAccessToken.
