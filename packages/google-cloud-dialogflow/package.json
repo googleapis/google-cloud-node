@@ -15,7 +15,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/protos",
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -39,7 +40,7 @@
     "fix": "gts fix",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
@@ -71,3 +72,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dialogflow"
 }
+

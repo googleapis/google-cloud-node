@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-privateca",
-        "version": "4.2.0",
+        "version": "4.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -378,7 +378,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -394,6 +394,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ignore_dependent_resources",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -646,7 +650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -669,6 +673,10 @@
                     },
                     {
                         "name": "skip_grace_period",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "ignore_dependent_resources",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -942,7 +950,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -958,6 +966,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ignore_dependent_resources",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

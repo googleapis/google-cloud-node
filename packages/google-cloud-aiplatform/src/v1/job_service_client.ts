@@ -382,6 +382,9 @@ export class JobServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -401,6 +404,10 @@ export class JobServiceClient {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -415,6 +422,9 @@ export class JobServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
           ],
         },
@@ -472,6 +482,9 @@ export class JobServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
@@ -670,6 +683,10 @@ export class JobServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
             },
             {
               delete:
@@ -885,6 +902,9 @@ export class JobServiceClient {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
@@ -1038,6 +1058,9 @@ export class JobServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
@@ -1201,6 +1224,9 @@ export class JobServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',

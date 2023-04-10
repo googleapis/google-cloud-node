@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ArtifactRegistry.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/devtools/artifactregistry/v1;artifactregistry",
+                    "go_package": "cloud.google.com/go/artifactregistry/apiv1/artifactregistrypb;artifactregistrypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "YumArtifactProto",
                     "java_package": "com.google.devtools.artifactregistry.v1",
@@ -2003,7 +2003,7 @@
                 "v1beta2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ArtifactRegistry.V1Beta2",
-                    "go_package": "google.golang.org/genproto/googleapis/devtools/artifactregistry/v1beta2;artifactregistry",
+                    "go_package": "cloud.google.com/go/artifactregistry/apiv1beta2/artifactregistrypb;artifactregistrypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "YumArtifactProto",
                     "java_package": "com.google.devtools.artifactregistry.v1beta2",

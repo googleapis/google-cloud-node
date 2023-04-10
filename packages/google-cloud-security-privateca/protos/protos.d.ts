@@ -5969,6 +5969,9 @@ export namespace google {
 
                         /** DisableCertificateAuthorityRequest requestId */
                         requestId?: (string|null);
+
+                        /** DisableCertificateAuthorityRequest ignoreDependentResources */
+                        ignoreDependentResources?: (boolean|null);
                     }
 
                     /** Represents a DisableCertificateAuthorityRequest. */
@@ -5985,6 +5988,9 @@ export namespace google {
 
                         /** DisableCertificateAuthorityRequest requestId. */
                         public requestId: string;
+
+                        /** DisableCertificateAuthorityRequest ignoreDependentResources. */
+                        public ignoreDependentResources: boolean;
 
                         /**
                          * Creates a new DisableCertificateAuthorityRequest instance using the specified properties.
@@ -6805,6 +6811,9 @@ export namespace google {
 
                         /** DeleteCertificateAuthorityRequest skipGracePeriod */
                         skipGracePeriod?: (boolean|null);
+
+                        /** DeleteCertificateAuthorityRequest ignoreDependentResources */
+                        ignoreDependentResources?: (boolean|null);
                     }
 
                     /** Represents a DeleteCertificateAuthorityRequest. */
@@ -6827,6 +6836,9 @@ export namespace google {
 
                         /** DeleteCertificateAuthorityRequest skipGracePeriod. */
                         public skipGracePeriod: boolean;
+
+                        /** DeleteCertificateAuthorityRequest ignoreDependentResources. */
+                        public ignoreDependentResources: boolean;
 
                         /**
                          * Creates a new DeleteCertificateAuthorityRequest instance using the specified properties.
@@ -7247,6 +7259,9 @@ export namespace google {
 
                         /** DeleteCaPoolRequest requestId */
                         requestId?: (string|null);
+
+                        /** DeleteCaPoolRequest ignoreDependentResources */
+                        ignoreDependentResources?: (boolean|null);
                     }
 
                     /** Represents a DeleteCaPoolRequest. */
@@ -7263,6 +7278,9 @@ export namespace google {
 
                         /** DeleteCaPoolRequest requestId. */
                         public requestId: string;
+
+                        /** DeleteCaPoolRequest ignoreDependentResources. */
+                        public ignoreDependentResources: boolean;
 
                         /**
                          * Creates a new DeleteCaPoolRequest instance using the specified properties.

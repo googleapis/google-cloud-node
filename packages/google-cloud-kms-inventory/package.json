@@ -12,7 +12,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -31,7 +32,7 @@
   "scripts": {
     "clean": "gts clean",
     "compile-protos": "compileProtos src",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "docs-test": "linkinator docs",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
@@ -71,3 +72,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-kms-inventory"
 }
+
