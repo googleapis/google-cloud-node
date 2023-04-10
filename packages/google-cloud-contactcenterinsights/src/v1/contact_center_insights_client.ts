@@ -262,6 +262,12 @@ export class ContactCenterInsightsClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const uploadConversationResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.Conversation'
+    ) as gax.protobuf.Type;
+    const uploadConversationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.UploadConversationMetadata'
+    ) as gax.protobuf.Type;
     const createAnalysisResponse = protoFilesRoot.lookup(
       '.google.cloud.contactcenterinsights.v1.Analysis'
     ) as gax.protobuf.Type;
@@ -312,6 +318,11 @@ export class ContactCenterInsightsClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      uploadConversation: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        uploadConversationResponse.decode.bind(uploadConversationResponse),
+        uploadConversationMetadata.decode.bind(uploadConversationMetadata)
+      ),
       createAnalysis: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAnalysisResponse.decode.bind(createAnalysisResponse),
@@ -410,6 +421,7 @@ export class ContactCenterInsightsClient {
     // and create an API call method for each.
     const contactCenterInsightsStubMethods = [
       'createConversation',
+      'uploadConversation',
       'updateConversation',
       'getConversation',
       'listConversations',
@@ -2990,6 +3002,158 @@ export class ContactCenterInsightsClient {
     return this.innerApiCalls.deleteView(request, options, callback);
   }
 
+  /**
+   * Create a longrunning conversation upload operation. This method differs
+   * from CreateConversation by allowing audio transcription and optional DLP
+   * redaction.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the conversation.
+   * @param {google.cloud.contactcenterinsights.v1.Conversation} request.conversation
+   *   Required. The conversation resource to create.
+   * @param {string} [request.conversationId]
+   *   Optional. A unique ID for the new conversation. This ID will become the
+   *   final component of the conversation's resource name. If no ID is specified,
+   *   a server-generated ID will be used.
+   *
+   *   This value should be 4-64 characters and must match the regular
+   *   expression `^{@link 0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
+   * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} [request.redactionConfig]
+   *   Optional. DLP settings for transcript redaction. Optional, will default to
+   *   the config specified in Settings.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.upload_conversation.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_async
+   */
+  uploadConversation(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUploadConversationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IConversation,
+        protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  uploadConversation(
+    request: protos.google.cloud.contactcenterinsights.v1.IUploadConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IConversation,
+        protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  uploadConversation(
+    request: protos.google.cloud.contactcenterinsights.v1.IUploadConversationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IConversation,
+        protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  uploadConversation(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUploadConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IConversation,
+            protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IConversation,
+        protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IConversation,
+        protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.uploadConversation(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `uploadConversation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.upload_conversation.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_async
+   */
+  async checkUploadConversationProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.Conversation,
+      protos.google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.uploadConversation,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.Conversation,
+      protos.google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+    >;
+  }
   /**
    * Creates an analysis. The long running operation is done when the analysis
    * has completed.
