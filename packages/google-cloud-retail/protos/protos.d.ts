@@ -23546,6 +23546,9 @@ export namespace google {
 
                     /** UserEvent pageViewId */
                     pageViewId?: (string|null);
+
+                    /** UserEvent entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a UserEvent. */
@@ -23616,6 +23619,9 @@ export namespace google {
 
                     /** UserEvent pageViewId. */
                     public pageViewId: string;
+
+                    /** UserEvent entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new UserEvent instance using the specified properties.
@@ -25953,6 +25959,9 @@ export namespace google {
 
                     /** CompleteQueryRequest enableAttributeSuggestions */
                     enableAttributeSuggestions?: (boolean|null);
+
+                    /** CompleteQueryRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -25987,6 +25996,9 @@ export namespace google {
 
                     /** CompleteQueryRequest enableAttributeSuggestions. */
                     public enableAttributeSuggestions: boolean;
+
+                    /** CompleteQueryRequest entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -26191,6 +26203,12 @@ export namespace google {
 
                         /** CompletionResult attributes */
                         attributes?: ({ [k: string]: google.cloud.retail.v2alpha.ICustomAttribute }|null);
+
+                        /** CompletionResult facets */
+                        facets?: (google.cloud.retail.v2alpha.SearchResponse.IFacet[]|null);
+
+                        /** CompletionResult totalProductCount */
+                        totalProductCount?: (number|null);
                     }
 
                     /** Represents a CompletionResult. */
@@ -26207,6 +26225,12 @@ export namespace google {
 
                         /** CompletionResult attributes. */
                         public attributes: { [k: string]: google.cloud.retail.v2alpha.ICustomAttribute };
+
+                        /** CompletionResult facets. */
+                        public facets: google.cloud.retail.v2alpha.SearchResponse.IFacet[];
+
+                        /** CompletionResult totalProductCount. */
+                        public totalProductCount: number;
 
                         /**
                          * Creates a new CompletionResult instance using the specified properties.
@@ -26481,142 +26505,6 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a Control. */
-                interface IControl {
-
-                    /** Control facetSpec */
-                    facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
-
-                    /** Control rule */
-                    rule?: (google.cloud.retail.v2alpha.IRule|null);
-
-                    /** Control name */
-                    name?: (string|null);
-
-                    /** Control displayName */
-                    displayName?: (string|null);
-
-                    /** Control associatedServingConfigIds */
-                    associatedServingConfigIds?: (string[]|null);
-
-                    /** Control solutionTypes */
-                    solutionTypes?: (google.cloud.retail.v2alpha.SolutionType[]|null);
-
-                    /** Control searchSolutionUseCase */
-                    searchSolutionUseCase?: (google.cloud.retail.v2alpha.SearchSolutionUseCase[]|null);
-                }
-
-                /** Represents a Control. */
-                class Control implements IControl {
-
-                    /**
-                     * Constructs a new Control.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2alpha.IControl);
-
-                    /** Control facetSpec. */
-                    public facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
-
-                    /** Control rule. */
-                    public rule?: (google.cloud.retail.v2alpha.IRule|null);
-
-                    /** Control name. */
-                    public name: string;
-
-                    /** Control displayName. */
-                    public displayName: string;
-
-                    /** Control associatedServingConfigIds. */
-                    public associatedServingConfigIds: string[];
-
-                    /** Control solutionTypes. */
-                    public solutionTypes: google.cloud.retail.v2alpha.SolutionType[];
-
-                    /** Control searchSolutionUseCase. */
-                    public searchSolutionUseCase: google.cloud.retail.v2alpha.SearchSolutionUseCase[];
-
-                    /** Control control. */
-                    public control?: ("facetSpec"|"rule");
-
-                    /**
-                     * Creates a new Control instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Control instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2alpha.IControl): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Encodes the specified Control message. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
-                     * @param message Control message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
-                     * @param message Control message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Control message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Control
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Decodes a Control message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Control
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Verifies a Control message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Control message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Control
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Creates a plain object from a Control message. Also converts values to other types if specified.
-                     * @param message Control
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2alpha.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Control to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Control
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Represents a SearchService */
                 class SearchService extends $protobuf.rpc.Service {
 
@@ -26730,6 +26618,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec */
                     spellCorrectionSpec?: (google.cloud.retail.v2alpha.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -26806,6 +26697,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec. */
                     public spellCorrectionSpec?: (google.cloud.retail.v2alpha.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
 
                     /** SearchRequest _spellCorrectionSpec. */
                     public _spellCorrectionSpec?: "spellCorrectionSpec";
@@ -27848,6 +27742,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs */
                     invalidConditionBoostSpecs?: (google.cloud.retail.v2alpha.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                    /** SearchResponse experimentInfo */
+                    experimentInfo?: (google.cloud.retail.v2alpha.IExperimentInfo[]|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -27888,6 +27785,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs. */
                     public invalidConditionBoostSpecs: google.cloud.retail.v2alpha.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                    /** SearchResponse experimentInfo. */
+                    public experimentInfo: google.cloud.retail.v2alpha.IExperimentInfo[];
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
@@ -28434,6 +28334,354 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of an ExperimentInfo. */
+                interface IExperimentInfo {
+
+                    /** ExperimentInfo servingConfigExperiment */
+                    servingConfigExperiment?: (google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment */
+                    experiment?: (string|null);
+                }
+
+                /** Represents an ExperimentInfo. */
+                class ExperimentInfo implements IExperimentInfo {
+
+                    /**
+                     * Constructs a new ExperimentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IExperimentInfo);
+
+                    /** ExperimentInfo servingConfigExperiment. */
+                    public servingConfigExperiment?: (google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment. */
+                    public experiment: string;
+
+                    /** ExperimentInfo experimentMetadata. */
+                    public experimentMetadata?: "servingConfigExperiment";
+
+                    /**
+                     * Creates a new ExperimentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentInfo instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IExperimentInfo): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Verifies an ExperimentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
+                     * @param message ExperimentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentInfo {
+
+                    /** Properties of a ServingConfigExperiment. */
+                    interface IServingConfigExperiment {
+
+                        /** ServingConfigExperiment originalServingConfig */
+                        originalServingConfig?: (string|null);
+
+                        /** ServingConfigExperiment experimentServingConfig */
+                        experimentServingConfig?: (string|null);
+                    }
+
+                    /** Represents a ServingConfigExperiment. */
+                    class ServingConfigExperiment implements IServingConfigExperiment {
+
+                        /**
+                         * Constructs a new ServingConfigExperiment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment);
+
+                        /** ServingConfigExperiment originalServingConfig. */
+                        public originalServingConfig: string;
+
+                        /** ServingConfigExperiment experimentServingConfig. */
+                        public experimentServingConfig: string;
+
+                        /**
+                         * Creates a new ServingConfigExperiment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigExperiment instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Verifies a ServingConfigExperiment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigExperiment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
+                         * @param message ServingConfigExperiment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigExperiment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigExperiment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Control. */
+                interface IControl {
+
+                    /** Control facetSpec */
+                    facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
+
+                    /** Control rule */
+                    rule?: (google.cloud.retail.v2alpha.IRule|null);
+
+                    /** Control name */
+                    name?: (string|null);
+
+                    /** Control displayName */
+                    displayName?: (string|null);
+
+                    /** Control associatedServingConfigIds */
+                    associatedServingConfigIds?: (string[]|null);
+
+                    /** Control solutionTypes */
+                    solutionTypes?: (google.cloud.retail.v2alpha.SolutionType[]|null);
+
+                    /** Control searchSolutionUseCase */
+                    searchSolutionUseCase?: (google.cloud.retail.v2alpha.SearchSolutionUseCase[]|null);
+                }
+
+                /** Represents a Control. */
+                class Control implements IControl {
+
+                    /**
+                     * Constructs a new Control.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IControl);
+
+                    /** Control facetSpec. */
+                    public facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
+
+                    /** Control rule. */
+                    public rule?: (google.cloud.retail.v2alpha.IRule|null);
+
+                    /** Control name. */
+                    public name: string;
+
+                    /** Control displayName. */
+                    public displayName: string;
+
+                    /** Control associatedServingConfigIds. */
+                    public associatedServingConfigIds: string[];
+
+                    /** Control solutionTypes. */
+                    public solutionTypes: google.cloud.retail.v2alpha.SolutionType[];
+
+                    /** Control searchSolutionUseCase. */
+                    public searchSolutionUseCase: google.cloud.retail.v2alpha.SearchSolutionUseCase[];
+
+                    /** Control control. */
+                    public control?: ("facetSpec"|"rule");
+
+                    /**
+                     * Creates a new Control instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Control instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IControl): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Encodes the specified Control message. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
+                     * @param message Control message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
+                     * @param message Control message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Control message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Control
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Decodes a Control message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Control
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Verifies a Control message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Control message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Control
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Creates a plain object from a Control message. Also converts values to other types if specified.
+                     * @param message Control
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Control to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Control
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a ControlService */
@@ -29913,6 +30161,849 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MerchantCenterAccountLink. */
+                interface IMerchantCenterAccountLink {
+
+                    /** MerchantCenterAccountLink name */
+                    name?: (string|null);
+
+                    /** MerchantCenterAccountLink id */
+                    id?: (string|null);
+
+                    /** MerchantCenterAccountLink merchantCenterAccountId */
+                    merchantCenterAccountId?: (number|Long|string|null);
+
+                    /** MerchantCenterAccountLink branchId */
+                    branchId?: (string|null);
+
+                    /** MerchantCenterAccountLink feedLabel */
+                    feedLabel?: (string|null);
+
+                    /** MerchantCenterAccountLink languageCode */
+                    languageCode?: (string|null);
+
+                    /** MerchantCenterAccountLink feedFilters */
+                    feedFilters?: (google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter[]|null);
+
+                    /** MerchantCenterAccountLink state */
+                    state?: (google.cloud.retail.v2alpha.MerchantCenterAccountLink.State|keyof typeof google.cloud.retail.v2alpha.MerchantCenterAccountLink.State|null);
+
+                    /** MerchantCenterAccountLink projectId */
+                    projectId?: (string|null);
+                }
+
+                /** Represents a MerchantCenterAccountLink. */
+                class MerchantCenterAccountLink implements IMerchantCenterAccountLink {
+
+                    /**
+                     * Constructs a new MerchantCenterAccountLink.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IMerchantCenterAccountLink);
+
+                    /** MerchantCenterAccountLink name. */
+                    public name: string;
+
+                    /** MerchantCenterAccountLink id. */
+                    public id: string;
+
+                    /** MerchantCenterAccountLink merchantCenterAccountId. */
+                    public merchantCenterAccountId: (number|Long|string);
+
+                    /** MerchantCenterAccountLink branchId. */
+                    public branchId: string;
+
+                    /** MerchantCenterAccountLink feedLabel. */
+                    public feedLabel: string;
+
+                    /** MerchantCenterAccountLink languageCode. */
+                    public languageCode: string;
+
+                    /** MerchantCenterAccountLink feedFilters. */
+                    public feedFilters: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter[];
+
+                    /** MerchantCenterAccountLink state. */
+                    public state: (google.cloud.retail.v2alpha.MerchantCenterAccountLink.State|keyof typeof google.cloud.retail.v2alpha.MerchantCenterAccountLink.State);
+
+                    /** MerchantCenterAccountLink projectId. */
+                    public projectId: string;
+
+                    /**
+                     * Creates a new MerchantCenterAccountLink instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MerchantCenterAccountLink instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IMerchantCenterAccountLink): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Encodes the specified MerchantCenterAccountLink message. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.verify|verify} messages.
+                     * @param message MerchantCenterAccountLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IMerchantCenterAccountLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MerchantCenterAccountLink message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.verify|verify} messages.
+                     * @param message MerchantCenterAccountLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IMerchantCenterAccountLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MerchantCenterAccountLink message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MerchantCenterAccountLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Decodes a MerchantCenterAccountLink message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MerchantCenterAccountLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Verifies a MerchantCenterAccountLink message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MerchantCenterAccountLink message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MerchantCenterAccountLink
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Creates a plain object from a MerchantCenterAccountLink message. Also converts values to other types if specified.
+                     * @param message MerchantCenterAccountLink
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MerchantCenterAccountLink to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MerchantCenterAccountLink
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MerchantCenterAccountLink {
+
+                    /** Properties of a MerchantCenterFeedFilter. */
+                    interface IMerchantCenterFeedFilter {
+
+                        /** MerchantCenterFeedFilter primaryFeedId */
+                        primaryFeedId?: (number|Long|string|null);
+
+                        /** MerchantCenterFeedFilter primaryFeedName */
+                        primaryFeedName?: (string|null);
+                    }
+
+                    /** Represents a MerchantCenterFeedFilter. */
+                    class MerchantCenterFeedFilter implements IMerchantCenterFeedFilter {
+
+                        /**
+                         * Constructs a new MerchantCenterFeedFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter);
+
+                        /** MerchantCenterFeedFilter primaryFeedId. */
+                        public primaryFeedId: (number|Long|string);
+
+                        /** MerchantCenterFeedFilter primaryFeedName. */
+                        public primaryFeedName: string;
+
+                        /**
+                         * Creates a new MerchantCenterFeedFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MerchantCenterFeedFilter instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Encodes the specified MerchantCenterFeedFilter message. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter.verify|verify} messages.
+                         * @param message MerchantCenterFeedFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MerchantCenterFeedFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter.verify|verify} messages.
+                         * @param message MerchantCenterFeedFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MerchantCenterFeedFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MerchantCenterFeedFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Decodes a MerchantCenterFeedFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MerchantCenterFeedFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Verifies a MerchantCenterFeedFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MerchantCenterFeedFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MerchantCenterFeedFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Creates a plain object from a MerchantCenterFeedFilter message. Also converts values to other types if specified.
+                         * @param message MerchantCenterFeedFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MerchantCenterFeedFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MerchantCenterFeedFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        ACTIVE = 2,
+                        FAILED = 3
+                    }
+                }
+
+                /** Properties of a CreateMerchantCenterAccountLinkMetadata. */
+                interface ICreateMerchantCenterAccountLinkMetadata {
+
+                    /** CreateMerchantCenterAccountLinkMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMerchantCenterAccountLinkMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CreateMerchantCenterAccountLinkMetadata. */
+                class CreateMerchantCenterAccountLinkMetadata implements ICreateMerchantCenterAccountLinkMetadata {
+
+                    /**
+                     * Constructs a new CreateMerchantCenterAccountLinkMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata);
+
+                    /** CreateMerchantCenterAccountLinkMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMerchantCenterAccountLinkMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CreateMerchantCenterAccountLinkMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMerchantCenterAccountLinkMetadata instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkMetadata message. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMerchantCenterAccountLinkMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMerchantCenterAccountLinkMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Verifies a CreateMerchantCenterAccountLinkMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMerchantCenterAccountLinkMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMerchantCenterAccountLinkMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateMerchantCenterAccountLinkMetadata message. Also converts values to other types if specified.
+                     * @param message CreateMerchantCenterAccountLinkMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMerchantCenterAccountLinkMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMerchantCenterAccountLinkMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a MerchantCenterAccountLinkService */
+                class MerchantCenterAccountLinkService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new MerchantCenterAccountLinkService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new MerchantCenterAccountLinkService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MerchantCenterAccountLinkService;
+
+                    /**
+                     * Calls ListMerchantCenterAccountLinks.
+                     * @param request ListMerchantCenterAccountLinksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMerchantCenterAccountLinksResponse
+                     */
+                    public listMerchantCenterAccountLinks(request: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest, callback: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.ListMerchantCenterAccountLinksCallback): void;
+
+                    /**
+                     * Calls ListMerchantCenterAccountLinks.
+                     * @param request ListMerchantCenterAccountLinksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMerchantCenterAccountLinks(request: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest): Promise<google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse>;
+
+                    /**
+                     * Calls CreateMerchantCenterAccountLink.
+                     * @param request CreateMerchantCenterAccountLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest, callback: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.CreateMerchantCenterAccountLinkCallback): void;
+
+                    /**
+                     * Calls CreateMerchantCenterAccountLink.
+                     * @param request CreateMerchantCenterAccountLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMerchantCenterAccountLink.
+                     * @param request DeleteMerchantCenterAccountLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest, callback: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.DeleteMerchantCenterAccountLinkCallback): void;
+
+                    /**
+                     * Calls DeleteMerchantCenterAccountLink.
+                     * @param request DeleteMerchantCenterAccountLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace MerchantCenterAccountLinkService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.MerchantCenterAccountLinkService|listMerchantCenterAccountLinks}.
+                     * @param error Error, if any
+                     * @param [response] ListMerchantCenterAccountLinksResponse
+                     */
+                    type ListMerchantCenterAccountLinksCallback = (error: (Error|null), response?: google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.MerchantCenterAccountLinkService|createMerchantCenterAccountLink}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMerchantCenterAccountLinkCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.MerchantCenterAccountLinkService|deleteMerchantCenterAccountLink}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteMerchantCenterAccountLinkCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a ListMerchantCenterAccountLinksRequest. */
+                interface IListMerchantCenterAccountLinksRequest {
+
+                    /** ListMerchantCenterAccountLinksRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ListMerchantCenterAccountLinksRequest. */
+                class ListMerchantCenterAccountLinksRequest implements IListMerchantCenterAccountLinksRequest {
+
+                    /**
+                     * Constructs a new ListMerchantCenterAccountLinksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest);
+
+                    /** ListMerchantCenterAccountLinksRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ListMerchantCenterAccountLinksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMerchantCenterAccountLinksRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMerchantCenterAccountLinksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMerchantCenterAccountLinksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Verifies a ListMerchantCenterAccountLinksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMerchantCenterAccountLinksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMerchantCenterAccountLinksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Creates a plain object from a ListMerchantCenterAccountLinksRequest message. Also converts values to other types if specified.
+                     * @param message ListMerchantCenterAccountLinksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMerchantCenterAccountLinksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMerchantCenterAccountLinksRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMerchantCenterAccountLinksResponse. */
+                interface IListMerchantCenterAccountLinksResponse {
+
+                    /** ListMerchantCenterAccountLinksResponse merchantCenterAccountLinks */
+                    merchantCenterAccountLinks?: (google.cloud.retail.v2alpha.IMerchantCenterAccountLink[]|null);
+                }
+
+                /** Represents a ListMerchantCenterAccountLinksResponse. */
+                class ListMerchantCenterAccountLinksResponse implements IListMerchantCenterAccountLinksResponse {
+
+                    /**
+                     * Constructs a new ListMerchantCenterAccountLinksResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse);
+
+                    /** ListMerchantCenterAccountLinksResponse merchantCenterAccountLinks. */
+                    public merchantCenterAccountLinks: google.cloud.retail.v2alpha.IMerchantCenterAccountLink[];
+
+                    /**
+                     * Creates a new ListMerchantCenterAccountLinksResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMerchantCenterAccountLinksResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksResponse message. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMerchantCenterAccountLinksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMerchantCenterAccountLinksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Verifies a ListMerchantCenterAccountLinksResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMerchantCenterAccountLinksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMerchantCenterAccountLinksResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Creates a plain object from a ListMerchantCenterAccountLinksResponse message. Also converts values to other types if specified.
+                     * @param message ListMerchantCenterAccountLinksResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMerchantCenterAccountLinksResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMerchantCenterAccountLinksResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMerchantCenterAccountLinkRequest. */
+                interface ICreateMerchantCenterAccountLinkRequest {
+
+                    /** CreateMerchantCenterAccountLinkRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMerchantCenterAccountLinkRequest merchantCenterAccountLink */
+                    merchantCenterAccountLink?: (google.cloud.retail.v2alpha.IMerchantCenterAccountLink|null);
+                }
+
+                /** Represents a CreateMerchantCenterAccountLinkRequest. */
+                class CreateMerchantCenterAccountLinkRequest implements ICreateMerchantCenterAccountLinkRequest {
+
+                    /**
+                     * Constructs a new CreateMerchantCenterAccountLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest);
+
+                    /** CreateMerchantCenterAccountLinkRequest parent. */
+                    public parent: string;
+
+                    /** CreateMerchantCenterAccountLinkRequest merchantCenterAccountLink. */
+                    public merchantCenterAccountLink?: (google.cloud.retail.v2alpha.IMerchantCenterAccountLink|null);
+
+                    /**
+                     * Creates a new CreateMerchantCenterAccountLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMerchantCenterAccountLinkRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Verifies a CreateMerchantCenterAccountLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMerchantCenterAccountLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMerchantCenterAccountLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMerchantCenterAccountLinkRequest message. Also converts values to other types if specified.
+                     * @param message CreateMerchantCenterAccountLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMerchantCenterAccountLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMerchantCenterAccountLinkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMerchantCenterAccountLinkRequest. */
+                interface IDeleteMerchantCenterAccountLinkRequest {
+
+                    /** DeleteMerchantCenterAccountLinkRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMerchantCenterAccountLinkRequest. */
+                class DeleteMerchantCenterAccountLinkRequest implements IDeleteMerchantCenterAccountLinkRequest {
+
+                    /**
+                     * Constructs a new DeleteMerchantCenterAccountLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest);
+
+                    /** DeleteMerchantCenterAccountLinkRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMerchantCenterAccountLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMerchantCenterAccountLinkRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Encodes the specified DeleteMerchantCenterAccountLinkRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message DeleteMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMerchantCenterAccountLinkRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message DeleteMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMerchantCenterAccountLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Decodes a DeleteMerchantCenterAccountLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Verifies a DeleteMerchantCenterAccountLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMerchantCenterAccountLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMerchantCenterAccountLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMerchantCenterAccountLinkRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMerchantCenterAccountLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMerchantCenterAccountLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMerchantCenterAccountLinkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Model. */
                 interface IModel {
 
@@ -30592,6 +31683,20 @@ export namespace google {
                     public createModel(request: google.cloud.retail.v2alpha.ICreateModelRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public getModel(request: google.cloud.retail.v2alpha.IGetModelRequest, callback: google.cloud.retail.v2alpha.ModelService.GetModelCallback): void;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getModel(request: google.cloud.retail.v2alpha.IGetModelRequest): Promise<google.cloud.retail.v2alpha.Model>;
+
+                    /**
                      * Calls PauseModel.
                      * @param request PauseModelRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Model
@@ -30684,6 +31789,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.ModelService|getModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type GetModelCallback = (error: (Error|null), response?: google.cloud.retail.v2alpha.Model) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.retail.v2alpha.ModelService|pauseModel}.
@@ -30934,6 +32046,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetModelRequest. */
+                interface IGetModelRequest {
+
+                    /** GetModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetModelRequest. */
+                class GetModelRequest implements IGetModelRequest {
+
+                    /**
+                     * Constructs a new GetModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IGetModelRequest);
+
+                    /** GetModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IGetModelRequest): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Verifies a GetModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                     * @param message GetModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.GetModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetModelRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -32826,6 +34035,9 @@ export namespace google {
 
                     /** DeleteProductRequest name */
                     name?: (string|null);
+
+                    /** DeleteProductRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteProductRequest. */
@@ -32839,6 +34051,9 @@ export namespace google {
 
                     /** DeleteProductRequest name. */
                     public name: string;
+
+                    /** DeleteProductRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteProductRequest instance using the specified properties.

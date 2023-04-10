@@ -21,11 +21,14 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as servingconfigserviceModule from '../src';
+import * as merchantcenteraccountlinkserviceModule from '../src';
 
-import {PassThrough} from 'stream';
-
-import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -66,42 +69,36 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
 ) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -127,62 +124,72 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2alpha.ServingConfigServiceClient', () => {
+describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        servingconfigserviceModule.v2alpha.ServingConfigServiceClient
-          .servicePath;
+        merchantcenteraccountlinkserviceModule.v2alpha
+          .MerchantCenterAccountLinkServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        servingconfigserviceModule.v2alpha.ServingConfigServiceClient
-          .apiEndpoint;
+        merchantcenteraccountlinkserviceModule.v2alpha
+          .MerchantCenterAccountLinkServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
       const port =
-        servingconfigserviceModule.v2alpha.ServingConfigServiceClient.port;
+        merchantcenteraccountlinkserviceModule.v2alpha
+          .MerchantCenterAccountLinkServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient();
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          fallback: true,
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.servingConfigServiceStub, undefined);
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(
+        client.merchantCenterAccountLinkServiceStub,
+        undefined
+      );
       await client.initialize();
-      assert(client.servingConfigServiceStub);
+      assert(client.merchantCenterAccountLinkServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      assert(client.servingConfigServiceStub);
+      assert(client.merchantCenterAccountLinkServiceStub);
       client.close().then(() => {
         done();
       });
@@ -190,11 +197,16 @@ describe('v2alpha.ServingConfigServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.servingConfigServiceStub, undefined);
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(
+        client.merchantCenterAccountLinkServiceStub,
+        undefined
+      );
       client.close().then(() => {
         done();
       });
@@ -203,10 +215,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -216,10 +230,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -237,67 +253,71 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
   });
 
-  describe('createServingConfig', () => {
-    it('invokes createServingConfig without error', async () => {
+  describe('listMerchantCenterAccountLinks', () => {
+    it('invokes listMerchantCenterAccountLinks without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        '.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
+        new protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse()
       );
-      client.innerApiCalls.createServingConfig =
+      client.innerApiCalls.listMerchantCenterAccountLinks =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.createServingConfig(request);
+      const [response] = await client.listMerchantCenterAccountLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createServingConfig as SinonStub
+        client.innerApiCalls.listMerchantCenterAccountLinks as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createServingConfig as SinonStub
+        client.innerApiCalls.listMerchantCenterAccountLinks as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createServingConfig without error using callback', async () => {
+    it('invokes listMerchantCenterAccountLinks without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        '.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
+        new protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse()
       );
-      client.innerApiCalls.createServingConfig =
+      client.innerApiCalls.listMerchantCenterAccountLinks =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createServingConfig(
+        client.listMerchantCenterAccountLinks(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IServingConfig | null
+            result?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -310,81 +330,93 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createServingConfig as SinonStub
+        client.innerApiCalls.listMerchantCenterAccountLinks as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createServingConfig as SinonStub
+        client.innerApiCalls.listMerchantCenterAccountLinks as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createServingConfig with error', async () => {
+    it('invokes listMerchantCenterAccountLinks with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        '.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createServingConfig = stubSimpleCall(
+      client.innerApiCalls.listMerchantCenterAccountLinks = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createServingConfig(request), expectedError);
+      await assert.rejects(
+        client.listMerchantCenterAccountLinks(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.createServingConfig as SinonStub
+        client.innerApiCalls.listMerchantCenterAccountLinks as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createServingConfig as SinonStub
+        client.innerApiCalls.listMerchantCenterAccountLinks as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createServingConfig with closed client', async () => {
+    it('invokes listMerchantCenterAccountLinks with closed client', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        '.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.createServingConfig(request), expectedError);
+      await assert.rejects(
+        client.listMerchantCenterAccountLinks(request),
+        expectedError
+      );
     });
   });
 
-  describe('deleteServingConfig', () => {
-    it('invokes deleteServingConfig without error', async () => {
+  describe('deleteMerchantCenterAccountLink', () => {
+    it('invokes deleteMerchantCenterAccountLink without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        '.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -392,32 +424,34 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteServingConfig =
+      client.innerApiCalls.deleteMerchantCenterAccountLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteServingConfig(request);
+      const [response] = await client.deleteMerchantCenterAccountLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteServingConfig as SinonStub
+        client.innerApiCalls.deleteMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServingConfig as SinonStub
+        client.innerApiCalls.deleteMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteServingConfig without error using callback', async () => {
+    it('invokes deleteMerchantCenterAccountLink without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        '.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -425,10 +459,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteServingConfig =
+      client.innerApiCalls.deleteMerchantCenterAccountLink =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteServingConfig(
+        client.deleteMerchantCenterAccountLink(
           request,
           (
             err?: Error | null,
@@ -445,131 +479,149 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteServingConfig as SinonStub
+        client.innerApiCalls.deleteMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServingConfig as SinonStub
+        client.innerApiCalls.deleteMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteServingConfig with error', async () => {
+    it('invokes deleteMerchantCenterAccountLink with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        '.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteServingConfig = stubSimpleCall(
+      client.innerApiCalls.deleteMerchantCenterAccountLink = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteServingConfig(request), expectedError);
+      await assert.rejects(
+        client.deleteMerchantCenterAccountLink(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.deleteServingConfig as SinonStub
+        client.innerApiCalls.deleteMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteServingConfig as SinonStub
+        client.innerApiCalls.deleteMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteServingConfig with closed client', async () => {
+    it('invokes deleteMerchantCenterAccountLink with closed client', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        '.google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.deleteServingConfig(request), expectedError);
+      await assert.rejects(
+        client.deleteMerchantCenterAccountLink(request),
+        expectedError
+      );
     });
   });
 
-  describe('updateServingConfig', () => {
-    it('invokes updateServingConfig without error', async () => {
+  describe('createMerchantCenterAccountLink', () => {
+    it('invokes createMerchantCenterAccountLink without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.servingConfig ??= {};
+      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
-        ['servingConfig', 'name']
+        '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
+        ['merchantCenterAccountLink', 'name']
       );
-      request.servingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
+      request.merchantCenterAccountLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
+        new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateServingConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateServingConfig(request);
+      client.innerApiCalls.createMerchantCenterAccountLink =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createMerchantCenterAccountLink(request);
+      const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateServingConfig as SinonStub
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServingConfig as SinonStub
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateServingConfig without error using callback', async () => {
+    it('invokes createMerchantCenterAccountLink without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.servingConfig ??= {};
+      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
-        ['servingConfig', 'name']
+        '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
+        ['merchantCenterAccountLink', 'name']
       );
-      request.servingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
+      request.merchantCenterAccountLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
+        new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateServingConfig =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.createMerchantCenterAccountLink =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateServingConfig(
+        client.createMerchantCenterAccountLink(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IServingConfig | null
+            result?: LROperation<
+              protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+              protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+            > | null
           ) => {
             if (err) {
               reject(err);
@@ -579,817 +631,149 @@ describe('v2alpha.ServingConfigServiceClient', () => {
           }
         );
       });
-      const response = await promise;
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+      >;
+      const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateServingConfig as SinonStub
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServingConfig as SinonStub
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateServingConfig with error', async () => {
+    it('invokes createMerchantCenterAccountLink with call error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
+        new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.servingConfig ??= {};
+      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
-        ['servingConfig', 'name']
+        '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
+        ['merchantCenterAccountLink', 'name']
       );
-      request.servingConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
+      request.merchantCenterAccountLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateServingConfig = stubSimpleCall(
+      client.innerApiCalls.createMerchantCenterAccountLink =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.createMerchantCenterAccountLink(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMerchantCenterAccountLink with LRO error', async () => {
+      const client =
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
+      );
+      request.merchantCenterAccountLink ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
+        ['merchantCenterAccountLink', 'name']
+      );
+      request.merchantCenterAccountLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMerchantCenterAccountLink =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] = await client.createMerchantCenterAccountLink(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMerchantCenterAccountLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateMerchantCenterAccountLinkProgress without error', async () => {
+      const client =
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateMerchantCenterAccountLinkProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateMerchantCenterAccountLinkProgress with error', async () => {
+      const client =
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateServingConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateServingConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateServingConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateServingConfig with closed client', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
-      );
-      request.servingConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
-        ['servingConfig', 'name']
-      );
-      request.servingConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateServingConfig(request), expectedError);
-    });
-  });
-
-  describe('getServingConfig', () => {
-    it('invokes getServingConfig without error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
-      );
-      client.innerApiCalls.getServingConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getServingConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServingConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServingConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServingConfig without error using callback', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
-      );
-      client.innerApiCalls.getServingConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getServingConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IServingConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getServingConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServingConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServingConfig with error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getServingConfig = stubSimpleCall(
-        undefined,
+      await assert.rejects(
+        client.checkCreateMerchantCenterAccountLinkProgress(''),
         expectedError
       );
-      await assert.rejects(client.getServingConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getServingConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getServingConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getServingConfig with closed client', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getServingConfig(request), expectedError);
-    });
-  });
-
-  describe('addControl', () => {
-    it('invokes addControl without error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.AddControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.AddControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
-      );
-      client.innerApiCalls.addControl = stubSimpleCall(expectedResponse);
-      const [response] = await client.addControl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addControl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addControl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addControl without error using callback', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.AddControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.AddControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
-      );
-      client.innerApiCalls.addControl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addControl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IServingConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addControl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addControl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addControl with error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.AddControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.AddControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addControl = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addControl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addControl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addControl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addControl with closed client', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.AddControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.AddControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.addControl(request), expectedError);
-    });
-  });
-
-  describe('removeControl', () => {
-    it('invokes removeControl without error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.RemoveControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
-      );
-      client.innerApiCalls.removeControl = stubSimpleCall(expectedResponse);
-      const [response] = await client.removeControl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeControl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeControl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeControl without error using callback', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.RemoveControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ServingConfig()
-      );
-      client.innerApiCalls.removeControl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeControl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IServingConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeControl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeControl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeControl with error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.RemoveControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeControl = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removeControl(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeControl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeControl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeControl with closed client', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.RemoveControlRequest',
-        ['servingConfig']
-      );
-      request.servingConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.removeControl(request), expectedError);
-    });
-  });
-
-  describe('listServingConfigs', () => {
-    it('invokes listServingConfigs without error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-      ];
-      client.innerApiCalls.listServingConfigs =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listServingConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServingConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServingConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServingConfigs without error using callback', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-      ];
-      client.innerApiCalls.listServingConfigs =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listServingConfigs(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IServingConfig[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listServingConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServingConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServingConfigs with error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listServingConfigs = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listServingConfigs(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listServingConfigs as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listServingConfigs as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listServingConfigsStream without error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-      ];
-      client.descriptors.page.listServingConfigs.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listServingConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.retail.v2alpha.ServingConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.retail.v2alpha.ServingConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServingConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listServingConfigsStream with error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServingConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listServingConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.retail.v2alpha.ServingConfig[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.retail.v2alpha.ServingConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listServingConfigs, request)
-      );
-      assert(
-        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listServingConfigs without error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.retail.v2alpha.ServingConfig()
-        ),
-      ];
-      client.descriptors.page.listServingConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.retail.v2alpha.IServingConfig[] = [];
-      const iterable = client.listServingConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServingConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServingConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listServingConfigs with error', async () => {
-      const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listServingConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listServingConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.retail.v2alpha.IServingConfig[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listServingConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listServingConfigs.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1417,10 +801,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1462,10 +848,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1498,10 +886,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1547,10 +937,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1589,10 +981,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -1611,10 +1005,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1646,10 +1042,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1671,10 +1069,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -1694,10 +1094,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1729,10 +1131,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1754,10 +1158,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -1777,10 +1183,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1812,10 +1220,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1837,10 +1247,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1874,10 +1286,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -1912,10 +1326,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.attributesConfigPathTemplate.render = sinon
         .stub()
@@ -1980,10 +1396,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.catalogPathTemplate.render = sinon
         .stub()
@@ -2045,10 +1463,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.completionConfigPathTemplate.render = sinon
         .stub()
@@ -2114,10 +1534,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.controlPathTemplate.render = sinon
         .stub()
@@ -2191,10 +1613,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         merchant_center_account_link: 'merchantCenterAccountLinkValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
         .stub()
@@ -2289,10 +1713,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -2367,10 +1793,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         product: 'productValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
@@ -2455,10 +1883,12 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new servingconfigserviceModule.v2alpha.ServingConfigServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+        new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.servingConfigPathTemplate.render = sinon
         .stub()

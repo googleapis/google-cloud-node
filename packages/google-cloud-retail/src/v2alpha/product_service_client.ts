@@ -204,6 +204,9 @@ export class ProductServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
       ),
@@ -850,6 +853,15 @@ export class ProductServiceClient {
    *
    *   All inventory information for the named
    *   {@link google.cloud.retail.v2alpha.Product|Product} will be deleted.
+   * @param {boolean} request.force
+   *   This value only applies to the case when the target product is of type
+   *   PRIMARY.
+   *   When deleting a product of VARIANT/COLLECTION type, this value
+   *   will be ignored.
+   *   When set to true, the subsequent variant products will be
+   *   deleted.
+   *   When set to false, if the primary product has active variant products, an
+   *   error will be returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1368,9 +1380,6 @@ export class ProductServiceClient {
    * updates are not marked as {@link google.longrunning.Operation.done|done} until
    * they are obsolete.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2alpha.Product} request.inventory
@@ -1583,6 +1592,14 @@ export class ProductServiceClient {
     >;
   }
   /**
+   * It is recommended to use the
+   * {@link google.cloud.retail.v2alpha.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
+   * method instead of
+   * {@link google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2alpha.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
+   * achieves the same results but provides more fine-grained control over
+   * ingesting local inventory data.
+   *
    * Incrementally adds place IDs to
    * {@link google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
    *
@@ -1604,9 +1621,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1798,6 +1812,14 @@ export class ProductServiceClient {
     >;
   }
   /**
+   * It is recommended to use the
+   * {@link google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
+   * method instead of
+   * {@link google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
+   * achieves the same results but provides more fine-grained control over
+   * ingesting local inventory data.
+   *
    * Incrementally removes place IDs from a
    * {@link google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
    *
@@ -1819,9 +1841,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2041,9 +2060,6 @@ export class ProductServiceClient {
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.product
@@ -2243,9 +2259,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3376,6 +3389,89 @@ export class ProductServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified merchantCenterAccountLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} merchant_center_account_link
+   * @returns {string} Resource name string.
+   */
+  merchantCenterAccountLinkPath(
+    project: string,
+    location: string,
+    catalog: string,
+    merchantCenterAccountLink: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      merchant_center_account_link: merchantCenterAccountLink,
+    });
+  }
+
+  /**
+   * Parse the project from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).catalog;
+  }
+
+  /**
+   * Parse the merchant_center_account_link from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the merchant_center_account_link.
+   */
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).merchant_center_account_link;
   }
 
   /**

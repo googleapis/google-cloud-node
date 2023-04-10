@@ -4621,8 +4621,8 @@
                     "objc_class_prefix": "RETAIL",
                     "php_namespace": "Google\\Cloud\\Retail\\V2alpha",
                     "ruby_package": "Google::Cloud::Retail::V2alpha",
-                    "(google.api.resource_definition).type": "retail.googleapis.com/Branch",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}"
+                    "(google.api.resource_definition).type": "retail.googleapis.com/Experiment",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}"
                   },
                   "nested": {
                     "ProductLevelConfig": {
@@ -6072,6 +6072,10 @@
                         "pageViewId": {
                           "type": "string",
                           "id": 15
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 23
                         }
                       }
                     },
@@ -6700,6 +6704,10 @@
                         "enableAttributeSuggestions": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -6736,6 +6744,15 @@
                               "keyType": "string",
                               "type": "CustomAttribute",
                               "id": 2
+                            },
+                            "facets": {
+                              "rule": "repeated",
+                              "type": "SearchResponse.Facet",
+                              "id": 3
+                            },
+                            "totalProductCount": {
+                              "type": "int32",
+                              "id": 4
                             }
                           }
                         },
@@ -6755,68 +6772,6 @@
                               "id": 1
                             }
                           }
-                        }
-                      }
-                    },
-                    "Control": {
-                      "options": {
-                        "(google.api.resource).type": "retail.googleapis.com/Control",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}"
-                      },
-                      "oneofs": {
-                        "control": {
-                          "oneof": [
-                            "facetSpec",
-                            "rule"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "facetSpec": {
-                          "type": "SearchRequest.FacetSpec",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "rule": {
-                          "type": "Rule",
-                          "id": 4
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "associatedServingConfigIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "solutionTypes": {
-                          "rule": "repeated",
-                          "type": "SolutionType",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "searchSolutionUseCase": {
-                          "rule": "repeated",
-                          "type": "SearchSolutionUseCase",
-                          "id": 7
                         }
                       }
                     },
@@ -6965,6 +6920,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 38
                         }
                       },
                       "nested": {
@@ -7213,6 +7172,11 @@
                           "rule": "repeated",
                           "type": "SearchRequest.BoostSpec.ConditionBoostSpec",
                           "id": 14
+                        },
+                        "experimentInfo": {
+                          "rule": "repeated",
+                          "type": "ExperimentInfo",
+                          "id": 17
                         }
                       },
                       "nested": {
@@ -7309,6 +7273,110 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "ExperimentInfo": {
+                      "oneofs": {
+                        "experimentMetadata": {
+                          "oneof": [
+                            "servingConfigExperiment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "servingConfigExperiment": {
+                          "type": "ServingConfigExperiment",
+                          "id": 2
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Experiment"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ServingConfigExperiment": {
+                          "fields": {
+                            "originalServingConfig": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            },
+                            "experimentServingConfig": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Control": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/Control",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}"
+                      },
+                      "oneofs": {
+                        "control": {
+                          "oneof": [
+                            "facetSpec",
+                            "rule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "facetSpec": {
+                          "type": "SearchRequest.FacetSpec",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "rule": {
+                          "type": "Rule",
+                          "id": 4
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "associatedServingConfigIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "solutionTypes": {
+                          "rule": "repeated",
+                          "type": "SolutionType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "searchSolutionUseCase": {
+                          "rule": "repeated",
+                          "type": "SearchSolutionUseCase",
+                          "id": 7
                         }
                       }
                     },
@@ -7620,6 +7688,227 @@
                         }
                       }
                     },
+                    "MerchantCenterAccountLink": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/MerchantCenterAccountLink",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "merchantCenterAccountId": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "branchId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "feedLabel": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "feedFilters": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterFeedFilter",
+                          "id": 6
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MerchantCenterFeedFilter": {
+                          "fields": {
+                            "primaryFeedId": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "primaryFeedName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "ACTIVE": 2,
+                            "FAILED": 3
+                          }
+                        }
+                      }
+                    },
+                    "CreateMerchantCenterAccountLinkMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "MerchantCenterAccountLinkService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListMerchantCenterAccountLinks": {
+                          "requestType": "ListMerchantCenterAccountLinksRequest",
+                          "responseType": "ListMerchantCenterAccountLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateMerchantCenterAccountLink": {
+                          "requestType": "CreateMerchantCenterAccountLinkRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{merchant_center_account_link.name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}",
+                            "(google.api.http).body": "merchant_center_account_link",
+                            "(google.api.method_signature)": "parent,merchant_center_account_link",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.MerchantCenterAccountLink",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{merchant_center_account_link.name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}",
+                                "body": "merchant_center_account_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,merchant_center_account_link"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2alpha.MerchantCenterAccountLink",
+                                "metadata_type": "google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteMerchantCenterAccountLink": {
+                          "requestType": "DeleteMerchantCenterAccountLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2alpha/{name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2alpha/{name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListMerchantCenterAccountLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        }
+                      }
+                    },
+                    "ListMerchantCenterAccountLinksResponse": {
+                      "fields": {
+                        "merchantCenterAccountLinks": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterAccountLink",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateMerchantCenterAccountLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        },
+                        "merchantCenterAccountLink": {
+                          "type": "MerchantCenterAccountLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMerchantCenterAccountLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/MerchantCenterAccountLink"
+                          }
+                        }
+                      }
+                    },
                     "Model": {
                       "options": {
                         "(google.api.resource).type": "retail.googleapis.com/Model",
@@ -7897,6 +8186,24 @@
                             }
                           ]
                         },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{name=projects/*/locations/*/catalogs/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "PauseModel": {
                           "requestType": "PauseModelRequest",
                           "responseType": "Model",
@@ -8063,6 +8370,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
                           }
                         }
                       }
@@ -8642,6 +8961,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "retail.googleapis.com/Product"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },

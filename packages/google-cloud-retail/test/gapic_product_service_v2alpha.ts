@@ -3310,6 +3310,103 @@ describe('v2alpha.ProductServiceClient', () => {
       });
     });
 
+    describe('merchantCenterAccountLink', () => {
+      const fakePath = '/rendered/path/merchantCenterAccountLink';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        merchant_center_account_link: 'merchantCenterAccountLinkValue',
+      };
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.merchantCenterAccountLinkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('merchantCenterAccountLinkPath', () => {
+        const result = client.merchantCenterAccountLinkPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'merchantCenterAccountLinkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchProjectFromMerchantCenterAccountLinkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchLocationFromMerchantCenterAccountLinkName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchCatalogFromMerchantCenterAccountLinkName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
+            fakePath
+          );
+        assert.strictEqual(result, 'merchantCenterAccountLinkValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('model', () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {

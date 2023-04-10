@@ -18,27 +18,33 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v2beta/completion_service_client_config.json`.
+ * `src/v2alpha/merchant_center_account_link_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './completion_service_client_config.json';
+import * as gapicConfig from './merchant_center_account_link_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Autocomplete service for retail.
- *
- *  This feature is only available for users who have Retail Search enabled.
- *  Enable Retail Search on Cloud Console before using this feature.
+ *  Merchant Center Link service to link a Branch to a Merchant Center Account.
  * @class
- * @memberof v2beta
+ * @memberof v2alpha
  */
-export class CompletionServiceClient {
+export class MerchantCenterAccountLinkServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -58,10 +64,10 @@ export class CompletionServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  completionServiceStub?: Promise<{[name: string]: Function}>;
+  merchantCenterAccountLinkServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of CompletionServiceClient.
+   * Construct an instance of MerchantCenterAccountLinkServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -97,17 +103,26 @@ export class CompletionServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CompletionServiceClient({fallback: 'rest'}, gax);
+   *     const client = new MerchantCenterAccountLinkServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof CompletionServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const staticMembers = this
+      .constructor as typeof MerchantCenterAccountLinkServiceClient;
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -133,7 +148,7 @@ export class CompletionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -149,13 +164,9 @@ export class CompletionServiceClient {
       this._gaxGrpc,
       opts
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -163,7 +174,7 @@ export class CompletionServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -188,6 +199,9 @@ export class CompletionServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
       ),
@@ -205,31 +219,65 @@ export class CompletionServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback === 'rest') {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{get: '/v2beta/{name=projects/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*}/operations',},{get: '/v2beta/{name=projects/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
+            },
+            {
+              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
+            },
+            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v2alpha/{name=projects/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
+          additional_bindings: [
+            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
+            {get: '/v2alpha/{name=projects/*}/operations'},
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
-    const importCompletionDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ImportCompletionDataResponse') as gax.protobuf.Type;
-    const importCompletionDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ImportMetadata') as gax.protobuf.Type;
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const createMerchantCenterAccountLinkResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.MerchantCenterAccountLink'
+    ) as gax.protobuf.Type;
+    const createMerchantCenterAccountLinkMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      importCompletionData: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        importCompletionDataResponse.decode.bind(importCompletionDataResponse),
-        importCompletionDataMetadata.decode.bind(importCompletionDataMetadata))
+      createMerchantCenterAccountLink:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createMerchantCenterAccountLinkResponse.decode.bind(
+            createMerchantCenterAccountLinkResponse
+          ),
+          createMerchantCenterAccountLinkMetadata.decode.bind(
+            createMerchantCenterAccountLinkMetadata
+          )
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.retail.v2beta.CompletionService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.retail.v2alpha.MerchantCenterAccountLinkService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -253,39 +301,47 @@ export class CompletionServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.completionServiceStub) {
-      return this.completionServiceStub;
+    if (this.merchantCenterAccountLinkServiceStub) {
+      return this.merchantCenterAccountLinkServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.retail.v2beta.CompletionService.
-    this.completionServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2beta.CompletionService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.retail.v2beta.CompletionService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+    // google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.
+    this.merchantCenterAccountLinkServiceStub = this._gaxGrpc.createStub(
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.retail.v2alpha.MerchantCenterAccountLinkService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.retail.v2alpha
+            .MerchantCenterAccountLinkService,
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const completionServiceStubMethods =
-        ['completeQuery', 'importCompletionData'];
-    for (const methodName of completionServiceStubMethods) {
-      const callPromise = this.completionServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+    const merchantCenterAccountLinkServiceStubMethods = [
+      'listMerchantCenterAccountLinks',
+      'createMerchantCenterAccountLink',
+      'deleteMerchantCenterAccountLink',
+    ];
+    for (const methodName of merchantCenterAccountLinkServiceStubMethods) {
+      const callPromise = this.merchantCenterAccountLinkServiceStub.then(
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -296,7 +352,7 @@ export class CompletionServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.completionServiceStub;
+    return this.merchantCenterAccountLinkServiceStub;
   }
 
   /**
@@ -330,9 +386,7 @@ export class CompletionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -341,8 +395,9 @@ export class CompletionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -353,261 +408,376 @@ export class CompletionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Completes the specified prefix with keyword suggestions.
- *
- * This feature is only available for users who have Retail Search enabled.
- * Enable Retail Search on Cloud Console before using this feature.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.catalog
- *   Required. Catalog for which the completion is performed.
- *
- *   Full resource name of catalog, such as
- *   `projects/* /locations/global/catalogs/default_catalog`.
- * @param {string} request.query
- *   Required. The query used to generate suggestions.
- *
- *   The maximum number of allowed characters is 255.
- * @param {string} request.visitorId
- *   Required field. A unique identifier for tracking visitors. For example,
- *   this could be implemented with an HTTP cookie, which should be able to
- *   uniquely identify a visitor on a single device. This unique identifier
- *   should not change if the visitor logs in or out of the website.
- *
- *   The field must be a UTF-8 encoded string with a length limit of 128
- *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
- * @param {string[]} request.languageCodes
- *   Note that this field applies for `user-data` dataset only. For requests
- *   with `cloud-retail` dataset, setting this field has no effect.
- *
- *   The language filters applied to the output suggestions. If set, it should
- *   contain the language of the query. If not set, suggestions are returned
- *   without considering language restrictions. This is the BCP-47 language
- *   code, such as "en-US" or "sr-Latn". For more information, see [Tags for
- *   Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum
- *   number of language codes is 3.
- * @param {string} request.deviceType
- *   The device type context for completion suggestions. We recommend that you
- *   leave this field empty.
- *
- *   It can apply different suggestions on different device types, e.g.
- *   `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device
- *   types.
- *
- *   Supported formats:
- *
- *   * `UNKNOWN_DEVICE_TYPE`
- *
- *   * `DESKTOP`
- *
- *   * `MOBILE`
- *
- *   * A customized string starts with `OTHER_`, e.g. `OTHER_IPHONE`.
- * @param {string} request.dataset
- *   Determines which dataset to use for fetching completion. "user-data" will
- *   use the imported dataset through
- *   {@link google.cloud.retail.v2beta.CompletionService.ImportCompletionData|CompletionService.ImportCompletionData}.
- *   "cloud-retail" will use the dataset generated by cloud retail based on user
- *   events. If leave empty, it will use the "user-data".
- *
- *   Current supported values:
- *
- *   * user-data
- *
- *   * cloud-retail:
- *     This option requires enabling auto-learning function first. See
- *     [guidelines](https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
- * @param {number} request.maxSuggestions
- *   Completion max suggestions. If left unset or set to 0, then will fallback
- *   to the configured value
- *   {@link google.cloud.retail.v2beta.CompletionConfig.max_suggestions|CompletionConfig.max_suggestions}.
- *
- *   The maximum allowed max suggestions is 20. If it is set higher, it will be
- *   capped by 20.
- * @param {string} request.entity
- *   The entity for customers that may run multiple different entities, domains,
- *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
- *   `google.com`, `youtube.com`, etc.
- *   If this is set, it should be exactly matched with
- *   {@link google.cloud.retail.v2beta.UserEvent.entity|UserEvent.entity} to get
- *   per-entity autocomplete results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.retail.v2beta.CompleteQueryResponse | CompleteQueryResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/completion_service.complete_query.js</caption>
- * region_tag:retail_v2beta_generated_CompletionService_CompleteQuery_async
- */
-  completeQuery(
-      request?: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-        protos.google.cloud.retail.v2beta.ICompleteQueryRequest|undefined, {}|undefined
-      ]>;
-  completeQuery(
-      request: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-          protos.google.cloud.retail.v2beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>): void;
-  completeQuery(
-      request: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-      callback: Callback<
-          protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-          protos.google.cloud.retail.v2beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>): void;
-  completeQuery(
-      request?: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-          protos.google.cloud.retail.v2beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-          protos.google.cloud.retail.v2beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-        protos.google.cloud.retail.v2beta.ICompleteQueryRequest|undefined, {}|undefined
-      ]>|void {
+  /**
+   * Lists all
+   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}s
+   * under the specified parent {@link google.cloud.retail.v2alpha.Catalog|Catalog}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent Catalog of the resource.
+   *   It must match this format:
+   *   projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse | ListMerchantCenterAccountLinksResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js</caption>
+   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_ListMerchantCenterAccountLinks_async
+   */
+  listMerchantCenterAccountLinks(
+    request?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+      (
+        | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  listMerchantCenterAccountLinks(
+    request: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+      | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listMerchantCenterAccountLinks(
+    request: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+      | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listMerchantCenterAccountLinks(
+    request?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+          | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+      | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+      (
+        | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'catalog': request.catalog ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
-    return this.innerApiCalls.completeQuery(request, options, callback);
+    return this.innerApiCalls.listMerchantCenterAccountLinks(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a MerchantCenterAccountLink.
+   * If the
+   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+   * to delete does not exist, a NOT_FOUND error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Full resource name. Format:
+   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/merchantCenterAccountLinks/{merchant_center_account_link_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js</caption>
+   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_DeleteMerchantCenterAccountLink_async
+   */
+  deleteMerchantCenterAccountLink(
+    request?: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteMerchantCenterAccountLink(
+    request: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMerchantCenterAccountLink(
+    request: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMerchantCenterAccountLink(
+    request?: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteMerchantCenterAccountLink(
+      request,
+      options,
+      callback
+    );
   }
 
-/**
- * Bulk import of processed completion dataset.
- *
- * Request processing is asynchronous. Partial updating is not supported.
- *
- * The operation is successfully finished only after the imported suggestions
- * are indexed successfully and ready for serving. The process takes hours.
- *
- * This feature is only available for users who have Retail Search enabled.
- * Enable Retail Search on Cloud Console before using this feature.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The catalog which the suggestions dataset belongs to.
- *
- *   Format: `projects/1234/locations/global/catalogs/default_catalog`.
- * @param {google.cloud.retail.v2beta.CompletionDataInputConfig} request.inputConfig
- *   Required. The desired input location of the data.
- * @param {string} request.notificationPubsubTopic
- *   Pub/Sub topic for receiving notification. If this field is set,
- *   when the import is finished, a notification is sent to
- *   specified Pub/Sub topic. The message data is JSON string of a
- *   {@link google.longrunning.Operation|Operation}.
- *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/completion_service.import_completion_data.js</caption>
- * region_tag:retail_v2beta_generated_CompletionService_ImportCompletionData_async
- */
-  importCompletionData(
-      request?: protos.google.cloud.retail.v2beta.IImportCompletionDataRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.retail.v2beta.IImportCompletionDataResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
-  importCompletionData(
-      request: protos.google.cloud.retail.v2beta.IImportCompletionDataRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.retail.v2beta.IImportCompletionDataResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-  importCompletionData(
-      request: protos.google.cloud.retail.v2beta.IImportCompletionDataRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.retail.v2beta.IImportCompletionDataResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-  importCompletionData(
-      request?: protos.google.cloud.retail.v2beta.IImportCompletionDataRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.retail.v2beta.IImportCompletionDataResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.retail.v2beta.IImportCompletionDataResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.retail.v2beta.IImportCompletionDataResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+  /**
+   * Creates a MerchantCenterAccountLink.
+   *
+   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+   * cannot be set to a different oneof field, if so an INVALID_ARGUMENT is
+   * returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The branch resource where this MerchantCenterAccountLink will be
+   *   created. Format:
+   *   projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}}
+   * @param {google.cloud.retail.v2alpha.MerchantCenterAccountLink} request.merchantCenterAccountLink
+   *   Required. The
+   *   {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+   *   to create.
+   *
+   *   If the caller does not have permission to create the
+   *   {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink},
+   *   regardless of whether or not it exists, a PERMISSION_DENIED error is
+   *   returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
+   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
+   */
+  createMerchantCenterAccountLink(
+    request?: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createMerchantCenterAccountLink(
+    request: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMerchantCenterAccountLink(
+    request: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMerchantCenterAccountLink(
+    request?: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+            protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
+        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'merchant_center_account_link.name':
+          request.merchantCenterAccountLink!.name ?? '',
+      });
     this.initialize();
-    return this.innerApiCalls.importCompletionData(request, options, callback);
+    return this.innerApiCalls.createMerchantCenterAccountLink(
+      request,
+      options,
+      callback
+    );
   }
-/**
- * Check the status of the long running operation returned by `importCompletionData()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/completion_service.import_completion_data.js</caption>
- * region_tag:retail_v2beta_generated_CompletionService_ImportCompletionData_async
- */
-  async checkImportCompletionDataProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2beta.ImportCompletionDataResponse, protos.google.cloud.retail.v2beta.ImportMetadata>>{
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `createMerchantCenterAccountLink()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
+   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
+   */
+  async checkCreateMerchantCenterAccountLinkProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink,
+      protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importCompletionData, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.retail.v2beta.ImportCompletionDataResponse, protos.google.cloud.retail.v2beta.ImportMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMerchantCenterAccountLink,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink,
+      protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata
+    >;
   }
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -648,7 +818,7 @@ export class CompletionServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -687,7 +857,7 @@ export class CompletionServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -801,7 +971,7 @@ export class CompletionServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     options?:
       | gax.CallOptions
@@ -874,7 +1044,7 @@ export class CompletionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project:string,location:string,catalog:string) {
+  attributesConfigPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -890,7 +1060,9 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).project;
   }
 
   /**
@@ -901,7 +1073,9 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).location;
   }
 
   /**
@@ -912,7 +1086,9 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName
+    ).catalog;
   }
 
   /**
@@ -923,7 +1099,7 @@ export class CompletionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project:string,location:string,catalog:string) {
+  catalogPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -972,7 +1148,7 @@ export class CompletionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project:string,location:string,catalog:string) {
+  completionConfigPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -988,7 +1164,9 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).project;
   }
 
   /**
@@ -999,7 +1177,9 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).location;
   }
 
   /**
@@ -1010,7 +1190,9 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName
+    ).catalog;
   }
 
   /**
@@ -1022,7 +1204,12 @@ export class CompletionServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(project:string,location:string,catalog:string,control:string) {
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string
+  ) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1076,6 +1263,89 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified merchantCenterAccountLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} merchant_center_account_link
+   * @returns {string} Resource name string.
+   */
+  merchantCenterAccountLinkPath(
+    project: string,
+    location: string,
+    catalog: string,
+    merchantCenterAccountLink: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      merchant_center_account_link: merchantCenterAccountLink,
+    });
+  }
+
+  /**
+   * Parse the project from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).catalog;
+  }
+
+  /**
+   * Parse the merchant_center_account_link from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the merchant_center_account_link.
+   */
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).merchant_center_account_link;
+  }
+
+  /**
    * Return a fully-qualified model resource name string.
    *
    * @param {string} project
@@ -1084,7 +1354,7 @@ export class CompletionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project:string,location:string,catalog:string,model:string) {
+  modelPath(project: string, location: string, catalog: string, model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1147,7 +1417,13 @@ export class CompletionServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
+  productPath(
+    project: string,
+    location: string,
+    catalog: string,
+    branch: string,
+    product: string
+  ) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1221,7 +1497,12 @@ export class CompletionServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string
+  ) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1238,7 +1519,8 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
   }
 
   /**
@@ -1249,7 +1531,8 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
   }
 
   /**
@@ -1260,7 +1543,8 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
   }
 
   /**
@@ -1271,7 +1555,8 @@ export class CompletionServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**
@@ -1281,8 +1566,8 @@ export class CompletionServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.completionServiceStub && !this._terminated) {
-      return this.completionServiceStub.then(stub => {
+    if (this.merchantCenterAccountLinkServiceStub && !this._terminated) {
+      return this.merchantCenterAccountLinkServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
