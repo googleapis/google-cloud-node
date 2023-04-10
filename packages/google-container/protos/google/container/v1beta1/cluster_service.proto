@@ -892,6 +892,20 @@ message NodeNetworkConfig {
 
   // Network bandwidth tier configuration.
   optional NetworkPerformanceConfig network_performance_config = 11;
+
+  // [PRIVATE FIELD]
+  // Pod CIDR size overprovisioning config for the nodepool.
+  //
+  // Pod CIDR size per node depends on max_pods_per_node. By default, the value
+  // of max_pods_per_node is rounded off to next power of 2 and we then double
+  // that to get the size of pod CIDR block per node.
+  // Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+  //
+  // This config can disable the doubling of IPs (we still round off to next
+  // power of 2)
+  // Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+  // overprovisioning is disabled.
+  PodCIDROverprovisionConfig pod_cidr_overprovision_config = 13;
 }
 
 // A set of Shielded Instance options.
@@ -1367,6 +1381,14 @@ message NetworkPolicy {
   bool enabled = 2;
 }
 
+// [PRIVATE FIELD]
+// Config for pod CIDR size overprovisioning.
+message PodCIDROverprovisionConfig {
+  // Whether Pod CIDR overprovisioning is disabled.
+  // Note: Pod CIDR overprovisioning is enabled by default.
+  bool disable = 1;
+}
+
 // Configuration for controlling how IPs are allocated in the cluster.
 message IPAllocationPolicy {
   // Possible values for IP stack type
@@ -1530,6 +1552,20 @@ message IPAllocationPolicy {
   // The ipv6 access type (internal or external) when create_subnetwork is true
   IPv6AccessType ipv6_access_type = 17;
 
+  // [PRIVATE FIELD]
+  // Pod CIDR size overprovisioning config for the cluster.
+  //
+  // Pod CIDR size per node depends on max_pods_per_node. By default, the value
+  // of max_pods_per_node is doubled and then rounded off to next power of 2 to
+  // get the size of pod CIDR block per node.
+  // Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+  //
+  // This config can disable the doubling of IPs (we still round off to next
+  // power of 2)
+  // Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+  // overprovisioning is disabled.
+  PodCIDROverprovisionConfig pod_cidr_overprovision_config = 21;
+
   // Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
   // pods.
   string subnet_ipv6_cidr_block = 22
@@ -1537,6 +1573,13 @@ message IPAllocationPolicy {
 
   // Output only. [Output only] The services IPv6 CIDR block for the cluster.
   string services_ipv6_cidr_block = 23
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. [Output only] The additional pod ranges that are added to the
+  // cluster. These pod ranges can be used by new node pools to allocate pod IPs
+  // automatically. Once the range is removed it will not show up in
+  // IPAllocationPolicy.
+  AdditionalPodRangesConfig additional_pod_ranges_config = 24
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
@@ -2277,7 +2320,20 @@ message ClusterUpdate {
   // If a stack type is provided and does not match the current stack type of
   // the cluster, update will attempt to change the stack type to the new type.
   StackType desired_stack_type = 119;
+
+  // The additional pod ranges to be added to the cluster. These pod ranges
+  // can be used by node pools to allocate pod IPs.
+  AdditionalPodRangesConfig additional_pod_ranges_config = 120;
+
+  // The additional pod ranges that are to be removed from the cluster.
+  // The pod ranges specified here must have been specified earlier in the
+  // 'additional_pod_ranges_config' argument.
+  AdditionalPodRangesConfig removed_additional_pod_ranges_config = 121;
 }
+
+// AdditionalPodRangesConfig is the configuration for additional pod secondary
+// ranges supporting the ClusterUpdate message.
+message AdditionalPodRangesConfig {}
 
 // This operation resource represents operations that may have happened or are
 // happening on the cluster. All fields are output only.

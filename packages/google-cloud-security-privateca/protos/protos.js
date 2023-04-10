@@ -15345,6 +15345,7 @@
                              * @interface IDisableCertificateAuthorityRequest
                              * @property {string|null} [name] DisableCertificateAuthorityRequest name
                              * @property {string|null} [requestId] DisableCertificateAuthorityRequest requestId
+                             * @property {boolean|null} [ignoreDependentResources] DisableCertificateAuthorityRequest ignoreDependentResources
                              */
     
                             /**
@@ -15379,6 +15380,14 @@
                             DisableCertificateAuthorityRequest.prototype.requestId = "";
     
                             /**
+                             * DisableCertificateAuthorityRequest ignoreDependentResources.
+                             * @member {boolean} ignoreDependentResources
+                             * @memberof google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest
+                             * @instance
+                             */
+                            DisableCertificateAuthorityRequest.prototype.ignoreDependentResources = false;
+    
+                            /**
                              * Creates a new DisableCertificateAuthorityRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest
@@ -15406,6 +15415,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                                if (message.ignoreDependentResources != null && Object.hasOwnProperty.call(message, "ignoreDependentResources"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.ignoreDependentResources);
                                 return writer;
                             };
     
@@ -15446,6 +15457,10 @@
                                         }
                                     case 2: {
                                             message.requestId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ignoreDependentResources = reader.bool();
                                             break;
                                         }
                                     default:
@@ -15489,6 +15504,9 @@
                                 if (message.requestId != null && message.hasOwnProperty("requestId"))
                                     if (!$util.isString(message.requestId))
                                         return "requestId: string expected";
+                                if (message.ignoreDependentResources != null && message.hasOwnProperty("ignoreDependentResources"))
+                                    if (typeof message.ignoreDependentResources !== "boolean")
+                                        return "ignoreDependentResources: boolean expected";
                                 return null;
                             };
     
@@ -15508,6 +15526,8 @@
                                     message.name = String(object.name);
                                 if (object.requestId != null)
                                     message.requestId = String(object.requestId);
+                                if (object.ignoreDependentResources != null)
+                                    message.ignoreDependentResources = Boolean(object.ignoreDependentResources);
                                 return message;
                             };
     
@@ -15527,11 +15547,14 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.requestId = "";
+                                    object.ignoreDependentResources = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.requestId != null && message.hasOwnProperty("requestId"))
                                     object.requestId = message.requestId;
+                                if (message.ignoreDependentResources != null && message.hasOwnProperty("ignoreDependentResources"))
+                                    object.ignoreDependentResources = message.ignoreDependentResources;
                                 return object;
                             };
     
@@ -17221,6 +17244,7 @@
                              * @property {string|null} [requestId] DeleteCertificateAuthorityRequest requestId
                              * @property {boolean|null} [ignoreActiveCertificates] DeleteCertificateAuthorityRequest ignoreActiveCertificates
                              * @property {boolean|null} [skipGracePeriod] DeleteCertificateAuthorityRequest skipGracePeriod
+                             * @property {boolean|null} [ignoreDependentResources] DeleteCertificateAuthorityRequest ignoreDependentResources
                              */
     
                             /**
@@ -17271,6 +17295,14 @@
                             DeleteCertificateAuthorityRequest.prototype.skipGracePeriod = false;
     
                             /**
+                             * DeleteCertificateAuthorityRequest ignoreDependentResources.
+                             * @member {boolean} ignoreDependentResources
+                             * @memberof google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest
+                             * @instance
+                             */
+                            DeleteCertificateAuthorityRequest.prototype.ignoreDependentResources = false;
+    
+                            /**
                              * Creates a new DeleteCertificateAuthorityRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest
@@ -17302,6 +17334,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.ignoreActiveCertificates);
                                 if (message.skipGracePeriod != null && Object.hasOwnProperty.call(message, "skipGracePeriod"))
                                     writer.uint32(/* id 5, wireType 0 =*/40).bool(message.skipGracePeriod);
+                                if (message.ignoreDependentResources != null && Object.hasOwnProperty.call(message, "ignoreDependentResources"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.ignoreDependentResources);
                                 return writer;
                             };
     
@@ -17352,6 +17386,10 @@
                                             message.skipGracePeriod = reader.bool();
                                             break;
                                         }
+                                    case 6: {
+                                            message.ignoreDependentResources = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -17399,6 +17437,9 @@
                                 if (message.skipGracePeriod != null && message.hasOwnProperty("skipGracePeriod"))
                                     if (typeof message.skipGracePeriod !== "boolean")
                                         return "skipGracePeriod: boolean expected";
+                                if (message.ignoreDependentResources != null && message.hasOwnProperty("ignoreDependentResources"))
+                                    if (typeof message.ignoreDependentResources !== "boolean")
+                                        return "ignoreDependentResources: boolean expected";
                                 return null;
                             };
     
@@ -17422,6 +17463,8 @@
                                     message.ignoreActiveCertificates = Boolean(object.ignoreActiveCertificates);
                                 if (object.skipGracePeriod != null)
                                     message.skipGracePeriod = Boolean(object.skipGracePeriod);
+                                if (object.ignoreDependentResources != null)
+                                    message.ignoreDependentResources = Boolean(object.ignoreDependentResources);
                                 return message;
                             };
     
@@ -17443,6 +17486,7 @@
                                     object.requestId = "";
                                     object.ignoreActiveCertificates = false;
                                     object.skipGracePeriod = false;
+                                    object.ignoreDependentResources = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -17452,6 +17496,8 @@
                                     object.ignoreActiveCertificates = message.ignoreActiveCertificates;
                                 if (message.skipGracePeriod != null && message.hasOwnProperty("skipGracePeriod"))
                                     object.skipGracePeriod = message.skipGracePeriod;
+                                if (message.ignoreDependentResources != null && message.hasOwnProperty("ignoreDependentResources"))
+                                    object.ignoreDependentResources = message.ignoreDependentResources;
                                 return object;
                             };
     
@@ -18290,6 +18336,7 @@
                              * @interface IDeleteCaPoolRequest
                              * @property {string|null} [name] DeleteCaPoolRequest name
                              * @property {string|null} [requestId] DeleteCaPoolRequest requestId
+                             * @property {boolean|null} [ignoreDependentResources] DeleteCaPoolRequest ignoreDependentResources
                              */
     
                             /**
@@ -18324,6 +18371,14 @@
                             DeleteCaPoolRequest.prototype.requestId = "";
     
                             /**
+                             * DeleteCaPoolRequest ignoreDependentResources.
+                             * @member {boolean} ignoreDependentResources
+                             * @memberof google.cloud.security.privateca.v1.DeleteCaPoolRequest
+                             * @instance
+                             */
+                            DeleteCaPoolRequest.prototype.ignoreDependentResources = false;
+    
+                            /**
                              * Creates a new DeleteCaPoolRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.security.privateca.v1.DeleteCaPoolRequest
@@ -18351,6 +18406,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                                if (message.ignoreDependentResources != null && Object.hasOwnProperty.call(message, "ignoreDependentResources"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.ignoreDependentResources);
                                 return writer;
                             };
     
@@ -18391,6 +18448,10 @@
                                         }
                                     case 2: {
                                             message.requestId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.ignoreDependentResources = reader.bool();
                                             break;
                                         }
                                     default:
@@ -18434,6 +18495,9 @@
                                 if (message.requestId != null && message.hasOwnProperty("requestId"))
                                     if (!$util.isString(message.requestId))
                                         return "requestId: string expected";
+                                if (message.ignoreDependentResources != null && message.hasOwnProperty("ignoreDependentResources"))
+                                    if (typeof message.ignoreDependentResources !== "boolean")
+                                        return "ignoreDependentResources: boolean expected";
                                 return null;
                             };
     
@@ -18453,6 +18517,8 @@
                                     message.name = String(object.name);
                                 if (object.requestId != null)
                                     message.requestId = String(object.requestId);
+                                if (object.ignoreDependentResources != null)
+                                    message.ignoreDependentResources = Boolean(object.ignoreDependentResources);
                                 return message;
                             };
     
@@ -18472,11 +18538,14 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.requestId = "";
+                                    object.ignoreDependentResources = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.requestId != null && message.hasOwnProperty("requestId"))
                                     object.requestId = message.requestId;
+                                if (message.ignoreDependentResources != null && message.hasOwnProperty("ignoreDependentResources"))
+                                    object.ignoreDependentResources = message.ignoreDependentResources;
                                 return object;
                             };
     

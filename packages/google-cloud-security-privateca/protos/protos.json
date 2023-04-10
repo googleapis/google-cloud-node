@@ -2254,6 +2254,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "ignoreDependentResources": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2418,6 +2425,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "ignoreDependentResources": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2517,6 +2531,13 @@
                             "requestId": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ignoreDependentResources": {
+                              "type": "bool",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
