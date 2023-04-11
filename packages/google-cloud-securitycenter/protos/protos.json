@@ -11,12 +11,12 @@
                     "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
                     "go_package": "cloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourceProto",
+                    "java_outer_classname": "SecurityHealthAnalyticsCustomModuleProto",
                     "java_package": "com.google.cloud.securitycenter.v1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1",
-                    "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
+                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/SecurityHealthAnalyticsSettings",
+                    "(google.api.resource_definition).pattern": "projects/{project}/securityHealthAnalyticsSettings"
                   },
                   "nested": {
                     "Access": {
@@ -390,6 +390,122 @@
                         }
                       }
                     },
+                    "EffectiveSecurityHealthAnalyticsCustomModule": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/EffectiveSecurityHealthAnalyticsCustomModule",
+                        "(google.api.resource).pattern": "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customConfig": {
+                          "type": "CustomConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enablementState": {
+                          "type": "EnablementState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EnablementState": {
+                          "values": {
+                            "ENABLEMENT_STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "CustomConfig": {
+                      "fields": {
+                        "predicate": {
+                          "type": "google.type.Expr",
+                          "id": 1
+                        },
+                        "customOutput": {
+                          "type": "CustomOutputSpec",
+                          "id": 2
+                        },
+                        "resourceSelector": {
+                          "type": "ResourceSelector",
+                          "id": 3
+                        },
+                        "severity": {
+                          "type": "Severity",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "recommendation": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "CustomOutputSpec": {
+                          "fields": {
+                            "properties": {
+                              "rule": "repeated",
+                              "type": "Property",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Property": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "valueExpression": {
+                                  "type": "google.type.Expr",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ResourceSelector": {
+                          "fields": {
+                            "resourceTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "CRITICAL": 1,
+                            "HIGH": 2,
+                            "MEDIUM": 3,
+                            "LOW": 4
+                          }
+                        }
+                      }
+                    },
                     "Exfiltration": {
                       "fields": {
                         "sources": {
@@ -621,6 +737,10 @@
                         "nextSteps": {
                           "type": "string",
                           "id": 40
+                        },
+                        "moduleName": {
+                          "type": "string",
+                          "id": 41
                         },
                         "containers": {
                           "rule": "repeated",
@@ -1525,6 +1645,65 @@
                         }
                       }
                     },
+                    "SecurityHealthAnalyticsCustomModule": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule",
+                        "(google.api.resource).pattern": "projects/{project}/securityHealthAnalyticsSettings/customModules/{custom_module}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "enablementState": {
+                          "type": "EnablementState",
+                          "id": 4
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastEditor": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "ancestorModule": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
+                          }
+                        },
+                        "customConfig": {
+                          "type": "CustomConfig",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "EnablementState": {
+                          "values": {
+                            "ENABLEMENT_STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2,
+                            "INHERITED": 3
+                          }
+                        }
+                      }
+                    },
                     "SecurityCenter": {
                       "options": {
                         "(google.api.default_host)": "securitycenter.googleapis.com",
@@ -1568,6 +1747,38 @@
                                 "response_type": "google.cloud.securitycenter.v1.BulkMuteFindingsResponse",
                                 "metadata_type": "google.protobuf.Empty"
                               }
+                            }
+                          ]
+                        },
+                        "CreateSecurityHealthAnalyticsCustomModule": {
+                          "requestType": "CreateSecurityHealthAnalyticsCustomModuleRequest",
+                          "responseType": "SecurityHealthAnalyticsCustomModule",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules",
+                            "(google.api.http).body": "security_health_analytics_custom_module",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules",
+                            "(google.api.http).additional_bindings.body": "security_health_analytics_custom_module",
+                            "(google.api.method_signature)": "parent,security_health_analytics_custom_module"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules",
+                                "body": "security_health_analytics_custom_module",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*/securityHealthAnalyticsSettings}/customModules",
+                                    "body": "security_health_analytics_custom_module"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules",
+                                    "body": "security_health_analytics_custom_module"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,security_health_analytics_custom_module"
                             }
                           ]
                         },
@@ -1735,6 +1946,33 @@
                             }
                           ]
                         },
+                        "DeleteSecurityHealthAnalyticsCustomModule": {
+                          "requestType": "DeleteSecurityHealthAnalyticsCustomModuleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/securityHealthAnalyticsSettings/customModules/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/securityHealthAnalyticsSettings/customModules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/securityHealthAnalyticsSettings/customModules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=folders/*/securityHealthAnalyticsSettings/customModules/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/securityHealthAnalyticsSettings/customModules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GetBigQueryExport": {
                           "requestType": "GetBigQueryExportRequest",
                           "responseType": "BigQueryExport",
@@ -1854,6 +2092,60 @@
                             }
                           ]
                         },
+                        "GetEffectiveSecurityHealthAnalyticsCustomModule": {
+                          "requestType": "GetEffectiveSecurityHealthAnalyticsCustomModuleRequest",
+                          "responseType": "EffectiveSecurityHealthAnalyticsCustomModule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/securityHealthAnalyticsSettings/effectiveCustomModules/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/securityHealthAnalyticsSettings/effectiveCustomModules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/securityHealthAnalyticsSettings/effectiveCustomModules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/securityHealthAnalyticsSettings/effectiveCustomModules/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/securityHealthAnalyticsSettings/effectiveCustomModules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetSecurityHealthAnalyticsCustomModule": {
+                          "requestType": "GetSecurityHealthAnalyticsCustomModuleRequest",
+                          "responseType": "SecurityHealthAnalyticsCustomModule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/securityHealthAnalyticsSettings/customModules/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/securityHealthAnalyticsSettings/customModules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/securityHealthAnalyticsSettings/customModules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/securityHealthAnalyticsSettings/customModules/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/securityHealthAnalyticsSettings/customModules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GetSource": {
                           "requestType": "GetSourceRequest",
                           "responseType": "Source",
@@ -1955,6 +2247,33 @@
                             }
                           ]
                         },
+                        "ListDescendantSecurityHealthAnalyticsCustomModules": {
+                          "requestType": "ListDescendantSecurityHealthAnalyticsCustomModulesRequest",
+                          "responseType": "ListDescendantSecurityHealthAnalyticsCustomModulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules:listDescendant",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules:listDescendant",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules:listDescendant",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/securityHealthAnalyticsSettings}/customModules:listDescendant"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules:listDescendant"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "ListFindings": {
                           "requestType": "ListFindingsRequest",
                           "responseType": "ListFindingsResponse",
@@ -2023,6 +2342,60 @@
                                   },
                                   {
                                     "get": "/v1/{parent=projects/*}/notificationConfigs"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListEffectiveSecurityHealthAnalyticsCustomModules": {
+                          "requestType": "ListEffectiveSecurityHealthAnalyticsCustomModulesRequest",
+                          "responseType": "ListEffectiveSecurityHealthAnalyticsCustomModulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/effectiveCustomModules",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/effectiveCustomModules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/effectiveCustomModules",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/securityHealthAnalyticsSettings}/effectiveCustomModules"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/effectiveCustomModules"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListSecurityHealthAnalyticsCustomModules": {
+                          "requestType": "ListSecurityHealthAnalyticsCustomModulesRequest",
+                          "responseType": "ListSecurityHealthAnalyticsCustomModulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/securityHealthAnalyticsSettings}/customModules",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/securityHealthAnalyticsSettings}/customModules"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/securityHealthAnalyticsSettings}/customModules"
                                   }
                                 ]
                               }
@@ -2342,6 +2715,38 @@
                             }
                           ]
                         },
+                        "UpdateSecurityHealthAnalyticsCustomModule": {
+                          "requestType": "UpdateSecurityHealthAnalyticsCustomModuleRequest",
+                          "responseType": "SecurityHealthAnalyticsCustomModule",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{security_health_analytics_custom_module.name=organizations/*/securityHealthAnalyticsSettings/customModules/*}",
+                            "(google.api.http).body": "security_health_analytics_custom_module",
+                            "(google.api.http).additional_bindings.patch": "/v1/{security_health_analytics_custom_module.name=projects/*/securityHealthAnalyticsSettings/customModules/*}",
+                            "(google.api.http).additional_bindings.body": "security_health_analytics_custom_module",
+                            "(google.api.method_signature)": "security_health_analytics_custom_module,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{security_health_analytics_custom_module.name=organizations/*/securityHealthAnalyticsSettings/customModules/*}",
+                                "body": "security_health_analytics_custom_module",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{security_health_analytics_custom_module.name=folders/*/securityHealthAnalyticsSettings/customModules/*}",
+                                    "body": "security_health_analytics_custom_module"
+                                  },
+                                  {
+                                    "patch": "/v1/{security_health_analytics_custom_module.name=projects/*/securityHealthAnalyticsSettings/customModules/*}",
+                                    "body": "security_health_analytics_custom_module"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_health_analytics_custom_module,update_mask"
+                            }
+                          ]
+                        },
                         "UpdateSource": {
                           "requestType": "UpdateSourceRequest",
                           "responseType": "Source",
@@ -2630,6 +3035,25 @@
                         }
                       }
                     },
+                    "CreateSecurityHealthAnalyticsCustomModuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
+                          }
+                        },
+                        "securityHealthAnalyticsCustomModule": {
+                          "type": "SecurityHealthAnalyticsCustomModule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CreateSourceRequest": {
                       "fields": {
                         "parent": {
@@ -2669,6 +3093,18 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "securitycenter.googleapis.com/NotificationConfig"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSecurityHealthAnalyticsCustomModuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
                           }
                         }
                       }
@@ -2717,6 +3153,30 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "securitycenter.googleapis.com/OrganizationSettings"
+                          }
+                        }
+                      }
+                    },
+                    "GetEffectiveSecurityHealthAnalyticsCustomModuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/EffectiveSecurityHealthAnalyticsCustomModule"
+                          }
+                        }
+                      }
+                    },
+                    "GetSecurityHealthAnalyticsCustomModuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
                           }
                         }
                       }
@@ -2866,6 +3326,39 @@
                         }
                       }
                     },
+                    "ListDescendantSecurityHealthAnalyticsCustomModulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDescendantSecurityHealthAnalyticsCustomModulesResponse": {
+                      "fields": {
+                        "securityHealthAnalyticsCustomModules": {
+                          "rule": "repeated",
+                          "type": "SecurityHealthAnalyticsCustomModule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ListMuteConfigsRequest": {
                       "fields": {
                         "parent": {
@@ -2924,6 +3417,72 @@
                         "notificationConfigs": {
                           "rule": "repeated",
                           "type": "NotificationConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListEffectiveSecurityHealthAnalyticsCustomModulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEffectiveSecurityHealthAnalyticsCustomModulesResponse": {
+                      "fields": {
+                        "effectiveSecurityHealthAnalyticsCustomModules": {
+                          "rule": "repeated",
+                          "type": "EffectiveSecurityHealthAnalyticsCustomModule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListSecurityHealthAnalyticsCustomModulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/SecurityHealthAnalyticsCustomModule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListSecurityHealthAnalyticsCustomModulesResponse": {
+                      "fields": {
+                        "securityHealthAnalyticsCustomModules": {
+                          "rule": "repeated",
+                          "type": "SecurityHealthAnalyticsCustomModule",
                           "id": 1
                         },
                         "nextPageToken": {
@@ -3301,6 +3860,21 @@
                       "fields": {
                         "organizationSettings": {
                           "type": "OrganizationSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateSecurityHealthAnalyticsCustomModuleRequest": {
+                      "fields": {
+                        "securityHealthAnalyticsCustomModule": {
+                          "type": "SecurityHealthAnalyticsCustomModule",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
@@ -7434,6 +8008,37 @@
             }
           }
         },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
+            "java_multiple_files": true,
+            "java_outer_classname": "ExprProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Expr": {
+              "fields": {
+                "expression": {
+                  "type": "string",
+                  "id": 1
+                },
+                "title": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "location": {
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            }
+          }
+        },
         "iam": {
           "nested": {
             "v1": {
@@ -7724,37 +8329,6 @@
                       }
                     }
                   }
-                }
-              }
-            }
-          }
-        },
-        "type": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
-            "java_multiple_files": true,
-            "java_outer_classname": "ExprProto",
-            "java_package": "com.google.type",
-            "objc_class_prefix": "GTP"
-          },
-          "nested": {
-            "Expr": {
-              "fields": {
-                "expression": {
-                  "type": "string",
-                  "id": 1
-                },
-                "title": {
-                  "type": "string",
-                  "id": 2
-                },
-                "description": {
-                  "type": "string",
-                  "id": 3
-                },
-                "location": {
-                  "type": "string",
-                  "id": 4
                 }
               }
             }

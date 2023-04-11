@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "SecurityCenterClient",
           "rpcs": {
+            "CreateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "createSecurityHealthAnalyticsCustomModule"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "createSource"
@@ -40,6 +45,11 @@
                 "deleteNotificationConfig"
               ]
             },
+            "DeleteSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "deleteSecurityHealthAnalyticsCustomModule"
+              ]
+            },
             "GetBigQueryExport": {
               "methods": [
                 "getBigQueryExport"
@@ -63,6 +73,16 @@
             "GetOrganizationSettings": {
               "methods": [
                 "getOrganizationSettings"
+              ]
+            },
+            "GetEffectiveSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "getEffectiveSecurityHealthAnalyticsCustomModule"
+              ]
+            },
+            "GetSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "getSecurityHealthAnalyticsCustomModule"
               ]
             },
             "GetSource": {
@@ -113,6 +133,11 @@
             "UpdateOrganizationSettings": {
               "methods": [
                 "updateOrganizationSettings"
+              ]
+            },
+            "UpdateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "updateSecurityHealthAnalyticsCustomModule"
               ]
             },
             "UpdateSource": {
@@ -171,6 +196,13 @@
                 "listAssetsAsync"
               ]
             },
+            "ListDescendantSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "listDescendantSecurityHealthAnalyticsCustomModules",
+                "listDescendantSecurityHealthAnalyticsCustomModulesStream",
+                "listDescendantSecurityHealthAnalyticsCustomModulesAsync"
+              ]
+            },
             "ListFindings": {
               "methods": [
                 "listFindings",
@@ -190,6 +222,20 @@
                 "listNotificationConfigs",
                 "listNotificationConfigsStream",
                 "listNotificationConfigsAsync"
+              ]
+            },
+            "ListEffectiveSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "listEffectiveSecurityHealthAnalyticsCustomModules",
+                "listEffectiveSecurityHealthAnalyticsCustomModulesStream",
+                "listEffectiveSecurityHealthAnalyticsCustomModulesAsync"
+              ]
+            },
+            "ListSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "listSecurityHealthAnalyticsCustomModules",
+                "listSecurityHealthAnalyticsCustomModulesStream",
+                "listSecurityHealthAnalyticsCustomModulesAsync"
               ]
             },
             "ListSources": {
@@ -211,6 +257,11 @@
         "grpc-fallback": {
           "libraryClient": "SecurityCenterClient",
           "rpcs": {
+            "CreateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "createSecurityHealthAnalyticsCustomModule"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "createSource"
@@ -241,6 +292,11 @@
                 "deleteNotificationConfig"
               ]
             },
+            "DeleteSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "deleteSecurityHealthAnalyticsCustomModule"
+              ]
+            },
             "GetBigQueryExport": {
               "methods": [
                 "getBigQueryExport"
@@ -264,6 +320,16 @@
             "GetOrganizationSettings": {
               "methods": [
                 "getOrganizationSettings"
+              ]
+            },
+            "GetEffectiveSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "getEffectiveSecurityHealthAnalyticsCustomModule"
+              ]
+            },
+            "GetSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "getSecurityHealthAnalyticsCustomModule"
               ]
             },
             "GetSource": {
@@ -314,6 +380,11 @@
             "UpdateOrganizationSettings": {
               "methods": [
                 "updateOrganizationSettings"
+              ]
+            },
+            "UpdateSecurityHealthAnalyticsCustomModule": {
+              "methods": [
+                "updateSecurityHealthAnalyticsCustomModule"
               ]
             },
             "UpdateSource": {
@@ -372,6 +443,13 @@
                 "listAssetsAsync"
               ]
             },
+            "ListDescendantSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "listDescendantSecurityHealthAnalyticsCustomModules",
+                "listDescendantSecurityHealthAnalyticsCustomModulesStream",
+                "listDescendantSecurityHealthAnalyticsCustomModulesAsync"
+              ]
+            },
             "ListFindings": {
               "methods": [
                 "listFindings",
@@ -391,6 +469,20 @@
                 "listNotificationConfigs",
                 "listNotificationConfigsStream",
                 "listNotificationConfigsAsync"
+              ]
+            },
+            "ListEffectiveSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "listEffectiveSecurityHealthAnalyticsCustomModules",
+                "listEffectiveSecurityHealthAnalyticsCustomModulesStream",
+                "listEffectiveSecurityHealthAnalyticsCustomModulesAsync"
+              ]
+            },
+            "ListSecurityHealthAnalyticsCustomModules": {
+              "methods": [
+                "listSecurityHealthAnalyticsCustomModules",
+                "listSecurityHealthAnalyticsCustomModulesStream",
+                "listSecurityHealthAnalyticsCustomModulesAsync"
               ]
             },
             "ListSources": {
