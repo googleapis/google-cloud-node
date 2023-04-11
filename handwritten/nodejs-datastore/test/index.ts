@@ -151,7 +151,7 @@ describe('Datastore', () => {
 
   const OPTIONS = {
     projectId: PROJECT_ID,
-    apiEndpoint: 'http://endpoint',
+    apiEndpoint: 'http://localhost',
     credentials: {},
     keyFilename: 'key/file',
     email: 'email',
@@ -289,14 +289,7 @@ describe('Datastore', () => {
       assert.strictEqual((datastore.options as any).port, port);
     });
 
-    it('should set grpc ssl credentials if custom endpoint', () => {
-      const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
-
-      Datastore.prototype.determineBaseUrl_ = function () {
-        Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
-        this.customEndpoint_ = true;
-      };
-
+    it('should set grpc ssl credentials if localhost custom endpoint', () => {
       const fakeInsecureCreds = {};
       createInsecureOverride = () => {
         return fakeInsecureCreds;
