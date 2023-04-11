@@ -250,6 +250,11 @@
         "grpc": {
           "libraryClient": "ModelServiceClient",
           "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
             "PauseModel": {
               "methods": [
                 "pauseModel"
@@ -292,6 +297,11 @@
         "grpc-fallback": {
           "libraryClient": "ModelServiceClient",
           "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
             "PauseModel": {
               "methods": [
                 "pauseModel"

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-retail",
-        "version": "2.3.0",
+        "version": "2.3.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -510,7 +510,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 115,
+                    "end": 124,
                     "type": "FULL"
                 }
             ],
@@ -546,6 +546,10 @@
                     {
                         "name": "max_suggestions",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "entity",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2.CompleteQueryResponse",
@@ -836,6 +840,346 @@
             }
         },
         {
+            "regionTag": "retail_v2_generated_ModelService_CreateModel_async",
+            "title": "CatalogService createModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new model.",
+            "canonical": true,
+            "file": "model_service.create_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateModel",
+                "fullName": "google.cloud.retail.v2.ModelService.CreateModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model",
+                        "type": ".google.cloud.retail.v2.Model"
+                    },
+                    {
+                        "name": "dry_run",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.CreateModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_GetModel_async",
+            "title": "CatalogService getModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a model.",
+            "canonical": true,
+            "file": "model_service.get_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetModel",
+                "fullName": "google.cloud.retail.v2.ModelService.GetModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2.Model",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "GetModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.GetModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_PauseModel_async",
+            "title": "CatalogService pauseModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Pauses the training of an existing model.",
+            "canonical": true,
+            "file": "model_service.pause_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PauseModel",
+                "fullName": "google.cloud.retail.v2.ModelService.PauseModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2.Model",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "PauseModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.PauseModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_ResumeModel_async",
+            "title": "CatalogService resumeModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Resumes the training of an existing model.",
+            "canonical": true,
+            "file": "model_service.resume_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ResumeModel",
+                "fullName": "google.cloud.retail.v2.ModelService.ResumeModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2.Model",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "ResumeModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.ResumeModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_DeleteModel_async",
+            "title": "CatalogService deleteModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an existing model.",
+            "canonical": true,
+            "file": "model_service.delete_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteModel",
+                "fullName": "google.cloud.retail.v2.ModelService.DeleteModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.DeleteModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_ListModels_async",
+            "title": "CatalogService listModels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all the models linked to this event store.",
+            "canonical": true,
+            "file": "model_service.list_models.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListModels",
+                "fullName": "google.cloud.retail.v2.ModelService.ListModels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2.ListModelsResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "ListModels",
+                    "fullName": "google.cloud.retail.v2.ModelService.ListModels",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_UpdateModel_async",
+            "title": "CatalogService updateModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update of model metadata. Only fields that currently can be updated are: `filtering_option` and `periodic_tuning_state`. If other values are provided, this API method ignores them.",
+            "canonical": true,
+            "file": "model_service.update_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateModel",
+                "fullName": "google.cloud.retail.v2.ModelService.UpdateModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": ".google.cloud.retail.v2.Model"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2.Model",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.UpdateModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2_generated_ModelService_TuneModel_async",
+            "title": "CatalogService tuneModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Tunes an existing model.",
+            "canonical": true,
+            "file": "model_service.tune_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TuneModel",
+                "fullName": "google.cloud.retail.v2.ModelService.TuneModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "TuneModel",
+                    "fullName": "google.cloud.retail.v2.ModelService.TuneModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2.ModelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2_generated_PredictionService_Predict_async",
             "title": "CatalogService predict Sample",
             "origin": "API_DEFINITION",
@@ -846,7 +1190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 177,
+                    "end": 179,
                     "type": "FULL"
                 }
             ],
@@ -1203,7 +1547,7 @@
             "regionTag": "retail_v2_generated_ProductService_SetInventory_async",
             "title": "CatalogService setInventory Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates inventory information for a [Product][google.cloud.retail.v2.Product] while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update is enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. When inventory is updated with [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct], the specified inventory field value(s) overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update times for the specified inventory fields are overwritten by the times of the [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] or [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] request. If no inventory fields are set in [CreateProductRequest.product][google.cloud.retail.v2.CreateProductRequest.product], then any pre-existing inventory information for this product is used. If no inventory fields are set in [SetInventoryRequest.set_mask][google.cloud.retail.v2.SetInventoryRequest.set_mask], then any existing inventory information is preserved. Pre-existing inventory information can only be updated with [ProductService.SetInventory][google.cloud.retail.v2.ProductService.SetInventory], [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces], and [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]. The returned [Operation][google.longrunning.Operation]s is obsolete after one day, and the [GetOperation][google.longrunning.Operations.GetOperation] API returns `NOT_FOUND` afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates are not marked as [done][google.longrunning.Operation.done] until they are obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " Updates inventory information for a [Product][google.cloud.retail.v2.Product] while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update is enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. When inventory is updated with [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct], the specified inventory field value(s) overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update times for the specified inventory fields are overwritten by the times of the [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] or [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] request. If no inventory fields are set in [CreateProductRequest.product][google.cloud.retail.v2.CreateProductRequest.product], then any pre-existing inventory information for this product is used. If no inventory fields are set in [SetInventoryRequest.set_mask][google.cloud.retail.v2.SetInventoryRequest.set_mask], then any existing inventory information is preserved. Pre-existing inventory information can only be updated with [ProductService.SetInventory][google.cloud.retail.v2.ProductService.SetInventory], [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces], and [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]. The returned [Operation][google.longrunning.Operation]s is obsolete after one day, and the [GetOperation][google.longrunning.Operations.GetOperation] API returns `NOT_FOUND` afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates are not marked as [done][google.longrunning.Operation.done] until they are obsolete.",
             "canonical": true,
             "file": "product_service.set_inventory.js",
             "language": "JAVASCRIPT",
@@ -1255,7 +1599,7 @@
             "regionTag": "retail_v2_generated_ProductService_AddFulfillmentPlaces_async",
             "title": "CatalogService addFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " It is recommended to use the [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] method instead of [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces]. [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.add_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -1311,7 +1655,7 @@
             "regionTag": "retail_v2_generated_ProductService_RemoveFulfillmentPlaces_async",
             "title": "CatalogService removeFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " It is recommended to use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] method instead of [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]. [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.remove_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -1367,7 +1711,7 @@
             "regionTag": "retail_v2_generated_ProductService_AddLocalInventories_async",
             "title": "CatalogService addLocalInventories Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates local inventory information for a [Product][google.cloud.retail.v2.Product] at a list of places, while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating inventory information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Local inventory information can only be modified using this method. [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " Updates local inventory information for a [Product][google.cloud.retail.v2.Product] at a list of places, while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating inventory information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Local inventory information can only be modified using this method. [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.add_local_inventories.js",
             "language": "JAVASCRIPT",
@@ -1423,7 +1767,7 @@
             "regionTag": "retail_v2_generated_ProductService_RemoveLocalInventories_async",
             "title": "CatalogService removeLocalInventories Sample",
             "origin": "API_DEFINITION",
-            "description": " Remove local inventory information for a [Product][google.cloud.retail.v2.Product] at a list of places at a removal timestamp. This process is asynchronous. If the request is valid, the removal will be enqueued and processed downstream. As a consequence, when a response is returned, removals are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Local inventory information can only be removed using this method. [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " Remove local inventory information for a [Product][google.cloud.retail.v2.Product] at a list of places at a removal timestamp. This process is asynchronous. If the request is valid, the removal will be enqueued and processed downstream. As a consequence, when a response is returned, removals are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Local inventory information can only be removed using this method. [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.remove_local_inventories.js",
             "language": "JAVASCRIPT",
@@ -1482,7 +1826,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 295,
+                    "end": 304,
                     "type": "FULL"
                 }
             ],
@@ -1574,6 +1918,10 @@
                     {
                         "name": "spell_correction_spec",
                         "type": ".google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec"
+                    },
+                    {
+                        "name": "entity",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2.SearchResponse",

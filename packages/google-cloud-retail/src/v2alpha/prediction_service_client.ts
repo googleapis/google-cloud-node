@@ -197,6 +197,9 @@ export class PredictionServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
       ),
@@ -460,6 +463,9 @@ export class PredictionServiceClient {
    *    * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
    *    * (availability: ANY("IN_STOCK")) AND
    *      (colors: ANY("Red") OR categories: ANY("Phones"))
+   *
+   *   For more information, see
+   *   [Filter recommendations](https://cloud.google.com/retail/docs/filter-recs).
    * @param {boolean} request.validateOnly
    *   Use validate only mode for this prediction query. If set to true, a
    *   dummy model will be used that returns arbitrary products.
@@ -1071,6 +1077,89 @@ export class PredictionServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified merchantCenterAccountLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} merchant_center_account_link
+   * @returns {string} Resource name string.
+   */
+  merchantCenterAccountLinkPath(
+    project: string,
+    location: string,
+    catalog: string,
+    merchantCenterAccountLink: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      merchant_center_account_link: merchantCenterAccountLink,
+    });
+  }
+
+  /**
+   * Parse the project from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).catalog;
+  }
+
+  /**
+   * Parse the merchant_center_account_link from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the merchant_center_account_link.
+   */
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).merchant_center_account_link;
   }
 
   /**

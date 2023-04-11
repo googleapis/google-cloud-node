@@ -30,6 +30,14 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Model_service.create_model](#model_service.create_model)
+  * [Model_service.delete_model](#model_service.delete_model)
+  * [Model_service.get_model](#model_service.get_model)
+  * [Model_service.list_models](#model_service.list_models)
+  * [Model_service.pause_model](#model_service.pause_model)
+  * [Model_service.resume_model](#model_service.resume_model)
+  * [Model_service.tune_model](#model_service.tune_model)
+  * [Model_service.update_model](#model_service.update_model)
   * [Prediction_service.predict](#prediction_service.predict)
   * [Product_service.add_fulfillment_places](#product_service.add_fulfillment_places)
   * [Product_service.add_local_inventories](#product_service.add_local_inventories)
@@ -74,8 +82,12 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Merchant_center_account_link_service.create_merchant_center_account_link](#merchant_center_account_link_service.create_merchant_center_account_link)
+  * [Merchant_center_account_link_service.delete_merchant_center_account_link](#merchant_center_account_link_service.delete_merchant_center_account_link)
+  * [Merchant_center_account_link_service.list_merchant_center_account_links](#merchant_center_account_link_service.list_merchant_center_account_links)
   * [Model_service.create_model](#model_service.create_model)
   * [Model_service.delete_model](#model_service.delete_model)
+  * [Model_service.get_model](#model_service.get_model)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.pause_model](#model_service.pause_model)
   * [Model_service.resume_model](#model_service.resume_model)
@@ -128,6 +140,7 @@
   * [Control_service.update_control](#control_service.update_control)
   * [Model_service.create_model](#model_service.create_model)
   * [Model_service.delete_model](#model_service.delete_model)
+  * [Model_service.get_model](#model_service.get_model)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.pause_model](#model_service.pause_model)
   * [Model_service.resume_model](#model_service.resume_model)
@@ -475,6 +488,142 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2/control_service.update_control.js`
+
+
+-----
+
+
+
+
+### Model_service.create_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.create_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.create_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.create_model.js`
+
+
+-----
+
+
+
+
+### Model_service.delete_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.delete_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.delete_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.delete_model.js`
+
+
+-----
+
+
+
+
+### Model_service.get_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.get_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.get_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.get_model.js`
+
+
+-----
+
+
+
+
+### Model_service.list_models
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.list_models.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.list_models.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.list_models.js`
+
+
+-----
+
+
+
+
+### Model_service.pause_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.pause_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.pause_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.pause_model.js`
+
+
+-----
+
+
+
+
+### Model_service.resume_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.resume_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.resume_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.resume_model.js`
+
+
+-----
+
+
+
+
+### Model_service.tune_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.tune_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.tune_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.tune_model.js`
+
+
+-----
+
+
+
+
+### Model_service.update_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/model_service.update_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/model_service.update_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/model_service.update_model.js`
 
 
 -----
@@ -1230,6 +1379,57 @@ __Usage:__
 
 
 
+### Merchant_center_account_link_service.create_merchant_center_account_link
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js`
+
+
+-----
+
+
+
+
+### Merchant_center_account_link_service.delete_merchant_center_account_link
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js`
+
+
+-----
+
+
+
+
+### Merchant_center_account_link_service.list_merchant_center_account_links
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js`
+
+
+-----
+
+
+
+
 ### Model_service.create_model
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/model_service.create_model.js).
@@ -1257,6 +1457,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2alpha/model_service.delete_model.js`
+
+
+-----
+
+
+
+
+### Model_service.get_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/model_service.get_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/model_service.get_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/model_service.get_model.js`
 
 
 -----
@@ -2141,6 +2358,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2beta/model_service.delete_model.js`
+
+
+-----
+
+
+
+
+### Model_service.get_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/model_service.get_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/model_service.get_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/model_service.get_model.js`
 
 
 -----

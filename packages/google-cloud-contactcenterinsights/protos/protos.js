@@ -132,6 +132,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|uploadConversation}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef UploadConversationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UploadConversation.
+                         * @function uploadConversation
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationRequest} request UploadConversationRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.UploadConversationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.uploadConversation = function uploadConversation(request, callback) {
+                            return this.rpcCall(uploadConversation, $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UploadConversation" });
+    
+                        /**
+                         * Calls UploadConversation.
+                         * @function uploadConversation
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationRequest} request UploadConversationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|updateConversation}.
                          * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
                          * @typedef UpdateConversationCallback
@@ -3112,6 +3145,605 @@
                         };
     
                         return CreateConversationRequest;
+                    })();
+    
+                    v1.UploadConversationRequest = (function() {
+    
+                        /**
+                         * Properties of an UploadConversationRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUploadConversationRequest
+                         * @property {string|null} [parent] UploadConversationRequest parent
+                         * @property {google.cloud.contactcenterinsights.v1.IConversation|null} [conversation] UploadConversationRequest conversation
+                         * @property {string|null} [conversationId] UploadConversationRequest conversationId
+                         * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [redactionConfig] UploadConversationRequest redactionConfig
+                         */
+    
+                        /**
+                         * Constructs a new UploadConversationRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UploadConversationRequest.
+                         * @implements IUploadConversationRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationRequest=} [properties] Properties to set
+                         */
+                        function UploadConversationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadConversationRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @instance
+                         */
+                        UploadConversationRequest.prototype.parent = "";
+    
+                        /**
+                         * UploadConversationRequest conversation.
+                         * @member {google.cloud.contactcenterinsights.v1.IConversation|null|undefined} conversation
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @instance
+                         */
+                        UploadConversationRequest.prototype.conversation = null;
+    
+                        /**
+                         * UploadConversationRequest conversationId.
+                         * @member {string} conversationId
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @instance
+                         */
+                        UploadConversationRequest.prototype.conversationId = "";
+    
+                        /**
+                         * UploadConversationRequest redactionConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.IRedactionConfig|null|undefined} redactionConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @instance
+                         */
+                        UploadConversationRequest.prototype.redactionConfig = null;
+    
+                        /**
+                         * Creates a new UploadConversationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationRequest} UploadConversationRequest instance
+                         */
+                        UploadConversationRequest.create = function create(properties) {
+                            return new UploadConversationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadConversationRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationRequest} message UploadConversationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadConversationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.conversation != null && Object.hasOwnProperty.call(message, "conversation"))
+                                $root.google.cloud.contactcenterinsights.v1.Conversation.encode(message.conversation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.conversationId != null && Object.hasOwnProperty.call(message, "conversationId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.conversationId);
+                            if (message.redactionConfig != null && Object.hasOwnProperty.call(message, "redactionConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.redactionConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadConversationRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationRequest} message UploadConversationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadConversationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadConversationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationRequest} UploadConversationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadConversationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.conversation = $root.google.cloud.contactcenterinsights.v1.Conversation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.conversationId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadConversationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationRequest} UploadConversationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadConversationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadConversationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadConversationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.conversation != null && message.hasOwnProperty("conversation")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.Conversation.verify(message.conversation);
+                                if (error)
+                                    return "conversation." + error;
+                            }
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                if (!$util.isString(message.conversationId))
+                                    return "conversationId: string expected";
+                            if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.verify(message.redactionConfig);
+                                if (error)
+                                    return "redactionConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadConversationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationRequest} UploadConversationRequest
+                         */
+                        UploadConversationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.conversation != null) {
+                                if (typeof object.conversation !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationRequest.conversation: object expected");
+                                message.conversation = $root.google.cloud.contactcenterinsights.v1.Conversation.fromObject(object.conversation);
+                            }
+                            if (object.conversationId != null)
+                                message.conversationId = String(object.conversationId);
+                            if (object.redactionConfig != null) {
+                                if (typeof object.redactionConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationRequest.redactionConfig: object expected");
+                                message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.fromObject(object.redactionConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadConversationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UploadConversationRequest} message UploadConversationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadConversationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.conversation = null;
+                                object.conversationId = "";
+                                object.redactionConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.conversation != null && message.hasOwnProperty("conversation"))
+                                object.conversation = $root.google.cloud.contactcenterinsights.v1.Conversation.toObject(message.conversation, options);
+                            if (message.conversationId != null && message.hasOwnProperty("conversationId"))
+                                object.conversationId = message.conversationId;
+                            if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig"))
+                                object.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.redactionConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadConversationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadConversationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadConversationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadConversationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.UploadConversationRequest";
+                        };
+    
+                        return UploadConversationRequest;
+                    })();
+    
+                    v1.UploadConversationMetadata = (function() {
+    
+                        /**
+                         * Properties of an UploadConversationMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUploadConversationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] UploadConversationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] UploadConversationMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IUploadConversationRequest|null} [request] UploadConversationMetadata request
+                         * @property {string|null} [analysisOperation] UploadConversationMetadata analysisOperation
+                         * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [appliedRedactionConfig] UploadConversationMetadata appliedRedactionConfig
+                         */
+    
+                        /**
+                         * Constructs a new UploadConversationMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UploadConversationMetadata.
+                         * @implements IUploadConversationMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationMetadata=} [properties] Properties to set
+                         */
+                        function UploadConversationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadConversationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @instance
+                         */
+                        UploadConversationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * UploadConversationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @instance
+                         */
+                        UploadConversationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * UploadConversationMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IUploadConversationRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @instance
+                         */
+                        UploadConversationMetadata.prototype.request = null;
+    
+                        /**
+                         * UploadConversationMetadata analysisOperation.
+                         * @member {string} analysisOperation
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @instance
+                         */
+                        UploadConversationMetadata.prototype.analysisOperation = "";
+    
+                        /**
+                         * UploadConversationMetadata appliedRedactionConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.IRedactionConfig|null|undefined} appliedRedactionConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @instance
+                         */
+                        UploadConversationMetadata.prototype.appliedRedactionConfig = null;
+    
+                        /**
+                         * Creates a new UploadConversationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationMetadata} UploadConversationMetadata instance
+                         */
+                        UploadConversationMetadata.create = function create(properties) {
+                            return new UploadConversationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadConversationMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationMetadata} message UploadConversationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadConversationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.analysisOperation != null && Object.hasOwnProperty.call(message, "analysisOperation"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.analysisOperation);
+                            if (message.appliedRedactionConfig != null && Object.hasOwnProperty.call(message, "appliedRedactionConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.appliedRedactionConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadConversationMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUploadConversationMetadata} message UploadConversationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadConversationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadConversationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationMetadata} UploadConversationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadConversationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UploadConversationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.request = $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.analysisOperation = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.appliedRedactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadConversationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationMetadata} UploadConversationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadConversationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadConversationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadConversationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            if (message.analysisOperation != null && message.hasOwnProperty("analysisOperation"))
+                                if (!$util.isString(message.analysisOperation))
+                                    return "analysisOperation: string expected";
+                            if (message.appliedRedactionConfig != null && message.hasOwnProperty("appliedRedactionConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.verify(message.appliedRedactionConfig);
+                                if (error)
+                                    return "appliedRedactionConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadConversationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UploadConversationMetadata} UploadConversationMetadata
+                         */
+                        UploadConversationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UploadConversationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UploadConversationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest.fromObject(object.request);
+                            }
+                            if (object.analysisOperation != null)
+                                message.analysisOperation = String(object.analysisOperation);
+                            if (object.appliedRedactionConfig != null) {
+                                if (typeof object.appliedRedactionConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationMetadata.appliedRedactionConfig: object expected");
+                                message.appliedRedactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.fromObject(object.appliedRedactionConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadConversationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UploadConversationMetadata} message UploadConversationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadConversationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                                object.analysisOperation = "";
+                                object.appliedRedactionConfig = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.UploadConversationRequest.toObject(message.request, options);
+                            if (message.analysisOperation != null && message.hasOwnProperty("analysisOperation"))
+                                object.analysisOperation = message.analysisOperation;
+                            if (message.appliedRedactionConfig != null && message.hasOwnProperty("appliedRedactionConfig"))
+                                object.appliedRedactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.appliedRedactionConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadConversationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadConversationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadConversationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadConversationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.UploadConversationMetadata";
+                        };
+    
+                        return UploadConversationMetadata;
                     })();
     
                     v1.ListConversationsRequest = (function() {
@@ -28318,6 +28950,7 @@
                          * @property {google.protobuf.IDuration|null} [conversationTtl] Settings conversationTtl
                          * @property {Object.<string,string>|null} [pubsubNotificationSettings] Settings pubsubNotificationSettings
                          * @property {google.cloud.contactcenterinsights.v1.Settings.IAnalysisConfig|null} [analysisConfig] Settings analysisConfig
+                         * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [redactionConfig] Settings redactionConfig
                          */
     
                         /**
@@ -28393,6 +29026,14 @@
                         Settings.prototype.analysisConfig = null;
     
                         /**
+                         * Settings redactionConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.IRedactionConfig|null|undefined} redactionConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.Settings
+                         * @instance
+                         */
+                        Settings.prototype.redactionConfig = null;
+    
+                        /**
                          * Creates a new Settings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.Settings
@@ -28431,6 +29072,8 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.pubsubNotificationSettings[keys[i]]).ldelim();
                             if (message.analysisConfig != null && Object.hasOwnProperty.call(message, "analysisConfig"))
                                 $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.encode(message.analysisConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.redactionConfig != null && Object.hasOwnProperty.call(message, "redactionConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.redactionConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -28512,6 +29155,10 @@
                                         message.analysisConfig = $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 10: {
+                                        message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28581,6 +29228,11 @@
                                 if (error)
                                     return "analysisConfig." + error;
                             }
+                            if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.verify(message.redactionConfig);
+                                if (error)
+                                    return "redactionConfig." + error;
+                            }
                             return null;
                         };
     
@@ -28627,6 +29279,11 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Settings.analysisConfig: object expected");
                                 message.analysisConfig = $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.fromObject(object.analysisConfig);
                             }
+                            if (object.redactionConfig != null) {
+                                if (typeof object.redactionConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.Settings.redactionConfig: object expected");
+                                message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.fromObject(object.redactionConfig);
+                            }
                             return message;
                         };
     
@@ -28652,6 +29309,7 @@
                                 object.languageCode = "";
                                 object.conversationTtl = null;
                                 object.analysisConfig = null;
+                                object.redactionConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -28671,6 +29329,8 @@
                             }
                             if (message.analysisConfig != null && message.hasOwnProperty("analysisConfig"))
                                 object.analysisConfig = $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.toObject(message.analysisConfig, options);
+                            if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig"))
+                                object.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.redactionConfig, options);
                             return object;
                         };
     
@@ -28956,6 +29616,233 @@
                         })();
     
                         return Settings;
+                    })();
+    
+                    v1.RedactionConfig = (function() {
+    
+                        /**
+                         * Properties of a RedactionConfig.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IRedactionConfig
+                         * @property {string|null} [deidentifyTemplate] RedactionConfig deidentifyTemplate
+                         * @property {string|null} [inspectTemplate] RedactionConfig inspectTemplate
+                         */
+    
+                        /**
+                         * Constructs a new RedactionConfig.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a RedactionConfig.
+                         * @implements IRedactionConfig
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IRedactionConfig=} [properties] Properties to set
+                         */
+                        function RedactionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RedactionConfig deidentifyTemplate.
+                         * @member {string} deidentifyTemplate
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @instance
+                         */
+                        RedactionConfig.prototype.deidentifyTemplate = "";
+    
+                        /**
+                         * RedactionConfig inspectTemplate.
+                         * @member {string} inspectTemplate
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @instance
+                         */
+                        RedactionConfig.prototype.inspectTemplate = "";
+    
+                        /**
+                         * Creates a new RedactionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IRedactionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.RedactionConfig} RedactionConfig instance
+                         */
+                        RedactionConfig.create = function create(properties) {
+                            return new RedactionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RedactionConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RedactionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IRedactionConfig} message RedactionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RedactionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deidentifyTemplate != null && Object.hasOwnProperty.call(message, "deidentifyTemplate"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.deidentifyTemplate);
+                            if (message.inspectTemplate != null && Object.hasOwnProperty.call(message, "inspectTemplate"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.inspectTemplate);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RedactionConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RedactionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IRedactionConfig} message RedactionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RedactionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RedactionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.RedactionConfig} RedactionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RedactionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.RedactionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.deidentifyTemplate = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inspectTemplate = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RedactionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.RedactionConfig} RedactionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RedactionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RedactionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RedactionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                if (!$util.isString(message.deidentifyTemplate))
+                                    return "deidentifyTemplate: string expected";
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                if (!$util.isString(message.inspectTemplate))
+                                    return "inspectTemplate: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RedactionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.RedactionConfig} RedactionConfig
+                         */
+                        RedactionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.RedactionConfig)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.RedactionConfig();
+                            if (object.deidentifyTemplate != null)
+                                message.deidentifyTemplate = String(object.deidentifyTemplate);
+                            if (object.inspectTemplate != null)
+                                message.inspectTemplate = String(object.inspectTemplate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RedactionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} message RedactionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RedactionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.deidentifyTemplate = "";
+                                object.inspectTemplate = "";
+                            }
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                object.deidentifyTemplate = message.deidentifyTemplate;
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                object.inspectTemplate = message.inspectTemplate;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RedactionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RedactionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RedactionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.RedactionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RedactionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.RedactionConfig";
+                        };
+    
+                        return RedactionConfig;
                     })();
     
                     v1.RuntimeAnnotation = (function() {

@@ -2189,6 +2189,11 @@ export class CertificateAuthorityServiceClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.ignoreDependentResources]
+   *   Optional. This field allows this CA to be disabled even if it's being
+   *   depended on by another resource. However, doing so may result in unintended
+   *   and unrecoverable effects on any dependent resource(s) since the CA will
+   *   no longer be able to issue certificates.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2674,6 +2679,11 @@ export class CertificateAuthorityServiceClient {
    *   Optional. If this flag is set, the Certificate Authority will be deleted as
    *   soon as possible without a 30-day grace period where undeletion would have
    *   been allowed. If you proceed, there will be no way to recover this CA.
+   * @param {boolean} [request.ignoreDependentResources]
+   *   Optional. This field allows this ca to be deleted even if it's being
+   *   depended on by another resource. However, doing so may result in unintended
+   *   and unrecoverable effects on any dependent resource(s) since the CA will
+   *   no longer be able to issue certificates.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3308,6 +3318,11 @@ export class CertificateAuthorityServiceClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.ignoreDependentResources]
+   *   Optional. This field allows this pool to be deleted even if it's being
+   *   depended on by another resource. However, doing so may result in unintended
+   *   and unrecoverable effects on any dependent resource(s) since the pool will
+   *   no longer be able to issue certificates.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

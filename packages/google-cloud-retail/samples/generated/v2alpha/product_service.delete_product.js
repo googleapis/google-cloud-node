@@ -49,6 +49,17 @@ function main(name) {
    *  Product google.cloud.retail.v2alpha.Product  will be deleted.
    */
   // const name = 'abc123'
+  /**
+   *  This value only applies to the case when the target product is of type
+   *  PRIMARY.
+   *  When deleting a product of VARIANT/COLLECTION type, this value
+   *  will be ignored.
+   *  When set to true, the subsequent variant products will be
+   *  deleted.
+   *  When set to false, if the primary product has active variant products, an
+   *  error will be returned.
+   */
+  // const force = true
 
   // Imports the Retail library
   const {ProductServiceClient} = require('@google-cloud/retail').v2alpha;

@@ -61,6 +61,20 @@ export namespace google {
                     public createConversation(request: google.cloud.contactcenterinsights.v1.ICreateConversationRequest): Promise<google.cloud.contactcenterinsights.v1.Conversation>;
 
                     /**
+                     * Calls UploadConversation.
+                     * @param request UploadConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public uploadConversation(request: google.cloud.contactcenterinsights.v1.IUploadConversationRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UploadConversationCallback): void;
+
+                    /**
+                     * Calls UploadConversation.
+                     * @param request UploadConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public uploadConversation(request: google.cloud.contactcenterinsights.v1.IUploadConversationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls UpdateConversation.
                      * @param request UpdateConversationRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Conversation
@@ -573,6 +587,13 @@ export namespace google {
                      * @param [response] Conversation
                      */
                     type CreateConversationCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.Conversation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|uploadConversation}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UploadConversationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|updateConversation}.
@@ -1506,6 +1527,242 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UploadConversationRequest. */
+                interface IUploadConversationRequest {
+
+                    /** UploadConversationRequest parent */
+                    parent?: (string|null);
+
+                    /** UploadConversationRequest conversation */
+                    conversation?: (google.cloud.contactcenterinsights.v1.IConversation|null);
+
+                    /** UploadConversationRequest conversationId */
+                    conversationId?: (string|null);
+
+                    /** UploadConversationRequest redactionConfig */
+                    redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+                }
+
+                /** Represents an UploadConversationRequest. */
+                class UploadConversationRequest implements IUploadConversationRequest {
+
+                    /**
+                     * Constructs a new UploadConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUploadConversationRequest);
+
+                    /** UploadConversationRequest parent. */
+                    public parent: string;
+
+                    /** UploadConversationRequest conversation. */
+                    public conversation?: (google.cloud.contactcenterinsights.v1.IConversation|null);
+
+                    /** UploadConversationRequest conversationId. */
+                    public conversationId: string;
+
+                    /** UploadConversationRequest redactionConfig. */
+                    public redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /**
+                     * Creates a new UploadConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUploadConversationRequest): google.cloud.contactcenterinsights.v1.UploadConversationRequest;
+
+                    /**
+                     * Encodes the specified UploadConversationRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationRequest.verify|verify} messages.
+                     * @param message UploadConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUploadConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadConversationRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationRequest.verify|verify} messages.
+                     * @param message UploadConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUploadConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UploadConversationRequest;
+
+                    /**
+                     * Decodes an UploadConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UploadConversationRequest;
+
+                    /**
+                     * Verifies an UploadConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UploadConversationRequest;
+
+                    /**
+                     * Creates a plain object from an UploadConversationRequest message. Also converts values to other types if specified.
+                     * @param message UploadConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UploadConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UploadConversationMetadata. */
+                interface IUploadConversationMetadata {
+
+                    /** UploadConversationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UploadConversationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UploadConversationMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IUploadConversationRequest|null);
+
+                    /** UploadConversationMetadata analysisOperation */
+                    analysisOperation?: (string|null);
+
+                    /** UploadConversationMetadata appliedRedactionConfig */
+                    appliedRedactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+                }
+
+                /** Represents an UploadConversationMetadata. */
+                class UploadConversationMetadata implements IUploadConversationMetadata {
+
+                    /**
+                     * Constructs a new UploadConversationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUploadConversationMetadata);
+
+                    /** UploadConversationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UploadConversationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UploadConversationMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IUploadConversationRequest|null);
+
+                    /** UploadConversationMetadata analysisOperation. */
+                    public analysisOperation: string;
+
+                    /** UploadConversationMetadata appliedRedactionConfig. */
+                    public appliedRedactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /**
+                     * Creates a new UploadConversationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadConversationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUploadConversationMetadata): google.cloud.contactcenterinsights.v1.UploadConversationMetadata;
+
+                    /**
+                     * Encodes the specified UploadConversationMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationMetadata.verify|verify} messages.
+                     * @param message UploadConversationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUploadConversationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadConversationMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UploadConversationMetadata.verify|verify} messages.
+                     * @param message UploadConversationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUploadConversationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadConversationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadConversationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UploadConversationMetadata;
+
+                    /**
+                     * Decodes an UploadConversationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadConversationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UploadConversationMetadata;
+
+                    /**
+                     * Verifies an UploadConversationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadConversationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadConversationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UploadConversationMetadata;
+
+                    /**
+                     * Creates a plain object from an UploadConversationMetadata message. Also converts values to other types if specified.
+                     * @param message UploadConversationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UploadConversationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadConversationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadConversationMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11999,6 +12256,9 @@ export namespace google {
 
                     /** Settings analysisConfig */
                     analysisConfig?: (google.cloud.contactcenterinsights.v1.Settings.IAnalysisConfig|null);
+
+                    /** Settings redactionConfig */
+                    redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
                 }
 
                 /** Represents a Settings. */
@@ -12030,6 +12290,9 @@ export namespace google {
 
                     /** Settings analysisConfig. */
                     public analysisConfig?: (google.cloud.contactcenterinsights.v1.Settings.IAnalysisConfig|null);
+
+                    /** Settings redactionConfig. */
+                    public redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -12219,6 +12482,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a RedactionConfig. */
+                interface IRedactionConfig {
+
+                    /** RedactionConfig deidentifyTemplate */
+                    deidentifyTemplate?: (string|null);
+
+                    /** RedactionConfig inspectTemplate */
+                    inspectTemplate?: (string|null);
+                }
+
+                /** Represents a RedactionConfig. */
+                class RedactionConfig implements IRedactionConfig {
+
+                    /**
+                     * Constructs a new RedactionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IRedactionConfig);
+
+                    /** RedactionConfig deidentifyTemplate. */
+                    public deidentifyTemplate: string;
+
+                    /** RedactionConfig inspectTemplate. */
+                    public inspectTemplate: string;
+
+                    /**
+                     * Creates a new RedactionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RedactionConfig instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IRedactionConfig): google.cloud.contactcenterinsights.v1.RedactionConfig;
+
+                    /**
+                     * Encodes the specified RedactionConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RedactionConfig.verify|verify} messages.
+                     * @param message RedactionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IRedactionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RedactionConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RedactionConfig.verify|verify} messages.
+                     * @param message RedactionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IRedactionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RedactionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RedactionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.RedactionConfig;
+
+                    /**
+                     * Decodes a RedactionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RedactionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.RedactionConfig;
+
+                    /**
+                     * Verifies a RedactionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RedactionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RedactionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.RedactionConfig;
+
+                    /**
+                     * Creates a plain object from a RedactionConfig message. Also converts values to other types if specified.
+                     * @param message RedactionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.RedactionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RedactionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RedactionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RuntimeAnnotation. */

@@ -245,11 +245,60 @@
         }
       }
     },
+    "MerchantCenterAccountLinkService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MerchantCenterAccountLinkServiceClient",
+          "rpcs": {
+            "ListMerchantCenterAccountLinks": {
+              "methods": [
+                "listMerchantCenterAccountLinks"
+              ]
+            },
+            "DeleteMerchantCenterAccountLink": {
+              "methods": [
+                "deleteMerchantCenterAccountLink"
+              ]
+            },
+            "CreateMerchantCenterAccountLink": {
+              "methods": [
+                "createMerchantCenterAccountLink"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MerchantCenterAccountLinkServiceClient",
+          "rpcs": {
+            "ListMerchantCenterAccountLinks": {
+              "methods": [
+                "listMerchantCenterAccountLinks"
+              ]
+            },
+            "DeleteMerchantCenterAccountLink": {
+              "methods": [
+                "deleteMerchantCenterAccountLink"
+              ]
+            },
+            "CreateMerchantCenterAccountLink": {
+              "methods": [
+                "createMerchantCenterAccountLink"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
           "libraryClient": "ModelServiceClient",
           "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
             "PauseModel": {
               "methods": [
                 "pauseModel"
@@ -292,6 +341,11 @@
         "grpc-fallback": {
           "libraryClient": "ModelServiceClient",
           "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
             "PauseModel": {
               "methods": [
                 "pauseModel"

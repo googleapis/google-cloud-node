@@ -3648,6 +3648,206 @@ describe('v1.ContactCenterInsightsClient', () => {
     });
   });
 
+  describe('uploadConversation', () => {
+    it('invokes uploadConversation without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UploadConversationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.uploadConversation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.uploadConversation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes uploadConversation without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UploadConversationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.uploadConversation =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.uploadConversation(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IConversation,
+              protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IConversation,
+        protos.google.cloud.contactcenterinsights.v1.IUploadConversationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes uploadConversation with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UploadConversationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.uploadConversation = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.uploadConversation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes uploadConversation with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UploadConversationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.uploadConversation = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.uploadConversation(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.uploadConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUploadConversationProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUploadConversationProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUploadConversationProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUploadConversationProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createAnalysis', () => {
     it('invokes createAnalysis without error', async () => {
       const client =
