@@ -205,6 +205,12 @@ export class SearchServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      experimentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}'
+      ),
+      merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
       ),
@@ -500,7 +506,7 @@ export class SearchServiceClient {
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
    *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -612,7 +618,7 @@ export class SearchServiceClient {
    *   If this field is set to an invalid value other than these, an
    *   INVALID_ARGUMENT error is returned.
    * @param {string[]} request.pageCategories
-   *   The categories associated with a category page. Required for category
+   *   The categories associated with a category page. Must be set for category
    *   navigation queries to achieve good search quality. The format should be
    *   the same as
    *   {@link google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
@@ -659,6 +665,13 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -834,7 +847,7 @@ export class SearchServiceClient {
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
    *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -946,7 +959,7 @@ export class SearchServiceClient {
    *   If this field is set to an invalid value other than these, an
    *   INVALID_ARGUMENT error is returned.
    * @param {string[]} request.pageCategories
-   *   The categories associated with a category page. Required for category
+   *   The categories associated with a category page. Must be set for category
    *   navigation queries to achieve good search quality. The format should be
    *   the same as
    *   {@link google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
@@ -993,6 +1006,13 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1124,7 +1144,7 @@ export class SearchServiceClient {
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2alpha.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
    *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -1236,7 +1256,7 @@ export class SearchServiceClient {
    *   If this field is set to an invalid value other than these, an
    *   INVALID_ARGUMENT error is returned.
    * @param {string[]} request.pageCategories
-   *   The categories associated with a category page. Required for category
+   *   The categories associated with a category page. Must be set for category
    *   navigation queries to achieve good search quality. The format should be
    *   the same as
    *   {@link google.cloud.retail.v2alpha.UserEvent.page_categories|UserEvent.page_categories};
@@ -1283,6 +1303,13 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
+   *   search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1867,6 +1894,160 @@ export class SearchServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified experiment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} experiment
+   * @returns {string} Resource name string.
+   */
+  experimentPath(
+    project: string,
+    location: string,
+    catalog: string,
+    experiment: string
+  ) {
+    return this.pathTemplates.experimentPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      experiment: experiment,
+    });
+  }
+
+  /**
+   * Parse the project from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .catalog;
+  }
+
+  /**
+   * Parse the experiment from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .experiment;
+  }
+
+  /**
+   * Return a fully-qualified merchantCenterAccountLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} merchant_center_account_link
+   * @returns {string} Resource name string.
+   */
+  merchantCenterAccountLinkPath(
+    project: string,
+    location: string,
+    catalog: string,
+    merchantCenterAccountLink: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      merchant_center_account_link: merchantCenterAccountLink,
+    });
+  }
+
+  /**
+   * Parse the project from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).location;
+  }
+
+  /**
+   * Parse the catalog from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).catalog;
+  }
+
+  /**
+   * Parse the merchant_center_account_link from MerchantCenterAccountLink resource.
+   *
+   * @param {string} merchantCenterAccountLinkName
+   *   A fully-qualified path representing MerchantCenterAccountLink resource.
+   * @returns {string} A string representing the merchant_center_account_link.
+   */
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
+    merchantCenterAccountLinkName: string
+  ) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
+      merchantCenterAccountLinkName
+    ).merchant_center_account_link;
   }
 
   /**
