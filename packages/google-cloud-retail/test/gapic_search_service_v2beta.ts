@@ -1415,6 +1415,82 @@ describe('v2beta.SearchServiceClient', () => {
       });
     });
 
+    describe('experiment', () => {
+      const fakePath = '/rendered/path/experiment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        experiment: 'experimentValue',
+      };
+      const client = new searchserviceModule.v2beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.experimentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.experimentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('experimentPath', () => {
+        const result = client.experimentPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'experimentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.experimentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExperimentName', () => {
+        const result = client.matchProjectFromExperimentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExperimentName', () => {
+        const result = client.matchLocationFromExperimentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromExperimentName', () => {
+        const result = client.matchCatalogFromExperimentName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromExperimentName', () => {
+        const result = client.matchExperimentFromExperimentName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (client.pathTemplates.experimentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('model', () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {

@@ -93,6 +93,15 @@ function main(catalog, query) {
    *  capped by 20.
    */
   // const maxSuggestions = 1234
+  /**
+   *  The entity for customers that may run multiple different entities, domains,
+   *  sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *  `google.com`, `youtube.com`, etc.
+   *  If this is set, it should be exactly matched with
+   *  UserEvent.entity google.cloud.retail.v2.UserEvent.entity  to get
+   *  per-entity autocomplete results.
+   */
+  // const entity = 'abc123'
 
   // Imports the Retail library
   const {CompletionServiceClient} = require('@google-cloud/retail').v2;

@@ -204,6 +204,9 @@ export class ProductServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -1120,9 +1123,6 @@ export class ProductServiceClient {
    * updates are not marked as {@link google.longrunning.Operation.done|done} until
    * they are obsolete.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2.Product} request.inventory
@@ -1335,6 +1335,14 @@ export class ProductServiceClient {
     >;
   }
   /**
+   * It is recommended to use the
+   * {@link google.cloud.retail.v2.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
+   * method instead of
+   * {@link google.cloud.retail.v2.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
+   * achieves the same results but provides more fine-grained control over
+   * ingesting local inventory data.
+   *
    * Incrementally adds place IDs to
    * {@link google.cloud.retail.v2.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
    *
@@ -1356,9 +1364,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1550,6 +1555,14 @@ export class ProductServiceClient {
     >;
   }
   /**
+   * It is recommended to use the
+   * {@link google.cloud.retail.v2.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
+   * method instead of
+   * {@link google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
+   * achieves the same results but provides more fine-grained control over
+   * ingesting local inventory data.
+   *
    * Incrementally removes place IDs from a
    * {@link google.cloud.retail.v2.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
    *
@@ -1571,9 +1584,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1793,9 +1803,6 @@ export class ProductServiceClient {
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.product
@@ -1994,9 +2001,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3091,6 +3095,68 @@ export class ProductServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

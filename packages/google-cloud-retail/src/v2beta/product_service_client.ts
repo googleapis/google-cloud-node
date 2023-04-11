@@ -1144,9 +1144,6 @@ export class ProductServiceClient {
    * updates are not marked as {@link google.longrunning.Operation.done|done} until
    * they are obsolete.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.retail.v2beta.Product} request.inventory
@@ -1359,6 +1356,14 @@ export class ProductServiceClient {
     >;
   }
   /**
+   * It is recommended to use the
+   * {@link google.cloud.retail.v2beta.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
+   * method instead of
+   * {@link google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2beta.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
+   * achieves the same results but provides more fine-grained control over
+   * ingesting local inventory data.
+   *
    * Incrementally adds place IDs to
    * {@link google.cloud.retail.v2beta.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
    *
@@ -1380,9 +1385,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1574,6 +1576,14 @@ export class ProductServiceClient {
     >;
   }
   /**
+   * It is recommended to use the
+   * {@link google.cloud.retail.v2beta.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
+   * method instead of
+   * {@link google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * {@link google.cloud.retail.v2beta.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
+   * achieves the same results but provides more fine-grained control over
+   * ingesting local inventory data.
+   *
    * Incrementally removes place IDs from a
    * {@link google.cloud.retail.v2beta.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
    *
@@ -1595,9 +1605,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1817,9 +1824,6 @@ export class ProductServiceClient {
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
    *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.product
@@ -2019,9 +2023,6 @@ export class ProductServiceClient {
    * {@link google.longrunning.Operation|Operation}s associated with the stale
    * updates will not be marked as {@link google.longrunning.Operation.done|done}
    * until being obsolete.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -127,7 +127,7 @@ function main(placement, visitorId) {
   // const orderBy = 'abc123'
   /**
    *  Facet specifications for faceted search. If empty, no facets are returned.
-   *  A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *  A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *  is returned.
    */
   // const facetSpecs = 1234
@@ -219,7 +219,7 @@ function main(placement, visitorId) {
    */
   // const variantRollupKeys = 'abc123'
   /**
-   *  The categories associated with a category page. Required for category
+   *  The categories associated with a category page. Must be set for category
    *  navigation queries to achieve good search quality. The format should be
    *  the same as
    *  UserEvent.page_categories google.cloud.retail.v2beta.UserEvent.page_categories;
@@ -271,6 +271,15 @@ function main(placement, visitorId) {
    *  which spell correction will take effect.
    */
   // const spellCorrectionSpec = {}
+  /**
+   *  The entity for customers that may run multiple different entities, domains,
+   *  sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *  `google.com`, `youtube.com`, etc.
+   *  If this is set, it should be exactly matched with
+   *  UserEvent.entity google.cloud.retail.v2beta.UserEvent.entity  to get
+   *  search results boosted by entity.
+   */
+  // const entity = 'abc123'
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2beta;
