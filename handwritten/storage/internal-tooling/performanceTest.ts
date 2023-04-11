@@ -103,6 +103,9 @@ function createWorker() {
   });
   w.on('error', e => {
     log(e, true, true);
+    // BBMC will not report errors unless the process is terminated with a non zero code.
+    // eslint-disable-next-line no-process-exit
+    process.exit(1);
   });
 }
 
