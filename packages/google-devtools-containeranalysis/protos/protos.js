@@ -57995,7 +57995,732 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1|generatePackagesSummary}.
+                         * @memberof google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1
+                         * @typedef GeneratePackagesSummaryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse} [response] PackagesSummaryResponse
+                         */
+    
+                        /**
+                         * Calls GeneratePackagesSummary.
+                         * @function generatePackagesSummary
+                         * @memberof google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1
+                         * @instance
+                         * @param {google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest} request GeneratePackagesSummaryRequest message or plain object
+                         * @param {google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.GeneratePackagesSummaryCallback} callback Node-style callback called with the error, if any, and PackagesSummaryResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContainerAnalysisV1Beta1.prototype.generatePackagesSummary = function generatePackagesSummary(request, callback) {
+                            return this.rpcCall(generatePackagesSummary, $root.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest, $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse, request, callback);
+                        }, "name", { value: "GeneratePackagesSummary" });
+    
+                        /**
+                         * Calls GeneratePackagesSummary.
+                         * @function generatePackagesSummary
+                         * @memberof google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1
+                         * @instance
+                         * @param {google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest} request GeneratePackagesSummaryRequest message or plain object
+                         * @returns {Promise<google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return ContainerAnalysisV1Beta1;
+                    })();
+    
+                    v1beta1.GeneratePackagesSummaryRequest = (function() {
+    
+                        /**
+                         * Properties of a GeneratePackagesSummaryRequest.
+                         * @memberof google.devtools.containeranalysis.v1beta1
+                         * @interface IGeneratePackagesSummaryRequest
+                         * @property {string|null} [name] GeneratePackagesSummaryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GeneratePackagesSummaryRequest.
+                         * @memberof google.devtools.containeranalysis.v1beta1
+                         * @classdesc Represents a GeneratePackagesSummaryRequest.
+                         * @implements IGeneratePackagesSummaryRequest
+                         * @constructor
+                         * @param {google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest=} [properties] Properties to set
+                         */
+                        function GeneratePackagesSummaryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GeneratePackagesSummaryRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @instance
+                         */
+                        GeneratePackagesSummaryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GeneratePackagesSummaryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest=} [properties] Properties to set
+                         * @returns {google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest} GeneratePackagesSummaryRequest instance
+                         */
+                        GeneratePackagesSummaryRequest.create = function create(properties) {
+                            return new GeneratePackagesSummaryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GeneratePackagesSummaryRequest message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest} message GeneratePackagesSummaryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeneratePackagesSummaryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GeneratePackagesSummaryRequest message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest} message GeneratePackagesSummaryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GeneratePackagesSummaryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GeneratePackagesSummaryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest} GeneratePackagesSummaryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeneratePackagesSummaryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GeneratePackagesSummaryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest} GeneratePackagesSummaryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GeneratePackagesSummaryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GeneratePackagesSummaryRequest message.
+                         * @function verify
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GeneratePackagesSummaryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GeneratePackagesSummaryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest} GeneratePackagesSummaryRequest
+                         */
+                        GeneratePackagesSummaryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest)
+                                return object;
+                            var message = new $root.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GeneratePackagesSummaryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest} message GeneratePackagesSummaryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GeneratePackagesSummaryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GeneratePackagesSummaryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GeneratePackagesSummaryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GeneratePackagesSummaryRequest
+                         * @function getTypeUrl
+                         * @memberof google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GeneratePackagesSummaryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest";
+                        };
+    
+                        return GeneratePackagesSummaryRequest;
+                    })();
+    
+                    v1beta1.PackagesSummaryResponse = (function() {
+    
+                        /**
+                         * Properties of a PackagesSummaryResponse.
+                         * @memberof google.devtools.containeranalysis.v1beta1
+                         * @interface IPackagesSummaryResponse
+                         * @property {string|null} [resourceUrl] PackagesSummaryResponse resourceUrl
+                         * @property {Array.<google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary>|null} [licensesSummary] PackagesSummaryResponse licensesSummary
+                         */
+    
+                        /**
+                         * Constructs a new PackagesSummaryResponse.
+                         * @memberof google.devtools.containeranalysis.v1beta1
+                         * @classdesc Represents a PackagesSummaryResponse.
+                         * @implements IPackagesSummaryResponse
+                         * @constructor
+                         * @param {google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse=} [properties] Properties to set
+                         */
+                        function PackagesSummaryResponse(properties) {
+                            this.licensesSummary = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PackagesSummaryResponse resourceUrl.
+                         * @member {string} resourceUrl
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @instance
+                         */
+                        PackagesSummaryResponse.prototype.resourceUrl = "";
+    
+                        /**
+                         * PackagesSummaryResponse licensesSummary.
+                         * @member {Array.<google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary>} licensesSummary
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @instance
+                         */
+                        PackagesSummaryResponse.prototype.licensesSummary = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PackagesSummaryResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse=} [properties] Properties to set
+                         * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse} PackagesSummaryResponse instance
+                         */
+                        PackagesSummaryResponse.create = function create(properties) {
+                            return new PackagesSummaryResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PackagesSummaryResponse message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse} message PackagesSummaryResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PackagesSummaryResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceUrl != null && Object.hasOwnProperty.call(message, "resourceUrl"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceUrl);
+                            if (message.licensesSummary != null && message.licensesSummary.length)
+                                for (var i = 0; i < message.licensesSummary.length; ++i)
+                                    $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.encode(message.licensesSummary[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PackagesSummaryResponse message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse} message PackagesSummaryResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PackagesSummaryResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PackagesSummaryResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse} PackagesSummaryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PackagesSummaryResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.resourceUrl = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.licensesSummary && message.licensesSummary.length))
+                                            message.licensesSummary = [];
+                                        message.licensesSummary.push($root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PackagesSummaryResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse} PackagesSummaryResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PackagesSummaryResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PackagesSummaryResponse message.
+                         * @function verify
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PackagesSummaryResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
+                                if (!$util.isString(message.resourceUrl))
+                                    return "resourceUrl: string expected";
+                            if (message.licensesSummary != null && message.hasOwnProperty("licensesSummary")) {
+                                if (!Array.isArray(message.licensesSummary))
+                                    return "licensesSummary: array expected";
+                                for (var i = 0; i < message.licensesSummary.length; ++i) {
+                                    var error = $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.verify(message.licensesSummary[i]);
+                                    if (error)
+                                        return "licensesSummary." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PackagesSummaryResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse} PackagesSummaryResponse
+                         */
+                        PackagesSummaryResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse)
+                                return object;
+                            var message = new $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse();
+                            if (object.resourceUrl != null)
+                                message.resourceUrl = String(object.resourceUrl);
+                            if (object.licensesSummary) {
+                                if (!Array.isArray(object.licensesSummary))
+                                    throw TypeError(".google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.licensesSummary: array expected");
+                                message.licensesSummary = [];
+                                for (var i = 0; i < object.licensesSummary.length; ++i) {
+                                    if (typeof object.licensesSummary[i] !== "object")
+                                        throw TypeError(".google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.licensesSummary: object expected");
+                                    message.licensesSummary[i] = $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.fromObject(object.licensesSummary[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PackagesSummaryResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse} message PackagesSummaryResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PackagesSummaryResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.licensesSummary = [];
+                            if (options.defaults)
+                                object.resourceUrl = "";
+                            if (message.resourceUrl != null && message.hasOwnProperty("resourceUrl"))
+                                object.resourceUrl = message.resourceUrl;
+                            if (message.licensesSummary && message.licensesSummary.length) {
+                                object.licensesSummary = [];
+                                for (var j = 0; j < message.licensesSummary.length; ++j)
+                                    object.licensesSummary[j] = $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.toObject(message.licensesSummary[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PackagesSummaryResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PackagesSummaryResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PackagesSummaryResponse
+                         * @function getTypeUrl
+                         * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PackagesSummaryResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse";
+                        };
+    
+                        PackagesSummaryResponse.LicensesSummary = (function() {
+    
+                            /**
+                             * Properties of a LicensesSummary.
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                             * @interface ILicensesSummary
+                             * @property {string|null} [license] LicensesSummary license
+                             * @property {number|Long|null} [count] LicensesSummary count
+                             */
+    
+                            /**
+                             * Constructs a new LicensesSummary.
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse
+                             * @classdesc Represents a LicensesSummary.
+                             * @implements ILicensesSummary
+                             * @constructor
+                             * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary=} [properties] Properties to set
+                             */
+                            function LicensesSummary(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LicensesSummary license.
+                             * @member {string} license
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @instance
+                             */
+                            LicensesSummary.prototype.license = "";
+    
+                            /**
+                             * LicensesSummary count.
+                             * @member {number|Long} count
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @instance
+                             */
+                            LicensesSummary.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new LicensesSummary instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary=} [properties] Properties to set
+                             * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary} LicensesSummary instance
+                             */
+                            LicensesSummary.create = function create(properties) {
+                                return new LicensesSummary(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LicensesSummary message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary} message LicensesSummary message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LicensesSummary.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.license != null && Object.hasOwnProperty.call(message, "license"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.license);
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LicensesSummary message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary} message LicensesSummary message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LicensesSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LicensesSummary message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary} LicensesSummary
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LicensesSummary.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.license = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.count = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LicensesSummary message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary} LicensesSummary
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LicensesSummary.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LicensesSummary message.
+                             * @function verify
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LicensesSummary.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.license != null && message.hasOwnProperty("license"))
+                                    if (!$util.isString(message.license))
+                                        return "license: string expected";
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                        return "count: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LicensesSummary message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary} LicensesSummary
+                             */
+                            LicensesSummary.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary)
+                                    return object;
+                                var message = new $root.google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary();
+                                if (object.license != null)
+                                    message.license = String(object.license);
+                                if (object.count != null)
+                                    if ($util.Long)
+                                        (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                    else if (typeof object.count === "string")
+                                        message.count = parseInt(object.count, 10);
+                                    else if (typeof object.count === "number")
+                                        message.count = object.count;
+                                    else if (typeof object.count === "object")
+                                        message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LicensesSummary message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary} message LicensesSummary
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LicensesSummary.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.license = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.count = options.longs === String ? "0" : 0;
+                                }
+                                if (message.license != null && message.hasOwnProperty("license"))
+                                    object.license = message.license;
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (typeof message.count === "number")
+                                        object.count = options.longs === String ? String(message.count) : message.count;
+                                    else
+                                        object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LicensesSummary to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LicensesSummary.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LicensesSummary
+                             * @function getTypeUrl
+                             * @memberof google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LicensesSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary";
+                            };
+    
+                            return LicensesSummary;
+                        })();
+    
+                        return PackagesSummaryResponse;
                     })();
     
                     return v1beta1;

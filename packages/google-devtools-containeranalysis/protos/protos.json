@@ -5140,6 +5140,48 @@
                               "(google.api.method_signature)": "resource,permissions"
                             }
                           ]
+                        },
+                        "GeneratePackagesSummary": {
+                          "requestType": "GeneratePackagesSummaryRequest",
+                          "responseType": "PackagesSummaryResponse"
+                        }
+                      }
+                    },
+                    "GeneratePackagesSummaryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PackagesSummaryResponse": {
+                      "fields": {
+                        "resourceUrl": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "licensesSummary": {
+                          "rule": "repeated",
+                          "type": "LicensesSummary",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "LicensesSummary": {
+                          "fields": {
+                            "license": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     }
