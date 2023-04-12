@@ -13,5 +13,9 @@
 // limitations under the License.
 
 module.exports = {
-  ...require('gts/.prettierrc.json')
+  ...JSON.parse(
+    fs.readFileSync('gts/.prettierrc.json').toString()
+  )
 }
+
+

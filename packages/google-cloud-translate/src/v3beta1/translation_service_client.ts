@@ -30,14 +30,18 @@ import type {
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
-import jsonProtos = require('../../protos/protos.json');
+const jsonProtos = JSON.parse(fs.readFileSync('../../protos/protos.json', 'utf8'));
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3beta1/translation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './translation_service_client_config.json';
-const version = require('../../../package.json').version;
+import * as fs from 'fs';
+const version = JSON.parse(
+  fs.readFileSync('../../../package.json').toString()
+).version;
 
 /**
  *  Provides natural language translation operations.
@@ -132,9 +136,9 @@ export class TranslationServiceClient {
     }
 
     // Load google-gax module synchronously if needed
-    if (!gaxInstance) {
-      gaxInstance = require('google-gax') as typeof gax;
-    }
+    // if (!gaxInstance) {
+    //   gaxInstance = require('google-gax') as typeof gax;
+    // }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;

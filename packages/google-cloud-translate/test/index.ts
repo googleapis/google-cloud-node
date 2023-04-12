@@ -21,13 +21,15 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import esmock from 'esmock';
 import * as r from 'request';
-
+import * as fs from 'fs';
 import * as orig from '../src';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkgJson = require('../../package.json');
+const pkgJson = JSON.parse(
+  fs.readFileSync('../../../package.json').toString()
+);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let makeRequestOverride: any;
@@ -74,7 +76,7 @@ describe('Translate v2', () => {
   let translate: any;
 
   before(() => {
-    Translate = proxyquire('../src/v2', {
+    Translate = esmock('../src/v2', {
       '@google-cloud/common': {
         util: fakeUtil,
         Service: FakeService,

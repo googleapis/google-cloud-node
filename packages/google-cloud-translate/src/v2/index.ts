@@ -14,19 +14,22 @@
 
 import {Service, util, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify = require('arrify');
+import arrify from 'arrify';
 import * as extend from 'extend';
+import * as fs from 'fs';
 import {GoogleAuthOptions} from 'google-auth-library';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const isHtml = require('is-html');
+import * as isHtml from 'is-html';
 import {
   DecorateRequestOptions,
   BodyResponseCallback,
 } from '@google-cloud/common/build/src/util';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const PKG = require('../../../package.json');
+const PKG = JSON.parse(
+  fs.readFileSync('../../../package.json').toString()
+);
 
 export interface TranslateRequest {
   format?: string;
@@ -145,7 +148,7 @@ export class Translate extends Service {
       apiEndpoint: options.apiEndpoint,
       baseUrl,
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      packageJson: require('../../../package.json'),
+      packageJson: PKG,
       projectIdRequired: false,
     };
 

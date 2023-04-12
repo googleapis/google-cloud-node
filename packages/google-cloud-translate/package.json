@@ -4,16 +4,29 @@
   "version": "7.2.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
+  "type": "module",
   "engines": {
     "node": ">=12.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/esm/src/index.d.ts",
+        "default": "./build/esm/src/index.js"
+      },
+      "require": {
+        "types": "./build/cjs/src/index.d.ts",
+        "default": "./build/cjs/src/index.js"
+      }
+    }
   },
   "repository": {
     "type": "git",
     "directory": "packages/google-cloud-translate",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
+  "main": "build/cjs/src/index.js",
+  "types": "build/cjs/src/index.d.ts",
   "files": [
     "build/src",
     "build/protos",
@@ -61,13 +74,14 @@
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
+    "@types/is-html": "^2.0.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^18.0.0",
-    "@types/proxyquire": "^1.3.28",
     "@types/request": "^2.47.1",
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "codecov": "^3.0.2",
+    "esmock": "^2.2.1",
     "google-auth-library": "^8.0.0",
     "gts": "^3.1.0",
     "http2spy": "^2.0.0",
@@ -77,10 +91,8 @@
     "linkinator": "^4.0.0",
     "mocha": "^9.2.2",
     "pack-n-play": "^1.0.0-2",
-    "proxyquire": "^2.0.1",
     "sinon": "^15.0.0",
     "typescript": "^4.6.4"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate"
 }
-
