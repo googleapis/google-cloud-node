@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [7.5.1](https://github.com/googleapis/nodejs-datastore/compare/v7.5.0...v7.5.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* Allow user to set custom endpoints ([#1101](https://github.com/googleapis/nodejs-datastore/issues/1101)) ([e79fa49](https://github.com/googleapis/nodejs-datastore/commit/e79fa49f753984e34b63538005f29ab7efb7695e))
+
 ## [7.5.0](https://github.com/googleapis/nodejs-datastore/compare/v7.4.0...v7.5.0) (2023-03-29)
 
 
