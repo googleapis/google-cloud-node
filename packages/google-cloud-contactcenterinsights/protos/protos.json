@@ -45,6 +45,30 @@
                             }
                           ]
                         },
+                        "UploadConversation": {
+                          "requestType": "UploadConversationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/conversations:upload",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Conversation",
+                            "(google.longrunning.operation_info).metadata_type": "UploadConversationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/conversations:upload",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Conversation",
+                                "metadata_type": "UploadConversationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "UpdateConversation": {
                           "requestType": "UpdateConversationRequest",
                           "responseType": "Conversation",
@@ -937,6 +961,78 @@
                         "conversationId": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "UploadConversationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "conversation": {
+                          "type": "Conversation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conversationId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "redactionConfig": {
+                          "type": "RedactionConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UploadConversationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "UploadConversationRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "analysisOperation": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "appliedRedactionConfig": {
+                          "type": "RedactionConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2910,6 +3006,10 @@
                         "analysisConfig": {
                           "type": "AnalysisConfig",
                           "id": 7
+                        },
+                        "redactionConfig": {
+                          "type": "RedactionConfig",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2928,6 +3028,18 @@
                               "id": 5
                             }
                           }
+                        }
+                      }
+                    },
+                    "RedactionConfig": {
+                      "fields": {
+                        "deidentifyTemplate": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "inspectTemplate": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

@@ -60,6 +60,58 @@
             }
         },
         {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_async",
+            "title": "ContactCenterInsights uploadConversation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create a longrunning conversation upload operation. This method differs from CreateConversation by allowing audio transcription and optional DLP redaction.",
+            "canonical": true,
+            "file": "contact_center_insights.upload_conversation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UploadConversation",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UploadConversation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "conversation",
+                        "type": ".google.cloud.contactcenterinsights.v1.Conversation"
+                    },
+                    {
+                        "name": "conversation_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "redaction_config",
+                        "type": ".google.cloud.contactcenterinsights.v1.RedactionConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "UploadConversation",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UploadConversation",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async",
             "title": "ContactCenterInsights updateConversation Sample",
             "origin": "API_DEFINITION",

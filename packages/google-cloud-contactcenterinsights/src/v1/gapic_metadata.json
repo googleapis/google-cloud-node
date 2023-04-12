@@ -135,6 +135,11 @@
                 "deleteView"
               ]
             },
+            "UploadConversation": {
+              "methods": [
+                "uploadConversation"
+              ]
+            },
             "CreateAnalysis": {
               "methods": [
                 "createAnalysis"
@@ -331,6 +336,11 @@
             "DeleteView": {
               "methods": [
                 "deleteView"
+              ]
+            },
+            "UploadConversation": {
+              "methods": [
+                "uploadConversation"
               ]
             },
             "CreateAnalysis": {

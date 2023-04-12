@@ -702,6 +702,13 @@ export namespace google {
                     SOLUTION_TYPE_SEARCH = 2
                 }
 
+                /** RecommendationsFilteringOption enum. */
+                enum RecommendationsFilteringOption {
+                    RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED = 0,
+                    RECOMMENDATIONS_FILTERING_DISABLED = 1,
+                    RECOMMENDATIONS_FILTERING_ENABLED = 3
+                }
+
                 /** SearchSolutionUseCase enum. */
                 enum SearchSolutionUseCase {
                     SEARCH_SOLUTION_USE_CASE_UNSPECIFIED = 0,
@@ -5456,6 +5463,9 @@ export namespace google {
 
                     /** UserEvent pageViewId */
                     pageViewId?: (string|null);
+
+                    /** UserEvent entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a UserEvent. */
@@ -5526,6 +5536,9 @@ export namespace google {
 
                     /** UserEvent pageViewId. */
                     public pageViewId: string;
+
+                    /** UserEvent entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new UserEvent instance using the specified properties.
@@ -7633,6 +7646,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions */
                     maxSuggestions?: (number|null);
+
+                    /** CompleteQueryRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -7664,6 +7680,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions. */
                     public maxSuggestions: number;
+
+                    /** CompleteQueryRequest entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -8932,6 +8951,1697 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListControlsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Model. */
+                interface IModel {
+
+                    /** Model name */
+                    name?: (string|null);
+
+                    /** Model displayName */
+                    displayName?: (string|null);
+
+                    /** Model trainingState */
+                    trainingState?: (google.cloud.retail.v2.Model.TrainingState|keyof typeof google.cloud.retail.v2.Model.TrainingState|null);
+
+                    /** Model servingState */
+                    servingState?: (google.cloud.retail.v2.Model.ServingState|keyof typeof google.cloud.retail.v2.Model.ServingState|null);
+
+                    /** Model createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model type */
+                    type?: (string|null);
+
+                    /** Model optimizationObjective */
+                    optimizationObjective?: (string|null);
+
+                    /** Model periodicTuningState */
+                    periodicTuningState?: (google.cloud.retail.v2.Model.PeriodicTuningState|keyof typeof google.cloud.retail.v2.Model.PeriodicTuningState|null);
+
+                    /** Model lastTuneTime */
+                    lastTuneTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model tuningOperation */
+                    tuningOperation?: (string|null);
+
+                    /** Model dataState */
+                    dataState?: (google.cloud.retail.v2.Model.DataState|keyof typeof google.cloud.retail.v2.Model.DataState|null);
+
+                    /** Model filteringOption */
+                    filteringOption?: (google.cloud.retail.v2.RecommendationsFilteringOption|keyof typeof google.cloud.retail.v2.RecommendationsFilteringOption|null);
+
+                    /** Model servingConfigLists */
+                    servingConfigLists?: (google.cloud.retail.v2.Model.IServingConfigList[]|null);
+                }
+
+                /** Represents a Model. */
+                class Model implements IModel {
+
+                    /**
+                     * Constructs a new Model.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IModel);
+
+                    /** Model name. */
+                    public name: string;
+
+                    /** Model displayName. */
+                    public displayName: string;
+
+                    /** Model trainingState. */
+                    public trainingState: (google.cloud.retail.v2.Model.TrainingState|keyof typeof google.cloud.retail.v2.Model.TrainingState);
+
+                    /** Model servingState. */
+                    public servingState: (google.cloud.retail.v2.Model.ServingState|keyof typeof google.cloud.retail.v2.Model.ServingState);
+
+                    /** Model createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model type. */
+                    public type: string;
+
+                    /** Model optimizationObjective. */
+                    public optimizationObjective: string;
+
+                    /** Model periodicTuningState. */
+                    public periodicTuningState: (google.cloud.retail.v2.Model.PeriodicTuningState|keyof typeof google.cloud.retail.v2.Model.PeriodicTuningState);
+
+                    /** Model lastTuneTime. */
+                    public lastTuneTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model tuningOperation. */
+                    public tuningOperation: string;
+
+                    /** Model dataState. */
+                    public dataState: (google.cloud.retail.v2.Model.DataState|keyof typeof google.cloud.retail.v2.Model.DataState);
+
+                    /** Model filteringOption. */
+                    public filteringOption: (google.cloud.retail.v2.RecommendationsFilteringOption|keyof typeof google.cloud.retail.v2.RecommendationsFilteringOption);
+
+                    /** Model servingConfigLists. */
+                    public servingConfigLists: google.cloud.retail.v2.Model.IServingConfigList[];
+
+                    /**
+                     * Creates a new Model instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Model instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IModel): google.cloud.retail.v2.Model;
+
+                    /**
+                     * Encodes the specified Model message. Does not implicitly {@link google.cloud.retail.v2.Model.verify|verify} messages.
+                     * @param message Model message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Model message, length delimited. Does not implicitly {@link google.cloud.retail.v2.Model.verify|verify} messages.
+                     * @param message Model message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Model message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Model
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.Model;
+
+                    /**
+                     * Decodes a Model message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Model
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.Model;
+
+                    /**
+                     * Verifies a Model message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Model message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Model
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.Model;
+
+                    /**
+                     * Creates a plain object from a Model message. Also converts values to other types if specified.
+                     * @param message Model
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Model to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Model
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Model {
+
+                    /** Properties of a ServingConfigList. */
+                    interface IServingConfigList {
+
+                        /** ServingConfigList servingConfigIds */
+                        servingConfigIds?: (string[]|null);
+                    }
+
+                    /** Represents a ServingConfigList. */
+                    class ServingConfigList implements IServingConfigList {
+
+                        /**
+                         * Constructs a new ServingConfigList.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.Model.IServingConfigList);
+
+                        /** ServingConfigList servingConfigIds. */
+                        public servingConfigIds: string[];
+
+                        /**
+                         * Creates a new ServingConfigList instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigList instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.Model.IServingConfigList): google.cloud.retail.v2.Model.ServingConfigList;
+
+                        /**
+                         * Encodes the specified ServingConfigList message. Does not implicitly {@link google.cloud.retail.v2.Model.ServingConfigList.verify|verify} messages.
+                         * @param message ServingConfigList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.Model.IServingConfigList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigList message, length delimited. Does not implicitly {@link google.cloud.retail.v2.Model.ServingConfigList.verify|verify} messages.
+                         * @param message ServingConfigList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.Model.IServingConfigList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigList message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.Model.ServingConfigList;
+
+                        /**
+                         * Decodes a ServingConfigList message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.Model.ServingConfigList;
+
+                        /**
+                         * Verifies a ServingConfigList message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigList message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigList
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.Model.ServingConfigList;
+
+                        /**
+                         * Creates a plain object from a ServingConfigList message. Also converts values to other types if specified.
+                         * @param message ServingConfigList
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.Model.ServingConfigList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigList to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ServingState enum. */
+                    enum ServingState {
+                        SERVING_STATE_UNSPECIFIED = 0,
+                        INACTIVE = 1,
+                        ACTIVE = 2,
+                        TUNED = 3
+                    }
+
+                    /** TrainingState enum. */
+                    enum TrainingState {
+                        TRAINING_STATE_UNSPECIFIED = 0,
+                        PAUSED = 1,
+                        TRAINING = 2
+                    }
+
+                    /** PeriodicTuningState enum. */
+                    enum PeriodicTuningState {
+                        PERIODIC_TUNING_STATE_UNSPECIFIED = 0,
+                        PERIODIC_TUNING_DISABLED = 1,
+                        ALL_TUNING_DISABLED = 3,
+                        PERIODIC_TUNING_ENABLED = 2
+                    }
+
+                    /** DataState enum. */
+                    enum DataState {
+                        DATA_STATE_UNSPECIFIED = 0,
+                        DATA_OK = 1,
+                        DATA_ERROR = 2
+                    }
+                }
+
+                /** Represents a ModelService */
+                class ModelService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ModelService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ModelService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ModelService;
+
+                    /**
+                     * Calls CreateModel.
+                     * @param request CreateModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createModel(request: google.cloud.retail.v2.ICreateModelRequest, callback: google.cloud.retail.v2.ModelService.CreateModelCallback): void;
+
+                    /**
+                     * Calls CreateModel.
+                     * @param request CreateModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createModel(request: google.cloud.retail.v2.ICreateModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public getModel(request: google.cloud.retail.v2.IGetModelRequest, callback: google.cloud.retail.v2.ModelService.GetModelCallback): void;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getModel(request: google.cloud.retail.v2.IGetModelRequest): Promise<google.cloud.retail.v2.Model>;
+
+                    /**
+                     * Calls PauseModel.
+                     * @param request PauseModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public pauseModel(request: google.cloud.retail.v2.IPauseModelRequest, callback: google.cloud.retail.v2.ModelService.PauseModelCallback): void;
+
+                    /**
+                     * Calls PauseModel.
+                     * @param request PauseModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public pauseModel(request: google.cloud.retail.v2.IPauseModelRequest): Promise<google.cloud.retail.v2.Model>;
+
+                    /**
+                     * Calls ResumeModel.
+                     * @param request ResumeModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public resumeModel(request: google.cloud.retail.v2.IResumeModelRequest, callback: google.cloud.retail.v2.ModelService.ResumeModelCallback): void;
+
+                    /**
+                     * Calls ResumeModel.
+                     * @param request ResumeModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resumeModel(request: google.cloud.retail.v2.IResumeModelRequest): Promise<google.cloud.retail.v2.Model>;
+
+                    /**
+                     * Calls DeleteModel.
+                     * @param request DeleteModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteModel(request: google.cloud.retail.v2.IDeleteModelRequest, callback: google.cloud.retail.v2.ModelService.DeleteModelCallback): void;
+
+                    /**
+                     * Calls DeleteModel.
+                     * @param request DeleteModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteModel(request: google.cloud.retail.v2.IDeleteModelRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListModels.
+                     * @param request ListModelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListModelsResponse
+                     */
+                    public listModels(request: google.cloud.retail.v2.IListModelsRequest, callback: google.cloud.retail.v2.ModelService.ListModelsCallback): void;
+
+                    /**
+                     * Calls ListModels.
+                     * @param request ListModelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listModels(request: google.cloud.retail.v2.IListModelsRequest): Promise<google.cloud.retail.v2.ListModelsResponse>;
+
+                    /**
+                     * Calls UpdateModel.
+                     * @param request UpdateModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public updateModel(request: google.cloud.retail.v2.IUpdateModelRequest, callback: google.cloud.retail.v2.ModelService.UpdateModelCallback): void;
+
+                    /**
+                     * Calls UpdateModel.
+                     * @param request UpdateModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateModel(request: google.cloud.retail.v2.IUpdateModelRequest): Promise<google.cloud.retail.v2.Model>;
+
+                    /**
+                     * Calls TuneModel.
+                     * @param request TuneModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public tuneModel(request: google.cloud.retail.v2.ITuneModelRequest, callback: google.cloud.retail.v2.ModelService.TuneModelCallback): void;
+
+                    /**
+                     * Calls TuneModel.
+                     * @param request TuneModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public tuneModel(request: google.cloud.retail.v2.ITuneModelRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace ModelService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|createModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|getModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type GetModelCallback = (error: (Error|null), response?: google.cloud.retail.v2.Model) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|pauseModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type PauseModelCallback = (error: (Error|null), response?: google.cloud.retail.v2.Model) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|resumeModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type ResumeModelCallback = (error: (Error|null), response?: google.cloud.retail.v2.Model) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|deleteModel}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteModelCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|listModels}.
+                     * @param error Error, if any
+                     * @param [response] ListModelsResponse
+                     */
+                    type ListModelsCallback = (error: (Error|null), response?: google.cloud.retail.v2.ListModelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|updateModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type UpdateModelCallback = (error: (Error|null), response?: google.cloud.retail.v2.Model) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2.ModelService|tuneModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TuneModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a CreateModelRequest. */
+                interface ICreateModelRequest {
+
+                    /** CreateModelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateModelRequest model */
+                    model?: (google.cloud.retail.v2.IModel|null);
+
+                    /** CreateModelRequest dryRun */
+                    dryRun?: (boolean|null);
+                }
+
+                /** Represents a CreateModelRequest. */
+                class CreateModelRequest implements ICreateModelRequest {
+
+                    /**
+                     * Constructs a new CreateModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ICreateModelRequest);
+
+                    /** CreateModelRequest parent. */
+                    public parent: string;
+
+                    /** CreateModelRequest model. */
+                    public model?: (google.cloud.retail.v2.IModel|null);
+
+                    /** CreateModelRequest dryRun. */
+                    public dryRun: boolean;
+
+                    /**
+                     * Creates a new CreateModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ICreateModelRequest): google.cloud.retail.v2.CreateModelRequest;
+
+                    /**
+                     * Encodes the specified CreateModelRequest message. Does not implicitly {@link google.cloud.retail.v2.CreateModelRequest.verify|verify} messages.
+                     * @param message CreateModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ICreateModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.CreateModelRequest.verify|verify} messages.
+                     * @param message CreateModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ICreateModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.CreateModelRequest;
+
+                    /**
+                     * Decodes a CreateModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.CreateModelRequest;
+
+                    /**
+                     * Verifies a CreateModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.CreateModelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateModelRequest message. Also converts values to other types if specified.
+                     * @param message CreateModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.CreateModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateModelRequest. */
+                interface IUpdateModelRequest {
+
+                    /** UpdateModelRequest model */
+                    model?: (google.cloud.retail.v2.IModel|null);
+
+                    /** UpdateModelRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateModelRequest. */
+                class UpdateModelRequest implements IUpdateModelRequest {
+
+                    /**
+                     * Constructs a new UpdateModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IUpdateModelRequest);
+
+                    /** UpdateModelRequest model. */
+                    public model?: (google.cloud.retail.v2.IModel|null);
+
+                    /** UpdateModelRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IUpdateModelRequest): google.cloud.retail.v2.UpdateModelRequest;
+
+                    /**
+                     * Encodes the specified UpdateModelRequest message. Does not implicitly {@link google.cloud.retail.v2.UpdateModelRequest.verify|verify} messages.
+                     * @param message UpdateModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IUpdateModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.UpdateModelRequest.verify|verify} messages.
+                     * @param message UpdateModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IUpdateModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.UpdateModelRequest;
+
+                    /**
+                     * Decodes an UpdateModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.UpdateModelRequest;
+
+                    /**
+                     * Verifies an UpdateModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.UpdateModelRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateModelRequest message. Also converts values to other types if specified.
+                     * @param message UpdateModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.UpdateModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetModelRequest. */
+                interface IGetModelRequest {
+
+                    /** GetModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetModelRequest. */
+                class GetModelRequest implements IGetModelRequest {
+
+                    /**
+                     * Constructs a new GetModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IGetModelRequest);
+
+                    /** GetModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IGetModelRequest): google.cloud.retail.v2.GetModelRequest;
+
+                    /**
+                     * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.retail.v2.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.GetModelRequest;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.GetModelRequest;
+
+                    /**
+                     * Verifies a GetModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.GetModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                     * @param message GetModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.GetModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PauseModelRequest. */
+                interface IPauseModelRequest {
+
+                    /** PauseModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PauseModelRequest. */
+                class PauseModelRequest implements IPauseModelRequest {
+
+                    /**
+                     * Constructs a new PauseModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IPauseModelRequest);
+
+                    /** PauseModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new PauseModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PauseModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IPauseModelRequest): google.cloud.retail.v2.PauseModelRequest;
+
+                    /**
+                     * Encodes the specified PauseModelRequest message. Does not implicitly {@link google.cloud.retail.v2.PauseModelRequest.verify|verify} messages.
+                     * @param message PauseModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IPauseModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PauseModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.PauseModelRequest.verify|verify} messages.
+                     * @param message PauseModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IPauseModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PauseModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PauseModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.PauseModelRequest;
+
+                    /**
+                     * Decodes a PauseModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PauseModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.PauseModelRequest;
+
+                    /**
+                     * Verifies a PauseModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PauseModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PauseModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.PauseModelRequest;
+
+                    /**
+                     * Creates a plain object from a PauseModelRequest message. Also converts values to other types if specified.
+                     * @param message PauseModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.PauseModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PauseModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PauseModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResumeModelRequest. */
+                interface IResumeModelRequest {
+
+                    /** ResumeModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ResumeModelRequest. */
+                class ResumeModelRequest implements IResumeModelRequest {
+
+                    /**
+                     * Constructs a new ResumeModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IResumeModelRequest);
+
+                    /** ResumeModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ResumeModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResumeModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IResumeModelRequest): google.cloud.retail.v2.ResumeModelRequest;
+
+                    /**
+                     * Encodes the specified ResumeModelRequest message. Does not implicitly {@link google.cloud.retail.v2.ResumeModelRequest.verify|verify} messages.
+                     * @param message ResumeModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IResumeModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResumeModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ResumeModelRequest.verify|verify} messages.
+                     * @param message ResumeModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IResumeModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResumeModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResumeModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ResumeModelRequest;
+
+                    /**
+                     * Decodes a ResumeModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResumeModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ResumeModelRequest;
+
+                    /**
+                     * Verifies a ResumeModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResumeModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResumeModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ResumeModelRequest;
+
+                    /**
+                     * Creates a plain object from a ResumeModelRequest message. Also converts values to other types if specified.
+                     * @param message ResumeModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ResumeModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResumeModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResumeModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListModelsRequest. */
+                interface IListModelsRequest {
+
+                    /** ListModelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListModelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListModelsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListModelsRequest. */
+                class ListModelsRequest implements IListModelsRequest {
+
+                    /**
+                     * Constructs a new ListModelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IListModelsRequest);
+
+                    /** ListModelsRequest parent. */
+                    public parent: string;
+
+                    /** ListModelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListModelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListModelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListModelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IListModelsRequest): google.cloud.retail.v2.ListModelsRequest;
+
+                    /**
+                     * Encodes the specified ListModelsRequest message. Does not implicitly {@link google.cloud.retail.v2.ListModelsRequest.verify|verify} messages.
+                     * @param message ListModelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IListModelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListModelsRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ListModelsRequest.verify|verify} messages.
+                     * @param message ListModelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IListModelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListModelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListModelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ListModelsRequest;
+
+                    /**
+                     * Decodes a ListModelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListModelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ListModelsRequest;
+
+                    /**
+                     * Verifies a ListModelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListModelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListModelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ListModelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListModelsRequest message. Also converts values to other types if specified.
+                     * @param message ListModelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ListModelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListModelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListModelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteModelRequest. */
+                interface IDeleteModelRequest {
+
+                    /** DeleteModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteModelRequest. */
+                class DeleteModelRequest implements IDeleteModelRequest {
+
+                    /**
+                     * Constructs a new DeleteModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IDeleteModelRequest);
+
+                    /** DeleteModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IDeleteModelRequest): google.cloud.retail.v2.DeleteModelRequest;
+
+                    /**
+                     * Encodes the specified DeleteModelRequest message. Does not implicitly {@link google.cloud.retail.v2.DeleteModelRequest.verify|verify} messages.
+                     * @param message DeleteModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IDeleteModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.DeleteModelRequest.verify|verify} messages.
+                     * @param message DeleteModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IDeleteModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.DeleteModelRequest;
+
+                    /**
+                     * Decodes a DeleteModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.DeleteModelRequest;
+
+                    /**
+                     * Verifies a DeleteModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.DeleteModelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteModelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.DeleteModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListModelsResponse. */
+                interface IListModelsResponse {
+
+                    /** ListModelsResponse models */
+                    models?: (google.cloud.retail.v2.IModel[]|null);
+
+                    /** ListModelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListModelsResponse. */
+                class ListModelsResponse implements IListModelsResponse {
+
+                    /**
+                     * Constructs a new ListModelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IListModelsResponse);
+
+                    /** ListModelsResponse models. */
+                    public models: google.cloud.retail.v2.IModel[];
+
+                    /** ListModelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListModelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListModelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IListModelsResponse): google.cloud.retail.v2.ListModelsResponse;
+
+                    /**
+                     * Encodes the specified ListModelsResponse message. Does not implicitly {@link google.cloud.retail.v2.ListModelsResponse.verify|verify} messages.
+                     * @param message ListModelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IListModelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListModelsResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ListModelsResponse.verify|verify} messages.
+                     * @param message ListModelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IListModelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListModelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListModelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ListModelsResponse;
+
+                    /**
+                     * Decodes a ListModelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListModelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ListModelsResponse;
+
+                    /**
+                     * Verifies a ListModelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListModelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListModelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ListModelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListModelsResponse message. Also converts values to other types if specified.
+                     * @param message ListModelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ListModelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListModelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListModelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneModelRequest. */
+                interface ITuneModelRequest {
+
+                    /** TuneModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a TuneModelRequest. */
+                class TuneModelRequest implements ITuneModelRequest {
+
+                    /**
+                     * Constructs a new TuneModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ITuneModelRequest);
+
+                    /** TuneModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new TuneModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ITuneModelRequest): google.cloud.retail.v2.TuneModelRequest;
+
+                    /**
+                     * Encodes the specified TuneModelRequest message. Does not implicitly {@link google.cloud.retail.v2.TuneModelRequest.verify|verify} messages.
+                     * @param message TuneModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ITuneModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2.TuneModelRequest.verify|verify} messages.
+                     * @param message TuneModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ITuneModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.TuneModelRequest;
+
+                    /**
+                     * Decodes a TuneModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.TuneModelRequest;
+
+                    /**
+                     * Verifies a TuneModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.TuneModelRequest;
+
+                    /**
+                     * Creates a plain object from a TuneModelRequest message. Also converts values to other types if specified.
+                     * @param message TuneModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.TuneModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateModelMetadata. */
+                interface ICreateModelMetadata {
+
+                    /** CreateModelMetadata model */
+                    model?: (string|null);
+                }
+
+                /** Represents a CreateModelMetadata. */
+                class CreateModelMetadata implements ICreateModelMetadata {
+
+                    /**
+                     * Constructs a new CreateModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ICreateModelMetadata);
+
+                    /** CreateModelMetadata model. */
+                    public model: string;
+
+                    /**
+                     * Creates a new CreateModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ICreateModelMetadata): google.cloud.retail.v2.CreateModelMetadata;
+
+                    /**
+                     * Encodes the specified CreateModelMetadata message. Does not implicitly {@link google.cloud.retail.v2.CreateModelMetadata.verify|verify} messages.
+                     * @param message CreateModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ICreateModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateModelMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2.CreateModelMetadata.verify|verify} messages.
+                     * @param message CreateModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ICreateModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.CreateModelMetadata;
+
+                    /**
+                     * Decodes a CreateModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.CreateModelMetadata;
+
+                    /**
+                     * Verifies a CreateModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.CreateModelMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateModelMetadata message. Also converts values to other types if specified.
+                     * @param message CreateModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.CreateModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneModelMetadata. */
+                interface ITuneModelMetadata {
+
+                    /** TuneModelMetadata model */
+                    model?: (string|null);
+                }
+
+                /** Represents a TuneModelMetadata. */
+                class TuneModelMetadata implements ITuneModelMetadata {
+
+                    /**
+                     * Constructs a new TuneModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ITuneModelMetadata);
+
+                    /** TuneModelMetadata model. */
+                    public model: string;
+
+                    /**
+                     * Creates a new TuneModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ITuneModelMetadata): google.cloud.retail.v2.TuneModelMetadata;
+
+                    /**
+                     * Encodes the specified TuneModelMetadata message. Does not implicitly {@link google.cloud.retail.v2.TuneModelMetadata.verify|verify} messages.
+                     * @param message TuneModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ITuneModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneModelMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2.TuneModelMetadata.verify|verify} messages.
+                     * @param message TuneModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ITuneModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.TuneModelMetadata;
+
+                    /**
+                     * Decodes a TuneModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.TuneModelMetadata;
+
+                    /**
+                     * Verifies a TuneModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.TuneModelMetadata;
+
+                    /**
+                     * Creates a plain object from a TuneModelMetadata message. Also converts values to other types if specified.
+                     * @param message TuneModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.TuneModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneModelResponse. */
+                interface ITuneModelResponse {
+                }
+
+                /** Represents a TuneModelResponse. */
+                class TuneModelResponse implements ITuneModelResponse {
+
+                    /**
+                     * Constructs a new TuneModelResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.ITuneModelResponse);
+
+                    /**
+                     * Creates a new TuneModelResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneModelResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.ITuneModelResponse): google.cloud.retail.v2.TuneModelResponse;
+
+                    /**
+                     * Encodes the specified TuneModelResponse message. Does not implicitly {@link google.cloud.retail.v2.TuneModelResponse.verify|verify} messages.
+                     * @param message TuneModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.ITuneModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneModelResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2.TuneModelResponse.verify|verify} messages.
+                     * @param message TuneModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.ITuneModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneModelResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.TuneModelResponse;
+
+                    /**
+                     * Decodes a TuneModelResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.TuneModelResponse;
+
+                    /**
+                     * Verifies a TuneModelResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneModelResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneModelResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.TuneModelResponse;
+
+                    /**
+                     * Creates a plain object from a TuneModelResponse message. Also converts values to other types if specified.
+                     * @param message TuneModelResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.TuneModelResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneModelResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneModelResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -12144,6 +13854,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec */
                     spellCorrectionSpec?: (google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -12217,6 +13930,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec. */
                     public spellCorrectionSpec?: (google.cloud.retail.v2.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
 
                     /** SearchRequest _spellCorrectionSpec. */
                     public _spellCorrectionSpec?: "spellCorrectionSpec";
@@ -13250,6 +14966,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs */
                     invalidConditionBoostSpecs?: (google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                    /** SearchResponse experimentInfo */
+                    experimentInfo?: (google.cloud.retail.v2.IExperimentInfo[]|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -13290,6 +15009,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs. */
                     public invalidConditionBoostSpecs: google.cloud.retail.v2.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                    /** SearchResponse experimentInfo. */
+                    public experimentInfo: google.cloud.retail.v2.IExperimentInfo[];
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
@@ -13831,6 +15553,218 @@ export namespace google {
 
                         /**
                          * Gets the default type url for QueryExpansionInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExperimentInfo. */
+                interface IExperimentInfo {
+
+                    /** ExperimentInfo servingConfigExperiment */
+                    servingConfigExperiment?: (google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment */
+                    experiment?: (string|null);
+                }
+
+                /** Represents an ExperimentInfo. */
+                class ExperimentInfo implements IExperimentInfo {
+
+                    /**
+                     * Constructs a new ExperimentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2.IExperimentInfo);
+
+                    /** ExperimentInfo servingConfigExperiment. */
+                    public servingConfigExperiment?: (google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment. */
+                    public experiment: string;
+
+                    /** ExperimentInfo experimentMetadata. */
+                    public experimentMetadata?: "servingConfigExperiment";
+
+                    /**
+                     * Creates a new ExperimentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentInfo instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2.IExperimentInfo): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Verifies an ExperimentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ExperimentInfo;
+
+                    /**
+                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
+                     * @param message ExperimentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentInfo {
+
+                    /** Properties of a ServingConfigExperiment. */
+                    interface IServingConfigExperiment {
+
+                        /** ServingConfigExperiment originalServingConfig */
+                        originalServingConfig?: (string|null);
+
+                        /** ServingConfigExperiment experimentServingConfig */
+                        experimentServingConfig?: (string|null);
+                    }
+
+                    /** Represents a ServingConfigExperiment. */
+                    class ServingConfigExperiment implements IServingConfigExperiment {
+
+                        /**
+                         * Constructs a new ServingConfigExperiment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment);
+
+                        /** ServingConfigExperiment originalServingConfig. */
+                        public originalServingConfig: string;
+
+                        /** ServingConfigExperiment experimentServingConfig. */
+                        public experimentServingConfig: string;
+
+                        /**
+                         * Creates a new ServingConfigExperiment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigExperiment instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Verifies a ServingConfigExperiment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigExperiment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
+                         * @param message ServingConfigExperiment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigExperiment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigExperiment
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -21612,6 +23546,9 @@ export namespace google {
 
                     /** UserEvent pageViewId */
                     pageViewId?: (string|null);
+
+                    /** UserEvent entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a UserEvent. */
@@ -21682,6 +23619,9 @@ export namespace google {
 
                     /** UserEvent pageViewId. */
                     public pageViewId: string;
+
+                    /** UserEvent entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new UserEvent instance using the specified properties.
@@ -24019,6 +25959,9 @@ export namespace google {
 
                     /** CompleteQueryRequest enableAttributeSuggestions */
                     enableAttributeSuggestions?: (boolean|null);
+
+                    /** CompleteQueryRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -24053,6 +25996,9 @@ export namespace google {
 
                     /** CompleteQueryRequest enableAttributeSuggestions. */
                     public enableAttributeSuggestions: boolean;
+
+                    /** CompleteQueryRequest entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -24257,6 +26203,12 @@ export namespace google {
 
                         /** CompletionResult attributes */
                         attributes?: ({ [k: string]: google.cloud.retail.v2alpha.ICustomAttribute }|null);
+
+                        /** CompletionResult facets */
+                        facets?: (google.cloud.retail.v2alpha.SearchResponse.IFacet[]|null);
+
+                        /** CompletionResult totalProductCount */
+                        totalProductCount?: (number|null);
                     }
 
                     /** Represents a CompletionResult. */
@@ -24273,6 +26225,12 @@ export namespace google {
 
                         /** CompletionResult attributes. */
                         public attributes: { [k: string]: google.cloud.retail.v2alpha.ICustomAttribute };
+
+                        /** CompletionResult facets. */
+                        public facets: google.cloud.retail.v2alpha.SearchResponse.IFacet[];
+
+                        /** CompletionResult totalProductCount. */
+                        public totalProductCount: number;
 
                         /**
                          * Creates a new CompletionResult instance using the specified properties.
@@ -24547,142 +26505,6 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a Control. */
-                interface IControl {
-
-                    /** Control facetSpec */
-                    facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
-
-                    /** Control rule */
-                    rule?: (google.cloud.retail.v2alpha.IRule|null);
-
-                    /** Control name */
-                    name?: (string|null);
-
-                    /** Control displayName */
-                    displayName?: (string|null);
-
-                    /** Control associatedServingConfigIds */
-                    associatedServingConfigIds?: (string[]|null);
-
-                    /** Control solutionTypes */
-                    solutionTypes?: (google.cloud.retail.v2alpha.SolutionType[]|null);
-
-                    /** Control searchSolutionUseCase */
-                    searchSolutionUseCase?: (google.cloud.retail.v2alpha.SearchSolutionUseCase[]|null);
-                }
-
-                /** Represents a Control. */
-                class Control implements IControl {
-
-                    /**
-                     * Constructs a new Control.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2alpha.IControl);
-
-                    /** Control facetSpec. */
-                    public facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
-
-                    /** Control rule. */
-                    public rule?: (google.cloud.retail.v2alpha.IRule|null);
-
-                    /** Control name. */
-                    public name: string;
-
-                    /** Control displayName. */
-                    public displayName: string;
-
-                    /** Control associatedServingConfigIds. */
-                    public associatedServingConfigIds: string[];
-
-                    /** Control solutionTypes. */
-                    public solutionTypes: google.cloud.retail.v2alpha.SolutionType[];
-
-                    /** Control searchSolutionUseCase. */
-                    public searchSolutionUseCase: google.cloud.retail.v2alpha.SearchSolutionUseCase[];
-
-                    /** Control control. */
-                    public control?: ("facetSpec"|"rule");
-
-                    /**
-                     * Creates a new Control instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Control instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2alpha.IControl): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Encodes the specified Control message. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
-                     * @param message Control message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
-                     * @param message Control message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Control message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Control
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Decodes a Control message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Control
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Verifies a Control message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Control message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Control
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.Control;
-
-                    /**
-                     * Creates a plain object from a Control message. Also converts values to other types if specified.
-                     * @param message Control
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2alpha.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Control to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Control
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Represents a SearchService */
                 class SearchService extends $protobuf.rpc.Service {
 
@@ -24796,6 +26618,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec */
                     spellCorrectionSpec?: (google.cloud.retail.v2alpha.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -24872,6 +26697,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec. */
                     public spellCorrectionSpec?: (google.cloud.retail.v2alpha.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
 
                     /** SearchRequest _spellCorrectionSpec. */
                     public _spellCorrectionSpec?: "spellCorrectionSpec";
@@ -25914,6 +27742,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs */
                     invalidConditionBoostSpecs?: (google.cloud.retail.v2alpha.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                    /** SearchResponse experimentInfo */
+                    experimentInfo?: (google.cloud.retail.v2alpha.IExperimentInfo[]|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -25954,6 +27785,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs. */
                     public invalidConditionBoostSpecs: google.cloud.retail.v2alpha.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                    /** SearchResponse experimentInfo. */
+                    public experimentInfo: google.cloud.retail.v2alpha.IExperimentInfo[];
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
@@ -26500,6 +28334,354 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of an ExperimentInfo. */
+                interface IExperimentInfo {
+
+                    /** ExperimentInfo servingConfigExperiment */
+                    servingConfigExperiment?: (google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment */
+                    experiment?: (string|null);
+                }
+
+                /** Represents an ExperimentInfo. */
+                class ExperimentInfo implements IExperimentInfo {
+
+                    /**
+                     * Constructs a new ExperimentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IExperimentInfo);
+
+                    /** ExperimentInfo servingConfigExperiment. */
+                    public servingConfigExperiment?: (google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment. */
+                    public experiment: string;
+
+                    /** ExperimentInfo experimentMetadata. */
+                    public experimentMetadata?: "servingConfigExperiment";
+
+                    /**
+                     * Creates a new ExperimentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentInfo instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IExperimentInfo): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Verifies an ExperimentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ExperimentInfo;
+
+                    /**
+                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
+                     * @param message ExperimentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentInfo {
+
+                    /** Properties of a ServingConfigExperiment. */
+                    interface IServingConfigExperiment {
+
+                        /** ServingConfigExperiment originalServingConfig */
+                        originalServingConfig?: (string|null);
+
+                        /** ServingConfigExperiment experimentServingConfig */
+                        experimentServingConfig?: (string|null);
+                    }
+
+                    /** Represents a ServingConfigExperiment. */
+                    class ServingConfigExperiment implements IServingConfigExperiment {
+
+                        /**
+                         * Constructs a new ServingConfigExperiment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment);
+
+                        /** ServingConfigExperiment originalServingConfig. */
+                        public originalServingConfig: string;
+
+                        /** ServingConfigExperiment experimentServingConfig. */
+                        public experimentServingConfig: string;
+
+                        /**
+                         * Creates a new ServingConfigExperiment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigExperiment instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2alpha.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Verifies a ServingConfigExperiment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigExperiment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
+                         * @param message ServingConfigExperiment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2alpha.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigExperiment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigExperiment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Control. */
+                interface IControl {
+
+                    /** Control facetSpec */
+                    facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
+
+                    /** Control rule */
+                    rule?: (google.cloud.retail.v2alpha.IRule|null);
+
+                    /** Control name */
+                    name?: (string|null);
+
+                    /** Control displayName */
+                    displayName?: (string|null);
+
+                    /** Control associatedServingConfigIds */
+                    associatedServingConfigIds?: (string[]|null);
+
+                    /** Control solutionTypes */
+                    solutionTypes?: (google.cloud.retail.v2alpha.SolutionType[]|null);
+
+                    /** Control searchSolutionUseCase */
+                    searchSolutionUseCase?: (google.cloud.retail.v2alpha.SearchSolutionUseCase[]|null);
+                }
+
+                /** Represents a Control. */
+                class Control implements IControl {
+
+                    /**
+                     * Constructs a new Control.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IControl);
+
+                    /** Control facetSpec. */
+                    public facetSpec?: (google.cloud.retail.v2alpha.SearchRequest.IFacetSpec|null);
+
+                    /** Control rule. */
+                    public rule?: (google.cloud.retail.v2alpha.IRule|null);
+
+                    /** Control name. */
+                    public name: string;
+
+                    /** Control displayName. */
+                    public displayName: string;
+
+                    /** Control associatedServingConfigIds. */
+                    public associatedServingConfigIds: string[];
+
+                    /** Control solutionTypes. */
+                    public solutionTypes: google.cloud.retail.v2alpha.SolutionType[];
+
+                    /** Control searchSolutionUseCase. */
+                    public searchSolutionUseCase: google.cloud.retail.v2alpha.SearchSolutionUseCase[];
+
+                    /** Control control. */
+                    public control?: ("facetSpec"|"rule");
+
+                    /**
+                     * Creates a new Control instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Control instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IControl): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Encodes the specified Control message. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
+                     * @param message Control message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.Control.verify|verify} messages.
+                     * @param message Control message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Control message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Control
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Decodes a Control message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Control
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Verifies a Control message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Control message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Control
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.Control;
+
+                    /**
+                     * Creates a plain object from a Control message. Also converts values to other types if specified.
+                     * @param message Control
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Control to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Control
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a ControlService */
@@ -27979,6 +30161,849 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MerchantCenterAccountLink. */
+                interface IMerchantCenterAccountLink {
+
+                    /** MerchantCenterAccountLink name */
+                    name?: (string|null);
+
+                    /** MerchantCenterAccountLink id */
+                    id?: (string|null);
+
+                    /** MerchantCenterAccountLink merchantCenterAccountId */
+                    merchantCenterAccountId?: (number|Long|string|null);
+
+                    /** MerchantCenterAccountLink branchId */
+                    branchId?: (string|null);
+
+                    /** MerchantCenterAccountLink feedLabel */
+                    feedLabel?: (string|null);
+
+                    /** MerchantCenterAccountLink languageCode */
+                    languageCode?: (string|null);
+
+                    /** MerchantCenterAccountLink feedFilters */
+                    feedFilters?: (google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter[]|null);
+
+                    /** MerchantCenterAccountLink state */
+                    state?: (google.cloud.retail.v2alpha.MerchantCenterAccountLink.State|keyof typeof google.cloud.retail.v2alpha.MerchantCenterAccountLink.State|null);
+
+                    /** MerchantCenterAccountLink projectId */
+                    projectId?: (string|null);
+                }
+
+                /** Represents a MerchantCenterAccountLink. */
+                class MerchantCenterAccountLink implements IMerchantCenterAccountLink {
+
+                    /**
+                     * Constructs a new MerchantCenterAccountLink.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IMerchantCenterAccountLink);
+
+                    /** MerchantCenterAccountLink name. */
+                    public name: string;
+
+                    /** MerchantCenterAccountLink id. */
+                    public id: string;
+
+                    /** MerchantCenterAccountLink merchantCenterAccountId. */
+                    public merchantCenterAccountId: (number|Long|string);
+
+                    /** MerchantCenterAccountLink branchId. */
+                    public branchId: string;
+
+                    /** MerchantCenterAccountLink feedLabel. */
+                    public feedLabel: string;
+
+                    /** MerchantCenterAccountLink languageCode. */
+                    public languageCode: string;
+
+                    /** MerchantCenterAccountLink feedFilters. */
+                    public feedFilters: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter[];
+
+                    /** MerchantCenterAccountLink state. */
+                    public state: (google.cloud.retail.v2alpha.MerchantCenterAccountLink.State|keyof typeof google.cloud.retail.v2alpha.MerchantCenterAccountLink.State);
+
+                    /** MerchantCenterAccountLink projectId. */
+                    public projectId: string;
+
+                    /**
+                     * Creates a new MerchantCenterAccountLink instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MerchantCenterAccountLink instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IMerchantCenterAccountLink): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Encodes the specified MerchantCenterAccountLink message. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.verify|verify} messages.
+                     * @param message MerchantCenterAccountLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IMerchantCenterAccountLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MerchantCenterAccountLink message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.verify|verify} messages.
+                     * @param message MerchantCenterAccountLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IMerchantCenterAccountLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MerchantCenterAccountLink message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MerchantCenterAccountLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Decodes a MerchantCenterAccountLink message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MerchantCenterAccountLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Verifies a MerchantCenterAccountLink message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MerchantCenterAccountLink message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MerchantCenterAccountLink
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.MerchantCenterAccountLink;
+
+                    /**
+                     * Creates a plain object from a MerchantCenterAccountLink message. Also converts values to other types if specified.
+                     * @param message MerchantCenterAccountLink
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MerchantCenterAccountLink to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MerchantCenterAccountLink
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MerchantCenterAccountLink {
+
+                    /** Properties of a MerchantCenterFeedFilter. */
+                    interface IMerchantCenterFeedFilter {
+
+                        /** MerchantCenterFeedFilter primaryFeedId */
+                        primaryFeedId?: (number|Long|string|null);
+
+                        /** MerchantCenterFeedFilter primaryFeedName */
+                        primaryFeedName?: (string|null);
+                    }
+
+                    /** Represents a MerchantCenterFeedFilter. */
+                    class MerchantCenterFeedFilter implements IMerchantCenterFeedFilter {
+
+                        /**
+                         * Constructs a new MerchantCenterFeedFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter);
+
+                        /** MerchantCenterFeedFilter primaryFeedId. */
+                        public primaryFeedId: (number|Long|string);
+
+                        /** MerchantCenterFeedFilter primaryFeedName. */
+                        public primaryFeedName: string;
+
+                        /**
+                         * Creates a new MerchantCenterFeedFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MerchantCenterFeedFilter instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Encodes the specified MerchantCenterFeedFilter message. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter.verify|verify} messages.
+                         * @param message MerchantCenterFeedFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MerchantCenterFeedFilter message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter.verify|verify} messages.
+                         * @param message MerchantCenterFeedFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink.IMerchantCenterFeedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MerchantCenterFeedFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MerchantCenterFeedFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Decodes a MerchantCenterFeedFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MerchantCenterFeedFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Verifies a MerchantCenterFeedFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MerchantCenterFeedFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MerchantCenterFeedFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter;
+
+                        /**
+                         * Creates a plain object from a MerchantCenterFeedFilter message. Also converts values to other types if specified.
+                         * @param message MerchantCenterFeedFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MerchantCenterFeedFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MerchantCenterFeedFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        ACTIVE = 2,
+                        FAILED = 3
+                    }
+                }
+
+                /** Properties of a CreateMerchantCenterAccountLinkMetadata. */
+                interface ICreateMerchantCenterAccountLinkMetadata {
+
+                    /** CreateMerchantCenterAccountLinkMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMerchantCenterAccountLinkMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CreateMerchantCenterAccountLinkMetadata. */
+                class CreateMerchantCenterAccountLinkMetadata implements ICreateMerchantCenterAccountLinkMetadata {
+
+                    /**
+                     * Constructs a new CreateMerchantCenterAccountLinkMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata);
+
+                    /** CreateMerchantCenterAccountLinkMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMerchantCenterAccountLinkMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CreateMerchantCenterAccountLinkMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMerchantCenterAccountLinkMetadata instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkMetadata message. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMerchantCenterAccountLinkMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMerchantCenterAccountLinkMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Verifies a CreateMerchantCenterAccountLinkMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMerchantCenterAccountLinkMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMerchantCenterAccountLinkMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateMerchantCenterAccountLinkMetadata message. Also converts values to other types if specified.
+                     * @param message CreateMerchantCenterAccountLinkMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMerchantCenterAccountLinkMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMerchantCenterAccountLinkMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a MerchantCenterAccountLinkService */
+                class MerchantCenterAccountLinkService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new MerchantCenterAccountLinkService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new MerchantCenterAccountLinkService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): MerchantCenterAccountLinkService;
+
+                    /**
+                     * Calls ListMerchantCenterAccountLinks.
+                     * @param request ListMerchantCenterAccountLinksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMerchantCenterAccountLinksResponse
+                     */
+                    public listMerchantCenterAccountLinks(request: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest, callback: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.ListMerchantCenterAccountLinksCallback): void;
+
+                    /**
+                     * Calls ListMerchantCenterAccountLinks.
+                     * @param request ListMerchantCenterAccountLinksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMerchantCenterAccountLinks(request: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest): Promise<google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse>;
+
+                    /**
+                     * Calls CreateMerchantCenterAccountLink.
+                     * @param request CreateMerchantCenterAccountLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest, callback: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.CreateMerchantCenterAccountLinkCallback): void;
+
+                    /**
+                     * Calls CreateMerchantCenterAccountLink.
+                     * @param request CreateMerchantCenterAccountLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMerchantCenterAccountLink.
+                     * @param request DeleteMerchantCenterAccountLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest, callback: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.DeleteMerchantCenterAccountLinkCallback): void;
+
+                    /**
+                     * Calls DeleteMerchantCenterAccountLink.
+                     * @param request DeleteMerchantCenterAccountLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMerchantCenterAccountLink(request: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace MerchantCenterAccountLinkService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.MerchantCenterAccountLinkService|listMerchantCenterAccountLinks}.
+                     * @param error Error, if any
+                     * @param [response] ListMerchantCenterAccountLinksResponse
+                     */
+                    type ListMerchantCenterAccountLinksCallback = (error: (Error|null), response?: google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.MerchantCenterAccountLinkService|createMerchantCenterAccountLink}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMerchantCenterAccountLinkCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.MerchantCenterAccountLinkService|deleteMerchantCenterAccountLink}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteMerchantCenterAccountLinkCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a ListMerchantCenterAccountLinksRequest. */
+                interface IListMerchantCenterAccountLinksRequest {
+
+                    /** ListMerchantCenterAccountLinksRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ListMerchantCenterAccountLinksRequest. */
+                class ListMerchantCenterAccountLinksRequest implements IListMerchantCenterAccountLinksRequest {
+
+                    /**
+                     * Constructs a new ListMerchantCenterAccountLinksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest);
+
+                    /** ListMerchantCenterAccountLinksRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ListMerchantCenterAccountLinksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMerchantCenterAccountLinksRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMerchantCenterAccountLinksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMerchantCenterAccountLinksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Verifies a ListMerchantCenterAccountLinksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMerchantCenterAccountLinksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMerchantCenterAccountLinksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest;
+
+                    /**
+                     * Creates a plain object from a ListMerchantCenterAccountLinksRequest message. Also converts values to other types if specified.
+                     * @param message ListMerchantCenterAccountLinksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMerchantCenterAccountLinksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMerchantCenterAccountLinksRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMerchantCenterAccountLinksResponse. */
+                interface IListMerchantCenterAccountLinksResponse {
+
+                    /** ListMerchantCenterAccountLinksResponse merchantCenterAccountLinks */
+                    merchantCenterAccountLinks?: (google.cloud.retail.v2alpha.IMerchantCenterAccountLink[]|null);
+                }
+
+                /** Represents a ListMerchantCenterAccountLinksResponse. */
+                class ListMerchantCenterAccountLinksResponse implements IListMerchantCenterAccountLinksResponse {
+
+                    /**
+                     * Constructs a new ListMerchantCenterAccountLinksResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse);
+
+                    /** ListMerchantCenterAccountLinksResponse merchantCenterAccountLinks. */
+                    public merchantCenterAccountLinks: google.cloud.retail.v2alpha.IMerchantCenterAccountLink[];
+
+                    /**
+                     * Creates a new ListMerchantCenterAccountLinksResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMerchantCenterAccountLinksResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksResponse message. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMerchantCenterAccountLinksResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse.verify|verify} messages.
+                     * @param message ListMerchantCenterAccountLinksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMerchantCenterAccountLinksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Decodes a ListMerchantCenterAccountLinksResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMerchantCenterAccountLinksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Verifies a ListMerchantCenterAccountLinksResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMerchantCenterAccountLinksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMerchantCenterAccountLinksResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse;
+
+                    /**
+                     * Creates a plain object from a ListMerchantCenterAccountLinksResponse message. Also converts values to other types if specified.
+                     * @param message ListMerchantCenterAccountLinksResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMerchantCenterAccountLinksResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMerchantCenterAccountLinksResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMerchantCenterAccountLinkRequest. */
+                interface ICreateMerchantCenterAccountLinkRequest {
+
+                    /** CreateMerchantCenterAccountLinkRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMerchantCenterAccountLinkRequest merchantCenterAccountLink */
+                    merchantCenterAccountLink?: (google.cloud.retail.v2alpha.IMerchantCenterAccountLink|null);
+                }
+
+                /** Represents a CreateMerchantCenterAccountLinkRequest. */
+                class CreateMerchantCenterAccountLinkRequest implements ICreateMerchantCenterAccountLinkRequest {
+
+                    /**
+                     * Constructs a new CreateMerchantCenterAccountLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest);
+
+                    /** CreateMerchantCenterAccountLinkRequest parent. */
+                    public parent: string;
+
+                    /** CreateMerchantCenterAccountLinkRequest merchantCenterAccountLink. */
+                    public merchantCenterAccountLink?: (google.cloud.retail.v2alpha.IMerchantCenterAccountLink|null);
+
+                    /**
+                     * Creates a new CreateMerchantCenterAccountLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMerchantCenterAccountLinkRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMerchantCenterAccountLinkRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message CreateMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Decodes a CreateMerchantCenterAccountLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Verifies a CreateMerchantCenterAccountLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMerchantCenterAccountLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMerchantCenterAccountLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMerchantCenterAccountLinkRequest message. Also converts values to other types if specified.
+                     * @param message CreateMerchantCenterAccountLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMerchantCenterAccountLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMerchantCenterAccountLinkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMerchantCenterAccountLinkRequest. */
+                interface IDeleteMerchantCenterAccountLinkRequest {
+
+                    /** DeleteMerchantCenterAccountLinkRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMerchantCenterAccountLinkRequest. */
+                class DeleteMerchantCenterAccountLinkRequest implements IDeleteMerchantCenterAccountLinkRequest {
+
+                    /**
+                     * Constructs a new DeleteMerchantCenterAccountLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest);
+
+                    /** DeleteMerchantCenterAccountLinkRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMerchantCenterAccountLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMerchantCenterAccountLinkRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Encodes the specified DeleteMerchantCenterAccountLinkRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message DeleteMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMerchantCenterAccountLinkRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest.verify|verify} messages.
+                     * @param message DeleteMerchantCenterAccountLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMerchantCenterAccountLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Decodes a DeleteMerchantCenterAccountLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMerchantCenterAccountLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Verifies a DeleteMerchantCenterAccountLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMerchantCenterAccountLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMerchantCenterAccountLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMerchantCenterAccountLinkRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMerchantCenterAccountLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.DeleteMerchantCenterAccountLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMerchantCenterAccountLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMerchantCenterAccountLinkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Model. */
                 interface IModel {
 
@@ -28658,6 +31683,20 @@ export namespace google {
                     public createModel(request: google.cloud.retail.v2alpha.ICreateModelRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public getModel(request: google.cloud.retail.v2alpha.IGetModelRequest, callback: google.cloud.retail.v2alpha.ModelService.GetModelCallback): void;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getModel(request: google.cloud.retail.v2alpha.IGetModelRequest): Promise<google.cloud.retail.v2alpha.Model>;
+
+                    /**
                      * Calls PauseModel.
                      * @param request PauseModelRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Model
@@ -28750,6 +31789,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2alpha.ModelService|getModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type GetModelCallback = (error: (Error|null), response?: google.cloud.retail.v2alpha.Model) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.retail.v2alpha.ModelService|pauseModel}.
@@ -29000,6 +32046,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetModelRequest. */
+                interface IGetModelRequest {
+
+                    /** GetModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetModelRequest. */
+                class GetModelRequest implements IGetModelRequest {
+
+                    /**
+                     * Constructs a new GetModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.IGetModelRequest);
+
+                    /** GetModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.IGetModelRequest): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.retail.v2alpha.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Verifies a GetModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.GetModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                     * @param message GetModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.GetModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetModelRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -30892,6 +34035,9 @@ export namespace google {
 
                     /** DeleteProductRequest name */
                     name?: (string|null);
+
+                    /** DeleteProductRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteProductRequest. */
@@ -30905,6 +34051,9 @@ export namespace google {
 
                     /** DeleteProductRequest name. */
                     public name: string;
+
+                    /** DeleteProductRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteProductRequest instance using the specified properties.
@@ -41006,6 +44155,9 @@ export namespace google {
 
                     /** UserEvent pageViewId */
                     pageViewId?: (string|null);
+
+                    /** UserEvent entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a UserEvent. */
@@ -41076,6 +44228,9 @@ export namespace google {
 
                     /** UserEvent pageViewId. */
                     public pageViewId: string;
+
+                    /** UserEvent entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new UserEvent instance using the specified properties.
@@ -43410,6 +46565,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions */
                     maxSuggestions?: (number|null);
+
+                    /** CompleteQueryRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -43441,6 +46599,9 @@ export namespace google {
 
                     /** CompleteQueryRequest maxSuggestions. */
                     public maxSuggestions: number;
+
+                    /** CompleteQueryRequest entity. */
+                    public entity: string;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -44078,6 +47239,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec */
                     spellCorrectionSpec?: (google.cloud.retail.v2beta.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity */
+                    entity?: (string|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -44151,6 +47315,9 @@ export namespace google {
 
                     /** SearchRequest spellCorrectionSpec. */
                     public spellCorrectionSpec?: (google.cloud.retail.v2beta.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest entity. */
+                    public entity: string;
 
                     /** SearchRequest _spellCorrectionSpec. */
                     public _spellCorrectionSpec?: "spellCorrectionSpec";
@@ -45184,6 +48351,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs */
                     invalidConditionBoostSpecs?: (google.cloud.retail.v2beta.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+
+                    /** SearchResponse experimentInfo */
+                    experimentInfo?: (google.cloud.retail.v2beta.IExperimentInfo[]|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -45224,6 +48394,9 @@ export namespace google {
 
                     /** SearchResponse invalidConditionBoostSpecs. */
                     public invalidConditionBoostSpecs: google.cloud.retail.v2beta.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                    /** SearchResponse experimentInfo. */
+                    public experimentInfo: google.cloud.retail.v2beta.IExperimentInfo[];
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
@@ -45765,6 +48938,218 @@ export namespace google {
 
                         /**
                          * Gets the default type url for QueryExpansionInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExperimentInfo. */
+                interface IExperimentInfo {
+
+                    /** ExperimentInfo servingConfigExperiment */
+                    servingConfigExperiment?: (google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment */
+                    experiment?: (string|null);
+                }
+
+                /** Represents an ExperimentInfo. */
+                class ExperimentInfo implements IExperimentInfo {
+
+                    /**
+                     * Constructs a new ExperimentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExperimentInfo);
+
+                    /** ExperimentInfo servingConfigExperiment. */
+                    public servingConfigExperiment?: (google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment|null);
+
+                    /** ExperimentInfo experiment. */
+                    public experiment: string;
+
+                    /** ExperimentInfo experimentMetadata. */
+                    public experimentMetadata?: "servingConfigExperiment";
+
+                    /**
+                     * Creates a new ExperimentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentInfo instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExperimentInfo): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentInfo message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.verify|verify} messages.
+                     * @param message ExperimentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExperimentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Decodes an ExperimentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Verifies an ExperimentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExperimentInfo;
+
+                    /**
+                     * Creates a plain object from an ExperimentInfo message. Also converts values to other types if specified.
+                     * @param message ExperimentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExperimentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentInfo {
+
+                    /** Properties of a ServingConfigExperiment. */
+                    interface IServingConfigExperiment {
+
+                        /** ServingConfigExperiment originalServingConfig */
+                        originalServingConfig?: (string|null);
+
+                        /** ServingConfigExperiment experimentServingConfig */
+                        experimentServingConfig?: (string|null);
+                    }
+
+                    /** Represents a ServingConfigExperiment. */
+                    class ServingConfigExperiment implements IServingConfigExperiment {
+
+                        /**
+                         * Constructs a new ServingConfigExperiment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment);
+
+                        /** ServingConfigExperiment originalServingConfig. */
+                        public originalServingConfig: string;
+
+                        /** ServingConfigExperiment experimentServingConfig. */
+                        public experimentServingConfig: string;
+
+                        /**
+                         * Creates a new ServingConfigExperiment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServingConfigExperiment instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServingConfigExperiment message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment.verify|verify} messages.
+                         * @param message ServingConfigExperiment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.ExperimentInfo.IServingConfigExperiment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Decodes a ServingConfigExperiment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServingConfigExperiment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Verifies a ServingConfigExperiment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServingConfigExperiment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServingConfigExperiment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment;
+
+                        /**
+                         * Creates a plain object from a ServingConfigExperiment message. Also converts values to other types if specified.
+                         * @param message ServingConfigExperiment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.ExperimentInfo.ServingConfigExperiment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServingConfigExperiment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServingConfigExperiment
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -47589,6 +50974,20 @@ export namespace google {
                     public createModel(request: google.cloud.retail.v2beta.ICreateModelRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public getModel(request: google.cloud.retail.v2beta.IGetModelRequest, callback: google.cloud.retail.v2beta.ModelService.GetModelCallback): void;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getModel(request: google.cloud.retail.v2beta.IGetModelRequest): Promise<google.cloud.retail.v2beta.Model>;
+
+                    /**
                      * Calls PauseModel.
                      * @param request PauseModelRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Model
@@ -47681,6 +51080,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2beta.ModelService|getModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type GetModelCallback = (error: (Error|null), response?: google.cloud.retail.v2beta.Model) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.retail.v2beta.ModelService|pauseModel}.
@@ -47931,6 +51337,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetModelRequest. */
+                interface IGetModelRequest {
+
+                    /** GetModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetModelRequest. */
+                class GetModelRequest implements IGetModelRequest {
+
+                    /**
+                     * Constructs a new GetModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IGetModelRequest);
+
+                    /** GetModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IGetModelRequest): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.retail.v2beta.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Verifies a GetModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.GetModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                     * @param message GetModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.GetModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetModelRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

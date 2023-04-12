@@ -264,6 +264,133 @@ describe('v2alpha.ModelServiceClient', () => {
     });
   });
 
+  describe('getModel', () => {
+    it('invokes getModel without error', async () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.Model()
+      );
+      client.innerApiCalls.getModel = stubSimpleCall(expectedResponse);
+      const [response] = await client.getModel(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getModel without error using callback', async () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.Model()
+      );
+      client.innerApiCalls.getModel =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getModel(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.retail.v2alpha.IModel | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getModel with error', async () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getModel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getModel with closed client', async () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getModel(request), expectedError);
+    });
+  });
+
   describe('pauseModel', () => {
     it('invokes pauseModel without error', async () => {
       const client = new modelserviceModule.v2alpha.ModelServiceClient({
@@ -2245,6 +2372,103 @@ describe('v2alpha.ModelServiceClient', () => {
         assert.strictEqual(result, 'controlValue');
         assert(
           (client.pathTemplates.controlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('merchantCenterAccountLink', () => {
+      const fakePath = '/rendered/path/merchantCenterAccountLink';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        merchant_center_account_link: 'merchantCenterAccountLinkValue',
+      };
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.merchantCenterAccountLinkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('merchantCenterAccountLinkPath', () => {
+        const result = client.merchantCenterAccountLinkPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'merchantCenterAccountLinkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchProjectFromMerchantCenterAccountLinkName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchLocationFromMerchantCenterAccountLinkName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchCatalogFromMerchantCenterAccountLinkName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName', () => {
+        const result =
+          client.matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
+            fakePath
+          );
+        assert.strictEqual(result, 'merchantCenterAccountLinkValue');
+        assert(
+          (
+            client.pathTemplates.merchantCenterAccountLinkPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

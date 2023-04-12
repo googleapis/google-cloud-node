@@ -21128,6 +21128,14 @@
                         "enableLogging": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "notificationChannels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                          }
                         }
                       },
                       "nested": {

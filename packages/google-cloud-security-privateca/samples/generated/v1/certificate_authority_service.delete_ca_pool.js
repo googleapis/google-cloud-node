@@ -48,6 +48,13 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. This field allows this pool to be deleted even if it's being
+   *  depended on by another resource. However, doing so may result in unintended
+   *  and unrecoverable effects on any dependent resource(s) since the pool will
+   *  no longer be able to issue certificates.
+   */
+  // const ignoreDependentResources = true
 
   // Imports the Privateca library
   const {CertificateAuthorityServiceClient} = require('@google-cloud/security-private-ca').v1;

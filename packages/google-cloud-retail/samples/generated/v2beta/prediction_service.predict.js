@@ -100,6 +100,8 @@ function main(placement, userEvent) {
    *   * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
    *   * (availability: ANY("IN_STOCK")) AND
    *     (colors: ANY("Red") OR categories: ANY("Phones"))
+   *  For more information, see
+   *  Filter recommendations (https://cloud.google.com/retail/docs/filter-recs).
    */
   // const filter = 'abc123'
   /**

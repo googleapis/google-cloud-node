@@ -1134,6 +1134,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "podCidrOverprovisionConfig": {
+                      "type": "PodCIDROverprovisionConfig",
+                      "id": 13
                     }
                   },
                   "nested": {
@@ -1621,6 +1625,14 @@
                     }
                   }
                 },
+                "PodCIDROverprovisionConfig": {
+                  "fields": {
+                    "disable": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "IPAllocationPolicy": {
                   "fields": {
                     "useIpAliases": {
@@ -1692,6 +1704,10 @@
                       "type": "IPv6AccessType",
                       "id": 17
                     },
+                    "podCidrOverprovisionConfig": {
+                      "type": "PodCIDROverprovisionConfig",
+                      "id": 21
+                    },
                     "subnetIpv6CidrBlock": {
                       "type": "string",
                       "id": 22,
@@ -1702,6 +1718,13 @@
                     "servicesIpv6CidrBlock": {
                       "type": "string",
                       "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "additionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 24,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
@@ -2220,8 +2243,19 @@
                     "desiredStackType": {
                       "type": "StackType",
                       "id": 119
+                    },
+                    "additionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 120
+                    },
+                    "removedAdditionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 121
                     }
                   }
+                },
+                "AdditionalPodRangesConfig": {
+                  "fields": {}
                 },
                 "Operation": {
                   "fields": {
@@ -6135,6 +6169,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "podCidrOverprovisionConfig": {
+                      "type": "PodCIDROverprovisionConfig",
+                      "id": 13
                     }
                   },
                   "nested": {
@@ -6680,6 +6718,14 @@
                     }
                   }
                 },
+                "PodCIDROverprovisionConfig": {
+                  "fields": {
+                    "disable": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "IPAllocationPolicy": {
                   "fields": {
                     "useIpAliases": {
@@ -6755,6 +6801,10 @@
                       "type": "IPv6AccessType",
                       "id": 17
                     },
+                    "podCidrOverprovisionConfig": {
+                      "type": "PodCIDROverprovisionConfig",
+                      "id": 21
+                    },
                     "subnetIpv6CidrBlock": {
                       "type": "string",
                       "id": 22,
@@ -6765,6 +6815,13 @@
                     "servicesIpv6CidrBlock": {
                       "type": "string",
                       "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "additionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 24,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
@@ -7523,8 +7580,19 @@
                     "desiredStackType": {
                       "type": "StackType",
                       "id": 119
+                    },
+                    "additionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 120
+                    },
+                    "removedAdditionalPodRangesConfig": {
+                      "type": "AdditionalPodRangesConfig",
+                      "id": 121
                     }
                   }
+                },
+                "AdditionalPodRangesConfig": {
+                  "fields": {}
                 },
                 "Operation": {
                   "fields": {
