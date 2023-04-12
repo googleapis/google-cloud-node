@@ -15269,6 +15269,7 @@
                         case 0:
                         case 1:
                         case 2:
+                        case 3:
                             break;
                         }
                     if (message.authentication != null && message.hasOwnProperty("authentication"))
@@ -15317,6 +15318,8 @@
                         case 1:
                         case 2:
                         case 3:
+                        case 4:
+                        case 5:
                             break;
                         }
                     if (message.integrityImpact != null && message.hasOwnProperty("integrityImpact"))
@@ -15327,6 +15330,8 @@
                         case 1:
                         case 2:
                         case 3:
+                        case 4:
+                        case 5:
                             break;
                         }
                     if (message.availabilityImpact != null && message.hasOwnProperty("availabilityImpact"))
@@ -15337,6 +15342,8 @@
                         case 1:
                         case 2:
                         case 3:
+                        case 4:
+                        case 5:
                             break;
                         }
                     return null;
@@ -15406,6 +15413,10 @@
                     case "ATTACK_COMPLEXITY_HIGH":
                     case 2:
                         message.attackComplexity = 2;
+                        break;
+                    case "ATTACK_COMPLEXITY_MEDIUM":
+                    case 3:
+                        message.attackComplexity = 3;
                         break;
                     }
                     switch (object.authentication) {
@@ -15519,6 +15530,14 @@
                     case 3:
                         message.confidentialityImpact = 3;
                         break;
+                    case "IMPACT_PARTIAL":
+                    case 4:
+                        message.confidentialityImpact = 4;
+                        break;
+                    case "IMPACT_COMPLETE":
+                    case 5:
+                        message.confidentialityImpact = 5;
+                        break;
                     }
                     switch (object.integrityImpact) {
                     default:
@@ -15543,6 +15562,14 @@
                     case 3:
                         message.integrityImpact = 3;
                         break;
+                    case "IMPACT_PARTIAL":
+                    case 4:
+                        message.integrityImpact = 4;
+                        break;
+                    case "IMPACT_COMPLETE":
+                    case 5:
+                        message.integrityImpact = 5;
+                        break;
                     }
                     switch (object.availabilityImpact) {
                     default:
@@ -15566,6 +15593,14 @@
                     case "IMPACT_NONE":
                     case 3:
                         message.availabilityImpact = 3;
+                        break;
+                    case "IMPACT_PARTIAL":
+                    case 4:
+                        message.availabilityImpact = 4;
+                        break;
+                    case "IMPACT_COMPLETE":
+                    case 5:
+                        message.availabilityImpact = 5;
                         break;
                     }
                     return message;
@@ -15678,12 +15713,14 @@
                  * @property {number} ATTACK_COMPLEXITY_UNSPECIFIED=0 ATTACK_COMPLEXITY_UNSPECIFIED value
                  * @property {number} ATTACK_COMPLEXITY_LOW=1 ATTACK_COMPLEXITY_LOW value
                  * @property {number} ATTACK_COMPLEXITY_HIGH=2 ATTACK_COMPLEXITY_HIGH value
+                 * @property {number} ATTACK_COMPLEXITY_MEDIUM=3 ATTACK_COMPLEXITY_MEDIUM value
                  */
                 CVSS.AttackComplexity = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[0] = "ATTACK_COMPLEXITY_UNSPECIFIED"] = 0;
                     values[valuesById[1] = "ATTACK_COMPLEXITY_LOW"] = 1;
                     values[valuesById[2] = "ATTACK_COMPLEXITY_HIGH"] = 2;
+                    values[valuesById[3] = "ATTACK_COMPLEXITY_MEDIUM"] = 3;
                     return values;
                 })();
     
@@ -15763,6 +15800,8 @@
                  * @property {number} IMPACT_HIGH=1 IMPACT_HIGH value
                  * @property {number} IMPACT_LOW=2 IMPACT_LOW value
                  * @property {number} IMPACT_NONE=3 IMPACT_NONE value
+                 * @property {number} IMPACT_PARTIAL=4 IMPACT_PARTIAL value
+                 * @property {number} IMPACT_COMPLETE=5 IMPACT_COMPLETE value
                  */
                 CVSS.Impact = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
@@ -15770,6 +15809,8 @@
                     values[valuesById[1] = "IMPACT_HIGH"] = 1;
                     values[valuesById[2] = "IMPACT_LOW"] = 2;
                     values[valuesById[3] = "IMPACT_NONE"] = 3;
+                    values[valuesById[4] = "IMPACT_PARTIAL"] = 4;
+                    values[valuesById[5] = "IMPACT_COMPLETE"] = 5;
                     return values;
                 })();
     
