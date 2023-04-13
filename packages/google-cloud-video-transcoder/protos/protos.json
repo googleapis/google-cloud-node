@@ -105,6 +105,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "mode": {
+                              "type": "ProcessingMode",
+                              "id": 20
                             }
                           },
                           "nested": {
@@ -115,6 +119,13 @@
                                 "RUNNING": 2,
                                 "SUCCEEDED": 3,
                                 "FAILED": 4
+                              }
+                            },
+                            "ProcessingMode": {
+                              "values": {
+                                "PROCESSING_MODE_UNSPECIFIED": 0,
+                                "PROCESSING_MODE_INTERACTIVE": 1,
+                                "PROCESSING_MODE_BATCH": 2
                               }
                             }
                           }
