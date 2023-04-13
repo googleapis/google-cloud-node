@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [3.1.3](https://github.com/googleapis/nodejs-automl/compare/v3.1.2...v3.1.3) (2023-04-02)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#701](https://github.com/googleapis/nodejs-automl/issues/701)) ([ed4b83e](https://github.com/googleapis/nodejs-automl/commit/ed4b83ecec7a6fce1c82a2aba42aaf07f95da153))
+* Regenerated protos JS and TS definitions ([#705](https://github.com/googleapis/nodejs-automl/issues/705)) ([8eb6181](https://github.com/googleapis/nodejs-automl/commit/8eb6181996fdc36b21d48e9589e0a4ab35cf6874))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-automl/compare/v3.1.1...v3.1.2) (2022-09-22)
 
 
