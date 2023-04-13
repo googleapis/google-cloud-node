@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import type * as gax from 'google-gax';
+import * as gax from 'google-gax';
 import type {
   Callback,
   CallOptions,
@@ -29,19 +29,23 @@ import type {
   GaxCall,
 } from 'google-gax';
 import {Transform} from 'stream';
-import * as protos from '../../protos/protos';
-const jsonProtos = JSON.parse(fs.readFileSync('../../protos/protos.json', 'utf8'));
+import * as protos from '../../protos/protos.js';
+import path from 'path';
+import fs from 'fs';
+import {fileURLToPath} from 'url';
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
+const gapicConfig = JSON.parse(fs.readFileSync(path.join(dirname, 'translation_service_client_config.json'), 'utf8'));
+const jsonProtos = JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'));
 /**
  * Client JSON configuration object, loaded from
- * `src/v3beta1/translation_service_client_config.json`.
+ * `src/v3/translation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './translation_service_client_config.json';
-import * as fs from 'fs';
 const version = JSON.parse(
-  fs.readFileSync('../../../package.json').toString()
-).version;
+  fs.readFileSync(path.join(dirname,'..', '..', '..', '..', 'package.json'), 'utf8'
+)).version;
 
 /**
  *  Provides natural language translation operations.
@@ -141,7 +145,7 @@ export class TranslationServiceClient {
     // }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
+    this._gaxModule = opts.fallback ? gax.fallback : gax;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);

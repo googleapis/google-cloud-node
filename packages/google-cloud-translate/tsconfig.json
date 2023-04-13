@@ -4,9 +4,13 @@
     "rootDir": ".",
     "outDir": "build/cjs",
     "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "module": "ES2020",
+    "moduleResolution": "node",
     "lib": [
-      "es2018",
-      "dom"
+      "es2020",
+      "DOM"
     ]
   },
   "include": [

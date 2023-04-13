@@ -16,20 +16,25 @@ import {DecorateRequestOptions, util} from '@google-cloud/common';
 import {
   BodyResponseCallback,
   MakeRequestConfig,
-} from '@google-cloud/common/build/src/util';
-import * as pfy from '@google-cloud/promisify';
-import * as assert from 'assert';
+} from '@google-cloud/common/build/src/util.js';
+import pfy from '@google-cloud/promisify';
+import assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
-import * as extend from 'extend';
+import extend from 'extend';
 import esmock from 'esmock';
-import * as r from 'request';
-import * as fs from 'fs';
-import * as orig from '../src';
+import r from 'request';
+import fs from 'fs';
+import * as orig from '../src/index.js';
+import path from 'path';
+import {fileURLToPath} from 'url';
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkgJson = JSON.parse(
-  fs.readFileSync('../../../package.json').toString()
-);
+  fs.readFileSync(path.join(dirname,'..', '..', '..', 'package.json'), 'utf8'
+));
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let makeRequestOverride: any;

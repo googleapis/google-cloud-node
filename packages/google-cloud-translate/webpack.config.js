@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {fileURLToPath} from 'url';
-import * as path from 'path';
+import path from 'path';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 module.exports = {

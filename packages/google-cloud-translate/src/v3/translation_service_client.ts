@@ -17,7 +17,6 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import type * as gax from 'google-gax';
 import type {
   Callback,
   CallOptions,
@@ -28,19 +27,24 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
+import gax from 'google-gax'
 import {Transform} from 'stream';
-import * as protos from '../../protos/protos';
-import * as fs from 'fs';
-const jsonProtos = JSON.parse(fs.readFileSync('../../protos/protos.json', 'utf8'));
+import * as protos from '../../protos/protos.js';
+import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/translation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './translation_service_client_config.json';
+const gapicConfig = JSON.parse(fs.readFileSync(path.join(dirname, 'translation_service_client_config.json'), 'utf8'));
+const jsonProtos = JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'));
 const version = JSON.parse(
-  fs.readFileSync('../../../package.json').toString()
-).version;
+  fs.readFileSync(path.join(dirname,'..', '..', '..', '..', 'package.json'), 'utf8'
+)).version;
 
 /**
  *  Provides natural language translation operations.
@@ -135,9 +139,10 @@ export class TranslationServiceClient {
     }
 
     // // Load google-gax module synchronously if needed
-    // if (!gaxInstance) {
-    //   gaxInstance = require('google-gax') as typeof gax;
-    // }
+    if (!gaxInstance) {
+      console.log('no gax instance?')
+      gaxInstance = gax as typeof gax;
+    }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
     this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
@@ -178,7 +183,7 @@ export class TranslationServiceClient {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos as gax.protobuf.INamespace);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -203,7 +208,7 @@ export class TranslationServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos as gax.protobuf.INamespace);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.

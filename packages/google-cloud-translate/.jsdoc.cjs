@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
-
 module.exports = {
   opts: {
     readme: './README.md',

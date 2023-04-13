@@ -7,9 +7,14 @@
         "module": "es2020",
         "moduleResolution": "node",
         "esModuleInterop": true,
-        "lib": ["ES2020"]
+        "sourceMap": false,
+        "lib": ["ES2020",  "DOM"]
     },
     "include": [
-        "src/*.ts"
+        "src/*.ts",
+        "src/**/*.ts",
+        "test/*.ts",
+        "test/**/*.ts",
+        "system-test/*.ts"
     ]
 }

@@ -16,20 +16,27 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as protos from '../protos/protos';
-import * as assert from 'assert';
-import * as sinon from 'sinon';
+import * as protos from '../protos/protos.js';
+import assert from 'assert';
+import sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as translationserviceModule from '../src';
-import * as fs from 'fs';
+import * as translationserviceModule from '../src/index.js';
 import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(JSON.parse(fs.readFileSync('../../protos/protos.json', 'utf8'))).resolveAll();
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'))).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {

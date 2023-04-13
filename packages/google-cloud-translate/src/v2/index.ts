@@ -15,20 +15,21 @@
 import {Service, util, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify from 'arrify';
-import * as extend from 'extend';
+import extend from 'extend';
 import * as fs from 'fs';
 import {GoogleAuthOptions} from 'google-auth-library';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import * as isHtml from 'is-html';
+import isHtml from 'is-html';
 import {
   DecorateRequestOptions,
   BodyResponseCallback,
-} from '@google-cloud/common/build/src/util';
+} from '@google-cloud/common/build/src/util.js';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import * as path from 'path';
+import {fileURLToPath} from 'url';
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 const PKG = JSON.parse(
-  fs.readFileSync('../../../package.json').toString()
+  fs.readFileSync(path.join(dirname, '..', '..', '..', '..', 'package.json')).toString()
 );
 
 export interface TranslateRequest {
