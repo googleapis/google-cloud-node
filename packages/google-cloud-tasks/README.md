@@ -58,7 +58,7 @@ npm install @google-cloud/tasks
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
