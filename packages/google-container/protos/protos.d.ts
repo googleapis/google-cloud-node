@@ -26570,6 +26570,9 @@ export namespace google {
 
             /** Properties of an AdditionalPodRangesConfig. */
             interface IAdditionalPodRangesConfig {
+
+                /** AdditionalPodRangesConfig podRangeNames */
+                podRangeNames?: (string[]|null);
             }
 
             /** Represents an AdditionalPodRangesConfig. */
@@ -26580,6 +26583,9 @@ export namespace google {
                  * @param [properties] Properties to set
                  */
                 constructor(properties?: google.container.v1beta1.IAdditionalPodRangesConfig);
+
+                /** AdditionalPodRangesConfig podRangeNames. */
+                public podRangeNames: string[];
 
                 /**
                  * Creates a new AdditionalPodRangesConfig instance using the specified properties.
