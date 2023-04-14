@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/iap",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "iap client for Node.js",
   "repository": {
     "type": "git",
