@@ -140,9 +140,8 @@ export class TranslationServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
-    // // Load google-gax module synchronously if needed
+    // Load google-gax module synchronously if needed
     if (!gaxInstance) {
-      console.log('no gax instance?')
       gaxInstance = gax as typeof gax;
     }
 

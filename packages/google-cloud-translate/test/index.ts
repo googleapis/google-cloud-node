@@ -81,15 +81,13 @@ describe('Translate v2', () => {
   let translate: any;
 
   before(async () => {
-    Translate = await esmock('../src/v2/index.js', {
+    Translate = (await esmock('../src/v2/index.js', {
       '@google-cloud/common': {
         util: fakeUtil,
         Service: FakeService,
       },
       '@google-cloud/promisify': fakePromisify,
-    });
-
-    console.log(Translate);
+    }) as any).Translate;
   });
 
   beforeEach(() => {
@@ -100,7 +98,7 @@ describe('Translate v2', () => {
   });
 
   describe('instantiation', () => {
-    it.only('should promisify all the things', () => {
+    it('should promisify all the things', () => {
       assert(promisified);
     });
 

@@ -6,10 +6,10 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "sourceMap": false,
-    "module": "ES2020",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "lib": [
-      "es2020",
+      "ES2020",
       "DOM"
     ]
   },

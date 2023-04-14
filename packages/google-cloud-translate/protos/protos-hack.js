@@ -13,15 +13,8 @@
 // limitations under the License.
 
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-(function(global, factory) { /* global define, require, module */
-
-    /* AMD */ if (typeof define === 'function' && define.amd)
-        define(["protobufjs/minimal"], factory);
-
-    /* CommonJS */ else if (typeof require === 'function' && typeof module === 'object' && module && module.exports)
-        module.exports = factory(require("google-gax/build/src/protobuf").protobufMinimal);
-
-})(this, function($protobuf) {
+import protobuf from "google-gax/build/src/protobuf.js";
+function main ($protobuf) {
     "use strict";
 
     // Common aliases
@@ -42454,4 +42447,6 @@
     })();
 
     return $root;
-});
+};
+
+export default main(protobuf.protobufMinimal);

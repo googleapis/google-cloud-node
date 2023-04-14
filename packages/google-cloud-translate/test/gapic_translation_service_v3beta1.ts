@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import protos from '../protos/protos.js';
+import protos from '../protos/protos-hack.js';
 import assert from 'assert';
 import sinon from 'sinon';
 import {SinonStub} from 'sinon';

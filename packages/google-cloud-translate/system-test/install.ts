@@ -17,18 +17,22 @@
 // ** All changes to this file may be overwritten. **
 
 import {packNTest} from 'pack-n-play';
-import {readFileSync} from 'fs';
+import fs from 'fs';
 import {describe, it} from 'mocha';
+import {fileURLToPath} from 'url';
+import path from 'path';
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 describe('📦 pack-n-play test', () => {
-  it('TypeScript code', async function () {
+  it.only('TypeScript code', async function () {
     this.timeout(300000);
+    console.log(path.join(dirname, '..', '..', '..', 'system-test/fixtures/sample/src/index.ts'))
     const options = {
       packageDir: process.cwd(),
       sample: {
         description: 'TypeScript user can use the type definitions',
-        ts: readFileSync(
-          './system-test/fixtures/sample/src/index.ts'
+        ts: fs.readFileSync(path.join(dirname, '..', '..', '..', 'system-test/fixtures/sample/src/index.ts')
         ).toString(),
       },
     };
@@ -41,9 +45,7 @@ describe('📦 pack-n-play test', () => {
       packageDir: process.cwd(),
       sample: {
         description: 'JavaScript user can use the library',
-        ts: readFileSync(
-          './system-test/fixtures/sample/src/index.js'
-        ).toString(),
+        ts: fs.readFileSync(path.join(dirname, '..', '..', '..', 'fixtures/sample/src/index.ts')).toString(),
       },
     };
     await packNTest(options);

@@ -31,7 +31,6 @@
     "build/src",
     "build/esm",
     "build/protos",
-    "!build/src/**/*.map",
     "!build/src/**/*.map"
   ],
   "keywords": [
@@ -51,11 +50,11 @@
     "predocs": "npm run compile",
     "lint": "gts check",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/esm/system-test",
     "test": "c8 mocha --loader=esmock build/esm/test",
     "compile:esm": "tsc -p ./tsconfig.esm.json",
     "compile:cjs": "tsc -p .",
-    "compile": "npm run compile:cjs && npm run compile:esm && cp -r protos build/ && cp -r protos build/esm && minifyProtoJson",
+    "compile": "npm run compile:esm && cp -r protos build/ && cp -r protos build/esm && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile",
