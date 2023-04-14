@@ -16831,6 +16831,10 @@
                         "etag": {
                           "type": "string",
                           "id": 9
+                        },
+                        "isDefault": {
+                          "type": "bool",
+                          "id": 12
                         }
                       }
                     },
@@ -37744,6 +37748,10 @@
                         "etag": {
                           "type": "string",
                           "id": 9
+                        },
+                        "isDefault": {
+                          "type": "bool",
+                          "id": 12
                         }
                       }
                     },
