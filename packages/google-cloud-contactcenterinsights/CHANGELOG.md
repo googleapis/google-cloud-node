@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.5.0...contact-center-insights-v2.6.0) (2023-04-13)
+
+
+### Features
+
+* [contactcenterinsights] Launch UploadConversation endpoint ([#4155](https://github.com/googleapis/google-cloud-node/issues/4155)) ([7e0c879](https://github.com/googleapis/google-cloud-node/commit/7e0c879b35e863135e381c78835244d3d5f9a9a7))
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.4.1...contact-center-insights-v2.5.0) (2023-03-06)
 
 

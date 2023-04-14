@@ -1,6 +1,6 @@
 {
   "name": "@google/area120-tables",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Tables client for Node.js",
   "repository": {
     "type": "git",
