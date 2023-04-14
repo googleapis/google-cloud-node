@@ -2204,109 +2204,6 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of a GamVodConfig. */
-                    interface IGamVodConfig {
-
-                        /** GamVodConfig networkCode */
-                        networkCode?: (string|null);
-
-                        /** GamVodConfig streamId */
-                        streamId?: (string|null);
-                    }
-
-                    /** Represents a GamVodConfig. */
-                    class GamVodConfig implements IGamVodConfig {
-
-                        /**
-                         * Constructs a new GamVodConfig.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.video.stitcher.v1.IGamVodConfig);
-
-                        /** GamVodConfig networkCode. */
-                        public networkCode: string;
-
-                        /** GamVodConfig streamId. */
-                        public streamId: string;
-
-                        /**
-                         * Creates a new GamVodConfig instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns GamVodConfig instance
-                         */
-                        public static create(properties?: google.cloud.video.stitcher.v1.IGamVodConfig): google.cloud.video.stitcher.v1.GamVodConfig;
-
-                        /**
-                         * Encodes the specified GamVodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
-                         * @param message GamVodConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.video.stitcher.v1.IGamVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified GamVodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
-                         * @param message GamVodConfig message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IGamVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a GamVodConfig message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns GamVodConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.GamVodConfig;
-
-                        /**
-                         * Decodes a GamVodConfig message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns GamVodConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.GamVodConfig;
-
-                        /**
-                         * Verifies a GamVodConfig message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a GamVodConfig message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns GamVodConfig
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.GamVodConfig;
-
-                        /**
-                         * Creates a plain object from a GamVodConfig message. Also converts values to other types if specified.
-                         * @param message GamVodConfig
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.video.stitcher.v1.GamVodConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this GamVodConfig to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for GamVodConfig
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
                     /** Properties of a VodSession. */
                     interface IVodSession {
 
@@ -2337,8 +2234,8 @@ export namespace google {
                         /** VodSession adTracking */
                         adTracking?: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking|null);
 
-                        /** VodSession gamVodConfig */
-                        gamVodConfig?: (google.cloud.video.stitcher.v1.IGamVodConfig|null);
+                        /** VodSession gamSettings */
+                        gamSettings?: (google.cloud.video.stitcher.v1.VodSession.IGamSettings|null);
                     }
 
                     /** Represents a VodSession. */
@@ -2377,8 +2274,8 @@ export namespace google {
                         /** VodSession adTracking. */
                         public adTracking: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking);
 
-                        /** VodSession gamVodConfig. */
-                        public gamVodConfig?: (google.cloud.video.stitcher.v1.IGamVodConfig|null);
+                        /** VodSession gamSettings. */
+                        public gamSettings?: (google.cloud.video.stitcher.v1.VodSession.IGamSettings|null);
 
                         /**
                          * Creates a new VodSession instance using the specified properties.
@@ -2456,6 +2353,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VodSession {
+
+                        /** Properties of a GamSettings. */
+                        interface IGamSettings {
+
+                            /** GamSettings networkCode */
+                            networkCode?: (string|null);
+
+                            /** GamSettings streamId */
+                            streamId?: (string|null);
+                        }
+
+                        /** Represents a GamSettings. */
+                        class GamSettings implements IGamSettings {
+
+                            /**
+                             * Constructs a new GamSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.stitcher.v1.VodSession.IGamSettings);
+
+                            /** GamSettings networkCode. */
+                            public networkCode: string;
+
+                            /** GamSettings streamId. */
+                            public streamId: string;
+
+                            /**
+                             * Creates a new GamSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GamSettings instance
+                             */
+                            public static create(properties?: google.cloud.video.stitcher.v1.VodSession.IGamSettings): google.cloud.video.stitcher.v1.VodSession.GamSettings;
+
+                            /**
+                             * Encodes the specified GamSettings message. Does not implicitly {@link google.cloud.video.stitcher.v1.VodSession.GamSettings.verify|verify} messages.
+                             * @param message GamSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.stitcher.v1.VodSession.IGamSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GamSettings message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.VodSession.GamSettings.verify|verify} messages.
+                             * @param message GamSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.stitcher.v1.VodSession.IGamSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GamSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GamSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.VodSession.GamSettings;
+
+                            /**
+                             * Decodes a GamSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GamSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.VodSession.GamSettings;
+
+                            /**
+                             * Verifies a GamSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GamSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GamSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.VodSession.GamSettings;
+
+                            /**
+                             * Creates a plain object from a GamSettings message. Also converts values to other types if specified.
+                             * @param message GamSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.stitcher.v1.VodSession.GamSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GamSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GamSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of an Interstitials. */
@@ -3014,12 +3017,6 @@ export namespace google {
                         /** Properties of a GamSettings. */
                         interface IGamSettings {
 
-                            /** GamSettings gamHls */
-                            gamHls?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls|null);
-
-                            /** GamSettings gamDash */
-                            gamDash?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash|null);
-
                             /** GamSettings streamId */
                             streamId?: (string|null);
                         }
@@ -3033,17 +3030,8 @@ export namespace google {
                              */
                             constructor(properties?: google.cloud.video.stitcher.v1.LiveSession.IGamSettings);
 
-                            /** GamSettings gamHls. */
-                            public gamHls?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls|null);
-
-                            /** GamSettings gamDash. */
-                            public gamDash?: (google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash|null);
-
                             /** GamSettings streamId. */
                             public streamId: string;
-
-                            /** GamSettings manifestFields. */
-                            public manifestFields?: ("gamHls"|"gamDash");
 
                             /**
                              * Creates a new GamSettings instance using the specified properties.
@@ -3121,197 +3109,6 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-
-                        namespace GamSettings {
-
-                            /** Properties of a GamHls. */
-                            interface IGamHls {
-                            }
-
-                            /** Represents a GamHls. */
-                            class GamHls implements IGamHls {
-
-                                /**
-                                 * Constructs a new GamHls.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls);
-
-                                /**
-                                 * Creates a new GamHls instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns GamHls instance
-                                 */
-                                public static create(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
-
-                                /**
-                                 * Encodes the specified GamHls message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify|verify} messages.
-                                 * @param message GamHls message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified GamHls message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify|verify} messages.
-                                 * @param message GamHls message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes a GamHls message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns GamHls
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
-
-                                /**
-                                 * Decodes a GamHls message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns GamHls
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
-
-                                /**
-                                 * Verifies a GamHls message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates a GamHls message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns GamHls
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls;
-
-                                /**
-                                 * Creates a plain object from a GamHls message. Also converts values to other types if specified.
-                                 * @param message GamHls
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this GamHls to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-
-                                /**
-                                 * Gets the default type url for GamHls
-                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns The default type url
-                                 */
-                                public static getTypeUrl(typeUrlPrefix?: string): string;
-                            }
-
-                            /** Properties of a GamDash. */
-                            interface IGamDash {
-
-                                /** GamDash periodTemplateUri */
-                                periodTemplateUri?: (string|null);
-                            }
-
-                            /** Represents a GamDash. */
-                            class GamDash implements IGamDash {
-
-                                /**
-                                 * Constructs a new GamDash.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash);
-
-                                /** GamDash periodTemplateUri. */
-                                public periodTemplateUri: string;
-
-                                /**
-                                 * Creates a new GamDash instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns GamDash instance
-                                 */
-                                public static create(properties?: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
-
-                                /**
-                                 * Encodes the specified GamDash message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify|verify} messages.
-                                 * @param message GamDash message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified GamDash message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify|verify} messages.
-                                 * @param message GamDash message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes a GamDash message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns GamDash
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
-
-                                /**
-                                 * Decodes a GamDash message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns GamDash
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
-
-                                /**
-                                 * Verifies a GamDash message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates a GamDash message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns GamDash
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash;
-
-                                /**
-                                 * Creates a plain object from a GamDash message. Also converts values to other types if specified.
-                                 * @param message GamDash
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this GamDash to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-
-                                /**
-                                 * Gets the default type url for GamDash
-                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                 * @returns The default type url
-                                 */
-                                public static getTypeUrl(typeUrlPrefix?: string): string;
-                            }
                         }
                     }
 

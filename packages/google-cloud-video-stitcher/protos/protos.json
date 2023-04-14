@@ -480,24 +480,6 @@
                             }
                           }
                         },
-                        "GamVodConfig": {
-                          "fields": {
-                            "networkCode": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "streamId": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
                         "VodSession": {
                           "options": {
                             "(google.api.resource).type": "videostitcher.googleapis.com/VodSession",
@@ -562,9 +544,29 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             },
-                            "gamVodConfig": {
-                              "type": "GamVodConfig",
-                              "id": 12
+                            "gamSettings": {
+                              "type": "GamSettings",
+                              "id": 13
+                            }
+                          },
+                          "nested": {
+                            "GamSettings": {
+                              "fields": {
+                                "networkCode": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "streamId": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -672,44 +674,12 @@
                           },
                           "nested": {
                             "GamSettings": {
-                              "oneofs": {
-                                "manifestFields": {
-                                  "oneof": [
-                                    "gamHls",
-                                    "gamDash"
-                                  ]
-                                }
-                              },
                               "fields": {
-                                "gamHls": {
-                                  "type": "GamHls",
-                                  "id": 2
-                                },
-                                "gamDash": {
-                                  "type": "GamDash",
-                                  "id": 3
-                                },
                                 "streamId": {
                                   "type": "string",
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              },
-                              "nested": {
-                                "GamHls": {
-                                  "fields": {}
-                                },
-                                "GamDash": {
-                                  "fields": {
-                                    "periodTemplateUri": {
-                                      "type": "string",
-                                      "id": 1,
-                                      "options": {
-                                        "(google.api.field_behavior)": "REQUIRED"
-                                      }
-                                    }
                                   }
                                 }
                               }
@@ -863,8 +833,8 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/cdnKeys",
                                 "(google.api.http).body": "cdn_key",
                                 "(google.api.method_signature)": "parent,cdn_key,cdn_key_id",
-                                "(google.longrunning.operation_info).response_type": "CdnKey",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -878,8 +848,8 @@
                                 },
                                 {
                                   "(google.longrunning.operation_info)": {
-                                    "response_type": "CdnKey",
-                                    "metadata_type": "OperationMetadata"
+                                    "response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -927,7 +897,7 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/cdnKeys/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -941,7 +911,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "google.protobuf.Empty",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -953,8 +923,8 @@
                                 "(google.api.http).patch": "/v1/{cdn_key.name=projects/*/locations/*/cdnKeys/*}",
                                 "(google.api.http).body": "cdn_key",
                                 "(google.api.method_signature)": "cdn_key,update_mask",
-                                "(google.longrunning.operation_info).response_type": "CdnKey",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -968,8 +938,8 @@
                                 },
                                 {
                                   "(google.longrunning.operation_info)": {
-                                    "response_type": "CdnKey",
-                                    "metadata_type": "OperationMetadata"
+                                    "response_type": "google.cloud.video.stitcher.v1.CdnKey",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1127,8 +1097,8 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/slates",
                                 "(google.api.http).body": "slate",
                                 "(google.api.method_signature)": "parent,slate,slate_id",
-                                "(google.longrunning.operation_info).response_type": "Slate",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.Slate",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1142,8 +1112,8 @@
                                 },
                                 {
                                   "(google.longrunning.operation_info)": {
-                                    "response_type": "Slate",
-                                    "metadata_type": "OperationMetadata"
+                                    "response_type": "google.cloud.video.stitcher.v1.Slate",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1191,8 +1161,8 @@
                                 "(google.api.http).patch": "/v1/{slate.name=projects/*/locations/*/slates/*}",
                                 "(google.api.http).body": "slate",
                                 "(google.api.method_signature)": "slate,update_mask",
-                                "(google.longrunning.operation_info).response_type": "Slate",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.Slate",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1206,8 +1176,8 @@
                                 },
                                 {
                                   "(google.longrunning.operation_info)": {
-                                    "response_type": "Slate",
-                                    "metadata_type": "OperationMetadata"
+                                    "response_type": "google.cloud.video.stitcher.v1.Slate",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1219,7 +1189,7 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/slates/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1233,7 +1203,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "google.protobuf.Empty",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1283,8 +1253,8 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/liveConfigs",
                                 "(google.api.http).body": "live_config",
                                 "(google.api.method_signature)": "parent,live_config,live_config_id",
-                                "(google.longrunning.operation_info).response_type": "LiveConfig",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.LiveConfig",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1298,8 +1268,8 @@
                                 },
                                 {
                                   "(google.longrunning.operation_info)": {
-                                    "response_type": "LiveConfig",
-                                    "metadata_type": "OperationMetadata"
+                                    "response_type": "google.cloud.video.stitcher.v1.LiveConfig",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]
@@ -1347,7 +1317,7 @@
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/liveConfigs/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                               },
                               "parsedOptions": [
                                 {
@@ -1361,7 +1331,7 @@
                                 {
                                   "(google.longrunning.operation_info)": {
                                     "response_type": "google.protobuf.Empty",
-                                    "metadata_type": "OperationMetadata"
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
                                   }
                                 }
                               ]

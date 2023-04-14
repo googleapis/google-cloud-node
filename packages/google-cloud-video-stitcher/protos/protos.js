@@ -5585,233 +5585,6 @@
                             return GamLiveConfig;
                         })();
     
-                        v1.GamVodConfig = (function() {
-    
-                            /**
-                             * Properties of a GamVodConfig.
-                             * @memberof google.cloud.video.stitcher.v1
-                             * @interface IGamVodConfig
-                             * @property {string|null} [networkCode] GamVodConfig networkCode
-                             * @property {string|null} [streamId] GamVodConfig streamId
-                             */
-    
-                            /**
-                             * Constructs a new GamVodConfig.
-                             * @memberof google.cloud.video.stitcher.v1
-                             * @classdesc Represents a GamVodConfig.
-                             * @implements IGamVodConfig
-                             * @constructor
-                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig=} [properties] Properties to set
-                             */
-                            function GamVodConfig(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GamVodConfig networkCode.
-                             * @member {string} networkCode
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @instance
-                             */
-                            GamVodConfig.prototype.networkCode = "";
-    
-                            /**
-                             * GamVodConfig streamId.
-                             * @member {string} streamId
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @instance
-                             */
-                            GamVodConfig.prototype.streamId = "";
-    
-                            /**
-                             * Creates a new GamVodConfig instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig=} [properties] Properties to set
-                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig instance
-                             */
-                            GamVodConfig.create = function create(properties) {
-                                return new GamVodConfig(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GamVodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig} message GamVodConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GamVodConfig.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.networkCode != null && Object.hasOwnProperty.call(message, "networkCode"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkCode);
-                                if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.streamId);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GamVodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig} message GamVodConfig message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GamVodConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GamVodConfig message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GamVodConfig.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.GamVodConfig();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.networkCode = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.streamId = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GamVodConfig message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GamVodConfig.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GamVodConfig message.
-                             * @function verify
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GamVodConfig.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.networkCode != null && message.hasOwnProperty("networkCode"))
-                                    if (!$util.isString(message.networkCode))
-                                        return "networkCode: string expected";
-                                if (message.streamId != null && message.hasOwnProperty("streamId"))
-                                    if (!$util.isString(message.streamId))
-                                        return "streamId: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GamVodConfig message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig
-                             */
-                            GamVodConfig.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.video.stitcher.v1.GamVodConfig)
-                                    return object;
-                                var message = new $root.google.cloud.video.stitcher.v1.GamVodConfig();
-                                if (object.networkCode != null)
-                                    message.networkCode = String(object.networkCode);
-                                if (object.streamId != null)
-                                    message.streamId = String(object.streamId);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GamVodConfig message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {google.cloud.video.stitcher.v1.GamVodConfig} message GamVodConfig
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GamVodConfig.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.networkCode = "";
-                                    object.streamId = "";
-                                }
-                                if (message.networkCode != null && message.hasOwnProperty("networkCode"))
-                                    object.networkCode = message.networkCode;
-                                if (message.streamId != null && message.hasOwnProperty("streamId"))
-                                    object.streamId = message.streamId;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GamVodConfig to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GamVodConfig.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for GamVodConfig
-                             * @function getTypeUrl
-                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            GamVodConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.GamVodConfig";
-                            };
-    
-                            return GamVodConfig;
-                        })();
-    
                         v1.VodSession = (function() {
     
                             /**
@@ -5827,7 +5600,7 @@
                              * @property {google.cloud.video.stitcher.v1.IManifestOptions|null} [manifestOptions] VodSession manifestOptions
                              * @property {string|null} [assetId] VodSession assetId
                              * @property {google.cloud.video.stitcher.v1.AdTracking|null} [adTracking] VodSession adTracking
-                             * @property {google.cloud.video.stitcher.v1.IGamVodConfig|null} [gamVodConfig] VodSession gamVodConfig
+                             * @property {google.cloud.video.stitcher.v1.VodSession.IGamSettings|null} [gamSettings] VodSession gamSettings
                              */
     
                             /**
@@ -5919,12 +5692,12 @@
                             VodSession.prototype.adTracking = 0;
     
                             /**
-                             * VodSession gamVodConfig.
-                             * @member {google.cloud.video.stitcher.v1.IGamVodConfig|null|undefined} gamVodConfig
+                             * VodSession gamSettings.
+                             * @member {google.cloud.video.stitcher.v1.VodSession.IGamSettings|null|undefined} gamSettings
                              * @memberof google.cloud.video.stitcher.v1.VodSession
                              * @instance
                              */
-                            VodSession.prototype.gamVodConfig = null;
+                            VodSession.prototype.gamSettings = null;
     
                             /**
                              * Creates a new VodSession instance using the specified properties.
@@ -5969,8 +5742,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.assetId);
                                 if (message.adTracking != null && Object.hasOwnProperty.call(message, "adTracking"))
                                     writer.uint32(/* id 11, wireType 0 =*/88).int32(message.adTracking);
-                                if (message.gamVodConfig != null && Object.hasOwnProperty.call(message, "gamVodConfig"))
-                                    $root.google.cloud.video.stitcher.v1.GamVodConfig.encode(message.gamVodConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.gamSettings != null && Object.hasOwnProperty.call(message, "gamSettings"))
+                                    $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.encode(message.gamSettings, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6060,8 +5833,8 @@
                                             message.adTracking = reader.int32();
                                             break;
                                         }
-                                    case 12: {
-                                            message.gamVodConfig = $root.google.cloud.video.stitcher.v1.GamVodConfig.decode(reader, reader.uint32());
+                                    case 13: {
+                                            message.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -6141,10 +5914,10 @@
                                     case 2:
                                         break;
                                     }
-                                if (message.gamVodConfig != null && message.hasOwnProperty("gamVodConfig")) {
-                                    var error = $root.google.cloud.video.stitcher.v1.GamVodConfig.verify(message.gamVodConfig);
+                                if (message.gamSettings != null && message.hasOwnProperty("gamSettings")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.verify(message.gamSettings);
                                     if (error)
-                                        return "gamVodConfig." + error;
+                                        return "gamSettings." + error;
                                 }
                                 return null;
                             };
@@ -6208,10 +5981,10 @@
                                     message.adTracking = 2;
                                     break;
                                 }
-                                if (object.gamVodConfig != null) {
-                                    if (typeof object.gamVodConfig !== "object")
-                                        throw TypeError(".google.cloud.video.stitcher.v1.VodSession.gamVodConfig: object expected");
-                                    message.gamVodConfig = $root.google.cloud.video.stitcher.v1.GamVodConfig.fromObject(object.gamVodConfig);
+                                if (object.gamSettings != null) {
+                                    if (typeof object.gamSettings !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.VodSession.gamSettings: object expected");
+                                    message.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.fromObject(object.gamSettings);
                                 }
                                 return message;
                             };
@@ -6240,7 +6013,7 @@
                                     object.manifestOptions = null;
                                     object.assetId = "";
                                     object.adTracking = options.enums === String ? "AD_TRACKING_UNSPECIFIED" : 0;
-                                    object.gamVodConfig = null;
+                                    object.gamSettings = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -6264,8 +6037,8 @@
                                     object.assetId = message.assetId;
                                 if (message.adTracking != null && message.hasOwnProperty("adTracking"))
                                     object.adTracking = options.enums === String ? $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] === undefined ? message.adTracking : $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] : message.adTracking;
-                                if (message.gamVodConfig != null && message.hasOwnProperty("gamVodConfig"))
-                                    object.gamVodConfig = $root.google.cloud.video.stitcher.v1.GamVodConfig.toObject(message.gamVodConfig, options);
+                                if (message.gamSettings != null && message.hasOwnProperty("gamSettings"))
+                                    object.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.toObject(message.gamSettings, options);
                                 return object;
                             };
     
@@ -6294,6 +6067,233 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.video.stitcher.v1.VodSession";
                             };
+    
+                            VodSession.GamSettings = (function() {
+    
+                                /**
+                                 * Properties of a GamSettings.
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession
+                                 * @interface IGamSettings
+                                 * @property {string|null} [networkCode] GamSettings networkCode
+                                 * @property {string|null} [streamId] GamSettings streamId
+                                 */
+    
+                                /**
+                                 * Constructs a new GamSettings.
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession
+                                 * @classdesc Represents a GamSettings.
+                                 * @implements IGamSettings
+                                 * @constructor
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings=} [properties] Properties to set
+                                 */
+                                function GamSettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GamSettings networkCode.
+                                 * @member {string} networkCode
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @instance
+                                 */
+                                GamSettings.prototype.networkCode = "";
+    
+                                /**
+                                 * GamSettings streamId.
+                                 * @member {string} streamId
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @instance
+                                 */
+                                GamSettings.prototype.streamId = "";
+    
+                                /**
+                                 * Creates a new GamSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings=} [properties] Properties to set
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings instance
+                                 */
+                                GamSettings.create = function create(properties) {
+                                    return new GamSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSettings message. Does not implicitly {@link google.cloud.video.stitcher.v1.VodSession.GamSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings} message GamSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.networkCode != null && Object.hasOwnProperty.call(message, "networkCode"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkCode);
+                                    if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.streamId);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GamSettings message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.VodSession.GamSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.IGamSettings} message GamSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GamSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GamSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSettings.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.VodSession.GamSettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.networkCode = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.streamId = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GamSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GamSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GamSettings message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GamSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                        if (!$util.isString(message.networkCode))
+                                            return "networkCode: string expected";
+                                    if (message.streamId != null && message.hasOwnProperty("streamId"))
+                                        if (!$util.isString(message.streamId))
+                                            return "streamId: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GamSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.stitcher.v1.VodSession.GamSettings} GamSettings
+                                 */
+                                GamSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.stitcher.v1.VodSession.GamSettings)
+                                        return object;
+                                    var message = new $root.google.cloud.video.stitcher.v1.VodSession.GamSettings();
+                                    if (object.networkCode != null)
+                                        message.networkCode = String(object.networkCode);
+                                    if (object.streamId != null)
+                                        message.streamId = String(object.streamId);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GamSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.VodSession.GamSettings} message GamSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GamSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.networkCode = "";
+                                        object.streamId = "";
+                                    }
+                                    if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                        object.networkCode = message.networkCode;
+                                    if (message.streamId != null && message.hasOwnProperty("streamId"))
+                                        object.streamId = message.streamId;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GamSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GamSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GamSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.stitcher.v1.VodSession.GamSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GamSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.stitcher.v1.VodSession.GamSettings";
+                                };
+    
+                                return GamSettings;
+                            })();
     
                             return VodSession;
                         })();
@@ -7736,8 +7736,6 @@
                                  * Properties of a GamSettings.
                                  * @memberof google.cloud.video.stitcher.v1.LiveSession
                                  * @interface IGamSettings
-                                 * @property {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls|null} [gamHls] GamSettings gamHls
-                                 * @property {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash|null} [gamDash] GamSettings gamDash
                                  * @property {string|null} [streamId] GamSettings streamId
                                  */
     
@@ -7757,42 +7755,12 @@
                                 }
     
                                 /**
-                                 * GamSettings gamHls.
-                                 * @member {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls|null|undefined} gamHls
-                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                 * @instance
-                                 */
-                                GamSettings.prototype.gamHls = null;
-    
-                                /**
-                                 * GamSettings gamDash.
-                                 * @member {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash|null|undefined} gamDash
-                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                 * @instance
-                                 */
-                                GamSettings.prototype.gamDash = null;
-    
-                                /**
                                  * GamSettings streamId.
                                  * @member {string} streamId
                                  * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
                                  * @instance
                                  */
                                 GamSettings.prototype.streamId = "";
-    
-                                // OneOf field names bound to virtual getters and setters
-                                var $oneOfFields;
-    
-                                /**
-                                 * GamSettings manifestFields.
-                                 * @member {"gamHls"|"gamDash"|undefined} manifestFields
-                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                 * @instance
-                                 */
-                                Object.defineProperty(GamSettings.prototype, "manifestFields", {
-                                    get: $util.oneOfGetter($oneOfFields = ["gamHls", "gamDash"]),
-                                    set: $util.oneOfSetter($oneOfFields)
-                                });
     
                                 /**
                                  * Creates a new GamSettings instance using the specified properties.
@@ -7820,10 +7788,6 @@
                                         writer = $Writer.create();
                                     if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.streamId);
-                                    if (message.gamHls != null && Object.hasOwnProperty.call(message, "gamHls"))
-                                        $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.encode(message.gamHls, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                    if (message.gamDash != null && Object.hasOwnProperty.call(message, "gamDash"))
-                                        $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.encode(message.gamDash, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -7858,14 +7822,6 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
-                                        case 2: {
-                                                message.gamHls = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.decode(reader, reader.uint32());
-                                                break;
-                                            }
-                                        case 3: {
-                                                message.gamDash = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.decode(reader, reader.uint32());
-                                                break;
-                                            }
                                         case 1: {
                                                 message.streamId = reader.string();
                                                 break;
@@ -7905,25 +7861,6 @@
                                 GamSettings.verify = function verify(message) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
-                                    var properties = {};
-                                    if (message.gamHls != null && message.hasOwnProperty("gamHls")) {
-                                        properties.manifestFields = 1;
-                                        {
-                                            var error = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify(message.gamHls);
-                                            if (error)
-                                                return "gamHls." + error;
-                                        }
-                                    }
-                                    if (message.gamDash != null && message.hasOwnProperty("gamDash")) {
-                                        if (properties.manifestFields === 1)
-                                            return "manifestFields: multiple values";
-                                        properties.manifestFields = 1;
-                                        {
-                                            var error = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify(message.gamDash);
-                                            if (error)
-                                                return "gamDash." + error;
-                                        }
-                                    }
                                     if (message.streamId != null && message.hasOwnProperty("streamId"))
                                         if (!$util.isString(message.streamId))
                                             return "streamId: string expected";
@@ -7942,16 +7879,6 @@
                                     if (object instanceof $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings)
                                         return object;
                                     var message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings();
-                                    if (object.gamHls != null) {
-                                        if (typeof object.gamHls !== "object")
-                                            throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.GamSettings.gamHls: object expected");
-                                        message.gamHls = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.fromObject(object.gamHls);
-                                    }
-                                    if (object.gamDash != null) {
-                                        if (typeof object.gamDash !== "object")
-                                            throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.GamSettings.gamDash: object expected");
-                                        message.gamDash = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.fromObject(object.gamDash);
-                                    }
                                     if (object.streamId != null)
                                         message.streamId = String(object.streamId);
                                     return message;
@@ -7974,16 +7901,6 @@
                                         object.streamId = "";
                                     if (message.streamId != null && message.hasOwnProperty("streamId"))
                                         object.streamId = message.streamId;
-                                    if (message.gamHls != null && message.hasOwnProperty("gamHls")) {
-                                        object.gamHls = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.toObject(message.gamHls, options);
-                                        if (options.oneofs)
-                                            object.manifestFields = "gamHls";
-                                    }
-                                    if (message.gamDash != null && message.hasOwnProperty("gamDash")) {
-                                        object.gamDash = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.toObject(message.gamDash, options);
-                                        if (options.oneofs)
-                                            object.manifestFields = "gamDash";
-                                    }
                                     return object;
                                 };
     
@@ -8012,384 +7929,6 @@
                                     }
                                     return typeUrlPrefix + "/google.cloud.video.stitcher.v1.LiveSession.GamSettings";
                                 };
-    
-                                GamSettings.GamHls = (function() {
-    
-                                    /**
-                                     * Properties of a GamHls.
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                     * @interface IGamHls
-                                     */
-    
-                                    /**
-                                     * Constructs a new GamHls.
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                     * @classdesc Represents a GamHls.
-                                     * @implements IGamHls
-                                     * @constructor
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls=} [properties] Properties to set
-                                     */
-                                    function GamHls(properties) {
-                                        if (properties)
-                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
-                                                    this[keys[i]] = properties[keys[i]];
-                                    }
-    
-                                    /**
-                                     * Creates a new GamHls instance using the specified properties.
-                                     * @function create
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls=} [properties] Properties to set
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls} GamHls instance
-                                     */
-                                    GamHls.create = function create(properties) {
-                                        return new GamHls(properties);
-                                    };
-    
-                                    /**
-                                     * Encodes the specified GamHls message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify|verify} messages.
-                                     * @function encode
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls} message GamHls message or plain object to encode
-                                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                                     * @returns {$protobuf.Writer} Writer
-                                     */
-                                    GamHls.encode = function encode(message, writer) {
-                                        if (!writer)
-                                            writer = $Writer.create();
-                                        return writer;
-                                    };
-    
-                                    /**
-                                     * Encodes the specified GamHls message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls.verify|verify} messages.
-                                     * @function encodeDelimited
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamHls} message GamHls message or plain object to encode
-                                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                                     * @returns {$protobuf.Writer} Writer
-                                     */
-                                    GamHls.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer).ldelim();
-                                    };
-    
-                                    /**
-                                     * Decodes a GamHls message from the specified reader or buffer.
-                                     * @function decode
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @param {number} [length] Message length if known beforehand
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls} GamHls
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    GamHls.decode = function decode(reader, length) {
-                                        if (!(reader instanceof $Reader))
-                                            reader = $Reader.create(reader);
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls();
-                                        while (reader.pos < end) {
-                                            var tag = reader.uint32();
-                                            switch (tag >>> 3) {
-                                            default:
-                                                reader.skipType(tag & 7);
-                                                break;
-                                            }
-                                        }
-                                        return message;
-                                    };
-    
-                                    /**
-                                     * Decodes a GamHls message from the specified reader or buffer, length delimited.
-                                     * @function decodeDelimited
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls} GamHls
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    GamHls.decodeDelimited = function decodeDelimited(reader) {
-                                        if (!(reader instanceof $Reader))
-                                            reader = new $Reader(reader);
-                                        return this.decode(reader, reader.uint32());
-                                    };
-    
-                                    /**
-                                     * Verifies a GamHls message.
-                                     * @function verify
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {Object.<string,*>} message Plain object to verify
-                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                     */
-                                    GamHls.verify = function verify(message) {
-                                        if (typeof message !== "object" || message === null)
-                                            return "object expected";
-                                        return null;
-                                    };
-    
-                                    /**
-                                     * Creates a GamHls message from a plain object. Also converts values to their respective internal types.
-                                     * @function fromObject
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {Object.<string,*>} object Plain object
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls} GamHls
-                                     */
-                                    GamHls.fromObject = function fromObject(object) {
-                                        if (object instanceof $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls)
-                                            return object;
-                                        return new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls();
-                                    };
-    
-                                    /**
-                                     * Creates a plain object from a GamHls message. Also converts values to other types if specified.
-                                     * @function toObject
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls} message GamHls
-                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                     * @returns {Object.<string,*>} Plain object
-                                     */
-                                    GamHls.toObject = function toObject() {
-                                        return {};
-                                    };
-    
-                                    /**
-                                     * Converts this GamHls to JSON.
-                                     * @function toJSON
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @instance
-                                     * @returns {Object.<string,*>} JSON object
-                                     */
-                                    GamHls.prototype.toJSON = function toJSON() {
-                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                    };
-    
-                                    /**
-                                     * Gets the default type url for GamHls
-                                     * @function getTypeUrl
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls
-                                     * @static
-                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                     * @returns {string} The default type url
-                                     */
-                                    GamHls.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                        if (typeUrlPrefix === undefined) {
-                                            typeUrlPrefix = "type.googleapis.com";
-                                        }
-                                        return typeUrlPrefix + "/google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls";
-                                    };
-    
-                                    return GamHls;
-                                })();
-    
-                                GamSettings.GamDash = (function() {
-    
-                                    /**
-                                     * Properties of a GamDash.
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                     * @interface IGamDash
-                                     * @property {string|null} [periodTemplateUri] GamDash periodTemplateUri
-                                     */
-    
-                                    /**
-                                     * Constructs a new GamDash.
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
-                                     * @classdesc Represents a GamDash.
-                                     * @implements IGamDash
-                                     * @constructor
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash=} [properties] Properties to set
-                                     */
-                                    function GamDash(properties) {
-                                        if (properties)
-                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
-                                                    this[keys[i]] = properties[keys[i]];
-                                    }
-    
-                                    /**
-                                     * GamDash periodTemplateUri.
-                                     * @member {string} periodTemplateUri
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @instance
-                                     */
-                                    GamDash.prototype.periodTemplateUri = "";
-    
-                                    /**
-                                     * Creates a new GamDash instance using the specified properties.
-                                     * @function create
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash=} [properties] Properties to set
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash} GamDash instance
-                                     */
-                                    GamDash.create = function create(properties) {
-                                        return new GamDash(properties);
-                                    };
-    
-                                    /**
-                                     * Encodes the specified GamDash message. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify|verify} messages.
-                                     * @function encode
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash} message GamDash message or plain object to encode
-                                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                                     * @returns {$protobuf.Writer} Writer
-                                     */
-                                    GamDash.encode = function encode(message, writer) {
-                                        if (!writer)
-                                            writer = $Writer.create();
-                                        if (message.periodTemplateUri != null && Object.hasOwnProperty.call(message, "periodTemplateUri"))
-                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.periodTemplateUri);
-                                        return writer;
-                                    };
-    
-                                    /**
-                                     * Encodes the specified GamDash message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash.verify|verify} messages.
-                                     * @function encodeDelimited
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.IGamDash} message GamDash message or plain object to encode
-                                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                                     * @returns {$protobuf.Writer} Writer
-                                     */
-                                    GamDash.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer).ldelim();
-                                    };
-    
-                                    /**
-                                     * Decodes a GamDash message from the specified reader or buffer.
-                                     * @function decode
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @param {number} [length] Message length if known beforehand
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash} GamDash
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    GamDash.decode = function decode(reader, length) {
-                                        if (!(reader instanceof $Reader))
-                                            reader = $Reader.create(reader);
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash();
-                                        while (reader.pos < end) {
-                                            var tag = reader.uint32();
-                                            switch (tag >>> 3) {
-                                            case 1: {
-                                                    message.periodTemplateUri = reader.string();
-                                                    break;
-                                                }
-                                            default:
-                                                reader.skipType(tag & 7);
-                                                break;
-                                            }
-                                        }
-                                        return message;
-                                    };
-    
-                                    /**
-                                     * Decodes a GamDash message from the specified reader or buffer, length delimited.
-                                     * @function decodeDelimited
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash} GamDash
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    GamDash.decodeDelimited = function decodeDelimited(reader) {
-                                        if (!(reader instanceof $Reader))
-                                            reader = new $Reader(reader);
-                                        return this.decode(reader, reader.uint32());
-                                    };
-    
-                                    /**
-                                     * Verifies a GamDash message.
-                                     * @function verify
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {Object.<string,*>} message Plain object to verify
-                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                     */
-                                    GamDash.verify = function verify(message) {
-                                        if (typeof message !== "object" || message === null)
-                                            return "object expected";
-                                        if (message.periodTemplateUri != null && message.hasOwnProperty("periodTemplateUri"))
-                                            if (!$util.isString(message.periodTemplateUri))
-                                                return "periodTemplateUri: string expected";
-                                        return null;
-                                    };
-    
-                                    /**
-                                     * Creates a GamDash message from a plain object. Also converts values to their respective internal types.
-                                     * @function fromObject
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {Object.<string,*>} object Plain object
-                                     * @returns {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash} GamDash
-                                     */
-                                    GamDash.fromObject = function fromObject(object) {
-                                        if (object instanceof $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash)
-                                            return object;
-                                        var message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash();
-                                        if (object.periodTemplateUri != null)
-                                            message.periodTemplateUri = String(object.periodTemplateUri);
-                                        return message;
-                                    };
-    
-                                    /**
-                                     * Creates a plain object from a GamDash message. Also converts values to other types if specified.
-                                     * @function toObject
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash} message GamDash
-                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                     * @returns {Object.<string,*>} Plain object
-                                     */
-                                    GamDash.toObject = function toObject(message, options) {
-                                        if (!options)
-                                            options = {};
-                                        var object = {};
-                                        if (options.defaults)
-                                            object.periodTemplateUri = "";
-                                        if (message.periodTemplateUri != null && message.hasOwnProperty("periodTemplateUri"))
-                                            object.periodTemplateUri = message.periodTemplateUri;
-                                        return object;
-                                    };
-    
-                                    /**
-                                     * Converts this GamDash to JSON.
-                                     * @function toJSON
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @instance
-                                     * @returns {Object.<string,*>} JSON object
-                                     */
-                                    GamDash.prototype.toJSON = function toJSON() {
-                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                    };
-    
-                                    /**
-                                     * Gets the default type url for GamDash
-                                     * @function getTypeUrl
-                                     * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash
-                                     * @static
-                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                                     * @returns {string} The default type url
-                                     */
-                                    GamDash.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                        if (typeUrlPrefix === undefined) {
-                                            typeUrlPrefix = "type.googleapis.com";
-                                        }
-                                        return typeUrlPrefix + "/google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash";
-                                    };
-    
-                                    return GamDash;
-                                })();
     
                                 return GamSettings;
                             })();
