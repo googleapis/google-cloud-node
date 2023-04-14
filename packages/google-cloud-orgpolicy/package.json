@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/org-policy",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Org policy client for Node.js",
   "repository": {
     "type": "git",

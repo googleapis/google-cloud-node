@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v1.0.1...addressvalidation-v1.0.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v1.0.0...addressvalidation-v1.0.1) (2023-02-15)
 
 
