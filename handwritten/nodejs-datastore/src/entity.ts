@@ -118,7 +118,7 @@ export namespace entity {
    *     `integerTypeCastFunction` to handle `integerValue` conversion.
    * @param {function} typeCastOptions.integerTypeCastFunction A custom user
    *     provided function to convert `integerValue`.
-   * @param {sting|string[]} [typeCastOptions.properties] `Entity` property
+   * @param {string|string[]} [typeCastOptions.properties] `Entity` property
    *     names to be converted using `integerTypeCastFunction`.
    *
    * @example
