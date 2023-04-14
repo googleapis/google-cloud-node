@@ -32,7 +32,9 @@ import {Transform} from 'stream';
 import * as protos from '../../protos/protos.js';
 import fs from 'fs';
 import path from 'path';
-import {fileURLToPath} from 'url';const filename = fileURLToPath(import.meta.url);
+import {fileURLToPath} from 'url';
+import * as translation_service_client_config from './translation_service_client_config.json'
+const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 /**

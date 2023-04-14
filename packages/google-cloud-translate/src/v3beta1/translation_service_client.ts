@@ -33,6 +33,7 @@ import * as protos from '../../protos/protos.js';
 import path from 'path';
 import fs from 'fs';
 import {fileURLToPath} from 'url';
+import * as translation_service_client_config from './translation_service_client_config.json'
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 

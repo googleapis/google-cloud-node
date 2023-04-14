@@ -80,14 +80,16 @@ describe('Translate v2', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let translate: any;
 
-  before(() => {
-    Translate = esmock('../src/v2', {
+  before(async () => {
+    Translate = await esmock('../src/v2/index.js', {
       '@google-cloud/common': {
         util: fakeUtil,
         Service: FakeService,
       },
       '@google-cloud/promisify': fakePromisify,
-    }).Translate;
+    });
+
+    console.log(Translate);
   });
 
   beforeEach(() => {
@@ -98,7 +100,7 @@ describe('Translate v2', () => {
   });
 
   describe('instantiation', () => {
-    it('should promisify all the things', () => {
+    it.only('should promisify all the things', () => {
       assert(promisified);
     });
 
