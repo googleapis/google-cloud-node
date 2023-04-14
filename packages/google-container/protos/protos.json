@@ -2255,7 +2255,13 @@
                   }
                 },
                 "AdditionalPodRangesConfig": {
-                  "fields": {}
+                  "fields": {
+                    "podRangeNames": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
                 },
                 "Operation": {
                   "fields": {
