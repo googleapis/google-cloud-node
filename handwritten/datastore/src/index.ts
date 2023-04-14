@@ -290,7 +290,7 @@ const urlSafeKey = new entity.URLSafeKey();
  * @example Creating Records
  * ```
  * // New entities can be created and persisted with {@link Datastore#save}.
- * // The entitiy must have a key to be saved. If you don't specify an
+ * // The entity must have a key to be saved. If you don't specify an
  * // identifier for the key, one is generated for you.
  * //
  * // We will create a key with a `name` identifier, "Google".
