@@ -321,6 +321,11 @@ export class DataprocMetastoreFederationClient {
           ],
         },
         {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
         },
