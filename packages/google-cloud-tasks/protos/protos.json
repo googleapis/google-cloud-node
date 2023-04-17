@@ -8,7 +8,7 @@
               "nested": {
                 "v2": {
                   "options": {
-                    "go_package": "cloud.google.com/go/tasks/apiv2/taskspb;taskspb",
+                    "go_package": "cloud.google.com/go/cloudtasks/apiv2/cloudtaskspb;cloudtaskspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.tasks.v2",
@@ -874,7 +874,7 @@
                 },
                 "v2beta2": {
                   "options": {
-                    "go_package": "cloud.google.com/go/tasks/apiv2beta2/taskspb;taskspb",
+                    "go_package": "cloud.google.com/go/cloudtasks/apiv2beta2/cloudtaskspb;cloudtaskspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.tasks.v2beta2",
@@ -1973,7 +1973,7 @@
                 },
                 "v2beta3": {
                   "options": {
-                    "go_package": "cloud.google.com/go/tasks/apiv2beta3/taskspb;taskspb",
+                    "go_package": "cloud.google.com/go/cloudtasks/apiv2beta3/cloudtaskspb;cloudtaskspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.tasks.v2beta3",
