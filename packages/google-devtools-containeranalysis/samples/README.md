@@ -30,6 +30,7 @@
   * [Grafeas.list_occurrences](#grafeas.list_occurrences)
   * [Grafeas.update_note](#grafeas.update_note)
   * [Grafeas.update_occurrence](#grafeas.update_occurrence)
+  * [Container_analysis_v1_beta1.generate_packages_summary](#container_analysis_v1_beta1.generate_packages_summary)
   * [Container_analysis_v1_beta1.get_iam_policy](#container_analysis_v1_beta1.get_iam_policy)
   * [Container_analysis_v1_beta1.get_scan_config](#container_analysis_v1_beta1.get_scan_config)
   * [Container_analysis_v1_beta1.list_scan_configs](#container_analysis_v1_beta1.list_scan_configs)
@@ -368,6 +369,23 @@ __Usage:__
 
 
 `node packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_occurrence.js`
+
+
+-----
+
+
+
+
+### Container_analysis_v1_beta1.generate_packages_summary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js`
 
 
 -----
