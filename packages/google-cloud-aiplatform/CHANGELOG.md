@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.8.1...aiplatform-v2.9.0) (2023-04-13)
+
+
+### Features
+
+* [ai-platform] add public_endpoint_enabled and publid_endpoint_domain_name to IndexEndpoint ([#4136](https://github.com/googleapis/google-cloud-node/issues/4136)) ([94ea195](https://github.com/googleapis/google-cloud-node/commit/94ea195acc92d947f27374a5a8c753c2f0cc1d0e))
+* Add notification_channels in aiplatform v1beta1 model_monitoring.proto ([#4160](https://github.com/googleapis/google-cloud-node/issues/4160)) ([c56a74d](https://github.com/googleapis/google-cloud-node/commit/c56a74d070a826e35b3582060c7ff5aa51a72f17))
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
 ## [2.8.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.8.0...aiplatform-v2.8.1) (2023-03-28)
 
 
