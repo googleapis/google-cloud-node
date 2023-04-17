@@ -6066,7 +6066,8 @@ export namespace grafeas {
             enum AttackComplexity {
                 ATTACK_COMPLEXITY_UNSPECIFIED = 0,
                 ATTACK_COMPLEXITY_LOW = 1,
-                ATTACK_COMPLEXITY_HIGH = 2
+                ATTACK_COMPLEXITY_HIGH = 2,
+                ATTACK_COMPLEXITY_MEDIUM = 3
             }
 
             /** Authentication enum. */
@@ -6104,7 +6105,9 @@ export namespace grafeas {
                 IMPACT_UNSPECIFIED = 0,
                 IMPACT_HIGH = 1,
                 IMPACT_LOW = 2,
-                IMPACT_NONE = 3
+                IMPACT_NONE = 3,
+                IMPACT_PARTIAL = 4,
+                IMPACT_COMPLETE = 5
             }
         }
 
@@ -22549,6 +22552,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                    /**
+                     * Calls GeneratePackagesSummary.
+                     * @param request GeneratePackagesSummaryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PackagesSummaryResponse
+                     */
+                    public generatePackagesSummary(request: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest, callback: google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.GeneratePackagesSummaryCallback): void;
+
+                    /**
+                     * Calls GeneratePackagesSummary.
+                     * @param request GeneratePackagesSummaryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generatePackagesSummary(request: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest): Promise<google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse>;
                 }
 
                 namespace ContainerAnalysisV1Beta1 {
@@ -22573,6 +22590,319 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1|generatePackagesSummary}.
+                     * @param error Error, if any
+                     * @param [response] PackagesSummaryResponse
+                     */
+                    type GeneratePackagesSummaryCallback = (error: (Error|null), response?: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse) => void;
+                }
+
+                /** Properties of a GeneratePackagesSummaryRequest. */
+                interface IGeneratePackagesSummaryRequest {
+
+                    /** GeneratePackagesSummaryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GeneratePackagesSummaryRequest. */
+                class GeneratePackagesSummaryRequest implements IGeneratePackagesSummaryRequest {
+
+                    /**
+                     * Constructs a new GeneratePackagesSummaryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest);
+
+                    /** GeneratePackagesSummaryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GeneratePackagesSummaryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeneratePackagesSummaryRequest instance
+                     */
+                    public static create(properties?: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest): google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest;
+
+                    /**
+                     * Encodes the specified GeneratePackagesSummaryRequest message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest.verify|verify} messages.
+                     * @param message GeneratePackagesSummaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeneratePackagesSummaryRequest message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest.verify|verify} messages.
+                     * @param message GeneratePackagesSummaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeneratePackagesSummaryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeneratePackagesSummaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest;
+
+                    /**
+                     * Decodes a GeneratePackagesSummaryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeneratePackagesSummaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest;
+
+                    /**
+                     * Verifies a GeneratePackagesSummaryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeneratePackagesSummaryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeneratePackagesSummaryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest;
+
+                    /**
+                     * Creates a plain object from a GeneratePackagesSummaryRequest message. Also converts values to other types if specified.
+                     * @param message GeneratePackagesSummaryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeneratePackagesSummaryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeneratePackagesSummaryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PackagesSummaryResponse. */
+                interface IPackagesSummaryResponse {
+
+                    /** PackagesSummaryResponse resourceUrl */
+                    resourceUrl?: (string|null);
+
+                    /** PackagesSummaryResponse licensesSummary */
+                    licensesSummary?: (google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary[]|null);
+                }
+
+                /** Represents a PackagesSummaryResponse. */
+                class PackagesSummaryResponse implements IPackagesSummaryResponse {
+
+                    /**
+                     * Constructs a new PackagesSummaryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse);
+
+                    /** PackagesSummaryResponse resourceUrl. */
+                    public resourceUrl: string;
+
+                    /** PackagesSummaryResponse licensesSummary. */
+                    public licensesSummary: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary[];
+
+                    /**
+                     * Creates a new PackagesSummaryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PackagesSummaryResponse instance
+                     */
+                    public static create(properties?: google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse;
+
+                    /**
+                     * Encodes the specified PackagesSummaryResponse message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.verify|verify} messages.
+                     * @param message PackagesSummaryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PackagesSummaryResponse message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.verify|verify} messages.
+                     * @param message PackagesSummaryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PackagesSummaryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PackagesSummaryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse;
+
+                    /**
+                     * Decodes a PackagesSummaryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PackagesSummaryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse;
+
+                    /**
+                     * Verifies a PackagesSummaryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PackagesSummaryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PackagesSummaryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse;
+
+                    /**
+                     * Creates a plain object from a PackagesSummaryResponse message. Also converts values to other types if specified.
+                     * @param message PackagesSummaryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PackagesSummaryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PackagesSummaryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PackagesSummaryResponse {
+
+                    /** Properties of a LicensesSummary. */
+                    interface ILicensesSummary {
+
+                        /** LicensesSummary license */
+                        license?: (string|null);
+
+                        /** LicensesSummary count */
+                        count?: (number|Long|string|null);
+                    }
+
+                    /** Represents a LicensesSummary. */
+                    class LicensesSummary implements ILicensesSummary {
+
+                        /**
+                         * Constructs a new LicensesSummary.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary);
+
+                        /** LicensesSummary license. */
+                        public license: string;
+
+                        /** LicensesSummary count. */
+                        public count: (number|Long|string);
+
+                        /**
+                         * Creates a new LicensesSummary instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LicensesSummary instance
+                         */
+                        public static create(properties?: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary;
+
+                        /**
+                         * Encodes the specified LicensesSummary message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.verify|verify} messages.
+                         * @param message LicensesSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LicensesSummary message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary.verify|verify} messages.
+                         * @param message LicensesSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.ILicensesSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LicensesSummary message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LicensesSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary;
+
+                        /**
+                         * Decodes a LicensesSummary message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LicensesSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary;
+
+                        /**
+                         * Verifies a LicensesSummary message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LicensesSummary message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LicensesSummary
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary;
+
+                        /**
+                         * Creates a plain object from a LicensesSummary message. Also converts values to other types if specified.
+                         * @param message LicensesSummary
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse.LicensesSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LicensesSummary to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LicensesSummary
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
             }
         }
