@@ -564,13 +564,12 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
-        ['merchantCenterAccountLink', 'name']
+        ['parent']
       );
-      request.merchantCenterAccountLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -601,13 +600,12 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
-        ['merchantCenterAccountLink', 'name']
+        ['parent']
       );
-      request.merchantCenterAccountLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -659,13 +657,12 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
-        ['merchantCenterAccountLink', 'name']
+        ['parent']
       );
-      request.merchantCenterAccountLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMerchantCenterAccountLink =
         stubLongRunningCall(undefined, expectedError);
@@ -695,13 +692,12 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest()
       );
-      request.merchantCenterAccountLink ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkRequest',
-        ['merchantCenterAccountLink', 'name']
+        ['parent']
       );
-      request.merchantCenterAccountLink.name = defaultValue1;
-      const expectedHeaderRequestParams = `merchant_center_account_link.name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMerchantCenterAccountLink =
         stubLongRunningCall(undefined, undefined, expectedError);
