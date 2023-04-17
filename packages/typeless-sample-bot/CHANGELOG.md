@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.3.0...typeless-sample-bot-v1.3.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.2.0...typeless-sample-bot-v1.3.0) (2023-01-28)
 
 

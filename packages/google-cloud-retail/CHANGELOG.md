@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v2.3.1...retail-v2.4.0) (2023-04-13)
+
+
+### Features
+
+* [retail] add merchant center link service ([#4159](https://github.com/googleapis/google-cloud-node/issues/4159)) ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* [retail] add model service ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* [retail] support per-entity search and autocomplete ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Add model get API ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Add model get API ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Allow cascaded deletion on primary product ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Expose A/B experiment info in search response ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Expose A/B experiment info in search response ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Expose A/B experiment info in search response ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Expose facets and product counts in autocomplete ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Support new filter syntax for recommendation ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Support new filter syntax for recommendation ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Support new filter syntax for recommendation ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Support per-entity search and autocomplete ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+* Support per-entity search and autocomplete ([2db406d](https://github.com/googleapis/google-cloud-node/commit/2db406de40df9843dcdfdd888f05d6f0e1243ca1))
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
 ## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/retail-v2.3.0...retail-v2.3.1) (2023-02-15)
 
 

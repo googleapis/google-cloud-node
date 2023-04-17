@@ -67,6 +67,9 @@ export namespace google {
 
                         /** Job error */
                         error?: (google.rpc.IStatus|null);
+
+                        /** Job mode */
+                        mode?: (google.cloud.video.transcoder.v1.Job.ProcessingMode|keyof typeof google.cloud.video.transcoder.v1.Job.ProcessingMode|null);
                     }
 
                     /** Represents a Job. */
@@ -113,6 +116,9 @@ export namespace google {
 
                         /** Job error. */
                         public error?: (google.rpc.IStatus|null);
+
+                        /** Job mode. */
+                        public mode: (google.cloud.video.transcoder.v1.Job.ProcessingMode|keyof typeof google.cloud.video.transcoder.v1.Job.ProcessingMode);
 
                         /** Job jobConfig. */
                         public jobConfig?: ("templateId"|"config");
@@ -204,6 +210,13 @@ export namespace google {
                             RUNNING = 2,
                             SUCCEEDED = 3,
                             FAILED = 4
+                        }
+
+                        /** ProcessingMode enum. */
+                        enum ProcessingMode {
+                            PROCESSING_MODE_UNSPECIFIED = 0,
+                            PROCESSING_MODE_INTERACTIVE = 1,
+                            PROCESSING_MODE_BATCH = 2
                         }
                     }
 

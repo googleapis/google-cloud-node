@@ -24,6 +24,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateSecurityHealthAnalyticsCustomModule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateSource": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -52,6 +57,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DeleteSecurityHealthAnalyticsCustomModule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetBigQueryExport": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -71,6 +81,16 @@
           "retry_params_name": "default"
         },
         "GetOrganizationSettings": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetEffectiveSecurityHealthAnalyticsCustomModule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetSecurityHealthAnalyticsCustomModule": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
@@ -95,6 +115,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "ListDescendantSecurityHealthAnalyticsCustomModules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "ListFindings": {
           "timeout_millis": 480000,
           "retry_codes_name": "idempotent",
@@ -105,6 +130,16 @@
           "retry_params_name": "default"
         },
         "ListNotificationConfigs": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListEffectiveSecurityHealthAnalyticsCustomModules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListSecurityHealthAnalyticsCustomModules": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
@@ -157,6 +192,11 @@
           "retry_params_name": "default"
         },
         "UpdateOrganizationSettings": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateSecurityHealthAnalyticsCustomModule": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

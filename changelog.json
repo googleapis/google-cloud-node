@@ -4,6 +4,3644 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "e7b43382-dfec-445c-b4de-a2c45d7fb7ea",
+      "createTime": "2023-04-13T14:05:54.623Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "32dff02a-4864-4265-8685-1d4f10351d6f",
+      "createTime": "2023-04-13T14:05:54.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "22cc92e7-2d56-4d5a-b14d-6c49f49a3948",
+      "createTime": "2023-04-13T14:05:54.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "240b07de-0e8c-4598-869c-9674af20f882",
+      "createTime": "2023-04-13T14:05:54.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "39606c18-4264-40e0-bf3a-48857e1c0846",
+      "createTime": "2023-04-13T14:05:54.612Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "3ca4b2d9-2a0c-47fb-88f8-555a6fc2976e",
+      "createTime": "2023-04-13T14:05:54.609Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "441b3869-d2b6-47c6-bee5-6168ec104c41",
+      "createTime": "2023-04-13T14:05:54.607Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "a8b37a58-ec0f-44f8-a38b-498684feaf45",
+      "createTime": "2023-04-13T14:05:54.604Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.9.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "5a0bce42-e718-4fb8-b94e-306948129225",
+      "createTime": "2023-04-13T14:05:54.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "08b63b7e-24a4-459f-b6d0-12056ff1fb22",
+      "createTime": "2023-04-13T14:05:54.597Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "b7e9b737-57df-43dc-8bbf-c7766591191f",
+      "createTime": "2023-04-13T14:05:54.595Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "b4206815-6dd5-4081-8a2a-66502bd3a18f",
+      "createTime": "2023-04-13T14:05:54.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "45380d34-cd64-4e93-9c2d-e0a579df2fd8",
+      "createTime": "2023-04-13T14:05:54.590Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "e65d157d-b95f-4cb9-8dab-127c9df82a81",
+      "createTime": "2023-04-13T14:05:54.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "524fe6a4-cd1d-45bf-a39e-0734efc17a1b",
+      "createTime": "2023-04-13T14:05:54.584Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        }
+      ],
+      "version": "4.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "c926abcb-1254-4823-bfb2-df9914d0b0d3",
+      "createTime": "2023-04-13T14:05:54.581Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.5.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "ae2682de-b870-4974-9ed0-acf2ce32788a",
+      "createTime": "2023-04-13T14:05:54.578Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "36ac7131-9693-499a-ad58-66618a7b5d67",
+      "createTime": "2023-04-13T14:05:54.575Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "0b62618f-03e1-4269-a609-d5ca56273f3c",
+      "createTime": "2023-04-13T14:05:54.572Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e1270d823aa166a41889dc491cd97a43095825",
+          "message": "[container] Add support for updating additional pod IPv4 ranges for Standard and Autopilot clusters",
+          "issues": [
+            "4154"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "802d4647-c55f-49f8-8d69-554bae03d298",
+      "createTime": "2023-04-13T14:05:54.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "f5126acf-6f57-44e2-8fc5-1ee8b1b7eddd",
+      "createTime": "2023-04-13T14:05:54.567Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "d85c550f-d8cd-4a41-8384-dc98883f2504",
+      "createTime": "2023-04-13T14:05:54.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "a0e385e5-0d48-4423-86db-66f50dbaa9d3",
+      "createTime": "2023-04-13T14:05:54.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "e3670ac0-3916-436f-92c1-2466d0a8338b",
+      "createTime": "2023-04-13T14:05:54.559Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "51defae3-038c-48f8-bf4e-9d5f3729400b",
+      "createTime": "2023-04-13T14:05:54.556Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "6602fbc9-221b-4e4a-83ec-9d332ac3a697",
+      "createTime": "2023-04-13T14:05:54.553Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "8268269b-2af8-4fcd-b6ce-b4d0a2164ecf",
+      "createTime": "2023-04-13T14:05:54.551Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "18e73fa2-443f-44a9-bc30-3a9d4b1dcba9",
+      "createTime": "2023-04-13T14:05:54.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8b9f60d44d074230bd857a6a1dd6d883f8d36b39",
+          "message": "[video-transcoder] add support for batch processing mode",
+          "issues": [
+            "4166"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "7674882e-35f6-42fe-88df-e7ea1155bc33",
+      "createTime": "2023-04-13T14:05:54.538Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "a5256170-5d61-4d04-be20-e8c690c3c2bd",
+      "createTime": "2023-04-13T14:05:54.536Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "f5c75f63-b7c6-45ac-8fa6-220ae976e7d4",
+      "createTime": "2023-04-13T14:05:54.533Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "ebc875d8-01d2-4b79-bf93-20b527240625",
+      "createTime": "2023-04-13T14:05:54.530Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "0489b77b-d8ca-474b-9510-0ae593f6bcf1",
+      "createTime": "2023-04-13T14:05:54.527Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "2a9f5c7a-5f69-467d-bab6-1582e7e3b8e0",
+      "createTime": "2023-04-13T14:05:54.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "10a1764c-e64b-4fa8-8943-e81b4f61e1c7",
+      "createTime": "2023-04-13T14:05:54.522Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "5b32501d-7baf-4b89-b644-f7d27bcf44cf",
+      "createTime": "2023-04-13T14:05:54.520Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "075882f3-36a7-4c9c-997e-6ba7d1b16d26",
+      "createTime": "2023-04-13T14:05:54.517Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "83db0d0a-f4ba-43b1-9bed-40953b420ff8",
+      "createTime": "2023-04-13T14:05:54.515Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.0.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "69e31840-d998-4b67-91e0-1073eb53fe8f",
+      "createTime": "2023-04-13T14:05:54.512Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d79385fa5ac0fa138ca01e36c6f0dc65d52ec889",
+          "message": "[securitycenter] released securitycenter/v1 SHA custom modules cloud libraries: Create, Get, List, Update, Delete",
+          "issues": [
+            "4164"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "3bd49fca-9ef6-4c71-9ce4-29d3a6aab823",
+      "createTime": "2023-04-13T14:05:54.509Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.1.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "cac0477f-eb08-4ae8-9c8f-9fb9407a5b4e",
+      "createTime": "2023-04-13T14:05:54.506Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8feed0b5a0efd92744d5296fef21f4b7741f3764",
+          "message": "[security] added ignore_dependent_resources to DeleteCaPoolRequest, DeleteCertificateAuthorityRequest, DisableCertificateAuthorityRequest",
+          "issues": [
+            "4152"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "5e745eb5-bca1-4dcc-b921-3d5d40ce970b",
+      "createTime": "2023-04-13T14:05:54.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "99f0a97e-3e92-4104-9a91-a824438adc28",
+      "createTime": "2023-04-13T14:05:54.502Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "9f0d31a3-3430-4dc7-aa3c-ca6701375194",
+      "createTime": "2023-04-13T14:05:54.500Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "eb56e3cd-78af-40ae-ad24-95f4fe1c4bd3",
+      "createTime": "2023-04-13T14:05:54.497Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Support per-entity search and autocomplete",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Expose facets and product counts in autocomplete",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Add model get API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Allow cascaded deletion on primary product",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Support new filter syntax for recommendation",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Expose A/B experiment info in search response",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "[retail] add merchant center link service",
+          "issues": [
+            "4159"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Support per-entity search and autocomplete",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Support new filter syntax for recommendation",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Expose A/B experiment info in search response",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "[retail] add model service",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Add model get API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Support new filter syntax for recommendation",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "Expose A/B experiment info in search response",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2db406de40df9843dcdfdd888f05d6f0e1243ca1",
+          "message": "[retail] support per-entity search and autocomplete",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "b9bc5024-f42c-4f27-bd96-f576180598e6",
+      "createTime": "2023-04-13T14:05:54.495Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.0.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "8a9ed82f-ec75-40d9-86bf-871b33426671",
+      "createTime": "2023-04-13T14:05:54.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "926d009a-4a72-4a60-8fd5-916932919d45",
+      "createTime": "2023-04-13T14:05:54.490Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "ecda6462-2643-43aa-b47a-98b7bf1036ca",
+      "createTime": "2023-04-13T14:05:54.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.0.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "6fa7f603-97d1-4d63-b1de-2bb87ff76226",
+      "createTime": "2023-04-13T14:05:54.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "8108ed48-aca6-4210-b4c1-5a0746483f51",
+      "createTime": "2023-04-13T14:05:54.482Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "6328f68c-4743-49e9-847b-06f3115ac53f",
+      "createTime": "2023-04-13T14:05:54.480Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.0.8",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "ac9772ac-9410-401d-9815-c111db393942",
+      "createTime": "2023-04-13T14:05:54.477Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.0.8",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "a3e0db8e-64b6-49cb-a47c-3a84926711be",
+      "createTime": "2023-04-13T14:05:54.475Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "87378199-5867-4e0f-b61c-ba13c0f02012",
+      "createTime": "2023-04-13T14:05:54.473Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "b73a7729-0e9d-4cf7-aae9-05670513341a",
+      "createTime": "2023-04-13T14:05:54.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "bbcfd1a3-eb49-473e-8349-83e6248f3ee4",
+      "createTime": "2023-04-13T14:05:54.468Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "00a0ee0b-8c73-4a9b-864a-e3940a9cead3",
+      "createTime": "2023-04-13T14:05:54.465Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "0ff1d0a5-8738-442e-bd7f-57a291a68c31",
+      "createTime": "2023-04-13T14:05:54.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "f5b9f6a6-27f6-4f7d-8140-8cb73c1af5c4",
+      "createTime": "2023-04-13T14:05:54.461Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "1.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "45ba7b3e-72ee-4504-8c31-38d48fbef51e",
+      "createTime": "2023-04-13T14:05:54.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "297dd90e-daed-4c27-b491-d2da7d54f085",
+      "createTime": "2023-04-13T14:05:54.456Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "19913160-a90e-4ae8-9b0e-b2345502ea8e",
+      "createTime": "2023-04-13T14:05:54.454Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "a05ac6b2-7f0b-492c-8cab-13d4842e29e6",
+      "createTime": "2023-04-13T14:05:54.452Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "20bbe7fc-5903-4e9b-8b63-7b38df0e3e64",
+      "createTime": "2023-04-13T14:05:54.450Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "a2b85022-665f-4a51-9ded-30cc947a018e",
+      "createTime": "2023-04-13T14:05:54.440Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "746efd3b-65aa-43bd-b30b-9942fb7ddc03",
+      "createTime": "2023-04-13T14:05:54.438Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "05e28c7d-ae01-4898-bfaa-e3205db2fd2d",
+      "createTime": "2023-04-13T14:05:54.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "6bff9a8c-013b-473b-b2c1-fe736c51fe8e",
+      "createTime": "2023-04-13T14:05:54.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "45ebeb94-a4e6-4fcd-902e-c4f98a499b18",
+      "createTime": "2023-04-13T14:05:54.431Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "d9467246-2914-40fd-91a1-3b31a36d3197",
+      "createTime": "2023-04-13T14:05:54.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "2d5d06b4-f170-4ceb-9a1b-392f10261c83",
+      "createTime": "2023-04-13T14:05:54.427Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "e38c1684-d340-461b-968e-7b0ab006de70",
+      "createTime": "2023-04-13T14:05:54.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "6a3440bf-f8f6-442b-a3ae-f17af0feb6cf",
+      "createTime": "2023-04-13T14:05:54.423Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "6037daed-a261-4c49-be4f-c19872ed2293",
+      "createTime": "2023-04-13T14:05:54.421Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "e6786712-2902-4037-a24c-73ab687d1b43",
+      "createTime": "2023-04-13T14:05:54.417Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "5212b3ab-6853-414c-b851-a61d613f9908",
+      "createTime": "2023-04-13T14:05:54.415Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "312a3b5e-2253-4fb0-ae4a-3e244dbce235",
+      "createTime": "2023-04-13T14:05:54.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "10ff4a63-db04-42c3-aad6-f806169a12a2",
+      "createTime": "2023-04-13T14:05:54.410Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/game-servers",
+      "id": "a9d26c5a-930f-4a83-a19c-286d6a1e68c6",
+      "createTime": "2023-04-13T14:05:54.408Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "eec00243-58bb-4336-8ba9-caca8f0770c5",
+      "createTime": "2023-04-13T14:05:54.406Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "0f96b17b-9e7e-46a4-8099-254cdebe5350",
+      "createTime": "2023-04-13T14:05:54.404Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "11b63f8a-2254-43bd-b3eb-b110b4358fe9",
+      "createTime": "2023-04-13T14:05:54.401Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "4e744f44-3406-4ad8-b881-86a2b885f791",
+      "createTime": "2023-04-13T14:05:54.399Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "3ba0018c-27c5-4a31-91dc-965a156881de",
+      "createTime": "2023-04-13T14:05:54.397Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "0a598301-1a84-4a21-80d5-9070a936e05e",
+      "createTime": "2023-04-13T14:05:54.394Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "5a70b3c2-caf9-4881-a636-7fd8a15a212c",
+      "createTime": "2023-04-13T14:05:54.391Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "cc34ab8f-63c4-4552-82e3-b2b4a11686ff",
+      "createTime": "2023-04-13T14:05:54.389Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "55738f4f-74a2-444e-ad9e-0cba02f44b9c",
+      "createTime": "2023-04-13T14:05:54.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "14cf4be4-8ded-4104-8b0f-aac673843845",
+      "createTime": "2023-04-13T14:05:54.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "cdbdd51b-f177-4214-b51f-1930892109e8",
+      "createTime": "2023-04-13T14:05:54.382Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "83a4d65e-bbdb-436d-91e3-4b0d9be4af5f",
+      "createTime": "2023-04-13T14:05:54.380Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "88968104-bac0-4dac-9196-4add7d4ace94",
+      "createTime": "2023-04-13T14:05:54.378Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "4d59324d-7626-487c-9659-a40dbfcdeeb6",
+      "createTime": "2023-04-13T14:05:54.376Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "61ce12aa-5dfc-4388-be80-80b635cb4182",
+      "createTime": "2023-04-13T14:05:54.374Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "a35bc7f3-1a4d-492d-addd-49e8e2f31777",
+      "createTime": "2023-04-13T14:05:54.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "72102032-ac98-4dd9-a26b-9af50114b049",
+      "createTime": "2023-04-13T14:05:54.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "19963584-04e9-461b-be31-4ba84377a9d8",
+      "createTime": "2023-04-13T14:05:54.367Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "ec655a80-13c1-4e2d-8e01-3a03a3136edf",
+      "createTime": "2023-04-13T14:05:54.365Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "0c27d5e5-9135-4e83-b05e-b791fb1a691e",
+      "createTime": "2023-04-13T14:05:54.362Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "c1f8f33d-5596-4516-9d07-822379db2854",
+      "createTime": "2023-04-13T14:05:54.361Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e0c879b35e863135e381c78835244d3d5f9a9a7",
+          "message": "[contactcenterinsights] Launch UploadConversation endpoint",
+          "issues": [
+            "4155"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "5e876824-1559-4c57-bb4b-17fd982b5d9e",
+      "createTime": "2023-04-13T14:05:54.359Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "f84fa98f-c7b4-4563-a9f4-e1983456f1e1",
+      "createTime": "2023-04-13T14:05:54.357Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "f5aed8e1-c4a7-4d81-9b36-5f8a63beef36",
+      "createTime": "2023-04-13T14:05:54.355Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "42c2a5fa-fb4c-4a9a-a709-1c1664e4c07b",
+      "createTime": "2023-04-13T14:05:54.352Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.7.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "50f60e5a-0cf4-4f38-87df-2c0bb7dc9bd3",
+      "createTime": "2023-04-13T14:05:54.350Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "69672a9312d1496d5a6ae23679324d026eb68eee",
+          "message": "[binaryauthorization] add enum for grafeas v1 cvss to support both cvss v2 and v3",
+          "issues": [
+            "4168"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "be0da28b-44f3-4d8c-b149-14d33530ce25",
+      "createTime": "2023-04-13T14:05:54.349Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "ab8eade7-b6ca-452b-99c2-a467ce2cb234",
+      "createTime": "2023-04-13T14:05:54.347Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "b5232c63-752a-4025-90f0-e2ce1e74837d",
+      "createTime": "2023-04-13T14:05:54.345Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "5fc8bec9-fe81-45ea-b209-3fac17092cb8",
+      "createTime": "2023-04-13T14:05:54.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "ea79231b-22a5-43bc-a379-ba54417abe63",
+      "createTime": "2023-04-13T14:05:54.340Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "b94defe4-79f9-487f-9654-7417be4a65e1",
+      "createTime": "2023-04-13T14:05:54.339Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "57dc36a7-ec3b-488e-a00d-45cf5d13e170",
+      "createTime": "2023-04-13T14:05:54.337Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "490bf8dc-a0aa-4eff-9709-254388a17f79",
+      "createTime": "2023-04-13T14:05:54.335Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "03708617-d5e5-4155-8b20-686bbc8ee36b",
+      "createTime": "2023-04-13T14:05:54.332Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "0f967130-e4ae-47cb-994b-30484c62ef40",
+      "createTime": "2023-04-13T14:05:54.330Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "3f5044a7-5582-42ea-8896-400769b5b299",
+      "createTime": "2023-04-13T14:05:54.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "af2a7e81-b274-4c35-9ed5-529c51739c63",
+      "createTime": "2023-04-13T14:05:54.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "c8e6f69f-5e1c-48ee-b129-f69d55656286",
+      "createTime": "2023-04-13T14:05:54.325Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "6937f7bf-b760-45aa-90b1-9357b9e252b2",
+      "createTime": "2023-04-13T14:05:54.323Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "6bd1bbb7-8d7f-4773-b9b6-d200927e61aa",
+      "createTime": "2023-04-13T14:05:54.320Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "9ac536c6-a72f-4f2f-8ce3-b21bb0ba0372",
+      "createTime": "2023-04-13T14:05:54.318Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.6.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "3138c269-628d-494b-8e3b-78e3732778bd",
+      "createTime": "2023-04-13T14:05:54.316Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.6.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "6e13fd45-2c4e-49d3-b4a7-44a9b5acf1e2",
+      "createTime": "2023-04-13T14:05:54.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "bced1885-1923-4b62-a6d9-6066321a16b9",
+      "createTime": "2023-04-13T14:05:54.312Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "516bb854-c084-4929-85b6-cb5f3ab12bea",
+      "createTime": "2023-04-13T14:05:54.311Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c56a74d070a826e35b3582060c7ff5aa51a72f17",
+          "message": "Add notification_channels in aiplatform v1beta1 model_monitoring.proto",
+          "issues": [
+            "4160"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "94ea195acc92d947f27374a5a8c753c2f0cc1d0e",
+          "message": "[ai-platform] add public_endpoint_enabled and publid_endpoint_domain_name to IndexEndpoint",
+          "issues": [
+            "4136"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "db2d0a1c-7f95-440c-a761-e8b10a872e7d",
+      "createTime": "2023-04-13T14:05:54.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "a3403c3d-b7a9-46db-aa1c-404588c76da2",
+      "createTime": "2023-04-13T14:05:54.306Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "60a27184-049b-47b6-98d6-03ca08f753a8",
+      "createTime": "2023-04-13T14:05:54.304Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "55395115-6015-4527-9572-f0e3f06d359c",
+      "createTime": "2023-04-13T14:05:54.302Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "f8500fa5-ef37-4148-99d3-a7557ece036a",
+      "createTime": "2023-04-13T14:05:54.300Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        }
+      ],
+      "version": "1.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "b52880db-eb27-4513-ad40-82a553efc2c7",
+      "createTime": "2023-04-13T14:05:54.299Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "2.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "115c6e3b-44c8-4d08-93e2-76deab7fb1d2",
+      "createTime": "2023-04-13T14:05:54.296Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "534871df-d21c-4fb3-a1a6-aae1ad2ae88c",
+      "createTime": "2023-04-13T14:05:54.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "84e8c8cd-daf9-49ee-ac07-3735d7457fe5",
+      "createTime": "2023-04-13T14:05:54.290Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "b8e8be4a-f17f-4118-98dd-dfdae5b273a8",
+      "createTime": "2023-04-13T14:05:54.288Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "f519b3246995fe9077fa245e734d0f735f5aca16",
           "message": "[advisorynotifications] updating Cloud Client Libraries with new field NotificationType for advisorynotifications.googleapis.com",
@@ -5086,5 +8724,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-04-04T20:22:18.424Z"
+  "updateTime": "2023-04-13T14:05:54.623Z"
 }
