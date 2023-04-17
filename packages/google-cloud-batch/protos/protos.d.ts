@@ -7455,6 +7455,9 @@ export namespace google {
 
                     /** AllocationPolicy network */
                     network?: (google.cloud.batch.v1alpha.AllocationPolicy.INetworkPolicy|null);
+
+                    /** AllocationPolicy placement */
+                    placement?: (google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null);
                 }
 
                 /** Represents an AllocationPolicy. */
@@ -7492,6 +7495,9 @@ export namespace google {
 
                     /** AllocationPolicy network. */
                     public network?: (google.cloud.batch.v1alpha.AllocationPolicy.INetworkPolicy|null);
+
+                    /** AllocationPolicy placement. */
+                    public placement?: (google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null);
 
                     /**
                      * Creates a new AllocationPolicy instance using the specified properties.
@@ -8478,6 +8484,109 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a PlacementPolicy. */
+                    interface IPlacementPolicy {
+
+                        /** PlacementPolicy collocation */
+                        collocation?: (string|null);
+
+                        /** PlacementPolicy maxDistance */
+                        maxDistance?: (number|Long|string|null);
+                    }
+
+                    /** Represents a PlacementPolicy. */
+                    class PlacementPolicy implements IPlacementPolicy {
+
+                        /**
+                         * Constructs a new PlacementPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy);
+
+                        /** PlacementPolicy collocation. */
+                        public collocation: string;
+
+                        /** PlacementPolicy maxDistance. */
+                        public maxDistance: (number|Long|string);
+
+                        /**
+                         * Creates a new PlacementPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlacementPolicy instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy): google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy;
+
+                        /**
+                         * Encodes the specified PlacementPolicy message. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.verify|verify} messages.
+                         * @param message PlacementPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlacementPolicy message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy.verify|verify} messages.
+                         * @param message PlacementPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlacementPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlacementPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy;
+
+                        /**
+                         * Decodes a PlacementPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlacementPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy;
+
+                        /**
+                         * Verifies a PlacementPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlacementPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlacementPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy;
+
+                        /**
+                         * Creates a plain object from a PlacementPolicy message. Also converts values to other types if specified.
+                         * @param message PlacementPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.AllocationPolicy.PlacementPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlacementPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlacementPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** ProvisioningModel enum. */
                     enum ProvisioningModel {
                         PROVISIONING_MODEL_UNSPECIFIED = 0,
@@ -8649,7 +8758,8 @@ export namespace google {
                     /** SchedulingPolicy enum. */
                     enum SchedulingPolicy {
                         SCHEDULING_POLICY_UNSPECIFIED = 0,
-                        AS_SOON_AS_POSSIBLE = 1
+                        AS_SOON_AS_POSSIBLE = 1,
+                        IN_ORDER = 2
                     }
                 }
 
@@ -9207,7 +9317,8 @@ export namespace google {
                         ASSIGNED = 2,
                         RUNNING = 3,
                         FAILED = 4,
-                        SUCCEEDED = 5
+                        SUCCEEDED = 5,
+                        UNEXECUTED = 6
                     }
                 }
 
