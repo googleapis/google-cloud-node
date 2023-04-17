@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@googlemaps/addressvalidation": "^1.0.1"
+    "@googlemaps/addressvalidation": "^1.0.2"
   },
   "devDependencies": {
     "c8": "^7.1.0",

@@ -93,6 +93,7 @@
                              * @property {number|null} [ttlAfterCompletionDays] Job ttlAfterCompletionDays
                              * @property {Object.<string,string>|null} [labels] Job labels
                              * @property {google.rpc.IStatus|null} [error] Job error
+                             * @property {google.cloud.video.transcoder.v1.Job.ProcessingMode|null} [mode] Job mode
                              */
     
                             /**
@@ -207,6 +208,14 @@
                              */
                             Job.prototype.error = null;
     
+                            /**
+                             * Job mode.
+                             * @member {google.cloud.video.transcoder.v1.Job.ProcessingMode} mode
+                             * @memberof google.cloud.video.transcoder.v1.Job
+                             * @instance
+                             */
+                            Job.prototype.mode = 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -270,6 +279,8 @@
                                         writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                                     $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 20, wireType 0 =*/160).int32(message.mode);
                                 return writer;
                             };
     
@@ -369,6 +380,10 @@
                                         }
                                     case 17: {
                                             message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.mode = reader.int32();
                                             break;
                                         }
                                     default:
@@ -473,6 +488,15 @@
                                     if (error)
                                         return "error." + error;
                                 }
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -558,6 +582,26 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.Job.error: object expected");
                                     message.error = $root.google.rpc.Status.fromObject(object.error);
                                 }
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "PROCESSING_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "PROCESSING_MODE_INTERACTIVE":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "PROCESSING_MODE_BATCH":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -586,6 +630,7 @@
                                     object.endTime = null;
                                     object.ttlAfterCompletionDays = 0;
                                     object.error = null;
+                                    object.mode = options.enums === String ? "PROCESSING_MODE_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -621,6 +666,8 @@
                                 }
                                 if (message.error != null && message.hasOwnProperty("error"))
                                     object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.video.transcoder.v1.Job.ProcessingMode[message.mode] === undefined ? message.mode : $root.google.cloud.video.transcoder.v1.Job.ProcessingMode[message.mode] : message.mode;
                                 return object;
                             };
     
@@ -667,6 +714,22 @@
                                 values[valuesById[2] = "RUNNING"] = 2;
                                 values[valuesById[3] = "SUCCEEDED"] = 3;
                                 values[valuesById[4] = "FAILED"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * ProcessingMode enum.
+                             * @name google.cloud.video.transcoder.v1.Job.ProcessingMode
+                             * @enum {number}
+                             * @property {number} PROCESSING_MODE_UNSPECIFIED=0 PROCESSING_MODE_UNSPECIFIED value
+                             * @property {number} PROCESSING_MODE_INTERACTIVE=1 PROCESSING_MODE_INTERACTIVE value
+                             * @property {number} PROCESSING_MODE_BATCH=2 PROCESSING_MODE_BATCH value
+                             */
+                            Job.ProcessingMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PROCESSING_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "PROCESSING_MODE_INTERACTIVE"] = 1;
+                                values[valuesById[2] = "PROCESSING_MODE_BATCH"] = 2;
                                 return values;
                             })();
     
