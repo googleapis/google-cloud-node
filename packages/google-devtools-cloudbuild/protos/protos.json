@@ -561,6 +561,22 @@
                         }
                       }
                     },
+                    "GitSource": {
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dir": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
                     "RepoSource": {
                       "oneofs": {
                         "revision": {
@@ -629,6 +645,7 @@
                           "oneof": [
                             "storageSource",
                             "repoSource",
+                            "gitSource",
                             "storageSourceManifest"
                           ]
                         }
@@ -641,6 +658,10 @@
                         "repoSource": {
                           "type": "RepoSource",
                           "id": 3
+                        },
+                        "gitSource": {
+                          "type": "GitSource",
+                          "id": 5
                         },
                         "storageSourceManifest": {
                           "type": "StorageSourceManifest",

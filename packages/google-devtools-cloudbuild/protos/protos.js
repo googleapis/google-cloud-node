@@ -1487,6 +1487,256 @@
                         return StorageSource;
                     })();
     
+                    v1.GitSource = (function() {
+    
+                        /**
+                         * Properties of a GitSource.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IGitSource
+                         * @property {string|null} [url] GitSource url
+                         * @property {string|null} [dir] GitSource dir
+                         * @property {string|null} [revision] GitSource revision
+                         */
+    
+                        /**
+                         * Constructs a new GitSource.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a GitSource.
+                         * @implements IGitSource
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IGitSource=} [properties] Properties to set
+                         */
+                        function GitSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitSource url.
+                         * @member {string} url
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         */
+                        GitSource.prototype.url = "";
+    
+                        /**
+                         * GitSource dir.
+                         * @member {string} dir
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         */
+                        GitSource.prototype.dir = "";
+    
+                        /**
+                         * GitSource revision.
+                         * @member {string} revision
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         */
+                        GitSource.prototype.revision = "";
+    
+                        /**
+                         * Creates a new GitSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitSource=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource instance
+                         */
+                        GitSource.create = function create(properties) {
+                            return new GitSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitSource message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitSource} message GitSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.dir != null && Object.hasOwnProperty.call(message, "dir"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.dir);
+                            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.revision);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitSource} message GitSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dir = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.revision = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitSource message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.dir != null && message.hasOwnProperty("dir"))
+                                if (!$util.isString(message.dir))
+                                    return "dir: string expected";
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                if (!$util.isString(message.revision))
+                                    return "revision: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource
+                         */
+                        GitSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.GitSource)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.GitSource();
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.dir != null)
+                                message.dir = String(object.dir);
+                            if (object.revision != null)
+                                message.revision = String(object.revision);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.GitSource} message GitSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.url = "";
+                                object.dir = "";
+                                object.revision = "";
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.dir != null && message.hasOwnProperty("dir"))
+                                object.dir = message.dir;
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                object.revision = message.revision;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitSource to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitSource
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.GitSource";
+                        };
+    
+                        return GitSource;
+                    })();
+    
                     v1.RepoSource = (function() {
     
                         /**
@@ -2191,6 +2441,7 @@
                          * @interface ISource
                          * @property {google.devtools.cloudbuild.v1.IStorageSource|null} [storageSource] Source storageSource
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [repoSource] Source repoSource
+                         * @property {google.devtools.cloudbuild.v1.IGitSource|null} [gitSource] Source gitSource
                          * @property {google.devtools.cloudbuild.v1.IStorageSourceManifest|null} [storageSourceManifest] Source storageSourceManifest
                          */
     
@@ -2226,6 +2477,14 @@
                         Source.prototype.repoSource = null;
     
                         /**
+                         * Source gitSource.
+                         * @member {google.devtools.cloudbuild.v1.IGitSource|null|undefined} gitSource
+                         * @memberof google.devtools.cloudbuild.v1.Source
+                         * @instance
+                         */
+                        Source.prototype.gitSource = null;
+    
+                        /**
                          * Source storageSourceManifest.
                          * @member {google.devtools.cloudbuild.v1.IStorageSourceManifest|null|undefined} storageSourceManifest
                          * @memberof google.devtools.cloudbuild.v1.Source
@@ -2238,12 +2497,12 @@
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|"storageSourceManifest"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"gitSource"|"storageSourceManifest"|undefined} source
                          * @memberof google.devtools.cloudbuild.v1.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "storageSourceManifest"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitSource", "storageSourceManifest"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2275,6 +2534,8 @@
                                 $root.google.devtools.cloudbuild.v1.StorageSource.encode(message.storageSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.repoSource != null && Object.hasOwnProperty.call(message, "repoSource"))
                                 $root.google.devtools.cloudbuild.v1.RepoSource.encode(message.repoSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.gitSource != null && Object.hasOwnProperty.call(message, "gitSource"))
+                                $root.google.devtools.cloudbuild.v1.GitSource.encode(message.gitSource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.storageSourceManifest != null && Object.hasOwnProperty.call(message, "storageSourceManifest"))
                                 $root.google.devtools.cloudbuild.v1.StorageSourceManifest.encode(message.storageSourceManifest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
@@ -2317,6 +2578,10 @@
                                     }
                                 case 3: {
                                         message.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.gitSource = $root.google.devtools.cloudbuild.v1.GitSource.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -2377,6 +2642,16 @@
                                         return "repoSource." + error;
                                 }
                             }
+                            if (message.gitSource != null && message.hasOwnProperty("gitSource")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v1.GitSource.verify(message.gitSource);
+                                    if (error)
+                                        return "gitSource." + error;
+                                }
+                            }
                             if (message.storageSourceManifest != null && message.hasOwnProperty("storageSourceManifest")) {
                                 if (properties.source === 1)
                                     return "source: multiple values";
@@ -2412,6 +2687,11 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.Source.repoSource: object expected");
                                 message.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.fromObject(object.repoSource);
                             }
+                            if (object.gitSource != null) {
+                                if (typeof object.gitSource !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Source.gitSource: object expected");
+                                message.gitSource = $root.google.devtools.cloudbuild.v1.GitSource.fromObject(object.gitSource);
+                            }
                             if (object.storageSourceManifest != null) {
                                 if (typeof object.storageSourceManifest !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.Source.storageSourceManifest: object expected");
@@ -2442,6 +2722,11 @@
                                 object.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.toObject(message.repoSource, options);
                                 if (options.oneofs)
                                     object.source = "repoSource";
+                            }
+                            if (message.gitSource != null && message.hasOwnProperty("gitSource")) {
+                                object.gitSource = $root.google.devtools.cloudbuild.v1.GitSource.toObject(message.gitSource, options);
+                                if (options.oneofs)
+                                    object.source = "gitSource";
                             }
                             if (message.storageSourceManifest != null && message.hasOwnProperty("storageSourceManifest")) {
                                 object.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.toObject(message.storageSourceManifest, options);

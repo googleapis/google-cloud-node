@@ -761,6 +761,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GitSource. */
+                interface IGitSource {
+
+                    /** GitSource url */
+                    url?: (string|null);
+
+                    /** GitSource dir */
+                    dir?: (string|null);
+
+                    /** GitSource revision */
+                    revision?: (string|null);
+                }
+
+                /** Represents a GitSource. */
+                class GitSource implements IGitSource {
+
+                    /**
+                     * Constructs a new GitSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitSource);
+
+                    /** GitSource url. */
+                    public url: string;
+
+                    /** GitSource dir. */
+                    public dir: string;
+
+                    /** GitSource revision. */
+                    public revision: string;
+
+                    /**
+                     * Creates a new GitSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitSource instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitSource): google.devtools.cloudbuild.v1.GitSource;
+
+                    /**
+                     * Encodes the specified GitSource message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitSource.verify|verify} messages.
+                     * @param message GitSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitSource.verify|verify} messages.
+                     * @param message GitSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitSource;
+
+                    /**
+                     * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitSource;
+
+                    /**
+                     * Verifies a GitSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitSource;
+
+                    /**
+                     * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                     * @param message GitSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RepoSource. */
                 interface IRepoSource {
 
@@ -1021,6 +1130,9 @@ export namespace google {
                     /** Source repoSource */
                     repoSource?: (google.devtools.cloudbuild.v1.IRepoSource|null);
 
+                    /** Source gitSource */
+                    gitSource?: (google.devtools.cloudbuild.v1.IGitSource|null);
+
                     /** Source storageSourceManifest */
                     storageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
                 }
@@ -1040,11 +1152,14 @@ export namespace google {
                     /** Source repoSource. */
                     public repoSource?: (google.devtools.cloudbuild.v1.IRepoSource|null);
 
+                    /** Source gitSource. */
+                    public gitSource?: (google.devtools.cloudbuild.v1.IGitSource|null);
+
                     /** Source storageSourceManifest. */
                     public storageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
 
                     /** Source source. */
-                    public source?: ("storageSource"|"repoSource"|"storageSourceManifest");
+                    public source?: ("storageSource"|"repoSource"|"gitSource"|"storageSourceManifest");
 
                     /**
                      * Creates a new Source instance using the specified properties.
