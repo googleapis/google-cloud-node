@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-tasks",
-        "version": "3.1.0",
+        "version": "3.1.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 95,
                     "type": "FULL"
                 }
             ],
@@ -122,7 +122,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -166,7 +166,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -506,7 +506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -558,7 +558,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -602,7 +602,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 100,
+                    "end": 101,
                     "type": "FULL"
                 }
             ],
@@ -690,7 +690,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 120,
+                    "end": 127,
                     "type": "FULL"
                 }
             ],
@@ -790,7 +790,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -842,7 +842,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -890,7 +890,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],

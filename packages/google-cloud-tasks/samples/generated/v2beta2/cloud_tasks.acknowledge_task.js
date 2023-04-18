@@ -37,8 +37,8 @@ function main(name, scheduleTime) {
    *  Required. The task's current schedule time, available in the
    *  schedule_time google.cloud.tasks.v2beta2.Task.schedule_time  returned by
    *  LeaseTasks google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks  response or
-   *  RenewLease google.cloud.tasks.v2beta2.CloudTasks.RenewLease  response. This restriction is
-   *  to ensure that your worker currently holds the lease.
+   *  RenewLease google.cloud.tasks.v2beta2.CloudTasks.RenewLease  response.
+   *  This restriction is to ensure that your worker currently holds the lease.
    */
   // const scheduleTime = {}
 

@@ -13,8 +13,8 @@
                     "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1",
                     "php_namespace": "Google\\Cloud\\Metastore\\V1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Subnetwork",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/subnetworks/{subnetwork}"
+                    "(google.api.resource_definition).type": "dataplex.googleapis.com/Lake",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/lakes/{lake}"
                   },
                   "nested": {
                     "DataprocMetastore": {
@@ -510,6 +510,10 @@
                         "telemetryConfig": {
                           "type": "TelemetryConfig",
                           "id": 23
+                        },
+                        "scalingConfig": {
+                          "type": "ScalingConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -577,6 +581,11 @@
                         "kerberosConfig": {
                           "type": "KerberosConfig",
                           "id": 3
+                        },
+                        "auxiliaryVersions": {
+                          "keyType": "string",
+                          "type": "AuxiliaryVersionConfig",
+                          "id": 5
                         }
                       }
                     },
@@ -616,6 +625,26 @@
                         "kmsKey": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "AuxiliaryVersionConfig": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "configOverrides": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -983,6 +1012,38 @@
                             "RESTORE_TYPE_UNSPECIFIED": 0,
                             "FULL": 1,
                             "METADATA_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "oneofs": {
+                        "scalingModel": {
+                          "oneof": [
+                            "instanceSize",
+                            "scalingFactor"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceSize": {
+                          "type": "InstanceSize",
+                          "id": 1
+                        },
+                        "scalingFactor": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InstanceSize": {
+                          "values": {
+                            "INSTANCE_SIZE_UNSPECIFIED": 0,
+                            "EXTRA_SMALL": 1,
+                            "SMALL": 2,
+                            "MEDIUM": 3,
+                            "LARGE": 4,
+                            "EXTRA_LARGE": 5
                           }
                         }
                       }
@@ -2520,6 +2581,10 @@
                         "telemetryConfig": {
                           "type": "TelemetryConfig",
                           "id": 23
+                        },
+                        "scalingConfig": {
+                          "type": "ScalingConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -2716,6 +2781,10 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "customRoutesEnabled": {
+                          "type": "bool",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -3078,6 +3147,38 @@
                             "RESTORE_TYPE_UNSPECIFIED": 0,
                             "FULL": 1,
                             "METADATA_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "oneofs": {
+                        "scalingModel": {
+                          "oneof": [
+                            "instanceSize",
+                            "scalingFactor"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceSize": {
+                          "type": "InstanceSize",
+                          "id": 1
+                        },
+                        "scalingFactor": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InstanceSize": {
+                          "values": {
+                            "INSTANCE_SIZE_UNSPECIFIED": 0,
+                            "EXTRA_SMALL": 1,
+                            "SMALL": 2,
+                            "MEDIUM": 3,
+                            "LARGE": 4,
+                            "EXTRA_LARGE": 5
                           }
                         }
                       }
@@ -3984,6 +4085,7 @@
                         "MetastoreType": {
                           "values": {
                             "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "DATAPLEX": 1,
                             "BIGQUERY": 2,
                             "DATAPROC_METASTORE": 3
                           }
@@ -4735,6 +4837,10 @@
                         "telemetryConfig": {
                           "type": "TelemetryConfig",
                           "id": 23
+                        },
+                        "scalingConfig": {
+                          "type": "ScalingConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -4931,6 +5037,10 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "customRoutesEnabled": {
+                          "type": "bool",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -5293,6 +5403,38 @@
                             "RESTORE_TYPE_UNSPECIFIED": 0,
                             "FULL": 1,
                             "METADATA_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "ScalingConfig": {
+                      "oneofs": {
+                        "scalingModel": {
+                          "oneof": [
+                            "instanceSize",
+                            "scalingFactor"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceSize": {
+                          "type": "InstanceSize",
+                          "id": 1
+                        },
+                        "scalingFactor": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InstanceSize": {
+                          "values": {
+                            "INSTANCE_SIZE_UNSPECIFIED": 0,
+                            "EXTRA_SMALL": 1,
+                            "SMALL": 2,
+                            "MEDIUM": 3,
+                            "LARGE": 4,
+                            "EXTRA_LARGE": 5
                           }
                         }
                       }
@@ -6199,6 +6341,7 @@
                         "MetastoreType": {
                           "values": {
                             "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "DATAPLEX": 1,
                             "BIGQUERY": 2,
                             "DATAPROC_METASTORE": 3
                           }
