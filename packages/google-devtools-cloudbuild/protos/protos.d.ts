@@ -1566,6 +1566,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UploadedNpmPackage. */
+                interface IUploadedNpmPackage {
+
+                    /** UploadedNpmPackage uri */
+                    uri?: (string|null);
+
+                    /** UploadedNpmPackage fileHashes */
+                    fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedNpmPackage pushTiming */
+                    pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+                }
+
+                /** Represents an UploadedNpmPackage. */
+                class UploadedNpmPackage implements IUploadedNpmPackage {
+
+                    /**
+                     * Constructs a new UploadedNpmPackage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IUploadedNpmPackage);
+
+                    /** UploadedNpmPackage uri. */
+                    public uri: string;
+
+                    /** UploadedNpmPackage fileHashes. */
+                    public fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedNpmPackage pushTiming. */
+                    public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /**
+                     * Creates a new UploadedNpmPackage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadedNpmPackage instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IUploadedNpmPackage): google.devtools.cloudbuild.v1.UploadedNpmPackage;
+
+                    /**
+                     * Encodes the specified UploadedNpmPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedNpmPackage.verify|verify} messages.
+                     * @param message UploadedNpmPackage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IUploadedNpmPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadedNpmPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedNpmPackage.verify|verify} messages.
+                     * @param message UploadedNpmPackage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IUploadedNpmPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadedNpmPackage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadedNpmPackage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.UploadedNpmPackage;
+
+                    /**
+                     * Decodes an UploadedNpmPackage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadedNpmPackage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.UploadedNpmPackage;
+
+                    /**
+                     * Verifies an UploadedNpmPackage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadedNpmPackage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadedNpmPackage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.UploadedNpmPackage;
+
+                    /**
+                     * Creates a plain object from an UploadedNpmPackage message. Also converts values to other types if specified.
+                     * @param message UploadedNpmPackage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.UploadedNpmPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadedNpmPackage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadedNpmPackage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BuildStep. */
                 interface IBuildStep {
 
@@ -1888,6 +1997,9 @@ export namespace google {
 
                     /** Results mavenArtifacts */
                     mavenArtifacts?: (google.devtools.cloudbuild.v1.IUploadedMavenArtifact[]|null);
+
+                    /** Results npmPackages */
+                    npmPackages?: (google.devtools.cloudbuild.v1.IUploadedNpmPackage[]|null);
                 }
 
                 /** Represents a Results. */
@@ -1922,6 +2034,9 @@ export namespace google {
 
                     /** Results mavenArtifacts. */
                     public mavenArtifacts: google.devtools.cloudbuild.v1.IUploadedMavenArtifact[];
+
+                    /** Results npmPackages. */
+                    public npmPackages: google.devtools.cloudbuild.v1.IUploadedNpmPackage[];
 
                     /**
                      * Creates a new Results instance using the specified properties.
@@ -2371,6 +2486,20 @@ export namespace google {
 
                 namespace Build {
 
+                    /** Status enum. */
+                    enum Status {
+                        STATUS_UNKNOWN = 0,
+                        PENDING = 10,
+                        QUEUED = 1,
+                        WORKING = 2,
+                        SUCCESS = 3,
+                        FAILURE = 4,
+                        INTERNAL_ERROR = 5,
+                        TIMEOUT = 6,
+                        CANCELLED = 7,
+                        EXPIRED = 9
+                    }
+
                     /** Properties of a Warning. */
                     interface IWarning {
 
@@ -2601,20 +2730,6 @@ export namespace google {
                             FETCH_SOURCE_FAILED = 6
                         }
                     }
-
-                    /** Status enum. */
-                    enum Status {
-                        STATUS_UNKNOWN = 0,
-                        PENDING = 10,
-                        QUEUED = 1,
-                        WORKING = 2,
-                        SUCCESS = 3,
-                        FAILURE = 4,
-                        INTERNAL_ERROR = 5,
-                        TIMEOUT = 6,
-                        CANCELLED = 7,
-                        EXPIRED = 9
-                    }
                 }
 
                 /** Properties of an Artifacts. */
@@ -2631,6 +2746,9 @@ export namespace google {
 
                     /** Artifacts pythonPackages */
                     pythonPackages?: (google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[]|null);
+
+                    /** Artifacts npmPackages */
+                    npmPackages?: (google.devtools.cloudbuild.v1.Artifacts.INpmPackage[]|null);
                 }
 
                 /** Represents an Artifacts. */
@@ -2653,6 +2771,9 @@ export namespace google {
 
                     /** Artifacts pythonPackages. */
                     public pythonPackages: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[];
+
+                    /** Artifacts npmPackages. */
+                    public npmPackages: google.devtools.cloudbuild.v1.Artifacts.INpmPackage[];
 
                     /**
                      * Creates a new Artifacts instance using the specified properties.
@@ -3061,6 +3182,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PythonPackage
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NpmPackage. */
+                    interface INpmPackage {
+
+                        /** NpmPackage repository */
+                        repository?: (string|null);
+
+                        /** NpmPackage packagePath */
+                        packagePath?: (string|null);
+                    }
+
+                    /** Represents a NpmPackage. */
+                    class NpmPackage implements INpmPackage {
+
+                        /**
+                         * Constructs a new NpmPackage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Artifacts.INpmPackage);
+
+                        /** NpmPackage repository. */
+                        public repository: string;
+
+                        /** NpmPackage packagePath. */
+                        public packagePath: string;
+
+                        /**
+                         * Creates a new NpmPackage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NpmPackage instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Artifacts.INpmPackage): google.devtools.cloudbuild.v1.Artifacts.NpmPackage;
+
+                        /**
+                         * Encodes the specified NpmPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.NpmPackage.verify|verify} messages.
+                         * @param message NpmPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Artifacts.INpmPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NpmPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.NpmPackage.verify|verify} messages.
+                         * @param message NpmPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Artifacts.INpmPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NpmPackage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NpmPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Artifacts.NpmPackage;
+
+                        /**
+                         * Decodes a NpmPackage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NpmPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Artifacts.NpmPackage;
+
+                        /**
+                         * Verifies a NpmPackage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NpmPackage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NpmPackage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Artifacts.NpmPackage;
+
+                        /**
+                         * Creates a plain object from a NpmPackage message. Also converts values to other types if specified.
+                         * @param message NpmPackage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Artifacts.NpmPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NpmPackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NpmPackage
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -3589,7 +3813,8 @@ export namespace google {
                     enum HashType {
                         NONE = 0,
                         SHA256 = 1,
-                        MD5 = 2
+                        MD5 = 2,
+                        SHA512 = 4
                     }
                 }
 
@@ -7384,6 +7609,9 @@ export namespace google {
 
                         /** NetworkConfig egressOption */
                         egressOption?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption|keyof typeof google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption|null);
+
+                        /** NetworkConfig peeredNetworkIpRange */
+                        peeredNetworkIpRange?: (string|null);
                     }
 
                     /** Represents a NetworkConfig. */
@@ -7400,6 +7628,9 @@ export namespace google {
 
                         /** NetworkConfig egressOption. */
                         public egressOption: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption|keyof typeof google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption);
+
+                        /** NetworkConfig peeredNetworkIpRange. */
+                        public peeredNetworkIpRange: string;
 
                         /**
                          * Creates a new NetworkConfig instance using the specified properties.
