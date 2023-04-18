@@ -6066,7 +6066,8 @@ export namespace grafeas {
             enum AttackComplexity {
                 ATTACK_COMPLEXITY_UNSPECIFIED = 0,
                 ATTACK_COMPLEXITY_LOW = 1,
-                ATTACK_COMPLEXITY_HIGH = 2
+                ATTACK_COMPLEXITY_HIGH = 2,
+                ATTACK_COMPLEXITY_MEDIUM = 3
             }
 
             /** Authentication enum. */
@@ -6104,7 +6105,9 @@ export namespace grafeas {
                 IMPACT_UNSPECIFIED = 0,
                 IMPACT_HIGH = 1,
                 IMPACT_LOW = 2,
-                IMPACT_NONE = 3
+                IMPACT_NONE = 3,
+                IMPACT_PARTIAL = 4,
+                IMPACT_COMPLETE = 5
             }
         }
 

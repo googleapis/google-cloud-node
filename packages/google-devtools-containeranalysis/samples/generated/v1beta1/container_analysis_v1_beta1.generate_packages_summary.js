@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START cloudtasks_v2beta2_generated_CloudTasks_GetQueue_async]
+  // [START containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_GeneratePackagesSummary_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,37 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the queue. For example:
-   *  `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   *  Required. The name of the resource to get a packages summary for in the
+   *  form of `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. Read mask is used for a more granular control over what the API
-   *  returns. If the mask is not present all fields will be returned except
-   *  Queue.stats. Queue.stats will be returned only if it was  explicitly
-   *  specified in the mask.
-   */
-  // const readMask = {}
 
-  // Imports the Tasks library
-  const {CloudTasksClient} = require('@google-cloud/tasks').v2beta2;
+  // Imports the Containeranalysis library
+  const {ContainerAnalysisV1Beta1Client} = require('@google-cloud/containeranalysis').v1beta1;
 
   // Instantiates a client
-  const tasksClient = new CloudTasksClient();
+  const containeranalysisClient = new ContainerAnalysisV1Beta1Client();
 
-  async function callGetQueue() {
+  async function callGeneratePackagesSummary() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await tasksClient.getQueue(request);
+    const response = await containeranalysisClient.generatePackagesSummary(request);
     console.log(response);
   }
 
-  callGetQueue();
-  // [END cloudtasks_v2beta2_generated_CloudTasks_GetQueue_async]
+  callGeneratePackagesSummary();
+  // [END containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_GeneratePackagesSummary_async]
 }
 
 process.on('unhandledRejection', err => {
