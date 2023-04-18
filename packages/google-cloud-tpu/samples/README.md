@@ -50,6 +50,7 @@
   * [Tpu.list_nodes](#tpu.list_nodes)
   * [Tpu.list_queued_resources](#tpu.list_queued_resources)
   * [Tpu.list_runtime_versions](#tpu.list_runtime_versions)
+  * [Tpu.reset_queued_resource](#tpu.reset_queued_resource)
   * [Tpu.simulate_maintenance_event](#tpu.simulate_maintenance_event)
   * [Tpu.start_node](#tpu.start_node)
   * [Tpu.stop_node](#tpu.stop_node)
@@ -711,6 +712,23 @@ __Usage:__
 
 
 `node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.list_runtime_versions.js`
+
+
+-----
+
+
+
+
+### Tpu.reset_queued_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.reset_queued_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.reset_queued_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.reset_queued_resource.js`
 
 
 -----

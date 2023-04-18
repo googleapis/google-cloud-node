@@ -2068,6 +2068,34 @@
                             }
                           ]
                         },
+                        "ResetQueuedResource": {
+                          "requestType": "ResetQueuedResourceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha1/{name=projects/*/locations/*/queuedResources/*}:reset",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "QueuedResource",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha1/{name=projects/*/locations/*/queuedResources/*}:reset",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "QueuedResource",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GenerateServiceIdentity": {
                           "requestType": "GenerateServiceIdentityRequest",
                           "responseType": "GenerateServiceIdentityResponse",
@@ -2550,6 +2578,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "reservationName": {
+                          "type": "string",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -2968,6 +3000,18 @@
                         "requestId": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ResetQueuedResourceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "tpu.googleapis.com/QueuedResource"
+                          }
                         }
                       }
                     },
