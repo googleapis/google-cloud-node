@@ -30,10 +30,12 @@ function main(queue) {
    */
   /**
    *  Required. The queue to create or update.
-   *  The queue's name google.cloud.tasks.v2beta2.Queue.name  must be specified.
+   *  The queue's name google.cloud.tasks.v2beta2.Queue.name  must be
+   *  specified.
    *  Output only fields cannot be modified using UpdateQueue.
    *  Any value specified for an output only field will be ignored.
-   *  The queue's name google.cloud.tasks.v2beta2.Queue.name  cannot be changed.
+   *  The queue's name google.cloud.tasks.v2beta2.Queue.name  cannot be
+   *  changed.
    */
   // const queue = {}
   /**

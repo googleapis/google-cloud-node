@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START cloudtasks_v2beta2_generated_CloudTasks_GetQueue_async]
+  // [START tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,37 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the queue. For example:
-   *  `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   *  Required. The name of the queued resource.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. Read mask is used for a more granular control over what the API
-   *  returns. If the mask is not present all fields will be returned except
-   *  Queue.stats. Queue.stats will be returned only if it was  explicitly
-   *  specified in the mask.
-   */
-  // const readMask = {}
 
-  // Imports the Tasks library
-  const {CloudTasksClient} = require('@google-cloud/tasks').v2beta2;
+  // Imports the Tpu library
+  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
 
   // Instantiates a client
-  const tasksClient = new CloudTasksClient();
+  const tpuClient = new TpuClient();
 
-  async function callGetQueue() {
+  async function callResetQueuedResource() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await tasksClient.getQueue(request);
+    const [operation] = await tpuClient.resetQueuedResource(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetQueue();
-  // [END cloudtasks_v2beta2_generated_CloudTasks_GetQueue_async]
+  callResetQueuedResource();
+  // [END tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async]
 }
 
 process.on('unhandledRejection', err => {
