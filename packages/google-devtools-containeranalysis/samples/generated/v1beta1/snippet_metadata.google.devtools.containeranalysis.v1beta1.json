@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-containeranalysis",
-        "version": "4.6.0",
+        "version": "4.6.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -140,6 +140,46 @@
                 "method": {
                     "shortName": "TestIamPermissions",
                     "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.TestIamPermissions",
+                    "service": {
+                        "shortName": "ContainerAnalysisV1Beta1",
+                        "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_GeneratePackagesSummary_async",
+            "title": "containeranalysis generatePackagesSummary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a summary of the packages within a given resource.",
+            "canonical": true,
+            "file": "container_analysis_v1_beta1.generate_packages_summary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GeneratePackagesSummary",
+                "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.GeneratePackagesSummary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse",
+                "client": {
+                    "shortName": "ContainerAnalysisV1Beta1Client",
+                    "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client"
+                },
+                "method": {
+                    "shortName": "GeneratePackagesSummary",
+                    "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.GeneratePackagesSummary",
                     "service": {
                         "shortName": "ContainerAnalysisV1Beta1",
                         "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1"
