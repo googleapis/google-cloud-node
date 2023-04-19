@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.RecaptchaEnterprise.V1",
-                    "go_package": "cloud.google.com/go/recaptchaenterprise/apiv1/recaptchaenterprisepb;recaptchaenterprisepb",
+                    "go_package": "cloud.google.com/go/recaptchaenterprise/v2/apiv1/recaptchaenterprisepb;recaptchaenterprisepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "RecaptchaEnterpriseProto",
                     "java_package": "com.google.recaptchaenterprise.v1",
@@ -1502,7 +1502,7 @@
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.RecaptchaEnterprise.V1Beta1",
-                    "go_package": "cloud.google.com/go/recaptchaenterprise/apiv1beta1/recaptchaenterprisepb;recaptchaenterprisepb",
+                    "go_package": "cloud.google.com/go/recaptchaenterprise/v2/apiv1beta1/recaptchaenterprisepb;recaptchaenterprisepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "RecaptchaEnterpriseProto",
                     "java_package": "com.google.recaptchaenterprise.v1beta1",
