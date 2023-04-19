@@ -40,9 +40,8 @@ const dirname = path.dirname(filename);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkgJson = JSON.parse(
-  fs.readFileSync(path.join(dirname,'..', '..', '..', 'package.json'), 'utf8'
-));
-
+  fs.readFileSync(path.join(dirname, '..', '..', '..', 'package.json'), 'utf8')
+);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let makeRequestOverride: any;
@@ -89,13 +88,15 @@ describe('Translate v2', () => {
   let translate: any;
 
   before(async () => {
-    Translate = (await esmock('../src/v2/index.js', {
-      '@google-cloud/common': {
-        util: fakeUtil,
-        Service: FakeService,
-      },
-      '@google-cloud/promisify': fakePromisify,
-    }) as any).Translate;
+    Translate = (
+      (await esmock('../src/v2/index.js', {
+        '@google-cloud/common': {
+          util: fakeUtil,
+          Service: FakeService,
+        },
+        '@google-cloud/promisify': fakePromisify,
+      })) as any
+    ).Translate;
   });
 
   beforeEach(() => {

@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {fileURLToPath} from 'url';
-import path from 'path';
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const path = require('path');
 
 module.exports = {
   entry: './src/index.ts',

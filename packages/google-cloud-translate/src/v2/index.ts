@@ -36,38 +36,39 @@ const filename = fileURLToPath(dirToUse);
 const dirname = path.dirname(filename);
 
 const PKG = JSON.parse(
-  fs.readFileSync(path.join(dirname, '..', '..', '..', '..', 'package.json')).toString()
+  fs
+    .readFileSync(path.join(dirname, '..', '..', '..', '..', 'package.json'))
+    .toString()
 );
-
 
 const basic = /\s?<!doctype html>|(<html\b[^>]*>|<body\b[^>]*>|<x-[^>]+>)+/i;
 const full = new RegExp(htmlTags.map(tag => `<${tag}\\b[^>]*>`).join('|'), 'i');
 
 function isHtml(string: string) {
-	// We limit it to a reasonable length to improve performance.
-	string = string.trim().slice(0, 1000);
+  // We limit it to a reasonable length to improve performance.
+  string = string.trim().slice(0, 1000);
 
-	return basic.test(string) || full.test(string);
+  return basic.test(string) || full.test(string);
 }
 
 function arrify(value: any) {
-	if (value === null || value === undefined) {
-		return [];
-	}
+  if (value === null || value === undefined) {
+    return [];
+  }
 
-	if (Array.isArray(value)) {
-		return value;
-	}
+  if (Array.isArray(value)) {
+    return value;
+  }
 
-	if (typeof value === 'string') {
-		return [value];
-	}
+  if (typeof value === 'string') {
+    return [value];
+  }
 
-	if (typeof value[Symbol.iterator] === 'function') {
-		return [...value];
-	}
+  if (typeof value[Symbol.iterator] === 'function') {
+    return [...value];
+  }
 
-	return [value];
+  return [value];
 }
 
 export interface TranslateRequest {

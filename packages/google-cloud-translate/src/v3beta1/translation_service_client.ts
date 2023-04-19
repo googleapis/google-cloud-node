@@ -31,7 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos.js';
 import path from 'path';
-import * as translation_service_client_config from './translation_service_client_config.json'
+import * as translation_service_client_config from './translation_service_client_config.json';
 import fs from 'fs';
 import {fileURLToPath} from 'url';
 let dirToUse = '';
@@ -45,16 +45,26 @@ try {
 const filename = fileURLToPath(dirToUse);
 const dirname = path.dirname(filename);
 
-const gapicConfig = JSON.parse(fs.readFileSync(path.join(dirname, 'translation_service_client_config.json'), 'utf8'));
-const jsonProtos = JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'));
+const gapicConfig = JSON.parse(
+  fs.readFileSync(
+    path.join(dirname, 'translation_service_client_config.json'),
+    'utf8'
+  )
+);
+const jsonProtos = JSON.parse(
+  fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8')
+);
 /**
  * Client JSON configuration object, loaded from
  * `src/v3beta1/translation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 const version = JSON.parse(
-  fs.readFileSync(path.join(dirname,'..', '..', '..', '..', 'package.json'), 'utf8'
-)).version;
+  fs.readFileSync(
+    path.join(dirname, '..', '..', '..', '..', 'package.json'),
+    'utf8'
+  )
+).version;
 
 /**
  *  Provides natural language translation operations.

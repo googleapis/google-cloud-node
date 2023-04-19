@@ -24,6 +24,7 @@ function main(
   // const projectId = 'YOUR_PROJECT_ID';
 
   // Imports the Google Cloud client library
+  // eslint-disable-next-line no-undef
   const {Translate} = require('@google-cloud/translate').v2;
 
   // Instantiates a client

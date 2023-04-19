@@ -27,13 +27,13 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as gax from 'google-gax'
+import * as gax from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos.js';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import * as translation_service_client_config from './translation_service_client_config.json'
+import * as translation_service_client_config from './translation_service_client_config.json';
 let dirToUse = '';
 try {
   dirToUse = __dirname;
@@ -50,11 +50,21 @@ const dirname = path.dirname(filename);
  * `src/v3/translation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-const gapicConfig = JSON.parse(fs.readFileSync(path.join(dirname, 'translation_service_client_config.json'), 'utf8'));
-const jsonProtos = JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'));
+const gapicConfig = JSON.parse(
+  fs.readFileSync(
+    path.join(dirname, 'translation_service_client_config.json'),
+    'utf8'
+  )
+);
+const jsonProtos = JSON.parse(
+  fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8')
+);
 const version = JSON.parse(
-  fs.readFileSync(path.join(dirname,'..', '..', '..', '..', 'package.json'), 'utf8'
-)).version;
+  fs.readFileSync(
+    path.join(dirname, '..', '..', '..', '..', 'package.json'),
+    'utf8'
+  )
+).version;
 
 /**
  *  Provides natural language translation operations.
@@ -192,7 +202,9 @@ export class TranslationServiceClient {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos as gax.protobuf.INamespace);
+    this._protos = this._gaxGrpc.loadProtoJSON(
+      jsonProtos as gax.protobuf.INamespace
+    );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -217,7 +229,9 @@ export class TranslationServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos as gax.protobuf.INamespace);
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(
+      jsonProtos as gax.protobuf.INamespace
+    );
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
