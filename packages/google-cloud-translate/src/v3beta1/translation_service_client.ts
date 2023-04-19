@@ -149,12 +149,12 @@ export class TranslationServiceClient {
     }
 
     // Load google-gax module synchronously if needed
-    // if (!gaxInstance) {
-    //   gaxInstance = require('google-gax') as typeof gax;
-    // }
+    if (!gaxInstance) {
+      gaxInstance = gax as typeof gax;
+    }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);

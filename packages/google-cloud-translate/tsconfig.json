@@ -9,7 +9,7 @@
     "sourceMap": false,
     "module": "CommonJS",
     "lib": [
-      "es2020",
+      "es2018",
       "DOM"
     ]
   },
