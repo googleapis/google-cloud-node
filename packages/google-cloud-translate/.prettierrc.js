@@ -17,5 +17,3 @@ module.exports = {
     fs.readFileSync('gts/.prettierrc.json').toString()
   )
 }
-
-
