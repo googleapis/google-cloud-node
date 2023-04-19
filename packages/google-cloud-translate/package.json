@@ -30,7 +30,6 @@
   "files": [
     "build/esm",
     "build/cjs",
-    "build/protos",
     "!build/esm/**/*.map"
   ],
   "keywords": [
