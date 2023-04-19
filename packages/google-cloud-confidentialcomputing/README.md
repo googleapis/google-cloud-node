@@ -81,7 +81,8 @@ npm install @google-cloud/confidentialcomputing
 // const tpmAttestation = {}
 
 // Imports the Confidentialcomputing library
-const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;
+const {ConfidentialComputingClient} =
+  require('@google-cloud/confidentialcomputing').v1;
 
 // Instantiates a client
 const confidentialcomputingClient = new ConfidentialComputingClient();
@@ -94,7 +95,9 @@ async function callVerifyAttestation() {
   };
 
   // Run request
-  const response = await confidentialcomputingClient.verifyAttestation(request);
+  const response = await confidentialcomputingClient.verifyAttestation(
+    request
+  );
   console.log(response);
 }
 
