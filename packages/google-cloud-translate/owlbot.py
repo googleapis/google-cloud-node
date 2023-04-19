@@ -16,4 +16,4 @@
 
 import synthtool.languages.node_mono_repo as node
 
-node.owlbot_main(relative_dir="packages/google-cloud-translate",templates_excludes=['src/index.ts', 'packages/google-cloud-translate/.prettierrc.js', 'packages/google-cloud-translate/.mocharc.js'])
+node.owlbot_main(relative_dir="packages/google-cloud-translate",staging_excludes=['packages/google-cloud-translate/.prettierrc.js', 'packages/google-cloud-translate/.mocharc.js'],templates_excludes=['src/index.ts', 'packages/google-cloud-translate/.prettierrc.js', 'packages/google-cloud-translate/.mocharc.js'])
