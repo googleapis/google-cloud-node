@@ -514,7 +514,8 @@ export class MerchantCenterAccountLinkServiceClient {
     );
   }
   /**
-   * Deletes a MerchantCenterAccountLink.
+   * Deletes a
+   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
    * If the
    * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
    * to delete does not exist, a NOT_FOUND error is returned.
@@ -620,11 +621,8 @@ export class MerchantCenterAccountLinkServiceClient {
   }
 
   /**
-   * Creates a MerchantCenterAccountLink.
-   *
-   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
-   * cannot be set to a different oneof field, if so an INVALID_ARGUMENT is
-   * returned.
+   * Creates a
+   * {@link google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -732,8 +730,7 @@ export class MerchantCenterAccountLinkServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'merchant_center_account_link.name':
-          request.merchantCenterAccountLink!.name ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createMerchantCenterAccountLink(
