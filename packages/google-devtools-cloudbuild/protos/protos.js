@@ -1487,6 +1487,256 @@
                         return StorageSource;
                     })();
     
+                    v1.GitSource = (function() {
+    
+                        /**
+                         * Properties of a GitSource.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IGitSource
+                         * @property {string|null} [url] GitSource url
+                         * @property {string|null} [dir] GitSource dir
+                         * @property {string|null} [revision] GitSource revision
+                         */
+    
+                        /**
+                         * Constructs a new GitSource.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a GitSource.
+                         * @implements IGitSource
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IGitSource=} [properties] Properties to set
+                         */
+                        function GitSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitSource url.
+                         * @member {string} url
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         */
+                        GitSource.prototype.url = "";
+    
+                        /**
+                         * GitSource dir.
+                         * @member {string} dir
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         */
+                        GitSource.prototype.dir = "";
+    
+                        /**
+                         * GitSource revision.
+                         * @member {string} revision
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         */
+                        GitSource.prototype.revision = "";
+    
+                        /**
+                         * Creates a new GitSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitSource=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource instance
+                         */
+                        GitSource.create = function create(properties) {
+                            return new GitSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitSource message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitSource} message GitSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.dir != null && Object.hasOwnProperty.call(message, "dir"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.dir);
+                            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.revision);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitSource message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitSource} message GitSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.url = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dir = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.revision = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitSource message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.dir != null && message.hasOwnProperty("dir"))
+                                if (!$util.isString(message.dir))
+                                    return "dir: string expected";
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                if (!$util.isString(message.revision))
+                                    return "revision: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.GitSource} GitSource
+                         */
+                        GitSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.GitSource)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.GitSource();
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            if (object.dir != null)
+                                message.dir = String(object.dir);
+                            if (object.revision != null)
+                                message.revision = String(object.revision);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.GitSource} message GitSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.url = "";
+                                object.dir = "";
+                                object.revision = "";
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.dir != null && message.hasOwnProperty("dir"))
+                                object.dir = message.dir;
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                object.revision = message.revision;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitSource to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitSource
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.GitSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.GitSource";
+                        };
+    
+                        return GitSource;
+                    })();
+    
                     v1.RepoSource = (function() {
     
                         /**
@@ -2191,6 +2441,7 @@
                          * @interface ISource
                          * @property {google.devtools.cloudbuild.v1.IStorageSource|null} [storageSource] Source storageSource
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [repoSource] Source repoSource
+                         * @property {google.devtools.cloudbuild.v1.IGitSource|null} [gitSource] Source gitSource
                          * @property {google.devtools.cloudbuild.v1.IStorageSourceManifest|null} [storageSourceManifest] Source storageSourceManifest
                          */
     
@@ -2226,6 +2477,14 @@
                         Source.prototype.repoSource = null;
     
                         /**
+                         * Source gitSource.
+                         * @member {google.devtools.cloudbuild.v1.IGitSource|null|undefined} gitSource
+                         * @memberof google.devtools.cloudbuild.v1.Source
+                         * @instance
+                         */
+                        Source.prototype.gitSource = null;
+    
+                        /**
                          * Source storageSourceManifest.
                          * @member {google.devtools.cloudbuild.v1.IStorageSourceManifest|null|undefined} storageSourceManifest
                          * @memberof google.devtools.cloudbuild.v1.Source
@@ -2238,12 +2497,12 @@
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|"storageSourceManifest"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"gitSource"|"storageSourceManifest"|undefined} source
                          * @memberof google.devtools.cloudbuild.v1.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "storageSourceManifest"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitSource", "storageSourceManifest"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2275,6 +2534,8 @@
                                 $root.google.devtools.cloudbuild.v1.StorageSource.encode(message.storageSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.repoSource != null && Object.hasOwnProperty.call(message, "repoSource"))
                                 $root.google.devtools.cloudbuild.v1.RepoSource.encode(message.repoSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.gitSource != null && Object.hasOwnProperty.call(message, "gitSource"))
+                                $root.google.devtools.cloudbuild.v1.GitSource.encode(message.gitSource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.storageSourceManifest != null && Object.hasOwnProperty.call(message, "storageSourceManifest"))
                                 $root.google.devtools.cloudbuild.v1.StorageSourceManifest.encode(message.storageSourceManifest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
@@ -2317,6 +2578,10 @@
                                     }
                                 case 3: {
                                         message.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.gitSource = $root.google.devtools.cloudbuild.v1.GitSource.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -2377,6 +2642,16 @@
                                         return "repoSource." + error;
                                 }
                             }
+                            if (message.gitSource != null && message.hasOwnProperty("gitSource")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v1.GitSource.verify(message.gitSource);
+                                    if (error)
+                                        return "gitSource." + error;
+                                }
+                            }
                             if (message.storageSourceManifest != null && message.hasOwnProperty("storageSourceManifest")) {
                                 if (properties.source === 1)
                                     return "source: multiple values";
@@ -2412,6 +2687,11 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.Source.repoSource: object expected");
                                 message.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.fromObject(object.repoSource);
                             }
+                            if (object.gitSource != null) {
+                                if (typeof object.gitSource !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Source.gitSource: object expected");
+                                message.gitSource = $root.google.devtools.cloudbuild.v1.GitSource.fromObject(object.gitSource);
+                            }
                             if (object.storageSourceManifest != null) {
                                 if (typeof object.storageSourceManifest !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.Source.storageSourceManifest: object expected");
@@ -2442,6 +2722,11 @@
                                 object.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.toObject(message.repoSource, options);
                                 if (options.oneofs)
                                     object.source = "repoSource";
+                            }
+                            if (message.gitSource != null && message.hasOwnProperty("gitSource")) {
+                                object.gitSource = $root.google.devtools.cloudbuild.v1.GitSource.toObject(message.gitSource, options);
+                                if (options.oneofs)
+                                    object.source = "gitSource";
                             }
                             if (message.storageSourceManifest != null && message.hasOwnProperty("storageSourceManifest")) {
                                 object.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.toObject(message.storageSourceManifest, options);
@@ -3253,6 +3538,266 @@
                         };
     
                         return UploadedMavenArtifact;
+                    })();
+    
+                    v1.UploadedNpmPackage = (function() {
+    
+                        /**
+                         * Properties of an UploadedNpmPackage.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IUploadedNpmPackage
+                         * @property {string|null} [uri] UploadedNpmPackage uri
+                         * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedNpmPackage fileHashes
+                         * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedNpmPackage pushTiming
+                         */
+    
+                        /**
+                         * Constructs a new UploadedNpmPackage.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an UploadedNpmPackage.
+                         * @implements IUploadedNpmPackage
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IUploadedNpmPackage=} [properties] Properties to set
+                         */
+                        function UploadedNpmPackage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadedNpmPackage uri.
+                         * @member {string} uri
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @instance
+                         */
+                        UploadedNpmPackage.prototype.uri = "";
+    
+                        /**
+                         * UploadedNpmPackage fileHashes.
+                         * @member {google.devtools.cloudbuild.v1.IFileHashes|null|undefined} fileHashes
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @instance
+                         */
+                        UploadedNpmPackage.prototype.fileHashes = null;
+    
+                        /**
+                         * UploadedNpmPackage pushTiming.
+                         * @member {google.devtools.cloudbuild.v1.ITimeSpan|null|undefined} pushTiming
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @instance
+                         */
+                        UploadedNpmPackage.prototype.pushTiming = null;
+    
+                        /**
+                         * Creates a new UploadedNpmPackage instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedNpmPackage=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.UploadedNpmPackage} UploadedNpmPackage instance
+                         */
+                        UploadedNpmPackage.create = function create(properties) {
+                            return new UploadedNpmPackage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedNpmPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedNpmPackage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedNpmPackage} message UploadedNpmPackage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedNpmPackage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.fileHashes != null && Object.hasOwnProperty.call(message, "fileHashes"))
+                                $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
+                                $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedNpmPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedNpmPackage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedNpmPackage} message UploadedNpmPackage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedNpmPackage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadedNpmPackage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.UploadedNpmPackage} UploadedNpmPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedNpmPackage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedNpmPackage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadedNpmPackage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.UploadedNpmPackage} UploadedNpmPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedNpmPackage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadedNpmPackage message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadedNpmPackage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes")) {
+                                var error = $root.google.devtools.cloudbuild.v1.FileHashes.verify(message.fileHashes);
+                                if (error)
+                                    return "fileHashes." + error;
+                            }
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming")) {
+                                var error = $root.google.devtools.cloudbuild.v1.TimeSpan.verify(message.pushTiming);
+                                if (error)
+                                    return "pushTiming." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadedNpmPackage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.UploadedNpmPackage} UploadedNpmPackage
+                         */
+                        UploadedNpmPackage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.UploadedNpmPackage)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.UploadedNpmPackage();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.fileHashes != null) {
+                                if (typeof object.fileHashes !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedNpmPackage.fileHashes: object expected");
+                                message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.fromObject(object.fileHashes);
+                            }
+                            if (object.pushTiming != null) {
+                                if (typeof object.pushTiming !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedNpmPackage.pushTiming: object expected");
+                                message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadedNpmPackage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.UploadedNpmPackage} message UploadedNpmPackage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadedNpmPackage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uri = "";
+                                object.fileHashes = null;
+                                object.pushTiming = null;
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes"))
+                                object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
+                                object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadedNpmPackage to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadedNpmPackage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadedNpmPackage
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadedNpmPackage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.UploadedNpmPackage";
+                        };
+    
+                        return UploadedNpmPackage;
                     })();
     
                     v1.BuildStep = (function() {
@@ -4253,6 +4798,7 @@
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [artifactTiming] Results artifactTiming
                          * @property {Array.<google.devtools.cloudbuild.v1.IUploadedPythonPackage>|null} [pythonPackages] Results pythonPackages
                          * @property {Array.<google.devtools.cloudbuild.v1.IUploadedMavenArtifact>|null} [mavenArtifacts] Results mavenArtifacts
+                         * @property {Array.<google.devtools.cloudbuild.v1.IUploadedNpmPackage>|null} [npmPackages] Results npmPackages
                          */
     
                         /**
@@ -4269,6 +4815,7 @@
                             this.buildStepOutputs = [];
                             this.pythonPackages = [];
                             this.mavenArtifacts = [];
+                            this.npmPackages = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4340,6 +4887,14 @@
                         Results.prototype.mavenArtifacts = $util.emptyArray;
     
                         /**
+                         * Results npmPackages.
+                         * @member {Array.<google.devtools.cloudbuild.v1.IUploadedNpmPackage>} npmPackages
+                         * @memberof google.devtools.cloudbuild.v1.Results
+                         * @instance
+                         */
+                        Results.prototype.npmPackages = $util.emptyArray;
+    
+                        /**
                          * Creates a new Results instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.Results
@@ -4384,6 +4939,9 @@
                             if (message.mavenArtifacts != null && message.mavenArtifacts.length)
                                 for (var i = 0; i < message.mavenArtifacts.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.encode(message.mavenArtifacts[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.npmPackages != null && message.npmPackages.length)
+                                for (var i = 0; i < message.npmPackages.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.UploadedNpmPackage.encode(message.npmPackages[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -4458,6 +5016,12 @@
                                         if (!(message.mavenArtifacts && message.mavenArtifacts.length))
                                             message.mavenArtifacts = [];
                                         message.mavenArtifacts.push($root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.npmPackages && message.npmPackages.length))
+                                            message.npmPackages = [];
+                                        message.npmPackages.push($root.google.devtools.cloudbuild.v1.UploadedNpmPackage.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -4547,6 +5111,15 @@
                                         return "mavenArtifacts." + error;
                                 }
                             }
+                            if (message.npmPackages != null && message.hasOwnProperty("npmPackages")) {
+                                if (!Array.isArray(message.npmPackages))
+                                    return "npmPackages: array expected";
+                                for (var i = 0; i < message.npmPackages.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.UploadedNpmPackage.verify(message.npmPackages[i]);
+                                    if (error)
+                                        return "npmPackages." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4625,6 +5198,16 @@
                                     message.mavenArtifacts[i] = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.fromObject(object.mavenArtifacts[i]);
                                 }
                             }
+                            if (object.npmPackages) {
+                                if (!Array.isArray(object.npmPackages))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Results.npmPackages: array expected");
+                                message.npmPackages = [];
+                                for (var i = 0; i < object.npmPackages.length; ++i) {
+                                    if (typeof object.npmPackages[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Results.npmPackages: object expected");
+                                    message.npmPackages[i] = $root.google.devtools.cloudbuild.v1.UploadedNpmPackage.fromObject(object.npmPackages[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -4647,6 +5230,7 @@
                                 object.buildStepOutputs = [];
                                 object.pythonPackages = [];
                                 object.mavenArtifacts = [];
+                                object.npmPackages = [];
                             }
                             if (options.defaults) {
                                 object.artifactManifest = "";
@@ -4690,6 +5274,11 @@
                                 object.mavenArtifacts = [];
                                 for (var j = 0; j < message.mavenArtifacts.length; ++j)
                                     object.mavenArtifacts[j] = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.toObject(message.mavenArtifacts[j], options);
+                            }
+                            if (message.npmPackages && message.npmPackages.length) {
+                                object.npmPackages = [];
+                                for (var j = 0; j < message.npmPackages.length; ++j)
+                                    object.npmPackages[j] = $root.google.devtools.cloudbuild.v1.UploadedNpmPackage.toObject(message.npmPackages[j], options);
                             }
                             return object;
                         };
@@ -6115,6 +6704,36 @@
                             return typeUrlPrefix + "/google.devtools.cloudbuild.v1.Build";
                         };
     
+                        /**
+                         * Status enum.
+                         * @name google.devtools.cloudbuild.v1.Build.Status
+                         * @enum {number}
+                         * @property {number} STATUS_UNKNOWN=0 STATUS_UNKNOWN value
+                         * @property {number} PENDING=10 PENDING value
+                         * @property {number} QUEUED=1 QUEUED value
+                         * @property {number} WORKING=2 WORKING value
+                         * @property {number} SUCCESS=3 SUCCESS value
+                         * @property {number} FAILURE=4 FAILURE value
+                         * @property {number} INTERNAL_ERROR=5 INTERNAL_ERROR value
+                         * @property {number} TIMEOUT=6 TIMEOUT value
+                         * @property {number} CANCELLED=7 CANCELLED value
+                         * @property {number} EXPIRED=9 EXPIRED value
+                         */
+                        Build.Status = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATUS_UNKNOWN"] = 0;
+                            values[valuesById[10] = "PENDING"] = 10;
+                            values[valuesById[1] = "QUEUED"] = 1;
+                            values[valuesById[2] = "WORKING"] = 2;
+                            values[valuesById[3] = "SUCCESS"] = 3;
+                            values[valuesById[4] = "FAILURE"] = 4;
+                            values[valuesById[5] = "INTERNAL_ERROR"] = 5;
+                            values[valuesById[6] = "TIMEOUT"] = 6;
+                            values[valuesById[7] = "CANCELLED"] = 7;
+                            values[valuesById[9] = "EXPIRED"] = 9;
+                            return values;
+                        })();
+    
                         Build.Warning = (function() {
     
                             /**
@@ -6684,36 +7303,6 @@
                             return FailureInfo;
                         })();
     
-                        /**
-                         * Status enum.
-                         * @name google.devtools.cloudbuild.v1.Build.Status
-                         * @enum {number}
-                         * @property {number} STATUS_UNKNOWN=0 STATUS_UNKNOWN value
-                         * @property {number} PENDING=10 PENDING value
-                         * @property {number} QUEUED=1 QUEUED value
-                         * @property {number} WORKING=2 WORKING value
-                         * @property {number} SUCCESS=3 SUCCESS value
-                         * @property {number} FAILURE=4 FAILURE value
-                         * @property {number} INTERNAL_ERROR=5 INTERNAL_ERROR value
-                         * @property {number} TIMEOUT=6 TIMEOUT value
-                         * @property {number} CANCELLED=7 CANCELLED value
-                         * @property {number} EXPIRED=9 EXPIRED value
-                         */
-                        Build.Status = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATUS_UNKNOWN"] = 0;
-                            values[valuesById[10] = "PENDING"] = 10;
-                            values[valuesById[1] = "QUEUED"] = 1;
-                            values[valuesById[2] = "WORKING"] = 2;
-                            values[valuesById[3] = "SUCCESS"] = 3;
-                            values[valuesById[4] = "FAILURE"] = 4;
-                            values[valuesById[5] = "INTERNAL_ERROR"] = 5;
-                            values[valuesById[6] = "TIMEOUT"] = 6;
-                            values[valuesById[7] = "CANCELLED"] = 7;
-                            values[valuesById[9] = "EXPIRED"] = 9;
-                            return values;
-                        })();
-    
                         return Build;
                     })();
     
@@ -6727,6 +7316,7 @@
                          * @property {google.devtools.cloudbuild.v1.Artifacts.IArtifactObjects|null} [objects] Artifacts objects
                          * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact>|null} [mavenArtifacts] Artifacts mavenArtifacts
                          * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IPythonPackage>|null} [pythonPackages] Artifacts pythonPackages
+                         * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.INpmPackage>|null} [npmPackages] Artifacts npmPackages
                          */
     
                         /**
@@ -6741,6 +7331,7 @@
                             this.images = [];
                             this.mavenArtifacts = [];
                             this.pythonPackages = [];
+                            this.npmPackages = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6780,6 +7371,14 @@
                         Artifacts.prototype.pythonPackages = $util.emptyArray;
     
                         /**
+                         * Artifacts npmPackages.
+                         * @member {Array.<google.devtools.cloudbuild.v1.Artifacts.INpmPackage>} npmPackages
+                         * @memberof google.devtools.cloudbuild.v1.Artifacts
+                         * @instance
+                         */
+                        Artifacts.prototype.npmPackages = $util.emptyArray;
+    
+                        /**
                          * Creates a new Artifacts instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.Artifacts
@@ -6814,6 +7413,9 @@
                             if (message.pythonPackages != null && message.pythonPackages.length)
                                 for (var i = 0; i < message.pythonPackages.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.encode(message.pythonPackages[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.npmPackages != null && message.npmPackages.length)
+                                for (var i = 0; i < message.npmPackages.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage.encode(message.npmPackages[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -6868,6 +7470,12 @@
                                         if (!(message.pythonPackages && message.pythonPackages.length))
                                             message.pythonPackages = [];
                                         message.pythonPackages.push($root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.npmPackages && message.npmPackages.length))
+                                            message.npmPackages = [];
+                                        message.npmPackages.push($root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -6935,6 +7543,15 @@
                                         return "pythonPackages." + error;
                                 }
                             }
+                            if (message.npmPackages != null && message.hasOwnProperty("npmPackages")) {
+                                if (!Array.isArray(message.npmPackages))
+                                    return "npmPackages: array expected";
+                                for (var i = 0; i < message.npmPackages.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage.verify(message.npmPackages[i]);
+                                    if (error)
+                                        return "npmPackages." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -6982,6 +7599,16 @@
                                     message.pythonPackages[i] = $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.fromObject(object.pythonPackages[i]);
                                 }
                             }
+                            if (object.npmPackages) {
+                                if (!Array.isArray(object.npmPackages))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.npmPackages: array expected");
+                                message.npmPackages = [];
+                                for (var i = 0; i < object.npmPackages.length; ++i) {
+                                    if (typeof object.npmPackages[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.npmPackages: object expected");
+                                    message.npmPackages[i] = $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage.fromObject(object.npmPackages[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -7002,6 +7629,7 @@
                                 object.images = [];
                                 object.mavenArtifacts = [];
                                 object.pythonPackages = [];
+                                object.npmPackages = [];
                             }
                             if (options.defaults)
                                 object.objects = null;
@@ -7021,6 +7649,11 @@
                                 object.pythonPackages = [];
                                 for (var j = 0; j < message.pythonPackages.length; ++j)
                                     object.pythonPackages[j] = $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.toObject(message.pythonPackages[j], options);
+                            }
+                            if (message.npmPackages && message.npmPackages.length) {
+                                object.npmPackages = [];
+                                for (var j = 0; j < message.npmPackages.length; ++j)
+                                    object.npmPackages[j] = $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage.toObject(message.npmPackages[j], options);
                             }
                             return object;
                         };
@@ -7860,6 +8493,233 @@
                             };
     
                             return PythonPackage;
+                        })();
+    
+                        Artifacts.NpmPackage = (function() {
+    
+                            /**
+                             * Properties of a NpmPackage.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @interface INpmPackage
+                             * @property {string|null} [repository] NpmPackage repository
+                             * @property {string|null} [packagePath] NpmPackage packagePath
+                             */
+    
+                            /**
+                             * Constructs a new NpmPackage.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @classdesc Represents a NpmPackage.
+                             * @implements INpmPackage
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.INpmPackage=} [properties] Properties to set
+                             */
+                            function NpmPackage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NpmPackage repository.
+                             * @member {string} repository
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @instance
+                             */
+                            NpmPackage.prototype.repository = "";
+    
+                            /**
+                             * NpmPackage packagePath.
+                             * @member {string} packagePath
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @instance
+                             */
+                            NpmPackage.prototype.packagePath = "";
+    
+                            /**
+                             * Creates a new NpmPackage instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.INpmPackage=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.NpmPackage} NpmPackage instance
+                             */
+                            NpmPackage.create = function create(properties) {
+                                return new NpmPackage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NpmPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.NpmPackage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.INpmPackage} message NpmPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NpmPackage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                                if (message.packagePath != null && Object.hasOwnProperty.call(message, "packagePath"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.packagePath);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NpmPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.NpmPackage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.INpmPackage} message NpmPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NpmPackage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NpmPackage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.NpmPackage} NpmPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NpmPackage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.repository = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.packagePath = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NpmPackage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.NpmPackage} NpmPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NpmPackage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NpmPackage message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NpmPackage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    if (!$util.isString(message.repository))
+                                        return "repository: string expected";
+                                if (message.packagePath != null && message.hasOwnProperty("packagePath"))
+                                    if (!$util.isString(message.packagePath))
+                                        return "packagePath: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NpmPackage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.NpmPackage} NpmPackage
+                             */
+                            NpmPackage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage();
+                                if (object.repository != null)
+                                    message.repository = String(object.repository);
+                                if (object.packagePath != null)
+                                    message.packagePath = String(object.packagePath);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NpmPackage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.NpmPackage} message NpmPackage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NpmPackage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.repository = "";
+                                    object.packagePath = "";
+                                }
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    object.repository = message.repository;
+                                if (message.packagePath != null && message.hasOwnProperty("packagePath"))
+                                    object.packagePath = message.packagePath;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NpmPackage to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NpmPackage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NpmPackage
+                             * @function getTypeUrl
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.NpmPackage
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NpmPackage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.cloudbuild.v1.Artifacts.NpmPackage";
+                            };
+    
+                            return NpmPackage;
                         })();
     
                         return Artifacts;
@@ -9018,6 +9878,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 4:
                                     break;
                                 }
                             if (message.value != null && message.hasOwnProperty("value"))
@@ -9056,6 +9917,10 @@
                             case "MD5":
                             case 2:
                                 message.type = 2;
+                                break;
+                            case "SHA512":
+                            case 4:
+                                message.type = 4;
                                 break;
                             }
                             if (object.value != null)
@@ -9129,12 +9994,14 @@
                          * @property {number} NONE=0 NONE value
                          * @property {number} SHA256=1 SHA256 value
                          * @property {number} MD5=2 MD5 value
+                         * @property {number} SHA512=4 SHA512 value
                          */
                         Hash.HashType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "NONE"] = 0;
                             values[valuesById[1] = "SHA256"] = 1;
                             values[valuesById[2] = "MD5"] = 2;
+                            values[valuesById[4] = "SHA512"] = 4;
                             return values;
                         })();
     
@@ -16755,6 +17622,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 4:
                                         break;
                                     }
                             }
@@ -16888,6 +17756,10 @@
                                     case "MD5":
                                     case 2:
                                         message.sourceProvenanceHash[i] = 2;
+                                        break;
+                                    case "SHA512":
+                                    case 4:
+                                        message.sourceProvenanceHash[i] = 4;
                                         break;
                                     }
                             }
@@ -18977,6 +19849,7 @@
                              * @interface INetworkConfig
                              * @property {string|null} [peeredNetwork] NetworkConfig peeredNetwork
                              * @property {google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption|null} [egressOption] NetworkConfig egressOption
+                             * @property {string|null} [peeredNetworkIpRange] NetworkConfig peeredNetworkIpRange
                              */
     
                             /**
@@ -19011,6 +19884,14 @@
                             NetworkConfig.prototype.egressOption = 0;
     
                             /**
+                             * NetworkConfig peeredNetworkIpRange.
+                             * @member {string} peeredNetworkIpRange
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig
+                             * @instance
+                             */
+                            NetworkConfig.prototype.peeredNetworkIpRange = "";
+    
+                            /**
                              * Creates a new NetworkConfig instance using the specified properties.
                              * @function create
                              * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig
@@ -19038,6 +19919,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.peeredNetwork);
                                 if (message.egressOption != null && Object.hasOwnProperty.call(message, "egressOption"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.egressOption);
+                                if (message.peeredNetworkIpRange != null && Object.hasOwnProperty.call(message, "peeredNetworkIpRange"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.peeredNetworkIpRange);
                                 return writer;
                             };
     
@@ -19078,6 +19961,10 @@
                                         }
                                     case 2: {
                                             message.egressOption = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.peeredNetworkIpRange = reader.string();
                                             break;
                                         }
                                     default:
@@ -19127,6 +20014,9 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.peeredNetworkIpRange != null && message.hasOwnProperty("peeredNetworkIpRange"))
+                                    if (!$util.isString(message.peeredNetworkIpRange))
+                                        return "peeredNetworkIpRange: string expected";
                                 return null;
                             };
     
@@ -19164,6 +20054,8 @@
                                     message.egressOption = 2;
                                     break;
                                 }
+                                if (object.peeredNetworkIpRange != null)
+                                    message.peeredNetworkIpRange = String(object.peeredNetworkIpRange);
                                 return message;
                             };
     
@@ -19183,11 +20075,14 @@
                                 if (options.defaults) {
                                     object.peeredNetwork = "";
                                     object.egressOption = options.enums === String ? "EGRESS_OPTION_UNSPECIFIED" : 0;
+                                    object.peeredNetworkIpRange = "";
                                 }
                                 if (message.peeredNetwork != null && message.hasOwnProperty("peeredNetwork"))
                                     object.peeredNetwork = message.peeredNetwork;
                                 if (message.egressOption != null && message.hasOwnProperty("egressOption"))
                                     object.egressOption = options.enums === String ? $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption[message.egressOption] === undefined ? message.egressOption : $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption[message.egressOption] : message.egressOption;
+                                if (message.peeredNetworkIpRange != null && message.hasOwnProperty("peeredNetworkIpRange"))
+                                    object.peeredNetworkIpRange = message.peeredNetworkIpRange;
                                 return object;
                             };
     
