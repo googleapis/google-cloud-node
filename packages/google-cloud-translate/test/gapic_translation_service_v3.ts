@@ -43,7 +43,7 @@ const dirname = path.dirname(filename);
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'))).resolveAll();
+const root = protobuf.Root.fromJSON(JSON.parse(fs.readFileSync(path.join(dirname, '..', 'protos/protos.json'), 'utf8'))).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
@@ -279,7 +279,7 @@ describe('v3.TranslationServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.translation.v3.TranslateTextRequest
+        new protos.google.cloud.translation.v3.TranslateTextRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.translation.v3.TranslateTextRequest',

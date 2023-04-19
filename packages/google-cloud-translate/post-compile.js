@@ -8,7 +8,7 @@ const regexJsExtensionSingleQuote = /\.js\'/g;
 const awaitEsmock = /await esmock/g;
 const protosHackregex = /protos-hack/g;
 const esmock = /esmock/g;
-async function compileTemplates(
+async function modifyCJSDir(
     dirNameReadAbsolute
   ) {
     const files = fs.readdirSync(dirNameReadAbsolute);
@@ -36,9 +36,9 @@ async function compileTemplates(
           await fsp.rename(readName, readName.replace(/\.js$/, '.cjs'))
         }
       } else if (fs.statSync(readName).isDirectory()) {
-            compileTemplates(readName);
+        modifyCJSDir(readName);
       }
     };
   }
 
-  compileTemplates('./build/cjs');
+  modifyCJSDir('./build/cjs');

@@ -59,7 +59,7 @@
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile",
-    "pretest": " npm run compile",
+    "pretest": "npm run compile",
     "presystem-test": "npm run compile",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
@@ -76,7 +76,6 @@
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
-    "@types/is-html": "^2.0.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^18.0.0",
     "@types/request": "^2.47.1",
@@ -93,6 +92,7 @@
     "linkinator": "^4.0.0",
     "mocha": "^9.2.2",
     "pack-n-play": "^1.0.0-2",
+    "proxyquire": "^2.0.1",
     "sinon": "^15.0.0",
     "typescript": "^4.9.5"
   },

@@ -49,7 +49,7 @@ const gapicConfig = JSON.parse(fs.readFileSync(path.join(dirname, 'translation_s
 const jsonProtos = JSON.parse(fs.readFileSync(path.join(dirname, '..', '..', 'protos/protos.json'), 'utf8'));
 /**
  * Client JSON configuration object, loaded from
- * `src/v3/translation_service_client_config.json`.
+ * `src/v3beta1/translation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 const version = JSON.parse(
