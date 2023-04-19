@@ -34,9 +34,9 @@ function main(name, destinationParent) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The resource name of the folder or organization which should be the
-   *  folder's new parent.
-   *  Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *  Required. The resource name of the folder or organization which should be
+   *  the folder's new parent. Must be of the form `folders/{folder_id}` or
+   *  `organizations/{org_id}`.
    */
   // const destinationParent = 'abc123'
 

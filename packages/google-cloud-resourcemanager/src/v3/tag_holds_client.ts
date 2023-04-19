@@ -18,7 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -100,14 +109,22 @@ export class TagHoldsClient {
    *     const client = new TagHoldsClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TagHoldsClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -133,7 +150,7 @@ export class TagHoldsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -147,10 +164,7 @@ export class TagHoldsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -158,7 +172,7 @@ export class TagHoldsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -171,9 +185,7 @@ export class TagHoldsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}'
-      ),
+      folderPathTemplate: new this._gaxModule.PathTemplate('folders/{folder}'),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
@@ -186,9 +198,7 @@ export class TagHoldsClient {
       tagHoldPathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}/tagHolds/{tag_hold}'
       ),
-      tagKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'tagKeys/{tag_key}'
-      ),
+      tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
       ),
@@ -198,8 +208,11 @@ export class TagHoldsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTagHolds:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tagHolds')
+      listTagHolds: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tagHolds'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -208,37 +221,53 @@ export class TagHoldsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback === 'rest') {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=operations/**}',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v3/{name=operations/**}',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createTagHoldResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagHold') as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagHold'
+    ) as gax.protobuf.Type;
     const createTagHoldMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.CreateTagHoldMetadata') as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.CreateTagHoldMetadata'
+    ) as gax.protobuf.Type;
     const deleteTagHoldResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteTagHoldMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata') as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTagHold: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createTagHoldResponse.decode.bind(createTagHoldResponse),
-        createTagHoldMetadata.decode.bind(createTagHoldMetadata)),
+        createTagHoldMetadata.decode.bind(createTagHoldMetadata)
+      ),
       deleteTagHold: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteTagHoldResponse.decode.bind(deleteTagHoldResponse),
-        deleteTagHoldMetadata.decode.bind(deleteTagHoldMetadata))
+        deleteTagHoldMetadata.decode.bind(deleteTagHoldMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.resourcemanager.v3.TagHolds', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.resourcemanager.v3.TagHolds',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -269,28 +298,37 @@ export class TagHoldsClient {
     // Put together the "service stub" for
     // google.cloud.resourcemanager.v3.TagHolds.
     this.tagHoldsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.resourcemanager.v3.TagHolds') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.resourcemanager.v3.TagHolds'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.resourcemanager.v3.TagHolds,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tagHoldsStubMethods =
-        ['createTagHold', 'deleteTagHold', 'listTagHolds'];
+    const tagHoldsStubMethods = [
+      'createTagHold',
+      'deleteTagHold',
+      'listTagHolds',
+    ];
     for (const methodName of tagHoldsStubMethods) {
       const callPromise = this.tagHoldsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -342,7 +380,7 @@ export class TagHoldsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only'
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
     ];
   }
 
@@ -352,8 +390,9 @@ export class TagHoldsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -365,347 +404,458 @@ export class TagHoldsClient {
   // -- Service calls --
   // -------------------
 
-/**
- * Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
- * resource and origin exists under the same TagValue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the TagHold's parent TagValue. Must be of
- *   the form: `tagValues/{tag-value-id}`.
- * @param {google.cloud.resourcemanager.v3.TagHold} request.tagHold
- *   Required. The TagHold to be created.
- * @param {boolean} [request.validateOnly]
- *   Optional. Set to true to perform the validations necessary for creating the
- *   resource, but not actually perform the action.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/tag_holds.create_tag_hold.js</caption>
- * region_tag:cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_async
- */
+  /**
+   * Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same
+   * resource and origin exists under the same TagValue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TagHold's parent TagValue. Must be of
+   *   the form: `tagValues/{tag-value-id}`.
+   * @param {google.cloud.resourcemanager.v3.TagHold} request.tagHold
+   *   Required. The TagHold to be created.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Set to true to perform the validations necessary for creating the
+   *   resource, but not actually perform the action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_holds.create_tag_hold.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_async
+   */
   createTagHold(
-      request?: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.resourcemanager.v3.ITagHold, protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.ITagHold,
+        protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   createTagHold(
-      request: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.resourcemanager.v3.ITagHold, protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.ITagHold,
+        protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createTagHold(
-      request: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.resourcemanager.v3.ITagHold, protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.ITagHold,
+        protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createTagHold(
-      request?: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.resourcemanager.v3.ITagHold, protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.resourcemanager.v3.ITagHold, protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.resourcemanager.v3.ITagHold, protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.resourcemanager.v3.ICreateTagHoldRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.resourcemanager.v3.ITagHold,
+            protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.ITagHold,
+        protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.ITagHold,
+        protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.createTagHold(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `createTagHold()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/tag_holds.create_tag_hold.js</caption>
- * region_tag:cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_async
- */
-  async checkCreateTagHoldProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagHold, protos.google.cloud.resourcemanager.v3.CreateTagHoldMetadata>>{
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `createTagHold()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_holds.create_tag_hold.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_async
+   */
+  async checkCreateTagHoldProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.resourcemanager.v3.TagHold,
+      protos.google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTagHold, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagHold, protos.google.cloud.resourcemanager.v3.CreateTagHoldMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createTagHold,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.resourcemanager.v3.TagHold,
+      protos.google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+    >;
   }
-/**
- * Deletes a TagHold.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the TagHold to delete. Must be of the form:
- *   `tagValues/{tag-value-id}/tagHolds/{tag-hold-id}`.
- * @param {boolean} [request.validateOnly]
- *   Optional. Set to true to perform the validations necessary for deleting the
- *   resource, but not actually perform the action.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/tag_holds.delete_tag_hold.js</caption>
- * region_tag:cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async
- */
+  /**
+   * Deletes a TagHold.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the TagHold to delete. Must be of the form:
+   *   `tagValues/{tag-value-id}/tagHolds/{tag-hold-id}`.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Set to true to perform the validations necessary for deleting the
+   *   resource, but not actually perform the action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_holds.delete_tag_hold.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async
+   */
   deleteTagHold(
-      request?: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   deleteTagHold(
-      request: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteTagHold(
-      request: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteTagHold(
-      request?: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.resourcemanager.v3.IDeleteTagHoldRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteTagHold(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `deleteTagHold()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/tag_holds.delete_tag_hold.js</caption>
- * region_tag:cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async
- */
-  async checkDeleteTagHoldProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata>>{
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `deleteTagHold()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_holds.delete_tag_hold.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async
+   */
+  async checkDeleteTagHoldProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteTagHold, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteTagHold,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+    >;
   }
- /**
- * Lists TagHolds under a TagValue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent TagValue. Must be of the form:
- *   `tagValues/{tag-value-id}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of TagHolds to return in the response. The
- *   server allows a maximum of 300 TagHolds to return. If unspecified, the
- *   server will use 100 as the default.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous call to
- *   `ListTagHolds` that indicates where this listing should continue from.
- * @param {string} [request.filter]
- *   Optional. Criteria used to select a subset of TagHolds parented by the
- *   TagValue to return. This field follows the syntax defined by aip.dev/160;
- *   the `holder` and `origin` fields are supported for filtering. Currently
- *   only `AND` syntax is supported. Some example queries are:
- *
- *     * `holder =
- *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group`
- *     * `origin = 35678234`
- *     * `holder =
- *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
- *       AND origin = 35678234`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.TagHold | TagHold}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listTagHoldsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Lists TagHolds under a TagValue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent TagValue. Must be of the form:
+   *   `tagValues/{tag-value-id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of TagHolds to return in the response. The
+   *   server allows a maximum of 300 TagHolds to return. If unspecified, the
+   *   server will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListTagHolds` that indicates where this listing should continue from.
+   * @param {string} [request.filter]
+   *   Optional. Criteria used to select a subset of TagHolds parented by the
+   *   TagValue to return. This field follows the syntax defined by aip.dev/160;
+   *   the `holder` and `origin` fields are supported for filtering. Currently
+   *   only `AND` syntax is supported. Some example queries are:
+   *
+   *     * `holder =
+   *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group`
+   *     * `origin = 35678234`
+   *     * `holder =
+   *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
+   *       AND origin = 35678234`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.TagHold | TagHold}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTagHoldsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listTagHolds(
-      request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.resourcemanager.v3.ITagHold[],
-        protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest|null,
-        protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
-      ]>;
+    request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.ITagHold[],
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest | null,
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+    ]
+  >;
   listTagHolds(
-      request: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse|null|undefined,
-          protos.google.cloud.resourcemanager.v3.ITagHold>): void;
+    request: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+      | protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.ITagHold
+    >
+  ): void;
   listTagHolds(
-      request: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse|null|undefined,
-          protos.google.cloud.resourcemanager.v3.ITagHold>): void;
+    request: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+      | protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.ITagHold
+    >
+  ): void;
   listTagHolds(
-      request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse|null|undefined,
-          protos.google.cloud.resourcemanager.v3.ITagHold>,
-      callback?: PaginationCallback<
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-          protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse|null|undefined,
-          protos.google.cloud.resourcemanager.v3.ITagHold>):
-      Promise<[
-        protos.google.cloud.resourcemanager.v3.ITagHold[],
-        protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest|null,
-        protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
-      ]>|void {
+          | protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+          | null
+          | undefined,
+          protos.google.cloud.resourcemanager.v3.ITagHold
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+      | protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.ITagHold
+    >
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.ITagHold[],
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest | null,
+      protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.listTagHolds(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent TagValue. Must be of the form:
- *   `tagValues/{tag-value-id}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of TagHolds to return in the response. The
- *   server allows a maximum of 300 TagHolds to return. If unspecified, the
- *   server will use 100 as the default.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous call to
- *   `ListTagHolds` that indicates where this listing should continue from.
- * @param {string} [request.filter]
- *   Optional. Criteria used to select a subset of TagHolds parented by the
- *   TagValue to return. This field follows the syntax defined by aip.dev/160;
- *   the `holder` and `origin` fields are supported for filtering. Currently
- *   only `AND` syntax is supported. Some example queries are:
- *
- *     * `holder =
- *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group`
- *     * `origin = 35678234`
- *     * `holder =
- *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
- *       AND origin = 35678234`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.TagHold | TagHold} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listTagHoldsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent TagValue. Must be of the form:
+   *   `tagValues/{tag-value-id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of TagHolds to return in the response. The
+   *   server allows a maximum of 300 TagHolds to return. If unspecified, the
+   *   server will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListTagHolds` that indicates where this listing should continue from.
+   * @param {string} [request.filter]
+   *   Optional. Criteria used to select a subset of TagHolds parented by the
+   *   TagValue to return. This field follows the syntax defined by aip.dev/160;
+   *   the `holder` and `origin` fields are supported for filtering. Currently
+   *   only `AND` syntax is supported. Some example queries are:
+   *
+   *     * `holder =
+   *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group`
+   *     * `origin = 35678234`
+   *     * `holder =
+   *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
+   *       AND origin = 35678234`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.TagHold | TagHold} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTagHoldsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listTagHoldsStream(
-      request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTagHolds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -716,60 +866,59 @@ export class TagHoldsClient {
     );
   }
 
-/**
- * Equivalent to `listTagHolds`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent TagValue. Must be of the form:
- *   `tagValues/{tag-value-id}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of TagHolds to return in the response. The
- *   server allows a maximum of 300 TagHolds to return. If unspecified, the
- *   server will use 100 as the default.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous call to
- *   `ListTagHolds` that indicates where this listing should continue from.
- * @param {string} [request.filter]
- *   Optional. Criteria used to select a subset of TagHolds parented by the
- *   TagValue to return. This field follows the syntax defined by aip.dev/160;
- *   the `holder` and `origin` fields are supported for filtering. Currently
- *   only `AND` syntax is supported. Some example queries are:
- *
- *     * `holder =
- *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group`
- *     * `origin = 35678234`
- *     * `holder =
- *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
- *       AND origin = 35678234`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link google.cloud.resourcemanager.v3.TagHold | TagHold}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/tag_holds.list_tag_holds.js</caption>
- * region_tag:cloudresourcemanager_v3_generated_TagHolds_ListTagHolds_async
- */
+  /**
+   * Equivalent to `listTagHolds`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent TagValue. Must be of the form:
+   *   `tagValues/{tag-value-id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of TagHolds to return in the response. The
+   *   server allows a maximum of 300 TagHolds to return. If unspecified, the
+   *   server will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListTagHolds` that indicates where this listing should continue from.
+   * @param {string} [request.filter]
+   *   Optional. Criteria used to select a subset of TagHolds parented by the
+   *   TagValue to return. This field follows the syntax defined by aip.dev/160;
+   *   the `holder` and `origin` fields are supported for filtering. Currently
+   *   only `AND` syntax is supported. Some example queries are:
+   *
+   *     * `holder =
+   *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group`
+   *     * `origin = 35678234`
+   *     * `holder =
+   *       //compute.googleapis.com/compute/projects/myproject/regions/us-east-1/instanceGroupManagers/instance-group
+   *       AND origin = 35678234`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.resourcemanager.v3.TagHold | TagHold}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_holds.list_tag_holds.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagHolds_ListTagHolds_async
+   */
   listTagHoldsAsync(
-      request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagHold>{
+    request?: protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagHold> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTagHolds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -779,7 +928,7 @@ export class TagHoldsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagHold>;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -893,7 +1042,7 @@ export class TagHoldsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     options?:
       | gax.CallOptions
@@ -964,7 +1113,7 @@ export class TagHoldsClient {
    * @param {string} folder
    * @returns {string} Resource name string.
    */
-  folderPath(folder:string) {
+  folderPath(folder: string) {
     return this.pathTemplates.folderPathTemplate.render({
       folder: folder,
     });
@@ -987,7 +1136,7 @@ export class TagHoldsClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization:string) {
+  organizationPath(organization: string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -1001,7 +1150,8 @@ export class TagHoldsClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
@@ -1010,7 +1160,7 @@ export class TagHoldsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1033,7 +1183,7 @@ export class TagHoldsClient {
    * @param {string} tag_binding
    * @returns {string} Resource name string.
    */
-  tagBindingPath(tagBinding:string) {
+  tagBindingPath(tagBinding: string) {
     return this.pathTemplates.tagBindingPathTemplate.render({
       tag_binding: tagBinding,
     });
@@ -1047,7 +1197,8 @@ export class TagHoldsClient {
    * @returns {string} A string representing the tag_binding.
    */
   matchTagBindingFromTagBindingName(tagBindingName: string) {
-    return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName).tag_binding;
+    return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
+      .tag_binding;
   }
 
   /**
@@ -1057,7 +1208,7 @@ export class TagHoldsClient {
    * @param {string} tag_hold
    * @returns {string} Resource name string.
    */
-  tagHoldPath(tagValue:string,tagHold:string) {
+  tagHoldPath(tagValue: string, tagHold: string) {
     return this.pathTemplates.tagHoldPathTemplate.render({
       tag_value: tagValue,
       tag_hold: tagHold,
@@ -1092,7 +1243,7 @@ export class TagHoldsClient {
    * @param {string} tag_key
    * @returns {string} Resource name string.
    */
-  tagKeyPath(tagKey:string) {
+  tagKeyPath(tagKey: string) {
     return this.pathTemplates.tagKeyPathTemplate.render({
       tag_key: tagKey,
     });
@@ -1115,7 +1266,7 @@ export class TagHoldsClient {
    * @param {string} tag_value
    * @returns {string} Resource name string.
    */
-  tagValuePath(tagValue:string) {
+  tagValuePath(tagValue: string) {
     return this.pathTemplates.tagValuePathTemplate.render({
       tag_value: tagValue,
     });
@@ -1129,7 +1280,8 @@ export class TagHoldsClient {
    * @returns {string} A string representing the tag_value.
    */
   matchTagValueFromTagValueName(tagValueName: string) {
-    return this.pathTemplates.tagValuePathTemplate.match(tagValueName).tag_value;
+    return this.pathTemplates.tagValuePathTemplate.match(tagValueName)
+      .tag_value;
   }
 
   /**

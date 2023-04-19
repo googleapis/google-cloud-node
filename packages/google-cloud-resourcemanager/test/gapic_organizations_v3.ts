@@ -1139,6 +1139,55 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
+    describe('tagHold', () => {
+      const fakePath = '/rendered/path/tagHold';
+      const expectedParameters = {
+        tag_value: 'tagValueValue',
+        tag_hold: 'tagHoldValue',
+      };
+      const client = new organizationsModule.v3.OrganizationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tagHoldPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tagHoldPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tagHoldPath', () => {
+        const result = client.tagHoldPath('tagValueValue', 'tagHoldValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tagHoldPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchTagValueFromTagHoldName', () => {
+        const result = client.matchTagValueFromTagHoldName(fakePath);
+        assert.strictEqual(result, 'tagValueValue');
+        assert(
+          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTagHoldFromTagHoldName', () => {
+        const result = client.matchTagHoldFromTagHoldName(fakePath);
+        assert.strictEqual(result, 'tagHoldValue');
+        assert(
+          (client.pathTemplates.tagHoldPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('tagKey', () => {
       const fakePath = '/rendered/path/tagKey';
       const expectedParameters = {

@@ -29,9 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Organization to fetch. This is the organization's
-   *  relative path in the API, formatted as "organizations/[organizationId]".
-   *  For example, "organizations/1234".
+   *  Required. The resource name of the Organization to fetch. This is the
+   *  organization's relative path in the API, formatted as
+   *  "organizations/[organizationId]". For example, "organizations/1234".
    */
   // const name = 'abc123'
 

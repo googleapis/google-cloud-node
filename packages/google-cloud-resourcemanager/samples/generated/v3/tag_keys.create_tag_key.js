@@ -29,13 +29,13 @@ function main(tagKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The TagKey to be created. Only fields `short_name`, `description`,
-   *  and `parent` are considered during the creation request.
+   *  Required. The TagKey to be created. Only fields `short_name`,
+   *  `description`, and `parent` are considered during the creation request.
    */
   // const tagKey = {}
   /**
-   *  Optional. Set to true to perform validations necessary for creating the resource, but
-   *  not actually perform the action.
+   *  Optional. Set to true to perform validations necessary for creating the
+   *  resource, but not actually perform the action.
    */
   // const validateOnly = true
 
