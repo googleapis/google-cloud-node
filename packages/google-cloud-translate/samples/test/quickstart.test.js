@@ -18,8 +18,6 @@ const {assert} = require('chai');
 const {describe, it} = require('mocha');
 const cp = require('child_process');
 const path = require('path');
-import {fileURLToPath} from 'url';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 

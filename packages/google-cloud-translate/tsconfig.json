@@ -4,12 +4,12 @@
     "rootDir": ".",
     "outDir": "build/cjs",
     "resolveJsonModule": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "sourceMap": false,
     "module": "CommonJS",
-    "moduleResolution": "node",
     "lib": [
-      "ES2020",
+      "es2020",
       "DOM"
     ]
   },

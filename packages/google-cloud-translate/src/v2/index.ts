@@ -14,23 +14,61 @@
 
 import {Service, util, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify from 'arrify';
 import extend from 'extend';
 import * as fs from 'fs';
 import {GoogleAuthOptions} from 'google-auth-library';
-import isHtml from 'is-html';
 import {
   DecorateRequestOptions,
   BodyResponseCallback,
 } from '@google-cloud/common/build/src/util.js';
-
-import * as path from 'path';
+import htmlTags from 'html-tags';
+import path from 'path';
 import {fileURLToPath} from 'url';
-const filename = fileURLToPath(import.meta.url);
+let dirToUse = '';
+try {
+  dirToUse = __dirname;
+} catch (e) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  dirToUse = import.meta.url;
+}
+const filename = fileURLToPath(dirToUse);
 const dirname = path.dirname(filename);
+
 const PKG = JSON.parse(
   fs.readFileSync(path.join(dirname, '..', '..', '..', '..', 'package.json')).toString()
 );
+
+
+const basic = /\s?<!doctype html>|(<html\b[^>]*>|<body\b[^>]*>|<x-[^>]+>)+/i;
+const full = new RegExp(htmlTags.map(tag => `<${tag}\\b[^>]*>`).join('|'), 'i');
+
+function isHtml(string: string) {
+	// We limit it to a reasonable length to improve performance.
+	string = string.trim().slice(0, 1000);
+
+	return basic.test(string) || full.test(string);
+}
+
+function arrify(value: any) {
+	if (value === null || value === undefined) {
+		return [];
+	}
+
+	if (Array.isArray(value)) {
+		return value;
+	}
+
+	if (typeof value === 'string') {
+		return [value];
+	}
+
+	if (typeof value[Symbol.iterator] === 'function') {
+		return [...value];
+	}
+
+	return [value];
+}
 
 export interface TranslateRequest {
   format?: string;

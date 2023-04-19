@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-import translation from '@google-cloud/translate';
+const translation = require('@google-cloud/translate');
 
 function main() {
   const translationServiceClient = new translation.TranslationServiceClient();

@@ -27,14 +27,22 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import gax from 'google-gax'
+import * as gax from 'google-gax'
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos.js';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import * as translation_service_client_config from './translation_service_client_config.json'
-const filename = fileURLToPath(import.meta.url);
+let dirToUse = '';
+try {
+  dirToUse = __dirname;
+} catch (e) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  dirToUse = import.meta.url;
+}
+const filename = fileURLToPath(dirToUse);
 const dirname = path.dirname(filename);
 
 /**

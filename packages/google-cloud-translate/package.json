@@ -16,7 +16,7 @@
       },
       "require": {
         "types": "./build/cjs/src/index.d.ts",
-        "default": "./build/cjs/src/index.js"
+        "default": "./build/cjs/src/index.cjs"
       }
     }
   },
@@ -25,13 +25,13 @@
     "directory": "packages/google-cloud-translate",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
-  "main": "build/cjs/src/index.js",
-  "types": "build/cjs/src/index.d.ts",
+  "main": "./build/cjs/src/index.cjs",
+  "types": "./build/cjs/src/index.d.ts",
   "files": [
-    "build/src",
     "build/esm",
+    "build/cjs",
     "build/protos",
-    "!build/src/**/*.map"
+    "!build/esm/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -50,15 +50,17 @@
     "predocs": "npm run compile",
     "lint": "gts check",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/esm/system-test",
-    "test": "c8 mocha --loader=esmock build/esm/test",
+    "system-test": "c8 mocha build/cjs/system-test",
+    "test:cjs": "c8 mocha build/cjs/test",
+    "test:esm": "c8 mocha --loader=esmock build/esm/test",
+    "test": "npm run test:cjs && npm run test:esm",
     "compile:esm": "tsc -p ./tsconfig.esm.json",
-    "compile:cjs": "tsc -p .",
-    "compile": "npm run compile:esm && cp -r protos build/ && cp -r protos build/esm && minifyProtoJson",
+    "compile:cjs": "tsc -p ./tsconfig.json",
+    "compile": "npm run compile:esm && npm run compile:cjs && cp -r protos build/esm && cp -r protos build/cjs && minifyProtoJson && node post-compile.js",
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile",
-    "pretest": " npm run compile:esm && cp -r protos build/esm",
+    "pretest": " npm run compile",
     "presystem-test": "npm run compile",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
@@ -69,11 +71,9 @@
   "dependencies": {
     "@google-cloud/common": "^4.0.0",
     "@google-cloud/promisify": "^3.0.0",
-    "arrify": "^3.0.0",
     "extend": "^3.0.2",
     "google-gax": "^3.5.8",
-    "html-tags": "^3.3.1",
-    "is-html": "^3.0.0"
+    "html-tags": "^3.3.1"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
@@ -95,7 +95,7 @@
     "mocha": "^9.2.2",
     "pack-n-play": "^1.0.0-2",
     "sinon": "^15.0.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.9.5"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate"
 }

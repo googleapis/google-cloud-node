@@ -27,7 +27,15 @@ import fs from 'fs';
 import * as orig from '../src/index.js';
 import path from 'path';
 import {fileURLToPath} from 'url';
-const filename = fileURLToPath(import.meta.url);
+let dirToUse = '';
+try {
+  dirToUse = __dirname;
+} catch (e) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  dirToUse = import.meta.url;
+}
+const filename = fileURLToPath(dirToUse);
 const dirname = path.dirname(filename);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

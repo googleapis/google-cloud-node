@@ -34,7 +34,15 @@ import path from 'path';
 import * as translation_service_client_config from './translation_service_client_config.json'
 import fs from 'fs';
 import {fileURLToPath} from 'url';
-const filename = fileURLToPath(import.meta.url);
+let dirToUse = '';
+try {
+  dirToUse = __dirname;
+} catch (e) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  dirToUse = import.meta.url;
+}
+const filename = fileURLToPath(dirToUse);
 const dirname = path.dirname(filename);
 
 const gapicConfig = JSON.parse(fs.readFileSync(path.join(dirname, 'translation_service_client_config.json'), 'utf8'));
