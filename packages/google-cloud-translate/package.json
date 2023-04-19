@@ -6,7 +6,7 @@
   "author": "Google Inc.",
   "type": "module",
   "engines": {
-    "node": ">=14.18.0"
+    "node": ">=14.0.0"
   },
   "exports": {
     ".": {
