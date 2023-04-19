@@ -55,7 +55,7 @@
     "test": "npm run test:cjs && npm run test:esm",
     "compile:esm": "tsc -p ./tsconfig.esm.json",
     "compile:cjs": "tsc -p ./tsconfig.json",
-    "compile": "npm run compile:esm && npm run compile:cjs && cp -r protos build/esm && cp -r protos build/cjs && minifyProtoJson && node post-compile.js",
+    "compile": "npm run compile:esm && npm run compile:cjs && cp -r protos build/esm && cp -r protos build/cjs && minifyProtoJson build/cjs && minifyProtoJson build/esm && node post-compile.js",
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile",

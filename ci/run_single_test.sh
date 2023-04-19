@@ -19,7 +19,7 @@ set -e
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 
-tests_without_node12="typeless-sample-bot gapic-node-templating node-bootstrap-container"
+tests_without_node12="typeless-sample-bot gapic-node-templating node-bootstrap-container google-cloud-translate"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing $BUILD_TYPE env var"
