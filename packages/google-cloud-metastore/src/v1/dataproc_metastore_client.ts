@@ -311,6 +311,11 @@ export class DataprocMetastoreClient {
           ],
         },
         {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
         },
@@ -587,8 +592,8 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The relative resource name of the metastore service to retrieve, in the
-   *   following form:
+   *   Required. The relative resource name of the metastore service to retrieve,
+   *   in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    * @param {object} [options]
@@ -675,8 +680,8 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The relative resource name of the metadata import to retrieve, in the
-   *   following form:
+   *   Required. The relative resource name of the metadata import to retrieve, in
+   *   the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
    * @param {object} [options]
@@ -856,8 +861,8 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location in which to create a metastore
-   *   service, in the following form:
+   *   Required. The relative resource name of the location in which to create a
+   *   metastore service, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {string} request.serviceId
@@ -872,10 +877,10 @@ export class DataprocMetastoreClient {
    *   ignored. The ID of the created metastore service must be provided in
    *   the request's `service_id` field.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1032,10 +1037,10 @@ export class DataprocMetastoreClient {
    *   The metastore service's `name` field is used to identify the metastore
    *   service to be updated.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1181,15 +1186,15 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The relative resource name of the metastore service to delete, in the
-   *   following form:
+   *   Required. The relative resource name of the metastore service to delete, in
+   *   the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1335,26 +1340,26 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the service in which to create a metastore
-   *   import, in the following form:
+   *   Required. The relative resource name of the service in which to create a
+   *   metastore import, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    * @param {string} request.metadataImportId
-   *   Required. The ID of the metadata import, which is used as the final component of the
-   *   metadata import's name.
+   *   Required. The ID of the metadata import, which is used as the final
+   *   component of the metadata import's name.
    *
    *   This value must be between 1 and 64 characters long, begin with a letter,
    *   end with a letter or number, and consist of alpha-numeric ASCII characters
    *   or hyphens.
    * @param {google.cloud.metastore.v1.MetadataImport} request.metadataImport
-   *   Required. The metadata import to create. The `name` field is ignored. The ID of the
-   *   created metadata import must be provided in the request's
+   *   Required. The metadata import to create. The `name` field is ignored. The
+   *   ID of the created metadata import must be provided in the request's
    *   `metadata_import_id` field.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1512,10 +1517,10 @@ export class DataprocMetastoreClient {
    *   The metadata import's `name` field is used to identify the metastore
    *   import to be updated.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1665,15 +1670,15 @@ export class DataprocMetastoreClient {
    *   `gs://<bucket_name>/<path_inside_bucket>`. A sub-folder
    *   `<export_folder>` containing exported files will be created below it.
    * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to run export, in the
-   *   following form:
+   *   Required. The relative resource name of the metastore service to run
+   *   export, in the following form:
    *
    *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1683,7 +1688,8 @@ export class DataprocMetastoreClient {
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
    *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
    * @param {google.cloud.metastore.v1.DatabaseDumpSpec.Type} [request.databaseDumpType]
-   *   Optional. The type of the database dump. If unspecified, defaults to `MYSQL`.
+   *   Optional. The type of the database dump. If unspecified, defaults to
+   *   `MYSQL`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1821,22 +1827,22 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.service
-   *   Required. The relative resource name of the metastore service to run restore, in the
-   *   following form:
+   *   Required. The relative resource name of the metastore service to run
+   *   restore, in the following form:
    *
    *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
    * @param {string} request.backup
-   *   Required. The relative resource name of the metastore service backup to restore
-   *   from, in the following form:
+   *   Required. The relative resource name of the metastore service backup to
+   *   restore from, in the following form:
    *
    *   `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
    * @param {google.cloud.metastore.v1.Restore.RestoreType} [request.restoreType]
    *   Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1982,8 +1988,8 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the service in which to create a backup
-   *   of the following form:
+   *   Required. The relative resource name of the service in which to create a
+   *   backup of the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    * @param {string} request.backupId
@@ -1994,13 +2000,13 @@ export class DataprocMetastoreClient {
    *   end with a letter or number, and consist of alpha-numeric ASCII characters
    *   or hyphens.
    * @param {google.cloud.metastore.v1.Backup} request.backup
-   *   Required. The backup to create. The `name` field is ignored. The ID of the created
-   *   backup must be provided in the request's `backup_id` field.
+   *   Required. The backup to create. The `name` field is ignored. The ID of the
+   *   created backup must be provided in the request's `backup_id` field.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -2151,10 +2157,10 @@ export class DataprocMetastoreClient {
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -2300,23 +2306,25 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore services to
-   *   list, in the following form:
+   *   Required. The relative resource name of the location of metastore services
+   *   to list, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of services to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 services are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *   Optional. The maximum number of services to return. The response may
+   *   contain less than the maximum number. If unspecified, no more than 500
+   *   services are returned. The maximum value is 1000; values above 1000 are
+   *   changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2410,23 +2418,25 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore services to
-   *   list, in the following form:
+   *   Required. The relative resource name of the location of metastore services
+   *   to list, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of services to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 services are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *   Optional. The maximum number of services to return. The response may
+   *   contain less than the maximum number. If unspecified, no more than 500
+   *   services are returned. The maximum value is 1000; values above 1000 are
+   *   changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2474,23 +2484,25 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore services to
-   *   list, in the following form:
+   *   Required. The relative resource name of the location of metastore services
+   *   to list, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of services to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 services are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *   Optional. The maximum number of services to return. The response may
+   *   contain less than the maximum number. If unspecified, no more than 500
+   *   services are returned. The maximum value is 1000; values above 1000 are
+   *   changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2537,23 +2549,24 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the service whose metadata imports to
-   *   list, in the following form:
+   *   Required. The relative resource name of the service whose metadata imports
+   *   to list, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of imports to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 imports are
+   *   Optional. The maximum number of imports to return. The response may contain
+   *   less than the maximum number. If unspecified, no more than 500 imports are
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2653,23 +2666,24 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the service whose metadata imports to
-   *   list, in the following form:
+   *   Required. The relative resource name of the service whose metadata imports
+   *   to list, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of imports to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 imports are
+   *   Optional. The maximum number of imports to return. The response may contain
+   *   less than the maximum number. If unspecified, no more than 500 imports are
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2717,23 +2731,24 @@ export class DataprocMetastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the service whose metadata imports to
-   *   list, in the following form:
+   *   Required. The relative resource name of the service whose metadata imports
+   *   to list, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of imports to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 imports are
+   *   Optional. The maximum number of imports to return. The response may contain
+   *   less than the maximum number. If unspecified, no more than 500 imports are
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListServices|DataprocMetastore.ListServices}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2785,18 +2800,19 @@ export class DataprocMetastoreClient {
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of backups to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 backups are
+   *   Optional. The maximum number of backups to return. The response may contain
+   *   less than the maximum number. If unspecified, no more than 500 backups are
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2895,18 +2911,19 @@ export class DataprocMetastoreClient {
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of backups to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 backups are
+   *   Optional. The maximum number of backups to return. The response may contain
+   *   less than the maximum number. If unspecified, no more than 500 backups are
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
@@ -2959,18 +2976,19 @@ export class DataprocMetastoreClient {
    *
    *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of backups to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 backups are
+   *   Optional. The maximum number of backups to return. The response may contain
+   *   less than the maximum number. If unspecified, no more than 500 backups are
    *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   Optional. A page token, received from a previous
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
    *   call. Provide this token to retrieve the subsequent page.
    *
    *   To retrieve the first page, supply an empty page token.
    *
    *   When paginating, other parameters provided to
-   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups} must match the call that provided the
-   *   page token.
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. The filter to apply to list results.
    * @param {string} [request.orderBy]
