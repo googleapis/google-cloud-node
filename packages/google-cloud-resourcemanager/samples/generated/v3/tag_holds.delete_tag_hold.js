@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async]
+  // [START cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,36 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for TagValue to be deleted in the format
-   *  tagValues/456.
+   *  Required. The resource name of the TagHold to delete. Must be of the form:
+   *  `tagValues/{tag-value-id}/tagHolds/{tag-hold-id}`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. Set as true to perform the validations necessary for deletion,
-   *  but not actually perform the action.
+   *  Optional. Set to true to perform the validations necessary for deleting the
+   *  resource, but not actually perform the action.
    */
   // const validateOnly = true
-  /**
-   *  Optional. The etag known to the client for the expected state of the
-   *  TagValue. This is to be used for optimistic concurrency.
-   */
-  // const etag = 'abc123'
 
   // Imports the Resourcemanager library
-  const {TagValuesClient} = require('@google-cloud/resource-manager').v3;
+  const {TagHoldsClient} = require('@google-cloud/resource-manager').v3;
 
   // Instantiates a client
-  const resourcemanagerClient = new TagValuesClient();
+  const resourcemanagerClient = new TagHoldsClient();
 
-  async function callDeleteTagValue() {
+  async function callDeleteTagHold() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await resourcemanagerClient.deleteTagValue(request);
+    const [operation] = await resourcemanagerClient.deleteTagHold(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteTagValue();
-  // [END cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async]
+  callDeleteTagHold();
+  // [END cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for TagValue to be fetched in the format `tagValues/456`.
+   *  Required. Resource name for TagValue to be fetched in the format
+   *  `tagValues/456`.
    */
   // const name = 'abc123'
 

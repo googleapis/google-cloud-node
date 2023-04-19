@@ -29,10 +29,10 @@ function main(tagValue) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new definition of the TagValue. Only fields `description` and `etag`
-   *  fields can be updated by this request. If the `etag` field is nonempty, it
-   *  must match the `etag` field of the existing ControlGroup. Otherwise,
-   *  `FAILED_PRECONDITION` will be returned.
+   *  Required. The new definition of the TagValue. Only fields `description` and
+   *  `etag` fields can be updated by this request. If the `etag` field is
+   *  nonempty, it must match the `etag` field of the existing ControlGroup.
+   *  Otherwise, `ABORTED` will be returned.
    */
   // const tagValue = {}
   /**
@@ -40,8 +40,8 @@ function main(tagValue) {
    */
   // const updateMask = {}
   /**
-   *  Optional. True to perform validations necessary for updating the resource, but not
-   *  actually perform the action.
+   *  Optional. True to perform validations necessary for updating the resource,
+   *  but not actually perform the action.
    */
   // const validateOnly = true
 

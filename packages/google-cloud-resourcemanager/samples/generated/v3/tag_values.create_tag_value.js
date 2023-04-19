@@ -29,13 +29,13 @@ function main(tagValue) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The TagValue to be created. Only fields `short_name`, `description`,
-   *  and `parent` are considered during the creation request.
+   *  Required. The TagValue to be created. Only fields `short_name`,
+   *  `description`, and `parent` are considered during the creation request.
    */
   // const tagValue = {}
   /**
-   *  Optional. Set as true to perform the validations necessary for creating the resource,
-   *  but not actually perform the action.
+   *  Optional. Set as true to perform the validations necessary for creating the
+   *  resource, but not actually perform the action.
    */
   // const validateOnly = true
 

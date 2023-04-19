@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async]
+function main(parent) {
+  // [START cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,44 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for TagValue to be deleted in the format
-   *  tagValues/456.
+   *  Required. The full resource name of a resource for which you want to list
+   *  the effective tags. E.g.
+   *  "//cloudresourcemanager.googleapis.com/projects/123"
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. Set as true to perform the validations necessary for deletion,
-   *  but not actually perform the action.
+   *  Optional. The maximum number of effective tags to return in the response.
+   *  The server allows a maximum of 300 effective tags to return in a single
+   *  page. If unspecified, the server will use 100 as the default.
    */
-  // const validateOnly = true
+  // const pageSize = 1234
   /**
-   *  Optional. The etag known to the client for the expected state of the
-   *  TagValue. This is to be used for optimistic concurrency.
+   *  Optional. A pagination token returned from a previous call to
+   *  `ListEffectiveTags` that indicates from where this listing should continue.
    */
-  // const etag = 'abc123'
+  // const pageToken = 'abc123'
 
   // Imports the Resourcemanager library
-  const {TagValuesClient} = require('@google-cloud/resource-manager').v3;
+  const {TagBindingsClient} = require('@google-cloud/resource-manager').v3;
 
   // Instantiates a client
-  const resourcemanagerClient = new TagValuesClient();
+  const resourcemanagerClient = new TagBindingsClient();
 
-  async function callDeleteTagValue() {
+  async function callListEffectiveTags() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await resourcemanagerClient.deleteTagValue(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await resourcemanagerClient.listEffectiveTagsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteTagValue();
-  // [END cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async]
+  callListEffectiveTags();
+  // [END cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_async]
 }
 
 process.on('unhandledRejection', err => {

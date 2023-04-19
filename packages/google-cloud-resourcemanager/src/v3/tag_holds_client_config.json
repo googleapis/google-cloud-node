@@ -1,13 +1,10 @@
 {
   "interfaces": {
-    "google.cloud.resourcemanager.v3.TagBindings": {
+    "google.cloud.resourcemanager.v3.TagHolds": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
           "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ],
-        "unavailable": [
           "UNAVAILABLE"
         ]
       },
@@ -23,22 +20,15 @@
         }
       },
       "methods": {
-        "ListTagBindings": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "default"
-        },
-        "CreateTagBinding": {
-          "timeout_millis": 60000,
+        "CreateTagHold": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "DeleteTagBinding": {
-          "timeout_millis": 60000,
+        "DeleteTagHold": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "ListEffectiveTags": {
+        "ListTagHolds": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

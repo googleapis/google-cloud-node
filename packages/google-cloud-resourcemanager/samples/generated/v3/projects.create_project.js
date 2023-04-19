@@ -34,7 +34,7 @@ function main(project) {
    *  fails.
    *  If the `parent` field is set, the `resourcemanager.projects.create`
    *  permission is checked on the parent resource. If no parent is set and
-   *  the authorization credentials belong to an Organziation, the parent
+   *  the authorization credentials belong to an Organization, the parent
    *  will be set to that Organization.
    */
   // const project = 'my-project'

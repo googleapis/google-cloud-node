@@ -29,19 +29,18 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for TagKey, parent of the TagValues to be listed,
-   *  in the format `tagKeys/123`.
+   *  Required.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of TagValues to return in the response. The server
-   *  allows a maximum of 300 TagValues to return. If unspecified, the server
-   *  will use 100 as the default.
+   *  Optional. The maximum number of TagValues to return in the response. The
+   *  server allows a maximum of 300 TagValues to return. If unspecified, the
+   *  server will use 100 as the default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A pagination token returned from a previous call to `ListTagValues`
-   *  that indicates where this listing should continue from.
+   *  Optional. A pagination token returned from a previous call to
+   *  `ListTagValues` that indicates where this listing should continue from.
    */
   // const pageToken = 'abc123'
 

@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async]
+  // [START cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,15 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for TagValue to be deleted in the format
-   *  tagValues/456.
+   *  Required. A namespaced tag value name in the following format:
+   *    `{parentId}/{tagKeyShort}/{tagValueShort}`
+   *  Examples:
+   *  - `42/foo/abc` for a value with short name "abc" under the key with short
+   *    name "foo" under the organization with ID 42
+   *  - `r2-d2/bar/xyz` for a value with short name "xyz" under the key with
+   *     short name "bar" under the project with ID "r2-d2"
    */
   // const name = 'abc123'
-  /**
-   *  Optional. Set as true to perform the validations necessary for deletion,
-   *  but not actually perform the action.
-   */
-  // const validateOnly = true
-  /**
-   *  Optional. The etag known to the client for the expected state of the
-   *  TagValue. This is to be used for optimistic concurrency.
-   */
-  // const etag = 'abc123'
 
   // Imports the Resourcemanager library
   const {TagValuesClient} = require('@google-cloud/resource-manager').v3;
@@ -50,20 +45,19 @@ function main(name) {
   // Instantiates a client
   const resourcemanagerClient = new TagValuesClient();
 
-  async function callDeleteTagValue() {
+  async function callGetNamespacedTagValue() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await resourcemanagerClient.deleteTagValue(request);
-    const [response] = await operation.promise();
+    const response = await resourcemanagerClient.getNamespacedTagValue(request);
     console.log(response);
   }
 
-  callDeleteTagValue();
-  // [END cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async]
+  callGetNamespacedTagValue();
+  // [END cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -10162,6 +10162,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.resourcemanager.v3.TagBindings|listEffectiveTags}.
+                         * @memberof google.cloud.resourcemanager.v3.TagBindings
+                         * @typedef ListEffectiveTagsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.resourcemanager.v3.ListEffectiveTagsResponse} [response] ListEffectiveTagsResponse
+                         */
+    
+                        /**
+                         * Calls ListEffectiveTags.
+                         * @function listEffectiveTags
+                         * @memberof google.cloud.resourcemanager.v3.TagBindings
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsRequest} request ListEffectiveTagsRequest message or plain object
+                         * @param {google.cloud.resourcemanager.v3.TagBindings.ListEffectiveTagsCallback} callback Node-style callback called with the error, if any, and ListEffectiveTagsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TagBindings.prototype.listEffectiveTags = function listEffectiveTags(request, callback) {
+                            return this.rpcCall(listEffectiveTags, $root.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest, $root.google.cloud.resourcemanager.v3.ListEffectiveTagsResponse, request, callback);
+                        }, "name", { value: "ListEffectiveTags" });
+    
+                        /**
+                         * Calls ListEffectiveTags.
+                         * @function listEffectiveTags
+                         * @memberof google.cloud.resourcemanager.v3.TagBindings
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsRequest} request ListEffectiveTagsRequest message or plain object
+                         * @returns {Promise<google.cloud.resourcemanager.v3.ListEffectiveTagsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return TagBindings;
                     })();
     
@@ -10174,6 +10207,7 @@
                          * @property {string|null} [name] TagBinding name
                          * @property {string|null} [parent] TagBinding parent
                          * @property {string|null} [tagValue] TagBinding tagValue
+                         * @property {string|null} [tagValueNamespacedName] TagBinding tagValueNamespacedName
                          */
     
                         /**
@@ -10216,6 +10250,14 @@
                         TagBinding.prototype.tagValue = "";
     
                         /**
+                         * TagBinding tagValueNamespacedName.
+                         * @member {string} tagValueNamespacedName
+                         * @memberof google.cloud.resourcemanager.v3.TagBinding
+                         * @instance
+                         */
+                        TagBinding.prototype.tagValueNamespacedName = "";
+    
+                        /**
                          * Creates a new TagBinding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.resourcemanager.v3.TagBinding
@@ -10245,6 +10287,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
                             if (message.tagValue != null && Object.hasOwnProperty.call(message, "tagValue"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.tagValue);
+                            if (message.tagValueNamespacedName != null && Object.hasOwnProperty.call(message, "tagValueNamespacedName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.tagValueNamespacedName);
                             return writer;
                         };
     
@@ -10291,6 +10335,10 @@
                                         message.tagValue = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.tagValueNamespacedName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10335,6 +10383,9 @@
                             if (message.tagValue != null && message.hasOwnProperty("tagValue"))
                                 if (!$util.isString(message.tagValue))
                                     return "tagValue: string expected";
+                            if (message.tagValueNamespacedName != null && message.hasOwnProperty("tagValueNamespacedName"))
+                                if (!$util.isString(message.tagValueNamespacedName))
+                                    return "tagValueNamespacedName: string expected";
                             return null;
                         };
     
@@ -10356,6 +10407,8 @@
                                 message.parent = String(object.parent);
                             if (object.tagValue != null)
                                 message.tagValue = String(object.tagValue);
+                            if (object.tagValueNamespacedName != null)
+                                message.tagValueNamespacedName = String(object.tagValueNamespacedName);
                             return message;
                         };
     
@@ -10376,6 +10429,7 @@
                                 object.name = "";
                                 object.parent = "";
                                 object.tagValue = "";
+                                object.tagValueNamespacedName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10383,6 +10437,8 @@
                                 object.parent = message.parent;
                             if (message.tagValue != null && message.hasOwnProperty("tagValue"))
                                 object.tagValue = message.tagValue;
+                            if (message.tagValueNamespacedName != null && message.hasOwnProperty("tagValueNamespacedName"))
+                                object.tagValueNamespacedName = message.tagValueNamespacedName;
                             return object;
                         };
     
@@ -11698,6 +11754,2611 @@
                         return ListTagBindingsResponse;
                     })();
     
+                    v3.ListEffectiveTagsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListEffectiveTagsRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IListEffectiveTagsRequest
+                         * @property {string|null} [parent] ListEffectiveTagsRequest parent
+                         * @property {number|null} [pageSize] ListEffectiveTagsRequest pageSize
+                         * @property {string|null} [pageToken] ListEffectiveTagsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListEffectiveTagsRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a ListEffectiveTagsRequest.
+                         * @implements IListEffectiveTagsRequest
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsRequest=} [properties] Properties to set
+                         */
+                        function ListEffectiveTagsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEffectiveTagsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @instance
+                         */
+                        ListEffectiveTagsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListEffectiveTagsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @instance
+                         */
+                        ListEffectiveTagsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListEffectiveTagsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @instance
+                         */
+                        ListEffectiveTagsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListEffectiveTagsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsRequest} ListEffectiveTagsRequest instance
+                         */
+                        ListEffectiveTagsRequest.create = function create(properties) {
+                            return new ListEffectiveTagsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEffectiveTagsRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsRequest} message ListEffectiveTagsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEffectiveTagsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEffectiveTagsRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsRequest} message ListEffectiveTagsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEffectiveTagsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEffectiveTagsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsRequest} ListEffectiveTagsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEffectiveTagsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEffectiveTagsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsRequest} ListEffectiveTagsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEffectiveTagsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEffectiveTagsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEffectiveTagsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEffectiveTagsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsRequest} ListEffectiveTagsRequest
+                         */
+                        ListEffectiveTagsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.ListEffectiveTagsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEffectiveTagsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ListEffectiveTagsRequest} message ListEffectiveTagsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEffectiveTagsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEffectiveTagsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEffectiveTagsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEffectiveTagsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEffectiveTagsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.ListEffectiveTagsRequest";
+                        };
+    
+                        return ListEffectiveTagsRequest;
+                    })();
+    
+                    v3.ListEffectiveTagsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListEffectiveTagsResponse.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IListEffectiveTagsResponse
+                         * @property {Array.<google.cloud.resourcemanager.v3.IEffectiveTag>|null} [effectiveTags] ListEffectiveTagsResponse effectiveTags
+                         * @property {string|null} [nextPageToken] ListEffectiveTagsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListEffectiveTagsResponse.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a ListEffectiveTagsResponse.
+                         * @implements IListEffectiveTagsResponse
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsResponse=} [properties] Properties to set
+                         */
+                        function ListEffectiveTagsResponse(properties) {
+                            this.effectiveTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListEffectiveTagsResponse effectiveTags.
+                         * @member {Array.<google.cloud.resourcemanager.v3.IEffectiveTag>} effectiveTags
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @instance
+                         */
+                        ListEffectiveTagsResponse.prototype.effectiveTags = $util.emptyArray;
+    
+                        /**
+                         * ListEffectiveTagsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @instance
+                         */
+                        ListEffectiveTagsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListEffectiveTagsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsResponse} ListEffectiveTagsResponse instance
+                         */
+                        ListEffectiveTagsResponse.create = function create(properties) {
+                            return new ListEffectiveTagsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListEffectiveTagsResponse message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsResponse} message ListEffectiveTagsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEffectiveTagsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.effectiveTags != null && message.effectiveTags.length)
+                                for (var i = 0; i < message.effectiveTags.length; ++i)
+                                    $root.google.cloud.resourcemanager.v3.EffectiveTag.encode(message.effectiveTags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListEffectiveTagsResponse message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListEffectiveTagsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListEffectiveTagsResponse} message ListEffectiveTagsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListEffectiveTagsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListEffectiveTagsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsResponse} ListEffectiveTagsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEffectiveTagsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.ListEffectiveTagsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.effectiveTags && message.effectiveTags.length))
+                                            message.effectiveTags = [];
+                                        message.effectiveTags.push($root.google.cloud.resourcemanager.v3.EffectiveTag.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListEffectiveTagsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsResponse} ListEffectiveTagsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListEffectiveTagsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListEffectiveTagsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListEffectiveTagsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.effectiveTags != null && message.hasOwnProperty("effectiveTags")) {
+                                if (!Array.isArray(message.effectiveTags))
+                                    return "effectiveTags: array expected";
+                                for (var i = 0; i < message.effectiveTags.length; ++i) {
+                                    var error = $root.google.cloud.resourcemanager.v3.EffectiveTag.verify(message.effectiveTags[i]);
+                                    if (error)
+                                        return "effectiveTags." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListEffectiveTagsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.ListEffectiveTagsResponse} ListEffectiveTagsResponse
+                         */
+                        ListEffectiveTagsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.ListEffectiveTagsResponse)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.ListEffectiveTagsResponse();
+                            if (object.effectiveTags) {
+                                if (!Array.isArray(object.effectiveTags))
+                                    throw TypeError(".google.cloud.resourcemanager.v3.ListEffectiveTagsResponse.effectiveTags: array expected");
+                                message.effectiveTags = [];
+                                for (var i = 0; i < object.effectiveTags.length; ++i) {
+                                    if (typeof object.effectiveTags[i] !== "object")
+                                        throw TypeError(".google.cloud.resourcemanager.v3.ListEffectiveTagsResponse.effectiveTags: object expected");
+                                    message.effectiveTags[i] = $root.google.cloud.resourcemanager.v3.EffectiveTag.fromObject(object.effectiveTags[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListEffectiveTagsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ListEffectiveTagsResponse} message ListEffectiveTagsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListEffectiveTagsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.effectiveTags = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.effectiveTags && message.effectiveTags.length) {
+                                object.effectiveTags = [];
+                                for (var j = 0; j < message.effectiveTags.length; ++j)
+                                    object.effectiveTags[j] = $root.google.cloud.resourcemanager.v3.EffectiveTag.toObject(message.effectiveTags[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListEffectiveTagsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListEffectiveTagsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListEffectiveTagsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.ListEffectiveTagsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListEffectiveTagsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.ListEffectiveTagsResponse";
+                        };
+    
+                        return ListEffectiveTagsResponse;
+                    })();
+    
+                    v3.EffectiveTag = (function() {
+    
+                        /**
+                         * Properties of an EffectiveTag.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IEffectiveTag
+                         * @property {string|null} [tagValue] EffectiveTag tagValue
+                         * @property {string|null} [namespacedTagValue] EffectiveTag namespacedTagValue
+                         * @property {string|null} [tagKey] EffectiveTag tagKey
+                         * @property {string|null} [namespacedTagKey] EffectiveTag namespacedTagKey
+                         * @property {string|null} [tagKeyParentName] EffectiveTag tagKeyParentName
+                         * @property {boolean|null} [inherited] EffectiveTag inherited
+                         */
+    
+                        /**
+                         * Constructs a new EffectiveTag.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents an EffectiveTag.
+                         * @implements IEffectiveTag
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IEffectiveTag=} [properties] Properties to set
+                         */
+                        function EffectiveTag(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EffectiveTag tagValue.
+                         * @member {string} tagValue
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         */
+                        EffectiveTag.prototype.tagValue = "";
+    
+                        /**
+                         * EffectiveTag namespacedTagValue.
+                         * @member {string} namespacedTagValue
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         */
+                        EffectiveTag.prototype.namespacedTagValue = "";
+    
+                        /**
+                         * EffectiveTag tagKey.
+                         * @member {string} tagKey
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         */
+                        EffectiveTag.prototype.tagKey = "";
+    
+                        /**
+                         * EffectiveTag namespacedTagKey.
+                         * @member {string} namespacedTagKey
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         */
+                        EffectiveTag.prototype.namespacedTagKey = "";
+    
+                        /**
+                         * EffectiveTag tagKeyParentName.
+                         * @member {string} tagKeyParentName
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         */
+                        EffectiveTag.prototype.tagKeyParentName = "";
+    
+                        /**
+                         * EffectiveTag inherited.
+                         * @member {boolean} inherited
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         */
+                        EffectiveTag.prototype.inherited = false;
+    
+                        /**
+                         * Creates a new EffectiveTag instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IEffectiveTag=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.EffectiveTag} EffectiveTag instance
+                         */
+                        EffectiveTag.create = function create(properties) {
+                            return new EffectiveTag(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EffectiveTag message. Does not implicitly {@link google.cloud.resourcemanager.v3.EffectiveTag.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IEffectiveTag} message EffectiveTag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EffectiveTag.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tagValue != null && Object.hasOwnProperty.call(message, "tagValue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.tagValue);
+                            if (message.namespacedTagValue != null && Object.hasOwnProperty.call(message, "namespacedTagValue"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespacedTagValue);
+                            if (message.tagKey != null && Object.hasOwnProperty.call(message, "tagKey"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.tagKey);
+                            if (message.namespacedTagKey != null && Object.hasOwnProperty.call(message, "namespacedTagKey"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespacedTagKey);
+                            if (message.inherited != null && Object.hasOwnProperty.call(message, "inherited"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.inherited);
+                            if (message.tagKeyParentName != null && Object.hasOwnProperty.call(message, "tagKeyParentName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.tagKeyParentName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EffectiveTag message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.EffectiveTag.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IEffectiveTag} message EffectiveTag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EffectiveTag.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EffectiveTag message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.EffectiveTag} EffectiveTag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EffectiveTag.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.EffectiveTag();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.tagValue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.namespacedTagValue = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.tagKey = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.namespacedTagKey = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.tagKeyParentName = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inherited = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EffectiveTag message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.EffectiveTag} EffectiveTag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EffectiveTag.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EffectiveTag message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EffectiveTag.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tagValue != null && message.hasOwnProperty("tagValue"))
+                                if (!$util.isString(message.tagValue))
+                                    return "tagValue: string expected";
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue"))
+                                if (!$util.isString(message.namespacedTagValue))
+                                    return "namespacedTagValue: string expected";
+                            if (message.tagKey != null && message.hasOwnProperty("tagKey"))
+                                if (!$util.isString(message.tagKey))
+                                    return "tagKey: string expected";
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey"))
+                                if (!$util.isString(message.namespacedTagKey))
+                                    return "namespacedTagKey: string expected";
+                            if (message.tagKeyParentName != null && message.hasOwnProperty("tagKeyParentName"))
+                                if (!$util.isString(message.tagKeyParentName))
+                                    return "tagKeyParentName: string expected";
+                            if (message.inherited != null && message.hasOwnProperty("inherited"))
+                                if (typeof message.inherited !== "boolean")
+                                    return "inherited: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EffectiveTag message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.EffectiveTag} EffectiveTag
+                         */
+                        EffectiveTag.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.EffectiveTag)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.EffectiveTag();
+                            if (object.tagValue != null)
+                                message.tagValue = String(object.tagValue);
+                            if (object.namespacedTagValue != null)
+                                message.namespacedTagValue = String(object.namespacedTagValue);
+                            if (object.tagKey != null)
+                                message.tagKey = String(object.tagKey);
+                            if (object.namespacedTagKey != null)
+                                message.namespacedTagKey = String(object.namespacedTagKey);
+                            if (object.tagKeyParentName != null)
+                                message.tagKeyParentName = String(object.tagKeyParentName);
+                            if (object.inherited != null)
+                                message.inherited = Boolean(object.inherited);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EffectiveTag message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.EffectiveTag} message EffectiveTag
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EffectiveTag.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.tagValue = "";
+                                object.namespacedTagValue = "";
+                                object.tagKey = "";
+                                object.namespacedTagKey = "";
+                                object.inherited = false;
+                                object.tagKeyParentName = "";
+                            }
+                            if (message.tagValue != null && message.hasOwnProperty("tagValue"))
+                                object.tagValue = message.tagValue;
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue"))
+                                object.namespacedTagValue = message.namespacedTagValue;
+                            if (message.tagKey != null && message.hasOwnProperty("tagKey"))
+                                object.tagKey = message.tagKey;
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey"))
+                                object.namespacedTagKey = message.namespacedTagKey;
+                            if (message.inherited != null && message.hasOwnProperty("inherited"))
+                                object.inherited = message.inherited;
+                            if (message.tagKeyParentName != null && message.hasOwnProperty("tagKeyParentName"))
+                                object.tagKeyParentName = message.tagKeyParentName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EffectiveTag to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EffectiveTag.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EffectiveTag
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.EffectiveTag
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EffectiveTag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.EffectiveTag";
+                        };
+    
+                        return EffectiveTag;
+                    })();
+    
+                    v3.TagHolds = (function() {
+    
+                        /**
+                         * Constructs a new TagHolds service.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a TagHolds
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function TagHolds(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (TagHolds.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = TagHolds;
+    
+                        /**
+                         * Creates new TagHolds service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {TagHolds} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        TagHolds.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.resourcemanager.v3.TagHolds|createTagHold}.
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @typedef CreateTagHoldCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateTagHold.
+                         * @function createTagHold
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldRequest} request CreateTagHoldRequest message or plain object
+                         * @param {google.cloud.resourcemanager.v3.TagHolds.CreateTagHoldCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TagHolds.prototype.createTagHold = function createTagHold(request, callback) {
+                            return this.rpcCall(createTagHold, $root.google.cloud.resourcemanager.v3.CreateTagHoldRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateTagHold" });
+    
+                        /**
+                         * Calls CreateTagHold.
+                         * @function createTagHold
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldRequest} request CreateTagHoldRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.resourcemanager.v3.TagHolds|deleteTagHold}.
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @typedef DeleteTagHoldCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteTagHold.
+                         * @function deleteTagHold
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldRequest} request DeleteTagHoldRequest message or plain object
+                         * @param {google.cloud.resourcemanager.v3.TagHolds.DeleteTagHoldCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TagHolds.prototype.deleteTagHold = function deleteTagHold(request, callback) {
+                            return this.rpcCall(deleteTagHold, $root.google.cloud.resourcemanager.v3.DeleteTagHoldRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteTagHold" });
+    
+                        /**
+                         * Calls DeleteTagHold.
+                         * @function deleteTagHold
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldRequest} request DeleteTagHoldRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.resourcemanager.v3.TagHolds|listTagHolds}.
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @typedef ListTagHoldsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.resourcemanager.v3.ListTagHoldsResponse} [response] ListTagHoldsResponse
+                         */
+    
+                        /**
+                         * Calls ListTagHolds.
+                         * @function listTagHolds
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsRequest} request ListTagHoldsRequest message or plain object
+                         * @param {google.cloud.resourcemanager.v3.TagHolds.ListTagHoldsCallback} callback Node-style callback called with the error, if any, and ListTagHoldsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TagHolds.prototype.listTagHolds = function listTagHolds(request, callback) {
+                            return this.rpcCall(listTagHolds, $root.google.cloud.resourcemanager.v3.ListTagHoldsRequest, $root.google.cloud.resourcemanager.v3.ListTagHoldsResponse, request, callback);
+                        }, "name", { value: "ListTagHolds" });
+    
+                        /**
+                         * Calls ListTagHolds.
+                         * @function listTagHolds
+                         * @memberof google.cloud.resourcemanager.v3.TagHolds
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsRequest} request ListTagHoldsRequest message or plain object
+                         * @returns {Promise<google.cloud.resourcemanager.v3.ListTagHoldsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return TagHolds;
+                    })();
+    
+                    v3.TagHold = (function() {
+    
+                        /**
+                         * Properties of a TagHold.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface ITagHold
+                         * @property {string|null} [name] TagHold name
+                         * @property {string|null} [holder] TagHold holder
+                         * @property {string|null} [origin] TagHold origin
+                         * @property {string|null} [helpLink] TagHold helpLink
+                         * @property {google.protobuf.ITimestamp|null} [createTime] TagHold createTime
+                         */
+    
+                        /**
+                         * Constructs a new TagHold.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a TagHold.
+                         * @implements ITagHold
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.ITagHold=} [properties] Properties to set
+                         */
+                        function TagHold(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagHold name.
+                         * @member {string} name
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @instance
+                         */
+                        TagHold.prototype.name = "";
+    
+                        /**
+                         * TagHold holder.
+                         * @member {string} holder
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @instance
+                         */
+                        TagHold.prototype.holder = "";
+    
+                        /**
+                         * TagHold origin.
+                         * @member {string} origin
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @instance
+                         */
+                        TagHold.prototype.origin = "";
+    
+                        /**
+                         * TagHold helpLink.
+                         * @member {string} helpLink
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @instance
+                         */
+                        TagHold.prototype.helpLink = "";
+    
+                        /**
+                         * TagHold createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @instance
+                         */
+                        TagHold.prototype.createTime = null;
+    
+                        /**
+                         * Creates a new TagHold instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ITagHold=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.TagHold} TagHold instance
+                         */
+                        TagHold.create = function create(properties) {
+                            return new TagHold(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagHold message. Does not implicitly {@link google.cloud.resourcemanager.v3.TagHold.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ITagHold} message TagHold message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagHold.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.holder != null && Object.hasOwnProperty.call(message, "holder"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.holder);
+                            if (message.origin != null && Object.hasOwnProperty.call(message, "origin"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.origin);
+                            if (message.helpLink != null && Object.hasOwnProperty.call(message, "helpLink"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.helpLink);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagHold message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.TagHold.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ITagHold} message TagHold message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagHold.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagHold message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.TagHold} TagHold
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagHold.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.TagHold();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.holder = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.origin = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.helpLink = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagHold message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.TagHold} TagHold
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagHold.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagHold message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagHold.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.holder != null && message.hasOwnProperty("holder"))
+                                if (!$util.isString(message.holder))
+                                    return "holder: string expected";
+                            if (message.origin != null && message.hasOwnProperty("origin"))
+                                if (!$util.isString(message.origin))
+                                    return "origin: string expected";
+                            if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                if (!$util.isString(message.helpLink))
+                                    return "helpLink: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagHold message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.TagHold} TagHold
+                         */
+                        TagHold.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.TagHold)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.TagHold();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.holder != null)
+                                message.holder = String(object.holder);
+                            if (object.origin != null)
+                                message.origin = String(object.origin);
+                            if (object.helpLink != null)
+                                message.helpLink = String(object.helpLink);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.resourcemanager.v3.TagHold.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagHold message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.TagHold} message TagHold
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagHold.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.holder = "";
+                                object.origin = "";
+                                object.helpLink = "";
+                                object.createTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.holder != null && message.hasOwnProperty("holder"))
+                                object.holder = message.holder;
+                            if (message.origin != null && message.hasOwnProperty("origin"))
+                                object.origin = message.origin;
+                            if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                object.helpLink = message.helpLink;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagHold to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagHold.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagHold
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.TagHold
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagHold.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.TagHold";
+                        };
+    
+                        return TagHold;
+                    })();
+    
+                    v3.CreateTagHoldRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateTagHoldRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface ICreateTagHoldRequest
+                         * @property {string|null} [parent] CreateTagHoldRequest parent
+                         * @property {google.cloud.resourcemanager.v3.ITagHold|null} [tagHold] CreateTagHoldRequest tagHold
+                         * @property {boolean|null} [validateOnly] CreateTagHoldRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateTagHoldRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a CreateTagHoldRequest.
+                         * @implements ICreateTagHoldRequest
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldRequest=} [properties] Properties to set
+                         */
+                        function CreateTagHoldRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateTagHoldRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @instance
+                         */
+                        CreateTagHoldRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateTagHoldRequest tagHold.
+                         * @member {google.cloud.resourcemanager.v3.ITagHold|null|undefined} tagHold
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @instance
+                         */
+                        CreateTagHoldRequest.prototype.tagHold = null;
+    
+                        /**
+                         * CreateTagHoldRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @instance
+                         */
+                        CreateTagHoldRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateTagHoldRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldRequest=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldRequest} CreateTagHoldRequest instance
+                         */
+                        CreateTagHoldRequest.create = function create(properties) {
+                            return new CreateTagHoldRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTagHoldRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldRequest} message CreateTagHoldRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTagHoldRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.tagHold != null && Object.hasOwnProperty.call(message, "tagHold"))
+                                $root.google.cloud.resourcemanager.v3.TagHold.encode(message.tagHold, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTagHoldRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldRequest} message CreateTagHoldRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTagHoldRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateTagHoldRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldRequest} CreateTagHoldRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTagHoldRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.CreateTagHoldRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.tagHold = $root.google.cloud.resourcemanager.v3.TagHold.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateTagHoldRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldRequest} CreateTagHoldRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTagHoldRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateTagHoldRequest message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateTagHoldRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.tagHold != null && message.hasOwnProperty("tagHold")) {
+                                var error = $root.google.cloud.resourcemanager.v3.TagHold.verify(message.tagHold);
+                                if (error)
+                                    return "tagHold." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateTagHoldRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldRequest} CreateTagHoldRequest
+                         */
+                        CreateTagHoldRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.CreateTagHoldRequest)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.CreateTagHoldRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.tagHold != null) {
+                                if (typeof object.tagHold !== "object")
+                                    throw TypeError(".google.cloud.resourcemanager.v3.CreateTagHoldRequest.tagHold: object expected");
+                                message.tagHold = $root.google.cloud.resourcemanager.v3.TagHold.fromObject(object.tagHold);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateTagHoldRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.CreateTagHoldRequest} message CreateTagHoldRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateTagHoldRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.tagHold = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.tagHold != null && message.hasOwnProperty("tagHold"))
+                                object.tagHold = $root.google.cloud.resourcemanager.v3.TagHold.toObject(message.tagHold, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateTagHoldRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateTagHoldRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateTagHoldRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateTagHoldRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.CreateTagHoldRequest";
+                        };
+    
+                        return CreateTagHoldRequest;
+                    })();
+    
+                    v3.CreateTagHoldMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateTagHoldMetadata.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface ICreateTagHoldMetadata
+                         */
+    
+                        /**
+                         * Constructs a new CreateTagHoldMetadata.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a CreateTagHoldMetadata.
+                         * @implements ICreateTagHoldMetadata
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldMetadata=} [properties] Properties to set
+                         */
+                        function CreateTagHoldMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CreateTagHoldMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldMetadata} CreateTagHoldMetadata instance
+                         */
+                        CreateTagHoldMetadata.create = function create(properties) {
+                            return new CreateTagHoldMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTagHoldMetadata message. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldMetadata} message CreateTagHoldMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTagHoldMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTagHoldMetadata message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.CreateTagHoldMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ICreateTagHoldMetadata} message CreateTagHoldMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTagHoldMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateTagHoldMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldMetadata} CreateTagHoldMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTagHoldMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.CreateTagHoldMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateTagHoldMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldMetadata} CreateTagHoldMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTagHoldMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateTagHoldMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateTagHoldMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateTagHoldMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.CreateTagHoldMetadata} CreateTagHoldMetadata
+                         */
+                        CreateTagHoldMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.CreateTagHoldMetadata)
+                                return object;
+                            return new $root.google.cloud.resourcemanager.v3.CreateTagHoldMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateTagHoldMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.CreateTagHoldMetadata} message CreateTagHoldMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateTagHoldMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CreateTagHoldMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateTagHoldMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateTagHoldMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.CreateTagHoldMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateTagHoldMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.CreateTagHoldMetadata";
+                        };
+    
+                        return CreateTagHoldMetadata;
+                    })();
+    
+                    v3.DeleteTagHoldRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteTagHoldRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IDeleteTagHoldRequest
+                         * @property {string|null} [name] DeleteTagHoldRequest name
+                         * @property {boolean|null} [validateOnly] DeleteTagHoldRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new DeleteTagHoldRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a DeleteTagHoldRequest.
+                         * @implements IDeleteTagHoldRequest
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldRequest=} [properties] Properties to set
+                         */
+                        function DeleteTagHoldRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteTagHoldRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @instance
+                         */
+                        DeleteTagHoldRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteTagHoldRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @instance
+                         */
+                        DeleteTagHoldRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new DeleteTagHoldRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldRequest=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldRequest} DeleteTagHoldRequest instance
+                         */
+                        DeleteTagHoldRequest.create = function create(properties) {
+                            return new DeleteTagHoldRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTagHoldRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldRequest} message DeleteTagHoldRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTagHoldRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTagHoldRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldRequest} message DeleteTagHoldRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTagHoldRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteTagHoldRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldRequest} DeleteTagHoldRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTagHoldRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.DeleteTagHoldRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteTagHoldRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldRequest} DeleteTagHoldRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTagHoldRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteTagHoldRequest message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteTagHoldRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteTagHoldRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldRequest} DeleteTagHoldRequest
+                         */
+                        DeleteTagHoldRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.DeleteTagHoldRequest)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.DeleteTagHoldRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteTagHoldRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.DeleteTagHoldRequest} message DeleteTagHoldRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteTagHoldRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteTagHoldRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteTagHoldRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteTagHoldRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteTagHoldRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.DeleteTagHoldRequest";
+                        };
+    
+                        return DeleteTagHoldRequest;
+                    })();
+    
+                    v3.DeleteTagHoldMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteTagHoldMetadata.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IDeleteTagHoldMetadata
+                         */
+    
+                        /**
+                         * Constructs a new DeleteTagHoldMetadata.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a DeleteTagHoldMetadata.
+                         * @implements IDeleteTagHoldMetadata
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata=} [properties] Properties to set
+                         */
+                        function DeleteTagHoldMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DeleteTagHoldMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldMetadata} DeleteTagHoldMetadata instance
+                         */
+                        DeleteTagHoldMetadata.create = function create(properties) {
+                            return new DeleteTagHoldMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTagHoldMetadata message. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata} message DeleteTagHoldMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTagHoldMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTagHoldMetadata message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.DeleteTagHoldMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata} message DeleteTagHoldMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTagHoldMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteTagHoldMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldMetadata} DeleteTagHoldMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTagHoldMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteTagHoldMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldMetadata} DeleteTagHoldMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTagHoldMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteTagHoldMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteTagHoldMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteTagHoldMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.DeleteTagHoldMetadata} DeleteTagHoldMetadata
+                         */
+                        DeleteTagHoldMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata)
+                                return object;
+                            return new $root.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteTagHoldMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.DeleteTagHoldMetadata} message DeleteTagHoldMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteTagHoldMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DeleteTagHoldMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteTagHoldMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteTagHoldMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteTagHoldMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.DeleteTagHoldMetadata";
+                        };
+    
+                        return DeleteTagHoldMetadata;
+                    })();
+    
+                    v3.ListTagHoldsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListTagHoldsRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IListTagHoldsRequest
+                         * @property {string|null} [parent] ListTagHoldsRequest parent
+                         * @property {number|null} [pageSize] ListTagHoldsRequest pageSize
+                         * @property {string|null} [pageToken] ListTagHoldsRequest pageToken
+                         * @property {string|null} [filter] ListTagHoldsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListTagHoldsRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a ListTagHoldsRequest.
+                         * @implements IListTagHoldsRequest
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsRequest=} [properties] Properties to set
+                         */
+                        function ListTagHoldsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTagHoldsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @instance
+                         */
+                        ListTagHoldsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListTagHoldsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @instance
+                         */
+                        ListTagHoldsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListTagHoldsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @instance
+                         */
+                        ListTagHoldsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListTagHoldsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @instance
+                         */
+                        ListTagHoldsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListTagHoldsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsRequest} ListTagHoldsRequest instance
+                         */
+                        ListTagHoldsRequest.create = function create(properties) {
+                            return new ListTagHoldsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagHoldsRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsRequest} message ListTagHoldsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagHoldsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagHoldsRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsRequest} message ListTagHoldsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagHoldsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTagHoldsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsRequest} ListTagHoldsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagHoldsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.ListTagHoldsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTagHoldsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsRequest} ListTagHoldsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagHoldsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTagHoldsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTagHoldsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTagHoldsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsRequest} ListTagHoldsRequest
+                         */
+                        ListTagHoldsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.ListTagHoldsRequest)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.ListTagHoldsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTagHoldsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ListTagHoldsRequest} message ListTagHoldsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTagHoldsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTagHoldsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTagHoldsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListTagHoldsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListTagHoldsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.ListTagHoldsRequest";
+                        };
+    
+                        return ListTagHoldsRequest;
+                    })();
+    
+                    v3.ListTagHoldsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListTagHoldsResponse.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IListTagHoldsResponse
+                         * @property {Array.<google.cloud.resourcemanager.v3.ITagHold>|null} [tagHolds] ListTagHoldsResponse tagHolds
+                         * @property {string|null} [nextPageToken] ListTagHoldsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListTagHoldsResponse.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a ListTagHoldsResponse.
+                         * @implements IListTagHoldsResponse
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsResponse=} [properties] Properties to set
+                         */
+                        function ListTagHoldsResponse(properties) {
+                            this.tagHolds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTagHoldsResponse tagHolds.
+                         * @member {Array.<google.cloud.resourcemanager.v3.ITagHold>} tagHolds
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @instance
+                         */
+                        ListTagHoldsResponse.prototype.tagHolds = $util.emptyArray;
+    
+                        /**
+                         * ListTagHoldsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @instance
+                         */
+                        ListTagHoldsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListTagHoldsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsResponse} ListTagHoldsResponse instance
+                         */
+                        ListTagHoldsResponse.create = function create(properties) {
+                            return new ListTagHoldsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagHoldsResponse message. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsResponse} message ListTagHoldsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagHoldsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tagHolds != null && message.tagHolds.length)
+                                for (var i = 0; i < message.tagHolds.length; ++i)
+                                    $root.google.cloud.resourcemanager.v3.TagHold.encode(message.tagHolds[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTagHoldsResponse message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.ListTagHoldsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IListTagHoldsResponse} message ListTagHoldsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTagHoldsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTagHoldsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsResponse} ListTagHoldsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagHoldsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.ListTagHoldsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.tagHolds && message.tagHolds.length))
+                                            message.tagHolds = [];
+                                        message.tagHolds.push($root.google.cloud.resourcemanager.v3.TagHold.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTagHoldsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsResponse} ListTagHoldsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTagHoldsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTagHoldsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTagHoldsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tagHolds != null && message.hasOwnProperty("tagHolds")) {
+                                if (!Array.isArray(message.tagHolds))
+                                    return "tagHolds: array expected";
+                                for (var i = 0; i < message.tagHolds.length; ++i) {
+                                    var error = $root.google.cloud.resourcemanager.v3.TagHold.verify(message.tagHolds[i]);
+                                    if (error)
+                                        return "tagHolds." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTagHoldsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.ListTagHoldsResponse} ListTagHoldsResponse
+                         */
+                        ListTagHoldsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.ListTagHoldsResponse)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.ListTagHoldsResponse();
+                            if (object.tagHolds) {
+                                if (!Array.isArray(object.tagHolds))
+                                    throw TypeError(".google.cloud.resourcemanager.v3.ListTagHoldsResponse.tagHolds: array expected");
+                                message.tagHolds = [];
+                                for (var i = 0; i < object.tagHolds.length; ++i) {
+                                    if (typeof object.tagHolds[i] !== "object")
+                                        throw TypeError(".google.cloud.resourcemanager.v3.ListTagHoldsResponse.tagHolds: object expected");
+                                    message.tagHolds[i] = $root.google.cloud.resourcemanager.v3.TagHold.fromObject(object.tagHolds[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTagHoldsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.ListTagHoldsResponse} message ListTagHoldsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTagHoldsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tagHolds = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.tagHolds && message.tagHolds.length) {
+                                object.tagHolds = [];
+                                for (var j = 0; j < message.tagHolds.length; ++j)
+                                    object.tagHolds[j] = $root.google.cloud.resourcemanager.v3.TagHold.toObject(message.tagHolds[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTagHoldsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTagHoldsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListTagHoldsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.ListTagHoldsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListTagHoldsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.ListTagHoldsResponse";
+                        };
+    
+                        return ListTagHoldsResponse;
+                    })();
+    
                     v3.TagKeys = (function() {
     
                         /**
@@ -11792,6 +14453,39 @@
                          * @memberof google.cloud.resourcemanager.v3.TagKeys
                          * @instance
                          * @param {google.cloud.resourcemanager.v3.IGetTagKeyRequest} request GetTagKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.resourcemanager.v3.TagKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.resourcemanager.v3.TagKeys|getNamespacedTagKey}.
+                         * @memberof google.cloud.resourcemanager.v3.TagKeys
+                         * @typedef GetNamespacedTagKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.resourcemanager.v3.TagKey} [response] TagKey
+                         */
+    
+                        /**
+                         * Calls GetNamespacedTagKey.
+                         * @function getNamespacedTagKey
+                         * @memberof google.cloud.resourcemanager.v3.TagKeys
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest} request GetNamespacedTagKeyRequest message or plain object
+                         * @param {google.cloud.resourcemanager.v3.TagKeys.GetNamespacedTagKeyCallback} callback Node-style callback called with the error, if any, and TagKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TagKeys.prototype.getNamespacedTagKey = function getNamespacedTagKey(request, callback) {
+                            return this.rpcCall(getNamespacedTagKey, $root.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest, $root.google.cloud.resourcemanager.v3.TagKey, request, callback);
+                        }, "name", { value: "GetNamespacedTagKey" });
+    
+                        /**
+                         * Calls GetNamespacedTagKey.
+                         * @function getNamespacedTagKey
+                         * @memberof google.cloud.resourcemanager.v3.TagKeys
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest} request GetNamespacedTagKeyRequest message or plain object
                          * @returns {Promise<google.cloud.resourcemanager.v3.TagKey>} Promise
                          * @variation 2
                          */
@@ -12011,6 +14705,8 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] TagKey createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] TagKey updateTime
                          * @property {string|null} [etag] TagKey etag
+                         * @property {google.cloud.resourcemanager.v3.Purpose|null} [purpose] TagKey purpose
+                         * @property {Object.<string,string>|null} [purposeData] TagKey purposeData
                          */
     
                         /**
@@ -12022,6 +14718,7 @@
                          * @param {google.cloud.resourcemanager.v3.ITagKey=} [properties] Properties to set
                          */
                         function TagKey(properties) {
+                            this.purposeData = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12093,6 +14790,22 @@
                         TagKey.prototype.etag = "";
     
                         /**
+                         * TagKey purpose.
+                         * @member {google.cloud.resourcemanager.v3.Purpose} purpose
+                         * @memberof google.cloud.resourcemanager.v3.TagKey
+                         * @instance
+                         */
+                        TagKey.prototype.purpose = 0;
+    
+                        /**
+                         * TagKey purposeData.
+                         * @member {Object.<string,string>} purposeData
+                         * @memberof google.cloud.resourcemanager.v3.TagKey
+                         * @instance
+                         */
+                        TagKey.prototype.purposeData = $util.emptyObject;
+    
+                        /**
                          * Creates a new TagKey instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.resourcemanager.v3.TagKey
@@ -12132,6 +14845,11 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
+                            if (message.purpose != null && Object.hasOwnProperty.call(message, "purpose"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.purpose);
+                            if (message.purposeData != null && Object.hasOwnProperty.call(message, "purposeData"))
+                                for (var keys = Object.keys(message.purposeData), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.purposeData[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -12162,7 +14880,7 @@
                         TagKey.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.TagKey();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.TagKey(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -12196,6 +14914,33 @@
                                     }
                                 case 8: {
                                         message.etag = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.purpose = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        if (message.purposeData === $util.emptyObject)
+                                            message.purposeData = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.purposeData[key] = value;
                                         break;
                                     }
                                 default:
@@ -12261,6 +15006,22 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.purpose != null && message.hasOwnProperty("purpose"))
+                                switch (message.purpose) {
+                                default:
+                                    return "purpose: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.purposeData != null && message.hasOwnProperty("purposeData")) {
+                                if (!$util.isObject(message.purposeData))
+                                    return "purposeData: object expected";
+                                var key = Object.keys(message.purposeData);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.purposeData[key[i]]))
+                                        return "purposeData: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -12298,6 +15059,29 @@
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            switch (object.purpose) {
+                            default:
+                                if (typeof object.purpose === "number") {
+                                    message.purpose = object.purpose;
+                                    break;
+                                }
+                                break;
+                            case "PURPOSE_UNSPECIFIED":
+                            case 0:
+                                message.purpose = 0;
+                                break;
+                            case "GCE_FIREWALL":
+                            case 1:
+                                message.purpose = 1;
+                                break;
+                            }
+                            if (object.purposeData) {
+                                if (typeof object.purposeData !== "object")
+                                    throw TypeError(".google.cloud.resourcemanager.v3.TagKey.purposeData: object expected");
+                                message.purposeData = {};
+                                for (var keys = Object.keys(object.purposeData), i = 0; i < keys.length; ++i)
+                                    message.purposeData[keys[i]] = String(object.purposeData[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -12314,6 +15098,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.purposeData = {};
                             if (options.defaults) {
                                 object.name = "";
                                 object.parent = "";
@@ -12323,6 +15109,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.etag = "";
+                                object.purpose = options.enums === String ? "PURPOSE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12340,6 +15127,14 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.purpose != null && message.hasOwnProperty("purpose"))
+                                object.purpose = options.enums === String ? $root.google.cloud.resourcemanager.v3.Purpose[message.purpose] === undefined ? message.purpose : $root.google.cloud.resourcemanager.v3.Purpose[message.purpose] : message.purpose;
+                            var keys2;
+                            if (message.purposeData && (keys2 = Object.keys(message.purposeData)).length) {
+                                object.purposeData = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.purposeData[keys2[j]] = message.purposeData[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -13071,6 +15866,209 @@
                         };
     
                         return GetTagKeyRequest;
+                    })();
+    
+                    v3.GetNamespacedTagKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetNamespacedTagKeyRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IGetNamespacedTagKeyRequest
+                         * @property {string|null} [name] GetNamespacedTagKeyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetNamespacedTagKeyRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a GetNamespacedTagKeyRequest.
+                         * @implements IGetNamespacedTagKeyRequest
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest=} [properties] Properties to set
+                         */
+                        function GetNamespacedTagKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetNamespacedTagKeyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @instance
+                         */
+                        GetNamespacedTagKeyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetNamespacedTagKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest} GetNamespacedTagKeyRequest instance
+                         */
+                        GetNamespacedTagKeyRequest.create = function create(properties) {
+                            return new GetNamespacedTagKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetNamespacedTagKeyRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest} message GetNamespacedTagKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNamespacedTagKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetNamespacedTagKeyRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest} message GetNamespacedTagKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNamespacedTagKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetNamespacedTagKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest} GetNamespacedTagKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNamespacedTagKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetNamespacedTagKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest} GetNamespacedTagKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNamespacedTagKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetNamespacedTagKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetNamespacedTagKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetNamespacedTagKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest} GetNamespacedTagKeyRequest
+                         */
+                        GetNamespacedTagKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetNamespacedTagKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest} message GetNamespacedTagKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetNamespacedTagKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetNamespacedTagKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetNamespacedTagKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetNamespacedTagKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetNamespacedTagKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest";
+                        };
+    
+                        return GetNamespacedTagKeyRequest;
                     })();
     
                     v3.CreateTagKeyRequest = (function() {
@@ -14340,6 +17338,20 @@
                         return DeleteTagKeyMetadata;
                     })();
     
+                    /**
+                     * Purpose enum.
+                     * @name google.cloud.resourcemanager.v3.Purpose
+                     * @enum {number}
+                     * @property {number} PURPOSE_UNSPECIFIED=0 PURPOSE_UNSPECIFIED value
+                     * @property {number} GCE_FIREWALL=1 GCE_FIREWALL value
+                     */
+                    v3.Purpose = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PURPOSE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GCE_FIREWALL"] = 1;
+                        return values;
+                    })();
+    
                     v3.TagValues = (function() {
     
                         /**
@@ -14434,6 +17446,39 @@
                          * @memberof google.cloud.resourcemanager.v3.TagValues
                          * @instance
                          * @param {google.cloud.resourcemanager.v3.IGetTagValueRequest} request GetTagValueRequest message or plain object
+                         * @returns {Promise<google.cloud.resourcemanager.v3.TagValue>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.resourcemanager.v3.TagValues|getNamespacedTagValue}.
+                         * @memberof google.cloud.resourcemanager.v3.TagValues
+                         * @typedef GetNamespacedTagValueCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.resourcemanager.v3.TagValue} [response] TagValue
+                         */
+    
+                        /**
+                         * Calls GetNamespacedTagValue.
+                         * @function getNamespacedTagValue
+                         * @memberof google.cloud.resourcemanager.v3.TagValues
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest} request GetNamespacedTagValueRequest message or plain object
+                         * @param {google.cloud.resourcemanager.v3.TagValues.GetNamespacedTagValueCallback} callback Node-style callback called with the error, if any, and TagValue
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TagValues.prototype.getNamespacedTagValue = function getNamespacedTagValue(request, callback) {
+                            return this.rpcCall(getNamespacedTagValue, $root.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest, $root.google.cloud.resourcemanager.v3.TagValue, request, callback);
+                        }, "name", { value: "GetNamespacedTagValue" });
+    
+                        /**
+                         * Calls GetNamespacedTagValue.
+                         * @function getNamespacedTagValue
+                         * @memberof google.cloud.resourcemanager.v3.TagValues
+                         * @instance
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest} request GetNamespacedTagValueRequest message or plain object
                          * @returns {Promise<google.cloud.resourcemanager.v3.TagValue>} Promise
                          * @variation 2
                          */
@@ -15713,6 +18758,209 @@
                         };
     
                         return GetTagValueRequest;
+                    })();
+    
+                    v3.GetNamespacedTagValueRequest = (function() {
+    
+                        /**
+                         * Properties of a GetNamespacedTagValueRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @interface IGetNamespacedTagValueRequest
+                         * @property {string|null} [name] GetNamespacedTagValueRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetNamespacedTagValueRequest.
+                         * @memberof google.cloud.resourcemanager.v3
+                         * @classdesc Represents a GetNamespacedTagValueRequest.
+                         * @implements IGetNamespacedTagValueRequest
+                         * @constructor
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest=} [properties] Properties to set
+                         */
+                        function GetNamespacedTagValueRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetNamespacedTagValueRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @instance
+                         */
+                        GetNamespacedTagValueRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetNamespacedTagValueRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest=} [properties] Properties to set
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest} GetNamespacedTagValueRequest instance
+                         */
+                        GetNamespacedTagValueRequest.create = function create(properties) {
+                            return new GetNamespacedTagValueRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetNamespacedTagValueRequest message. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest} message GetNamespacedTagValueRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNamespacedTagValueRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetNamespacedTagValueRequest message, length delimited. Does not implicitly {@link google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.IGetNamespacedTagValueRequest} message GetNamespacedTagValueRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetNamespacedTagValueRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetNamespacedTagValueRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest} GetNamespacedTagValueRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNamespacedTagValueRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetNamespacedTagValueRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest} GetNamespacedTagValueRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetNamespacedTagValueRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetNamespacedTagValueRequest message.
+                         * @function verify
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetNamespacedTagValueRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetNamespacedTagValueRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest} GetNamespacedTagValueRequest
+                         */
+                        GetNamespacedTagValueRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest)
+                                return object;
+                            var message = new $root.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetNamespacedTagValueRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest} message GetNamespacedTagValueRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetNamespacedTagValueRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetNamespacedTagValueRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetNamespacedTagValueRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetNamespacedTagValueRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetNamespacedTagValueRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest";
+                        };
+    
+                        return GetNamespacedTagValueRequest;
                     })();
     
                     v3.CreateTagValueRequest = (function() {

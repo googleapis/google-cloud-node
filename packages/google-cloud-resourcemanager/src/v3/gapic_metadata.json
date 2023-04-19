@@ -358,6 +358,13 @@
                 "listTagBindingsStream",
                 "listTagBindingsAsync"
               ]
+            },
+            "ListEffectiveTags": {
+              "methods": [
+                "listEffectiveTags",
+                "listEffectiveTagsStream",
+                "listEffectiveTagsAsync"
+              ]
             }
           }
         },
@@ -380,6 +387,61 @@
                 "listTagBindingsStream",
                 "listTagBindingsAsync"
               ]
+            },
+            "ListEffectiveTags": {
+              "methods": [
+                "listEffectiveTags",
+                "listEffectiveTagsStream",
+                "listEffectiveTagsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TagHolds": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TagHoldsClient",
+          "rpcs": {
+            "CreateTagHold": {
+              "methods": [
+                "createTagHold"
+              ]
+            },
+            "DeleteTagHold": {
+              "methods": [
+                "deleteTagHold"
+              ]
+            },
+            "ListTagHolds": {
+              "methods": [
+                "listTagHolds",
+                "listTagHoldsStream",
+                "listTagHoldsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TagHoldsClient",
+          "rpcs": {
+            "CreateTagHold": {
+              "methods": [
+                "createTagHold"
+              ]
+            },
+            "DeleteTagHold": {
+              "methods": [
+                "deleteTagHold"
+              ]
+            },
+            "ListTagHolds": {
+              "methods": [
+                "listTagHolds",
+                "listTagHoldsStream",
+                "listTagHoldsAsync"
+              ]
             }
           }
         }
@@ -393,6 +455,11 @@
             "GetTagKey": {
               "methods": [
                 "getTagKey"
+              ]
+            },
+            "GetNamespacedTagKey": {
+              "methods": [
+                "getNamespacedTagKey"
               ]
             },
             "GetIamPolicy": {
@@ -440,6 +507,11 @@
             "GetTagKey": {
               "methods": [
                 "getTagKey"
+              ]
+            },
+            "GetNamespacedTagKey": {
+              "methods": [
+                "getNamespacedTagKey"
               ]
             },
             "GetIamPolicy": {
@@ -493,6 +565,11 @@
                 "getTagValue"
               ]
             },
+            "GetNamespacedTagValue": {
+              "methods": [
+                "getNamespacedTagValue"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -538,6 +615,11 @@
             "GetTagValue": {
               "methods": [
                 "getTagValue"
+              ]
+            },
+            "GetNamespacedTagValue": {
+              "methods": [
+                "getNamespacedTagValue"
               ]
             },
             "GetIamPolicy": {

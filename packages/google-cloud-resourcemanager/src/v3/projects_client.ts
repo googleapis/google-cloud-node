@@ -191,6 +191,9 @@ export class ProjectsClient {
       tagBindingPathTemplate: new this._gaxModule.PathTemplate(
         'tagBindings/{tag_binding}'
       ),
+      tagHoldPathTemplate: new this._gaxModule.PathTemplate(
+        'tagValues/{tag_value}/tagHolds/{tag_hold}'
+      ),
       tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
@@ -538,7 +541,8 @@ export class ProjectsClient {
     return this.innerApiCalls.getProject(request, options, callback);
   }
   /**
-   * Returns the IAM access control policy for the specified project.
+   * Returns the IAM access control policy for the specified project, in the
+   * format `projects/{ProjectIdOrNumber}` e.g. projects/123.
    * Permission is denied if the policy or the resource do not exist.
    *
    * @param {Object} request
@@ -626,7 +630,8 @@ export class ProjectsClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   /**
-   * Sets the IAM access control policy for the specified project.
+   * Sets the IAM access control policy for the specified project, in the
+   * format `projects/{ProjectIdOrNumber}` e.g. projects/123.
    *
    * CAUTION: This method will replace the existing policy, and cannot be used
    * to append additional IAM settings.
@@ -658,18 +663,14 @@ export class ProjectsClient {
    * `setIamPolicy()`;
    * they must be sent only using the Cloud Platform Console.
    *
-   * + Membership changes that leave the project without any owners that have
-   * accepted the Terms of Service (ToS) will be rejected.
-   *
    * + If the project is not part of an organization, there must be at least
    * one owner who has accepted the Terms of Service (ToS) agreement in the
    * policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
    * from the policy will fail. This restriction also applies to legacy
    * projects that no longer have owners who have accepted the ToS. Edits to
    * IAM policies will be rejected until the lack of a ToS-accepting owner is
-   * rectified.
-   *
-   * + Calling this method requires enabling the App Engine Admin API.
+   * rectified. If the project is part of an organization, you can remove all
+   * owners, potentially making the organization inaccessible.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -764,7 +765,8 @@ export class ProjectsClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   /**
-   * Returns permissions that a caller has on the specified project.
+   * Returns permissions that a caller has on the specified project, in the
+   * format `projects/{ProjectIdOrNumber}` e.g. projects/123..
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -870,7 +872,7 @@ export class ProjectsClient {
    *
    *   If the `parent` field is set, the `resourcemanager.projects.create`
    *   permission is checked on the parent resource. If no parent is set and
-   *   the authorization credentials belong to an Organziation, the parent
+   *   the authorization credentials belong to an Organization, the parent
    *   will be set to that Organization.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1153,9 +1155,12 @@ export class ProjectsClient {
    * Upon success, the `Operation.response` field will be populated with the
    * moved project.
    *
-   * The caller must have `resourcemanager.projects.update` permission on the
-   * project and have `resourcemanager.projects.move` permission on the
-   * project's current and proposed new parent.
+   * The caller must have `resourcemanager.projects.move` permission on the
+   * project, on the project's current and proposed new parent.
+   *
+   * If project has no current parent, or it currently does not have an
+   * associated organization resource, you will also need the
+   * `resourcemanager.projects.setIamPolicy` permission in the project.
    *
    *
    *
@@ -1305,7 +1310,8 @@ export class ProjectsClient {
    *
    * This method changes the Project's lifecycle state from
    * {@link google.cloud.resourcemanager.v3.Project.State.ACTIVE|ACTIVE}
-   * to {@link google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED|DELETE_REQUESTED}.
+   * to
+   * {@link google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED|DELETE_REQUESTED}.
    * The deletion starts at an unspecified time,
    * at which point the Project is no longer accessible.
    *
@@ -1624,21 +1630,23 @@ export class ProjectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource to list projects under.
+   *   Required. The name of the parent resource whose projects are being listed.
+   *   Only children of this parent resource are listed; descendants are not
+   *   listed.
    *
-   *   For example, setting this field to 'folders/1234' would list all projects
-   *   directly under that folder.
+   *   If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *   parent is an organization, use the value `organizations/{org_id}`.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to [ListProjects]
-   *   [google.cloud.resourcemanager.v3.Projects.ListProjects]
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+   *   indicates from where listing should continue.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of projects to return in the response.
    *   The server can return fewer projects than requested.
    *   If unspecified, server picks an appropriate default.
    * @param {boolean} [request.showDeleted]
-   *   Optional. Indicate that projects in the `DELETE_REQUESTED` state should also be
-   *   returned. Normally only `ACTIVE` projects are returned.
+   *   Optional. Indicate that projects in the `DELETE_REQUESTED` state should
+   *   also be returned. Normally only `ACTIVE` projects are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1728,21 +1736,23 @@ export class ProjectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource to list projects under.
+   *   Required. The name of the parent resource whose projects are being listed.
+   *   Only children of this parent resource are listed; descendants are not
+   *   listed.
    *
-   *   For example, setting this field to 'folders/1234' would list all projects
-   *   directly under that folder.
+   *   If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *   parent is an organization, use the value `organizations/{org_id}`.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to [ListProjects]
-   *   [google.cloud.resourcemanager.v3.Projects.ListProjects]
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+   *   indicates from where listing should continue.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of projects to return in the response.
    *   The server can return fewer projects than requested.
    *   If unspecified, server picks an appropriate default.
    * @param {boolean} [request.showDeleted]
-   *   Optional. Indicate that projects in the `DELETE_REQUESTED` state should also be
-   *   returned. Normally only `ACTIVE` projects are returned.
+   *   Optional. Indicate that projects in the `DELETE_REQUESTED` state should
+   *   also be returned. Normally only `ACTIVE` projects are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1780,21 +1790,23 @@ export class ProjectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource to list projects under.
+   *   Required. The name of the parent resource whose projects are being listed.
+   *   Only children of this parent resource are listed; descendants are not
+   *   listed.
    *
-   *   For example, setting this field to 'folders/1234' would list all projects
-   *   directly under that folder.
+   *   If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *   parent is an organization, use the value `organizations/{org_id}`.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to [ListProjects]
-   *   [google.cloud.resourcemanager.v3.Projects.ListProjects]
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+   *   indicates from where listing should continue.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of projects to return in the response.
    *   The server can return fewer projects than requested.
    *   If unspecified, server picks an appropriate default.
    * @param {boolean} [request.showDeleted]
-   *   Optional. Indicate that projects in the `DELETE_REQUESTED` state should also be
-   *   returned. Normally only `ACTIVE` projects are returned.
+   *   Optional. Indicate that projects in the `DELETE_REQUESTED` state should
+   *   also be returned. Normally only `ACTIVE` projects are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1842,22 +1854,22 @@ export class ProjectsClient {
    * @param {string} [request.query]
    *   Optional. A query string for searching for projects that the caller has
    *   `resourcemanager.projects.get` permission to. If multiple fields are
-   *   included in the query, the it will return results that match any of the
+   *   included in the query, then it will return results that match any of the
    *   fields. Some eligible fields are:
    *
    *   ```
    *   | Field                   | Description                                  |
    *   |-------------------------|----------------------------------------------|
    *   | displayName, name       | Filters by displayName.                      |
-   *   | parent                  | Project's parent. (for example: folders/123,
-   *   organizations/*) Prefer parent field over parent.type and parent.id. |
-   *   | parent.type             | Parent's type: `folder` or `organization`.   |
-   *   | parent.id               | Parent's id number (for example: 123)        |
-   *   | id, projectId           | Filters by projectId.                        |
-   *   | state, lifecycleState   | Filters by state.                            |
-   *   | labels                  | Filters by label name or value.              |
-   *   | labels.<key> (where *key* is the name of a label) | Filters by label
-   *   name. |
+   *   | parent                  | Project's parent (for example: folders/123,
+   *   organizations/*). Prefer parent field over parent.type and parent.id.| |
+   *   parent.type             | Parent's type: `folder` or `organization`.   | |
+   *   parent.id               | Parent's id number (for example: 123)        | |
+   *   id, projectId           | Filters by projectId.                        | |
+   *   state, lifecycleState   | Filters by state.                            | |
+   *   labels                  | Filters by label name or value.              | |
+   *   labels.\<key\> (where *key* is the name of a label) | Filters by label
+   *   name.|
    *   ```
    *
    *   Search expressions are case insensitive.
@@ -1873,16 +1885,16 @@ export class ProjectsClient {
    *   | NAME:howl        | Equivalent to above.                                |
    *   | labels.color:*   | The project has the label `color`.                  |
    *   | labels.color:red | The project's label `color` has the value `red`.    |
-   *   | labels.color:red&nbsp;labels.size:big | The project's label `color` has
-   *   the value `red` and its label `size` has the value `big`.                |
+   *   | labels.color:red labels.size:big | The project's label `color` has the
+   *   value `red` or its label `size` has the value `big`.                     |
    *   ```
    *
    *   If no query is specified, the call will return projects for which the user
    *   has the `resourcemanager.projects.get` permission.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to [ListProjects]
-   *   [google.cloud.resourcemanager.v3.Projects.ListProjects]
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+   *   indicates from where listing should continue.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of projects to return in the response.
    *   The server can return fewer projects than requested.
@@ -1978,22 +1990,22 @@ export class ProjectsClient {
    * @param {string} [request.query]
    *   Optional. A query string for searching for projects that the caller has
    *   `resourcemanager.projects.get` permission to. If multiple fields are
-   *   included in the query, the it will return results that match any of the
+   *   included in the query, then it will return results that match any of the
    *   fields. Some eligible fields are:
    *
    *   ```
    *   | Field                   | Description                                  |
    *   |-------------------------|----------------------------------------------|
    *   | displayName, name       | Filters by displayName.                      |
-   *   | parent                  | Project's parent. (for example: folders/123,
-   *   organizations/*) Prefer parent field over parent.type and parent.id. |
-   *   | parent.type             | Parent's type: `folder` or `organization`.   |
-   *   | parent.id               | Parent's id number (for example: 123)        |
-   *   | id, projectId           | Filters by projectId.                        |
-   *   | state, lifecycleState   | Filters by state.                            |
-   *   | labels                  | Filters by label name or value.              |
-   *   | labels.<key> (where *key* is the name of a label) | Filters by label
-   *   name. |
+   *   | parent                  | Project's parent (for example: folders/123,
+   *   organizations/*). Prefer parent field over parent.type and parent.id.| |
+   *   parent.type             | Parent's type: `folder` or `organization`.   | |
+   *   parent.id               | Parent's id number (for example: 123)        | |
+   *   id, projectId           | Filters by projectId.                        | |
+   *   state, lifecycleState   | Filters by state.                            | |
+   *   labels                  | Filters by label name or value.              | |
+   *   labels.\<key\> (where *key* is the name of a label) | Filters by label
+   *   name.|
    *   ```
    *
    *   Search expressions are case insensitive.
@@ -2009,16 +2021,16 @@ export class ProjectsClient {
    *   | NAME:howl        | Equivalent to above.                                |
    *   | labels.color:*   | The project has the label `color`.                  |
    *   | labels.color:red | The project's label `color` has the value `red`.    |
-   *   | labels.color:red&nbsp;labels.size:big | The project's label `color` has
-   *   the value `red` and its label `size` has the value `big`.                |
+   *   | labels.color:red labels.size:big | The project's label `color` has the
+   *   value `red` or its label `size` has the value `big`.                     |
    *   ```
    *
    *   If no query is specified, the call will return projects for which the user
    *   has the `resourcemanager.projects.get` permission.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to [ListProjects]
-   *   [google.cloud.resourcemanager.v3.Projects.ListProjects]
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+   *   indicates from where listing should continue.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of projects to return in the response.
    *   The server can return fewer projects than requested.
@@ -2062,22 +2074,22 @@ export class ProjectsClient {
    * @param {string} [request.query]
    *   Optional. A query string for searching for projects that the caller has
    *   `resourcemanager.projects.get` permission to. If multiple fields are
-   *   included in the query, the it will return results that match any of the
+   *   included in the query, then it will return results that match any of the
    *   fields. Some eligible fields are:
    *
    *   ```
    *   | Field                   | Description                                  |
    *   |-------------------------|----------------------------------------------|
    *   | displayName, name       | Filters by displayName.                      |
-   *   | parent                  | Project's parent. (for example: folders/123,
-   *   organizations/*) Prefer parent field over parent.type and parent.id. |
-   *   | parent.type             | Parent's type: `folder` or `organization`.   |
-   *   | parent.id               | Parent's id number (for example: 123)        |
-   *   | id, projectId           | Filters by projectId.                        |
-   *   | state, lifecycleState   | Filters by state.                            |
-   *   | labels                  | Filters by label name or value.              |
-   *   | labels.<key> (where *key* is the name of a label) | Filters by label
-   *   name. |
+   *   | parent                  | Project's parent (for example: folders/123,
+   *   organizations/*). Prefer parent field over parent.type and parent.id.| |
+   *   parent.type             | Parent's type: `folder` or `organization`.   | |
+   *   parent.id               | Parent's id number (for example: 123)        | |
+   *   id, projectId           | Filters by projectId.                        | |
+   *   state, lifecycleState   | Filters by state.                            | |
+   *   labels                  | Filters by label name or value.              | |
+   *   labels.\<key\> (where *key* is the name of a label) | Filters by label
+   *   name.|
    *   ```
    *
    *   Search expressions are case insensitive.
@@ -2093,16 +2105,16 @@ export class ProjectsClient {
    *   | NAME:howl        | Equivalent to above.                                |
    *   | labels.color:*   | The project has the label `color`.                  |
    *   | labels.color:red | The project's label `color` has the value `red`.    |
-   *   | labels.color:red&nbsp;labels.size:big | The project's label `color` has
-   *   the value `red` and its label `size` has the value `big`.                |
+   *   | labels.color:red labels.size:big | The project's label `color` has the
+   *   value `red` or its label `size` has the value `big`.                     |
    *   ```
    *
    *   If no query is specified, the call will return projects for which the user
    *   has the `resourcemanager.projects.get` permission.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to [ListProjects]
-   *   [google.cloud.resourcemanager.v3.Projects.ListProjects]
-   *   that indicates from where listing should continue.
+   *   Optional. A pagination token returned from a previous call to
+   *   [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+   *   indicates from where listing should continue.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of projects to return in the response.
    *   The server can return fewer projects than requested.
@@ -2137,6 +2149,181 @@ export class ProjectsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IProject>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2233,6 +2420,42 @@ export class ProjectsClient {
   matchTagBindingFromTagBindingName(tagBindingName: string) {
     return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
       .tag_binding;
+  }
+
+  /**
+   * Return a fully-qualified tagHold resource name string.
+   *
+   * @param {string} tag_value
+   * @param {string} tag_hold
+   * @returns {string} Resource name string.
+   */
+  tagHoldPath(tagValue: string, tagHold: string) {
+    return this.pathTemplates.tagHoldPathTemplate.render({
+      tag_value: tagValue,
+      tag_hold: tagHold,
+    });
+  }
+
+  /**
+   * Parse the tag_value from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_value.
+   */
+  matchTagValueFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_value;
+  }
+
+  /**
+   * Parse the tag_hold from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_hold.
+   */
+  matchTagHoldFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_hold;
   }
 
   /**
