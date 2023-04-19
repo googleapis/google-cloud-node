@@ -13,8 +13,8 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloudbuild.v1",
                     "objc_class_prefix": "GCB",
-                    "ruby_package": "Google::Cloud::Build::V1",
                     "php_namespace": "Google\\Cloud\\Build\\V1",
+                    "ruby_package": "Google::Cloud::Build::V1",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
                     "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
@@ -561,6 +561,22 @@
                         }
                       }
                     },
+                    "GitSource": {
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dir": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
                     "RepoSource": {
                       "oneofs": {
                         "revision": {
@@ -629,6 +645,7 @@
                           "oneof": [
                             "storageSource",
                             "repoSource",
+                            "gitSource",
                             "storageSourceManifest"
                           ]
                         }
@@ -641,6 +658,10 @@
                         "repoSource": {
                           "type": "RepoSource",
                           "id": 3
+                        },
+                        "gitSource": {
+                          "type": "GitSource",
+                          "id": 5
                         },
                         "storageSourceManifest": {
                           "type": "StorageSourceManifest",
@@ -687,6 +708,25 @@
                       }
                     },
                     "UploadedMavenArtifact": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileHashes": {
+                          "type": "FileHashes",
+                          "id": 2
+                        },
+                        "pushTiming": {
+                          "type": "TimeSpan",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UploadedNpmPackage": {
                       "fields": {
                         "uri": {
                           "type": "string",
@@ -845,6 +885,11 @@
                           "rule": "repeated",
                           "type": "UploadedMavenArtifact",
                           "id": 9
+                        },
+                        "npmPackages": {
+                          "rule": "repeated",
+                          "type": "UploadedNpmPackage",
+                          "id": 12
                         }
                       }
                     },
@@ -1043,6 +1088,20 @@
                         }
                       },
                       "nested": {
+                        "Status": {
+                          "values": {
+                            "STATUS_UNKNOWN": 0,
+                            "PENDING": 10,
+                            "QUEUED": 1,
+                            "WORKING": 2,
+                            "SUCCESS": 3,
+                            "FAILURE": 4,
+                            "INTERNAL_ERROR": 5,
+                            "TIMEOUT": 6,
+                            "CANCELLED": 7,
+                            "EXPIRED": 9
+                          }
+                        },
                         "Warning": {
                           "fields": {
                             "text": {
@@ -1089,20 +1148,6 @@
                               }
                             }
                           }
-                        },
-                        "Status": {
-                          "values": {
-                            "STATUS_UNKNOWN": 0,
-                            "PENDING": 10,
-                            "QUEUED": 1,
-                            "WORKING": 2,
-                            "SUCCESS": 3,
-                            "FAILURE": 4,
-                            "INTERNAL_ERROR": 5,
-                            "TIMEOUT": 6,
-                            "CANCELLED": 7,
-                            "EXPIRED": 9
-                          }
                         }
                       }
                     },
@@ -1126,6 +1171,11 @@
                           "rule": "repeated",
                           "type": "PythonPackage",
                           "id": 5
+                        },
+                        "npmPackages": {
+                          "rule": "repeated",
+                          "type": "NpmPackage",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -1181,6 +1231,18 @@
                             },
                             "paths": {
                               "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "NpmPackage": {
+                          "fields": {
+                            "repository": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "packagePath": {
                               "type": "string",
                               "id": 2
                             }
@@ -1257,7 +1319,8 @@
                           "values": {
                             "NONE": 0,
                             "SHA256": 1,
-                            "MD5": 2
+                            "MD5": 2,
+                            "SHA512": 4
                           }
                         }
                       }
@@ -2249,6 +2312,13 @@
                             "egressOption": {
                               "type": "EgressOption",
                               "id": 2
+                            },
+                            "peeredNetworkIpRange": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             }
                           },
                           "nested": {

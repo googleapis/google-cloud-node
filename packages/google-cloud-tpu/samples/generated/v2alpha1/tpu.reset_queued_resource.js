@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START metastore_v1_generated_DataprocMetastoreFederation_GetFederation_async]
+  // [START tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource name of the metastore federation to
-   *  retrieve, in the following form:
-   *  `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
+   *  Required. The name of the queued resource.
    */
   // const name = 'abc123'
 
-  // Imports the Metastore library
-  const {DataprocMetastoreFederationClient} = require('@google-cloud/dataproc-metastore').v1;
+  // Imports the Tpu library
+  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
 
   // Instantiates a client
-  const metastoreClient = new DataprocMetastoreFederationClient();
+  const tpuClient = new TpuClient();
 
-  async function callGetFederation() {
+  async function callResetQueuedResource() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await metastoreClient.getFederation(request);
+    const [operation] = await tpuClient.resetQueuedResource(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetFederation();
-  // [END metastore_v1_generated_DataprocMetastoreFederation_GetFederation_async]
+  callResetQueuedResource();
+  // [END tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async]
 }
 
 process.on('unhandledRejection', err => {
