@@ -15,5 +15,8 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool.languages.node_mono_repo as node
+from synthtool import shell
 
 node.owlbot_main(relative_dir="packages/google-cloud-translate",staging_excludes=['packages/google-cloud-translate/.prettierrc.js', 'packages/google-cloud-translate/.mocharc.js'],templates_excludes=['src/index.ts', 'packages/google-cloud-translate/.prettierrc.js', 'packages/google-cloud-translate/.mocharc.js'])
+
+shell.run(('rm', '-rf', 'packages/google-cloud-translate/.prettierrc.js'), hide_output = False)
