@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-securitycenter",
-        "version": "7.2.1",
+        "version": "7.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1735,7 +1735,7 @@
             "regionTag": "securitycenter_v1_generated_SecurityCenter_UpdateSecurityHealthAnalyticsCustomModule_async",
             "title": "SecurityCenter updateSecurityHealthAnalyticsCustomModule Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the SecurityHealthAnalyticsCustomModule under the given name based on the given update mask. Updating the enablement state is supported on both resident and inherited modules (though resident modules cannot have an enablement state of \u201cinherited\u201d). Updating the display name and custom config of a module is supported on resident modules only.",
+            "description": " Updates the SecurityHealthAnalyticsCustomModule under the given name based on the given update mask. Updating the enablement state is supported on both resident and inherited modules (though resident modules cannot have an enablement state of \"inherited\"). Updating the display name and custom config of a module is supported on resident modules only.",
             "canonical": true,
             "file": "security_center.update_security_health_analytics_custom_module.js",
             "language": "JAVASCRIPT",
