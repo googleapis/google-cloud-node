@@ -79,7 +79,7 @@ async function main() {
  * Cleans up after a test is complete by removing all files from the bucket
  */
 async function performTestCleanup() {
-  await bucket.deleteFiles();
+  await bucket.deleteFiles({force: true});
 }
 
 /**

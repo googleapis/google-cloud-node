@@ -181,7 +181,7 @@ async function performReadTest(): Promise<TestResult> {
   };
 
   rmSync(TEST_NAME_STRING, {recursive: true, force: true});
-  await bucket.deleteFiles(); //cleanup
+  await bucket.deleteFiles({force: true}); //cleanup
   return result;
 }
 

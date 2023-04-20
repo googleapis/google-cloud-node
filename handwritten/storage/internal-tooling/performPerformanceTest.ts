@@ -120,7 +120,7 @@ async function performRangedReadTest(): Promise<TestResult[]> {
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
   }
 
-  await file.delete();
+  await file.delete({ignoreNotFound: true});
   results.push(iterationResult);
   return results;
 }
@@ -206,7 +206,7 @@ async function performWriteReadTest(): Promise<TestResult[]> {
     iterationResult.elapsedTimeUs = Math.round((end - start) * 1000);
   }
 
-  await file.delete();
+  await file.delete({ignoreNotFound: true});
   results.push(iterationResult);
   return results;
 }
