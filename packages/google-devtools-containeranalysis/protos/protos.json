@@ -5146,7 +5146,19 @@
                         },
                         "GeneratePackagesSummary": {
                           "requestType": "GeneratePackagesSummaryRequest",
-                          "responseType": "PackagesSummaryResponse"
+                          "responseType": "PackagesSummaryResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/resources/**}:generatePackagesSummary",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/resources/**}:generatePackagesSummary",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
