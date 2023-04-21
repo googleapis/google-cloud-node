@@ -2355,6 +2355,23 @@
                       }
                     },
                     "Type": {
+                      "valuesOptions": {
+                        "AUTO_UPGRADE_NODES": {
+                          "deprecated": true
+                        },
+                        "SET_LABELS": {
+                          "deprecated": true
+                        },
+                        "SET_MASTER_AUTH": {
+                          "deprecated": true
+                        },
+                        "SET_NETWORK_POLICY": {
+                          "deprecated": true
+                        },
+                        "SET_MAINTENANCE_POLICY": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "TYPE_UNSPECIFIED": 0,
                         "CREATE_CLUSTER": 1,
@@ -2372,7 +2389,8 @@
                         "SET_MASTER_AUTH": 13,
                         "SET_NODE_POOL_SIZE": 14,
                         "SET_NETWORK_POLICY": 15,
-                        "SET_MAINTENANCE_POLICY": 16
+                        "SET_MAINTENANCE_POLICY": 16,
+                        "RESIZE_CLUSTER": 18
                       }
                     }
                   }
@@ -4574,13 +4592,13 @@
                 },
                 "DatabaseEncryption": {
                   "fields": {
-                    "state": {
-                      "type": "State",
-                      "id": 2
-                    },
                     "keyName": {
                       "type": "string",
                       "id": 1
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 2
                     }
                   },
                   "nested": {

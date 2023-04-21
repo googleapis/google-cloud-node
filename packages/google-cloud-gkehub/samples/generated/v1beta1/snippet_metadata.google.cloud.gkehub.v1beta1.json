@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-gkehub",
-        "version": "3.3.0",
+        "version": "3.3.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 87,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -170,7 +170,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -186,6 +186,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -266,7 +270,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -326,7 +330,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
