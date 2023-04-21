@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "cloud.google.com/go/vision/apiv1/visionpb;visionpb",
+                    "go_package": "cloud.google.com/go/vision/v2/apiv1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1",
@@ -2353,7 +2353,7 @@
                 "v1p1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "go_package": "cloud.google.com/go/vision/apiv1p1beta1/visionpb;visionpb",
+                    "go_package": "cloud.google.com/go/vision/v2/apiv1p1beta1/visionpb;visionpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WebDetectionProto",
                     "java_package": "com.google.cloud.vision.v1p1beta1"
