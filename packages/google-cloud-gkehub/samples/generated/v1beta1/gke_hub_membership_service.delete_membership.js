@@ -47,6 +47,12 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, any subresource from this Membership will also be
+   *  deleted. Otherwise, the request will only work if the Membership has no
+   *  subresource.
+   */
+  // const force = true
 
   // Imports the Gkehub library
   const {GkeHubMembershipServiceClient} = require('@google-cloud/gke-hub').v1beta1;
