@@ -18,7 +18,12 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -95,14 +100,22 @@ export class CompletionServiceClient {
    *     const client = new CompletionServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CompletionServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -128,7 +141,7 @@ export class CompletionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -142,10 +155,7 @@ export class CompletionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -153,7 +163,7 @@ export class CompletionServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -166,30 +176,38 @@ export class CompletionServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      projectLocationCollectionDataStorePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
-      ),
-      projectLocationCollectionDataStoreBranchDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-      ),
-      projectLocationCollectionDataStoreSchemaPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
-      ),
+      projectLocationCollectionDataStorePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+        ),
+      projectLocationCollectionDataStoreBranchDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationCollectionDataStoreSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
+        ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
-      projectLocationDataStoreBranchDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
-      ),
-      projectLocationDataStoreSchemaPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
-      ),
+      projectLocationDataStoreBranchDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.discoveryengine.v1beta.CompletionService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.discoveryengine.v1beta.CompletionService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -220,31 +238,36 @@ export class CompletionServiceClient {
     // Put together the "service stub" for
     // google.cloud.discoveryengine.v1beta.CompletionService.
     this.completionServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.discoveryengine.v1beta.CompletionService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1beta.CompletionService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.discoveryengine.v1beta.CompletionService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.discoveryengine.v1beta
+            .CompletionService,
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const completionServiceStubMethods =
-        ['completeQuery'];
+    const completionServiceStubMethods = ['completeQuery'];
     for (const methodName of completionServiceStubMethods) {
       const callPromise = this.completionServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -289,9 +312,7 @@ export class CompletionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -300,8 +321,9 @@ export class CompletionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -312,111 +334,137 @@ export class CompletionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Completes the specified user input with keyword suggestions.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.dataStore
- *   Required. The parent data store resource name for which the completion is
- *   performed, such as
- *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store`.
- * @param {string} request.query
- *   Required. The typeahead input used to fetch suggestions. Maximum length is
- *   128 characters.
- * @param {string} request.queryModel
- *   Selects data model of query suggestions for serving. Currently supported
- *   values:
- *
- *   * `document` - Using suggestions generated from user-imported documents.
- *   * `search-history` - Using suggestions generated from the past history of
- *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
- *   API calls. Do not use it when there is no traffic for Search API.
- *   * `user-event` - Using suggestions generated from user-imported search
- *   events.
- *
- *   Default values:
- *
- *   * `document` is the default model for regular dataStores.
- *   * `search-history` is the default model for
- *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
- *   dataStores.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
- *
- *   This field should NOT have a fixed value such as `unknown_visitor`.
- *
- *   This should be the same identifier as
- *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
- *   and
- *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
- *
- *   The field must be a UTF-8 encoded string with a length limit of 128
- *   characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse | CompleteQueryResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/completion_service.complete_query.js</caption>
- * region_tag:discoveryengine_v1beta_generated_CompletionService_CompleteQuery_async
- */
+  /**
+   * Completes the specified user input with keyword suggestions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataStore
+   *   Required. The parent data store resource name for which the completion is
+   *   performed, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store`.
+   * @param {string} request.query
+   *   Required. The typeahead input used to fetch suggestions. Maximum length is
+   *   128 characters.
+   * @param {string} request.queryModel
+   *   Selects data model of query suggestions for serving. Currently supported
+   *   values:
+   *
+   *   * `document` - Using suggestions generated from user-imported documents.
+   *   * `search-history` - Using suggestions generated from the past history of
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   API calls. Do not use it when there is no traffic for Search API.
+   *   * `user-event` - Using suggestions generated from user-imported search
+   *   events.
+   *
+   *   Default values:
+   *
+   *   * `document` is the default model for regular dataStores.
+   *   * `search-history` is the default model for
+   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
+   *   dataStores.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse | CompleteQueryResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/completion_service.complete_query.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_CompletionService_CompleteQuery_async
+   */
   completeQuery(
-      request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-        protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   completeQuery(
-      request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   completeQuery(
-      request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
-      callback: Callback<
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   completeQuery(
-      request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
-        protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'data_store': request.dataStore ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        data_store: request.dataStore ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.completeQuery(request, options, callback);
   }
@@ -434,13 +482,20 @@ export class CompletionServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStorePath(project:string,location:string,collection:string,dataStore:string) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      data_store: dataStore,
-    });
+  projectLocationCollectionDataStorePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
   }
 
   /**
@@ -450,8 +505,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).project;
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).project;
   }
 
   /**
@@ -461,8 +520,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).location;
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).location;
   }
 
   /**
@@ -472,8 +535,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).collection;
   }
 
   /**
@@ -483,8 +550,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreName(projectLocationCollectionDataStoreName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(projectLocationCollectionDataStoreName).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).data_store;
   }
 
   /**
@@ -498,15 +569,24 @@ export class CompletionServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreBranchDocumentPath(project:string,location:string,collection:string,dataStore:string,branch:string,document:string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      data_store: dataStore,
-      branch: branch,
-      document: document,
-    });
+  projectLocationCollectionDataStoreBranchDocumentPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+      }
+    );
   }
 
   /**
@@ -516,8 +596,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).project;
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).project;
   }
 
   /**
@@ -527,8 +611,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).location;
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).location;
   }
 
   /**
@@ -538,8 +626,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).collection;
   }
 
   /**
@@ -549,8 +641,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).data_store;
   }
 
   /**
@@ -560,8 +656,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).branch;
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).branch;
   }
 
   /**
@@ -571,8 +671,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(projectLocationCollectionDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(projectLocationCollectionDataStoreBranchDocumentName).document;
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentName(
+    projectLocationCollectionDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentName
+    ).document;
   }
 
   /**
@@ -585,14 +689,22 @@ export class CompletionServiceClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreSchemaPath(project:string,location:string,collection:string,dataStore:string,schema:string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      data_store: dataStore,
-      schema: schema,
-    });
+  projectLocationCollectionDataStoreSchemaPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    schema: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        schema: schema,
+      }
+    );
   }
 
   /**
@@ -602,8 +714,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).project;
+  matchProjectFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).project;
   }
 
   /**
@@ -613,8 +729,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).location;
+  matchLocationFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).location;
   }
 
   /**
@@ -624,8 +744,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).collection;
+  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).collection;
   }
 
   /**
@@ -635,8 +759,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).data_store;
+  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).data_store;
   }
 
   /**
@@ -646,8 +774,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_collection_data_store_schema resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(projectLocationCollectionDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(projectLocationCollectionDataStoreSchemaName).schema;
+  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).schema;
   }
 
   /**
@@ -658,7 +790,11 @@ export class CompletionServiceClient {
    * @param {string} data_store
    * @returns {string} Resource name string.
    */
-  projectLocationDataStorePath(project:string,location:string,dataStore:string) {
+  projectLocationDataStorePath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
     return this.pathTemplates.projectLocationDataStorePathTemplate.render({
       project: project,
       location: location,
@@ -673,8 +809,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).project;
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).project;
   }
 
   /**
@@ -684,8 +824,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).location;
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).location;
   }
 
   /**
@@ -695,8 +839,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreName(projectLocationDataStoreName: string) {
-    return this.pathTemplates.projectLocationDataStorePathTemplate.match(projectLocationDataStoreName).data_store;
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).data_store;
   }
 
   /**
@@ -709,14 +857,22 @@ export class CompletionServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreBranchDocumentPath(project:string,location:string,dataStore:string,branch:string,document:string) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render({
-      project: project,
-      location: location,
-      data_store: dataStore,
-      branch: branch,
-      document: document,
-    });
+  projectLocationDataStoreBranchDocumentPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    branch: string,
+    document: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+      }
+    );
   }
 
   /**
@@ -726,8 +882,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).project;
+  matchProjectFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).project;
   }
 
   /**
@@ -737,8 +897,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).location;
+  matchLocationFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).location;
   }
 
   /**
@@ -748,8 +912,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).data_store;
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).data_store;
   }
 
   /**
@@ -759,8 +927,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the branch.
    */
-  matchBranchFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).branch;
+  matchBranchFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).branch;
   }
 
   /**
@@ -770,8 +942,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_branch_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDataStoreBranchDocumentName(projectLocationDataStoreBranchDocumentName: string) {
-    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(projectLocationDataStoreBranchDocumentName).document;
+  matchDocumentFromProjectLocationDataStoreBranchDocumentName(
+    projectLocationDataStoreBranchDocumentName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
+      projectLocationDataStoreBranchDocumentName
+    ).document;
   }
 
   /**
@@ -783,13 +959,20 @@ export class CompletionServiceClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreSchemaPath(project:string,location:string,dataStore:string,schema:string) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render({
-      project: project,
-      location: location,
-      data_store: dataStore,
-      schema: schema,
-    });
+  projectLocationDataStoreSchemaPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    schema: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        schema: schema,
+      }
+    );
   }
 
   /**
@@ -799,8 +982,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).project;
+  matchProjectFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).project;
   }
 
   /**
@@ -810,8 +997,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).location;
+  matchLocationFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).location;
   }
 
   /**
@@ -821,8 +1012,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).data_store;
+  matchDataStoreFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).data_store;
   }
 
   /**
@@ -832,8 +1027,12 @@ export class CompletionServiceClient {
    *   A fully-qualified path representing project_location_data_store_schema resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationDataStoreSchemaName(projectLocationDataStoreSchemaName: string) {
-    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(projectLocationDataStoreSchemaName).schema;
+  matchSchemaFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).schema;
   }
 
   /**

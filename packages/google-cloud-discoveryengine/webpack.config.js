@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DocumentService',
-    filename: './document-service.js',
+    library: 'CompletionService',
+    filename: './completion-service.js',
   },
   node: {
     child_process: 'empty',

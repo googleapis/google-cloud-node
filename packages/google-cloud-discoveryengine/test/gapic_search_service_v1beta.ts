@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as recommendationserviceModule from '../src';
+import * as searchserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
@@ -64,74 +66,127 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-describe('v1beta.RecommendationServiceClient', () => {
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
+}
+
+describe('v1beta.SearchServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        recommendationserviceModule.v1beta.RecommendationServiceClient
-          .servicePath;
+        searchserviceModule.v1beta.SearchServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        recommendationserviceModule.v1beta.RecommendationServiceClient
-          .apiEndpoint;
+        searchserviceModule.v1beta.SearchServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port =
-        recommendationserviceModule.v1beta.RecommendationServiceClient.port;
+      const port = searchserviceModule.v1beta.SearchServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient();
+      const client = new searchserviceModule.v1beta.SearchServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          fallback: true,
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.recommendationServiceStub, undefined);
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.searchServiceStub, undefined);
       await client.initialize();
-      assert(client.recommendationServiceStub);
+      assert(client.searchServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
-      assert(client.recommendationServiceStub);
+      assert(client.searchServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.recommendationServiceStub, undefined);
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.searchServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -139,11 +194,10 @@ describe('v1beta.RecommendationServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -152,11 +206,10 @@ describe('v1beta.RecommendationServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -174,66 +227,82 @@ describe('v1beta.RecommendationServiceClient', () => {
     });
   });
 
-  describe('recommend', () => {
-    it('invokes recommend without error', async () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('search', () => {
+    it('invokes search without error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendResponse()
-      );
-      client.innerApiCalls.recommend = stubSimpleCall(expectedResponse);
-      const [response] = await client.recommend(request);
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.innerApiCalls.search = stubSimpleCall(expectedResponse);
+      const [response] = await client.search(request);
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.recommend as SinonStub
-      ).getCall(0).args[0];
+      const actualRequest = (client.innerApiCalls.search as SinonStub).getCall(
+        0
+      ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.search as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes recommend without error using callback', async () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes search without error using callback', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendResponse()
-      );
-      client.innerApiCalls.recommend =
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.innerApiCalls.search =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.recommend(
+        client.search(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IRecommendResponse | null
+            result?:
+              | protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -245,67 +314,380 @@ describe('v1beta.RecommendationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.recommend as SinonStub
-      ).getCall(0).args[0];
+      const actualRequest = (client.innerApiCalls.search as SinonStub).getCall(
+        0
+      ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.search as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes recommend with error', async () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes search with error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.recommend = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.recommend(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.recommend as SinonStub
-      ).getCall(0).args[0];
+      client.innerApiCalls.search = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.search(request), expectedError);
+      const actualRequest = (client.innerApiCalls.search as SinonStub).getCall(
+        0
+      ).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.search as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes recommend with closed client', async () => {
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes searchStream without error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.recommend(request), expectedError);
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.descriptors.page.search.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.search.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.search, request)
+      );
+      assert(
+        (client.descriptors.page.search.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes searchStream with error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.search.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.searchStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.search.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.search, request)
+      );
+      assert(
+        (client.descriptors.page.search.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with search without error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult()
+        ),
+      ];
+      client.descriptors.page.search.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[] =
+        [];
+      const iterable = client.searchAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.search.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.search.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with search with error', async () => {
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SearchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.SearchRequest',
+        ['servingConfig']
+      );
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.search.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.searchAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.search.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.search.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
 
   describe('Path templates', () => {
+    describe('projectLocationCollectionDataStoreBranch', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreBranch';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        branch: 'branchValue',
+      };
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreBranchPath', () => {
+        const result = client.projectLocationCollectionDataStoreBranchPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'dataStoreValue',
+          'branchValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreBranchPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreBranchName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreBranchName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreBranchName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreBranchName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreBranchName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreBranchName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBranchFromProjectLocationCollectionDataStoreBranchName', () => {
+        const result =
+          client.matchBranchFromProjectLocationCollectionDataStoreBranchName(
+            fakePath
+          );
+        assert.strictEqual(result, 'branchValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStoreBranchDocument', () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
@@ -317,11 +699,10 @@ describe('v1beta.RecommendationServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -463,11 +844,10 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -590,11 +970,10 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -708,6 +1087,99 @@ describe('v1beta.RecommendationServiceClient', () => {
       });
     });
 
+    describe('projectLocationDataStoreBranch', () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreBranch';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        branch: 'branchValue',
+      };
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreBranchPath', () => {
+        const result = client.projectLocationDataStoreBranchPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'branchValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreBranchName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreBranchName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreBranchName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreBranchName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreBranchName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreBranchName(fakePath);
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBranchFromProjectLocationDataStoreBranchName', () => {
+        const result =
+          client.matchBranchFromProjectLocationDataStoreBranchName(fakePath);
+        assert.strictEqual(result, 'branchValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationDataStoreBranchDocument', () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
       const expectedParameters = {
@@ -717,11 +1189,10 @@ describe('v1beta.RecommendationServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -842,11 +1313,10 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -936,11 +1406,10 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new searchserviceModule.v1beta.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
