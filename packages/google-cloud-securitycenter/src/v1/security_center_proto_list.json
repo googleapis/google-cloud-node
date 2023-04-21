@@ -2,6 +2,8 @@
   "../../protos/google/cloud/securitycenter/v1/access.proto",
   "../../protos/google/cloud/securitycenter/v1/asset.proto",
   "../../protos/google/cloud/securitycenter/v1/bigquery_export.proto",
+  "../../protos/google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto",
+  "../../protos/google/cloud/securitycenter/v1/cloud_dlp_inspection.proto",
   "../../protos/google/cloud/securitycenter/v1/compliance.proto",
   "../../protos/google/cloud/securitycenter/v1/connection.proto",
   "../../protos/google/cloud/securitycenter/v1/contact_details.proto",

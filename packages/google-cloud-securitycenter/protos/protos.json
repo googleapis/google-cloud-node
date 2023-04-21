@@ -262,6 +262,40 @@
                         }
                       }
                     },
+                    "CloudDlpDataProfile": {
+                      "fields": {
+                        "dataProfile": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/TableDataProfile"
+                          }
+                        }
+                      }
+                    },
+                    "CloudDlpInspection": {
+                      "fields": {
+                        "inspectJob": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/DlpJob"
+                          }
+                        },
+                        "infoType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "infoTypeCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "fullScan": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
                     "Compliance": {
                       "fields": {
                         "standard": {
@@ -759,6 +793,14 @@
                           "rule": "repeated",
                           "type": "File",
                           "id": 46
+                        },
+                        "cloudDlpInspection": {
+                          "type": "CloudDlpInspection",
+                          "id": 48
+                        },
+                        "cloudDlpDataProfile": {
+                          "type": "CloudDlpDataProfile",
+                          "id": 49
                         },
                         "kernelRootkit": {
                           "type": "KernelRootkit",
