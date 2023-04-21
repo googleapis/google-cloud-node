@@ -18,7 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1alpha1;
+const {ConfidentialComputingClient} =
+  require('@google-cloud/confidentialcomputing').v1alpha1;
 const confidentialcomputingClient = new ConfidentialComputingClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
