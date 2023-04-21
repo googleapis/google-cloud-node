@@ -1112,6 +1112,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CloudDlpDataProfile. */
+                interface ICloudDlpDataProfile {
+
+                    /** CloudDlpDataProfile dataProfile */
+                    dataProfile?: (string|null);
+                }
+
+                /** Represents a CloudDlpDataProfile. */
+                class CloudDlpDataProfile implements ICloudDlpDataProfile {
+
+                    /**
+                     * Constructs a new CloudDlpDataProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICloudDlpDataProfile);
+
+                    /** CloudDlpDataProfile dataProfile. */
+                    public dataProfile: string;
+
+                    /**
+                     * Creates a new CloudDlpDataProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudDlpDataProfile instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICloudDlpDataProfile): google.cloud.securitycenter.v1.CloudDlpDataProfile;
+
+                    /**
+                     * Encodes the specified CloudDlpDataProfile message. Does not implicitly {@link google.cloud.securitycenter.v1.CloudDlpDataProfile.verify|verify} messages.
+                     * @param message CloudDlpDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICloudDlpDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudDlpDataProfile message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CloudDlpDataProfile.verify|verify} messages.
+                     * @param message CloudDlpDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICloudDlpDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudDlpDataProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudDlpDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CloudDlpDataProfile;
+
+                    /**
+                     * Decodes a CloudDlpDataProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudDlpDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CloudDlpDataProfile;
+
+                    /**
+                     * Verifies a CloudDlpDataProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudDlpDataProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudDlpDataProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CloudDlpDataProfile;
+
+                    /**
+                     * Creates a plain object from a CloudDlpDataProfile message. Also converts values to other types if specified.
+                     * @param message CloudDlpDataProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CloudDlpDataProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudDlpDataProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudDlpDataProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudDlpInspection. */
+                interface ICloudDlpInspection {
+
+                    /** CloudDlpInspection inspectJob */
+                    inspectJob?: (string|null);
+
+                    /** CloudDlpInspection infoType */
+                    infoType?: (string|null);
+
+                    /** CloudDlpInspection infoTypeCount */
+                    infoTypeCount?: (number|Long|string|null);
+
+                    /** CloudDlpInspection fullScan */
+                    fullScan?: (boolean|null);
+                }
+
+                /** Represents a CloudDlpInspection. */
+                class CloudDlpInspection implements ICloudDlpInspection {
+
+                    /**
+                     * Constructs a new CloudDlpInspection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICloudDlpInspection);
+
+                    /** CloudDlpInspection inspectJob. */
+                    public inspectJob: string;
+
+                    /** CloudDlpInspection infoType. */
+                    public infoType: string;
+
+                    /** CloudDlpInspection infoTypeCount. */
+                    public infoTypeCount: (number|Long|string);
+
+                    /** CloudDlpInspection fullScan. */
+                    public fullScan: boolean;
+
+                    /**
+                     * Creates a new CloudDlpInspection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudDlpInspection instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICloudDlpInspection): google.cloud.securitycenter.v1.CloudDlpInspection;
+
+                    /**
+                     * Encodes the specified CloudDlpInspection message. Does not implicitly {@link google.cloud.securitycenter.v1.CloudDlpInspection.verify|verify} messages.
+                     * @param message CloudDlpInspection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICloudDlpInspection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudDlpInspection message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CloudDlpInspection.verify|verify} messages.
+                     * @param message CloudDlpInspection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICloudDlpInspection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudDlpInspection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudDlpInspection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CloudDlpInspection;
+
+                    /**
+                     * Decodes a CloudDlpInspection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudDlpInspection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CloudDlpInspection;
+
+                    /**
+                     * Verifies a CloudDlpInspection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudDlpInspection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudDlpInspection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CloudDlpInspection;
+
+                    /**
+                     * Creates a plain object from a CloudDlpInspection message. Also converts values to other types if specified.
+                     * @param message CloudDlpInspection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CloudDlpInspection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudDlpInspection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudDlpInspection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Compliance. */
                 interface ICompliance {
 
@@ -3014,6 +3226,12 @@ export namespace google {
                     /** Finding files */
                     files?: (google.cloud.securitycenter.v1.IFile[]|null);
 
+                    /** Finding cloudDlpInspection */
+                    cloudDlpInspection?: (google.cloud.securitycenter.v1.ICloudDlpInspection|null);
+
+                    /** Finding cloudDlpDataProfile */
+                    cloudDlpDataProfile?: (google.cloud.securitycenter.v1.ICloudDlpDataProfile|null);
+
                     /** Finding kernelRootkit */
                     kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
                 }
@@ -3131,6 +3349,12 @@ export namespace google {
 
                     /** Finding files. */
                     public files: google.cloud.securitycenter.v1.IFile[];
+
+                    /** Finding cloudDlpInspection. */
+                    public cloudDlpInspection?: (google.cloud.securitycenter.v1.ICloudDlpInspection|null);
+
+                    /** Finding cloudDlpDataProfile. */
+                    public cloudDlpDataProfile?: (google.cloud.securitycenter.v1.ICloudDlpDataProfile|null);
 
                     /** Finding kernelRootkit. */
                     public kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
