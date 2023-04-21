@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START discoveryengine_v1beta_generated_DocumentService_GetDocument_async]
+  // [START discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,31 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Full resource name of
-   *  Document google.cloud.discoveryengine.v1beta.Document, such as
-   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
-   *  If the caller does not have permission to access the
-   *  Document google.cloud.discoveryengine.v1beta.Document, regardless of
-   *  whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *  If the requested Document google.cloud.discoveryengine.v1beta.Document 
-   *  does not exist, a `NOT_FOUND` error is returned.
+   *  Required. The full resource name of the schema, in the format of
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
    */
   // const name = 'abc123'
 
   // Imports the Discoveryengine library
-  const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  const {SchemaServiceClient} = require('@google-cloud/discoveryengine').v1beta;
 
   // Instantiates a client
-  const discoveryengineClient = new DocumentServiceClient();
+  const discoveryengineClient = new SchemaServiceClient();
 
-  async function callGetDocument() {
+  async function callDeleteSchema() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await discoveryengineClient.getDocument(request);
+    const [operation] = await discoveryengineClient.deleteSchema(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetDocument();
-  // [END discoveryengine_v1beta_generated_DocumentService_GetDocument_async]
+  callDeleteSchema();
+  // [END discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async]
 }
 
 process.on('unhandledRejection', err => {

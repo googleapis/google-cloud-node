@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START discoveryengine_v1beta_generated_DocumentService_GetDocument_async]
+function main(parent, schema, schemaId) {
+  // [START discoveryengine_v1beta_generated_SchemaService_CreateSchema_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,48 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Full resource name of
-   *  Document google.cloud.discoveryengine.v1beta.Document, such as
-   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
-   *  If the caller does not have permission to access the
-   *  Document google.cloud.discoveryengine.v1beta.Document, regardless of
-   *  whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *  If the requested Document google.cloud.discoveryengine.v1beta.Document 
-   *  does not exist, a `NOT_FOUND` error is returned.
+   *  Required. The parent data store resource name, in the format of
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Required. The Schema google.cloud.discoveryengine.v1beta.Schema  to
+   *  create.
+   */
+  // const schema = {}
+  /**
+   *  Required. The ID to use for the
+   *  Schema google.cloud.discoveryengine.v1beta.Schema, which will become the
+   *  final component of the
+   *  Schema.name google.cloud.discoveryengine.v1beta.Schema.name.
+   *  This field should conform to
+   *  RFC-1034 (https://tools.ietf.org/html/rfc1034) standard with a length
+   *  limit of 63 characters.
+   */
+  // const schemaId = 'abc123'
 
   // Imports the Discoveryengine library
-  const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  const {SchemaServiceClient} = require('@google-cloud/discoveryengine').v1beta;
 
   // Instantiates a client
-  const discoveryengineClient = new DocumentServiceClient();
+  const discoveryengineClient = new SchemaServiceClient();
 
-  async function callGetDocument() {
+  async function callCreateSchema() {
     // Construct request
     const request = {
-      name,
+      parent,
+      schema,
+      schemaId,
     };
 
     // Run request
-    const response = await discoveryengineClient.getDocument(request);
+    const [operation] = await discoveryengineClient.createSchema(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetDocument();
-  // [END discoveryengine_v1beta_generated_DocumentService_GetDocument_async]
+  callCreateSchema();
+  // [END discoveryengine_v1beta_generated_SchemaService_CreateSchema_async]
 }
 
 process.on('unhandledRejection', err => {

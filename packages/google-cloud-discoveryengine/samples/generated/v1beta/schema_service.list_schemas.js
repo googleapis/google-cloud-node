@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START discoveryengine_v1beta_generated_DocumentService_ListDocuments_async]
+  // [START discoveryengine_v1beta_generated_SchemaService_ListSchemas_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,56 +29,49 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent branch resource name, such as
-   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
-   *  Use `default_branch` as the branch ID, to list documents under the default
-   *  branch.
-   *  If the caller does not have permission to list Documents  s under this
-   *  branch, regardless of whether or not this branch exists, a
-   *  `PERMISSION_DENIED` error is returned.
+   *  Required. The parent data store resource name, in the format of
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of Document google.cloud.discoveryengine.v1beta.Document s
-   *  to return. If unspecified, defaults to 100. The maximum allowed value is
-   *  1000. Values above 1000 will be coerced to 1000.
-   *  If this field is negative, an `INVALID_ARGUMENT` error is returned.
+   *  The maximum number of Schema google.cloud.discoveryengine.v1beta.Schema s
+   *  to return. The service may return fewer than this value.
+   *  If unspecified, at most 100
+   *  Schema google.cloud.discoveryengine.v1beta.Schema s will be returned.
+   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  A page token
-   *  ListDocumentsResponse.next_page_token google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token,
-   *  received from a previous
-   *  DocumentService.ListDocuments google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments 
+   *  A page token, received from a previous
+   *  SchemaService.ListSchemas google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  DocumentService.ListDocuments google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments 
-   *  must match the call that provided the page token. Otherwise, an
-   *  `INVALID_ARGUMENT` error is returned.
+   *  SchemaService.ListSchemas google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
 
   // Imports the Discoveryengine library
-  const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  const {SchemaServiceClient} = require('@google-cloud/discoveryengine').v1beta;
 
   // Instantiates a client
-  const discoveryengineClient = new DocumentServiceClient();
+  const discoveryengineClient = new SchemaServiceClient();
 
-  async function callListDocuments() {
+  async function callListSchemas() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listDocumentsAsync(request);
+    const iterable = await discoveryengineClient.listSchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListDocuments();
-  // [END discoveryengine_v1beta_generated_DocumentService_ListDocuments_async]
+  callListSchemas();
+  // [END discoveryengine_v1beta_generated_SchemaService_ListSchemas_async]
 }
 
 process.on('unhandledRejection', err => {

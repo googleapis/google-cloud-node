@@ -33,20 +33,18 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/document_service_client_config.json`.
+ * `src/v1beta/schema_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './document_service_client_config.json';
+import * as gapicConfig from './schema_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for ingesting
- *  {@link google.cloud.discoveryengine.v1beta.Document|Document} information of the
- *  customer's website.
+ *  Service for managing {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s.
  * @class
  * @memberof v1beta
  */
-export class DocumentServiceClient {
+export class SchemaServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -65,10 +63,10 @@ export class DocumentServiceClient {
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  documentServiceStub?: Promise<{[name: string]: Function}>;
+  schemaServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of DocumentServiceClient.
+   * Construct an instance of SchemaServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -104,7 +102,7 @@ export class DocumentServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DocumentServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SchemaServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -112,7 +110,7 @@ export class DocumentServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof DocumentServiceClient;
+    const staticMembers = this.constructor as typeof SchemaServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -183,9 +181,9 @@ export class DocumentServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      projectLocationCollectionDataStoreBranchPathTemplate:
+      projectLocationCollectionDataStorePathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}'
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
         ),
       projectLocationCollectionDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -195,10 +193,9 @@ export class DocumentServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
         ),
-      projectLocationDataStoreBranchPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}'
-        ),
+      projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}'
+      ),
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
@@ -213,10 +210,10 @@ export class DocumentServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDocuments: new this._gaxModule.PageDescriptor(
+      listSchemas: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'documents'
+        'schemas'
       ),
     };
 
@@ -288,24 +285,46 @@ export class DocumentServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const importDocumentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportDocumentsResponse'
+    const createSchemaResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.Schema'
     ) as gax.protobuf.Type;
-    const importDocumentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata'
+    const createSchemaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata'
+    ) as gax.protobuf.Type;
+    const updateSchemaResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.Schema'
+    ) as gax.protobuf.Type;
+    const updateSchemaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata'
+    ) as gax.protobuf.Type;
+    const deleteSchemaResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSchemaMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      importDocuments: new this._gaxModule.LongrunningDescriptor(
+      createSchema: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        importDocumentsResponse.decode.bind(importDocumentsResponse),
-        importDocumentsMetadata.decode.bind(importDocumentsMetadata)
+        createSchemaResponse.decode.bind(createSchemaResponse),
+        createSchemaMetadata.decode.bind(createSchemaMetadata)
+      ),
+      updateSchema: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateSchemaResponse.decode.bind(updateSchemaResponse),
+        updateSchemaMetadata.decode.bind(updateSchemaMetadata)
+      ),
+      deleteSchema: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSchemaResponse.decode.bind(deleteSchemaResponse),
+        deleteSchemaMetadata.decode.bind(deleteSchemaMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.DocumentService',
+      'google.cloud.discoveryengine.v1beta.SchemaService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -333,36 +352,35 @@ export class DocumentServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.documentServiceStub) {
-      return this.documentServiceStub;
+    if (this.schemaServiceStub) {
+      return this.schemaServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.DocumentService.
-    this.documentServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1beta.SchemaService.
+    this.schemaServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.DocumentService'
+            'google.cloud.discoveryengine.v1beta.SchemaService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1beta
-            .DocumentService,
+            .SchemaService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const documentServiceStubMethods = [
-      'getDocument',
-      'listDocuments',
-      'createDocument',
-      'updateDocument',
-      'deleteDocument',
-      'importDocuments',
+    const schemaServiceStubMethods = [
+      'getSchema',
+      'listSchemas',
+      'createSchema',
+      'updateSchema',
+      'deleteSchema',
     ];
-    for (const methodName of documentServiceStubMethods) {
-      const callPromise = this.documentServiceStub.then(
+    for (const methodName of schemaServiceStubMethods) {
+      const callPromise = this.schemaServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -390,7 +408,7 @@ export class DocumentServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.documentServiceStub;
+    return this.schemaServiceStub;
   }
 
   /**
@@ -447,90 +465,76 @@ export class DocumentServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets a {@link google.cloud.discoveryengine.v1beta.Document|Document}.
+   * Gets a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
-   *
-   *   If the caller does not have permission to access the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *
-   *   If the requested {@link google.cloud.discoveryengine.v1beta.Document|Document}
-   *   does not exist, a `NOT_FOUND` error is returned.
+   *   Required. The full resource name of the schema, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.Document | Document}.
+   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.Schema | Schema}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.get_document.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_GetDocument_async
+   * @example <caption>include:samples/generated/v1beta/schema_service.get_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_GetSchema_async
    */
-  getDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest,
+  getSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1beta.ISchema,
+      protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest | undefined,
       {} | undefined
     ]
   >;
-  getDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest,
+  getSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
+      protos.google.cloud.discoveryengine.v1beta.ISchema,
+      | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest,
+  getSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
+      protos.google.cloud.discoveryengine.v1beta.ISchema,
+      | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest,
+  getSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IDocument,
-          | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
+          protos.google.cloud.discoveryengine.v1beta.ISchema,
+          | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
+      protos.google.cloud.discoveryengine.v1beta.ISchema,
+      | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IGetDocumentRequest
-        | undefined
-      ),
+      protos.google.cloud.discoveryengine.v1beta.ISchema,
+      protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -550,372 +554,29 @@ export class DocumentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDocument(request, options, callback);
-  }
-  /**
-   * Creates a {@link google.cloud.discoveryengine.v1beta.Document|Document}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
-   * @param {google.cloud.discoveryengine.v1beta.Document} request.document
-   *   Required. The {@link google.cloud.discoveryengine.v1beta.Document|Document} to
-   *   create.
-   * @param {string} request.documentId
-   *   Required. The ID to use for the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, which will become
-   *   the final component of the
-   *   {@link google.cloud.discoveryengine.v1beta.Document.name|Document.name}.
-   *
-   *   If the caller does not have permission to create the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *
-   *   This field must be unique among all
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s with the same
-   *   {@link google.cloud.discoveryengine.v1beta.CreateDocumentRequest.parent|parent}.
-   *   Otherwise, an `ALREADY_EXISTS` error is returned.
-   *
-   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-   *   standard with a length limit of 63 characters. Otherwise, an
-   *   `INVALID_ARGUMENT` error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.Document | Document}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.create_document.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_CreateDocument_async
-   */
-  createDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  createDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IDocument,
-          | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.ICreateDocumentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createDocument(request, options, callback);
-  }
-  /**
-   * Updates a {@link google.cloud.discoveryengine.v1beta.Document|Document}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1beta.Document} request.document
-   *   Required. The document to update/create.
-   *
-   *   If the caller does not have permission to update the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *
-   *   If the {@link google.cloud.discoveryengine.v1beta.Document|Document} to update
-   *   does not exist and
-   *   {@link google.cloud.discoveryengine.v1beta.UpdateDocumentRequest.allow_missing|allow_missing}
-   *   is not set, a `NOT_FOUND` error is returned.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document} is not found, a
-   *   new {@link google.cloud.discoveryengine.v1beta.Document|Document} will be
-   *   created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.Document | Document}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.update_document.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_UpdateDocument_async
-   */
-  updateDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  updateDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IDocument,
-          | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1beta.IDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IUpdateDocumentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'document.name': request.document!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateDocument(request, options, callback);
-  }
-  /**
-   * Deletes a {@link google.cloud.discoveryengine.v1beta.Document|Document}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
-   *
-   *   If the caller does not have permission to delete the
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}, regardless of
-   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *
-   *   If the {@link google.cloud.discoveryengine.v1beta.Document|Document} to delete
-   *   does not exist, a `NOT_FOUND` error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.delete_document.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_DeleteDocument_async
-   */
-  deleteDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  deleteDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDocument(
-    request: protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDocument(
-    request?: protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.discoveryengine.v1beta.IDeleteDocumentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteDocument(request, options, callback);
+    return this.innerApiCalls.getSchema(request, options, callback);
   }
 
   /**
-   * Bulk import of multiple
-   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s. Request
-   * processing may be synchronous. Non-existing items will be created.
-   *
-   * Note: It is possible for a subset of the
-   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s to be
-   * successfully updated.
+   * Creates a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1beta.ImportDocumentsRequest.InlineSource} request.inlineSource
-   *   The Inline source for the input content for documents.
-   * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
-   *   Cloud Storage location for the input content.
-   * @param {google.cloud.discoveryengine.v1beta.BigQuerySource} request.bigquerySource
-   *   BigQuery input source.
    * @param {string} request.parent
-   *   Required. The parent branch resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
-   *   Requires create/update permission.
-   * @param {google.cloud.discoveryengine.v1beta.ImportErrorConfig} request.errorConfig
-   *   The desired location of errors incurred during the Import.
-   * @param {google.cloud.discoveryengine.v1beta.ImportDocumentsRequest.ReconciliationMode} request.reconciliationMode
-   *   The mode of reconciliation between existing documents and the documents to
-   *   be imported. Defaults to
-   *   {@link google.cloud.discoveryengine.v1beta.ImportDocumentsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   * @param {google.cloud.discoveryengine.v1beta.Schema} request.schema
+   *   Required. The {@link google.cloud.discoveryengine.v1beta.Schema|Schema} to
+   *   create.
+   * @param {string} request.schemaId
+   *   Required. The ID to use for the
+   *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}, which will become the
+   *   final component of the
+   *   {@link google.cloud.discoveryengine.v1beta.Schema.name|Schema.name}.
+   *
+   *   This field should conform to
+   *   [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length
+   *   limit of 63 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -925,61 +586,61 @@ export class DocumentServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.import_documents.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_ImportDocuments_async
+   * @example <caption>include:samples/generated/v1beta/schema_service.create_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_CreateSchema_async
    */
-  importDocuments(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportDocumentsRequest,
+  createSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.ICreateSchemaRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
-  importDocuments(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportDocumentsRequest,
+  createSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.ICreateSchemaRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  importDocuments(
-    request: protos.google.cloud.discoveryengine.v1beta.IImportDocumentsRequest,
+  createSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.ICreateSchemaRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  importDocuments(
-    request?: protos.google.cloud.discoveryengine.v1beta.IImportDocumentsRequest,
+  createSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.ICreateSchemaRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-            protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -987,8 +648,8 @@ export class DocumentServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportDocumentsMetadata
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1010,10 +671,10 @@ export class DocumentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importDocuments(request, options, callback);
+    return this.innerApiCalls.createSchema(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `importDocuments()`.
+   * Check the status of the long running operation returned by `createSchema()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
@@ -1021,15 +682,15 @@ export class DocumentServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.import_documents.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_ImportDocuments_async
+   * @example <caption>include:samples/generated/v1beta/schema_service.create_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_CreateSchema_async
    */
-  async checkImportDocumentsProgress(
+  async checkCreateSchemaProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportDocumentsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata
+      protos.google.cloud.discoveryengine.v1beta.Schema,
+      protos.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
     >
   > {
     const request =
@@ -1039,112 +700,388 @@ export class DocumentServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.importDocuments,
+      this.descriptors.longrunning.createSchema,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1beta.ImportDocumentsResponse,
-      protos.google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata
+      protos.google.cloud.discoveryengine.v1beta.Schema,
+      protos.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
     >;
   }
   /**
-   * Gets a list of {@link google.cloud.discoveryengine.v1beta.Document|Document}s.
+   * Updates a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1beta.Schema} request.schema
+   *   Required. The {@link google.cloud.discoveryengine.v1beta.Schema|Schema} to
+   *   update.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the
+   *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema} is not found, a new
+   *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema} will be created. In
+   *   this situation, `update_mask` is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/schema_service.update_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_UpdateSchema_async
+   */
+  updateSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'schema.name': request.schema!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSchema(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateSchema()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/schema_service.update_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_UpdateSchema_async
+   */
+  async checkUpdateSchemaProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1beta.Schema,
+      protos.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateSchema,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1beta.Schema,
+      protos.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
+    >;
+  }
+  /**
+   * Deletes a {@link google.cloud.discoveryengine.v1beta.Schema|Schema}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full resource name of the schema, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/schema_service.delete_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async
+   */
+  deleteSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSchema(
+    request: protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSchema(
+    request?: protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSchema(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSchema()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/schema_service.delete_schema.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_DeleteSchema_async
+   */
+  async checkDeleteSchemaProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSchema,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
+    >;
+  }
+  /**
+   * Gets a list of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent branch resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
-   *   Use `default_branch` as the branch ID, to list documents under the default
-   *   branch.
-   *
-   *   If the caller does not have permission to list {@link |Documents}s under this
-   *   branch, regardless of whether or not this branch exists, a
-   *   `PERMISSION_DENIED` error is returned.
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
-   *   to return. If unspecified, defaults to 100. The maximum allowed value is
-   *   1000. Values above 1000 will be coerced to 1000.
+   *   The maximum number of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s
+   *   to return. The service may return fewer than this value.
    *
-   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
+   *   If unspecified, at most 100
+   *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} request.pageToken
-   *   A page token
-   *   {@link google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token},
-   *   received from a previous
-   *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
+   *   A page token, received from a previous
+   *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
-   *   must match the call that provided the page token. Otherwise, an
-   *   `INVALID_ARGUMENT` error is returned.
+   *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1beta.Document | Document}.
+   *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1beta.Schema | Schema}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
+   *   We recommend using `listSchemasAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listDocuments(
-    request?: protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
+  listSchemas(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IDocument[],
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.ISchema[],
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
     ]
   >;
-  listDocuments(
-    request: protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
+  listSchemas(
+    request: protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
-      | protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
+      | protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1beta.IDocument
+      protos.google.cloud.discoveryengine.v1beta.ISchema
     >
   ): void;
-  listDocuments(
-    request: protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
+  listSchemas(
+    request: protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
-      | protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
+      | protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1beta.IDocument
+      protos.google.cloud.discoveryengine.v1beta.ISchema
     >
   ): void;
-  listDocuments(
-    request?: protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
+  listSchemas(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
-          | protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1beta.IDocument
+          protos.google.cloud.discoveryengine.v1beta.ISchema
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
-      | protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
+      | protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1beta.IDocument
+      protos.google.cloud.discoveryengine.v1beta.ISchema
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IDocument[],
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest | null,
-      protos.google.cloud.discoveryengine.v1beta.IListDocumentsResponse
+      protos.google.cloud.discoveryengine.v1beta.ISchema[],
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
     ]
   > | void {
     request = request || {};
@@ -1163,7 +1100,7 @@ export class DocumentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDocuments(request, options, callback);
+    return this.innerApiCalls.listSchemas(request, options, callback);
   }
 
   /**
@@ -1171,45 +1108,38 @@ export class DocumentServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent branch resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
-   *   Use `default_branch` as the branch ID, to list documents under the default
-   *   branch.
-   *
-   *   If the caller does not have permission to list {@link |Documents}s under this
-   *   branch, regardless of whether or not this branch exists, a
-   *   `PERMISSION_DENIED` error is returned.
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
-   *   to return. If unspecified, defaults to 100. The maximum allowed value is
-   *   1000. Values above 1000 will be coerced to 1000.
+   *   The maximum number of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s
+   *   to return. The service may return fewer than this value.
    *
-   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
+   *   If unspecified, at most 100
+   *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} request.pageToken
-   *   A page token
-   *   {@link google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token},
-   *   received from a previous
-   *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
+   *   A page token, received from a previous
+   *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
-   *   must match the call that provided the page token. Otherwise, an
-   *   `INVALID_ARGUMENT` error is returned.
+   *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1beta.Document | Document} on 'data' event.
+   *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1beta.Schema | Schema} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
+   *   We recommend using `listSchemasAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listDocumentsStream(
-    request?: protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
+  listSchemasStream(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1220,65 +1150,58 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listDocuments'];
+    const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listDocuments.createStream(
-      this.innerApiCalls.listDocuments as GaxCall,
+    return this.descriptors.page.listSchemas.createStream(
+      this.innerApiCalls.listSchemas as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listDocuments`, but returns an iterable object.
+   * Equivalent to `listSchemas`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent branch resource name, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
-   *   Use `default_branch` as the branch ID, to list documents under the default
-   *   branch.
-   *
-   *   If the caller does not have permission to list {@link |Documents}s under this
-   *   branch, regardless of whether or not this branch exists, a
-   *   `PERMISSION_DENIED` error is returned.
+   *   Required. The parent data store resource name, in the format of
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
    * @param {number} request.pageSize
-   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
-   *   to return. If unspecified, defaults to 100. The maximum allowed value is
-   *   1000. Values above 1000 will be coerced to 1000.
+   *   The maximum number of {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s
+   *   to return. The service may return fewer than this value.
    *
-   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
+   *   If unspecified, at most 100
+   *   {@link google.cloud.discoveryengine.v1beta.Schema|Schema}s will be returned.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
    * @param {string} request.pageToken
-   *   A page token
-   *   {@link google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token},
-   *   received from a previous
-   *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
+   *   A page token, received from a previous
+   *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}
-   *   must match the call that provided the page token. Otherwise, an
-   *   `INVALID_ARGUMENT` error is returned.
+   *   {@link google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.discoveryengine.v1beta.Document | Document}. The API will be called under the hood as needed, once per the page,
+   *   {@link google.cloud.discoveryengine.v1beta.Schema | Schema}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/document_service.list_documents.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_DocumentService_ListDocuments_async
+   * @example <caption>include:samples/generated/v1beta/schema_service.list_schemas.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SchemaService_ListSchemas_async
    */
-  listDocumentsAsync(
-    request?: protos.google.cloud.discoveryengine.v1beta.IListDocumentsRequest,
+  listSchemasAsync(
+    request?: protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1beta.IDocument> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1beta.ISchema> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1287,14 +1210,14 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listDocuments'];
+    const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listDocuments.asyncIterate(
-      this.innerApiCalls['listDocuments'] as GaxCall,
+    return this.descriptors.page.listSchemas.asyncIterate(
+      this.innerApiCalls['listSchemas'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.IDocument>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.ISchema>;
   }
   /**
    * Gets the latest state of a long-running operation.  Clients can use this
@@ -1476,106 +1399,88 @@ export class DocumentServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified projectLocationCollectionDataStoreBranch resource name string.
+   * Return a fully-qualified projectLocationCollectionDataStore resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} collection
    * @param {string} data_store
-   * @param {string} branch
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreBranchPath(
+  projectLocationCollectionDataStorePath(
     project: string,
     location: string,
     collection: string,
-    dataStore: string,
-    branch: string
+    dataStore: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render(
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
       {
         project: project,
         location: location,
         collection: collection,
         data_store: dataStore,
-        branch: branch,
       }
     );
   }
 
   /**
-   * Parse the project from ProjectLocationCollectionDataStoreBranch resource.
+   * Parse the project from ProjectLocationCollectionDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreBranchName
-   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreBranchName(
-    projectLocationCollectionDataStoreBranchName: string
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
-      projectLocationCollectionDataStoreBranchName
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocationCollectionDataStoreBranch resource.
+   * Parse the location from ProjectLocationCollectionDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreBranchName
-   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreBranchName(
-    projectLocationCollectionDataStoreBranchName: string
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
-      projectLocationCollectionDataStoreBranchName
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
     ).location;
   }
 
   /**
-   * Parse the collection from ProjectLocationCollectionDataStoreBranch resource.
+   * Parse the collection from ProjectLocationCollectionDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreBranchName
-   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the collection.
    */
-  matchCollectionFromProjectLocationCollectionDataStoreBranchName(
-    projectLocationCollectionDataStoreBranchName: string
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
-      projectLocationCollectionDataStoreBranchName
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
     ).collection;
   }
 
   /**
-   * Parse the data_store from ProjectLocationCollectionDataStoreBranch resource.
+   * Parse the data_store from ProjectLocationCollectionDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreBranchName
-   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreBranchName(
-    projectLocationCollectionDataStoreBranchName: string
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
-      projectLocationCollectionDataStoreBranchName
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
     ).data_store;
-  }
-
-  /**
-   * Parse the branch from ProjectLocationCollectionDataStoreBranch resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreBranchName
-   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
-   * @returns {string} A string representing the branch.
-   */
-  matchBranchFromProjectLocationCollectionDataStoreBranchName(
-    projectLocationCollectionDataStoreBranchName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
-      projectLocationCollectionDataStoreBranchName
-    ).branch;
   }
 
   /**
@@ -1803,88 +1708,68 @@ export class DocumentServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationDataStoreBranch resource name string.
+   * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} data_store
-   * @param {string} branch
    * @returns {string} Resource name string.
    */
-  projectLocationDataStoreBranchPath(
+  projectLocationDataStorePath(
     project: string,
     location: string,
-    dataStore: string,
-    branch: string
+    dataStore: string
   ) {
-    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        branch: branch,
-      }
-    );
+    return this.pathTemplates.projectLocationDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
   }
 
   /**
-   * Parse the project from ProjectLocationDataStoreBranch resource.
+   * Parse the project from ProjectLocationDataStore resource.
    *
-   * @param {string} projectLocationDataStoreBranchName
-   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDataStoreBranchName(
-    projectLocationDataStoreBranchName: string
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
-      projectLocationDataStoreBranchName
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocationDataStoreBranch resource.
+   * Parse the location from ProjectLocationDataStore resource.
    *
-   * @param {string} projectLocationDataStoreBranchName
-   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDataStoreBranchName(
-    projectLocationDataStoreBranchName: string
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
-      projectLocationDataStoreBranchName
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
     ).location;
   }
 
   /**
-   * Parse the data_store from ProjectLocationDataStoreBranch resource.
+   * Parse the data_store from ProjectLocationDataStore resource.
    *
-   * @param {string} projectLocationDataStoreBranchName
-   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationDataStoreBranchName(
-    projectLocationDataStoreBranchName: string
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
-      projectLocationDataStoreBranchName
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
     ).data_store;
-  }
-
-  /**
-   * Parse the branch from ProjectLocationDataStoreBranch resource.
-   *
-   * @param {string} projectLocationDataStoreBranchName
-   *   A fully-qualified path representing project_location_data_store_branch resource.
-   * @returns {string} A string representing the branch.
-   */
-  matchBranchFromProjectLocationDataStoreBranchName(
-    projectLocationDataStoreBranchName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
-      projectLocationDataStoreBranchName
-    ).branch;
   }
 
   /**
@@ -2082,8 +1967,8 @@ export class DocumentServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.documentServiceStub && !this._terminated) {
-      return this.documentServiceStub.then(stub => {
+    if (this.schemaServiceStub && !this._terminated) {
+      return this.schemaServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

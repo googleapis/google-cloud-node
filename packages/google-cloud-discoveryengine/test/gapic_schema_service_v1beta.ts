@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as usereventserviceModule from '../src';
+import * as schemaserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
@@ -96,6 +98,44 @@ function stubLongRunningCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -119,66 +159,66 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.UserEventServiceClient', () => {
+describe('v1beta.SchemaServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        usereventserviceModule.v1beta.UserEventServiceClient.servicePath;
+        schemaserviceModule.v1beta.SchemaServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        usereventserviceModule.v1beta.UserEventServiceClient.apiEndpoint;
+        schemaserviceModule.v1beta.SchemaServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = usereventserviceModule.v1beta.UserEventServiceClient.port;
+      const port = schemaserviceModule.v1beta.SchemaServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient();
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.userEventServiceStub, undefined);
+      assert.strictEqual(client.schemaServiceStub, undefined);
       await client.initialize();
-      assert(client.userEventServiceStub);
+      assert(client.schemaServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.userEventServiceStub);
+      assert(client.schemaServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.userEventServiceStub, undefined);
+      assert.strictEqual(client.schemaServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -186,7 +226,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -198,7 +238,7 @@ describe('v1beta.UserEventServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -219,64 +259,64 @@ describe('v1beta.UserEventServiceClient', () => {
     });
   });
 
-  describe('writeUserEvent', () => {
-    it('invokes writeUserEvent without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+  describe('getSchema', () => {
+    it('invokes getSchema without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UserEvent()
+        new protos.google.cloud.discoveryengine.v1beta.Schema()
       );
-      client.innerApiCalls.writeUserEvent = stubSimpleCall(expectedResponse);
-      const [response] = await client.writeUserEvent(request);
+      client.innerApiCalls.getSchema = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSchema(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.getSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.getSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes writeUserEvent without error using callback', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes getSchema without error using callback', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UserEvent()
+        new protos.google.cloud.discoveryengine.v1beta.Schema()
       );
-      client.innerApiCalls.writeUserEvent =
+      client.innerApiCalls.getSchema =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.writeUserEvent(
+        client.getSchema(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IUserEvent | null
+            result?: protos.google.cloud.discoveryengine.v1beta.ISchema | null
           ) => {
             if (err) {
               reject(err);
@@ -289,205 +329,75 @@ describe('v1beta.UserEventServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.getSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.getSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes writeUserEvent with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes getSchema with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.writeUserEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.writeUserEvent(request), expectedError);
+      client.innerApiCalls.getSchema = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getSchema(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.getSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.writeUserEvent as SinonStub
+        client.innerApiCalls.getSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes writeUserEvent with closed client', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes getSchema with closed client', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.WriteUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.WriteUserEventRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.writeUserEvent(request), expectedError);
+      await assert.rejects(client.getSchema(request), expectedError);
     });
   });
 
-  describe('collectUserEvent', () => {
-    it('invokes collectUserEvent without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+  describe('createSchema', () => {
+    it('invokes createSchema without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CollectUserEventRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CollectUserEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.collectUserEvent = stubSimpleCall(expectedResponse);
-      const [response] = await client.collectUserEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.collectUserEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.collectUserEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes collectUserEvent without error using callback', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CollectUserEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CollectUserEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.collectUserEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.collectUserEvent(
-          request,
-          (err?: Error | null, result?: protos.google.api.IHttpBody | null) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.collectUserEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.collectUserEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes collectUserEvent with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CollectUserEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CollectUserEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.collectUserEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.collectUserEvent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.collectUserEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.collectUserEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes collectUserEvent with closed client', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CollectUserEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CollectUserEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.collectUserEvent(request), expectedError);
-    });
-  });
-
-  describe('importUserEvents', () => {
-    it('invokes importUserEvents without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest',
+        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -495,32 +405,31 @@ describe('v1beta.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importUserEvents =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importUserEvents(request);
+      client.innerApiCalls.createSchema = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createSchema(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importUserEvents without error using callback', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes createSchema without error using callback', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest',
+        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -528,16 +437,16 @@ describe('v1beta.UserEventServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importUserEvents =
+      client.innerApiCalls.createSchema =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.importUserEvents(
+        client.createSchema(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-              protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+              protos.google.cloud.discoveryengine.v1beta.ISchema,
+              protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
             > | null
           ) => {
             if (err) {
@@ -549,87 +458,87 @@ describe('v1beta.UserEventServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsResponse,
-        protos.google.cloud.discoveryengine.v1beta.IImportUserEventsMetadata
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importUserEvents with call error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes createSchema with call error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest',
+        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importUserEvents = stubLongRunningCall(
+      client.innerApiCalls.createSchema = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.importUserEvents(request), expectedError);
+      await assert.rejects(client.createSchema(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importUserEvents with LRO error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes createSchema with LRO error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ImportUserEventsRequest',
+        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importUserEvents = stubLongRunningCall(
+      client.innerApiCalls.createSchema = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.importUserEvents(request);
+      const [operation] = await client.createSchema(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importUserEvents as SinonStub
+        client.innerApiCalls.createSchema as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkImportUserEventsProgress without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes checkCreateSchemaProgress without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -642,7 +551,7 @@ describe('v1beta.UserEventServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportUserEventsProgress(
+      const decodedOperation = await client.checkCreateSchemaProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -650,8 +559,8 @@ describe('v1beta.UserEventServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkImportUserEventsProgress with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+    it('invokes checkCreateSchemaProgress with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -662,16 +571,730 @@ describe('v1beta.UserEventServiceClient', () => {
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.checkImportUserEventsProgress(''),
+      await assert.rejects(client.checkCreateSchemaProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateSchema', () => {
+    it('invokes updateSchema without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
+      );
+      request.schema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
+        ['schema', 'name']
+      );
+      request.schema.name = defaultValue1;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateSchema = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateSchema(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchema without error using callback', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
+      );
+      request.schema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
+        ['schema', 'name']
+      );
+      request.schema.name = defaultValue1;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateSchema =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.discoveryengine.v1beta.ISchema,
+              protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.discoveryengine.v1beta.ISchema,
+        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchema with call error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
+      );
+      request.schema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
+        ['schema', 'name']
+      );
+      request.schema.name = defaultValue1;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSchema = stubLongRunningCall(
+        undefined,
         expectedError
       );
+      await assert.rejects(client.updateSchema(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSchema with LRO error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
+      );
+      request.schema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
+        ['schema', 'name']
+      );
+      request.schema.name = defaultValue1;
+      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSchema = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateSchema(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateSchemaProgress without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateSchemaProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateSchemaProgress with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkUpdateSchemaProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteSchema', () => {
+    it('invokes deleteSchema without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteSchema = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteSchema(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSchema without error using callback', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteSchema =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSchema with call error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSchema = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteSchema(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSchema with LRO error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSchema = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteSchema(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteSchemaProgress without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteSchemaProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteSchemaProgress with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteSchemaProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listSchemas', () => {
+    it('invokes listSchemas without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+      ];
+      client.innerApiCalls.listSchemas = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSchemas(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSchemas without error using callback', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+      ];
+      client.innerApiCalls.listSchemas =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSchemas(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.ISchema[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSchemas with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSchemas = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSchemas(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSchemasStream without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+      ];
+      client.descriptors.page.listSchemas.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSchemasStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.Schema[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1beta.Schema) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSchemas.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSchemas, request)
+      );
+      assert(
+        (client.descriptors.page.listSchemas.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSchemasStream with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSchemas.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listSchemasStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.Schema[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1beta.Schema) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSchemas.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSchemas, request)
+      );
+      assert(
+        (client.descriptors.page.listSchemas.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSchemas without error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Schema()
+        ),
+      ];
+      client.descriptors.page.listSchemas.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1beta.ISchema[] =
+        [];
+      const iterable = client.listSchemasAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listSchemas.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSchemas.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSchemas with error', async () => {
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSchemas.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listSchemasAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.ISchema[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listSchemas.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSchemas.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -692,7 +1315,7 @@ describe('v1beta.UserEventServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -726,7 +1349,7 @@ describe('v1beta.UserEventServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -750,7 +1373,7 @@ describe('v1beta.UserEventServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -772,7 +1395,7 @@ describe('v1beta.UserEventServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -806,7 +1429,7 @@ describe('v1beta.UserEventServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -830,7 +1453,7 @@ describe('v1beta.UserEventServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -852,7 +1475,7 @@ describe('v1beta.UserEventServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -886,7 +1509,7 @@ describe('v1beta.UserEventServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -910,7 +1533,7 @@ describe('v1beta.UserEventServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -946,7 +1569,7 @@ describe('v1beta.UserEventServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -984,7 +1607,7 @@ describe('v1beta.UserEventServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1088,7 +1711,7 @@ describe('v1beta.UserEventServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1233,7 +1856,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1356,7 +1979,7 @@ describe('v1beta.UserEventServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1437,7 +2060,7 @@ describe('v1beta.UserEventServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1561,7 +2184,7 @@ describe('v1beta.UserEventServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new usereventserviceModule.v1beta.UserEventServiceClient({
+      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

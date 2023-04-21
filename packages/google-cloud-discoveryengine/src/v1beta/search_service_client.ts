@@ -23,24 +23,26 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/recommendation_service_client_config.json`.
+ * `src/v1beta/search_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './recommendation_service_client_config.json';
+import * as gapicConfig from './search_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for making recommendations.
+ *  Service for search.
  * @class
  * @memberof v1beta
  */
-export class RecommendationServiceClient {
+export class SearchServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -58,10 +60,10 @@ export class RecommendationServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  recommendationServiceStub?: Promise<{[name: string]: Function}>;
+  searchServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of RecommendationServiceClient.
+   * Construct an instance of SearchServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -97,7 +99,7 @@ export class RecommendationServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new RecommendationServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SearchServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -105,8 +107,7 @@ export class RecommendationServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof RecommendationServiceClient;
+    const staticMembers = this.constructor as typeof SearchServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -177,6 +178,10 @@ export class RecommendationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      projectLocationCollectionDataStoreBranchPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}'
+        ),
       projectLocationCollectionDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
@@ -188,6 +193,10 @@ export class RecommendationServiceClient {
       projectLocationCollectionDataStoreServingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
+        ),
+      projectLocationDataStoreBranchPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}'
         ),
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -203,9 +212,20 @@ export class RecommendationServiceClient {
         ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      search: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.RecommendationService',
+      'google.cloud.discoveryengine.v1beta.SearchService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -233,29 +253,29 @@ export class RecommendationServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.recommendationServiceStub) {
-      return this.recommendationServiceStub;
+    if (this.searchServiceStub) {
+      return this.searchServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.RecommendationService.
-    this.recommendationServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1beta.SearchService.
+    this.searchServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.RecommendationService'
+            'google.cloud.discoveryengine.v1beta.SearchService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1beta
-            .RecommendationService,
+            .SearchService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const recommendationServiceStubMethods = ['recommend'];
-    for (const methodName of recommendationServiceStubMethods) {
-      const callPromise = this.recommendationServiceStub.then(
+    const searchServiceStubMethods = ['search'];
+    for (const methodName of searchServiceStubMethods) {
+      const callPromise = this.searchServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -269,7 +289,7 @@ export class RecommendationServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -280,7 +300,7 @@ export class RecommendationServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.recommendationServiceStub;
+    return this.searchServiceStub;
   }
 
   /**
@@ -336,171 +356,173 @@ export class RecommendationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+
   /**
-   * Makes a recommendation, which requires a contextual user event.
+   * Performs a search.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.servingConfig
-   *   Required. Full resource name of the format:
-   *   `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {string} request.branch
+   *   The branch resource name, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
    *
-   *   Before you can request recommendations from your model, you must create at
-   *   least one serving config  for it.
-   * @param {google.cloud.discoveryengine.v1beta.UserEvent} request.userEvent
-   *   Required. Context about the user, what they are looking at and what action
-   *   they took to trigger the Recommend request. Note that this user event
-   *   detail won't be ingested to userEvent logs. Thus, a separate userEvent
-   *   write request is required for event logging.
-   *
-   *   Don't set
-   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   or
-   *   {@link google.cloud.discoveryengine.v1beta.UserInfo.user_id|UserEvent.user_info.user_id}
-   *   to the same fixed ID for different users. If you are trying to receive
-   *   non-personalized recommendations (not recommended; this can negatively
-   *   impact model performance), instead set
-   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   to a random unique ID and leave
-   *   {@link google.cloud.discoveryengine.v1beta.UserInfo.user_id|UserEvent.user_info.user_id}
-   *   unset.
+   *   Use `default_branch` as the branch ID or leave this field empty, to search
+   *   documents under the default branch.
+   * @param {string} request.query
+   *   Raw search query.
    * @param {number} request.pageSize
-   *   Maximum number of results to return. Set this property
-   *   to the number of recommendation results needed. If zero, the service will
-   *   choose a reasonable default. The maximum allowed value is 100. Values
-   *   above 100 will be coerced to 100.
+   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
+   *   to return. If unspecified, defaults to a reasonable value. The maximum
+   *   allowed value is 100. Values above 100 will be coerced to 100.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   must match the call that provided the page token. Otherwise, an
+   *    `INVALID_ARGUMENT`  error is returned.
+   * @param {number} request.offset
+   *   A 0-indexed integer that specifies the current offset (that is, starting
+   *   result location, amongst the
+   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
+   *   as relevant) in search results. This field is only considered if
+   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
+   *   is unset.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.filter
-   *   Filter for restricting recommendation results with a length limit of 5,000
-   *   characters. Currently, only filter expressions on the `filter_tags`
-   *   attribute is supported.
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
    *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Document can be ordered by
+   *   a field in an {@link google.cloud.discoveryengine.v1beta.Document|Document}
+   *   object. Leave it unset if ordered by relevance. OrderBy expression is
+   *   case-sensitive.
    *
-   *   Examples:
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *    * `(filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))`
-   *    * `(filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))`
-   *
-   *   If your filter blocks all results, the API will return generic
-   *   (unfiltered) popular Documents. If you only want results strictly matching
-   *   the filters, set `strictFiltering` to True in
-   *   {@link google.cloud.discoveryengine.v1beta.RecommendRequest.params|RecommendRequest.params}
-   *   to receive empty results instead.
-   *
-   *   Note that the API will never return
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s with
-   *   `storageStatus` of `EXPIRED` or `DELETED` regardless of filter choices.
-   * @param {boolean} request.validateOnly
-   *   Use validate only mode for this recommendation query. If set to true, a
-   *   fake model will be used that returns arbitrary Document IDs.
-   *   Note that the validate only mode should only be used for testing the API,
-   *   or if the model is not ready.
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
-   *   Additional domain specific parameters for the recommendations.
+   *   Additional search parameters.
    *
-   *   Allowed values:
+   *   For
+   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
+   *   vertical, supported values are:
    *
-   *   * `returnDocument`: Boolean. If set to true, the associated Document
-   *      object will be returned in
-   *      {@link google.cloud.discoveryengine.v1beta.RecommendResponse.RecommendationResult.document|RecommendResponse.RecommendationResult.document}.
-   *   * `returnScore`: Boolean. If set to true, the recommendation 'score'
-   *      corresponding to each returned Document will be set in
-   *      {@link google.cloud.discoveryengine.v1beta.RecommendResponse.RecommendationResult.metadata|RecommendResponse.RecommendationResult.metadata}.
-   *      The given 'score' indicates the probability of a Document conversion
-   *      given the user's context and history.
-   *   * `strictFiltering`: Boolean. True by default. If set to false, the service
-   *      will return generic (unfiltered) popular Documents instead of empty if
-   *      your filter blocks all recommendation results.
-   *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
-   *      it needs to be one of:
-   *       *  `no-diversity`
-   *       *  `low-diversity`
-   *       *  `medium-diversity`
-   *       *  `high-diversity`
-   *       *  `auto-diversity`
-   *      This gives request-level control and adjusts recommendation results
-   *      based on Document category.
-   * @param {number[]} request.userLabels
-   *   The user labels applied to a resource must meet the following requirements:
+   *   * `user_country_code`: string. Default empty. If set to non-empty, results
+   *      are restricted or boosted based on the location provided.
+   *   * `search_type`: double. Default empty. Enables non-webpage searching
+   *     depending on the value. The only valid non-default value is 1,
+   *     which enables image searching.
+   *   This field is ignored for other verticals.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   *   The query expansion specification that specifies the conditions under which
+   *   query expansion will occur.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction will take effect.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
    *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
-   *   See [Requirements for
-   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
+   *   This should be the same identifier as
+   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   *   The content search spec that configs the desired behavior of content
+   *   search.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.RecommendResponse | RecommendResponse}.
+   *   The first element of the array is Array of {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult | SearchResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchAsync()`
+   *   method described below for async iteration which you can stop as needed.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/recommendation_service.recommend.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_RecommendationService_Recommend_async
    */
-  recommend(
-    request?: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  search(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      protos.google.cloud.discoveryengine.v1beta.IRecommendRequest | undefined,
-      {} | undefined
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.ISearchResponse
     ]
   >;
-  recommend(
-    request: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  search(
+    request: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
     options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
       | null
       | undefined,
-      {} | null | undefined
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
     >
   ): void;
-  recommend(
-    request: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+  search(
+    request: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
       | null
       | undefined,
-      {} | null | undefined
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
     >
   ): void;
-  recommend(
-    request?: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  search(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
     optionsOrCallback?:
       | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-          | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+          | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
           | null
           | undefined,
-          {} | null | undefined
+          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
         >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
       | null
       | undefined,
-      {} | null | undefined
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      protos.google.cloud.discoveryengine.v1beta.IRecommendRequest | undefined,
-      {} | undefined
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.ISearchResponse
     ]
   > | void {
     request = request || {};
@@ -519,12 +541,381 @@ export class RecommendationServiceClient {
         serving_config: request.servingConfig ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.recommend(request, options, callback);
+    return this.innerApiCalls.search(request, options, callback);
   }
 
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {string} request.branch
+   *   The branch resource name, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
+   *
+   *   Use `default_branch` as the branch ID or leave this field empty, to search
+   *   documents under the default branch.
+   * @param {string} request.query
+   *   Raw search query.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
+   *   to return. If unspecified, defaults to a reasonable value. The maximum
+   *   allowed value is 100. Values above 100 will be coerced to 100.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   must match the call that provided the page token. Otherwise, an
+   *    `INVALID_ARGUMENT`  error is returned.
+   * @param {number} request.offset
+   *   A 0-indexed integer that specifies the current offset (that is, starting
+   *   result location, amongst the
+   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
+   *   as relevant) in search results. This field is only considered if
+   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
+   *   is unset.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Document can be ordered by
+   *   a field in an {@link google.cloud.discoveryengine.v1beta.Document|Document}
+   *   object. Leave it unset if ordered by relevance. OrderBy expression is
+   *   case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
+   * @param {number[]} request.params
+   *   Additional search parameters.
+   *
+   *   For
+   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
+   *   vertical, supported values are:
+   *
+   *   * `user_country_code`: string. Default empty. If set to non-empty, results
+   *      are restricted or boosted based on the location provided.
+   *   * `search_type`: double. Default empty. Enables non-webpage searching
+   *     depending on the value. The only valid non-default value is 1,
+   *     which enables image searching.
+   *   This field is ignored for other verticals.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   *   The query expansion specification that specifies the conditions under which
+   *   query expansion will occur.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction will take effect.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   *   The content search spec that configs the desired behavior of content
+   *   search.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult | SearchResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchStream(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    const defaultCallSettings = this._defaults['search'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.search.createStream(
+      this.innerApiCalls.search as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `search`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {string} request.branch
+   *   The branch resource name, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
+   *
+   *   Use `default_branch` as the branch ID or leave this field empty, to search
+   *   documents under the default branch.
+   * @param {string} request.query
+   *   Raw search query.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link google.cloud.discoveryengine.v1beta.Document|Document}s
+   *   to return. If unspecified, defaults to a reasonable value. The maximum
+   *   allowed value is 100. Values above 100 will be coerced to 100.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   must match the call that provided the page token. Otherwise, an
+   *    `INVALID_ARGUMENT`  error is returned.
+   * @param {number} request.offset
+   *   A 0-indexed integer that specifies the current offset (that is, starting
+   *   result location, amongst the
+   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
+   *   as relevant) in search results. This field is only considered if
+   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
+   *   is unset.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Document can be ordered by
+   *   a field in an {@link google.cloud.discoveryengine.v1beta.Document|Document}
+   *   object. Leave it unset if ordered by relevance. OrderBy expression is
+   *   case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
+   * @param {number[]} request.params
+   *   Additional search parameters.
+   *
+   *   For
+   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
+   *   vertical, supported values are:
+   *
+   *   * `user_country_code`: string. Default empty. If set to non-empty, results
+   *      are restricted or boosted based on the location provided.
+   *   * `search_type`: double. Default empty. Enables non-webpage searching
+   *     depending on the value. The only valid non-default value is 1,
+   *     which enables image searching.
+   *   This field is ignored for other verticals.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   *   The query expansion specification that specifies the conditions under which
+   *   query expansion will occur.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction will take effect.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   *   The content search spec that configs the desired behavior of content
+   *   search.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult | SearchResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/search_service.search.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SearchService_Search_async
+   */
+  searchAsync(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    const defaultCallSettings = this._defaults['search'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.search.asyncIterate(
+      this.innerApiCalls['search'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreBranch resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} branch
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreBranchPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreBranch resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchName
+   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreBranchName(
+    projectLocationCollectionDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
+      projectLocationCollectionDataStoreBranchName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreBranch resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchName
+   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreBranchName(
+    projectLocationCollectionDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
+      projectLocationCollectionDataStoreBranchName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreBranch resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchName
+   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreBranchName(
+    projectLocationCollectionDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
+      projectLocationCollectionDataStoreBranchName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreBranch resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchName
+   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchName(
+    projectLocationCollectionDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
+      projectLocationCollectionDataStoreBranchName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationCollectionDataStoreBranch resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchName
+   *   A fully-qualified path representing project_location_collection_data_store_branch resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationCollectionDataStoreBranchName(
+    projectLocationCollectionDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match(
+      projectLocationCollectionDataStoreBranchName
+    ).branch;
+  }
 
   /**
    * Return a fully-qualified projectLocationCollectionDataStoreBranchDocument resource name string.
@@ -854,6 +1245,91 @@ export class RecommendationServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreBranch resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} branch
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreBranchPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    branch: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreBranch resource.
+   *
+   * @param {string} projectLocationDataStoreBranchName
+   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreBranchName(
+    projectLocationDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
+      projectLocationDataStoreBranchName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreBranch resource.
+   *
+   * @param {string} projectLocationDataStoreBranchName
+   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreBranchName(
+    projectLocationDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
+      projectLocationDataStoreBranchName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreBranch resource.
+   *
+   * @param {string} projectLocationDataStoreBranchName
+   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreBranchName(
+    projectLocationDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
+      projectLocationDataStoreBranchName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationDataStoreBranch resource.
+   *
+   * @param {string} projectLocationDataStoreBranchName
+   *   A fully-qualified path representing project_location_data_store_branch resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationDataStoreBranchName(
+    projectLocationDataStoreBranchName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchPathTemplate.match(
+      projectLocationDataStoreBranchName
+    ).branch;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreBranchDocument resource name string.
    *
    * @param {string} project
@@ -1133,8 +1609,8 @@ export class RecommendationServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.recommendationServiceStub && !this._terminated) {
-      return this.recommendationServiceStub.then(stub => {
+    if (this.searchServiceStub && !this._terminated) {
+      return this.searchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

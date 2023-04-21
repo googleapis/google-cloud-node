@@ -29,18 +29,18 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/recommendation_service_client_config.json`.
+ * `src/v1beta/completion_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './recommendation_service_client_config.json';
+import * as gapicConfig from './completion_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for making recommendations.
+ *  Service for Auto-Completion.
  * @class
  * @memberof v1beta
  */
-export class RecommendationServiceClient {
+export class CompletionServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -58,10 +58,10 @@ export class RecommendationServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  recommendationServiceStub?: Promise<{[name: string]: Function}>;
+  completionServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of RecommendationServiceClient.
+   * Construct an instance of CompletionServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -97,7 +97,7 @@ export class RecommendationServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new RecommendationServiceClient({fallback: 'rest'}, gax);
+   *     const client = new CompletionServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -105,8 +105,7 @@ export class RecommendationServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof RecommendationServiceClient;
+    const staticMembers = this.constructor as typeof CompletionServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -177,6 +176,10 @@ export class RecommendationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      projectLocationCollectionDataStorePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+        ),
       projectLocationCollectionDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
@@ -185,10 +188,9 @@ export class RecommendationServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
         ),
-      projectLocationCollectionDataStoreServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
-        ),
+      projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}'
+      ),
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
@@ -197,15 +199,11 @@ export class RecommendationServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
         ),
-      projectLocationDataStoreServingConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
-        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1beta.RecommendationService',
+      'google.cloud.discoveryengine.v1beta.CompletionService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -233,29 +231,29 @@ export class RecommendationServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.recommendationServiceStub) {
-      return this.recommendationServiceStub;
+    if (this.completionServiceStub) {
+      return this.completionServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1beta.RecommendationService.
-    this.recommendationServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1beta.CompletionService.
+    this.completionServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1beta.RecommendationService'
+            'google.cloud.discoveryengine.v1beta.CompletionService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1beta
-            .RecommendationService,
+            .CompletionService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const recommendationServiceStubMethods = ['recommend'];
-    for (const methodName of recommendationServiceStubMethods) {
-      const callPromise = this.recommendationServiceStub.then(
+    const completionServiceStubMethods = ['completeQuery'];
+    for (const methodName of completionServiceStubMethods) {
+      const callPromise = this.completionServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -280,7 +278,7 @@ export class RecommendationServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.recommendationServiceStub;
+    return this.completionServiceStub;
   }
 
   /**
@@ -337,169 +335,118 @@ export class RecommendationServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Makes a recommendation, which requires a contextual user event.
+   * Completes the specified user input with keyword suggestions.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.servingConfig
-   *   Required. Full resource name of the format:
-   *   `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
+   * @param {string} request.dataStore
+   *   Required. The parent data store resource name for which the completion is
+   *   performed, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store`.
+   * @param {string} request.query
+   *   Required. The typeahead input used to fetch suggestions. Maximum length is
+   *   128 characters.
+   * @param {string} request.queryModel
+   *   Selects data model of query suggestions for serving. Currently supported
+   *   values:
    *
-   *   Before you can request recommendations from your model, you must create at
-   *   least one serving config  for it.
-   * @param {google.cloud.discoveryengine.v1beta.UserEvent} request.userEvent
-   *   Required. Context about the user, what they are looking at and what action
-   *   they took to trigger the Recommend request. Note that this user event
-   *   detail won't be ingested to userEvent logs. Thus, a separate userEvent
-   *   write request is required for event logging.
+   *   * `document` - Using suggestions generated from user-imported documents.
+   *   * `search-history` - Using suggestions generated from the past history of
+   *   {@link google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   API calls. Do not use it when there is no traffic for Search API.
+   *   * `user-event` - Using suggestions generated from user-imported search
+   *   events.
    *
-   *   Don't set
+   *   Default values:
+   *
+   *   * `document` is the default model for regular dataStores.
+   *   * `search-history` is the default model for
+   *   {@link google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH|IndustryVertical.SITE_SEARCH}
+   *   dataStores.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
    *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   or
-   *   {@link google.cloud.discoveryengine.v1beta.UserInfo.user_id|UserEvent.user_info.user_id}
-   *   to the same fixed ID for different users. If you are trying to receive
-   *   non-personalized recommendations (not recommended; this can negatively
-   *   impact model performance), instead set
-   *   {@link google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
-   *   to a random unique ID and leave
-   *   {@link google.cloud.discoveryengine.v1beta.UserInfo.user_id|UserEvent.user_info.user_id}
-   *   unset.
-   * @param {number} request.pageSize
-   *   Maximum number of results to return. Set this property
-   *   to the number of recommendation results needed. If zero, the service will
-   *   choose a reasonable default. The maximum allowed value is 100. Values
-   *   above 100 will be coerced to 100.
-   * @param {string} request.filter
-   *   Filter for restricting recommendation results with a length limit of 5,000
-   *   characters. Currently, only filter expressions on the `filter_tags`
-   *   attribute is supported.
+   *   and
+   *   {@link google.cloud.discoveryengine.v1beta.SearchRequest.user_pseudo_id|SearchRequest.user_pseudo_id}.
    *
-   *
-   *   Examples:
-   *
-   *    * `(filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))`
-   *    * `(filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))`
-   *
-   *   If your filter blocks all results, the API will return generic
-   *   (unfiltered) popular Documents. If you only want results strictly matching
-   *   the filters, set `strictFiltering` to True in
-   *   {@link google.cloud.discoveryengine.v1beta.RecommendRequest.params|RecommendRequest.params}
-   *   to receive empty results instead.
-   *
-   *   Note that the API will never return
-   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s with
-   *   `storageStatus` of `EXPIRED` or `DELETED` regardless of filter choices.
-   * @param {boolean} request.validateOnly
-   *   Use validate only mode for this recommendation query. If set to true, a
-   *   fake model will be used that returns arbitrary Document IDs.
-   *   Note that the validate only mode should only be used for testing the API,
-   *   or if the model is not ready.
-   * @param {number[]} request.params
-   *   Additional domain specific parameters for the recommendations.
-   *
-   *   Allowed values:
-   *
-   *   * `returnDocument`: Boolean. If set to true, the associated Document
-   *      object will be returned in
-   *      {@link google.cloud.discoveryengine.v1beta.RecommendResponse.RecommendationResult.document|RecommendResponse.RecommendationResult.document}.
-   *   * `returnScore`: Boolean. If set to true, the recommendation 'score'
-   *      corresponding to each returned Document will be set in
-   *      {@link google.cloud.discoveryengine.v1beta.RecommendResponse.RecommendationResult.metadata|RecommendResponse.RecommendationResult.metadata}.
-   *      The given 'score' indicates the probability of a Document conversion
-   *      given the user's context and history.
-   *   * `strictFiltering`: Boolean. True by default. If set to false, the service
-   *      will return generic (unfiltered) popular Documents instead of empty if
-   *      your filter blocks all recommendation results.
-   *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
-   *      it needs to be one of:
-   *       *  `no-diversity`
-   *       *  `low-diversity`
-   *       *  `medium-diversity`
-   *       *  `high-diversity`
-   *       *  `auto-diversity`
-   *      This gives request-level control and adjusts recommendation results
-   *      based on Document category.
-   * @param {number[]} request.userLabels
-   *   The user labels applied to a resource must meet the following requirements:
-   *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
-   *
-   *   See [Requirements for
-   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.RecommendResponse | RecommendResponse}.
+   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1beta.CompleteQueryResponse | CompleteQueryResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/recommendation_service.recommend.js</caption>
-   * region_tag:discoveryengine_v1beta_generated_RecommendationService_Recommend_async
+   * @example <caption>include:samples/generated/v1beta/completion_service.complete_query.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_CompletionService_CompleteQuery_async
    */
-  recommend(
-    request?: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  completeQuery(
+    request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      protos.google.cloud.discoveryengine.v1beta.IRecommendRequest | undefined,
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
-  recommend(
-    request: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  completeQuery(
+    request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  recommend(
-    request: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  completeQuery(
+    request: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  recommend(
-    request?: protos.google.cloud.discoveryengine.v1beta.IRecommendRequest,
+  completeQuery(
+    request?: protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-          | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+          protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+          | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      | protos.google.cloud.discoveryengine.v1beta.IRecommendRequest
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1beta.IRecommendResponse,
-      protos.google.cloud.discoveryengine.v1beta.IRecommendRequest | undefined,
+      protos.google.cloud.discoveryengine.v1beta.ICompleteQueryResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1beta.ICompleteQueryRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -516,15 +463,100 @@ export class RecommendationServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig ?? '',
+        data_store: request.dataStore ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.recommend(request, options, callback);
+    return this.innerApiCalls.completeQuery(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStorePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).data_store;
+  }
 
   /**
    * Return a fully-qualified projectLocationCollectionDataStoreBranchDocument resource name string.
@@ -751,106 +783,68 @@ export class RecommendationServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationCollectionDataStoreServingConfig resource name string.
+   * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} collection
    * @param {string} data_store
-   * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  projectLocationCollectionDataStoreServingConfigPath(
+  projectLocationDataStorePath(
     project: string,
     location: string,
-    collection: string,
-    dataStore: string,
-    servingConfig: string
+    dataStore: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        collection: collection,
-        data_store: dataStore,
-        serving_config: servingConfig,
-      }
-    );
+    return this.pathTemplates.projectLocationDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
   }
 
   /**
-   * Parse the project from ProjectLocationCollectionDataStoreServingConfig resource.
+   * Parse the project from ProjectLocationDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
     ).project;
   }
 
   /**
-   * Parse the location from ProjectLocationCollectionDataStoreServingConfig resource.
+   * Parse the location from ProjectLocationDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
     ).location;
   }
 
   /**
-   * Parse the collection from ProjectLocationCollectionDataStoreServingConfig resource.
+   * Parse the data_store from ProjectLocationDataStore resource.
    *
-   * @param {string} projectLocationCollectionDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).collection;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationCollectionDataStoreServingConfig resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
    * @returns {string} A string representing the data_store.
    */
-  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
   ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
     ).data_store;
-  }
-
-  /**
-   * Parse the serving_config from ProjectLocationCollectionDataStoreServingConfig resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
-   * @returns {string} A string representing the serving_config.
-   */
-  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
-    projectLocationCollectionDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
-      projectLocationCollectionDataStoreServingConfigName
-    ).serving_config;
   }
 
   /**
@@ -1042,99 +1036,14 @@ export class RecommendationServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationDataStoreServingConfig resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} data_store
-   * @param {string} serving_config
-   * @returns {string} Resource name string.
-   */
-  projectLocationDataStoreServingConfigPath(
-    project: string,
-    location: string,
-    dataStore: string,
-    servingConfig: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        data_store: dataStore,
-        serving_config: servingConfig,
-      }
-    );
-  }
-
-  /**
-   * Parse the project from ProjectLocationDataStoreServingConfig resource.
-   *
-   * @param {string} projectLocationDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_data_store_serving_config resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationDataStoreServingConfig resource.
-   *
-   * @param {string} projectLocationDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_data_store_serving_config resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).location;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationDataStoreServingConfig resource.
-   *
-   * @param {string} projectLocationDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_data_store_serving_config resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).data_store;
-  }
-
-  /**
-   * Parse the serving_config from ProjectLocationDataStoreServingConfig resource.
-   *
-   * @param {string} projectLocationDataStoreServingConfigName
-   *   A fully-qualified path representing project_location_data_store_serving_config resource.
-   * @returns {string} A string representing the serving_config.
-   */
-  matchServingConfigFromProjectLocationDataStoreServingConfigName(
-    projectLocationDataStoreServingConfigName: string
-  ) {
-    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
-      projectLocationDataStoreServingConfigName
-    ).serving_config;
-  }
-
-  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.recommendationServiceStub && !this._terminated) {
-      return this.recommendationServiceStub.then(stub => {
+    if (this.completionServiceStub && !this._terminated) {
+      return this.completionServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

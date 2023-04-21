@@ -18,23 +18,35 @@
 
 import * as v1beta from './v1beta';
 
+const CompletionServiceClient = v1beta.CompletionServiceClient;
+type CompletionServiceClient = v1beta.CompletionServiceClient;
 const DocumentServiceClient = v1beta.DocumentServiceClient;
 type DocumentServiceClient = v1beta.DocumentServiceClient;
 const RecommendationServiceClient = v1beta.RecommendationServiceClient;
 type RecommendationServiceClient = v1beta.RecommendationServiceClient;
+const SchemaServiceClient = v1beta.SchemaServiceClient;
+type SchemaServiceClient = v1beta.SchemaServiceClient;
+const SearchServiceClient = v1beta.SearchServiceClient;
+type SearchServiceClient = v1beta.SearchServiceClient;
 const UserEventServiceClient = v1beta.UserEventServiceClient;
 type UserEventServiceClient = v1beta.UserEventServiceClient;
 
 export {
   v1beta,
+  CompletionServiceClient,
   DocumentServiceClient,
   RecommendationServiceClient,
+  SchemaServiceClient,
+  SearchServiceClient,
   UserEventServiceClient,
 };
 export default {
   v1beta,
+  CompletionServiceClient,
   DocumentServiceClient,
   RecommendationServiceClient,
+  SchemaServiceClient,
+  SearchServiceClient,
   UserEventServiceClient,
 };
 import * as protos from '../protos/protos';
