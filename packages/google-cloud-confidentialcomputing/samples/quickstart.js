@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent, challenge) {
@@ -40,7 +38,8 @@ function main(parent, challenge) {
   // const challenge = {}
 
   // Imports the Confidentialcomputing library
-  const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;
+  const {ConfidentialComputingClient} =
+    require('@google-cloud/confidentialcomputing').v1;
 
   // Instantiates a client
   const confidentialcomputingClient = new ConfidentialComputingClient();
