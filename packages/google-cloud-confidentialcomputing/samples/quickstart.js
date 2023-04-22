@@ -16,9 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
-function main(challenge, tpmAttestation) {
+function main(parent, challenge) {
   // [START confidentialcomputing_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -27,44 +29,35 @@ function main(challenge, tpmAttestation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Challenge whose nonce was used to generate the
-   *  attestation, in the format `projects/* /locations/* /challenges/*`. The
-   *  provided Challenge will be consumed, and cannot be used again.
+   *  Required. The resource name of the location where the Challenge will be
+   *  used, in the format `projects/* /locations/*`.
    */
-  // const challenge = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. Credentials used to populate the "emails" claim in the
-   *  claims_token.
+   *  Required. The Challenge to be created. Currently this field can be empty as
+   *  all the Challenge fields are set by the server.
    */
-  // const gcpCredentials = {}
-  /**
-   *  Required. The TPM-specific data provided by the attesting platform, used to
-   *  populate any of the claims regarding platform state.
-   */
-  // const tpmAttestation = {}
+  // const challenge = {}
 
   // Imports the Confidentialcomputing library
-  const {ConfidentialComputingClient} =
-    require('@google-cloud/confidentialcomputing').v1;
+  const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;
 
   // Instantiates a client
   const confidentialcomputingClient = new ConfidentialComputingClient();
 
-  async function callVerifyAttestation() {
+  async function callCreateChallenge() {
     // Construct request
     const request = {
+      parent,
       challenge,
-      tpmAttestation,
     };
 
     // Run request
-    const response = await confidentialcomputingClient.verifyAttestation(
-      request
-    );
+    const response = await confidentialcomputingClient.createChallenge(request);
     console.log(response);
   }
 
-  callVerifyAttestation();
+  callCreateChallenge();
   // [END confidentialcomputing_quickstart]
 }
 
