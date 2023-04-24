@@ -205,6 +205,12 @@ export class SearchServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      experimentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -492,7 +498,7 @@ export class SearchServiceClient {
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
    *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -634,6 +640,13 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2.UserEvent.entity|UserEvent.entity} to get search
+   *   results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -807,7 +820,7 @@ export class SearchServiceClient {
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
    *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -949,6 +962,13 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2.UserEvent.entity|UserEvent.entity} to get search
+   *   results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1078,7 +1098,7 @@ export class SearchServiceClient {
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
-   *   A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
+   *   A maximum of 200 values are allowed. Otherwise, an INVALID_ARGUMENT error
    *   is returned.
    * @param {google.cloud.retail.v2.SearchRequest.DynamicFacetSpec} request.dynamicFacetSpec
    *   Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
@@ -1220,6 +1240,13 @@ export class SearchServiceClient {
    * @param {google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2.UserEvent.entity|UserEvent.entity} to get search
+   *   results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1804,6 +1831,139 @@ export class SearchServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified experiment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} experiment
+   * @returns {string} Resource name string.
+   */
+  experimentPath(
+    project: string,
+    location: string,
+    catalog: string,
+    experiment: string
+  ) {
+    return this.pathTemplates.experimentPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      experiment: experiment,
+    });
+  }
+
+  /**
+   * Parse the project from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .location;
+  }
+
+  /**
+   * Parse the catalog from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .catalog;
+  }
+
+  /**
+   * Parse the experiment from Experiment resource.
+   *
+   * @param {string} experimentName
+   *   A fully-qualified path representing Experiment resource.
+   * @returns {string} A string representing the experiment.
+   */
+  matchExperimentFromExperimentName(experimentName: string) {
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .experiment;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

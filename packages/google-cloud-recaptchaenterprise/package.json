@@ -5,7 +5,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/recaptcha-enterprise",
-  "version": "3.3.1",
+  "version": "3.4.1",
   "author": "Google LLC",
   "description": "reCAPTCHA Enterprise API client for Node.js",
   "main": "build/src/index.js",
@@ -13,7 +13,8 @@
     "build/protos",
     "build/src",
     "AUTHORS",
-    "COPYING"
+    "COPYING",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -29,7 +30,7 @@
     "reCAPTCHA Enterprise API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -59,7 +60,7 @@
     "test": "c8 mocha build/test",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile",
@@ -72,3 +73,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-recaptchaenterprise"
 }
+

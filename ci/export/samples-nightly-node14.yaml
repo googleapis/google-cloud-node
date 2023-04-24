@@ -7,6 +7,7 @@ gitFileSource:
   uri: https://github.com/googleapis/google-cloud-node
 id: 25a89188-0ae6-4faf-9131-9b1e3c8b9720
 name: samples-nightly-node14
+resourceName: projects/long-door-651/locations/global/triggers/25a89188-0ae6-4faf-9131-9b1e3c8b9720
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 sourceToBuild:
   ref: refs/heads/main

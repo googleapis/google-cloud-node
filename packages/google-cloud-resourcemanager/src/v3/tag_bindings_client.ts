@@ -41,7 +41,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Allow users to create and manage TagBindings between TagValues and
- *  different cloud resources throughout the GCP resource hierarchy.
+ *  different Google Cloud resources throughout the GCP resource hierarchy.
  * @class
  * @memberof v3
  */
@@ -192,6 +192,9 @@ export class TagBindingsClient {
       tagBindingPathTemplate: new this._gaxModule.PathTemplate(
         'tagBindings/{tag_binding}'
       ),
+      tagHoldPathTemplate: new this._gaxModule.PathTemplate(
+        'tagValues/{tag_value}/tagHolds/{tag_hold}'
+      ),
       tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
@@ -206,6 +209,11 @@ export class TagBindingsClient {
         'pageToken',
         'nextPageToken',
         'tagBindings'
+      ),
+      listEffectiveTags: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'effectiveTags'
       ),
     };
 
@@ -308,6 +316,7 @@ export class TagBindingsClient {
       'listTagBindings',
       'createTagBinding',
       'deleteTagBinding',
+      'listEffectiveTags',
     ];
     for (const methodName of tagBindingsStubMethods) {
       const callPromise = this.tagBindingsStub.then(
@@ -399,16 +408,15 @@ export class TagBindingsClient {
   // -------------------
 
   /**
-   * Creates a TagBinding between a TagValue and a cloud resource
-   * (currently project, folder, or organization).
+   * Creates a TagBinding between a TagValue and a Google Cloud resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.resourcemanager.v3.TagBinding} request.tagBinding
    *   Required. The TagBinding to be created.
    * @param {boolean} [request.validateOnly]
-   *   Optional. Set to true to perform the validations necessary for creating the resource,
-   *   but not actually perform the action.
+   *   Optional. Set to true to perform the validations necessary for creating the
+   *   resource, but not actually perform the action.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -677,8 +685,8 @@ export class TagBindingsClient {
     >;
   }
   /**
-   * Lists the TagBindings for the given cloud resource, as specified with
-   * `parent`.
+   * Lists the TagBindings for the given Google Cloud resource, as specified
+   * with `parent`.
    *
    * NOTE: The `parent` field is expected to be a full resource name:
    * https://cloud.google.com/apis/design/resource_names#full_resource_name
@@ -686,16 +694,16 @@ export class TagBindingsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The full resource name of a resource for which you want to list existing
-   *   TagBindings.
-   *   E.g. "//cloudresourcemanager.googleapis.com/projects/123"
+   *   Required. The full resource name of a resource for which you want to list
+   *   existing TagBindings. E.g.
+   *   "//cloudresourcemanager.googleapis.com/projects/123"
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagBindings to return in the response. The server
-   *   allows a maximum of 300 TagBindings to return. If unspecified, the server
-   *   will use 100 as the default.
+   *   Optional. The maximum number of TagBindings to return in the response. The
+   *   server allows a maximum of 300 TagBindings to return. If unspecified, the
+   *   server will use 100 as the default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagBindings`
-   *   that indicates where this listing should continue from.
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListTagBindings` that indicates where this listing should continue from.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -785,16 +793,16 @@ export class TagBindingsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The full resource name of a resource for which you want to list existing
-   *   TagBindings.
-   *   E.g. "//cloudresourcemanager.googleapis.com/projects/123"
+   *   Required. The full resource name of a resource for which you want to list
+   *   existing TagBindings. E.g.
+   *   "//cloudresourcemanager.googleapis.com/projects/123"
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagBindings to return in the response. The server
-   *   allows a maximum of 300 TagBindings to return. If unspecified, the server
-   *   will use 100 as the default.
+   *   Optional. The maximum number of TagBindings to return in the response. The
+   *   server allows a maximum of 300 TagBindings to return. If unspecified, the
+   *   server will use 100 as the default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagBindings`
-   *   that indicates where this listing should continue from.
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListTagBindings` that indicates where this listing should continue from.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -832,16 +840,16 @@ export class TagBindingsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The full resource name of a resource for which you want to list existing
-   *   TagBindings.
-   *   E.g. "//cloudresourcemanager.googleapis.com/projects/123"
+   *   Required. The full resource name of a resource for which you want to list
+   *   existing TagBindings. E.g.
+   *   "//cloudresourcemanager.googleapis.com/projects/123"
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagBindings to return in the response. The server
-   *   allows a maximum of 300 TagBindings to return. If unspecified, the server
-   *   will use 100 as the default.
+   *   Optional. The maximum number of TagBindings to return in the response. The
+   *   server allows a maximum of 300 TagBindings to return. If unspecified, the
+   *   server will use 100 as the default.
    * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagBindings`
-   *   that indicates where this listing should continue from.
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListTagBindings` that indicates where this listing should continue from.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -872,6 +880,374 @@ export class TagBindingsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagBinding>;
   }
+  /**
+   * Return a list of effective tags for the given Google Cloud resource, as
+   * specified in `parent`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The full resource name of a resource for which you want to list
+   *   the effective tags. E.g.
+   *   "//cloudresourcemanager.googleapis.com/projects/123"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of effective tags to return in the response.
+   *   The server allows a maximum of 300 effective tags to return in a single
+   *   page. If unspecified, the server will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListEffectiveTags` that indicates from where this listing should continue.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.EffectiveTag | EffectiveTag}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEffectiveTagsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEffectiveTags(
+    request?: protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.IEffectiveTag[],
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest | null,
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+    ]
+  >;
+  listEffectiveTags(
+    request: protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+      | protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IEffectiveTag
+    >
+  ): void;
+  listEffectiveTags(
+    request: protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+      | protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IEffectiveTag
+    >
+  ): void;
+  listEffectiveTags(
+    request?: protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+          | protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+          | null
+          | undefined,
+          protos.google.cloud.resourcemanager.v3.IEffectiveTag
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+      | protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IEffectiveTag
+    >
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.IEffectiveTag[],
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest | null,
+      protos.google.cloud.resourcemanager.v3.IListEffectiveTagsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.listEffectiveTags(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The full resource name of a resource for which you want to list
+   *   the effective tags. E.g.
+   *   "//cloudresourcemanager.googleapis.com/projects/123"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of effective tags to return in the response.
+   *   The server allows a maximum of 300 effective tags to return in a single
+   *   page. If unspecified, the server will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListEffectiveTags` that indicates from where this listing should continue.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.EffectiveTag | EffectiveTag} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEffectiveTagsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEffectiveTagsStream(
+    request?: protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listEffectiveTags'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEffectiveTags.createStream(
+      this.innerApiCalls.listEffectiveTags as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEffectiveTags`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The full resource name of a resource for which you want to list
+   *   the effective tags. E.g.
+   *   "//cloudresourcemanager.googleapis.com/projects/123"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of effective tags to return in the response.
+   *   The server allows a maximum of 300 effective tags to return in a single
+   *   page. If unspecified, the server will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to
+   *   `ListEffectiveTags` that indicates from where this listing should continue.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.resourcemanager.v3.EffectiveTag | EffectiveTag}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_bindings.list_effective_tags.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_async
+   */
+  listEffectiveTagsAsync(
+    request?: protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.resourcemanager.v3.IEffectiveTag> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listEffectiveTags'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEffectiveTags.asyncIterate(
+      this.innerApiCalls['listEffectiveTags'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IEffectiveTag>;
+  }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -968,6 +1344,42 @@ export class TagBindingsClient {
   matchTagBindingFromTagBindingName(tagBindingName: string) {
     return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
       .tag_binding;
+  }
+
+  /**
+   * Return a fully-qualified tagHold resource name string.
+   *
+   * @param {string} tag_value
+   * @param {string} tag_hold
+   * @returns {string} Resource name string.
+   */
+  tagHoldPath(tagValue: string, tagHold: string) {
+    return this.pathTemplates.tagHoldPathTemplate.render({
+      tag_value: tagValue,
+      tag_hold: tagHold,
+    });
+  }
+
+  /**
+   * Parse the tag_value from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_value.
+   */
+  matchTagValueFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_value;
+  }
+
+  /**
+   * Parse the tag_hold from TagHold resource.
+   *
+   * @param {string} tagHoldName
+   *   A fully-qualified path representing TagHold resource.
+   * @returns {string} A string representing the tag_hold.
+   */
+  matchTagHoldFromTagHoldName(tagHoldName: string) {
+    return this.pathTemplates.tagHoldPathTemplate.match(tagHoldName).tag_hold;
   }
 
   /**

@@ -17,12 +17,18 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  CompletionServiceClient,
   DocumentServiceClient,
   RecommendationServiceClient,
+  SchemaServiceClient,
+  SearchServiceClient,
   UserEventServiceClient,
 } from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
+function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
+  client.close();
+}
 function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
   client.close();
 }
@@ -31,17 +37,32 @@ function doStuffWithRecommendationServiceClient(
 ) {
   client.close();
 }
+function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
+  client.close();
+}
+function doStuffWithSearchServiceClient(client: SearchServiceClient) {
+  client.close();
+}
 function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
+  const completionServiceClient = new CompletionServiceClient();
+  doStuffWithCompletionServiceClient(completionServiceClient);
+  // check that the client instance can be created
   const documentServiceClient = new DocumentServiceClient();
   doStuffWithDocumentServiceClient(documentServiceClient);
   // check that the client instance can be created
   const recommendationServiceClient = new RecommendationServiceClient();
   doStuffWithRecommendationServiceClient(recommendationServiceClient);
+  // check that the client instance can be created
+  const schemaServiceClient = new SchemaServiceClient();
+  doStuffWithSchemaServiceClient(schemaServiceClient);
+  // check that the client instance can be created
+  const searchServiceClient = new SearchServiceClient();
+  doStuffWithSearchServiceClient(searchServiceClient);
   // check that the client instance can be created
   const userEventServiceClient = new UserEventServiceClient();
   doStuffWithUserEventServiceClient(userEventServiceClient);

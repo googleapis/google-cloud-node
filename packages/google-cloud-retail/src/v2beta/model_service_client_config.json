@@ -24,6 +24,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetModel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "PauseModel": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

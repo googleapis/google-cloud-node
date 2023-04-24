@@ -295,6 +295,11 @@ export class DataprocMetastoreFederationClient {
           ],
         },
         {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
         },
@@ -496,8 +501,8 @@ export class DataprocMetastoreFederationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The relative resource name of the metastore federation to retrieve,
-   *   in the following form:
+   *   Required. The relative resource name of the metastore federation to
+   *   retrieve, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
    * @param {object} [options]
@@ -585,8 +590,8 @@ export class DataprocMetastoreFederationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location in which to create a federation
-   *   service, in the following form:
+   *   Required. The relative resource name of the location in which to create a
+   *   federation service, in the following form:
    *
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {string} request.federationId
@@ -601,10 +606,10 @@ export class DataprocMetastoreFederationClient {
    *   ignored. The ID of the created metastore federation must be
    *   provided in the request's `federation_id` field.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -761,10 +766,10 @@ export class DataprocMetastoreFederationClient {
    *   The metastore federation's `name` field is used to identify the
    *   metastore service to be updated.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -915,10 +920,10 @@ export class DataprocMetastoreFederationClient {
    *
    *   `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
    * @param {string} [request.requestId]
-   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *   request if it has completed. The server will ignore subsequent requests
-   *   that provide a duplicate request ID for at least 60 minutes after the first
-   *   request.
+   *   Optional. A request ID. Specify a unique request ID to allow the server to
+   *   ignore the request if it has completed. The server will ignore subsequent
+   *   requests that provide a duplicate request ID for at least 60 minutes after
+   *   the first request.
    *
    *   For example, if an initial request times out, followed by another request
    *   with the same request ID, the server ignores the second request to prevent
@@ -1064,13 +1069,14 @@ export class DataprocMetastoreFederationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore federations
-   *   to list, in the following form:
+   *   Required. The relative resource name of the location of metastore
+   *   federations to list, in the following form:
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of federations to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 services are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *   Optional. The maximum number of federations to return. The response may
+   *   contain less than the maximum number. If unspecified, no more than 500
+   *   services are returned. The maximum value is 1000; values above 1000 are
+   *   changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous ListFederationServices
    *   call. Provide this token to retrieve the subsequent page.
@@ -1179,13 +1185,14 @@ export class DataprocMetastoreFederationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore federations
-   *   to list, in the following form:
+   *   Required. The relative resource name of the location of metastore
+   *   federations to list, in the following form:
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of federations to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 services are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *   Optional. The maximum number of federations to return. The response may
+   *   contain less than the maximum number. If unspecified, no more than 500
+   *   services are returned. The maximum value is 1000; values above 1000 are
+   *   changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous ListFederationServices
    *   call. Provide this token to retrieve the subsequent page.
@@ -1242,13 +1249,14 @@ export class DataprocMetastoreFederationClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The relative resource name of the location of metastore federations
-   *   to list, in the following form:
+   *   Required. The relative resource name of the location of metastore
+   *   federations to list, in the following form:
    *   `projects/{project_number}/locations/{location_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of federations to return. The response may contain less
-   *   than the maximum number. If unspecified, no more than 500 services are
-   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   *   Optional. The maximum number of federations to return. The response may
+   *   contain less than the maximum number. If unspecified, no more than 500
+   *   services are returned. The maximum value is 1000; values above 1000 are
+   *   changed to 1000.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous ListFederationServices
    *   call. Provide this token to retrieve the subsequent page.

@@ -59,6 +59,13 @@ function main(name) {
    *  been allowed. If you proceed, there will be no way to recover this CA.
    */
   // const skipGracePeriod = true
+  /**
+   *  Optional. This field allows this ca to be deleted even if it's being
+   *  depended on by another resource. However, doing so may result in unintended
+   *  and unrecoverable effects on any dependent resource(s) since the CA will
+   *  no longer be able to issue certificates.
+   */
+  // const ignoreDependentResources = true
 
   // Imports the Privateca library
   const {CertificateAuthorityServiceClient} = require('@google-cloud/security-private-ca').v1;

@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.4.0...binary-authorization-v2.5.0) (2023-04-13)
+
+
+### Features
+
+* [binaryauthorization] add enum for grafeas v1 cvss to support both cvss v2 and v3 ([#4168](https://github.com/googleapis/google-cloud-node/issues/4168)) ([69672a9](https://github.com/googleapis/google-cloud-node/commit/69672a9312d1496d5a6ae23679324d026eb68eee))
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.3.0...binary-authorization-v2.4.0) (2023-03-28)
+
+
+### Features
+
+* [binaryauthorization] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments ([#4071](https://github.com/googleapis/google-cloud-node/issues/4071)) ([671757d](https://github.com/googleapis/google-cloud-node/commit/671757d28e2ed57c8586005bb4143cf4fb1545b0))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.2.1...binary-authorization-v2.3.0) (2023-03-06)
 
 

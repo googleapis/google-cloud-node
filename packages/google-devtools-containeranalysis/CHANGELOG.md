@@ -4,6 +4,33 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.6.1...containeranalysis-v4.7.0) (2023-04-24)
+
+
+### Features
+
+* [containeranalysis] add enum for grafeas v1 cvss to support both cvss v2 and v3 ([#4163](https://github.com/googleapis/google-cloud-node/issues/4163)) ([0904936](https://github.com/googleapis/google-cloud-node/commit/090493643ae86992c44e31963e1ba774d97b79d4))
+
+
+### Bug Fixes
+
+* [containeranalysis] scope GeneratePackagesSummary method to v1beta1 http path ([#4196](https://github.com/googleapis/google-cloud-node/issues/4196)) ([e1841e7](https://github.com/googleapis/google-cloud-node/commit/e1841e71f1be28ec607fa6f00c6f624909bd7981))
+
+## [4.6.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.6.0...containeranalysis-v4.6.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.5.0...containeranalysis-v4.6.0) (2023-03-28)
+
+
+### Features
+
+* [containeranalysis] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments ([#4070](https://github.com/googleapis/google-cloud-node/issues/4070)) ([ec484a6](https://github.com/googleapis/google-cloud-node/commit/ec484a6f369d2df6dc73a798501c8937caf5634b))
+* [containeranalysis] remove the unimplemented ScanConfig API method and resources ([a3b26fc](https://github.com/googleapis/google-cloud-node/commit/a3b26fc4052a72858f837a45237c9df88289fb75))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v4.4.2...containeranalysis-v4.5.0) (2023-03-13)
 
 

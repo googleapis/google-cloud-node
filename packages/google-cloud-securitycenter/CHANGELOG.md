@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.3.0...security-center-v7.4.0) (2023-04-24)
+
+
+### Features
+
+* [securitycenter] add cloud_dlp_inspection and cloud_dlp_data_profile fields to finding's list of attributes ([#4198](https://github.com/googleapis/google-cloud-node/issues/4198)) ([3e1c467](https://github.com/googleapis/google-cloud-node/commit/3e1c4678dc20281eeaf30bf8cf64368e9110f307))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.2.1...security-center-v7.3.0) (2023-04-13)
+
+
+### Features
+
+* [securitycenter] released securitycenter/v1 SHA custom modules cloud libraries: Create, Get, List, Update, Delete ([#4164](https://github.com/googleapis/google-cloud-node/issues/4164)) ([d79385f](https://github.com/googleapis/google-cloud-node/commit/d79385fa5ac0fa138ca01e36c6f0dc65d52ec889))
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
 ## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/security-center-v7.2.0...security-center-v7.2.1) (2023-02-15)
 
 

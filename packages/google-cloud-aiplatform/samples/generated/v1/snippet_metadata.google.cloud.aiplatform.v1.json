@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.8.0",
+        "version": "2.10.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -654,7 +654,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 75,
                     "type": "FULL"
                 }
             ],
@@ -1954,7 +1954,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 109,
+                    "end": 106,
                     "type": "FULL"
                 }
             ],

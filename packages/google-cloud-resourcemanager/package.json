@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/resource-manager",
   "description": "Cloud Resource Manager Client Library for Node.js",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -17,7 +17,8 @@
   "types": "./build/src/index.d.ts",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -33,7 +34,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
@@ -48,7 +49,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -70,3 +71,4 @@
     "webpack-cli": "^5.0.0"
   }
 }
+

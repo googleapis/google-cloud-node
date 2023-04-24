@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/translate",
   "description": "Cloud Translation API Client Library for Node.js",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -17,6 +17,7 @@
   "files": [
     "build/src",
     "build/protos",
+    "!build/src/**/*.map",
     "!build/src/**/*.map"
   ],
   "keywords": [
@@ -38,7 +39,7 @@
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile",
@@ -55,7 +56,7 @@
     "@google-cloud/promisify": "^3.0.0",
     "arrify": "^2.0.0",
     "extend": "^3.0.2",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "is-html": "^2.0.0"
   },
   "devDependencies": {
@@ -82,3 +83,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-translate"
 }
+

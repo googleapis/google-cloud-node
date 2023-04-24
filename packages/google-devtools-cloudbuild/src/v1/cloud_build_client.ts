@@ -2097,7 +2097,7 @@ export class CloudBuildClient {
    * @param {string} request.name
    *   Required. The name of the `WorkerPool` to delete.
    *   Format:
-   *   `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+   *   `projects/{project}/locations/{location}/workerPools/{workerPool}`.
    * @param {string} request.etag
    *   Optional. If this is provided, it must match the server's etag on the
    *   workerpool for the request to be processed.
@@ -2394,7 +2394,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent of the collection of `Builds`.
-   *   Format: `projects/{project}/locations/location`
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -2506,7 +2506,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent of the collection of `Builds`.
-   *   Format: `projects/{project}/locations/location`
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize
@@ -2566,7 +2566,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent of the collection of `Builds`.
-   *   Format: `projects/{project}/locations/location`
+   *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {number} request.pageSize

@@ -16,8 +16,8 @@
                     "objc_class_prefix": "RETAIL",
                     "php_namespace": "Google\\Cloud\\Retail\\V2",
                     "ruby_package": "Google::Cloud::Retail::V2",
-                    "(google.api.resource_definition).type": "retail.googleapis.com/Branch",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}"
+                    "(google.api.resource_definition).type": "retail.googleapis.com/Experiment",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}"
                   },
                   "nested": {
                     "ProductLevelConfig": {
@@ -262,6 +262,13 @@
                         "SOLUTION_TYPE_UNSPECIFIED": 0,
                         "SOLUTION_TYPE_RECOMMENDATION": 1,
                         "SOLUTION_TYPE_SEARCH": 2
+                      }
+                    },
+                    "RecommendationsFilteringOption": {
+                      "values": {
+                        "RECOMMENDATIONS_FILTERING_OPTION_UNSPECIFIED": 0,
+                        "RECOMMENDATIONS_FILTERING_DISABLED": 1,
+                        "RECOMMENDATIONS_FILTERING_ENABLED": 3
                       }
                     },
                     "SearchSolutionUseCase": {
@@ -1378,6 +1385,10 @@
                         "pageViewId": {
                           "type": "string",
                           "id": 15
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 23
                         }
                       }
                     },
@@ -1952,6 +1963,10 @@
                         "maxSuggestions": {
                           "type": "int32",
                           "id": 5
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -2262,6 +2277,496 @@
                           "id": 2
                         }
                       }
+                    },
+                    "Model": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/Model",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "trainingState": {
+                          "type": "TrainingState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "servingState": {
+                          "type": "ServingState",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "optimizationObjective": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "periodicTuningState": {
+                          "type": "PeriodicTuningState",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "lastTuneTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tuningOperation": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataState": {
+                          "type": "DataState",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "filteringOption": {
+                          "type": "RecommendationsFilteringOption",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "servingConfigLists": {
+                          "rule": "repeated",
+                          "type": "ServingConfigList",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ServingConfigList": {
+                          "fields": {
+                            "servingConfigIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ServingState": {
+                          "values": {
+                            "SERVING_STATE_UNSPECIFIED": 0,
+                            "INACTIVE": 1,
+                            "ACTIVE": 2,
+                            "TUNED": 3
+                          }
+                        },
+                        "TrainingState": {
+                          "values": {
+                            "TRAINING_STATE_UNSPECIFIED": 0,
+                            "PAUSED": 1,
+                            "TRAINING": 2
+                          }
+                        },
+                        "PeriodicTuningState": {
+                          "values": {
+                            "PERIODIC_TUNING_STATE_UNSPECIFIED": 0,
+                            "PERIODIC_TUNING_DISABLED": 1,
+                            "ALL_TUNING_DISABLED": 3,
+                            "PERIODIC_TUNING_ENABLED": 2
+                          }
+                        },
+                        "DataState": {
+                          "values": {
+                            "DATA_STATE_UNSPECIFIED": 0,
+                            "DATA_OK": 1,
+                            "DATA_ERROR": 2
+                          }
+                        }
+                      }
+                    },
+                    "ModelService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateModel": {
+                          "requestType": "CreateModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/catalogs/*}/models",
+                            "(google.api.http).body": "model",
+                            "(google.api.method_signature)": "parent,model",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2.Model",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2.CreateModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/catalogs/*}/models",
+                                "body": "model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2.Model",
+                                "metadata_type": "google.cloud.retail.v2.CreateModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "PauseModel": {
+                          "requestType": "PauseModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}:pause",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ResumeModel": {
+                          "requestType": "ResumeModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}:resume",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteModel": {
+                          "requestType": "DeleteModelRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListModels": {
+                          "requestType": "ListModelsRequest",
+                          "responseType": "ListModelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/catalogs/*}/models",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/catalogs/*}/models"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateModel": {
+                          "requestType": "UpdateModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{model.name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.http).body": "model",
+                            "(google.api.method_signature)": "model,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{model.name=projects/*/locations/*/catalogs/*/models/*}",
+                                "body": "model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,update_mask"
+                            }
+                          ]
+                        },
+                        "TuneModel": {
+                          "requestType": "TuneModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}:tune",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2.TuneModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2.TuneModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/catalogs/*/models/*}:tune",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2.TuneModelResponse",
+                                "metadata_type": "google.cloud.retail.v2.TuneModelMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateModelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        },
+                        "model": {
+                          "type": "Model",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dryRun": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateModelRequest": {
+                      "fields": {
+                        "model": {
+                          "type": "Model",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "PauseModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "ResumeModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListModelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "ListModelsResponse": {
+                      "fields": {
+                        "models": {
+                          "rule": "repeated",
+                          "type": "Model",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TuneModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "CreateModelMetadata": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TuneModelMetadata": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TuneModelResponse": {
+                      "fields": {}
                     },
                     "PredictionService": {
                       "options": {
@@ -3111,6 +3616,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 38
                         }
                       },
                       "nested": {
@@ -3350,6 +3859,11 @@
                           "rule": "repeated",
                           "type": "SearchRequest.BoostSpec.ConditionBoostSpec",
                           "id": 14
+                        },
+                        "experimentInfo": {
+                          "rule": "repeated",
+                          "type": "ExperimentInfo",
+                          "id": 17
                         }
                       },
                       "nested": {
@@ -3444,6 +3958,48 @@
                             "pinnedResultCount": {
                               "type": "int64",
                               "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExperimentInfo": {
+                      "oneofs": {
+                        "experimentMetadata": {
+                          "oneof": [
+                            "servingConfigExperiment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "servingConfigExperiment": {
+                          "type": "ServingConfigExperiment",
+                          "id": 2
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Experiment"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ServingConfigExperiment": {
+                          "fields": {
+                            "originalServingConfig": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            },
+                            "experimentServingConfig": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
                             }
                           }
                         }
@@ -4065,8 +4621,8 @@
                     "objc_class_prefix": "RETAIL",
                     "php_namespace": "Google\\Cloud\\Retail\\V2alpha",
                     "ruby_package": "Google::Cloud::Retail::V2alpha",
-                    "(google.api.resource_definition).type": "retail.googleapis.com/Branch",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}"
+                    "(google.api.resource_definition).type": "retail.googleapis.com/Experiment",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}"
                   },
                   "nested": {
                     "ProductLevelConfig": {
@@ -5516,6 +6072,10 @@
                         "pageViewId": {
                           "type": "string",
                           "id": 15
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 23
                         }
                       }
                     },
@@ -6144,6 +6704,10 @@
                         "enableAttributeSuggestions": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -6180,6 +6744,15 @@
                               "keyType": "string",
                               "type": "CustomAttribute",
                               "id": 2
+                            },
+                            "facets": {
+                              "rule": "repeated",
+                              "type": "SearchResponse.Facet",
+                              "id": 3
+                            },
+                            "totalProductCount": {
+                              "type": "int32",
+                              "id": 4
                             }
                           }
                         },
@@ -6199,68 +6772,6 @@
                               "id": 1
                             }
                           }
-                        }
-                      }
-                    },
-                    "Control": {
-                      "options": {
-                        "(google.api.resource).type": "retail.googleapis.com/Control",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}"
-                      },
-                      "oneofs": {
-                        "control": {
-                          "oneof": [
-                            "facetSpec",
-                            "rule"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "facetSpec": {
-                          "type": "SearchRequest.FacetSpec",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "rule": {
-                          "type": "Rule",
-                          "id": 4
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "associatedServingConfigIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "solutionTypes": {
-                          "rule": "repeated",
-                          "type": "SolutionType",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "searchSolutionUseCase": {
-                          "rule": "repeated",
-                          "type": "SearchSolutionUseCase",
-                          "id": 7
                         }
                       }
                     },
@@ -6409,6 +6920,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 38
                         }
                       },
                       "nested": {
@@ -6657,6 +7172,11 @@
                           "rule": "repeated",
                           "type": "SearchRequest.BoostSpec.ConditionBoostSpec",
                           "id": 14
+                        },
+                        "experimentInfo": {
+                          "rule": "repeated",
+                          "type": "ExperimentInfo",
+                          "id": 17
                         }
                       },
                       "nested": {
@@ -6753,6 +7273,110 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "ExperimentInfo": {
+                      "oneofs": {
+                        "experimentMetadata": {
+                          "oneof": [
+                            "servingConfigExperiment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "servingConfigExperiment": {
+                          "type": "ServingConfigExperiment",
+                          "id": 2
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Experiment"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ServingConfigExperiment": {
+                          "fields": {
+                            "originalServingConfig": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            },
+                            "experimentServingConfig": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Control": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/Control",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}"
+                      },
+                      "oneofs": {
+                        "control": {
+                          "oneof": [
+                            "facetSpec",
+                            "rule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "facetSpec": {
+                          "type": "SearchRequest.FacetSpec",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "rule": {
+                          "type": "Rule",
+                          "id": 4
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "associatedServingConfigIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "solutionTypes": {
+                          "rule": "repeated",
+                          "type": "SolutionType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "searchSolutionUseCase": {
+                          "rule": "repeated",
+                          "type": "SearchSolutionUseCase",
+                          "id": 7
                         }
                       }
                     },
@@ -7064,6 +7688,227 @@
                         }
                       }
                     },
+                    "MerchantCenterAccountLink": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/MerchantCenterAccountLink",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "merchantCenterAccountId": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "branchId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "feedLabel": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "feedFilters": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterFeedFilter",
+                          "id": 6
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MerchantCenterFeedFilter": {
+                          "fields": {
+                            "primaryFeedId": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "primaryFeedName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "ACTIVE": 2,
+                            "FAILED": 3
+                          }
+                        }
+                      }
+                    },
+                    "CreateMerchantCenterAccountLinkMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "MerchantCenterAccountLinkService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListMerchantCenterAccountLinks": {
+                          "requestType": "ListMerchantCenterAccountLinksRequest",
+                          "responseType": "ListMerchantCenterAccountLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateMerchantCenterAccountLink": {
+                          "requestType": "CreateMerchantCenterAccountLinkRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks",
+                            "(google.api.http).body": "merchant_center_account_link",
+                            "(google.api.method_signature)": "parent,merchant_center_account_link",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.MerchantCenterAccountLink",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/merchantCenterAccountLinks",
+                                "body": "merchant_center_account_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,merchant_center_account_link"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2alpha.MerchantCenterAccountLink",
+                                "metadata_type": "google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteMerchantCenterAccountLink": {
+                          "requestType": "DeleteMerchantCenterAccountLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2alpha/{name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2alpha/{name=projects/*/locations/*/catalogs/*/merchantCenterAccountLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListMerchantCenterAccountLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        }
+                      }
+                    },
+                    "ListMerchantCenterAccountLinksResponse": {
+                      "fields": {
+                        "merchantCenterAccountLinks": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterAccountLink",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateMerchantCenterAccountLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        },
+                        "merchantCenterAccountLink": {
+                          "type": "MerchantCenterAccountLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMerchantCenterAccountLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/MerchantCenterAccountLink"
+                          }
+                        }
+                      }
+                    },
                     "Model": {
                       "options": {
                         "(google.api.resource).type": "retail.googleapis.com/Model",
@@ -7341,6 +8186,24 @@
                             }
                           ]
                         },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{name=projects/*/locations/*/catalogs/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "PauseModel": {
                           "requestType": "PauseModelRequest",
                           "responseType": "Model",
@@ -7507,6 +8370,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
                           }
                         }
                       }
@@ -8086,6 +8961,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "retail.googleapis.com/Product"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
@@ -9030,8 +9909,8 @@
                     "objc_class_prefix": "RETAIL",
                     "php_namespace": "Google\\Cloud\\Retail\\V2beta",
                     "ruby_package": "Google::Cloud::Retail::V2beta",
-                    "(google.api.resource_definition).type": "retail.googleapis.com/Branch",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}"
+                    "(google.api.resource_definition).type": "retail.googleapis.com/Experiment",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}"
                   },
                   "nested": {
                     "ProductLevelConfig": {
@@ -10461,6 +11340,10 @@
                         "pageViewId": {
                           "type": "string",
                           "id": 15
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 23
                         }
                       }
                     },
@@ -11085,6 +11968,10 @@
                         "maxSuggestions": {
                           "type": "int32",
                           "id": 5
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },
@@ -11332,6 +12219,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "entity": {
+                          "type": "string",
+                          "id": 38
                         }
                       },
                       "nested": {
@@ -11571,6 +12462,11 @@
                           "rule": "repeated",
                           "type": "SearchRequest.BoostSpec.ConditionBoostSpec",
                           "id": 14
+                        },
+                        "experimentInfo": {
+                          "rule": "repeated",
+                          "type": "ExperimentInfo",
+                          "id": 17
                         }
                       },
                       "nested": {
@@ -11665,6 +12561,48 @@
                             "pinnedResultCount": {
                               "type": "int64",
                               "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExperimentInfo": {
+                      "oneofs": {
+                        "experimentMetadata": {
+                          "oneof": [
+                            "servingConfigExperiment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "servingConfigExperiment": {
+                          "type": "ServingConfigExperiment",
+                          "id": 2
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Experiment"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ServingConfigExperiment": {
+                          "fields": {
+                            "originalServingConfig": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
+                            },
+                            "experimentServingConfig": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "retail.googleapis.com/ServingConfig"
+                              }
                             }
                           }
                         }
@@ -12163,6 +13101,24 @@
                             }
                           ]
                         },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v2beta/{name=projects/*/locations/*/catalogs/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta/{name=projects/*/locations/*/catalogs/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "PauseModel": {
                           "requestType": "PauseModelRequest",
                           "responseType": "Model",
@@ -12329,6 +13285,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Model"
                           }
                         }
                       }

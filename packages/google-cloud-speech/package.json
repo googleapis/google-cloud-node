@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/speech",
   "description": "Cloud Speech Client Library for Node.js",
-  "version": "5.4.0",
+  "version": "5.4.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -17,7 +17,8 @@
     "build/protos",
     "build/src",
     "AUTHORS",
-    "LICENSE"
+    "LICENSE",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -41,7 +42,7 @@
     "fix": "gts fix",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "compile": "tsc -p . && cp system-test/*.js build/system-test/ && cp -r protos build/",
+    "compile": "tsc -p . && cp system-test/*.js build/system-test/ && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
@@ -52,7 +53,7 @@
   "dependencies": {
     "@google-cloud/common": "^4.0.0",
     "@types/pumpify": "^1.4.1",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.5.8",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4",
     "uuid": "^9.0.0"
@@ -79,3 +80,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-speech"
 }
+

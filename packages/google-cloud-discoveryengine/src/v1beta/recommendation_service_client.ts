@@ -181,6 +181,10 @@ export class RecommendationServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
+        ),
       projectLocationCollectionDataStoreServingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
@@ -188,6 +192,10 @@ export class RecommendationServiceClient {
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
         ),
       projectLocationDataStoreServingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -335,7 +343,7 @@ export class RecommendationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. Full resource name of the format:
-   *   projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*
+   *   `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
    *
    *   Before you can request recommendations from your model, you must create at
    *   least one serving config  for it.
@@ -369,8 +377,8 @@ export class RecommendationServiceClient {
    *
    *   Examples:
    *
-   *    * (filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))
-   *    * (filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))
+   *    * `(filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))`
+   *    * `(filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))`
    *
    *   If your filter blocks all results, the API will return generic
    *   (unfiltered) popular Documents. If you only want results strictly matching
@@ -378,8 +386,9 @@ export class RecommendationServiceClient {
    *   {@link google.cloud.discoveryengine.v1beta.RecommendRequest.params|RecommendRequest.params}
    *   to receive empty results instead.
    *
-   *   Note that the API will never return Documents with storageStatus of
-   *   "EXPIRED" or "DELETED" regardless of filter choices.
+   *   Note that the API will never return
+   *   {@link google.cloud.discoveryengine.v1beta.Document|Document}s with
+   *   `storageStatus` of `EXPIRED` or `DELETED` regardless of filter choices.
    * @param {boolean} request.validateOnly
    *   Use validate only mode for this recommendation query. If set to true, a
    *   fake model will be used that returns arbitrary Document IDs.
@@ -392,22 +401,22 @@ export class RecommendationServiceClient {
    *
    *   * `returnDocument`: Boolean. If set to true, the associated Document
    *      object will be returned in
-   *      {@link RecommendationResult.document|RecommendResponse.results.document}.
+   *      {@link google.cloud.discoveryengine.v1beta.RecommendResponse.RecommendationResult.document|RecommendResponse.RecommendationResult.document}.
    *   * `returnScore`: Boolean. If set to true, the recommendation 'score'
    *      corresponding to each returned Document will be set in
-   *      {@link RecommendationResult.metadata|RecommendResponse.results.metadata}. The
-   *      given 'score' indicates the probability of a Document conversion given
-   *      the user's context and history.
+   *      {@link google.cloud.discoveryengine.v1beta.RecommendResponse.RecommendationResult.metadata|RecommendResponse.RecommendationResult.metadata}.
+   *      The given 'score' indicates the probability of a Document conversion
+   *      given the user's context and history.
    *   * `strictFiltering`: Boolean. True by default. If set to false, the service
    *      will return generic (unfiltered) popular Documents instead of empty if
    *      your filter blocks all recommendation results.
    *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
    *      it needs to be one of:
-   *      *  'no-diversity'
-   *      *  'low-diversity'
-   *      *  'medium-diversity'
-   *      *  'high-diversity'
-   *      *  'auto-diversity'
+   *       *  `no-diversity`
+   *       *  `low-diversity`
+   *       *  `medium-diversity`
+   *       *  `high-diversity`
+   *       *  `auto-diversity`
    *      This gives request-level control and adjusts recommendation results
    *      based on Document category.
    * @param {number[]} request.userLabels
@@ -639,6 +648,109 @@ export class RecommendationServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} schema
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSchemaPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    schema: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        schema: schema,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).data_store;
+  }
+
+  /**
+   * Parse the schema from ProjectLocationCollectionDataStoreSchema resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSchemaName
+   *   A fully-qualified path representing project_location_collection_data_store_schema resource.
+   * @returns {string} A string representing the schema.
+   */
+  matchSchemaFromProjectLocationCollectionDataStoreSchemaName(
+    projectLocationCollectionDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
+      projectLocationCollectionDataStoreSchemaName
+    ).schema;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreServingConfig resource name string.
    *
    * @param {string} project
@@ -842,6 +954,91 @@ export class RecommendationServiceClient {
     return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
       projectLocationDataStoreBranchDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} schema
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSchemaPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    schema: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        schema: schema,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).data_store;
+  }
+
+  /**
+   * Parse the schema from ProjectLocationDataStoreSchema resource.
+   *
+   * @param {string} projectLocationDataStoreSchemaName
+   *   A fully-qualified path representing project_location_data_store_schema resource.
+   * @returns {string} A string representing the schema.
+   */
+  matchSchemaFromProjectLocationDataStoreSchemaName(
+    projectLocationDataStoreSchemaName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
+      projectLocationDataStoreSchemaName
+    ).schema;
   }
 
   /**

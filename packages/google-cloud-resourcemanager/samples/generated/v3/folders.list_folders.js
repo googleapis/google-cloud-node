@@ -29,16 +29,19 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the organization or folder whose folders are
-   *  being listed.
-   *  Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *  Required. The name of the parent resource whose folders are being listed.
+   *  Only children of this parent resource are listed; descendants are not
+   *  listed.
+   *  If the parent is a folder, use the value `folders/{folder_id}`. If the
+   *  parent is an organization, use the value `organizations/{org_id}`.
    *  Access to this method is controlled by checking the
    *  `resourcemanager.folders.list` permission on the `parent`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of folders to return in the response.
-   *  If unspecified, server picks an appropriate default.
+   *  Optional. The maximum number of folders to return in the response. The
+   *  server can return fewer folders than requested. If unspecified, server
+   *  picks an appropriate default.
    */
   // const pageSize = 1234
   /**

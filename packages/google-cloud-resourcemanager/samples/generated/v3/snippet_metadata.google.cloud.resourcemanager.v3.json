@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-resourcemanager",
-        "version": "4.2.0",
+        "version": "4.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -114,7 +114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -546,7 +546,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -770,7 +770,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -947,7 +947,7 @@
             "regionTag": "cloudresourcemanager_v3_generated_Projects_MoveProject_async",
             "title": "Folders moveProject Sample",
             "origin": "API_DEFINITION",
-            "description": " Move a project to another place in your resource hierarchy, under a new resource parent. Returns an operation which can be used to track the process of the project move workflow. Upon success, the `Operation.response` field will be populated with the moved project. The caller must have `resourcemanager.projects.update` permission on the project and have `resourcemanager.projects.move` permission on the project's current and proposed new parent.",
+            "description": " Move a project to another place in your resource hierarchy, under a new resource parent. Returns an operation which can be used to track the process of the project move workflow. Upon success, the `Operation.response` field will be populated with the moved project. The caller must have `resourcemanager.projects.move` permission on the project, on the project's current and proposed new parent. If project has no current parent, or it currently does not have an associated organization resource, you will also need the `resourcemanager.projects.setIamPolicy` permission in the project.",
             "canonical": true,
             "file": "projects.move_project.js",
             "language": "JAVASCRIPT",
@@ -1071,7 +1071,7 @@
             "regionTag": "cloudresourcemanager_v3_generated_Projects_GetIamPolicy_async",
             "title": "Folders getIamPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns the IAM access control policy for the specified project. Permission is denied if the policy or the resource do not exist.",
+            "description": " Returns the IAM access control policy for the specified project, in the format `projects/{ProjectIdOrNumber}` e.g. projects/123. Permission is denied if the policy or the resource do not exist.",
             "canonical": true,
             "file": "projects.get_iam_policy.js",
             "language": "JAVASCRIPT",
@@ -1115,7 +1115,7 @@
             "regionTag": "cloudresourcemanager_v3_generated_Projects_SetIamPolicy_async",
             "title": "Folders setIamPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Sets the IAM access control policy for the specified project. CAUTION: This method will replace the existing policy, and cannot be used to append additional IAM settings. Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles. The following constraints apply when using `setIamPolicy()`: + Project does not support `allUsers` and `allAuthenticatedUsers` as `members` in a `Binding` of a `Policy`. + The owner role can be granted to a `user`, `serviceAccount`, or a group that is part of an organization. For example, group@myownpersonaldomain.com could be added as an owner to a project in the myownpersonaldomain.com organization, but not the examplepetstore.com organization. + Service accounts can be made owners of a project directly without any restrictions. However, to be added as an owner, a user must be invited using the Cloud Platform console and must accept the invitation. + A user cannot be granted the owner role using `setIamPolicy()`. The user must be granted the owner role using the Cloud Platform Console and must explicitly accept the invitation. + Invitations to grant the owner role cannot be sent using `setIamPolicy()`; they must be sent only using the Cloud Platform Console. + Membership changes that leave the project without any owners that have accepted the Terms of Service (ToS) will be rejected. + If the project is not part of an organization, there must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner from the policy will fail. This restriction also applies to legacy projects that no longer have owners who have accepted the ToS. Edits to IAM policies will be rejected until the lack of a ToS-accepting owner is rectified. + Calling this method requires enabling the App Engine Admin API.",
+            "description": " Sets the IAM access control policy for the specified project, in the format `projects/{ProjectIdOrNumber}` e.g. projects/123. CAUTION: This method will replace the existing policy, and cannot be used to append additional IAM settings. Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles. The following constraints apply when using `setIamPolicy()`: + Project does not support `allUsers` and `allAuthenticatedUsers` as `members` in a `Binding` of a `Policy`. + The owner role can be granted to a `user`, `serviceAccount`, or a group that is part of an organization. For example, group@myownpersonaldomain.com could be added as an owner to a project in the myownpersonaldomain.com organization, but not the examplepetstore.com organization. + Service accounts can be made owners of a project directly without any restrictions. However, to be added as an owner, a user must be invited using the Cloud Platform console and must accept the invitation. + A user cannot be granted the owner role using `setIamPolicy()`. The user must be granted the owner role using the Cloud Platform Console and must explicitly accept the invitation. + Invitations to grant the owner role cannot be sent using `setIamPolicy()`; they must be sent only using the Cloud Platform Console. + If the project is not part of an organization, there must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner from the policy will fail. This restriction also applies to legacy projects that no longer have owners who have accepted the ToS. Edits to IAM policies will be rejected until the lack of a ToS-accepting owner is rectified. If the project is part of an organization, you can remove all owners, potentially making the organization inaccessible.",
             "canonical": true,
             "file": "projects.set_iam_policy.js",
             "language": "JAVASCRIPT",
@@ -1163,7 +1163,7 @@
             "regionTag": "cloudresourcemanager_v3_generated_Projects_TestIamPermissions_async",
             "title": "Folders testIamPermissions Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns permissions that a caller has on the specified project.",
+            "description": " Returns permissions that a caller has on the specified project, in the format `projects/{ProjectIdOrNumber}` e.g. projects/123..",
             "canonical": true,
             "file": "projects.test_iam_permissions.js",
             "language": "JAVASCRIPT",
@@ -1207,7 +1207,7 @@
             "regionTag": "cloudresourcemanager_v3_generated_TagBindings_ListTagBindings_async",
             "title": "Folders listTagBindings Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists the TagBindings for the given cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name",
+            "description": " Lists the TagBindings for the given Google Cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name",
             "canonical": true,
             "file": "tag_bindings.list_tag_bindings.js",
             "language": "JAVASCRIPT",
@@ -1255,7 +1255,7 @@
             "regionTag": "cloudresourcemanager_v3_generated_TagBindings_CreateTagBinding_async",
             "title": "Folders createTagBinding Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a TagBinding between a TagValue and a cloud resource (currently project, folder, or organization).",
+            "description": " Creates a TagBinding between a TagValue and a Google Cloud resource.",
             "canonical": true,
             "file": "tag_bindings.create_tag_binding.js",
             "language": "JAVASCRIPT",
@@ -1331,6 +1331,198 @@
                     "service": {
                         "shortName": "TagBindings",
                         "fullName": "google.cloud.resourcemanager.v3.TagBindings"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_async",
+            "title": "Folders listEffectiveTags Sample",
+            "origin": "API_DEFINITION",
+            "description": " Return a list of effective tags for the given Google Cloud resource, as specified in `parent`.",
+            "canonical": true,
+            "file": "tag_bindings.list_effective_tags.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListEffectiveTags",
+                "fullName": "google.cloud.resourcemanager.v3.TagBindings.ListEffectiveTags",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.resourcemanager.v3.ListEffectiveTagsResponse",
+                "client": {
+                    "shortName": "TagBindingsClient",
+                    "fullName": "google.cloud.resourcemanager.v3.TagBindingsClient"
+                },
+                "method": {
+                    "shortName": "ListEffectiveTags",
+                    "fullName": "google.cloud.resourcemanager.v3.TagBindings.ListEffectiveTags",
+                    "service": {
+                        "shortName": "TagBindings",
+                        "fullName": "google.cloud.resourcemanager.v3.TagBindings"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_async",
+            "title": "Folders createTagHold Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a TagHold. Returns ALREADY_EXISTS if a TagHold with the same resource and origin exists under the same TagValue.",
+            "canonical": true,
+            "file": "tag_holds.create_tag_hold.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateTagHold",
+                "fullName": "google.cloud.resourcemanager.v3.TagHolds.CreateTagHold",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tag_hold",
+                        "type": ".google.cloud.resourcemanager.v3.TagHold"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "TagHoldsClient",
+                    "fullName": "google.cloud.resourcemanager.v3.TagHoldsClient"
+                },
+                "method": {
+                    "shortName": "CreateTagHold",
+                    "fullName": "google.cloud.resourcemanager.v3.TagHolds.CreateTagHold",
+                    "service": {
+                        "shortName": "TagHolds",
+                        "fullName": "google.cloud.resourcemanager.v3.TagHolds"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_async",
+            "title": "Folders deleteTagHold Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a TagHold.",
+            "canonical": true,
+            "file": "tag_holds.delete_tag_hold.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTagHold",
+                "fullName": "google.cloud.resourcemanager.v3.TagHolds.DeleteTagHold",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "TagHoldsClient",
+                    "fullName": "google.cloud.resourcemanager.v3.TagHoldsClient"
+                },
+                "method": {
+                    "shortName": "DeleteTagHold",
+                    "fullName": "google.cloud.resourcemanager.v3.TagHolds.DeleteTagHold",
+                    "service": {
+                        "shortName": "TagHolds",
+                        "fullName": "google.cloud.resourcemanager.v3.TagHolds"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudresourcemanager_v3_generated_TagHolds_ListTagHolds_async",
+            "title": "Folders listTagHolds Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists TagHolds under a TagValue.",
+            "canonical": true,
+            "file": "tag_holds.list_tag_holds.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListTagHolds",
+                "fullName": "google.cloud.resourcemanager.v3.TagHolds.ListTagHolds",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.resourcemanager.v3.ListTagHoldsResponse",
+                "client": {
+                    "shortName": "TagHoldsClient",
+                    "fullName": "google.cloud.resourcemanager.v3.TagHoldsClient"
+                },
+                "method": {
+                    "shortName": "ListTagHolds",
+                    "fullName": "google.cloud.resourcemanager.v3.TagHolds.ListTagHolds",
+                    "service": {
+                        "shortName": "TagHolds",
+                        "fullName": "google.cloud.resourcemanager.v3.TagHolds"
                     }
                 }
             }
@@ -1424,10 +1616,50 @@
             }
         },
         {
+            "regionTag": "cloudresourcemanager_v3_generated_TagKeys_GetNamespacedTagKey_async",
+            "title": "Folders getNamespacedTagKey Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a TagKey by its namespaced name. This method will return `PERMISSION_DENIED` if the key does not exist or the user does not have permission to view it.",
+            "canonical": true,
+            "file": "tag_keys.get_namespaced_tag_key.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNamespacedTagKey",
+                "fullName": "google.cloud.resourcemanager.v3.TagKeys.GetNamespacedTagKey",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.resourcemanager.v3.TagKey",
+                "client": {
+                    "shortName": "TagKeysClient",
+                    "fullName": "google.cloud.resourcemanager.v3.TagKeysClient"
+                },
+                "method": {
+                    "shortName": "GetNamespacedTagKey",
+                    "fullName": "google.cloud.resourcemanager.v3.TagKeys.GetNamespacedTagKey",
+                    "service": {
+                        "shortName": "TagKeys",
+                        "fullName": "google.cloud.resourcemanager.v3.TagKeys"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_async",
             "title": "Folders createTagKey Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 300 TagKeys can exist under a parent at any given time.",
+            "description": " Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 1000 TagKeys can exist under a parent at any given time.",
             "canonical": true,
             "file": "tag_keys.create_tag_key.js",
             "language": "JAVASCRIPT",
@@ -1710,7 +1942,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -1751,14 +1983,14 @@
             "regionTag": "cloudresourcemanager_v3_generated_TagValues_GetTagValue_async",
             "title": "Folders getTagValue Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves TagValue. If the TagValue or namespaced name does not exist, or if the user does not have permission to view it, this method will return `PERMISSION_DENIED`.",
+            "description": " Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the value does not exist or the user does not have permission to view it.",
             "canonical": true,
             "file": "tag_values.get_tag_value.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -1788,10 +2020,50 @@
             }
         },
         {
+            "regionTag": "cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_async",
+            "title": "Folders getNamespacedTagValue Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a TagValue by its namespaced name. This method will return `PERMISSION_DENIED` if the value does not exist or the user does not have permission to view it.",
+            "canonical": true,
+            "file": "tag_values.get_namespaced_tag_value.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNamespacedTagValue",
+                "fullName": "google.cloud.resourcemanager.v3.TagValues.GetNamespacedTagValue",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.resourcemanager.v3.TagValue",
+                "client": {
+                    "shortName": "TagValuesClient",
+                    "fullName": "google.cloud.resourcemanager.v3.TagValuesClient"
+                },
+                "method": {
+                    "shortName": "GetNamespacedTagValue",
+                    "fullName": "google.cloud.resourcemanager.v3.TagValues.GetNamespacedTagValue",
+                    "service": {
+                        "shortName": "TagValues",
+                        "fullName": "google.cloud.resourcemanager.v3.TagValues"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async",
             "title": "Folders createTagValue Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 300 TagValues can exist under a TagKey at any given time.",
+            "description": " Creates a TagValue as a child of the specified TagKey. If a another request with the same parameters is sent while the original request is in process the second request will receive an error. A maximum of 1000 TagValues can exist under a TagKey at any given time.",
             "canonical": true,
             "file": "tag_values.create_tag_value.js",
             "language": "JAVASCRIPT",
@@ -1890,7 +2162,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],

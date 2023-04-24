@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/talent",
   "description": "Cloud Talent Solution API client for Node.js",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -15,7 +15,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/protos",
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -41,13 +42,13 @@
     "docs-test": "linkinator docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile",
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -70,3 +71,4 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-talent"
 }
+

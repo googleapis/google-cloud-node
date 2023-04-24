@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/routing-v0.5.0...routing-v0.5.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.4.0...routing-v0.5.0) (2023-03-28)
+
+
+### Features
+
+* [routing] adds support for specifying region_code in the ComputeRoutesRequest ([#4103](https://github.com/googleapis/google-cloud-node/issues/4103)) ([1106a82](https://github.com/googleapis/google-cloud-node/commit/1106a824dbddc7296f069a0a3e063b0ec9fc914f))
+* [routing] moved speed in SpeedReadingInterval into a oneof speed_type, this is a breaking change for Go client libraries ([#4121](https://github.com/googleapis/google-cloud-node/issues/4121)) ([9878d72](https://github.com/googleapis/google-cloud-node/commit/9878d722f634f356590014ea8f2f035bb1b134db))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/routing-v0.3.1...routing-v0.4.0) (2023-03-13)
 
 

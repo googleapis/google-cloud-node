@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. The name of the `WorkerPool` to delete.
    *  Format:
-   *  `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+   *  `projects/{project}/locations/{location}/workerPools/{workerPool}`.
    */
   // const name = 'abc123'
   /**

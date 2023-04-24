@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.6.3](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.2...asset-v4.6.3) (2023-04-13)
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
+## [4.6.2](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.1...asset-v4.6.2) (2023-04-04)
+
+
+### Bug Fixes
+
+* [asset] Change retry configuration for API calls ([#4144](https://github.com/googleapis/google-cloud-node/issues/4144)) ([8073ac0](https://github.com/googleapis/google-cloud-node/commit/8073ac00bad1baadfcbfc09715a0590895582010))
+
 ## [4.6.1](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.0...asset-v4.6.1) (2023-02-15)
 
 

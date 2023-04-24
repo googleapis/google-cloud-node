@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-retail",
-        "version": "2.3.0",
+        "version": "2.4.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -554,7 +554,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 115,
+                    "end": 124,
                     "type": "FULL"
                 }
             ],
@@ -590,6 +590,10 @@
                     {
                         "name": "max_suggestions",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "entity",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2beta.CompleteQueryResponse",
@@ -928,6 +932,46 @@
             }
         },
         {
+            "regionTag": "retail_v2beta_generated_ModelService_GetModel_async",
+            "title": "CatalogService getModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a model.",
+            "canonical": true,
+            "file": "model_service.get_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetModel",
+                "fullName": "google.cloud.retail.v2beta.ModelService.GetModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2beta.Model",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.retail.v2beta.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "GetModel",
+                    "fullName": "google.cloud.retail.v2beta.ModelService.GetModel",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.retail.v2beta.ModelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2beta_generated_ModelService_PauseModel_async",
             "title": "CatalogService pauseModel Sample",
             "origin": "API_DEFINITION",
@@ -1190,7 +1234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 177,
+                    "end": 179,
                     "type": "FULL"
                 }
             ],
@@ -1547,7 +1591,7 @@
             "regionTag": "retail_v2beta_generated_ProductService_SetInventory_async",
             "title": "CatalogService setInventory Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates inventory information for a [Product][google.cloud.retail.v2beta.Product] while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating fulfillment information. If the request is valid, the update is enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. When inventory is updated with [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct], the specified inventory field value(s) overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update times for the specified inventory fields are overwritten by the times of the [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] or [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct] request. If no inventory fields are set in [CreateProductRequest.product][google.cloud.retail.v2beta.CreateProductRequest.product], then any pre-existing inventory information for this product is used. If no inventory fields are set in [SetInventoryRequest.set_mask][google.cloud.retail.v2beta.SetInventoryRequest.set_mask], then any existing inventory information is preserved. Pre-existing inventory information can only be updated with [ProductService.SetInventory][google.cloud.retail.v2beta.ProductService.SetInventory], [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces], and [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces]. The returned [Operation][google.longrunning.Operation]s is obsolete after one day, and the [GetOperation][google.longrunning.Operations.GetOperation] API returns `NOT_FOUND` afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates are not marked as [done][google.longrunning.Operation.done] until they are obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " Updates inventory information for a [Product][google.cloud.retail.v2beta.Product] while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating fulfillment information. If the request is valid, the update is enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. When inventory is updated with [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct], the specified inventory field value(s) overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update times for the specified inventory fields are overwritten by the times of the [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] or [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct] request. If no inventory fields are set in [CreateProductRequest.product][google.cloud.retail.v2beta.CreateProductRequest.product], then any pre-existing inventory information for this product is used. If no inventory fields are set in [SetInventoryRequest.set_mask][google.cloud.retail.v2beta.SetInventoryRequest.set_mask], then any existing inventory information is preserved. Pre-existing inventory information can only be updated with [ProductService.SetInventory][google.cloud.retail.v2beta.ProductService.SetInventory], [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces], and [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces]. The returned [Operation][google.longrunning.Operation]s is obsolete after one day, and the [GetOperation][google.longrunning.Operations.GetOperation] API returns `NOT_FOUND` afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates are not marked as [done][google.longrunning.Operation.done] until they are obsolete.",
             "canonical": true,
             "file": "product_service.set_inventory.js",
             "language": "JAVASCRIPT",
@@ -1599,7 +1643,7 @@
             "regionTag": "retail_v2beta_generated_ProductService_AddFulfillmentPlaces_async",
             "title": "CatalogService addFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2beta.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " It is recommended to use the [ProductService.AddLocalInventories][google.cloud.retail.v2beta.ProductService.AddLocalInventories] method instead of [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces]. [ProductService.AddLocalInventories][google.cloud.retail.v2beta.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2beta.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.add_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -1655,7 +1699,7 @@
             "regionTag": "retail_v2beta_generated_ProductService_RemoveFulfillmentPlaces_async",
             "title": "CatalogService removeFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2beta.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " It is recommended to use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2beta.ProductService.RemoveLocalInventories] method instead of [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces]. [ProductService.RemoveLocalInventories][google.cloud.retail.v2beta.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2beta.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.remove_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -1711,7 +1755,7 @@
             "regionTag": "retail_v2beta_generated_ProductService_AddLocalInventories_async",
             "title": "CatalogService addLocalInventories Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates local inventory information for a [Product][google.cloud.retail.v2beta.Product] at a list of places, while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating inventory information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. Local inventory information can only be modified using this method. [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " Updates local inventory information for a [Product][google.cloud.retail.v2beta.Product] at a list of places, while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2beta.Product] to exist before updating inventory information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. Local inventory information can only be modified using this method. [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.add_local_inventories.js",
             "language": "JAVASCRIPT",
@@ -1767,7 +1811,7 @@
             "regionTag": "retail_v2beta_generated_ProductService_RemoveLocalInventories_async",
             "title": "CatalogService removeLocalInventories Sample",
             "origin": "API_DEFINITION",
-            "description": " Remove local inventory information for a [Product][google.cloud.retail.v2beta.Product] at a list of places at a removal timestamp. This process is asynchronous. If the request is valid, the removal will be enqueued and processed downstream. As a consequence, when a response is returned, removals are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. Local inventory information can only be removed using this method. [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
+            "description": " Remove local inventory information for a [Product][google.cloud.retail.v2beta.Product] at a list of places at a removal timestamp. This process is asynchronous. If the request is valid, the removal will be enqueued and processed downstream. As a consequence, when a response is returned, removals are not immediately manifested in the [Product][google.cloud.retail.v2beta.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2beta.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2beta.ProductService.ListProducts]. Local inventory information can only be removed using this method. [ProductService.CreateProduct][google.cloud.retail.v2beta.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2beta.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.remove_local_inventories.js",
             "language": "JAVASCRIPT",
@@ -1826,7 +1870,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 295,
+                    "end": 304,
                     "type": "FULL"
                 }
             ],
@@ -1918,6 +1962,10 @@
                     {
                         "name": "spell_correction_spec",
                         "type": ".google.cloud.retail.v2beta.SearchRequest.SpellCorrectionSpec"
+                    },
+                    {
+                        "name": "entity",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2beta.SearchResponse",

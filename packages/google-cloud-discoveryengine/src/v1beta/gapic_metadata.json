@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.discoveryengine.v1beta",
   "libraryPackage": "@google-cloud/discoveryengine",
   "services": {
+    "CompletionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CompletionServiceClient",
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "completeQuery"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CompletionServiceClient",
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "completeQuery"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DocumentService": {
       "clients": {
         "grpc": {
@@ -101,6 +125,102 @@
             "Recommend": {
               "methods": [
                 "recommend"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SchemaService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SchemaServiceClient",
+          "rpcs": {
+            "GetSchema": {
+              "methods": [
+                "getSchema"
+              ]
+            },
+            "CreateSchema": {
+              "methods": [
+                "createSchema"
+              ]
+            },
+            "UpdateSchema": {
+              "methods": [
+                "updateSchema"
+              ]
+            },
+            "DeleteSchema": {
+              "methods": [
+                "deleteSchema"
+              ]
+            },
+            "ListSchemas": {
+              "methods": [
+                "listSchemas",
+                "listSchemasStream",
+                "listSchemasAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SchemaServiceClient",
+          "rpcs": {
+            "GetSchema": {
+              "methods": [
+                "getSchema"
+              ]
+            },
+            "CreateSchema": {
+              "methods": [
+                "createSchema"
+              ]
+            },
+            "UpdateSchema": {
+              "methods": [
+                "updateSchema"
+              ]
+            },
+            "DeleteSchema": {
+              "methods": [
+                "deleteSchema"
+              ]
+            },
+            "ListSchemas": {
+              "methods": [
+                "listSchemas",
+                "listSchemasStream",
+                "listSchemasAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SearchServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search",
+                "searchStream",
+                "searchAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SearchServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search",
+                "searchStream",
+                "searchAsync"
               ]
             }
           }

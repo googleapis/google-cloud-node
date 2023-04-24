@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.4.1...grafeas-v4.5.0) (2023-04-24)
+
+
+### Features
+
+* [grafeas] add enum for grafeas v1 cvss to support both cvss v2 and v3 ([#4167](https://github.com/googleapis/google-cloud-node/issues/4167)) ([d9cf3bd](https://github.com/googleapis/google-cloud-node/commit/d9cf3bd09e06f53bfe650619df5c039a2b918af9))
+
+## [4.4.1](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.4.0...grafeas-v4.4.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.3.0...grafeas-v4.4.0) (2023-03-28)
+
+
+### Features
+
+* [grafeas] Add VULNERABILITY_ASSESSMENT Note type to grafeas v1 API, adds Vex_Assessment derived from the Note to resources' occurrences, VEX notes now be written to add CVE assessments ([#4069](https://github.com/googleapis/google-cloud-node/issues/4069)) ([c0d401d](https://github.com/googleapis/google-cloud-node/commit/c0d401de0df43b36c4b2d1511c436eb90a7cf446))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.2.2...grafeas-v4.3.0) (2023-03-06)
 
 

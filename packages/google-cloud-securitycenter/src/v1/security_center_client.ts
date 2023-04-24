@@ -196,6 +196,14 @@ export class SecurityCenterClient {
       folderNotificationConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/notificationConfigs/{notification_config}'
       ),
+      folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/securityHealthAnalyticsSettings/customModules/{custom_module}'
+        ),
+      folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}'
+        ),
       folderSourcePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}'
       ),
@@ -230,6 +238,18 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/notificationConfigs/{notification_config}'
         ),
+      organizationSecurityHealthAnalyticsSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/securityHealthAnalyticsSettings'
+        ),
+      organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/securityHealthAnalyticsSettings/customModules/{custom_module}'
+        ),
+      organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}'
+        ),
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
@@ -262,6 +282,14 @@ export class SecurityCenterClient {
       projectNotificationConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/notificationConfigs/{notification_config}'
       ),
+      projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/securityHealthAnalyticsSettings/customModules/{custom_module}'
+        ),
+      projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}'
+        ),
       projectSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}'
       ),
@@ -297,6 +325,12 @@ export class SecurityCenterClient {
         'nextPageToken',
         'listAssetsResults'
       ),
+      listDescendantSecurityHealthAnalyticsCustomModules:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'securityHealthAnalyticsCustomModules'
+        ),
       listFindings: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -312,6 +346,18 @@ export class SecurityCenterClient {
         'nextPageToken',
         'notificationConfigs'
       ),
+      listEffectiveSecurityHealthAnalyticsCustomModules:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'effectiveSecurityHealthAnalyticsCustomModules'
+        ),
+      listSecurityHealthAnalyticsCustomModules:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'securityHealthAnalyticsCustomModules'
+        ),
       listSources: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -433,24 +479,31 @@ export class SecurityCenterClient {
     // and create an API call method for each.
     const securityCenterStubMethods = [
       'bulkMuteFindings',
+      'createSecurityHealthAnalyticsCustomModule',
       'createSource',
       'createFinding',
       'createMuteConfig',
       'createNotificationConfig',
       'deleteMuteConfig',
       'deleteNotificationConfig',
+      'deleteSecurityHealthAnalyticsCustomModule',
       'getBigQueryExport',
       'getIamPolicy',
       'getMuteConfig',
       'getNotificationConfig',
       'getOrganizationSettings',
+      'getEffectiveSecurityHealthAnalyticsCustomModule',
+      'getSecurityHealthAnalyticsCustomModule',
       'getSource',
       'groupAssets',
       'groupFindings',
       'listAssets',
+      'listDescendantSecurityHealthAnalyticsCustomModules',
       'listFindings',
       'listMuteConfigs',
       'listNotificationConfigs',
+      'listEffectiveSecurityHealthAnalyticsCustomModules',
+      'listSecurityHealthAnalyticsCustomModules',
       'listSources',
       'runAssetDiscovery',
       'setFindingState',
@@ -462,6 +515,7 @@ export class SecurityCenterClient {
       'updateMuteConfig',
       'updateNotificationConfig',
       'updateOrganizationSettings',
+      'updateSecurityHealthAnalyticsCustomModule',
       'updateSource',
       'updateSecurityMarks',
       'createBigQueryExport',
@@ -554,6 +608,117 @@ export class SecurityCenterClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a resident SecurityHealthAnalyticsCustomModule at the scope of the
+   * given CRM parent, and also creates inherited
+   * SecurityHealthAnalyticsCustomModules for all CRM descendants of the given
+   * parent. These modules are enabled by default.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the new custom module's parent. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
+   *   Required. SecurityHealthAnalytics custom module to create. The provided
+   *   name is ignored and reset with provided parent information and
+   *   server-generated ID.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.create_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_CreateSecurityHealthAnalyticsCustomModule_async
+   */
+  createSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createSecurityHealthAnalyticsCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
   /**
    * Creates a source.
    *
@@ -1172,6 +1337,113 @@ export class SecurityCenterClient {
     );
   }
   /**
+   * Deletes the specified SecurityHealthAnalyticsCustomModule and all of its
+   * descendants in the CRM hierarchy. This method is only supported for
+   * resident custom modules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the custom module to delete. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *   "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *   or
+   *   "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.delete_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_DeleteSecurityHealthAnalyticsCustomModule_async
+   */
+  deleteSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Gets a BigQuery export.
    *
    * @param {Object} request
@@ -1649,6 +1921,216 @@ export class SecurityCenterClient {
       });
     this.initialize();
     return this.innerApiCalls.getOrganizationSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Retrieves an EffectiveSecurityHealthAnalyticsCustomModule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the effective custom module to get. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}",
+   *   "folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}",
+   *   or
+   *   "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule | EffectiveSecurityHealthAnalyticsCustomModule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_effective_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetEffectiveSecurityHealthAnalyticsCustomModule_async
+   */
+  getEffectiveSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getEffectiveSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEffectiveSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEffectiveSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Retrieves a SecurityHealthAnalyticsCustomModule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the custom module to get. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *   "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *   or
+   *   "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetSecurityHealthAnalyticsCustomModule_async
+   */
+  getSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSecurityHealthAnalyticsCustomModule(
       request,
       options,
       callback
@@ -2635,6 +3117,114 @@ export class SecurityCenterClient {
       });
     this.initialize();
     return this.innerApiCalls.updateOrganizationSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates the SecurityHealthAnalyticsCustomModule under the given name based
+   * on the given update mask. Updating the enablement state is supported on
+   * both resident and inherited modules (though resident modules cannot have an
+   * enablement state of "inherited"). Updating the display name and custom
+   * config of a module is supported on resident modules only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
+   *   Required. The SecurityHealthAnalytics custom module to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.update_security_health_analytics_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_UpdateSecurityHealthAnalyticsCustomModule_async
+   */
+  updateSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSecurityHealthAnalyticsCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSecurityHealthAnalyticsCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'security_health_analytics_custom_module.name':
+          request.securityHealthAnalyticsCustomModule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSecurityHealthAnalyticsCustomModule(
       request,
       options,
       callback
@@ -5142,6 +5732,217 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ListAssetsResponse.IListAssetsResult>;
   }
   /**
+   * Returns a list of all resident SecurityHealthAnalyticsCustomModules under
+   * the given CRM parent and all of the parent’s CRM descendants.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list descendant custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDescendantSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listDescendantSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+    ]
+  >;
+  listDescendantSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+    >
+  ): void;
+  listDescendantSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+    >
+  ): void;
+  listDescendantSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list descendant custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDescendantSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listDescendantSecurityHealthAnalyticsCustomModulesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream(
+      this.innerApiCalls
+        .listDescendantSecurityHealthAnalyticsCustomModules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list descendant custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_descendant_security_health_analytics_custom_modules.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListDescendantSecurityHealthAnalyticsCustomModules_async
+   */
+  listDescendantSecurityHealthAnalyticsCustomModulesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate(
+      this.innerApiCalls[
+        'listDescendantSecurityHealthAnalyticsCustomModules'
+      ] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule>;
+  }
+  /**
    * Lists an organization or source's findings.
    *
    * To list across all sources provide a `-` as the source id.
@@ -6145,6 +6946,427 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.INotificationConfig>;
   }
   /**
+   * Returns a list of all EffectiveSecurityHealthAnalyticsCustomModules for the
+   * given parent. This includes resident modules defined at the scope of the
+   * parent, and inherited modules, inherited from CRM ancestors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule | EffectiveSecurityHealthAnalyticsCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEffectiveSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEffectiveSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+    ]
+  >;
+  listEffectiveSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+    >
+  ): void;
+  listEffectiveSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+    >
+  ): void;
+  listEffectiveSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule | EffectiveSecurityHealthAnalyticsCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEffectiveSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listEffectiveSecurityHealthAnalyticsCustomModulesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream(
+      this.innerApiCalls
+        .listEffectiveSecurityHealthAnalyticsCustomModules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list effective custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule | EffectiveSecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_effective_security_health_analytics_custom_modules.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListEffectiveSecurityHealthAnalyticsCustomModules_async
+   */
+  listEffectiveSecurityHealthAnalyticsCustomModulesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate(
+      this.innerApiCalls[
+        'listEffectiveSecurityHealthAnalyticsCustomModules'
+      ] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule>;
+  }
+  /**
+   * Returns a list of all SecurityHealthAnalyticsCustomModules for the given
+   * parent. This includes resident modules defined at the scope of the parent,
+   * and inherited modules, inherited from CRM ancestors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+    ]
+  >;
+  listSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+    >
+  ): void;
+  listSecurityHealthAnalyticsCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+    >
+  ): void;
+  listSecurityHealthAnalyticsCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSecurityHealthAnalyticsCustomModules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSecurityHealthAnalyticsCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listSecurityHealthAnalyticsCustomModulesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSecurityHealthAnalyticsCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream(
+      this.innerApiCalls.listSecurityHealthAnalyticsCustomModules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list custom modules. Its format is
+   *   "organizations/{organization}/securityHealthAnalyticsSettings",
+   *   "folders/{folder}/securityHealthAnalyticsSettings", or
+   *   "projects/{project}/securityHealthAnalyticsSettings"
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} request.pageToken
+   *   The value returned by the last call indicating a continuation
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule | SecurityHealthAnalyticsCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_security_health_analytics_custom_modules.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListSecurityHealthAnalyticsCustomModules_async
+   */
+  listSecurityHealthAnalyticsCustomModulesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSecurityHealthAnalyticsCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate(
+      this.innerApiCalls['listSecurityHealthAnalyticsCustomModules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule>;
+  }
+  /**
    * Lists all sources belonging to an organization.
    *
    * @param {Object} request
@@ -6949,6 +8171,104 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified folderSecurityHealthAnalyticsSettingsCustomModule resource name string.
+   *
+   * @param {string} folder
+   * @param {string} custom_module
+   * @returns {string} Resource name string.
+   */
+  folderSecurityHealthAnalyticsSettingsCustomModulePath(
+    folder: string,
+    customModule: string
+  ) {
+    return this.pathTemplates.folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate.render(
+      {
+        folder: folder,
+        custom_module: customModule,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderSecurityHealthAnalyticsSettingsCustomModule resource.
+   *
+   * @param {string} folderSecurityHealthAnalyticsSettingsCustomModuleName
+   *   A fully-qualified path representing folder_securityHealthAnalyticsSettings_custom_module resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderSecurityHealthAnalyticsSettingsCustomModuleName(
+    folderSecurityHealthAnalyticsSettingsCustomModuleName: string
+  ) {
+    return this.pathTemplates.folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match(
+      folderSecurityHealthAnalyticsSettingsCustomModuleName
+    ).folder;
+  }
+
+  /**
+   * Parse the custom_module from FolderSecurityHealthAnalyticsSettingsCustomModule resource.
+   *
+   * @param {string} folderSecurityHealthAnalyticsSettingsCustomModuleName
+   *   A fully-qualified path representing folder_securityHealthAnalyticsSettings_custom_module resource.
+   * @returns {string} A string representing the custom_module.
+   */
+  matchCustomModuleFromFolderSecurityHealthAnalyticsSettingsCustomModuleName(
+    folderSecurityHealthAnalyticsSettingsCustomModuleName: string
+  ) {
+    return this.pathTemplates.folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match(
+      folderSecurityHealthAnalyticsSettingsCustomModuleName
+    ).custom_module;
+  }
+
+  /**
+   * Return a fully-qualified folderSecurityHealthAnalyticsSettingsEffectiveCustomModule resource name string.
+   *
+   * @param {string} folder
+   * @param {string} effective_custom_module
+   * @returns {string} Resource name string.
+   */
+  folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePath(
+    folder: string,
+    effectiveCustomModule: string
+  ) {
+    return this.pathTemplates.folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.render(
+      {
+        folder: folder,
+        effective_custom_module: effectiveCustomModule,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderSecurityHealthAnalyticsSettingsEffectiveCustomModule resource.
+   *
+   * @param {string} folderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+   *   A fully-qualified path representing folder_securityHealthAnalyticsSettings_effective_custom_module resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+    folderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName: string
+  ) {
+    return this.pathTemplates.folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match(
+      folderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+    ).folder;
+  }
+
+  /**
+   * Parse the effective_custom_module from FolderSecurityHealthAnalyticsSettingsEffectiveCustomModule resource.
+   *
+   * @param {string} folderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+   *   A fully-qualified path representing folder_securityHealthAnalyticsSettings_effective_custom_module resource.
+   * @returns {string} A string representing the effective_custom_module.
+   */
+  matchEffectiveCustomModuleFromFolderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+    folderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName: string
+  ) {
+    return this.pathTemplates.folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match(
+      folderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+    ).effective_custom_module;
+  }
+
+  /**
    * Return a fully-qualified folderSource resource name string.
    *
    * @param {string} folder
@@ -7437,6 +8757,133 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationSecurityHealthAnalyticsSettings resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationSecurityHealthAnalyticsSettingsPath(organization: string) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsPathTemplate.render(
+      {
+        organization: organization,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationSecurityHealthAnalyticsSettings resource.
+   *
+   * @param {string} organizationSecurityHealthAnalyticsSettingsName
+   *   A fully-qualified path representing organization_securityHealthAnalyticsSettings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsName(
+    organizationSecurityHealthAnalyticsSettingsName: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsPathTemplate.match(
+      organizationSecurityHealthAnalyticsSettingsName
+    ).organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationSecurityHealthAnalyticsSettingsCustomModule resource name string.
+   *
+   * @param {string} organization
+   * @param {string} custom_module
+   * @returns {string} Resource name string.
+   */
+  organizationSecurityHealthAnalyticsSettingsCustomModulePath(
+    organization: string,
+    customModule: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate.render(
+      {
+        organization: organization,
+        custom_module: customModule,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationSecurityHealthAnalyticsSettingsCustomModule resource.
+   *
+   * @param {string} organizationSecurityHealthAnalyticsSettingsCustomModuleName
+   *   A fully-qualified path representing organization_securityHealthAnalyticsSettings_custom_module resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsCustomModuleName(
+    organizationSecurityHealthAnalyticsSettingsCustomModuleName: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match(
+      organizationSecurityHealthAnalyticsSettingsCustomModuleName
+    ).organization;
+  }
+
+  /**
+   * Parse the custom_module from OrganizationSecurityHealthAnalyticsSettingsCustomModule resource.
+   *
+   * @param {string} organizationSecurityHealthAnalyticsSettingsCustomModuleName
+   *   A fully-qualified path representing organization_securityHealthAnalyticsSettings_custom_module resource.
+   * @returns {string} A string representing the custom_module.
+   */
+  matchCustomModuleFromOrganizationSecurityHealthAnalyticsSettingsCustomModuleName(
+    organizationSecurityHealthAnalyticsSettingsCustomModuleName: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match(
+      organizationSecurityHealthAnalyticsSettingsCustomModuleName
+    ).custom_module;
+  }
+
+  /**
+   * Return a fully-qualified organizationSecurityHealthAnalyticsSettingsEffectiveCustomModule resource name string.
+   *
+   * @param {string} organization
+   * @param {string} effective_custom_module
+   * @returns {string} Resource name string.
+   */
+  organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePath(
+    organization: string,
+    effectiveCustomModule: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.render(
+      {
+        organization: organization,
+        effective_custom_module: effectiveCustomModule,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModule resource.
+   *
+   * @param {string} organizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+   *   A fully-qualified path representing organization_securityHealthAnalyticsSettings_effective_custom_module resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+    organizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match(
+      organizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+    ).organization;
+  }
+
+  /**
+   * Parse the effective_custom_module from OrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModule resource.
+   *
+   * @param {string} organizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+   *   A fully-qualified path representing organization_securityHealthAnalyticsSettings_effective_custom_module resource.
+   * @returns {string} A string representing the effective_custom_module.
+   */
+  matchEffectiveCustomModuleFromOrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+    organizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName: string
+  ) {
+    return this.pathTemplates.organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match(
+      organizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+    ).effective_custom_module;
+  }
+
+  /**
    * Return a fully-qualified organizationSettings resource name string.
    *
    * @param {string} organization
@@ -7922,6 +9369,104 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectNotificationConfigPathTemplate.match(
       projectNotificationConfigName
     ).notification_config;
+  }
+
+  /**
+   * Return a fully-qualified projectSecurityHealthAnalyticsSettingsCustomModule resource name string.
+   *
+   * @param {string} project
+   * @param {string} custom_module
+   * @returns {string} Resource name string.
+   */
+  projectSecurityHealthAnalyticsSettingsCustomModulePath(
+    project: string,
+    customModule: string
+  ) {
+    return this.pathTemplates.projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate.render(
+      {
+        project: project,
+        custom_module: customModule,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectSecurityHealthAnalyticsSettingsCustomModule resource.
+   *
+   * @param {string} projectSecurityHealthAnalyticsSettingsCustomModuleName
+   *   A fully-qualified path representing project_securityHealthAnalyticsSettings_custom_module resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSecurityHealthAnalyticsSettingsCustomModuleName(
+    projectSecurityHealthAnalyticsSettingsCustomModuleName: string
+  ) {
+    return this.pathTemplates.projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match(
+      projectSecurityHealthAnalyticsSettingsCustomModuleName
+    ).project;
+  }
+
+  /**
+   * Parse the custom_module from ProjectSecurityHealthAnalyticsSettingsCustomModule resource.
+   *
+   * @param {string} projectSecurityHealthAnalyticsSettingsCustomModuleName
+   *   A fully-qualified path representing project_securityHealthAnalyticsSettings_custom_module resource.
+   * @returns {string} A string representing the custom_module.
+   */
+  matchCustomModuleFromProjectSecurityHealthAnalyticsSettingsCustomModuleName(
+    projectSecurityHealthAnalyticsSettingsCustomModuleName: string
+  ) {
+    return this.pathTemplates.projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match(
+      projectSecurityHealthAnalyticsSettingsCustomModuleName
+    ).custom_module;
+  }
+
+  /**
+   * Return a fully-qualified projectSecurityHealthAnalyticsSettingsEffectiveCustomModule resource name string.
+   *
+   * @param {string} project
+   * @param {string} effective_custom_module
+   * @returns {string} Resource name string.
+   */
+  projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePath(
+    project: string,
+    effectiveCustomModule: string
+  ) {
+    return this.pathTemplates.projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.render(
+      {
+        project: project,
+        effective_custom_module: effectiveCustomModule,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectSecurityHealthAnalyticsSettingsEffectiveCustomModule resource.
+   *
+   * @param {string} projectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+   *   A fully-qualified path representing project_securityHealthAnalyticsSettings_effective_custom_module resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+    projectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName: string
+  ) {
+    return this.pathTemplates.projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match(
+      projectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+    ).project;
+  }
+
+  /**
+   * Parse the effective_custom_module from ProjectSecurityHealthAnalyticsSettingsEffectiveCustomModule resource.
+   *
+   * @param {string} projectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+   *   A fully-qualified path representing project_securityHealthAnalyticsSettings_effective_custom_module resource.
+   * @returns {string} A string representing the effective_custom_module.
+   */
+  matchEffectiveCustomModuleFromProjectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+    projectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName: string
+  ) {
+    return this.pathTemplates.projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match(
+      projectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName
+    ).effective_custom_module;
   }
 
   /**

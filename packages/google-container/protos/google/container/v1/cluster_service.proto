@@ -28,7 +28,7 @@ import "google/rpc/code.proto";
 import "google/rpc/status.proto";
 
 option csharp_namespace = "Google.Cloud.Container.V1";
-option go_package = "google.golang.org/genproto/googleapis/container/v1;container";
+option go_package = "cloud.google.com/go/container/apiv1/containerpb;containerpb";
 option java_multiple_files = true;
 option java_outer_classname = "ClusterServiceProto";
 option java_package = "com.google.container.v1";
@@ -891,6 +891,20 @@ message NodeNetworkConfig {
 
   // Network bandwidth tier configuration.
   optional NetworkPerformanceConfig network_performance_config = 11;
+
+  // [PRIVATE FIELD]
+  // Pod CIDR size overprovisioning config for the nodepool.
+  //
+  // Pod CIDR size per node depends on max_pods_per_node. By default, the value
+  // of max_pods_per_node is rounded off to next power of 2 and we then double
+  // that to get the size of pod CIDR block per node.
+  // Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+  //
+  // This config can disable the doubling of IPs (we still round off to next
+  // power of 2)
+  // Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+  // overprovisioning is disabled.
+  PodCIDROverprovisionConfig pod_cidr_overprovision_config = 13;
 }
 
 // A set of Shielded Instance options.
@@ -1334,6 +1348,14 @@ message BinaryAuthorization {
   EvaluationMode evaluation_mode = 2;
 }
 
+// [PRIVATE FIELD]
+// Config for pod CIDR size overprovisioning.
+message PodCIDROverprovisionConfig {
+  // Whether Pod CIDR overprovisioning is disabled.
+  // Note: Pod CIDR overprovisioning is enabled by default.
+  bool disable = 1;
+}
+
 // Configuration for controlling how IPs are allocated in the cluster.
 message IPAllocationPolicy {
   // Whether alias IPs will be used for pod IPs in the cluster.
@@ -1458,6 +1480,20 @@ message IPAllocationPolicy {
   // The ipv6 access type (internal or external) when create_subnetwork is true
   IPv6AccessType ipv6_access_type = 17;
 
+  // [PRIVATE FIELD]
+  // Pod CIDR size overprovisioning config for the cluster.
+  //
+  // Pod CIDR size per node depends on max_pods_per_node. By default, the value
+  // of max_pods_per_node is doubled and then rounded off to next power of 2 to
+  // get the size of pod CIDR block per node.
+  // Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+  //
+  // This config can disable the doubling of IPs (we still round off to next
+  // power of 2)
+  // Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+  // overprovisioning is disabled.
+  PodCIDROverprovisionConfig pod_cidr_overprovision_config = 21;
+
   // Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
   // pods.
   string subnet_ipv6_cidr_block = 22
@@ -1465,6 +1501,13 @@ message IPAllocationPolicy {
 
   // Output only. [Output only] The services IPv6 CIDR block for the cluster.
   string services_ipv6_cidr_block = 23
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. [Output only] The additional pod ranges that are added to the
+  // cluster. These pod ranges can be used by new node pools to allocate pod IPs
+  // automatically. Once the range is removed it will not show up in
+  // IPAllocationPolicy.
+  AdditionalPodRangesConfig additional_pod_ranges_config = 24
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
@@ -1813,6 +1856,9 @@ message Cluster {
   // fields, and may be sent on update requests to ensure the client has an
   // up-to-date value before proceeding.
   string etag = 139;
+
+  // Fleet information for the cluster.
+  Fleet fleet = 140;
 }
 
 // Node pool configs that apply to all auto-provisioned node pools
@@ -2023,6 +2069,22 @@ message ClusterUpdate {
   // If a stack type is provided and does not match the current stack type of
   // the cluster, update will attempt to change the stack type to the new type.
   StackType desired_stack_type = 119;
+
+  // The additional pod ranges to be added to the cluster. These pod ranges
+  // can be used by node pools to allocate pod IPs.
+  AdditionalPodRangesConfig additional_pod_ranges_config = 120;
+
+  // The additional pod ranges that are to be removed from the cluster.
+  // The pod ranges specified here must have been specified earlier in the
+  // 'additional_pod_ranges_config' argument.
+  AdditionalPodRangesConfig removed_additional_pod_ranges_config = 121;
+}
+
+// AdditionalPodRangesConfig is the configuration for additional pod secondary
+// ranges supporting the ClusterUpdate message.
+message AdditionalPodRangesConfig {
+  // Name for pod secondary ipv4 range which has the actual range defined ahead.
+  repeated string pod_range_names = 1;
 }
 
 // This operation resource represents operations that may have happened or are
@@ -2046,58 +2108,125 @@ message Operation {
     ABORTING = 4;
   }
 
-  // Operation type.
+  // Operation type categorizes the operation.
   enum Type {
     // Not set.
     TYPE_UNSPECIFIED = 0;
 
-    // Cluster create.
+    // The cluster is being created. The cluster should be assumed to be
+    // unusable until the operation finishes.
+    //
+    // In the event of the operation failing, the cluster will enter the [ERROR
+    // state][Cluster.Status.ERROR] and eventually be deleted.
     CREATE_CLUSTER = 1;
 
-    // Cluster delete.
+    // The cluster is being deleted. The cluster should be assumed to be
+    // unusable as soon as this operation starts.
+    //
+    // In the event of the operation failing, the cluster will enter the [ERROR
+    // state][Cluster.Status.ERROR] and the deletion will be automatically
+    // retried until completed.
     DELETE_CLUSTER = 2;
 
-    // A master upgrade.
+    // The [cluster
+    // version][google.container.v1.ClusterUpdate.desired_master_version] is
+    // being updated. Note that this includes "upgrades" to the same version,
+    // which are simply a recreation. This also includes
+    // [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#upgrading_automatically).
+    // For more details, see [documentation on cluster
+    // upgrades](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades#cluster_upgrades).
     UPGRADE_MASTER = 3;
 
-    // A node upgrade.
+    // A node pool is being updated. Despite calling this an "upgrade", this
+    // includes most forms of updates to node pools. This also includes
+    // [auto-upgrades](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades).
+    //
+    // This operation sets the
+    // [progress][google.container.v1.Operation.progress] field and may be
+    // [canceled][google.container.v1.ClusterManager.CancelOperation].
+    //
+    // The upgrade strategy depends on [node pool
+    // configuration](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies).
+    // The nodes are generally still usable during this operation.
     UPGRADE_NODES = 4;
 
-    // Cluster repair.
+    // A problem has been detected with the control plane and is being repaired.
+    // This operation type is initiated by GKE. For more details, see
+    // [documentation on
+    // repairs](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
     REPAIR_CLUSTER = 5;
 
-    // Cluster update.
+    // The cluster is being updated. This is a broad category of operations and
+    // includes operations that only change metadata as well as those that must
+    // recreate the entire cluster. If the control plane must be recreated, this
+    // will cause temporary downtime for zonal clusters.
+    //
+    // Some features require recreating the nodes as well. Those will be
+    // recreated as separate operations and the update may not be completely
+    // functional until the node pools recreations finish. Node recreations will
+    // generally follow [maintenance
+    // policies](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions).
+    //
+    // Some GKE-initiated operations use this type. This includes certain types
+    // of auto-upgrades and incident mitigations.
     UPDATE_CLUSTER = 6;
 
-    // Node pool create.
+    // A node pool is being created. The node pool should be assumed to be
+    // unusable until this operation finishes. In the event of an error, the
+    // node pool may be partially created.
+    //
+    // If enabled, [node
+    // autoprovisioning](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-provisioning)
+    // may have automatically initiated such operations.
     CREATE_NODE_POOL = 7;
 
-    // Node pool delete.
+    // The node pool is being deleted. The node pool should be assumed to be
+    // unusable as soon as this operation starts.
     DELETE_NODE_POOL = 8;
 
-    // Set node pool management.
+    // The node pool's [manamagent][google.container.v1.NodePool.management]
+    // field is being updated. These operations only update metadata and may be
+    // concurrent with most other operations.
     SET_NODE_POOL_MANAGEMENT = 9;
 
-    // Automatic node pool repair.
+    // A problem has been detected with nodes and [they are being
+    // repaired](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair).
+    // This operation type is initiated by GKE, typically automatically. This
+    // operation may be concurrent with other operations and there may be
+    // multiple repairs occurring on the same node pool.
     AUTO_REPAIR_NODES = 10;
 
-    // Automatic node upgrade.
-    AUTO_UPGRADE_NODES = 11;
+    // Unused. Automatic node upgrade uses
+    // [UPGRADE_NODES][google.container.v1.Operation.Type.UPGRADE_NODES].
+    AUTO_UPGRADE_NODES = 11 [deprecated = true];
 
-    // Set labels.
-    SET_LABELS = 12;
+    // Unused. Updating labels uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_LABELS = 12 [deprecated = true];
 
-    // Set/generate master auth materials
-    SET_MASTER_AUTH = 13;
+    // Unused. Updating master auth uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_MASTER_AUTH = 13 [deprecated = true];
 
-    // Set node pool size.
+    // The node pool is being resized. With the exception of resizing to or from
+    // size zero, the node pool is generally usable during this operation.
     SET_NODE_POOL_SIZE = 14;
 
-    // Updates network policy for a cluster.
-    SET_NETWORK_POLICY = 15;
+    // Unused. Updating network policy uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_NETWORK_POLICY = 15 [deprecated = true];
 
-    // Set the maintenance policy.
-    SET_MAINTENANCE_POLICY = 16;
+    // Unused. Updating maintenance policy uses
+    // [UPDATE_CLUSTER][google.container.v1.Operation.Type.UPDATE_CLUSTER].
+    SET_MAINTENANCE_POLICY = 16 [deprecated = true];
+
+    // The control plane is being resized. This operation type is initiated by
+    // GKE. These operations are often performed preemptively to ensure that the
+    // control plane has sufficient resources and is not typically an indication
+    // of issues. For more details, see
+    // [documentation on
+    // resizes](https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs).
+    RESIZE_CLUSTER = 18;
   }
 
   // The server-assigned ID for the operation.
@@ -2122,10 +2251,23 @@ message Operation {
   string status_message = 5
       [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Server-defined URL for the resource.
+  // Server-defined URI for the operation. Example:
+  // `https://container.googleapis.com/v1alpha1/projects/123/locations/us-central1/operations/operation-123`.
   string self_link = 6;
 
-  // Server-defined URL for the target of the operation.
+  // Server-defined URI for the target of the operation. The format of this is a
+  // URI to the resource being modified (such as a cluster, node pool, or node).
+  // For node pool repairs, there may be multiple nodes being repaired, but only
+  // one will be the target.
+  //
+  // Examples:
+  //
+  //   -
+  //   `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
+  //   -
+  //   `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
+  //   -
+  //   `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
   string target_link = 7;
 
   // [Output only] The name of the Google Compute Engine
@@ -4156,12 +4298,12 @@ message DatabaseEncryption {
     DECRYPTED = 2;
   }
 
-  // Denotes the state of etcd encryption.
-  State state = 2;
-
   // Name of CloudKMS key to use for the encryption of secrets in etcd.
   // Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
   string key_name = 1;
+
+  // The desired state of etcd encryption.
+  State state = 2;
 }
 
 // ListUsableSubnetworksRequest requests the list of usable subnetworks
@@ -4211,8 +4353,9 @@ message UsableSubnetworkSecondaryRange {
     // UNUSED denotes that this range is unclaimed by any cluster.
     UNUSED = 1;
 
-    // IN_USE_SERVICE denotes that this range is claimed by a cluster for
-    // services. It cannot be used for other clusters.
+    // IN_USE_SERVICE denotes that this range is claimed by cluster(s) for
+    // services. User-managed services range can be shared between clusters
+    // within the same subnetwork.
     IN_USE_SERVICE = 2;
 
     // IN_USE_SHAREABLE_POD denotes this range was created by the network admin
@@ -4620,6 +4763,23 @@ enum NodePoolUpdateStrategy {
 message ManagedPrometheusConfig {
   // Enable Managed Collection.
   bool enabled = 1;
+}
+
+// Fleet is the fleet configuration for the cluster.
+message Fleet {
+  // The Fleet host project(project ID or project number) where this cluster
+  // will be registered to. This field cannot be changed after the cluster has
+  // been registered.
+  string project = 1;
+
+  // [Output only] The full resource name of the registered fleet membership of
+  // the cluster, in the format
+  // `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`.
+  string membership = 2;
+
+  // [Output only] Whether the cluster has been registered through the fleet
+  // API.
+  bool pre_registered = 3;
 }
 
 // Possible values for IP stack type

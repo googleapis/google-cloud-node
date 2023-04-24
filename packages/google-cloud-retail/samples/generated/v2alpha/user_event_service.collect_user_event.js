@@ -30,7 +30,7 @@ function main(parent, userEvent) {
    */
   /**
    *  The prebuilt rule name that can convert a specific type of raw_json.
-   *  For example: "default_schema/v1.0"
+   *  For example: "ga4_bq" rule for the GA4 user event schema.
    */
   // const prebuiltRule = 'abc123'
   /**

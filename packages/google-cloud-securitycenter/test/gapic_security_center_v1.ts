@@ -259,6 +259,149 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('createSecurityHealthAnalyticsCustomModule', () => {
+    it('invokes createSecurityHealthAnalyticsCustomModule without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.createSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createSecurityHealthAnalyticsCustomModule(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .createSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSecurityHealthAnalyticsCustomModule without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.createSecurityHealthAnalyticsCustomModule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSecurityHealthAnalyticsCustomModule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .createSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSecurityHealthAnalyticsCustomModule with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.createSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .createSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSecurityHealthAnalyticsCustomModule with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.CreateSecurityHealthAnalyticsCustomModuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('createSource', () => {
     it('invokes createSource without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -1053,6 +1196,149 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('deleteSecurityHealthAnalyticsCustomModule', () => {
+    it('invokes deleteSecurityHealthAnalyticsCustomModule without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSecurityHealthAnalyticsCustomModule(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSecurityHealthAnalyticsCustomModule without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSecurityHealthAnalyticsCustomModule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSecurityHealthAnalyticsCustomModule with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.deleteSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSecurityHealthAnalyticsCustomModule with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.DeleteSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getBigQueryExport', () => {
     it('invokes getBigQueryExport without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -1712,6 +1998,285 @@ describe('v1.SecurityCenterClient', () => {
       client.close();
       await assert.rejects(
         client.getOrganizationSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getEffectiveSecurityHealthAnalyticsCustomModule', () => {
+    it('invokes getEffectiveSecurityHealthAnalyticsCustomModule without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.getEffectiveSecurityHealthAnalyticsCustomModule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .getEffectiveSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .getEffectiveSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEffectiveSecurityHealthAnalyticsCustomModule without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEffectiveSecurityHealthAnalyticsCustomModule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .getEffectiveSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .getEffectiveSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEffectiveSecurityHealthAnalyticsCustomModule with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getEffectiveSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .getEffectiveSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .getEffectiveSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEffectiveSecurityHealthAnalyticsCustomModule with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetEffectiveSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getEffectiveSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getSecurityHealthAnalyticsCustomModule', () => {
+    it('invokes getSecurityHealthAnalyticsCustomModule without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.getSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getSecurityHealthAnalyticsCustomModule(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSecurityHealthAnalyticsCustomModule without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.getSecurityHealthAnalyticsCustomModule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSecurityHealthAnalyticsCustomModule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSecurityHealthAnalyticsCustomModule with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSecurityHealthAnalyticsCustomModule with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.GetSecurityHealthAnalyticsCustomModuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getSecurityHealthAnalyticsCustomModule(request),
         expectedError
       );
     });
@@ -3042,6 +3607,153 @@ describe('v1.SecurityCenterClient', () => {
       client.close();
       await assert.rejects(
         client.updateOrganizationSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateSecurityHealthAnalyticsCustomModule', () => {
+    it('invokes updateSecurityHealthAnalyticsCustomModule without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      request.securityHealthAnalyticsCustomModule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest',
+        ['securityHealthAnalyticsCustomModule', 'name']
+      );
+      request.securityHealthAnalyticsCustomModule.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.updateSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSecurityHealthAnalyticsCustomModule(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .updateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .updateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSecurityHealthAnalyticsCustomModule without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      request.securityHealthAnalyticsCustomModule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest',
+        ['securityHealthAnalyticsCustomModule', 'name']
+      );
+      request.securityHealthAnalyticsCustomModule.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+      );
+      client.innerApiCalls.updateSecurityHealthAnalyticsCustomModule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSecurityHealthAnalyticsCustomModule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .updateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .updateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSecurityHealthAnalyticsCustomModule with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      request.securityHealthAnalyticsCustomModule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest',
+        ['securityHealthAnalyticsCustomModule', 'name']
+      );
+      request.securityHealthAnalyticsCustomModule.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_health_analytics_custom_module.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSecurityHealthAnalyticsCustomModule =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.updateSecurityHealthAnalyticsCustomModule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .updateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .updateSecurityHealthAnalyticsCustomModule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSecurityHealthAnalyticsCustomModule with closed client', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest()
+      );
+      request.securityHealthAnalyticsCustomModule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest',
+        ['securityHealthAnalyticsCustomModule', 'name']
+      );
+      request.securityHealthAnalyticsCustomModule.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSecurityHealthAnalyticsCustomModule(request),
         expectedError
       );
     });
@@ -5102,6 +5814,396 @@ describe('v1.SecurityCenterClient', () => {
     });
   });
 
+  describe('listDescendantSecurityHealthAnalyticsCustomModules', () => {
+    it('invokes listDescendantSecurityHealthAnalyticsCustomModules without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listDescendantSecurityHealthAnalyticsCustomModules(
+          request
+        );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listDescendantSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listDescendantSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDescendantSecurityHealthAnalyticsCustomModules without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDescendantSecurityHealthAnalyticsCustomModules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listDescendantSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listDescendantSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDescendantSecurityHealthAnalyticsCustomModules with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listDescendantSecurityHealthAnalyticsCustomModules(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listDescendantSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listDescendantSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDescendantSecurityHealthAnalyticsCustomModulesStream without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.listDescendantSecurityHealthAnalyticsCustomModulesStream(
+          request
+        );
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls
+              .listDescendantSecurityHealthAnalyticsCustomModules,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listDescendantSecurityHealthAnalyticsCustomModulesStream with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.listDescendantSecurityHealthAnalyticsCustomModulesStream(
+          request
+        );
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls
+              .listDescendantSecurityHealthAnalyticsCustomModules,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listDescendantSecurityHealthAnalyticsCustomModules without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[] =
+        [];
+      const iterable =
+        client.listDescendantSecurityHealthAnalyticsCustomModulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listDescendantSecurityHealthAnalyticsCustomModules with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListDescendantSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listDescendantSecurityHealthAnalyticsCustomModulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listDescendantSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('listFindings', () => {
     it('invokes listFindings without error', async () => {
       const client = new securitycenterModule.v1.SecurityCenterClient({
@@ -6116,6 +7218,765 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (
           client.descriptors.page.listNotificationConfigs
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listEffectiveSecurityHealthAnalyticsCustomModules', () => {
+    it('invokes listEffectiveSecurityHealthAnalyticsCustomModules without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listEffectiveSecurityHealthAnalyticsCustomModules(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listEffectiveSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listEffectiveSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEffectiveSecurityHealthAnalyticsCustomModules without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEffectiveSecurityHealthAnalyticsCustomModules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listEffectiveSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listEffectiveSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEffectiveSecurityHealthAnalyticsCustomModules with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listEffectiveSecurityHealthAnalyticsCustomModules(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listEffectiveSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listEffectiveSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEffectiveSecurityHealthAnalyticsCustomModulesStream without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.listEffectiveSecurityHealthAnalyticsCustomModulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls
+              .listEffectiveSecurityHealthAnalyticsCustomModules,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listEffectiveSecurityHealthAnalyticsCustomModulesStream with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.listEffectiveSecurityHealthAnalyticsCustomModulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls
+              .listEffectiveSecurityHealthAnalyticsCustomModules,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEffectiveSecurityHealthAnalyticsCustomModules without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.EffectiveSecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule[] =
+        [];
+      const iterable =
+        client.listEffectiveSecurityHealthAnalyticsCustomModulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEffectiveSecurityHealthAnalyticsCustomModules with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListEffectiveSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listEffectiveSecurityHealthAnalyticsCustomModulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securitycenter.v1.IEffectiveSecurityHealthAnalyticsCustomModule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page
+            .listEffectiveSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listSecurityHealthAnalyticsCustomModules', () => {
+    it('invokes listSecurityHealthAnalyticsCustomModules without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.innerApiCalls.listSecurityHealthAnalyticsCustomModules =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listSecurityHealthAnalyticsCustomModules(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSecurityHealthAnalyticsCustomModules without error using callback', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.innerApiCalls.listSecurityHealthAnalyticsCustomModules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSecurityHealthAnalyticsCustomModules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .listSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSecurityHealthAnalyticsCustomModules with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSecurityHealthAnalyticsCustomModules =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listSecurityHealthAnalyticsCustomModules(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listSecurityHealthAnalyticsCustomModules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSecurityHealthAnalyticsCustomModulesStream without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.listSecurityHealthAnalyticsCustomModulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listSecurityHealthAnalyticsCustomModules,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSecurityHealthAnalyticsCustomModulesStream with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.listSecurityHealthAnalyticsCustomModulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listSecurityHealthAnalyticsCustomModules,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSecurityHealthAnalyticsCustomModules without error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule()
+        ),
+      ];
+      client.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[] =
+        [];
+      const iterable =
+        client.listSecurityHealthAnalyticsCustomModulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSecurityHealthAnalyticsCustomModules with error', async () => {
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1.ListSecurityHealthAnalyticsCustomModulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listSecurityHealthAnalyticsCustomModulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securitycenter.v1.ISecurityHealthAnalyticsCustomModule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityHealthAnalyticsCustomModules
             .asyncIterate as SinonStub
         )
           .getCall(0)
@@ -7374,6 +9235,146 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('folderSecurityHealthAnalyticsSettingsCustomModule', () => {
+      const fakePath =
+        '/rendered/path/folderSecurityHealthAnalyticsSettingsCustomModule';
+      const expectedParameters = {
+        folder: 'folderValue',
+        custom_module: 'customModuleValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderSecurityHealthAnalyticsSettingsCustomModulePath', () => {
+        const result =
+          client.folderSecurityHealthAnalyticsSettingsCustomModulePath(
+            'folderValue',
+            'customModuleValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderSecurityHealthAnalyticsSettingsCustomModuleName', () => {
+        const result =
+          client.matchFolderFromFolderSecurityHealthAnalyticsSettingsCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates
+              .folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomModuleFromFolderSecurityHealthAnalyticsSettingsCustomModuleName', () => {
+        const result =
+          client.matchCustomModuleFromFolderSecurityHealthAnalyticsSettingsCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'customModuleValue');
+        assert(
+          (
+            client.pathTemplates
+              .folderSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderSecurityHealthAnalyticsSettingsEffectiveCustomModule', () => {
+      const fakePath =
+        '/rendered/path/folderSecurityHealthAnalyticsSettingsEffectiveCustomModule';
+      const expectedParameters = {
+        folder: 'folderValue',
+        effective_custom_module: 'effectiveCustomModuleValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePath', () => {
+        const result =
+          client.folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePath(
+            'folderValue',
+            'effectiveCustomModuleValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName', () => {
+        const result =
+          client.matchFolderFromFolderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates
+              .folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEffectiveCustomModuleFromFolderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName', () => {
+        const result =
+          client.matchEffectiveCustomModuleFromFolderSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'effectiveCustomModuleValue');
+        assert(
+          (
+            client.pathTemplates
+              .folderSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderSource', () => {
       const fakePath = '/rendered/path/folderSource';
       const expectedParameters = {
@@ -8018,6 +10019,197 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.organizationNotificationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSecurityHealthAnalyticsSettings', () => {
+      const fakePath =
+        '/rendered/path/organizationSecurityHealthAnalyticsSettings';
+      const expectedParameters = {
+        organization: 'organizationValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSecurityHealthAnalyticsSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSecurityHealthAnalyticsSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationSecurityHealthAnalyticsSettingsPath', () => {
+        const result =
+          client.organizationSecurityHealthAnalyticsSettingsPath(
+            'organizationValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSecurityHealthAnalyticsSettingsCustomModule', () => {
+      const fakePath =
+        '/rendered/path/organizationSecurityHealthAnalyticsSettingsCustomModule';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        custom_module: 'customModuleValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationSecurityHealthAnalyticsSettingsCustomModulePath', () => {
+        const result =
+          client.organizationSecurityHealthAnalyticsSettingsCustomModulePath(
+            'organizationValue',
+            'customModuleValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsCustomModuleName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomModuleFromOrganizationSecurityHealthAnalyticsSettingsCustomModuleName', () => {
+        const result =
+          client.matchCustomModuleFromOrganizationSecurityHealthAnalyticsSettingsCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'customModuleValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSecurityHealthAnalyticsSettingsEffectiveCustomModule', () => {
+      const fakePath =
+        '/rendered/path/organizationSecurityHealthAnalyticsSettingsEffectiveCustomModule';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        effective_custom_module: 'effectiveCustomModuleValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePath', () => {
+        const result =
+          client.organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePath(
+            'organizationValue',
+            'effectiveCustomModuleValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEffectiveCustomModuleFromOrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName', () => {
+        const result =
+          client.matchEffectiveCustomModuleFromOrganizationSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'effectiveCustomModuleValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -8685,6 +10877,146 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.projectNotificationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSecurityHealthAnalyticsSettingsCustomModule', () => {
+      const fakePath =
+        '/rendered/path/projectSecurityHealthAnalyticsSettingsCustomModule';
+      const expectedParameters = {
+        project: 'projectValue',
+        custom_module: 'customModuleValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectSecurityHealthAnalyticsSettingsCustomModulePath', () => {
+        const result =
+          client.projectSecurityHealthAnalyticsSettingsCustomModulePath(
+            'projectValue',
+            'customModuleValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSecurityHealthAnalyticsSettingsCustomModuleName', () => {
+        const result =
+          client.matchProjectFromProjectSecurityHealthAnalyticsSettingsCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCustomModuleFromProjectSecurityHealthAnalyticsSettingsCustomModuleName', () => {
+        const result =
+          client.matchCustomModuleFromProjectSecurityHealthAnalyticsSettingsCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'customModuleValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectSecurityHealthAnalyticsSettingsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSecurityHealthAnalyticsSettingsEffectiveCustomModule', () => {
+      const fakePath =
+        '/rendered/path/projectSecurityHealthAnalyticsSettingsEffectiveCustomModule';
+      const expectedParameters = {
+        project: 'projectValue',
+        effective_custom_module: 'effectiveCustomModuleValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePath', () => {
+        const result =
+          client.projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePath(
+            'projectValue',
+            'effectiveCustomModuleValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName', () => {
+        const result =
+          client.matchProjectFromProjectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEffectiveCustomModuleFromProjectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName', () => {
+        const result =
+          client.matchEffectiveCustomModuleFromProjectSecurityHealthAnalyticsSettingsEffectiveCustomModuleName(
+            fakePath
+          );
+        assert.strictEqual(result, 'effectiveCustomModuleValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectSecurityHealthAnalyticsSettingsEffectiveCustomModulePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

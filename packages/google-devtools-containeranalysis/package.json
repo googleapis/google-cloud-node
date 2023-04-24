@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/containeranalysis",
-  "version": "4.5.0",
+  "version": "4.7.0",
   "description": "Containeranalysis client for Node.js",
   "repository": "googleapis/nodejs-containeranalysis",
   "license": "Apache-2.0",
@@ -8,7 +8,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -66,3 +67,4 @@
     "node": ">=v12"
   }
 }
+

@@ -1308,7 +1308,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ServiceUsage.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/api/serviceusage/v1;serviceusage",
+                    "go_package": "cloud.google.com/go/serviceusage/apiv1/serviceusagepb;serviceusagepb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceUsageProto",
                     "java_package": "com.google.api.serviceusage.v1",

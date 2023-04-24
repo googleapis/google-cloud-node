@@ -17,23 +17,30 @@
   * [Security_center.create_finding](#security_center.create_finding)
   * [Security_center.create_mute_config](#security_center.create_mute_config)
   * [Security_center.create_notification_config](#security_center.create_notification_config)
+  * [Security_center.create_security_health_analytics_custom_module](#security_center.create_security_health_analytics_custom_module)
   * [Security_center.create_source](#security_center.create_source)
   * [Security_center.delete_big_query_export](#security_center.delete_big_query_export)
   * [Security_center.delete_mute_config](#security_center.delete_mute_config)
   * [Security_center.delete_notification_config](#security_center.delete_notification_config)
+  * [Security_center.delete_security_health_analytics_custom_module](#security_center.delete_security_health_analytics_custom_module)
   * [Security_center.get_big_query_export](#security_center.get_big_query_export)
+  * [Security_center.get_effective_security_health_analytics_custom_module](#security_center.get_effective_security_health_analytics_custom_module)
   * [Security_center.get_iam_policy](#security_center.get_iam_policy)
   * [Security_center.get_mute_config](#security_center.get_mute_config)
   * [Security_center.get_notification_config](#security_center.get_notification_config)
   * [Security_center.get_organization_settings](#security_center.get_organization_settings)
+  * [Security_center.get_security_health_analytics_custom_module](#security_center.get_security_health_analytics_custom_module)
   * [Security_center.get_source](#security_center.get_source)
   * [Security_center.group_assets](#security_center.group_assets)
   * [Security_center.group_findings](#security_center.group_findings)
   * [Security_center.list_assets](#security_center.list_assets)
   * [Security_center.list_big_query_exports](#security_center.list_big_query_exports)
+  * [Security_center.list_descendant_security_health_analytics_custom_modules](#security_center.list_descendant_security_health_analytics_custom_modules)
+  * [Security_center.list_effective_security_health_analytics_custom_modules](#security_center.list_effective_security_health_analytics_custom_modules)
   * [Security_center.list_findings](#security_center.list_findings)
   * [Security_center.list_mute_configs](#security_center.list_mute_configs)
   * [Security_center.list_notification_configs](#security_center.list_notification_configs)
+  * [Security_center.list_security_health_analytics_custom_modules](#security_center.list_security_health_analytics_custom_modules)
   * [Security_center.list_sources](#security_center.list_sources)
   * [Security_center.run_asset_discovery](#security_center.run_asset_discovery)
   * [Security_center.set_finding_state](#security_center.set_finding_state)
@@ -46,6 +53,7 @@
   * [Security_center.update_mute_config](#security_center.update_mute_config)
   * [Security_center.update_notification_config](#security_center.update_notification_config)
   * [Security_center.update_organization_settings](#security_center.update_organization_settings)
+  * [Security_center.update_security_health_analytics_custom_module](#security_center.update_security_health_analytics_custom_module)
   * [Security_center.update_security_marks](#security_center.update_security_marks)
   * [Security_center.update_source](#security_center.update_source)
   * [Security_center.create_finding](#security_center.create_finding)
@@ -192,6 +200,23 @@ __Usage:__
 
 
 
+### Security_center.create_security_health_analytics_custom_module
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_security_health_analytics_custom_module.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_security_health_analytics_custom_module.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_security_health_analytics_custom_module.js`
+
+
+-----
+
+
+
+
 ### Security_center.create_source
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.create_source.js).
@@ -260,6 +285,23 @@ __Usage:__
 
 
 
+### Security_center.delete_security_health_analytics_custom_module
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_security_health_analytics_custom_module.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_security_health_analytics_custom_module.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.delete_security_health_analytics_custom_module.js`
+
+
+-----
+
+
+
+
 ### Security_center.get_big_query_export
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_big_query_export.js).
@@ -270,6 +312,23 @@ __Usage:__
 
 
 `node packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_big_query_export.js`
+
+
+-----
+
+
+
+
+### Security_center.get_effective_security_health_analytics_custom_module
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_effective_security_health_analytics_custom_module.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_effective_security_health_analytics_custom_module.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_effective_security_health_analytics_custom_module.js`
 
 
 -----
@@ -338,6 +397,23 @@ __Usage:__
 
 
 `node packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_organization_settings.js`
+
+
+-----
+
+
+
+
+### Security_center.get_security_health_analytics_custom_module
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_security_health_analytics_custom_module.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_security_health_analytics_custom_module.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.get_security_health_analytics_custom_module.js`
 
 
 -----
@@ -430,6 +506,40 @@ __Usage:__
 
 
 
+### Security_center.list_descendant_security_health_analytics_custom_modules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_descendant_security_health_analytics_custom_modules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_descendant_security_health_analytics_custom_modules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_descendant_security_health_analytics_custom_modules.js`
+
+
+-----
+
+
+
+
+### Security_center.list_effective_security_health_analytics_custom_modules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_effective_security_health_analytics_custom_modules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_effective_security_health_analytics_custom_modules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_effective_security_health_analytics_custom_modules.js`
+
+
+-----
+
+
+
+
 ### Security_center.list_findings
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_findings.js).
@@ -474,6 +584,23 @@ __Usage:__
 
 
 `node packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_notification_configs.js`
+
+
+-----
+
+
+
+
+### Security_center.list_security_health_analytics_custom_modules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_security_health_analytics_custom_modules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_security_health_analytics_custom_modules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.list_security_health_analytics_custom_modules.js`
 
 
 -----
@@ -678,6 +805,23 @@ __Usage:__
 
 
 `node packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_organization_settings.js`
+
+
+-----
+
+
+
+
+### Security_center.update_security_health_analytics_custom_module
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_security_health_analytics_custom_module.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_security_health_analytics_custom_module.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycenter/samples/generated/v1/security_center.update_security_health_analytics_custom_module.js`
 
 
 -----

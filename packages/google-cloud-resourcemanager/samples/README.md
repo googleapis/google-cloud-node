@@ -41,10 +41,15 @@
   * [Projects.update_project](#projects.update_project)
   * [Tag_bindings.create_tag_binding](#tag_bindings.create_tag_binding)
   * [Tag_bindings.delete_tag_binding](#tag_bindings.delete_tag_binding)
+  * [Tag_bindings.list_effective_tags](#tag_bindings.list_effective_tags)
   * [Tag_bindings.list_tag_bindings](#tag_bindings.list_tag_bindings)
+  * [Tag_holds.create_tag_hold](#tag_holds.create_tag_hold)
+  * [Tag_holds.delete_tag_hold](#tag_holds.delete_tag_hold)
+  * [Tag_holds.list_tag_holds](#tag_holds.list_tag_holds)
   * [Tag_keys.create_tag_key](#tag_keys.create_tag_key)
   * [Tag_keys.delete_tag_key](#tag_keys.delete_tag_key)
   * [Tag_keys.get_iam_policy](#tag_keys.get_iam_policy)
+  * [Tag_keys.get_namespaced_tag_key](#tag_keys.get_namespaced_tag_key)
   * [Tag_keys.get_tag_key](#tag_keys.get_tag_key)
   * [Tag_keys.list_tag_keys](#tag_keys.list_tag_keys)
   * [Tag_keys.set_iam_policy](#tag_keys.set_iam_policy)
@@ -53,6 +58,7 @@
   * [Tag_values.create_tag_value](#tag_values.create_tag_value)
   * [Tag_values.delete_tag_value](#tag_values.delete_tag_value)
   * [Tag_values.get_iam_policy](#tag_values.get_iam_policy)
+  * [Tag_values.get_namespaced_tag_value](#tag_values.get_namespaced_tag_value)
   * [Tag_values.get_tag_value](#tag_values.get_tag_value)
   * [Tag_values.list_tag_values](#tag_values.list_tag_values)
   * [Tag_values.set_iam_policy](#tag_values.set_iam_policy)
@@ -569,6 +575,23 @@ __Usage:__
 
 
 
+### Tag_bindings.list_effective_tags
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js`
+
+
+-----
+
+
+
+
 ### Tag_bindings.list_tag_bindings
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_tag_bindings.js).
@@ -579,6 +602,57 @@ __Usage:__
 
 
 `node packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_tag_bindings.js`
+
+
+-----
+
+
+
+
+### Tag_holds.create_tag_hold
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.create_tag_hold.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.create_tag_hold.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.create_tag_hold.js`
+
+
+-----
+
+
+
+
+### Tag_holds.delete_tag_hold
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.delete_tag_hold.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.delete_tag_hold.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.delete_tag_hold.js`
+
+
+-----
+
+
+
+
+### Tag_holds.list_tag_holds
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.list_tag_holds.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.list_tag_holds.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-resourcemanager/samples/generated/v3/tag_holds.list_tag_holds.js`
 
 
 -----
@@ -630,6 +704,23 @@ __Usage:__
 
 
 `node packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Tag_keys.get_namespaced_tag_key
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_namespaced_tag_key.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_namespaced_tag_key.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-resourcemanager/samples/generated/v3/tag_keys.get_namespaced_tag_key.js`
 
 
 -----
@@ -766,6 +857,23 @@ __Usage:__
 
 
 `node packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Tag_values.get_namespaced_tag_value
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_namespaced_tag_value.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_namespaced_tag_value.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-resourcemanager/samples/generated/v3/tag_values.get_namespaced_tag_value.js`
 
 
 -----

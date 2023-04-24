@@ -33,7 +33,7 @@ function main(parent, queuedResource) {
    */
   // const parent = 'abc123'
   /**
-   *  The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$
+   *  The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$`
    *  regex format.
    */
   // const queuedResourceId = 'abc123'

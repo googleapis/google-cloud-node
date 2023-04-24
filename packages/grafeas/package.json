@@ -5,13 +5,14 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/grafeas",
-  "version": "4.3.0",
+  "version": "4.5.0",
   "author": "Google LLC",
   "description": "Grafeas API client for Node.js",
   "main": "build/src/index.js",
   "files": [
     "build/protos",
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "keywords": [
     "google apis client",
@@ -27,7 +28,7 @@
     "Container Analysis API"
   ],
   "dependencies": {
-    "google-gax": "^3.5.2"
+    "google-gax": "^3.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",
@@ -59,7 +60,7 @@
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",

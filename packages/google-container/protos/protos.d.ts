@@ -1484,6 +1484,9 @@ export namespace google {
 
                 /** NodeNetworkConfig networkPerformanceConfig */
                 networkPerformanceConfig?: (google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig|null);
+
+                /** NodeNetworkConfig podCidrOverprovisionConfig */
+                podCidrOverprovisionConfig?: (google.container.v1.IPodCIDROverprovisionConfig|null);
             }
 
             /** Represents a NodeNetworkConfig. */
@@ -1509,6 +1512,9 @@ export namespace google {
 
                 /** NodeNetworkConfig networkPerformanceConfig. */
                 public networkPerformanceConfig?: (google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig|null);
+
+                /** NodeNetworkConfig podCidrOverprovisionConfig. */
+                public podCidrOverprovisionConfig?: (google.container.v1.IPodCIDROverprovisionConfig|null);
 
                 /** NodeNetworkConfig _enablePrivateNodes. */
                 public _enablePrivateNodes?: "enablePrivateNodes";
@@ -4880,6 +4886,103 @@ export namespace google {
                 }
             }
 
+            /** Properties of a PodCIDROverprovisionConfig. */
+            interface IPodCIDROverprovisionConfig {
+
+                /** PodCIDROverprovisionConfig disable */
+                disable?: (boolean|null);
+            }
+
+            /** Represents a PodCIDROverprovisionConfig. */
+            class PodCIDROverprovisionConfig implements IPodCIDROverprovisionConfig {
+
+                /**
+                 * Constructs a new PodCIDROverprovisionConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IPodCIDROverprovisionConfig);
+
+                /** PodCIDROverprovisionConfig disable. */
+                public disable: boolean;
+
+                /**
+                 * Creates a new PodCIDROverprovisionConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PodCIDROverprovisionConfig instance
+                 */
+                public static create(properties?: google.container.v1.IPodCIDROverprovisionConfig): google.container.v1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Encodes the specified PodCIDROverprovisionConfig message. Does not implicitly {@link google.container.v1.PodCIDROverprovisionConfig.verify|verify} messages.
+                 * @param message PodCIDROverprovisionConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IPodCIDROverprovisionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PodCIDROverprovisionConfig message, length delimited. Does not implicitly {@link google.container.v1.PodCIDROverprovisionConfig.verify|verify} messages.
+                 * @param message PodCIDROverprovisionConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IPodCIDROverprovisionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PodCIDROverprovisionConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PodCIDROverprovisionConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Decodes a PodCIDROverprovisionConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PodCIDROverprovisionConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Verifies a PodCIDROverprovisionConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PodCIDROverprovisionConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PodCIDROverprovisionConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Creates a plain object from a PodCIDROverprovisionConfig message. Also converts values to other types if specified.
+                 * @param message PodCIDROverprovisionConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.PodCIDROverprovisionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PodCIDROverprovisionConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PodCIDROverprovisionConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a IPAllocationPolicy. */
             interface IIPAllocationPolicy {
 
@@ -4928,11 +5031,17 @@ export namespace google {
                 /** IPAllocationPolicy ipv6AccessType */
                 ipv6AccessType?: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType|null);
 
+                /** IPAllocationPolicy podCidrOverprovisionConfig */
+                podCidrOverprovisionConfig?: (google.container.v1.IPodCIDROverprovisionConfig|null);
+
                 /** IPAllocationPolicy subnetIpv6CidrBlock */
                 subnetIpv6CidrBlock?: (string|null);
 
                 /** IPAllocationPolicy servicesIpv6CidrBlock */
                 servicesIpv6CidrBlock?: (string|null);
+
+                /** IPAllocationPolicy additionalPodRangesConfig */
+                additionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -4989,11 +5098,17 @@ export namespace google {
                 /** IPAllocationPolicy ipv6AccessType. */
                 public ipv6AccessType: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType);
 
+                /** IPAllocationPolicy podCidrOverprovisionConfig. */
+                public podCidrOverprovisionConfig?: (google.container.v1.IPodCIDROverprovisionConfig|null);
+
                 /** IPAllocationPolicy subnetIpv6CidrBlock. */
                 public subnetIpv6CidrBlock: string;
 
                 /** IPAllocationPolicy servicesIpv6CidrBlock. */
                 public servicesIpv6CidrBlock: string;
+
+                /** IPAllocationPolicy additionalPodRangesConfig. */
+                public additionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -5264,6 +5379,9 @@ export namespace google {
 
                 /** Cluster etag */
                 etag?: (string|null);
+
+                /** Cluster fleet */
+                fleet?: (google.container.v1.IFleet|null);
             }
 
             /** Represents a Cluster. */
@@ -5463,6 +5581,9 @@ export namespace google {
 
                 /** Cluster etag. */
                 public etag: string;
+
+                /** Cluster fleet. */
+                public fleet?: (google.container.v1.IFleet|null);
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -5978,6 +6099,12 @@ export namespace google {
 
                 /** ClusterUpdate desiredStackType */
                 desiredStackType?: (google.container.v1.StackType|keyof typeof google.container.v1.StackType|null);
+
+                /** ClusterUpdate additionalPodRangesConfig */
+                additionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
+
+                /** ClusterUpdate removedAdditionalPodRangesConfig */
+                removedAdditionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -6109,6 +6236,12 @@ export namespace google {
                 /** ClusterUpdate desiredStackType. */
                 public desiredStackType: (google.container.v1.StackType|keyof typeof google.container.v1.StackType);
 
+                /** ClusterUpdate additionalPodRangesConfig. */
+                public additionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
+
+                /** ClusterUpdate removedAdditionalPodRangesConfig. */
+                public removedAdditionalPodRangesConfig?: (google.container.v1.IAdditionalPodRangesConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
@@ -6184,6 +6317,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for ClusterUpdate
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AdditionalPodRangesConfig. */
+            interface IAdditionalPodRangesConfig {
+
+                /** AdditionalPodRangesConfig podRangeNames */
+                podRangeNames?: (string[]|null);
+            }
+
+            /** Represents an AdditionalPodRangesConfig. */
+            class AdditionalPodRangesConfig implements IAdditionalPodRangesConfig {
+
+                /**
+                 * Constructs a new AdditionalPodRangesConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IAdditionalPodRangesConfig);
+
+                /** AdditionalPodRangesConfig podRangeNames. */
+                public podRangeNames: string[];
+
+                /**
+                 * Creates a new AdditionalPodRangesConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalPodRangesConfig instance
+                 */
+                public static create(properties?: google.container.v1.IAdditionalPodRangesConfig): google.container.v1.AdditionalPodRangesConfig;
+
+                /**
+                 * Encodes the specified AdditionalPodRangesConfig message. Does not implicitly {@link google.container.v1.AdditionalPodRangesConfig.verify|verify} messages.
+                 * @param message AdditionalPodRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IAdditionalPodRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalPodRangesConfig message, length delimited. Does not implicitly {@link google.container.v1.AdditionalPodRangesConfig.verify|verify} messages.
+                 * @param message AdditionalPodRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IAdditionalPodRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalPodRangesConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalPodRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.AdditionalPodRangesConfig;
+
+                /**
+                 * Decodes an AdditionalPodRangesConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalPodRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.AdditionalPodRangesConfig;
+
+                /**
+                 * Verifies an AdditionalPodRangesConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalPodRangesConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalPodRangesConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.AdditionalPodRangesConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalPodRangesConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalPodRangesConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.AdditionalPodRangesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalPodRangesConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalPodRangesConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -6400,7 +6630,8 @@ export namespace google {
                     SET_MASTER_AUTH = 13,
                     SET_NODE_POOL_SIZE = 14,
                     SET_NETWORK_POLICY = 15,
-                    SET_MAINTENANCE_POLICY = 16
+                    SET_MAINTENANCE_POLICY = 16,
+                    RESIZE_CLUSTER = 18
                 }
             }
 
@@ -15591,11 +15822,11 @@ export namespace google {
             /** Properties of a DatabaseEncryption. */
             interface IDatabaseEncryption {
 
-                /** DatabaseEncryption state */
-                state?: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State|null);
-
                 /** DatabaseEncryption keyName */
                 keyName?: (string|null);
+
+                /** DatabaseEncryption state */
+                state?: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State|null);
             }
 
             /** Represents a DatabaseEncryption. */
@@ -15607,11 +15838,11 @@ export namespace google {
                  */
                 constructor(properties?: google.container.v1.IDatabaseEncryption);
 
-                /** DatabaseEncryption state. */
-                public state: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State);
-
                 /** DatabaseEncryption keyName. */
                 public keyName: string;
+
+                /** DatabaseEncryption state. */
+                public state: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State);
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
@@ -18602,6 +18833,115 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a Fleet. */
+            interface IFleet {
+
+                /** Fleet project */
+                project?: (string|null);
+
+                /** Fleet membership */
+                membership?: (string|null);
+
+                /** Fleet preRegistered */
+                preRegistered?: (boolean|null);
+            }
+
+            /** Represents a Fleet. */
+            class Fleet implements IFleet {
+
+                /**
+                 * Constructs a new Fleet.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IFleet);
+
+                /** Fleet project. */
+                public project: string;
+
+                /** Fleet membership. */
+                public membership: string;
+
+                /** Fleet preRegistered. */
+                public preRegistered: boolean;
+
+                /**
+                 * Creates a new Fleet instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Fleet instance
+                 */
+                public static create(properties?: google.container.v1.IFleet): google.container.v1.Fleet;
+
+                /**
+                 * Encodes the specified Fleet message. Does not implicitly {@link google.container.v1.Fleet.verify|verify} messages.
+                 * @param message Fleet message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Fleet message, length delimited. Does not implicitly {@link google.container.v1.Fleet.verify|verify} messages.
+                 * @param message Fleet message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Fleet message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Fleet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.Fleet;
+
+                /**
+                 * Decodes a Fleet message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Fleet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.Fleet;
+
+                /**
+                 * Verifies a Fleet message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Fleet message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Fleet
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.Fleet;
+
+                /**
+                 * Creates a plain object from a Fleet message. Also converts values to other types if specified.
+                 * @param message Fleet
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.Fleet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Fleet to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Fleet
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** StackType enum. */
             enum StackType {
                 STACK_TYPE_UNSPECIFIED = 0,
@@ -20302,6 +20642,9 @@ export namespace google {
 
                 /** NodeNetworkConfig networkPerformanceConfig */
                 networkPerformanceConfig?: (google.container.v1beta1.NodeNetworkConfig.INetworkPerformanceConfig|null);
+
+                /** NodeNetworkConfig podCidrOverprovisionConfig */
+                podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
             }
 
             /** Represents a NodeNetworkConfig. */
@@ -20327,6 +20670,9 @@ export namespace google {
 
                 /** NodeNetworkConfig networkPerformanceConfig. */
                 public networkPerformanceConfig?: (google.container.v1beta1.NodeNetworkConfig.INetworkPerformanceConfig|null);
+
+                /** NodeNetworkConfig podCidrOverprovisionConfig. */
+                public podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
 
                 /** NodeNetworkConfig _enablePrivateNodes. */
                 public _enablePrivateNodes?: "enablePrivateNodes";
@@ -24009,6 +24355,103 @@ export namespace google {
                 }
             }
 
+            /** Properties of a PodCIDROverprovisionConfig. */
+            interface IPodCIDROverprovisionConfig {
+
+                /** PodCIDROverprovisionConfig disable */
+                disable?: (boolean|null);
+            }
+
+            /** Represents a PodCIDROverprovisionConfig. */
+            class PodCIDROverprovisionConfig implements IPodCIDROverprovisionConfig {
+
+                /**
+                 * Constructs a new PodCIDROverprovisionConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IPodCIDROverprovisionConfig);
+
+                /** PodCIDROverprovisionConfig disable. */
+                public disable: boolean;
+
+                /**
+                 * Creates a new PodCIDROverprovisionConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PodCIDROverprovisionConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IPodCIDROverprovisionConfig): google.container.v1beta1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Encodes the specified PodCIDROverprovisionConfig message. Does not implicitly {@link google.container.v1beta1.PodCIDROverprovisionConfig.verify|verify} messages.
+                 * @param message PodCIDROverprovisionConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IPodCIDROverprovisionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PodCIDROverprovisionConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.PodCIDROverprovisionConfig.verify|verify} messages.
+                 * @param message PodCIDROverprovisionConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IPodCIDROverprovisionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PodCIDROverprovisionConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PodCIDROverprovisionConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Decodes a PodCIDROverprovisionConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PodCIDROverprovisionConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Verifies a PodCIDROverprovisionConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PodCIDROverprovisionConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PodCIDROverprovisionConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.PodCIDROverprovisionConfig;
+
+                /**
+                 * Creates a plain object from a PodCIDROverprovisionConfig message. Also converts values to other types if specified.
+                 * @param message PodCIDROverprovisionConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.PodCIDROverprovisionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PodCIDROverprovisionConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PodCIDROverprovisionConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a IPAllocationPolicy. */
             interface IIPAllocationPolicy {
 
@@ -24060,11 +24503,17 @@ export namespace google {
                 /** IPAllocationPolicy ipv6AccessType */
                 ipv6AccessType?: (google.container.v1beta1.IPAllocationPolicy.IPv6AccessType|keyof typeof google.container.v1beta1.IPAllocationPolicy.IPv6AccessType|null);
 
+                /** IPAllocationPolicy podCidrOverprovisionConfig */
+                podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
+
                 /** IPAllocationPolicy subnetIpv6CidrBlock */
                 subnetIpv6CidrBlock?: (string|null);
 
                 /** IPAllocationPolicy servicesIpv6CidrBlock */
                 servicesIpv6CidrBlock?: (string|null);
+
+                /** IPAllocationPolicy additionalPodRangesConfig */
+                additionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -24124,11 +24573,17 @@ export namespace google {
                 /** IPAllocationPolicy ipv6AccessType. */
                 public ipv6AccessType: (google.container.v1beta1.IPAllocationPolicy.IPv6AccessType|keyof typeof google.container.v1beta1.IPAllocationPolicy.IPv6AccessType);
 
+                /** IPAllocationPolicy podCidrOverprovisionConfig. */
+                public podCidrOverprovisionConfig?: (google.container.v1beta1.IPodCIDROverprovisionConfig|null);
+
                 /** IPAllocationPolicy subnetIpv6CidrBlock. */
                 public subnetIpv6CidrBlock: string;
 
                 /** IPAllocationPolicy servicesIpv6CidrBlock. */
                 public servicesIpv6CidrBlock: string;
+
+                /** IPAllocationPolicy additionalPodRangesConfig. */
+                public additionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -24864,6 +25319,9 @@ export namespace google {
 
                 /** Cluster etag */
                 etag?: (string|null);
+
+                /** Cluster fleet */
+                fleet?: (google.container.v1beta1.IFleet|null);
             }
 
             /** Represents a Cluster. */
@@ -25090,6 +25548,9 @@ export namespace google {
 
                 /** Cluster etag. */
                 public etag: string;
+
+                /** Cluster fleet. */
+                public fleet?: (google.container.v1beta1.IFleet|null);
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -25860,6 +26321,12 @@ export namespace google {
 
                 /** ClusterUpdate desiredStackType */
                 desiredStackType?: (google.container.v1beta1.StackType|keyof typeof google.container.v1beta1.StackType|null);
+
+                /** ClusterUpdate additionalPodRangesConfig */
+                additionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
+
+                /** ClusterUpdate removedAdditionalPodRangesConfig */
+                removedAdditionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -26012,6 +26479,12 @@ export namespace google {
                 /** ClusterUpdate desiredStackType. */
                 public desiredStackType: (google.container.v1beta1.StackType|keyof typeof google.container.v1beta1.StackType);
 
+                /** ClusterUpdate additionalPodRangesConfig. */
+                public additionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
+
+                /** ClusterUpdate removedAdditionalPodRangesConfig. */
+                public removedAdditionalPodRangesConfig?: (google.container.v1beta1.IAdditionalPodRangesConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
@@ -26090,6 +26563,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for ClusterUpdate
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AdditionalPodRangesConfig. */
+            interface IAdditionalPodRangesConfig {
+
+                /** AdditionalPodRangesConfig podRangeNames */
+                podRangeNames?: (string[]|null);
+            }
+
+            /** Represents an AdditionalPodRangesConfig. */
+            class AdditionalPodRangesConfig implements IAdditionalPodRangesConfig {
+
+                /**
+                 * Constructs a new AdditionalPodRangesConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAdditionalPodRangesConfig);
+
+                /** AdditionalPodRangesConfig podRangeNames. */
+                public podRangeNames: string[];
+
+                /**
+                 * Creates a new AdditionalPodRangesConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalPodRangesConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAdditionalPodRangesConfig): google.container.v1beta1.AdditionalPodRangesConfig;
+
+                /**
+                 * Encodes the specified AdditionalPodRangesConfig message. Does not implicitly {@link google.container.v1beta1.AdditionalPodRangesConfig.verify|verify} messages.
+                 * @param message AdditionalPodRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAdditionalPodRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalPodRangesConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AdditionalPodRangesConfig.verify|verify} messages.
+                 * @param message AdditionalPodRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAdditionalPodRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalPodRangesConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalPodRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AdditionalPodRangesConfig;
+
+                /**
+                 * Decodes an AdditionalPodRangesConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalPodRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AdditionalPodRangesConfig;
+
+                /**
+                 * Verifies an AdditionalPodRangesConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalPodRangesConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalPodRangesConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AdditionalPodRangesConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalPodRangesConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalPodRangesConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AdditionalPodRangesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalPodRangesConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalPodRangesConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -39585,6 +40155,115 @@ export namespace google {
                 DATAPATH_PROVIDER_UNSPECIFIED = 0,
                 LEGACY_DATAPATH = 1,
                 ADVANCED_DATAPATH = 2
+            }
+
+            /** Properties of a Fleet. */
+            interface IFleet {
+
+                /** Fleet project */
+                project?: (string|null);
+
+                /** Fleet membership */
+                membership?: (string|null);
+
+                /** Fleet preRegistered */
+                preRegistered?: (boolean|null);
+            }
+
+            /** Represents a Fleet. */
+            class Fleet implements IFleet {
+
+                /**
+                 * Constructs a new Fleet.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IFleet);
+
+                /** Fleet project. */
+                public project: string;
+
+                /** Fleet membership. */
+                public membership: string;
+
+                /** Fleet preRegistered. */
+                public preRegistered: boolean;
+
+                /**
+                 * Creates a new Fleet instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Fleet instance
+                 */
+                public static create(properties?: google.container.v1beta1.IFleet): google.container.v1beta1.Fleet;
+
+                /**
+                 * Encodes the specified Fleet message. Does not implicitly {@link google.container.v1beta1.Fleet.verify|verify} messages.
+                 * @param message Fleet message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Fleet message, length delimited. Does not implicitly {@link google.container.v1beta1.Fleet.verify|verify} messages.
+                 * @param message Fleet message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Fleet message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Fleet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.Fleet;
+
+                /**
+                 * Decodes a Fleet message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Fleet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.Fleet;
+
+                /**
+                 * Verifies a Fleet message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Fleet message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Fleet
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.Fleet;
+
+                /**
+                 * Creates a plain object from a Fleet message. Also converts values to other types if specified.
+                 * @param message Fleet
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.Fleet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Fleet to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Fleet
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** StackType enum. */

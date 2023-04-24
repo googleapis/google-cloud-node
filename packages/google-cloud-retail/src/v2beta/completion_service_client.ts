@@ -40,7 +40,7 @@ import * as gapicConfig from './completion_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Auto-completion service for retail.
+ *  Autocomplete service for retail.
  *
  *  This feature is only available for users who have Retail Search enabled.
  *  Enable Retail Search on Cloud Console before using this feature.
@@ -470,6 +470,13 @@ export class CompletionServiceClient {
    *
    *   The maximum allowed max suggestions is 20. If it is set higher, it will be
    *   capped by 20.
+   * @param {string} request.entity
+   *   The entity for customers that may run multiple different entities, domains,
+   *   sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *   `google.com`, `youtube.com`, etc.
+   *   If this is set, it should be exactly matched with
+   *   {@link google.cloud.retail.v2beta.UserEvent.entity|UserEvent.entity} to get
+   *   per-entity autocomplete results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -559,6 +559,17 @@
                           },
                           "nested": {
                             "CommitmentPlan": {
+                              "valuesOptions": {
+                                "FLEX_FLAT_RATE": {
+                                  "deprecated": true
+                                },
+                                "MONTHLY_FLAT_RATE": {
+                                  "deprecated": true
+                                },
+                                "ANNUAL_FLAT_RATE": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "COMMITMENT_PLAN_UNSPECIFIED": 0,
                                 "FLEX": 3,

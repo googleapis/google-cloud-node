@@ -29,27 +29,29 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Membership resource name the Agent will associate with, in the format
-   *  `projects/* /locations/* /memberships/*`.
+   *  Required. The Membership resource name the Agent will associate with, in
+   *  the format `projects/* /locations/* /memberships/*`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. Namespace for GKE Connect agent resources. Defaults to `gke-connect`.
+   *  Optional. Namespace for GKE Connect agent resources. Defaults to
+   *  `gke-connect`.
    *  The Connect Agent is authorized automatically when run in the default
    *  namespace. Otherwise, explicit authorization must be granted with an
    *  additional IAM binding.
    */
   // const namespace = 'abc123'
   /**
-   *  Optional. URI of a proxy if connectivity from the agent to gkeconnect.googleapis.com
-   *  requires the use of a proxy. Format must be in the form
-   *  `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
+   *  Optional. URI of a proxy if connectivity from the agent to
+   *  gkeconnect.googleapis.com requires the use of a proxy. Format must be in
+   *  the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
    *  supported by the proxy. This will direct the connect agent's outbound
    *  traffic through a HTTP(S) proxy.
    */
   // const proxy = 'Buffer.from('string')'
   /**
-   *  Optional. The Connect agent version to use. Defaults to the most current version.
+   *  Optional. The Connect agent version to use. Defaults to the most current
+   *  version.
    */
   // const version = 'abc123'
   /**

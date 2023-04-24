@@ -238,6 +238,7 @@ export class ContainerAnalysisV1Beta1Client {
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
+      'generatePackagesSummary',
     ];
     for (const methodName of containerAnalysisV1Beta1StubMethods) {
       const callPromise = this.containerAnalysisV1Beta1Stub.then(
@@ -611,6 +612,108 @@ export class ContainerAnalysisV1Beta1Client {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
+  /**
+   * Gets a summary of the packages within a given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource to get a packages summary for in the
+   *   form of `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse | PackagesSummaryResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js</caption>
+   * region_tag:containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_GeneratePackagesSummary_async
+   */
+  generatePackagesSummary(
+    request?: protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse,
+      (
+        | protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  generatePackagesSummary(
+    request: protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse,
+      | protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generatePackagesSummary(
+    request: protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse,
+      | protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generatePackagesSummary(
+    request?: protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse,
+          | protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse,
+      | protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.containeranalysis.v1beta1.IPackagesSummaryResponse,
+      (
+        | protos.google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generatePackagesSummary(
+      request,
+      options,
+      callback
+    );
   }
 
   /**

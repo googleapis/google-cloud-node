@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-metastore",
-        "version": "3.4.0",
+        "version": "3.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -262,7 +262,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -458,7 +458,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -562,7 +562,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -754,7 +754,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],

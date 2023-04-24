@@ -7,7 +7,7 @@
             "v2": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Iam.V2",
-                "go_package": "google.golang.org/genproto/googleapis/iam/v2;iam",
+                "go_package": "cloud.google.com/go/iam/apiv2/iampb;iampb",
                 "java_multiple_files": true,
                 "java_outer_classname": "PolicyProto",
                 "java_package": "com.google.iam.v2",

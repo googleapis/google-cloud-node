@@ -34,9 +34,9 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of TagKeys to return in the response. The server allows
-   *  a maximum of 300 TagKeys to return. If unspecified, the server will use 100
-   *  as the default.
+   *  Optional. The maximum number of TagKeys to return in the response. The
+   *  server allows a maximum of 300 TagKeys to return. If unspecified, the
+   *  server will use 100 as the default.
    */
   // const pageSize = 1234
   /**

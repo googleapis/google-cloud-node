@@ -26,6 +26,8 @@ const ProjectsClient = v3.ProjectsClient;
 type ProjectsClient = v3.ProjectsClient;
 const TagBindingsClient = v3.TagBindingsClient;
 type TagBindingsClient = v3.TagBindingsClient;
+const TagHoldsClient = v3.TagHoldsClient;
+type TagHoldsClient = v3.TagHoldsClient;
 const TagKeysClient = v3.TagKeysClient;
 type TagKeysClient = v3.TagKeysClient;
 const TagValuesClient = v3.TagValuesClient;
@@ -37,6 +39,7 @@ export {
   OrganizationsClient,
   ProjectsClient,
   TagBindingsClient,
+  TagHoldsClient,
   TagKeysClient,
   TagValuesClient,
 };
@@ -46,6 +49,7 @@ export default {
   OrganizationsClient,
   ProjectsClient,
   TagBindingsClient,
+  TagHoldsClient,
   TagKeysClient,
   TagValuesClient,
 };
