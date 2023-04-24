@@ -38,6 +38,8 @@ steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: "bash"
     args: ["ci/deletecloudbuild.sh"]
+    env:
+    - 'REF_NAME=${REF_NAME}'
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
     timeout: 32400s
