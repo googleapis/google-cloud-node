@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.8.0...container-v4.9.0) (2023-04-24)
+
+
+### Features
+
+* [container] Add support for updating additional pod IPv4 ranges for Standard and Autopilot clusters ([#4177](https://github.com/googleapis/google-cloud-node/issues/4177)) ([2beee25](https://github.com/googleapis/google-cloud-node/commit/2beee255de109032828ffd5f9f8fb9d62574787b))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.7.1...container-v4.8.0) (2023-04-13)
 
 

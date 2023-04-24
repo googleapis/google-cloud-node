@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.4.1...grafeas-v4.5.0) (2023-04-24)
+
+
+### Features
+
+* [grafeas] add enum for grafeas v1 cvss to support both cvss v2 and v3 ([#4167](https://github.com/googleapis/google-cloud-node/issues/4167)) ([d9cf3bd](https://github.com/googleapis/google-cloud-node/commit/d9cf3bd09e06f53bfe650619df5c039a2b918af9))
+
 ## [4.4.1](https://github.com/googleapis/google-cloud-node/compare/grafeas-v4.4.0...grafeas-v4.4.1) (2023-04-13)
 
 
