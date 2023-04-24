@@ -4,6 +4,260 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "a2e0b9ed07f58228386f8ebcf5c16fa7ac589cc3",
+          "message": "Add initial files for google.cloud.confidentialcomputing.v1alpha1",
+          "issues": [
+            "4193"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "ccdebfe5-a220-428a-838a-53530fdb2c88",
+      "createTime": "2023-04-24T18:38:43.643Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d9cf3bd09e06f53bfe650619df5c039a2b918af9",
+          "message": "[grafeas] add enum for grafeas v1 cvss to support both cvss v2 and v3",
+          "issues": [
+            "4167"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "762340ef-29bc-4f99-8e9b-ae564255a44d",
+      "createTime": "2023-04-24T18:38:43.639Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e1841e71f1be28ec607fa6f00c6f624909bd7981",
+          "message": "[containeranalysis] scope GeneratePackagesSummary method to v1beta1 http path",
+          "issues": [
+            "4196"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "090493643ae86992c44e31963e1ba774d97b79d4",
+          "message": "[containeranalysis] add enum for grafeas v1 cvss to support both cvss v2 and v3",
+          "issues": [
+            "4163"
+          ]
+        }
+      ],
+      "version": "4.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "470e70ad-0d83-411e-937e-4b6a39234bf6",
+      "createTime": "2023-04-24T18:38:43.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "01fa5eb8e96fd8c8c0dd689b5da1ab57c4b66c98",
+          "message": "[cloudbuild] Add PeeredNetworkIpRange to NetworkConfigs message",
+          "issues": [
+            "4181"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "a77b867d-3f45-42db-a3de-fc0d7c42c959",
+      "createTime": "2023-04-24T18:38:43.632Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2beee255de109032828ffd5f9f8fb9d62574787b",
+          "message": "[container] Add support for updating additional pod IPv4 ranges for Standard and Autopilot clusters",
+          "issues": [
+            "4177"
+          ]
+        }
+      ],
+      "version": "4.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "1f994633-3f46-4447-be8d-14752d911f7f",
+      "createTime": "2023-04-24T18:38:43.630Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "595ab2845ac8a70fc2e94d7f69029396cb6414f0",
+          "message": "[tpu] make reservation_name parameter generally visible in QueuedResource message",
+          "issues": [
+            "4178"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "97ecd9d0-7f92-4d85-89c4-8c6131f60465",
+      "createTime": "2023-04-24T18:38:43.627Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3e1c4678dc20281eeaf30bf8cf64368e9110f307",
+          "message": "[securitycenter] add cloud_dlp_inspection and cloud_dlp_data_profile fields to finding's list of attributes",
+          "issues": [
+            "4198"
+          ]
+        }
+      ],
+      "version": "7.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "89d6684b-3475-4ea2-accc-6572e8d0b425",
+      "createTime": "2023-04-24T18:38:43.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ad27ba7ef7f23e90fdd8870f9b6b24fa25970f5d",
+          "message": "[retail] fix the HTTP format for merchant center link service",
+          "issues": [
+            "4183"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "5ac971ce-a7e0-4294-916d-bd5c8cd97e18",
+      "createTime": "2023-04-24T18:38:43.621Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a742949ff07268521d8901508b83413f6030fc33",
+          "message": "[resourcemanager] add TagHolds, GetNamespacedTagKey, and GetNamespacedTagValue APIs. Adds support for project parented tags",
+          "issues": [
+            "4191"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "d584004b-8927-44f2-834a-f2fd8d15b917",
+      "createTime": "2023-04-24T18:38:43.615Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ff093a9ab1b79c1863e25ffa71e1fdcbf32faa2d",
+          "message": "[metastore] added ScalingConfig (v1)",
+          "issues": [
+            "4176"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "a2fa125c-5302-428a-9bc5-b5c960c73375",
+      "createTime": "2023-04-24T18:38:43.612Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32e9389cdd555738855cc226a7c88a6f883a8da9",
+          "message": "[gkehub] add `monitoring_config` field",
+          "issues": [
+            "4197"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "86f1174537a80f807bdaf405e7af301a08ce40ce",
+          "message": "[gkehub] add `monitoring_config` field",
+          "issues": [
+            "4194"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "9ab74b2d-4531-49ae-8ce4-384b1332c3a7",
+      "createTime": "2023-04-24T18:38:43.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "de00e1d88877dd674dfd20b78a3de4476d65eb29",
+          "message": "[discoveryengine] add search, autocomplete and schema services",
+          "issues": [
+            "4201"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "bdac8712-5230-4ebb-81c7-9fae350fc14c",
+      "createTime": "2023-04-24T18:38:43.606Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c50526dc1b23a0318adc8fde9a4a88af0725b030",
+          "message": "[dataproc] update go_package to v2 in google.cloud.dataproc.v1",
+          "issues": [
+            "4184"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "3d1de55d-def1-49e4-87be-8caa1dd51d89",
+      "createTime": "2023-04-24T18:38:43.602Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3c46888d8b5b7568eaeac913fed55829a63f58df",
+          "message": "Add is_default to Tensorboard in aiplatform v1 tensorboard.proto and v1beta1 tensorboard.proto",
+          "issues": [
+            "4179"
+          ]
+        }
+      ],
+      "version": "2.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "b48f31b3-426a-4ddf-b757-b39ad40bff9b",
+      "createTime": "2023-04-24T18:38:43.597Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
           "message": "Minify JSON and JS files, and remove .map files",
@@ -8724,5 +8978,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-04-13T14:05:54.623Z"
+  "updateTime": "2023-04-24T18:38:43.643Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.9.0...aiplatform-v2.10.0) (2023-04-24)
+
+
+### Features
+
+* Add is_default to Tensorboard in aiplatform v1 tensorboard.proto and v1beta1 tensorboard.proto ([#4179](https://github.com/googleapis/google-cloud-node/issues/4179)) ([3c46888](https://github.com/googleapis/google-cloud-node/commit/3c46888d8b5b7568eaeac913fed55829a63f58df))
+
 ## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.8.1...aiplatform-v2.9.0) (2023-04-13)
 
 

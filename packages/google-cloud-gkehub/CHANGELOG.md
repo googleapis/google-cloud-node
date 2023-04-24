@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v3.3.2...gke-hub-v3.4.0) (2023-04-24)
+
+
+### Features
+
+* [gkehub] add `monitoring_config` field ([#4194](https://github.com/googleapis/google-cloud-node/issues/4194)) ([86f1174](https://github.com/googleapis/google-cloud-node/commit/86f1174537a80f807bdaf405e7af301a08ce40ce))
+* [gkehub] add `monitoring_config` field ([#4197](https://github.com/googleapis/google-cloud-node/issues/4197)) ([32e9389](https://github.com/googleapis/google-cloud-node/commit/32e9389cdd555738855cc226a7c88a6f883a8da9))
+
 ## [3.3.2](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v3.3.1...gke-hub-v3.3.2) (2023-04-13)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v4.2.2...resource-manager-v4.3.0) (2023-04-24)
+
+
+### Features
+
+* [resourcemanager] add TagHolds, GetNamespacedTagKey, and GetNamespacedTagValue APIs. Adds support for project parented tags ([#4191](https://github.com/googleapis/google-cloud-node/issues/4191)) ([a742949](https://github.com/googleapis/google-cloud-node/commit/a742949ff07268521d8901508b83413f6030fc33))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v4.2.1...resource-manager-v4.2.2) (2023-04-13)
 
 

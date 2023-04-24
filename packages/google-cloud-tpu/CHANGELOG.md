@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.5.1...tpu-v2.6.0) (2023-04-24)
+
+
+### Features
+
+* [tpu] make reservation_name parameter generally visible in QueuedResource message ([#4178](https://github.com/googleapis/google-cloud-node/issues/4178)) ([595ab28](https://github.com/googleapis/google-cloud-node/commit/595ab2845ac8a70fc2e94d7f69029396cb6414f0))
+
 ## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.5.0...tpu-v2.5.1) (2023-04-13)
 
 

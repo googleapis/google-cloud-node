@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataproc-metastore",
-  "version": "3.4.2",
+  "version": "3.5.0",
   "description": "Metastore client for Node.js",
   "repository": {
     "type": "git",
