@@ -35,6 +35,9 @@ steps:
       '--push-retry=3',
       '--image-fs-extract-retry=3'
     ]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: "bash"
+    args: ["ci/deletecloudbuild.sh"]
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
     timeout: 32400s
