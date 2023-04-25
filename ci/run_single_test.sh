@@ -40,6 +40,9 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
+echo "which pnpm"
+which pnpm
+
 # Install dependencies
 if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} == "12.22.12" ]] && [[ ${TEST_TYPE} != "lint" ]]; then
     echo "not running tests for Node 12"
