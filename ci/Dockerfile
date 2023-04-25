@@ -19,12 +19,6 @@ FROM node:${NODE_VERSION}-alpine as build
 
 RUN apk add --no-cache curl tar python3
 
-# Install pnpm
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
-
-# Files required by pnpm install
-COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
-
 # Install gcloud
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
 
@@ -40,6 +34,8 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
 FROM node:${NODE_VERSION}-alpine
 
 COPY --from=build /bin/flakybot /bin/flakybot
+
+RUN npm install -g pnpm
 
 # Hack for not found error with flakybot
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
