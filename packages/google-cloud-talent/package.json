@@ -32,20 +32,20 @@
     "Cloud Talent Solution API"
   ],
   "scripts": {
-    "test": "c8 mocha build/test",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "lint": "gts check",
-    "fix": "gts fix",
+    "preinstall": "npx only-allow pnpm",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
-    "prelint": "cd samples; npm link ../; npm install",
-    "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
-    "compile-protos": "compileProtos src",
-    "prepare": "npm run compile-protos && npm run compile",
-    "precompile": "gts clean"
+    "fix": "gts fix",
+    "lint": "gts check",
+    "prelint": "cd samples; npm link ../; npm i",
+    "prepare": "npm run compile-protos && npm run compile && minifyProtoJson",
+    "samples-test": "npm run compile-test && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile-test && c8 mocha build/system-test",
+    "test": "c8 mocha build/test"
   },
   "dependencies": {
     "google-gax": "^3.5.8"
@@ -71,4 +71,3 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-talent"
 }
-

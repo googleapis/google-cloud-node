@@ -29,6 +29,7 @@
     "Confidential Computing API"
   ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
@@ -37,11 +38,11 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "prelint": "cd samples; npm link ../; npm i"
+    "prelint": "cd samples; npm link ../; npm i",
+    "prepare": "npm run compile-protos && npm run compile && minifyProtoJson",
+    "samples-test": "npm run compile-test && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile-test && c8 mocha build/system-test",
+    "test": "c8 mocha build/test"
   },
   "dependencies": {
     "google-gax": "^3.5.8"

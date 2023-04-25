@@ -19,6 +19,12 @@ FROM node:${NODE_VERSION}-alpine as build
 
 RUN apk add --no-cache curl tar python3
 
+# Install pnpm
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
+# Files required by pnpm install
+COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
+
 # Install gcloud
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
 
