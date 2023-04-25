@@ -31,7 +31,9 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN curl https://get.pnpm.io/v6.16.js \
+    -o /bin/pnpm -s -L \
+    && chmod +x /bin/pnpm
 
 FROM node:${NODE_VERSION}-alpine
 
