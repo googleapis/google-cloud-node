@@ -41,8 +41,7 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} == "12.22.12" ]] && [[ ${TEST_TYPE} != 
-"lint" ]]; then
+if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} == "12.22.12" ]] && [[ ${TEST_TYPE} != "lint" ]]; then
     echo "not running tests for Node 12"
 elif [[ ${NODE_VERSION} == "12.22.12" ]]; then
     echo "pnpm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; pnpm install --unsafe-perm"
