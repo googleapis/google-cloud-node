@@ -31,11 +31,11 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
 FROM node:${NODE_VERSION}-alpine
 
 COPY --from=build /bin/flakybot /bin/flakybot
-
-RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=6 sh -
 
 # Hack for not found error with flakybot
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
