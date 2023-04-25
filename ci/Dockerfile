@@ -35,7 +35,7 @@ FROM node:${NODE_VERSION}-alpine
 
 COPY --from=build /bin/flakybot /bin/flakybot
 
-RUN npm install -g pnpm
+RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 # Hack for not found error with flakybot
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2

@@ -47,7 +47,7 @@ elif [[ ${NODE_VERSION} == "12.22.12" ]]; then
     echo "pnpm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; pnpm install --unsafe-perm"
     pnpm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; pnpm install --unsafe-perm
 else
-    echo "npm install --ignore-scripts --engine-strict --omit=dev; npm install"
+    echo "pnpm install --ignore-scripts --engine-strict --omit=dev; pnpm install"
     pnpm install --ignore-scripts --engine-strict --omit=dev; pnpm install
 fi
 
