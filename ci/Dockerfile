@@ -31,7 +31,7 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
-RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=v6.16 bash -
+RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=v6.16 sh -
 
 FROM node:${NODE_VERSION}-alpine
 
