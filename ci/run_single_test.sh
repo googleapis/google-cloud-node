@@ -60,15 +60,15 @@ retval=0
 set +e
 case ${TEST_TYPE} in
 lint)
-    pnpm run lint
+    pnpm lint
     retval=$?
     ;;
 samples)
-    pnpm run samples-test
+    pnpm samples-test
     retval=$?
     ;;
 system)
-    pnpm run system-test
+    pnpm system-test
     retval=$?
     ;;
 units)
