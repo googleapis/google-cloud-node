@@ -44,6 +44,7 @@ RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 COPY --from=build /usr/local/gcloud /usr/local/gcloud
 COPY --from=build /bin/flakybot /bin/flakybot
 COPY --from=build /root/.local/share/pnpm/pnpm /root/.local/share/pnpm/pnpm
+COPY --from=build /root/.shrc /root/.shrc
 
 RUN source /root/.shrc
 
