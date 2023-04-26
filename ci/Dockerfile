@@ -33,6 +33,7 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
 
 # RUN mkdir -p /usr/local/pnpm
 # RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=6.34.0 sh -
+RUN curl https://get.pnpm.io/install.sh | ENV="$PNPM_VERSION=6.34.0" ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 
 FROM node:${NODE_VERSION}-alpine
 
@@ -43,9 +44,5 @@ COPY --from=build /usr/local/gcloud /usr/local/gcloud
 COPY --from=build /bin/flakybot /bin/flakybot
 
 RUN apk add --no-cache git bash python3
-
-ENV PNPM_HOME=/usr/local/bin
-
-RUN corepack enable && corepack prepare pnpm@6.34.0 --activate
 
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
