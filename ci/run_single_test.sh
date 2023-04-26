@@ -53,6 +53,7 @@ else
     echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
     # pnpm install --ignore-scripts --engine-strict --prod; pnpm install
     pnpm install
+    pnpm add long
 fi
 
 retval=0
