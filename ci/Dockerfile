@@ -48,4 +48,5 @@ COPY --from=build /root/.local/share/pnpm/pnpm /root/.local/share/pnpm/pnpm
 RUN apk add --no-cache git bash python3
 
 ENV PATH=$PATH:/usr/local/gcloud/google-cloud-sdk/bin
-ENV PATH=$PATH:/root/.local/share/pnpm/pnpm
+ENV PNPM_HOME=/root/.local/share/pnpm/pnpm
+ENV PATH=$PNPM_HOME:$PATH
