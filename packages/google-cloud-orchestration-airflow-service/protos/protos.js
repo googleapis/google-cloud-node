@@ -14934,6 +14934,7 @@
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IDatabaseConfig|null} [databaseConfig] EnvironmentConfig databaseConfig
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IWebServerConfig|null} [webServerConfig] EnvironmentConfig webServerConfig
                                  * @property {string|null} [airflowUri] EnvironmentConfig airflowUri
+                                 * @property {string|null} [airflowByoidUri] EnvironmentConfig airflowByoidUri
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IEncryptionConfig|null} [encryptionConfig] EnvironmentConfig encryptionConfig
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IMaintenanceWindow|null} [maintenanceWindow] EnvironmentConfig maintenanceWindow
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IWorkloadsConfig|null} [workloadsConfig] EnvironmentConfig workloadsConfig
@@ -15036,6 +15037,14 @@
                                  * @instance
                                  */
                                 EnvironmentConfig.prototype.airflowUri = "";
+    
+                                /**
+                                 * EnvironmentConfig airflowByoidUri.
+                                 * @member {string} airflowByoidUri
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.airflowByoidUri = "";
     
                                 /**
                                  * EnvironmentConfig encryptionConfig.
@@ -15141,6 +15150,8 @@
                                         $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.encode(message.masterAuthorizedNetworksConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                     if (message.recoveryConfig != null && Object.hasOwnProperty.call(message, "recoveryConfig"))
                                         $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.encode(message.recoveryConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                                    if (message.airflowByoidUri != null && Object.hasOwnProperty.call(message, "airflowByoidUri"))
+                                        writer.uint32(/* id 21, wireType 2 =*/170).string(message.airflowByoidUri);
                                     return writer;
                                 };
     
@@ -15213,6 +15224,10 @@
                                             }
                                         case 6: {
                                                 message.airflowUri = reader.string();
+                                                break;
+                                            }
+                                        case 21: {
+                                                message.airflowByoidUri = reader.string();
                                                 break;
                                             }
                                         case 12: {
@@ -15316,6 +15331,9 @@
                                     if (message.airflowUri != null && message.hasOwnProperty("airflowUri"))
                                         if (!$util.isString(message.airflowUri))
                                             return "airflowUri: string expected";
+                                    if (message.airflowByoidUri != null && message.hasOwnProperty("airflowByoidUri"))
+                                        if (!$util.isString(message.airflowByoidUri))
+                                            return "airflowByoidUri: string expected";
                                     if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig")) {
                                         var error = $root.google.cloud.orchestration.airflow.service.v1beta1.EncryptionConfig.verify(message.encryptionConfig);
                                         if (error)
@@ -15404,6 +15422,8 @@
                                     }
                                     if (object.airflowUri != null)
                                         message.airflowUri = String(object.airflowUri);
+                                    if (object.airflowByoidUri != null)
+                                        message.airflowByoidUri = String(object.airflowByoidUri);
                                     if (object.encryptionConfig != null) {
                                         if (typeof object.encryptionConfig !== "object")
                                             throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.encryptionConfig: object expected");
@@ -15486,6 +15506,7 @@
                                         object.environmentSize = options.enums === String ? "ENVIRONMENT_SIZE_UNSPECIFIED" : 0;
                                         object.masterAuthorizedNetworksConfig = null;
                                         object.recoveryConfig = null;
+                                        object.airflowByoidUri = "";
                                     }
                                     if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster"))
                                         object.gkeCluster = message.gkeCluster;
@@ -15519,6 +15540,8 @@
                                         object.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.toObject(message.masterAuthorizedNetworksConfig, options);
                                     if (message.recoveryConfig != null && message.hasOwnProperty("recoveryConfig"))
                                         object.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.toObject(message.recoveryConfig, options);
+                                    if (message.airflowByoidUri != null && message.hasOwnProperty("airflowByoidUri"))
+                                        object.airflowByoidUri = message.airflowByoidUri;
                                     return object;
                                 };
     

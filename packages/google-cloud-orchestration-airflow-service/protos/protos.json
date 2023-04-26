@@ -1687,6 +1687,13 @@
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
                                 },
+                                "airflowByoidUri": {
+                                  "type": "string",
+                                  "id": 21,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
                                 "encryptionConfig": {
                                   "type": "EncryptionConfig",
                                   "id": 12,

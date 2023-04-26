@@ -6330,6 +6330,9 @@ export namespace google {
                             /** EnvironmentConfig airflowUri */
                             airflowUri?: (string|null);
 
+                            /** EnvironmentConfig airflowByoidUri */
+                            airflowByoidUri?: (string|null);
+
                             /** EnvironmentConfig encryptionConfig */
                             encryptionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IEncryptionConfig|null);
 
@@ -6387,6 +6390,9 @@ export namespace google {
 
                             /** EnvironmentConfig airflowUri. */
                             public airflowUri: string;
+
+                            /** EnvironmentConfig airflowByoidUri. */
+                            public airflowByoidUri: string;
 
                             /** EnvironmentConfig encryptionConfig. */
                             public encryptionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IEncryptionConfig|null);
