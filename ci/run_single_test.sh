@@ -47,11 +47,11 @@ which pnpm
 if [[ "${tests_without_node12[*]}" =~ "${PROJECT}" ]] && [[ ${NODE_VERSION} == "12.22.12" ]] && [[ ${TEST_TYPE} != "lint" ]]; then
     echo "not running tests for Node 12"
 elif [[ ${NODE_VERSION} == "12.22.12" ]]; then
-    echo "pnpm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; pnpm install --unsafe-perm"
+    echo "npm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; npm install --unsafe-perm"
     pnpm install --unsafe-perm --ignore-scripts --engine-strict --only=prod; pnpm install --unsafe-perm
 else
     echo "pnpm install --ignore-scripts --engine-strict --omit=dev; pnpm install"
-    pnpm install --ignore-scripts --engine-strict --omit=dev; pnpm install
+    pnpm install --ignore-scripts --engine-strict --prod; pnpm install
 fi
 
 retval=0
