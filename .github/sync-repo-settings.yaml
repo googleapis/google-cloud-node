@@ -40,7 +40,7 @@ branchProtectionRules:
 # List of explicit permissions to add (additive only)
 permissionRules:
     # Team slug to add to repository permissions
-  - team: js-team-admins
+  - team: jsteam-admins
     permission: admin
-  - team: js-team
+  - team: jsteam
     permission: push
