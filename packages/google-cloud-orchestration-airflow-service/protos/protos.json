@@ -395,6 +395,13 @@
                                   "type": "string",
                                   "id": 6
                                 },
+                                "airflowByoidUri": {
+                                  "type": "string",
+                                  "id": 20,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
                                 "masterAuthorizedNetworksConfig": {
                                   "type": "MasterAuthorizedNetworksConfig",
                                   "id": 17,

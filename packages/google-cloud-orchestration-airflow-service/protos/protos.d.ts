@@ -1284,6 +1284,9 @@ export namespace google {
                             /** EnvironmentConfig airflowUri */
                             airflowUri?: (string|null);
 
+                            /** EnvironmentConfig airflowByoidUri */
+                            airflowByoidUri?: (string|null);
+
                             /** EnvironmentConfig masterAuthorizedNetworksConfig */
                             masterAuthorizedNetworksConfig?: (google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig|null);
 
@@ -1341,6 +1344,9 @@ export namespace google {
 
                             /** EnvironmentConfig airflowUri. */
                             public airflowUri: string;
+
+                            /** EnvironmentConfig airflowByoidUri. */
+                            public airflowByoidUri: string;
 
                             /** EnvironmentConfig masterAuthorizedNetworksConfig. */
                             public masterAuthorizedNetworksConfig?: (google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig|null);
