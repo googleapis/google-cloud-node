@@ -40,7 +40,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prelint": "cd samples; pnpm link ../; pnpm i",
-    "prepare": "pnpm run compile-protos && pnpm run compile && minifyProtoJson",
+    "prepare": "pnpm compile-protos && pnpm compile && minifyProtoJson",
     "samples-test": "pnpm compile && cd samples/ && pnpm link ../ && pnpm i && pnpm test",
     "system-test": "pnpm compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
