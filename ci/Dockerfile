@@ -33,7 +33,7 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
 
 # RUN mkdir -p /usr/local/pnpm
 # RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=6.34.0 sh -
-ENV PNPM_VERSION=6.34.0
+ENV PNPM_VERSION=7.32.2
 RUN curl https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 
 FROM node:${NODE_VERSION}-alpine
