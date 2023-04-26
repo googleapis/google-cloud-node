@@ -37,8 +37,8 @@
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile-protos && npm run compile && minifyProtoJson",
-    "samples-test": "npm run compile-test && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile-test && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
