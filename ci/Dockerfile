@@ -31,11 +31,9 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
-RUN curl https://get.pnpm.io/v6.16.js \
-    -o /bin/pnpm -s -L \
-    && chmod +x /bin/pnpm
-
 FROM node:${NODE_VERSION}-alpine
+
+RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=v6.16 bash
 
 COPY --from=build /bin/flakybot /bin/flakybot
 
@@ -44,7 +42,6 @@ RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
 COPY --from=build /usr/local/gcloud /usr/local/gcloud
 COPY --from=build /bin/flakybot /bin/flakybot
-COPY --from=build /usr/local/bin/pnpm /usr/local/bin/pnpm
 
 RUN apk add --no-cache git bash python3
 
