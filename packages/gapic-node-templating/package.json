@@ -21,7 +21,7 @@
   "author": "Google LLC",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@octokit/rest": "19.0.6",
+    "@octokit/rest": "19.0.0",
     "@types/js-yaml": "^4.0.5",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.0",
