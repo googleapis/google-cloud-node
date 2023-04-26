@@ -54,7 +54,7 @@ else
     # pnpm install --ignore-scripts --engine-strict --prod; pnpm install
     pnpm install
     pnpm add long --save-dev
-    pnpm @types/long --save-dev
+    pnpm add @types/long --save-dev
 fi
 
 retval=0
