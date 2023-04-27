@@ -4,6 +4,7 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "lib": [
       "es2018",
       "dom"
