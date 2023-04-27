@@ -203,9 +203,6 @@ export class MatchServiceClient {
       deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
-      endpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpoints/{endpoint}'
-      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -253,6 +250,12 @@ export class MatchServiceClient {
       ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
+      ),
+      projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/endpoints/{endpoint}'
+      ),
+      projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -422,7 +425,7 @@ export class MatchServiceClient {
  *   Format:
  *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
  * @param {string} request.deployedIndexId
- *   The ID of the DeploydIndex that will serve the request. This request is
+ *   The ID of the DeployedIndex that will serve the request. This request is
  *   sent to a specific IndexEndpoint, as per the IndexEndpoint.network. That
  *   IndexEndpoint also has IndexEndpoint.deployed_indexes, and each such index
  *   has a DeployedIndex.id field.
@@ -510,7 +513,7 @@ export class MatchServiceClient {
  *   Format:
  *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
  * @param {string} request.deployedIndexId
- *   The ID of the DeploydIndex that will serve the request.
+ *   The ID of the DeployedIndex that will serve the request.
  * @param {string[]} request.ids
  *   IDs of the datapoints to be searched for.
  * @param {object} [options]
@@ -1368,55 +1371,6 @@ export class MatchServiceClient {
    */
   matchDeploymentResourcePoolFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).deployment_resource_pool;
-  }
-
-  /**
-   * Return a fully-qualified endpoint resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} endpoint
-   * @returns {string} Resource name string.
-   */
-  endpointPath(project:string,location:string,endpoint:string) {
-    return this.pathTemplates.endpointPathTemplate.render({
-      project: project,
-      location: location,
-      endpoint: endpoint,
-    });
-  }
-
-  /**
-   * Parse the project from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).project;
-  }
-
-  /**
-   * Parse the location from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).location;
-  }
-
-  /**
-   * Parse the endpoint from Endpoint resource.
-   *
-   * @param {string} endpointName
-   *   A fully-qualified path representing Endpoint resource.
-   * @returns {string} A string representing the endpoint.
-   */
-  matchEndpointFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
   }
 
   /**
@@ -2318,6 +2272,117 @@ export class MatchServiceClient {
    */
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
     return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).pipeline_job;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} endpoint
+   * @returns {string} Resource name string.
+   */
+  projectLocationEndpointPath(project:string,location:string,endpoint:string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      endpoint: endpoint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).location;
+  }
+
+  /**
+   * Parse the endpoint from ProjectLocationEndpoint resource.
+   *
+   * @param {string} projectLocationEndpointName
+   *   A fully-qualified path representing project_location_endpoint resource.
+   * @returns {string} A string representing the endpoint.
+   */
+  matchEndpointFromProjectLocationEndpointName(projectLocationEndpointName: string) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPublisherModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  projectLocationPublisherModelPath(project:string,location:string,publisher:string,model:string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
+      project: project,
+      location: location,
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).location;
+  }
+
+  /**
+   * Parse the publisher from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).publisher;
+  }
+
+  /**
+   * Parse the model from ProjectLocationPublisherModel resource.
+   *
+   * @param {string} projectLocationPublisherModelName
+   *   A fully-qualified path representing project_location_publisher_model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).model;
   }
 
   /**
