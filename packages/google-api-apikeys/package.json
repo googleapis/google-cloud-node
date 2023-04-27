@@ -30,7 +30,6 @@
     "API Keys API"
   ],
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
@@ -40,7 +39,8 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm i",
-    "prepare": "pnpm compile-protos && pnpm compile && minifyProtoJson",
+    "pretest": "pnpm compile-protos && pnpm compile",
+    "prepublish": "pnpm compile-protos && pnpm compile && minifyProtoJson",
     "samples-test": "pnpm compile && cd samples/ && pnpm link ../ && pnpm i && pnpm test",
     "system-test": "pnpm compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
