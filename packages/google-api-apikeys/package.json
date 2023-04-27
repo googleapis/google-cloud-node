@@ -46,10 +46,11 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "@types/long": "^5.0.0",
+  
     "google-gax": "^3.5.8"
   },
   "devDependencies": {
+    "@types/long": "^5.0.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^18.0.0",
     "@types/sinon": "^10.0.0",
