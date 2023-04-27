@@ -15,5 +15,8 @@
     "test/*.ts",
     "test/**/*.ts",
     "system-test/*.ts"
+  ],
+  "exclude": [
+    "build/protos"
   ]
 }
