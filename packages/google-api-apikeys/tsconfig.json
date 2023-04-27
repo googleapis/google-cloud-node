@@ -17,6 +17,6 @@
     "system-test/*.ts"
   ],
   "exclude": [
-    "build/protos"
+    "protos"
   ]
 }
