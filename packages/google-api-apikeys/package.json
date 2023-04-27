@@ -38,9 +38,9 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "prelint": "cd samples; npm link ../; npm i",
     "prepare": "pnpm compile-protos && pnpm compile",
-    "prepublish": "pnpm prepare && minifyProtoJson",
+    "prelint": "cd samples; npm link ../; npm i",
+    "postpack": "minifyProtoJson",
     "samples-test": "pnpm compile && cd samples/ && pnpm link ../ && pnpm i && pnpm test",
     "system-test": "pnpm compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
