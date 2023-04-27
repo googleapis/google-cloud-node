@@ -4,7 +4,6 @@
   "description": "container to bootstrap initial files in a Node library",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "test": "mocha tests/",
     "lint": "echo 'FIXME: no lint tests'",
     "samples-test": "echo 'no sample tests'",
