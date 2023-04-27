@@ -39,8 +39,8 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm i",
-    "pretest": "pnpm compile-protos && pnpm compile",
-    "prepublish": "pnpm compile-protos && pnpm compile && minifyProtoJson",
+    "prepare": "pnpm compile-protos && pnpm compile",
+    "prepublish": "pnpm prepare && minifyProtoJson",
     "samples-test": "pnpm compile && cd samples/ && pnpm link ../ && pnpm i && pnpm test",
     "system-test": "pnpm compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
