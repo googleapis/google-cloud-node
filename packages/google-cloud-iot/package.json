@@ -32,7 +32,6 @@
     "Cloud IoT API"
   ],
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
@@ -41,9 +40,10 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
+    "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
-    "prepare": "npm run compile-protos && npm run compile && minifyProtoJson",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "postpack": "minifyProtoJson",
+    "samples-test": "npm run compile && cd samples/ && npm run link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
@@ -60,6 +60,7 @@
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
     "linkinator": "^4.0.0",
+    "long": "^5.2.3",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",

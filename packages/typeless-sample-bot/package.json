@@ -15,7 +15,6 @@
     "build/src"
   ],
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
@@ -24,10 +23,11 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
+    "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
-    "prepare": "npm run compile-protos && npm run compile && minifyProtoJson",
-    "samples-test": "npm run compile-test && cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile-test && c8 mocha build/system-test",
+    "postpack": "minifyProtoJson",
+    "samples-test": "npm run compile && cd samples/ && npm run link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
@@ -52,6 +52,7 @@
     "@types/yargs": "^17.0.10",
     "c8": "^7.11.3",
     "gts": "^3.1.0",
+    "long": "^5.2.3",
     "mocha": "^10.0.0",
     "sinon": "^15.0.0",
     "snap-shot-it": "^7.9.6",
