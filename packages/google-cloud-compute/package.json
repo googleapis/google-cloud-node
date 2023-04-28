@@ -120,7 +120,7 @@
     "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
-    "samples-test": "npm run compile && cd samples/ && npm run link ../ && npm i && npm test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 node build/test/run.js"
   },
