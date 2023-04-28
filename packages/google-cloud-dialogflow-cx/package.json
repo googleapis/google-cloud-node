@@ -53,7 +53,7 @@
     "postpack": "minifyProtoJson",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test/*_v2.js && c8 mocha build/test/*_v2beta1.js"
+    "test": "c8 node build/test/run.js"
   },
   "dependencies": {
     "google-gax": "^3.5.8"
