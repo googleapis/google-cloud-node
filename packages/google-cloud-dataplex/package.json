@@ -32,6 +32,7 @@
   "scripts": {
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
+    "samples-test-suite": "cd samples/ && npm link ../ && npm test && cd ../",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",

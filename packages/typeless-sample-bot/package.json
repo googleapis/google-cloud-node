@@ -15,20 +15,15 @@
     "build/src"
   ],
   "scripts": {
-    "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
-    "compile-protos": "compileProtos src",
-    "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
-    "fix": "gts fix",
+    "compile": "tsc -p .",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "test": "c8 mocha build/test --recursive",
+    "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
+    "samples-test": "echo no system tests yet 🙀",
+    "system-test": "echo no system tests yet 🙀",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
-    "prelint": "cd samples; npm link ../; npm i",
-    "postpack": "minifyProtoJson",
-    "samples-test": "npm run compile && cd samples/ && npm run link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "fix": "gts fix"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",
