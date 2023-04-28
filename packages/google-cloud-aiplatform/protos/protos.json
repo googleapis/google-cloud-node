@@ -28,6 +28,7 @@
                         "NVIDIA_TESLA_P4": 4,
                         "NVIDIA_TESLA_T4": 5,
                         "NVIDIA_TESLA_A100": 8,
+                        "NVIDIA_L4": 11,
                         "TPU_V2": 6,
                         "TPU_V3": 7,
                         "TPU_V4_POD": 10
@@ -1769,7 +1770,8 @@
                             "AUTOML": 1,
                             "CUSTOM": 2,
                             "BQML": 3,
-                            "MODEL_GARDEN": 4
+                            "MODEL_GARDEN": 4,
+                            "GENIE": 5
                           }
                         }
                       }
@@ -2024,6 +2026,22 @@
                           "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        },
+                        "experimentRun": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
                           }
                         }
                       }
@@ -3404,7 +3422,7 @@
                     "Endpoint": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/Endpoint",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/endpoints/{endpoint}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/publishers/{publisher}/models/{model}"
                       },
                       "fields": {
                         "name": {
@@ -3792,6 +3810,34 @@
                               }
                             }
                           ]
+                        },
+                        "MutateDeployedModel": {
+                          "requestType": "MutateDeployedModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:mutateDeployedModel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "endpoint,deployed_model,update_mask",
+                            "(google.longrunning.operation_info).response_type": "MutateDeployedModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "MutateDeployedModelOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:mutateDeployedModel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,deployed_model,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MutateDeployedModelResponse",
+                                "metadata_type": "MutateDeployedModelOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -4003,6 +4049,48 @@
                         }
                       }
                     },
+                    "MutateDeployedModelRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "deployedModel": {
+                          "type": "DeployedModel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MutateDeployedModelResponse": {
+                      "fields": {
+                        "deployedModel": {
+                          "type": "DeployedModel",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MutateDeployedModelOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "EntityType": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/EntityType",
@@ -4055,6 +4143,13 @@
                         "monitoringConfig": {
                           "type": "FeaturestoreMonitoringConfig",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "offlineStorageTtlDays": {
+                          "type": "int32",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4602,6 +4697,13 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "onlineStorageTtlDays": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "encryptionSpec": {
@@ -15237,13 +15339,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "endpoint,instances,parameters"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -15257,13 +15365,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "endpoint,http_body"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -19172,6 +19286,7 @@
                         "NVIDIA_TESLA_T4": 5,
                         "NVIDIA_TESLA_A100": 8,
                         "NVIDIA_A100_80GB": 9,
+                        "NVIDIA_L4": 11,
                         "TPU_V2": 6,
                         "TPU_V3": 7,
                         "TPU_V4_POD": 10
@@ -21549,7 +21664,8 @@
                             "AUTOML": 1,
                             "CUSTOM": 2,
                             "BQML": 3,
-                            "MODEL_GARDEN": 4
+                            "MODEL_GARDEN": 4,
+                            "GENIE": 5
                           }
                         }
                       }
@@ -21804,6 +21920,22 @@
                           "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        },
+                        "experimentRun": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
                           }
                         }
                       }
@@ -23476,7 +23608,7 @@
                     "Endpoint": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/Endpoint",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/endpoints/{endpoint}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/publishers/{publisher}/models/{model}"
                       },
                       "fields": {
                         "name": {
@@ -23876,6 +24008,34 @@
                               }
                             }
                           ]
+                        },
+                        "MutateDeployedModel": {
+                          "requestType": "MutateDeployedModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:mutateDeployedModel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "endpoint,deployed_model,update_mask",
+                            "(google.longrunning.operation_info).response_type": "MutateDeployedModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "MutateDeployedModelOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:mutateDeployedModel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,deployed_model,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MutateDeployedModelResponse",
+                                "metadata_type": "MutateDeployedModelOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -24076,6 +24236,48 @@
                       "fields": {}
                     },
                     "UndeployModelOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MutateDeployedModelRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "deployedModel": {
+                          "type": "DeployedModel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MutateDeployedModelResponse": {
+                      "fields": {
+                        "deployedModel": {
+                          "type": "DeployedModel",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MutateDeployedModelOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
@@ -35092,13 +35294,19 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "endpoint,instances,parameters"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -35112,13 +35320,19 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "endpoint,http_body"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -35355,6 +35569,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "nextRunTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7,
@@ -35396,9 +35617,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "lastScheduledRunResponse": {
+                          "type": "RunResponse",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "RunResponse": {
+                          "fields": {
+                            "scheduledRunTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "runResponse": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -35523,7 +35763,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/schedules/*}:resume",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name"
+                            "(google.api.method_signature)": "name,catch_up"
                           },
                           "parsedOptions": [
                             {
@@ -35534,6 +35774,9 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,catch_up"
                             }
                           ]
                         }

@@ -35,7 +35,7 @@ function main(indexEndpoint) {
    */
   // const indexEndpoint = 'abc123'
   /**
-   *  The ID of the DeploydIndex that will serve the request.
+   *  The ID of the DeployedIndex that will serve the request.
    */
   // const deployedIndexId = 'abc123'
   /**

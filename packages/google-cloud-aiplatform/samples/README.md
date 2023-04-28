@@ -29,6 +29,7 @@
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
   * [Endpoint_service.get_endpoint](#endpoint_service.get_endpoint)
   * [Endpoint_service.list_endpoints](#endpoint_service.list_endpoints)
+  * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
   * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
@@ -240,6 +241,7 @@
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
   * [Endpoint_service.get_endpoint](#endpoint_service.get_endpoint)
   * [Endpoint_service.list_endpoints](#endpoint_service.list_endpoints)
+  * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
   * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
@@ -738,6 +740,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.list_endpoints.js`
+
+
+-----
+
+
+
+
+### Endpoint_service.mutate_deployed_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/endpoint_service.mutate_deployed_model.js`
 
 
 -----
@@ -4325,6 +4344,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.list_endpoints.js`
+
+
+-----
+
+
+
+
+### Endpoint_service.mutate_deployed_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.mutate_deployed_model.js`
 
 
 -----

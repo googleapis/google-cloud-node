@@ -46,11 +46,11 @@ function main(tensorboardTimeSeries) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  TensorboardService.ExportTensorboardTimeSeries   call.
-   *  Provide this to retrieve the subsequent page.
+   *  ExportTensorboardTimeSeriesData google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData 
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  TensorboardService.ExportTensorboardTimeSeries   must
-   *  match the call that provided the page token.
+   *  ExportTensorboardTimeSeriesData google.cloud.aiplatform.v1.TensorboardService.ExportTensorboardTimeSeriesData 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
