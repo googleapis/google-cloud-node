@@ -9,7 +9,7 @@ jobs:
         node: [14, 16, 18]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v2
         with:
           node-version: ${{ matrix.node }}
       - run: node --version
