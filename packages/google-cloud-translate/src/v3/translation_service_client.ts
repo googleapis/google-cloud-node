@@ -29,7 +29,7 @@ import type {
 } from 'google-gax';
 import * as gax from 'google-gax';
 import {Transform} from 'stream';
-import * as protos from '../../protos/protos.js';
+import type * as protos from '../../protos/protos';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
