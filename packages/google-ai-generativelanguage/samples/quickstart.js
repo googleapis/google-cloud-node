@@ -18,8 +18,8 @@
 
 'use strict';
 
-function main() {
-  // [START generativelanguage_quickstart]
+function main(model, prompt) {
+  // [START generativelanguage_v1beta2_generated_DiscussService_GenerateMessage_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -27,41 +27,67 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The maximum number of `Models` to return (per page).
-   *  The service may return fewer models.
-   *  If unspecified, at most 50 models will be returned per page.
-   *  This method returns at most 1000 models per page, even if you pass a larger
-   *  page_size.
+   *  Required. The name of the model to use.
+   *  Format: `name=models/{model}`.
    */
-  // const pageSize = 1234
+  // const model = 'abc123'
   /**
-   *  A page token, received from a previous `ListModels` call.
-   *  Provide the `page_token` returned by one request as an argument to the next
-   *  request to retrieve the next page.
-   *  When paginating, all other parameters provided to `ListModels` must match
-   *  the call that provided the page token.
+   *  Required. The structured textual input given to the model as a prompt.
+   *  Given a
+   *  prompt, the model will return what it predicts is the next message in the
+   *  discussion.
    */
-  // const pageToken = 'abc123'
+  // const prompt = {}
+  /**
+   *  Optional. Controls the randomness of the output.
+   *  Values can range over `[0.0,1.0]`,
+   *  inclusive. A value closer to `1.0` will produce responses that are more
+   *  varied, while a value closer to `0.0` will typically result in
+   *  less surprising responses from the model.
+   */
+  // const temperature = 1234
+  /**
+   *  Optional. The number of generated response messages to return.
+   *  This value must be between
+   *  `[1, 8]`, inclusive. If unset, this will default to `1`.
+   */
+  // const candidateCount = 1234
+  /**
+   *  Optional. The maximum cumulative probability of tokens to consider when
+   *  sampling.
+   *  The model uses combined Top-k and nucleus sampling.
+   *  Nucleus sampling considers the smallest set of tokens whose probability
+   *  sum is at least `top_p`.
+   */
+  // const topP = 1234
+  /**
+   *  Optional. The maximum number of tokens to consider when sampling.
+   *  The model uses combined Top-k and nucleus sampling.
+   *  Top-k sampling considers the set of `top_k` most probable tokens.
+   */
+  // const topK = 1234
 
   // Imports the Generativelanguage library
-  const {ModelServiceClient} = require('@google-ai/generativelanguage').v1beta2;
+  const {DiscussServiceClient} =
+    require('@google-ai/generativelanguage').v1beta2;
 
   // Instantiates a client
-  const generativelanguageClient = new ModelServiceClient();
+  const generativelanguageClient = new DiscussServiceClient();
 
-  async function callListModels() {
+  async function callGenerateMessage() {
     // Construct request
-    const request = {};
+    const request = {
+      model,
+      prompt,
+    };
 
     // Run request
-    const iterable = await generativelanguageClient.listModelsAsync(request);
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const response = await generativelanguageClient.generateMessage(request);
+    console.log(response);
   }
 
-  callListModels();
-  // [END generativelanguage_quickstart]
+  callGenerateMessage();
+  // [END generativelanguage_v1beta2_generated_DiscussService_GenerateMessage_async]
 }
 
 process.on('unhandledRejection', err => {
