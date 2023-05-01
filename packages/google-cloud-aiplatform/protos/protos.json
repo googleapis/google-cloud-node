@@ -21556,6 +21556,17 @@
                         }
                       }
                     },
+                    "LargeModelReference": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "PredictSchemata": {
                       "fields": {
                         "instanceSchemaUri": {
