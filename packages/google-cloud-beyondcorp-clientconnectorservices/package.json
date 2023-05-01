@@ -1,13 +1,13 @@
 {
-  "name": "@google-cloud/clientconnectorservices",
+  "name": "@google-cloud/clientgateways",
   "version": "0.3.2",
   "description": "BeyondCorp API client for Node.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
-    "directory": "packages/google-cloud-beyondcorp-clientconnectorservices"
+    "directory": "packages/google-cloud-beyondcorp-clientgateways"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -25,8 +25,8 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google clientconnectorservices",
-    "clientconnectorservices",
+    "google clientgateways",
+    "clientgateways",
     ""
   ],
   "scripts": {
