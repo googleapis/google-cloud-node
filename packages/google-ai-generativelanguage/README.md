@@ -88,13 +88,12 @@ const generativelanguageClient = new ModelServiceClient();
 
 async function callListModels() {
   // Construct request
-  const request = {
-  };
+  const request = {};
 
   // Run request
   const iterable = await generativelanguageClient.listModelsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
