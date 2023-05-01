@@ -31,6 +31,6 @@ describe('Quickstart', () => {
     const output = execSync(
       'node ./quickstart.js kokoro-system-test@long-door-651.iam.gserviceaccount.com https://www.googleapis.com/auth/iam'
     );
-    assert(output != null);
+    assert(output !== null);
   });
 });
