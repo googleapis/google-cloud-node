@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,53 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-ai/generativelanguage
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  The maximum number of `Models` to return (per page).
- *  The service may return fewer models.
- *  If unspecified, at most 50 models will be returned per page.
- *  This method returns at most 1000 models per page, even if you pass a larger
- *  page_size.
- */
-// const pageSize = 1234
-/**
- *  A page token, received from a previous `ListModels` call.
- *  Provide the `page_token` returned by one request as an argument to the next
- *  request to retrieve the next page.
- *  When paginating, all other parameters provided to `ListModels` must match
- *  the call that provided the page token.
- */
-// const pageToken = 'abc123'
-
-// Imports the Generativelanguage library
-const {ModelServiceClient} = require('@google-ai/generativelanguage').v1beta2;
-
-// Instantiates a client
-const generativelanguageClient = new ModelServiceClient();
-
-async function callListModels() {
-  // Construct request
-  const request = {};
-
-  // Run request
-  const iterable = await generativelanguageClient.listModelsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListModels();
-
-```
 
 
 
