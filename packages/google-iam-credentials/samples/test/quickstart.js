@@ -22,7 +22,6 @@ const {assert} = require('chai');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
