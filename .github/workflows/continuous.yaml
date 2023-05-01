@@ -24,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [14, 16, 18]
+        node: [12, 14, 16, 18]
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.32.2
+          version: ^6.24.1
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests
