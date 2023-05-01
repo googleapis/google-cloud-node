@@ -84,7 +84,7 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [[ "${TEST_TYPE}" == "system" ]] ; then
+                if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in ${d} for system test"
                     should_test=true
                 elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then

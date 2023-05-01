@@ -56,6 +56,7 @@ retval=0
 set +e
 case ${TEST_TYPE} in
 lint)
+    pnpm prelint
     pnpm lint
     retval=$?
     ;;
