@@ -19,7 +19,7 @@
 'use strict';
 
 function main(model, prompt) {
-  // [START generativelanguage_v1beta2_generated_DiscussService_GenerateMessage_async]
+  // [START generativelanguage_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -87,7 +87,7 @@ function main(model, prompt) {
   }
 
   callGenerateMessage();
-  // [END generativelanguage_v1beta2_generated_DiscussService_GenerateMessage_async]
+  // [END generativelanguage_quickstart]
 }
 
 process.on('unhandledRejection', err => {
