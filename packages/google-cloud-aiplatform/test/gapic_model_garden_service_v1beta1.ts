@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as matchserviceModule from '../src';
+import * as modelgardenserviceModule from '../src';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
@@ -87,66 +87,72 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.MatchServiceClient', () => {
+describe('v1beta1.ModelGardenServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        matchserviceModule.v1beta1.MatchServiceClient.servicePath;
+        modelgardenserviceModule.v1beta1.ModelGardenServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        matchserviceModule.v1beta1.MatchServiceClient.apiEndpoint;
+        modelgardenserviceModule.v1beta1.ModelGardenServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = matchserviceModule.v1beta1.MatchServiceClient.port;
+      const port =
+        modelgardenserviceModule.v1beta1.ModelGardenServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient();
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        fallback: true,
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          fallback: true,
+        });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.matchServiceStub, undefined);
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.modelGardenServiceStub, undefined);
       await client.initialize();
-      assert(client.matchServiceStub);
+      assert(client.modelGardenServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
-      assert(client.matchServiceStub);
+      assert(client.modelGardenServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.matchServiceStub, undefined);
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.modelGardenServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -154,10 +160,11 @@ describe('v1beta1.MatchServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -166,10 +173,11 @@ describe('v1beta1.MatchServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -187,64 +195,66 @@ describe('v1beta1.MatchServiceClient', () => {
     });
   });
 
-  describe('findNeighbors', () => {
-    it('invokes findNeighbors without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('getPublisherModel', () => {
+    it('invokes getPublisherModel without error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FindNeighborsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FindNeighborsRequest',
-        ['indexEndpoint']
+        '.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest',
+        ['name']
       );
-      request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FindNeighborsResponse()
+        new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
       );
-      client.innerApiCalls.findNeighbors = stubSimpleCall(expectedResponse);
-      const [response] = await client.findNeighbors(request);
+      client.innerApiCalls.getPublisherModel = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPublisherModel(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.findNeighbors as SinonStub
+        client.innerApiCalls.getPublisherModel as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.findNeighbors as SinonStub
+        client.innerApiCalls.getPublisherModel as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes findNeighbors without error using callback', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getPublisherModel without error using callback', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FindNeighborsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FindNeighborsRequest',
-        ['indexEndpoint']
+        '.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest',
+        ['name']
       );
-      request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FindNeighborsResponse()
+        new protos.google.cloud.aiplatform.v1beta1.PublisherModel()
       );
-      client.innerApiCalls.findNeighbors =
+      client.innerApiCalls.getPublisherModel =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.findNeighbors(
+        client.getPublisherModel(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IFindNeighborsResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.IPublisherModel | null
           ) => {
             if (err) {
               reject(err);
@@ -257,202 +267,74 @@ describe('v1beta1.MatchServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.findNeighbors as SinonStub
+        client.innerApiCalls.getPublisherModel as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.findNeighbors as SinonStub
+        client.innerApiCalls.getPublisherModel as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes findNeighbors with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getPublisherModel with error', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FindNeighborsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FindNeighborsRequest',
-        ['indexEndpoint']
+        '.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest',
+        ['name']
       );
-      request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.findNeighbors = stubSimpleCall(
+      client.innerApiCalls.getPublisherModel = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.findNeighbors(request), expectedError);
+      await assert.rejects(client.getPublisherModel(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.findNeighbors as SinonStub
+        client.innerApiCalls.getPublisherModel as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.findNeighbors as SinonStub
+        client.innerApiCalls.getPublisherModel as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes findNeighbors with closed client', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getPublisherModel with closed client', async () => {
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FindNeighborsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FindNeighborsRequest',
-        ['indexEndpoint']
+        '.google.cloud.aiplatform.v1beta1.GetPublisherModelRequest',
+        ['name']
       );
-      request.indexEndpoint = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.findNeighbors(request), expectedError);
-    });
-  });
-
-  describe('readIndexDatapoints', () => {
-    it('invokes readIndexDatapoints without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest',
-        ['indexEndpoint']
-      );
-      request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse()
-      );
-      client.innerApiCalls.readIndexDatapoints =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.readIndexDatapoints(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.readIndexDatapoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.readIndexDatapoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes readIndexDatapoints without error using callback', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest',
-        ['indexEndpoint']
-      );
-      request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsResponse()
-      );
-      client.innerApiCalls.readIndexDatapoints =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.readIndexDatapoints(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IReadIndexDatapointsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.readIndexDatapoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.readIndexDatapoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes readIndexDatapoints with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest',
-        ['indexEndpoint']
-      );
-      request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.readIndexDatapoints = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.readIndexDatapoints(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.readIndexDatapoints as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.readIndexDatapoints as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes readIndexDatapoints with closed client', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ReadIndexDatapointsRequest',
-        ['indexEndpoint']
-      );
-      request.indexEndpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.readIndexDatapoints(request), expectedError);
+      await assert.rejects(client.getPublisherModel(request), expectedError);
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -479,10 +361,11 @@ describe('v1beta1.MatchServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -523,10 +406,11 @@ describe('v1beta1.MatchServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -555,10 +439,11 @@ describe('v1beta1.MatchServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -585,10 +470,11 @@ describe('v1beta1.MatchServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -629,10 +515,11 @@ describe('v1beta1.MatchServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -661,10 +548,11 @@ describe('v1beta1.MatchServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -694,10 +582,11 @@ describe('v1beta1.MatchServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -738,10 +627,11 @@ describe('v1beta1.MatchServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -773,10 +663,11 @@ describe('v1beta1.MatchServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -803,10 +694,11 @@ describe('v1beta1.MatchServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -847,10 +739,11 @@ describe('v1beta1.MatchServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -882,10 +775,11 @@ describe('v1beta1.MatchServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -930,10 +824,11 @@ describe('v1beta1.MatchServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -980,10 +875,11 @@ describe('v1beta1.MatchServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -1067,10 +963,11 @@ describe('v1beta1.MatchServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -1144,10 +1041,11 @@ describe('v1beta1.MatchServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -1219,10 +1117,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -1297,10 +1196,11 @@ describe('v1beta1.MatchServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -1372,10 +1272,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -1437,10 +1338,11 @@ describe('v1beta1.MatchServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -1512,10 +1414,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -1577,10 +1480,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -1641,10 +1545,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
         .stub()
@@ -1723,10 +1628,11 @@ describe('v1beta1.MatchServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -1799,10 +1705,11 @@ describe('v1beta1.MatchServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -1876,10 +1783,11 @@ describe('v1beta1.MatchServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featurePathTemplate.render = sinon
         .stub()
@@ -1962,10 +1870,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -2026,10 +1935,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -2107,10 +2017,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -2171,10 +2082,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -2236,10 +2148,11 @@ describe('v1beta1.MatchServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -2313,10 +2226,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -2377,10 +2291,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -2441,10 +2356,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2521,10 +2437,11 @@ describe('v1beta1.MatchServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -2598,10 +2515,11 @@ describe('v1beta1.MatchServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -2705,10 +2623,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         nas_job: 'nasJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.nasJobPathTemplate.render = sinon
         .stub()
@@ -2770,10 +2689,11 @@ describe('v1beta1.MatchServiceClient', () => {
         nas_job: 'nasJobValue',
         nas_trial_detail: 'nasTrialDetailValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
         .stub()
@@ -2846,10 +2766,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -2910,10 +2831,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
         .stub()
@@ -2990,10 +2912,11 @@ describe('v1beta1.MatchServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3081,10 +3004,11 @@ describe('v1beta1.MatchServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.publisherModelPathTemplate.render = sinon
         .stub()
@@ -3135,10 +3059,11 @@ describe('v1beta1.MatchServiceClient', () => {
         dataset: 'datasetValue',
         saved_query: 'savedQueryValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.savedQueryPathTemplate.render = sinon
         .stub()
@@ -3210,10 +3135,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         schedule: 'scheduleValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.schedulePathTemplate.render = sinon
         .stub()
@@ -3274,10 +3200,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -3339,10 +3266,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -3403,10 +3331,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -3468,10 +3397,11 @@ describe('v1beta1.MatchServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -3564,10 +3494,11 @@ describe('v1beta1.MatchServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -3653,10 +3584,11 @@ describe('v1beta1.MatchServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -3776,10 +3708,11 @@ describe('v1beta1.MatchServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -3845,10 +3778,11 @@ describe('v1beta1.MatchServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client = new matchserviceModule.v1beta1.MatchServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()
