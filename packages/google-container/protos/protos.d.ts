@@ -26876,7 +26876,8 @@ export namespace google {
                     SET_MASTER_AUTH = 13,
                     SET_NODE_POOL_SIZE = 14,
                     SET_NETWORK_POLICY = 15,
-                    SET_MAINTENANCE_POLICY = 16
+                    SET_MAINTENANCE_POLICY = 16,
+                    RESIZE_CLUSTER = 18
                 }
             }
 
@@ -36819,11 +36820,11 @@ export namespace google {
             /** Properties of a DatabaseEncryption. */
             interface IDatabaseEncryption {
 
-                /** DatabaseEncryption state */
-                state?: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State|null);
-
                 /** DatabaseEncryption keyName */
                 keyName?: (string|null);
+
+                /** DatabaseEncryption state */
+                state?: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State|null);
             }
 
             /** Represents a DatabaseEncryption. */
@@ -36835,11 +36836,11 @@ export namespace google {
                  */
                 constructor(properties?: google.container.v1beta1.IDatabaseEncryption);
 
-                /** DatabaseEncryption state. */
-                public state: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State);
-
                 /** DatabaseEncryption keyName. */
                 public keyName: string;
+
+                /** DatabaseEncryption state. */
+                public state: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State);
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
