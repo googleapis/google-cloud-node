@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.10.0](https://github.com/googleapis/nodejs-storage/compare/v6.9.5...v6.10.0) (2023-05-02)
+
+
+### Features
+
+* Retry Socket Connection Timeouts on Node 20+ ([#2187](https://github.com/googleapis/nodejs-storage/issues/2187)) ([733b560](https://github.com/googleapis/nodejs-storage/commit/733b560c2f634884dd31c916c208ee6395d4fbe1))
+
 ## [6.9.5](https://github.com/googleapis/nodejs-storage/compare/v6.9.4...v6.9.5) (2023-03-30)
 
 
