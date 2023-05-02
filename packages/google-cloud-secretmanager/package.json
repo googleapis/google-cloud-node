@@ -37,7 +37,7 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {

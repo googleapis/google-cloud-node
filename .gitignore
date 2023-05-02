@@ -9,3 +9,5 @@ packages/*/CONTRIBUTORS
 packages/*/COPYING
 package-lock.json
 __pycache__
+packages/*/pnpm-lock.yaml
+containers/*/pnpm-lock.yaml
