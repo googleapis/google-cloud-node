@@ -14,7 +14,7 @@ async function main() {
                 rewrite = true;
             }
             if (packageJson.scripts.hasOwnProperty("system-test")) {
-                packageJson.scripts["system-test"] = "npm run compile && c8 mocha build/system-test"
+                packageJson.scripts["system-test"] = "c8 mocha build/system-test"
                 rewrite = true;
             }
             if (rewrite) {
