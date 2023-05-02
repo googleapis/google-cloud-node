@@ -323,6 +323,24 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.retryOptions.retryableErrorFn(error), true);
     });
 
+    it('should retry a socket connection timeout', () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+      });
+      const calledWith = storage.calledWith_[0];
+      const error = new ApiError('Broken pipe');
+      const innerError = {
+        /**
+         * @link https://nodejs.org/api/errors.html#err_socket_connection_timeout
+         * @link https://github.com/nodejs/node/blob/798db3c92a9b9c9f991eed59ce91e9974c052bc9/lib/internal/errors.js#L1570-L1571
+         */
+        reason: 'Socket connection timeout',
+      };
+
+      error.errors = [innerError];
+      assert.strictEqual(calledWith.retryOptions.retryableErrorFn(error), true);
+    });
+
     it('should not retry a 999 error', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,

@@ -270,7 +270,8 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
       reason.includes('eai_again') || // DNS lookup error
       reason === 'econnreset' ||
       reason === 'unexpected connection closure' ||
-      reason === 'epipe'
+      reason === 'epipe' ||
+      reason === 'socket connection timeout'
     );
   };
 
