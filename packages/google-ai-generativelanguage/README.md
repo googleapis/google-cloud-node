@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,79 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-ai/generativelanguage
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The name of the model to use.
+ *  Format: `name=models/{model}`.
+ */
+// const model = 'abc123'
+/**
+ *  Required. The structured textual input given to the model as a prompt.
+ *  Given a
+ *  prompt, the model will return what it predicts is the next message in the
+ *  discussion.
+ */
+// const prompt = {}
+/**
+ *  Optional. Controls the randomness of the output.
+ *  Values can range over `[0.0,1.0]`,
+ *  inclusive. A value closer to `1.0` will produce responses that are more
+ *  varied, while a value closer to `0.0` will typically result in
+ *  less surprising responses from the model.
+ */
+// const temperature = 1234
+/**
+ *  Optional. The number of generated response messages to return.
+ *  This value must be between
+ *  `[1, 8]`, inclusive. If unset, this will default to `1`.
+ */
+// const candidateCount = 1234
+/**
+ *  Optional. The maximum cumulative probability of tokens to consider when
+ *  sampling.
+ *  The model uses combined Top-k and nucleus sampling.
+ *  Nucleus sampling considers the smallest set of tokens whose probability
+ *  sum is at least `top_p`.
+ */
+// const topP = 1234
+/**
+ *  Optional. The maximum number of tokens to consider when sampling.
+ *  The model uses combined Top-k and nucleus sampling.
+ *  Top-k sampling considers the set of `top_k` most probable tokens.
+ */
+// const topK = 1234
+
+// Imports the Generativelanguage library
+const {DiscussServiceClient} =
+  require('@google-ai/generativelanguage').v1beta2;
+
+// Instantiates a client
+const generativelanguageClient = new DiscussServiceClient();
+
+async function callGenerateMessage() {
+  // Construct request
+  const request = {
+    model,
+    prompt,
+  };
+
+  // Run request
+  const response = await generativelanguageClient.generateMessage(request);
+  console.log(response);
+}
+
+callGenerateMessage();
+
+```
 
 
 
