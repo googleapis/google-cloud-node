@@ -405,6 +405,26 @@
                 "deleteExpandedDataSet"
               ]
             },
+            "GetChannelGroup": {
+              "methods": [
+                "getChannelGroup"
+              ]
+            },
+            "CreateChannelGroup": {
+              "methods": [
+                "createChannelGroup"
+              ]
+            },
+            "UpdateChannelGroup": {
+              "methods": [
+                "updateChannelGroup"
+              ]
+            },
+            "DeleteChannelGroup": {
+              "methods": [
+                "deleteChannelGroup"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "setAutomatedGa4ConfigurationOptOut"
@@ -443,6 +463,11 @@
             "ListConnectedSiteTags": {
               "methods": [
                 "listConnectedSiteTags"
+              ]
+            },
+            "FetchConnectedGa4Property": {
+              "methods": [
+                "fetchConnectedGa4Property"
               ]
             },
             "ListAccounts": {
@@ -576,6 +601,13 @@
                 "listExpandedDataSets",
                 "listExpandedDataSetsStream",
                 "listExpandedDataSetsAsync"
+              ]
+            },
+            "ListChannelGroups": {
+              "methods": [
+                "listChannelGroups",
+                "listChannelGroupsStream",
+                "listChannelGroupsAsync"
               ]
             },
             "ListBigQueryLinks": {
@@ -985,6 +1017,26 @@
                 "deleteExpandedDataSet"
               ]
             },
+            "GetChannelGroup": {
+              "methods": [
+                "getChannelGroup"
+              ]
+            },
+            "CreateChannelGroup": {
+              "methods": [
+                "createChannelGroup"
+              ]
+            },
+            "UpdateChannelGroup": {
+              "methods": [
+                "updateChannelGroup"
+              ]
+            },
+            "DeleteChannelGroup": {
+              "methods": [
+                "deleteChannelGroup"
+              ]
+            },
             "SetAutomatedGa4ConfigurationOptOut": {
               "methods": [
                 "setAutomatedGa4ConfigurationOptOut"
@@ -1023,6 +1075,11 @@
             "ListConnectedSiteTags": {
               "methods": [
                 "listConnectedSiteTags"
+              ]
+            },
+            "FetchConnectedGa4Property": {
+              "methods": [
+                "fetchConnectedGa4Property"
               ]
             },
             "ListAccounts": {
@@ -1156,6 +1213,13 @@
                 "listExpandedDataSets",
                 "listExpandedDataSetsStream",
                 "listExpandedDataSetsAsync"
+              ]
+            },
+            "ListChannelGroups": {
+              "methods": [
+                "listChannelGroups",
+                "listChannelGroupsStream",
+                "listChannelGroupsAsync"
               ]
             },
             "ListBigQueryLinks": {
