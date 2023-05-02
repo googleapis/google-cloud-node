@@ -1,0 +1,17 @@
+{
+  "name": "generativelanguage",
+  "name_pretty": "Generative Language API",
+  "product_documentation": "https://developers.generativeai.google/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/generativelanguage/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-ai/generativelanguage",
+  "api_id": "generativelanguage.googleapis.com",
+  "default_version": "v1beta2",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "generativelanguage"
+}
+
