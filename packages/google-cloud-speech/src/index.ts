@@ -12,45 +12,65 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ImprovedStreamingClient} from './helpers';
-import * as v1p1beta1 from './v1p1beta1';
 import * as v1 from './v1';
-import * as v2 from './v2';
-
-// The following code is adapted from http://www.typescriptlang.org/docs/handbook/mixins.html
-// tslint:disable-next-line no-any
-Object.defineProperty(
-  v1.SpeechClient.prototype,
-  'streamingRecognize',
-  Object.getOwnPropertyDescriptor(
-    ImprovedStreamingClient.prototype,
-    'streamingRecognize'
-  )!
-);
-Object.defineProperty(
-  v1p1beta1.SpeechClient.prototype,
-  'streamingRecognize',
-  Object.getOwnPropertyDescriptor(
-    ImprovedStreamingClient.prototype,
-    'streamingRecognize'
-  )!
-);
-Object.defineProperty(
-  v2.SpeechClient.prototype,
-  'streamingRecognize',
-  Object.getOwnPropertyDescriptor(
-    ImprovedStreamingClient.prototype,
-    'streamingRecognize'
-  )!
-);
 
 const SpeechClient = v1.SpeechClient;
 type SpeechClient = v1.SpeechClient;
-const AdaptationClient = v1.AdaptationClient;
-type AdaptationClient = v1.AdaptationClient;
-export {v1, v1p1beta1, v2, SpeechClient, AdaptationClient};
+export {v1, SpeechClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
-export default {v1, v1p1beta1, v2, SpeechClient, AdaptationClient};
-import * as protos from '../protos/protos';
-export {protos};
+export default {v1, SpeechClient};
+
+/* Usage test */
+import {RecognitionAudio, RecognitionConfig_AudioEncoding, RecognizeRequest} from './gen/google/cloud/speech/v1/cloud_speech_pb';
+import { PartialMessage } from '@bufbuild/protobuf';
+
+async function useProtobufEsObjects(client: SpeechClient) {
+  const gcsUri: string = 'gs://cloud-samples-data/speech/brooklyn_bridge.raw';
+  const audio: PartialMessage<RecognitionAudio> = { // note: completely different oneof representation
+    audioSource: {
+      case: 'uri',
+      value: gcsUri,    
+    },
+  };
+  const config = {
+    encoding: RecognitionConfig_AudioEncoding.LINEAR16, // note: enum value as string is not accepted
+    sampleRateHertz: 16000,
+    languageCode: 'en-US',
+  };
+  const request: PartialMessage<RecognizeRequest> = {
+    config,
+    audio,
+  };
+  const [response] = await client.recognize(request);
+  console.log(JSON.stringify(response, null, '  '));
+}
+
+async function useJsonRepresentation(client: SpeechClient) {
+  const gcsUri = 'gs://cloud-samples-data/speech/brooklyn_bridge.raw';
+  const audio = {
+    uri: gcsUri,
+  };
+  const config = {
+    encoding: 'LINEAR16',
+    sampleRateHertz: 16000,
+    languageCode: 'en-US',
+  };
+  const request = {
+    audio: audio,
+    config: config,
+  };
+  const requestObject = RecognizeRequest.fromJson(request);
+  const [response] = await client.recognize(requestObject);
+  console.log(JSON.stringify(response, null, '  '));
+}
+
+async function main() {
+  const client = new SpeechClient();
+  await useProtobufEsObjects(client);
+  await useJsonRepresentation(client);
+}
+
+if (require.main === module) {
+  main();
+}

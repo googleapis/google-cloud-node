@@ -23,12 +23,13 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  GrpcClientOptions,
-  LROperation,
 } from 'google-gax';
 import {PassThrough} from 'stream';
-import * as protos from '../../protos/protos';
-import jsonProtos = require('../../protos/protos.json');
+
+import {RecognizeRequest, RecognizeResponse} from '../gen/google/cloud/speech/v1/cloud_speech_pb';
+import {SpeechService} from '../gen/google/cloud/speech/v1/cloud_speech_grpc_pb';
+import {PartialMessage} from '@bufbuild/protobuf';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/speech_client_config.json`.
@@ -46,8 +47,8 @@ export class SpeechClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
-  private _gaxModule: typeof gax | typeof gax.fallback;
-  private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
+  private _gaxModule: typeof gax; // | typeof gax.fallback;
+  private _gaxGrpc: gax.GrpcClient; // | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
   auth: gax.GoogleAuth;
@@ -60,7 +61,6 @@ export class SpeechClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  operationsClient: gax.OperationsClient;
   speechStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -172,8 +172,9 @@ export class SpeechClient {
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
-    // Load the applicable protos.
-    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // Read gRPC package definition
+    this._protos = this._gaxGrpc.loadFromPackageDefinition(SpeechService as {});
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -193,45 +194,6 @@ export class SpeechClient {
       streamingRecognize: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         opts.fallback === 'rest'
-      ),
-    };
-
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-    // This API contains "long-running operations", which return a
-    // an Operation object that allows for tracking of the operation,
-    // rather than holding a request open.
-    const lroOptions: GrpcClientOptions = {
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-    };
-    if (opts.fallback === 'rest') {
-      lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/operations/{name=**}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/operations',
-        },
-      ];
-    }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
-    const longRunningRecognizeResponse = protoFilesRoot.lookup(
-      '.google.cloud.speech.v1.LongRunningRecognizeResponse'
-    ) as gax.protobuf.Type;
-    const longRunningRecognizeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.speech.v1.LongRunningRecognizeMetadata'
-    ) as gax.protobuf.Type;
-
-    this.descriptors.longrunning = {
-      longRunningRecognize: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        longRunningRecognizeResponse.decode.bind(longRunningRecognizeResponse),
-        longRunningRecognizeMetadata.decode.bind(longRunningRecognizeMetadata)
       ),
     };
 
@@ -272,11 +234,11 @@ export class SpeechClient {
     // Put together the "service stub" for
     // google.cloud.speech.v1.Speech.
     this.speechStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.speech.v1.Speech'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // this._opts.fallback
+      //   ? (this._protos as protobuf.Root).lookupService(
+      //       'google.cloud.speech.v1.Speech'
+      //     )
+      //   : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.speech.v1.Speech,
       this._opts,
       this._providedCustomServicePath
@@ -286,8 +248,6 @@ export class SpeechClient {
     // and create an API call method for each.
     const speechStubMethods = [
       'recognize',
-      'longRunningRecognize',
-      'streamingRecognize',
     ];
     for (const methodName of speechStubMethods) {
       const callPromise = this.speechStub.then(
@@ -408,50 +368,50 @@ export class SpeechClient {
    * region_tag:speech_v1_generated_Speech_Recognize_async
    */
   recognize(
-    request?: protos.google.cloud.speech.v1.IRecognizeRequest,
+    request?: PartialMessage<RecognizeRequest>,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.speech.v1.IRecognizeResponse,
-      protos.google.cloud.speech.v1.IRecognizeRequest | undefined,
+      RecognizeResponse,
+      RecognizeRequest | undefined,
       {} | undefined
     ]
   >;
   recognize(
-    request: protos.google.cloud.speech.v1.IRecognizeRequest,
+    request: PartialMessage<RecognizeRequest>,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.speech.v1.IRecognizeResponse,
-      protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+      RecognizeResponse,
+      RecognizeRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   recognize(
-    request: protos.google.cloud.speech.v1.IRecognizeRequest,
+    request: PartialMessage<RecognizeRequest>,
     callback: Callback<
-      protos.google.cloud.speech.v1.IRecognizeResponse,
-      protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+      RecognizeResponse,
+      RecognizeRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   recognize(
-    request?: protos.google.cloud.speech.v1.IRecognizeRequest,
+    request?: PartialMessage<RecognizeRequest>,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.speech.v1.IRecognizeResponse,
-          protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+          RecognizeResponse,
+          RecognizeRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.speech.v1.IRecognizeResponse,
-      protos.google.cloud.speech.v1.IRecognizeRequest | null | undefined,
+      RecognizeResponse,
+      RecognizeRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.speech.v1.IRecognizeResponse,
-      protos.google.cloud.speech.v1.IRecognizeRequest | undefined,
+      RecognizeResponse,
+      RecognizeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -470,453 +430,6 @@ export class SpeechClient {
     return this.innerApiCalls.recognize(request, options, callback);
   }
 
-  /**
-   * Performs bidirectional streaming speech recognition: receive results while
-   * sending audio. This method is only available via the gRPC API (not REST).
-   *
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.speech.v1.StreamingRecognizeRequest | StreamingRecognizeRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.speech.v1.StreamingRecognizeResponse | StreamingRecognizeResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/speech.streaming_recognize.js</caption>
-   * region_tag:speech_v1_generated_Speech_StreamingRecognize_async
-   */
-  _streamingRecognize(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
-    return this.innerApiCalls.streamingRecognize(null, options);
-  }
-
-  /**
-   * Performs asynchronous speech recognition: receive results via the
-   * google.longrunning.Operations interface. Returns either an
-   * `Operation.error` or an `Operation.response` which contains
-   * a `LongRunningRecognizeResponse` message.
-   * For more information on asynchronous speech recognition, see the
-   * [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1.RecognitionConfig} request.config
-   *   Required. Provides information to the recognizer that specifies how to
-   *   process the request.
-   * @param {google.cloud.speech.v1.RecognitionAudio} request.audio
-   *   Required. The audio data to be recognized.
-   * @param {google.cloud.speech.v1.TranscriptOutputConfig} [request.outputConfig]
-   *   Optional. Specifies an optional destination for the recognition results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/speech.long_running_recognize.js</caption>
-   * region_tag:speech_v1_generated_Speech_LongRunningRecognize_async
-   */
-  longRunningRecognize(
-    request?: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  longRunningRecognize(
-    request: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  longRunningRecognize(
-    request: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  longRunningRecognize(
-    request?: protos.google.cloud.speech.v1.ILongRunningRecognizeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-            protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.speech.v1.ILongRunningRecognizeResponse,
-        protos.google.cloud.speech.v1.ILongRunningRecognizeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.longRunningRecognize(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `longRunningRecognize()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/speech.long_running_recognize.js</caption>
-   * region_tag:speech_v1_generated_Speech_LongRunningRecognize_async
-   */
-  async checkLongRunningRecognizeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.speech.v1.LongRunningRecognizeResponse,
-      protos.google.cloud.speech.v1.LongRunningRecognizeMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.longRunningRecognize,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.speech.v1.LongRunningRecognizeResponse,
-      protos.google.cloud.speech.v1.LongRunningRecognizeMetadata
-    >;
-  }
-  /**
-   * Gets the latest state of a long-running operation.  Clients can use this
-   * method to poll the operation result at intervals as recommended by the API
-   * service.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See {@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
-   *   for the details.
-   * @param {function(?Error, ?Object)=} callback
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing
-   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
-   * @return {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   * {@link google.longrunning.Operation | google.longrunning.Operation}.
-   * The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * const name = '';
-   * const [response] = await client.getOperation({name});
-   * // doThingsWith(response)
-   * ```
-   */
-  getOperation(
-    request: protos.google.longrunning.GetOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.Operation,
-          protos.google.longrunning.GetOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.Operation,
-      protos.google.longrunning.GetOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<[protos.google.longrunning.Operation]> {
-    return this.operationsClient.getOperation(request, options, callback);
-  }
-  /**
-   * Lists operations that match the specified filter in the request. If the
-   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
-   *
-   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation collection.
-   * @param {string} request.filter - The standard list filter.
-   * @param {number=} request.pageSize -
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See {@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
-   *   details.
-   * @returns {Object}
-   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * for await (const response of client.listOperationsAsync(request));
-   * // doThingsWith(response)
-   * ```
-   */
-  listOperationsAsync(
-    request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
-    return this.operationsClient.listOperationsAsync(request, options);
-  }
-  /**
-   * Starts asynchronous cancellation on a long-running operation.  The server
-   * makes a best effort to cancel the operation, but success is not
-   * guaranteed.  If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-   * {@link Operations.GetOperation} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * operation completed despite cancellation. On successful cancellation,
-   * the operation is not deleted; instead, it becomes an operation with
-   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
-   * 1, corresponding to `Code.CANCELLED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be cancelled.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See {@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.cancelOperation({name: ''});
-   * ```
-   */
-  cancelOperation(
-    request: protos.google.longrunning.CancelOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.CancelOperationRequest,
-          {} | undefined | null
-        >,
-    callback?: Callback<
-      protos.google.longrunning.CancelOperationRequest,
-      protos.google.protobuf.Empty,
-      {} | undefined | null
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.cancelOperation(request, options, callback);
-  }
-
-  /**
-   * Deletes a long-running operation. This method indicates that the client is
-   * no longer interested in the operation result. It does not cancel the
-   * operation. If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be deleted.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See {@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
-   * for the details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.deleteOperation({name: ''});
-   * ```
-   */
-  deleteOperation(
-    request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.DeleteOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.Empty,
-      protos.google.longrunning.DeleteOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.deleteOperation(request, options, callback);
-  }
-
-  // --------------------
-  // -- Path templates --
-  // --------------------
-
-  /**
-   * Return a fully-qualified customClass resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} custom_class
-   * @returns {string} Resource name string.
-   */
-  customClassPath(project: string, location: string, customClass: string) {
-    return this.pathTemplates.customClassPathTemplate.render({
-      project: project,
-      location: location,
-      custom_class: customClass,
-    });
-  }
-
-  /**
-   * Parse the project from CustomClass resource.
-   *
-   * @param {string} customClassName
-   *   A fully-qualified path representing CustomClass resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .project;
-  }
-
-  /**
-   * Parse the location from CustomClass resource.
-   *
-   * @param {string} customClassName
-   *   A fully-qualified path representing CustomClass resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .location;
-  }
-
-  /**
-   * Parse the custom_class from CustomClass resource.
-   *
-   * @param {string} customClassName
-   *   A fully-qualified path representing CustomClass resource.
-   * @returns {string} A string representing the custom_class.
-   */
-  matchCustomClassFromCustomClassName(customClassName: string) {
-    return this.pathTemplates.customClassPathTemplate.match(customClassName)
-      .custom_class;
-  }
-
-  /**
-   * Return a fully-qualified phraseSet resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} phrase_set
-   * @returns {string} Resource name string.
-   */
-  phraseSetPath(project: string, location: string, phraseSet: string) {
-    return this.pathTemplates.phraseSetPathTemplate.render({
-      project: project,
-      location: location,
-      phrase_set: phraseSet,
-    });
-  }
-
-  /**
-   * Parse the project from PhraseSet resource.
-   *
-   * @param {string} phraseSetName
-   *   A fully-qualified path representing PhraseSet resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .project;
-  }
-
-  /**
-   * Parse the location from PhraseSet resource.
-   *
-   * @param {string} phraseSetName
-   *   A fully-qualified path representing PhraseSet resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .location;
-  }
-
-  /**
-   * Parse the phrase_set from PhraseSet resource.
-   *
-   * @param {string} phraseSetName
-   *   A fully-qualified path representing PhraseSet resource.
-   * @returns {string} A string representing the phrase_set.
-   */
-  matchPhraseSetFromPhraseSetName(phraseSetName: string) {
-    return this.pathTemplates.phraseSetPathTemplate.match(phraseSetName)
-      .phrase_set;
-  }
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -929,13 +442,8 @@ export class SpeechClient {
       return this.speechStub.then(stub => {
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
       });
     }
     return Promise.resolve();
   }
 }
-
-import {ImprovedStreamingClient} from '../helpers';
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface SpeechClient extends ImprovedStreamingClient {}

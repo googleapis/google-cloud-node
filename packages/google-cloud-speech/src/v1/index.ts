@@ -16,5 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AdaptationClient} from './adaptation_client';
 export {SpeechClient} from './speech_client';

@@ -1,0 +1,4 @@
+version: v1
+directories:
+  - protos
+  - node_modules/google-gax/build/protos
