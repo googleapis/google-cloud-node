@@ -14223,6 +14223,7 @@
                              * @interface IPhaseArtifact
                              * @property {string|null} [skaffoldConfigPath] PhaseArtifact skaffoldConfigPath
                              * @property {string|null} [manifestPath] PhaseArtifact manifestPath
+                             * @property {string|null} [jobManifestsPath] PhaseArtifact jobManifestsPath
                              */
     
                             /**
@@ -14257,6 +14258,14 @@
                             PhaseArtifact.prototype.manifestPath = "";
     
                             /**
+                             * PhaseArtifact jobManifestsPath.
+                             * @member {string} jobManifestsPath
+                             * @memberof google.cloud.deploy.v1.TargetArtifact.PhaseArtifact
+                             * @instance
+                             */
+                            PhaseArtifact.prototype.jobManifestsPath = "";
+    
+                            /**
                              * Creates a new PhaseArtifact instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.deploy.v1.TargetArtifact.PhaseArtifact
@@ -14284,6 +14293,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.skaffoldConfigPath);
                                 if (message.manifestPath != null && Object.hasOwnProperty.call(message, "manifestPath"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.manifestPath);
+                                if (message.jobManifestsPath != null && Object.hasOwnProperty.call(message, "jobManifestsPath"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.jobManifestsPath);
                                 return writer;
                             };
     
@@ -14324,6 +14335,10 @@
                                         }
                                     case 3: {
                                             message.manifestPath = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.jobManifestsPath = reader.string();
                                             break;
                                         }
                                     default:
@@ -14367,6 +14382,9 @@
                                 if (message.manifestPath != null && message.hasOwnProperty("manifestPath"))
                                     if (!$util.isString(message.manifestPath))
                                         return "manifestPath: string expected";
+                                if (message.jobManifestsPath != null && message.hasOwnProperty("jobManifestsPath"))
+                                    if (!$util.isString(message.jobManifestsPath))
+                                        return "jobManifestsPath: string expected";
                                 return null;
                             };
     
@@ -14386,6 +14404,8 @@
                                     message.skaffoldConfigPath = String(object.skaffoldConfigPath);
                                 if (object.manifestPath != null)
                                     message.manifestPath = String(object.manifestPath);
+                                if (object.jobManifestsPath != null)
+                                    message.jobManifestsPath = String(object.jobManifestsPath);
                                 return message;
                             };
     
@@ -14405,11 +14425,14 @@
                                 if (options.defaults) {
                                     object.skaffoldConfigPath = "";
                                     object.manifestPath = "";
+                                    object.jobManifestsPath = "";
                                 }
                                 if (message.skaffoldConfigPath != null && message.hasOwnProperty("skaffoldConfigPath"))
                                     object.skaffoldConfigPath = message.skaffoldConfigPath;
                                 if (message.manifestPath != null && message.hasOwnProperty("manifestPath"))
                                     object.manifestPath = message.manifestPath;
+                                if (message.jobManifestsPath != null && message.hasOwnProperty("jobManifestsPath"))
+                                    object.jobManifestsPath = message.jobManifestsPath;
                                 return object;
                             };
     
@@ -14443,6 +14466,249 @@
                         })();
     
                         return TargetArtifact;
+                    })();
+    
+                    v1.DeployArtifact = (function() {
+    
+                        /**
+                         * Properties of a DeployArtifact.
+                         * @memberof google.cloud.deploy.v1
+                         * @interface IDeployArtifact
+                         * @property {string|null} [artifactUri] DeployArtifact artifactUri
+                         * @property {Array.<string>|null} [manifestPaths] DeployArtifact manifestPaths
+                         */
+    
+                        /**
+                         * Constructs a new DeployArtifact.
+                         * @memberof google.cloud.deploy.v1
+                         * @classdesc Represents a DeployArtifact.
+                         * @implements IDeployArtifact
+                         * @constructor
+                         * @param {google.cloud.deploy.v1.IDeployArtifact=} [properties] Properties to set
+                         */
+                        function DeployArtifact(properties) {
+                            this.manifestPaths = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeployArtifact artifactUri.
+                         * @member {string} artifactUri
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @instance
+                         */
+                        DeployArtifact.prototype.artifactUri = "";
+    
+                        /**
+                         * DeployArtifact manifestPaths.
+                         * @member {Array.<string>} manifestPaths
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @instance
+                         */
+                        DeployArtifact.prototype.manifestPaths = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DeployArtifact instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeployArtifact=} [properties] Properties to set
+                         * @returns {google.cloud.deploy.v1.DeployArtifact} DeployArtifact instance
+                         */
+                        DeployArtifact.create = function create(properties) {
+                            return new DeployArtifact(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeployArtifact message. Does not implicitly {@link google.cloud.deploy.v1.DeployArtifact.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeployArtifact} message DeployArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployArtifact.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.artifactUri != null && Object.hasOwnProperty.call(message, "artifactUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.artifactUri);
+                            if (message.manifestPaths != null && message.manifestPaths.length)
+                                for (var i = 0; i < message.manifestPaths.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.manifestPaths[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeployArtifact message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployArtifact.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {google.cloud.deploy.v1.IDeployArtifact} message DeployArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployArtifact.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeployArtifact message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.deploy.v1.DeployArtifact} DeployArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployArtifact.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.DeployArtifact();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.artifactUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.manifestPaths && message.manifestPaths.length))
+                                            message.manifestPaths = [];
+                                        message.manifestPaths.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeployArtifact message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.deploy.v1.DeployArtifact} DeployArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployArtifact.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeployArtifact message.
+                         * @function verify
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeployArtifact.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.artifactUri != null && message.hasOwnProperty("artifactUri"))
+                                if (!$util.isString(message.artifactUri))
+                                    return "artifactUri: string expected";
+                            if (message.manifestPaths != null && message.hasOwnProperty("manifestPaths")) {
+                                if (!Array.isArray(message.manifestPaths))
+                                    return "manifestPaths: array expected";
+                                for (var i = 0; i < message.manifestPaths.length; ++i)
+                                    if (!$util.isString(message.manifestPaths[i]))
+                                        return "manifestPaths: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeployArtifact message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.deploy.v1.DeployArtifact} DeployArtifact
+                         */
+                        DeployArtifact.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.deploy.v1.DeployArtifact)
+                                return object;
+                            var message = new $root.google.cloud.deploy.v1.DeployArtifact();
+                            if (object.artifactUri != null)
+                                message.artifactUri = String(object.artifactUri);
+                            if (object.manifestPaths) {
+                                if (!Array.isArray(object.manifestPaths))
+                                    throw TypeError(".google.cloud.deploy.v1.DeployArtifact.manifestPaths: array expected");
+                                message.manifestPaths = [];
+                                for (var i = 0; i < object.manifestPaths.length; ++i)
+                                    message.manifestPaths[i] = String(object.manifestPaths[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeployArtifact message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {google.cloud.deploy.v1.DeployArtifact} message DeployArtifact
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeployArtifact.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.manifestPaths = [];
+                            if (options.defaults)
+                                object.artifactUri = "";
+                            if (message.artifactUri != null && message.hasOwnProperty("artifactUri"))
+                                object.artifactUri = message.artifactUri;
+                            if (message.manifestPaths && message.manifestPaths.length) {
+                                object.manifestPaths = [];
+                                for (var j = 0; j < message.manifestPaths.length; ++j)
+                                    object.manifestPaths[j] = message.manifestPaths[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeployArtifact to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeployArtifact.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeployArtifact
+                         * @function getTypeUrl
+                         * @memberof google.cloud.deploy.v1.DeployArtifact
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeployArtifact.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.deploy.v1.DeployArtifact";
+                        };
+    
+                        return DeployArtifact;
                     })();
     
                     v1.CloudRunRenderMetadata = (function() {
@@ -24231,6 +24497,7 @@
                          * @property {google.cloud.deploy.v1.DeployJobRun.FailureCause|null} [failureCause] DeployJobRun failureCause
                          * @property {string|null} [failureMessage] DeployJobRun failureMessage
                          * @property {google.cloud.deploy.v1.IDeployJobRunMetadata|null} [metadata] DeployJobRun metadata
+                         * @property {google.cloud.deploy.v1.IDeployArtifact|null} [artifact] DeployJobRun artifact
                          */
     
                         /**
@@ -24281,6 +24548,14 @@
                         DeployJobRun.prototype.metadata = null;
     
                         /**
+                         * DeployJobRun artifact.
+                         * @member {google.cloud.deploy.v1.IDeployArtifact|null|undefined} artifact
+                         * @memberof google.cloud.deploy.v1.DeployJobRun
+                         * @instance
+                         */
+                        DeployJobRun.prototype.artifact = null;
+    
+                        /**
                          * Creates a new DeployJobRun instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.deploy.v1.DeployJobRun
@@ -24312,6 +24587,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.failureMessage);
                             if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                                 $root.google.cloud.deploy.v1.DeployJobRunMetadata.encode(message.metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.artifact != null && Object.hasOwnProperty.call(message, "artifact"))
+                                $root.google.cloud.deploy.v1.DeployArtifact.encode(message.artifact, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -24360,6 +24637,10 @@
                                     }
                                 case 4: {
                                         message.metadata = $root.google.cloud.deploy.v1.DeployJobRunMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.artifact = $root.google.cloud.deploy.v1.DeployArtifact.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -24420,6 +24701,11 @@
                                 if (error)
                                     return "metadata." + error;
                             }
+                            if (message.artifact != null && message.hasOwnProperty("artifact")) {
+                                var error = $root.google.cloud.deploy.v1.DeployArtifact.verify(message.artifact);
+                                if (error)
+                                    return "artifact." + error;
+                            }
                             return null;
                         };
     
@@ -24476,6 +24762,11 @@
                                     throw TypeError(".google.cloud.deploy.v1.DeployJobRun.metadata: object expected");
                                 message.metadata = $root.google.cloud.deploy.v1.DeployJobRunMetadata.fromObject(object.metadata);
                             }
+                            if (object.artifact != null) {
+                                if (typeof object.artifact !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.DeployJobRun.artifact: object expected");
+                                message.artifact = $root.google.cloud.deploy.v1.DeployArtifact.fromObject(object.artifact);
+                            }
                             return message;
                         };
     
@@ -24497,6 +24788,7 @@
                                 object.failureCause = options.enums === String ? "FAILURE_CAUSE_UNSPECIFIED" : 0;
                                 object.failureMessage = "";
                                 object.metadata = null;
+                                object.artifact = null;
                             }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 object.build = message.build;
@@ -24506,6 +24798,8 @@
                                 object.failureMessage = message.failureMessage;
                             if (message.metadata != null && message.hasOwnProperty("metadata"))
                                 object.metadata = $root.google.cloud.deploy.v1.DeployJobRunMetadata.toObject(message.metadata, options);
+                            if (message.artifact != null && message.hasOwnProperty("artifact"))
+                                object.artifact = $root.google.cloud.deploy.v1.DeployArtifact.toObject(message.artifact, options);
                             return object;
                         };
     

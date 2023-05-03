@@ -18,6 +18,7 @@
   * [Document_service.get_document](#document_service.get_document)
   * [Document_service.import_documents](#document_service.import_documents)
   * [Document_service.list_documents](#document_service.list_documents)
+  * [Document_service.purge_documents](#document_service.purge_documents)
   * [Document_service.update_document](#document_service.update_document)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
   * [Schema_service.create_schema](#schema_service.create_schema)
@@ -142,6 +143,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js`
+
+
+-----
+
+
+
+
+### Document_service.purge_documents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.purge_documents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.purge_documents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.purge_documents.js`
 
 
 -----

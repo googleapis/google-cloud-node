@@ -283,6 +283,9 @@ export class VizierServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
         ),
+      publisherModelPathTemplate: new this._gaxModule.PathTemplate(
+        'publishers/{publisher}/models/{model}'
+      ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
@@ -5698,6 +5701,46 @@ export class VizierServiceClient {
   ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
       projectLocationPublisherModelName
+    ).model;
+  }
+
+  /**
+   * Return a fully-qualified publisherModel resource name string.
+   *
+   * @param {string} publisher
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  publisherModelPath(publisher: string, model: string) {
+    return this.pathTemplates.publisherModelPathTemplate.render({
+      publisher: publisher,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the publisher from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the publisher.
+   */
+  matchPublisherFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
+  }
+
+  /**
+   * Parse the model from PublisherModel resource.
+   *
+   * @param {string} publisherModelName
+   *   A fully-qualified path representing PublisherModel resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromPublisherModelName(publisherModelName: string) {
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
     ).model;
   }
 
