@@ -84,7 +84,7 @@ for subdir in ${subdirs[@]}; do
             if [[ "${changed}" -eq 0 ]]; then
                 echo "no change detected in ${d}, skipping"
             else
-                if [[ "${TEST_TYPE}" == "system" ]]; then
+                if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in ${d} for system test"
                     should_test=true
                 elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
@@ -97,7 +97,7 @@ for subdir in ${subdirs[@]}; do
             fi
         else
             # If GIT_DIFF_ARG is empty, run all the tests.
-            if [[ "${TEST_TYPE}" == "system" ]]; then
+            if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                 echo "run system test for ${d}"
                 should_test=true
             elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
@@ -118,6 +118,8 @@ for subdir in ${subdirs[@]}; do
             set -e
             if [ ${ret} -ne 0 ]; then
                 RETVAL=${ret}
+                # Since there are so many APIs, we should exit early if there's an error
+                break
             fi
             popd
         fi

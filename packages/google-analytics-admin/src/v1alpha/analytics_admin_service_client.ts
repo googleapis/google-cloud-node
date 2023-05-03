@@ -200,6 +200,9 @@ export class AnalyticsAdminServiceClient {
       bigQueryLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/bigQueryLinks/{bigquery_link}'
       ),
+      channelGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/channelGroups/{channel_group}'
+      ),
       conversionEventPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/conversionEvents/{conversion_event}'
       ),
@@ -361,6 +364,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'expandedDataSets'
       ),
+      listChannelGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'channelGroups'
+      ),
       listBigQueryLinks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -517,6 +525,11 @@ export class AnalyticsAdminServiceClient {
       'createExpandedDataSet',
       'updateExpandedDataSet',
       'deleteExpandedDataSet',
+      'getChannelGroup',
+      'listChannelGroups',
+      'createChannelGroup',
+      'updateChannelGroup',
+      'deleteChannelGroup',
       'setAutomatedGa4ConfigurationOptOut',
       'fetchAutomatedGa4ConfigurationOptOut',
       'getBigQueryLink',
@@ -526,6 +539,7 @@ export class AnalyticsAdminServiceClient {
       'createConnectedSiteTag',
       'deleteConnectedSiteTag',
       'listConnectedSiteTags',
+      'fetchConnectedGa4Property',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -8251,7 +8265,7 @@ export class AnalyticsAdminServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the Audience to get.
+   *   Required. The name of the ExpandedDataSet to get.
    *   Example format: properties/1234/expandedDataSets/5678
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -8642,6 +8656,400 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteExpandedDataSet(request, options, callback);
+  }
+  /**
+   * Lookup for a single ChannelGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The ChannelGroup to get.
+   *   Example format: properties/1234/channelGroups/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_channel_group.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetChannelGroup_async
+   */
+  getChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          | protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      protos.google.analytics.admin.v1alpha.IGetChannelGroupRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getChannelGroup(request, options, callback);
+  }
+  /**
+   * Creates a ChannelGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The property for which to create a ChannelGroup.
+   *   Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.ChannelGroup} request.channelGroup
+   *   Required. The ChannelGroup to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_channel_group.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateChannelGroup_async
+   */
+  createChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateChannelGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createChannelGroup(request, options, callback);
+  }
+  /**
+   * Updates a ChannelGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.ChannelGroup} request.channelGroup
+   *   Required. The ChannelGroup to update.
+   *   The resource's `name` field is used to identify the ChannelGroup to be
+   *   updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_channel_group.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateChannelGroup_async
+   */
+  updateChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IChannelGroup,
+          | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateChannelGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'channel_group.name': request.channelGroup!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateChannelGroup(request, options, callback);
+  }
+  /**
+   * Deletes a ChannelGroup on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The ChannelGroup to delete.
+   *   Example format: properties/1234/channelGroups/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_channel_group.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteChannelGroup_async
+   */
+  deleteChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannelGroup(
+    request: protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteChannelGroup(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteChannelGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteChannelGroup(request, options, callback);
   }
   /**
    * Sets the opt out status for the automated GA4 setup process for a UA
@@ -9463,6 +9871,108 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listConnectedSiteTags(request, options, callback);
+  }
+  /**
+   * Given a specified UA property, looks up the GA4 property connected to it.
+   * Note: this cannot be used with GA4 properties.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   Required. The UA property for which to look up the connected GA4 property.
+   *   Note this request uses the
+   *   internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+   *   Format: properties/{internal_web_property_id}
+   *   Example: properties/1234
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse | FetchConnectedGa4PropertyResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.fetch_connected_ga4_property.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchConnectedGa4Property_async
+   */
+  fetchConnectedGa4Property(
+    request?: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  fetchConnectedGa4Property(
+    request: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+      | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchConnectedGa4Property(
+    request: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+      | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  fetchConnectedGa4Property(
+    request?: protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+          | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+      | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse,
+      (
+        | protos.google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.fetchConnectedGa4Property(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -13546,6 +14056,216 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IExpandedDataSet>;
   }
   /**
+   * Lists ChannelGroups on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The property for which to list ChannelGroups.
+   *   Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListChannelGroups` call. Provide
+   *   this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannelGroups`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listChannelGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelGroups(
+    request?: protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup[],
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+    ]
+  >;
+  listChannelGroups(
+    request: protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+      | protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IChannelGroup
+    >
+  ): void;
+  listChannelGroups(
+    request: protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+      | protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IChannelGroup
+    >
+  ): void;
+  listChannelGroups(
+    request?: protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+          | protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IChannelGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+      | protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IChannelGroup
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IChannelGroup[],
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListChannelGroupsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listChannelGroups(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The property for which to list ChannelGroups.
+   *   Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListChannelGroups` call. Provide
+   *   this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannelGroups`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listChannelGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listChannelGroupsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listChannelGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannelGroups.createStream(
+      this.innerApiCalls.listChannelGroups as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listChannelGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The property for which to list ChannelGroups.
+   *   Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListChannelGroups` call. Provide
+   *   this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChannelGroups`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.analytics.admin.v1alpha.ChannelGroup | ChannelGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_channel_groups.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListChannelGroups_async
+   */
+  listChannelGroupsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListChannelGroupsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IChannelGroup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listChannelGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listChannelGroups.asyncIterate(
+      this.innerApiCalls['listChannelGroups'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IChannelGroup>;
+  }
+  /**
    * Lists BigQuery Links on a property.
    *
    * @param {Object} request
@@ -13989,6 +14709,44 @@ export class AnalyticsAdminServiceClient {
   matchBigqueryLinkFromBigQueryLinkName(bigQueryLinkName: string) {
     return this.pathTemplates.bigQueryLinkPathTemplate.match(bigQueryLinkName)
       .bigquery_link;
+  }
+
+  /**
+   * Return a fully-qualified channelGroup resource name string.
+   *
+   * @param {string} property
+   * @param {string} channel_group
+   * @returns {string} Resource name string.
+   */
+  channelGroupPath(property: string, channelGroup: string) {
+    return this.pathTemplates.channelGroupPathTemplate.render({
+      property: property,
+      channel_group: channelGroup,
+    });
+  }
+
+  /**
+   * Parse the property from ChannelGroup resource.
+   *
+   * @param {string} channelGroupName
+   *   A fully-qualified path representing ChannelGroup resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromChannelGroupName(channelGroupName: string) {
+    return this.pathTemplates.channelGroupPathTemplate.match(channelGroupName)
+      .property;
+  }
+
+  /**
+   * Parse the channel_group from ChannelGroup resource.
+   *
+   * @param {string} channelGroupName
+   *   A fully-qualified path representing ChannelGroup resource.
+   * @returns {string} A string representing the channel_group.
+   */
+  matchChannelGroupFromChannelGroupName(channelGroupName: string) {
+    return this.pathTemplates.channelGroupPathTemplate.match(channelGroupName)
+      .channel_group;
   }
 
   /**

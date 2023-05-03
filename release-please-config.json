@@ -137,7 +137,8 @@
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-alloydb": {},
     "packages/google-cloud-workstations": {},
-    "packages/google-cloud-confidentialcomputing": {}
+    "packages/google-cloud-confidentialcomputing": {},
+    "packages/google-ai-generativelanguage": {}
   },
   "plugins": [
     {
