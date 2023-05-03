@@ -4,6 +4,7 @@
   "../../protos/google/cloud/discoveryengine/v1beta/document.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/document_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/import_config.proto",
+  "../../protos/google/cloud/discoveryengine/v1beta/purge_config.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/recommendation_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/schema.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/schema_service.proto",

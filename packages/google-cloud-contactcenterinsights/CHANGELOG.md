@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.6.0...contact-center-insights-v2.7.0) (2023-05-02)
+
+
+### Features
+
+* [contactcenterinsights] support for generating summaries during conversation analysis ([#4215](https://github.com/googleapis/google-cloud-node/issues/4215)) ([f12c277](https://github.com/googleapis/google-cloud-node/commit/f12c277d7f7566ead6128076c1c9ba81a856256a))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v2.5.0...contact-center-insights-v2.6.0) (2023-04-13)
 
 

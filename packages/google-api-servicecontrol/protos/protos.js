@@ -20436,6 +20436,230 @@
                         return ReportResponse;
                     })();
     
+                    v2.ResourceInfoList = (function() {
+    
+                        /**
+                         * Properties of a ResourceInfoList.
+                         * @memberof google.api.servicecontrol.v2
+                         * @interface IResourceInfoList
+                         * @property {Array.<google.api.servicecontrol.v2.IResourceInfo>|null} [resources] ResourceInfoList resources
+                         */
+    
+                        /**
+                         * Constructs a new ResourceInfoList.
+                         * @memberof google.api.servicecontrol.v2
+                         * @classdesc Represents a ResourceInfoList.
+                         * @implements IResourceInfoList
+                         * @constructor
+                         * @param {google.api.servicecontrol.v2.IResourceInfoList=} [properties] Properties to set
+                         */
+                        function ResourceInfoList(properties) {
+                            this.resources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceInfoList resources.
+                         * @member {Array.<google.api.servicecontrol.v2.IResourceInfo>} resources
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @instance
+                         */
+                        ResourceInfoList.prototype.resources = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ResourceInfoList instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IResourceInfoList=} [properties] Properties to set
+                         * @returns {google.api.servicecontrol.v2.ResourceInfoList} ResourceInfoList instance
+                         */
+                        ResourceInfoList.create = function create(properties) {
+                            return new ResourceInfoList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceInfoList message. Does not implicitly {@link google.api.servicecontrol.v2.ResourceInfoList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IResourceInfoList} message ResourceInfoList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceInfoList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resources != null && message.resources.length)
+                                for (var i = 0; i < message.resources.length; ++i)
+                                    $root.google.api.servicecontrol.v2.ResourceInfo.encode(message.resources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceInfoList message, length delimited. Does not implicitly {@link google.api.servicecontrol.v2.ResourceInfoList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {google.api.servicecontrol.v2.IResourceInfoList} message ResourceInfoList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceInfoList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceInfoList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.servicecontrol.v2.ResourceInfoList} ResourceInfoList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceInfoList.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.servicecontrol.v2.ResourceInfoList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resources && message.resources.length))
+                                            message.resources = [];
+                                        message.resources.push($root.google.api.servicecontrol.v2.ResourceInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceInfoList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.servicecontrol.v2.ResourceInfoList} ResourceInfoList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceInfoList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceInfoList message.
+                         * @function verify
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceInfoList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resources != null && message.hasOwnProperty("resources")) {
+                                if (!Array.isArray(message.resources))
+                                    return "resources: array expected";
+                                for (var i = 0; i < message.resources.length; ++i) {
+                                    var error = $root.google.api.servicecontrol.v2.ResourceInfo.verify(message.resources[i]);
+                                    if (error)
+                                        return "resources." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceInfoList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.servicecontrol.v2.ResourceInfoList} ResourceInfoList
+                         */
+                        ResourceInfoList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.servicecontrol.v2.ResourceInfoList)
+                                return object;
+                            var message = new $root.google.api.servicecontrol.v2.ResourceInfoList();
+                            if (object.resources) {
+                                if (!Array.isArray(object.resources))
+                                    throw TypeError(".google.api.servicecontrol.v2.ResourceInfoList.resources: array expected");
+                                message.resources = [];
+                                for (var i = 0; i < object.resources.length; ++i) {
+                                    if (typeof object.resources[i] !== "object")
+                                        throw TypeError(".google.api.servicecontrol.v2.ResourceInfoList.resources: object expected");
+                                    message.resources[i] = $root.google.api.servicecontrol.v2.ResourceInfo.fromObject(object.resources[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceInfoList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {google.api.servicecontrol.v2.ResourceInfoList} message ResourceInfoList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceInfoList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resources = [];
+                            if (message.resources && message.resources.length) {
+                                object.resources = [];
+                                for (var j = 0; j < message.resources.length; ++j)
+                                    object.resources[j] = $root.google.api.servicecontrol.v2.ResourceInfo.toObject(message.resources[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceInfoList to JSON.
+                         * @function toJSON
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceInfoList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceInfoList
+                         * @function getTypeUrl
+                         * @memberof google.api.servicecontrol.v2.ResourceInfoList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceInfoList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.servicecontrol.v2.ResourceInfoList";
+                        };
+    
+                        return ResourceInfoList;
+                    })();
+    
                     return v2;
                 })();
     

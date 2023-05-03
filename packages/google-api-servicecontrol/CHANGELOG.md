@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v2.1.2...service-control-v2.2.0) (2023-05-02)
+
+
+### Features
+
+* [servicecontrol] add a proto message used for batch mode resource info for ServiceController V2 ([#4213](https://github.com/googleapis/google-cloud-node/issues/4213)) ([14d2cc9](https://github.com/googleapis/google-cloud-node/commit/14d2cc9ccf3b974bce2fc3ab9ff96ec8bdf166bd))
+
 ## [2.1.2](https://github.com/googleapis/google-cloud-node/compare/service-control-v2.1.1...service-control-v2.1.2) (2023-04-13)
 
 

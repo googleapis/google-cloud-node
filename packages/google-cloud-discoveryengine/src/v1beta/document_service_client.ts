@@ -294,12 +294,23 @@ export class DocumentServiceClient {
     const importDocumentsMetadata = protoFilesRoot.lookup(
       '.google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata'
     ) as gax.protobuf.Type;
+    const purgeDocumentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse'
+    ) as gax.protobuf.Type;
+    const purgeDocumentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importDocuments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDocumentsResponse.decode.bind(importDocumentsResponse),
         importDocumentsMetadata.decode.bind(importDocumentsMetadata)
+      ),
+      purgeDocuments: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeDocumentsResponse.decode.bind(purgeDocumentsResponse),
+        purgeDocumentsMetadata.decode.bind(purgeDocumentsMetadata)
       ),
     };
 
@@ -360,6 +371,7 @@ export class DocumentServiceClient {
       'updateDocument',
       'deleteDocument',
       'importDocuments',
+      'purgeDocuments',
     ];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
@@ -1045,6 +1057,168 @@ export class DocumentServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.discoveryengine.v1beta.ImportDocumentsResponse,
       protos.google.cloud.discoveryengine.v1beta.ImportDocumentsMetadata
+    >;
+  }
+  /**
+   * Permanently deletes all selected
+   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s in a branch.
+   *
+   * This process is asynchronous. Depending on the number of
+   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s to be deleted,
+   * this operation can take hours to complete. Before the delete operation
+   * completes, some {@link google.cloud.discoveryengine.v1beta.Document|Document}s
+   * might still be returned by
+   * {@link google.cloud.discoveryengine.v1beta.DocumentService.GetDocument|DocumentService.GetDocument}
+   * or
+   * {@link google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments|DocumentService.ListDocuments}.
+   *
+   * To get a list of the
+   * {@link google.cloud.discoveryengine.v1beta.Document|Document}s to be deleted,
+   * set
+   * {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.force|PurgeDocumentsRequest.force}
+   * to false.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+   * @param {string} request.filter
+   *   Required. Filter matching documents to purge. Only currently supported
+   *   value is
+   *   `*` (all items).
+   * @param {boolean} request.force
+   *   Actually performs the purge. If `force` is set to false, return the
+   *   expected purge count without deleting any documents.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/document_service.purge_documents.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async
+   */
+  purgeDocuments(
+    request?: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeDocuments(
+    request: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeDocuments(
+    request: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeDocuments(
+    request?: protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+            protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeDocuments(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeDocuments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/document_service.purge_documents.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async
+   */
+  async checkPurgeDocumentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse,
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeDocuments,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse,
+      protos.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
     >;
   }
   /**
