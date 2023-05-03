@@ -344,6 +344,54 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async",
+            "title": "CompletionService purgeDocuments Sample",
+            "origin": "API_DEFINITION",
+            "description": " Permanently deletes all selected [Document][google.cloud.discoveryengine.v1beta.Document]s in a branch. This process is asynchronous. Depending on the number of [Document][google.cloud.discoveryengine.v1beta.Document]s to be deleted, this operation can take hours to complete. Before the delete operation completes, some [Document][google.cloud.discoveryengine.v1beta.Document]s might still be returned by [DocumentService.GetDocument][google.cloud.discoveryengine.v1beta.DocumentService.GetDocument] or [DocumentService.ListDocuments][google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments]. To get a list of the [Document][google.cloud.discoveryengine.v1beta.Document]s to be deleted, set [PurgeDocumentsRequest.force][google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.force] to false.",
+            "canonical": true,
+            "file": "document_service.purge_documents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PurgeDocuments",
+                "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocuments",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "PurgeDocuments",
+                    "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocuments",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1beta_generated_RecommendationService_Recommend_async",
             "title": "CompletionService recommend Sample",
             "origin": "API_DEFINITION",

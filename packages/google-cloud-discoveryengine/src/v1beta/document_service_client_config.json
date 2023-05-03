@@ -70,6 +70,11 @@
           "timeout_millis": 300000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "e6a9f61a856ca7c2128ab9550ca4fb9e97c77876"
+        },
+        "PurgeDocuments": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         }
       }
     }

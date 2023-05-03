@@ -1,3 +1,4 @@
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +30,6 @@ const cwd = path.join(__dirname, '..');
 describe('Quickstart', async () => {
   it('should run quickstart', async () => {
     const output = execSync('node quickstart.js', {cwd});
-    assert(output != null);
+    assert(output !== null);
   });
 });
