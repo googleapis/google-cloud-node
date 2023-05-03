@@ -22,7 +22,7 @@ export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
 tests_without_node12="typeless-sample-bot gapic-node-templating node-bootstrap-container"
 
 if [ -z "${BUILD_TYPE}" ]; then
-    echo "missing $BUILD_TYPE env var"
+    echo "missing BUILD_TYPE env var"
     exit 1
 fi
 
