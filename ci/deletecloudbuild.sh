@@ -12,12 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A script for exporting Cloud Build build triggers.
-
-# `-e` enables the script to automatically fail when a command fails
-# `-o pipefail` sets the exit code to the rightmost comment to exit
-# with a non-zero
-
 now=$(date -u -d "-15 min" +"%Y-%m-%dT%H:%M:%SZ")
 gcloud builds list --format="value(id)" --filter="substitutions.REF_NAME="$REF_NAME" AND status="WORKING" AND create_time<"$now"" | while IFS= read -r line ; do
     echo "gcloud builds cancel "$line""
