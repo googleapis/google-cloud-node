@@ -37,6 +37,11 @@ function main(dataScan, updateMask) {
    *  Required. Mask of fields to update.
    */
   // const updateMask = {}
+  /**
+   *  Optional. Only validate the request, but do not perform mutations.
+   *  The default is `false`.
+   */
+  // const validateOnly = true
 
   // Imports the Dataplex library
   const {DataScanServiceClient} = require('@google-cloud/dataplex').v1;

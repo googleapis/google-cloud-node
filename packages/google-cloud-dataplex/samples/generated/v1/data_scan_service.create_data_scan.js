@@ -48,6 +48,11 @@ function main(parent, dataScan, dataScanId) {
    *  * Must be unique within the customer project / location.
    */
   // const dataScanId = 'abc123'
+  /**
+   *  Optional. Only validate the request, but do not perform mutations.
+   *  The default is `false`.
+   */
+  // const validateOnly = true
 
   // Imports the Dataplex library
   const {DataScanServiceClient} = require('@google-cloud/dataplex').v1;
