@@ -318,12 +318,6 @@ export class TpuClient {
     const deleteQueuedResourceMetadata = protoFilesRoot.lookup(
       '.google.cloud.tpu.v2alpha1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const resetQueuedResourceResponse = protoFilesRoot.lookup(
-      '.google.cloud.tpu.v2alpha1.QueuedResource'
-    ) as gax.protobuf.Type;
-    const resetQueuedResourceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.tpu.v2alpha1.OperationMetadata'
-    ) as gax.protobuf.Type;
     const simulateMaintenanceEventResponse = protoFilesRoot.lookup(
       '.google.cloud.tpu.v2alpha1.Node'
     ) as gax.protobuf.Type;
@@ -366,11 +360,6 @@ export class TpuClient {
         this.operationsClient,
         deleteQueuedResourceResponse.decode.bind(deleteQueuedResourceResponse),
         deleteQueuedResourceMetadata.decode.bind(deleteQueuedResourceMetadata)
-      ),
-      resetQueuedResource: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        resetQueuedResourceResponse.decode.bind(resetQueuedResourceResponse),
-        resetQueuedResourceMetadata.decode.bind(resetQueuedResourceMetadata)
       ),
       simulateMaintenanceEvent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -444,7 +433,6 @@ export class TpuClient {
       'getQueuedResource',
       'createQueuedResource',
       'deleteQueuedResource',
-      'resetQueuedResource',
       'generateServiceIdentity',
       'listAcceleratorTypes',
       'getAcceleratorType',
@@ -2072,144 +2060,6 @@ export class TpuClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteQueuedResource,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.tpu.v2alpha1.QueuedResource,
-      protos.google.cloud.tpu.v2alpha1.OperationMetadata
-    >;
-  }
-  /**
-   * Resets a QueuedResource TPU instance
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the queued resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha1/tpu.reset_queued_resource.js</caption>
-   * region_tag:tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async
-   */
-  resetQueuedResource(
-    request?: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
-        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  resetQueuedResource(
-    request: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
-        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetQueuedResource(
-    request: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
-        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resetQueuedResource(
-    request?: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.tpu.v2alpha1.IQueuedResource,
-            protos.google.cloud.tpu.v2alpha1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
-        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
-        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.resetQueuedResource(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `resetQueuedResource()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha1/tpu.reset_queued_resource.js</caption>
-   * region_tag:tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async
-   */
-  async checkResetQueuedResourceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.tpu.v2alpha1.QueuedResource,
-      protos.google.cloud.tpu.v2alpha1.OperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.resetQueuedResource,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
