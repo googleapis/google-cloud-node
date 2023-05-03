@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "2.10.0",
+        "version": "2.11.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -6343,6 +6343,54 @@
                     "service": {
                         "shortName": "MigrationService",
                         "fullName": "google.cloud.aiplatform.v1beta1.MigrationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelGardenService_GetPublisherModel_async",
+            "title": "DatasetService getPublisherModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Model Garden publisher model.",
+            "canonical": true,
+            "file": "model_garden_service.get_publisher_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPublisherModel",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService.GetPublisherModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.aiplatform.v1beta1.PublisherModelView"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.PublisherModel",
+                "client": {
+                    "shortName": "ModelGardenServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPublisherModel",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService.GetPublisherModel",
+                    "service": {
+                        "shortName": "ModelGardenService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService"
                     }
                 }
             }

@@ -7772,6 +7772,59 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
     });
 
+    describe('publisherModel', () => {
+      const fakePath = '/rendered/path/publisherModel';
+      const expectedParameters = {
+        publisher: 'publisherValue',
+        model: 'modelValue',
+      };
+      const client =
+        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.publisherModelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.publisherModelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('publisherModelPath', () => {
+        const result = client.publisherModelPath(
+          'publisherValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPublisherFromPublisherModelName', () => {
+        const result = client.matchPublisherFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'publisherValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromPublisherModelName', () => {
+        const result = client.matchModelFromPublisherModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('savedQuery', () => {
       const fakePath = '/rendered/path/savedQuery';
       const expectedParameters = {

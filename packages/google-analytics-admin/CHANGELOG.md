@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.7.1...admin-v4.8.0) (2023-05-02)
+
+
+### Features
+
+* [analytics-admin] add `FetchConnectedGa4Property` method to the Admin API v1alpha ([#4207](https://github.com/googleapis/google-cloud-node/issues/4207)) ([5af79e1](https://github.com/googleapis/google-cloud-node/commit/5af79e1a4ed1742009bc48e2ee61933b28e45d9e))
+
 ## [4.7.1](https://github.com/googleapis/google-cloud-node/compare/admin-v4.7.0...admin-v4.7.1) (2023-04-13)
 
 
