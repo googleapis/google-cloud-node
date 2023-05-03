@@ -9,7 +9,7 @@
   "repo": "googleapis/nodejs-datastore",
   "distribution_name": "@google-cloud/datastore",
   "api_id": "datastore.googleapis.com",
-  "codeowner_team": "@googleapis/cloud-native-db-dpes",
+  "codeowner_team": "@googleapis/cloud-native-db-dpes @googleapis/api-datastore-sdk",
   "api_shortname": "datastore",
   "library_type": "GAPIC_COMBO"
 }
