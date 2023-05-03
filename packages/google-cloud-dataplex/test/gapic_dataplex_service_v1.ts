@@ -772,6 +772,133 @@ describe('v1.DataplexServiceClient', () => {
     });
   });
 
+  describe('runTask', () => {
+    it('invokes runTask without error', async () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RunTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RunTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RunTaskResponse()
+      );
+      client.innerApiCalls.runTask = stubSimpleCall(expectedResponse);
+      const [response] = await client.runTask(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.runTask as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes runTask without error using callback', async () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RunTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RunTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RunTaskResponse()
+      );
+      client.innerApiCalls.runTask =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.runTask(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dataplex.v1.IRunTaskResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.runTask as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes runTask with error', async () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RunTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RunTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.runTask(request), expectedError);
+      const actualRequest = (client.innerApiCalls.runTask as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes runTask with closed client', async () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataplex.v1.RunTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.RunTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.runTask(request), expectedError);
+    });
+  });
+
   describe('getJob', () => {
     it('invokes getJob without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
