@@ -7928,6 +7928,9 @@ export namespace google {
                     /** Conversation latestAnalysis */
                     latestAnalysis?: (google.cloud.contactcenterinsights.v1.IAnalysis|null);
 
+                    /** Conversation latestSummary */
+                    latestSummary?: (google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null);
+
                     /** Conversation runtimeAnnotations */
                     runtimeAnnotations?: (google.cloud.contactcenterinsights.v1.IRuntimeAnnotation[]|null);
 
@@ -7994,6 +7997,9 @@ export namespace google {
 
                     /** Conversation latestAnalysis. */
                     public latestAnalysis?: (google.cloud.contactcenterinsights.v1.IAnalysis|null);
+
+                    /** Conversation latestSummary. */
+                    public latestSummary?: (google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null);
 
                     /** Conversation runtimeAnnotations. */
                     public runtimeAnnotations: google.cloud.contactcenterinsights.v1.IRuntimeAnnotation[];
@@ -12605,6 +12611,9 @@ export namespace google {
                     /** RuntimeAnnotation dialogflowInteraction */
                     dialogflowInteraction?: (google.cloud.contactcenterinsights.v1.IDialogflowInteractionData|null);
 
+                    /** RuntimeAnnotation conversationSummarizationSuggestion */
+                    conversationSummarizationSuggestion?: (google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null);
+
                     /** RuntimeAnnotation annotationId */
                     annotationId?: (string|null);
 
@@ -12645,6 +12654,9 @@ export namespace google {
                     /** RuntimeAnnotation dialogflowInteraction. */
                     public dialogflowInteraction?: (google.cloud.contactcenterinsights.v1.IDialogflowInteractionData|null);
 
+                    /** RuntimeAnnotation conversationSummarizationSuggestion. */
+                    public conversationSummarizationSuggestion?: (google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData|null);
+
                     /** RuntimeAnnotation annotationId. */
                     public annotationId: string;
 
@@ -12661,7 +12673,7 @@ export namespace google {
                     public answerFeedback?: (google.cloud.contactcenterinsights.v1.IAnswerFeedback|null);
 
                     /** RuntimeAnnotation data. */
-                    public data?: ("articleSuggestion"|"faqAnswer"|"smartReply"|"smartComposeSuggestion"|"dialogflowInteraction");
+                    public data?: ("articleSuggestion"|"faqAnswer"|"smartReply"|"smartComposeSuggestion"|"dialogflowInteraction"|"conversationSummarizationSuggestion");
 
                     /**
                      * Creates a new RuntimeAnnotation instance using the specified properties.
@@ -13448,6 +13460,133 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ConversationSummarizationSuggestionData. */
+                interface IConversationSummarizationSuggestionData {
+
+                    /** ConversationSummarizationSuggestionData text */
+                    text?: (string|null);
+
+                    /** ConversationSummarizationSuggestionData textSections */
+                    textSections?: ({ [k: string]: string }|null);
+
+                    /** ConversationSummarizationSuggestionData confidence */
+                    confidence?: (number|null);
+
+                    /** ConversationSummarizationSuggestionData metadata */
+                    metadata?: ({ [k: string]: string }|null);
+
+                    /** ConversationSummarizationSuggestionData answerRecord */
+                    answerRecord?: (string|null);
+
+                    /** ConversationSummarizationSuggestionData conversationModel */
+                    conversationModel?: (string|null);
+                }
+
+                /** Represents a ConversationSummarizationSuggestionData. */
+                class ConversationSummarizationSuggestionData implements IConversationSummarizationSuggestionData {
+
+                    /**
+                     * Constructs a new ConversationSummarizationSuggestionData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData);
+
+                    /** ConversationSummarizationSuggestionData text. */
+                    public text: string;
+
+                    /** ConversationSummarizationSuggestionData textSections. */
+                    public textSections: { [k: string]: string };
+
+                    /** ConversationSummarizationSuggestionData confidence. */
+                    public confidence: number;
+
+                    /** ConversationSummarizationSuggestionData metadata. */
+                    public metadata: { [k: string]: string };
+
+                    /** ConversationSummarizationSuggestionData answerRecord. */
+                    public answerRecord: string;
+
+                    /** ConversationSummarizationSuggestionData conversationModel. */
+                    public conversationModel: string;
+
+                    /**
+                     * Creates a new ConversationSummarizationSuggestionData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationSummarizationSuggestionData instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData): google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData;
+
+                    /**
+                     * Encodes the specified ConversationSummarizationSuggestionData message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.verify|verify} messages.
+                     * @param message ConversationSummarizationSuggestionData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationSummarizationSuggestionData message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.verify|verify} messages.
+                     * @param message ConversationSummarizationSuggestionData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IConversationSummarizationSuggestionData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationSummarizationSuggestionData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationSummarizationSuggestionData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData;
+
+                    /**
+                     * Decodes a ConversationSummarizationSuggestionData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationSummarizationSuggestionData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData;
+
+                    /**
+                     * Verifies a ConversationSummarizationSuggestionData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationSummarizationSuggestionData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationSummarizationSuggestionData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData;
+
+                    /**
+                     * Creates a plain object from a ConversationSummarizationSuggestionData message. Also converts values to other types if specified.
+                     * @param message ConversationSummarizationSuggestionData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationSummarizationSuggestionData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationSummarizationSuggestionData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ConversationParticipant. */
                 interface IConversationParticipant {
 
@@ -13734,6 +13873,12 @@ export namespace google {
 
                     /** AnnotatorSelector issueModels */
                     issueModels?: (string[]|null);
+
+                    /** AnnotatorSelector runSummarizationAnnotator */
+                    runSummarizationAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector summarizationConfig */
+                    summarizationConfig?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig|null);
                 }
 
                 /** Represents an AnnotatorSelector. */
@@ -13771,6 +13916,12 @@ export namespace google {
 
                     /** AnnotatorSelector issueModels. */
                     public issueModels: string[];
+
+                    /** AnnotatorSelector runSummarizationAnnotator. */
+                    public runSummarizationAnnotator: boolean;
+
+                    /** AnnotatorSelector summarizationConfig. */
+                    public summarizationConfig?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig|null);
 
                     /**
                      * Creates a new AnnotatorSelector instance using the specified properties.
@@ -13848,6 +13999,124 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnnotatorSelector {
+
+                    /** Properties of a SummarizationConfig. */
+                    interface ISummarizationConfig {
+
+                        /** SummarizationConfig conversationProfile */
+                        conversationProfile?: (string|null);
+
+                        /** SummarizationConfig summarizationModel */
+                        summarizationModel?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel|keyof typeof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel|null);
+                    }
+
+                    /** Represents a SummarizationConfig. */
+                    class SummarizationConfig implements ISummarizationConfig {
+
+                        /**
+                         * Constructs a new SummarizationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig);
+
+                        /** SummarizationConfig conversationProfile. */
+                        public conversationProfile?: (string|null);
+
+                        /** SummarizationConfig summarizationModel. */
+                        public summarizationModel?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel|keyof typeof google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel|null);
+
+                        /** SummarizationConfig modelSource. */
+                        public modelSource?: ("conversationProfile"|"summarizationModel");
+
+                        /**
+                         * Creates a new SummarizationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SummarizationConfig instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig): google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig;
+
+                        /**
+                         * Encodes the specified SummarizationConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.verify|verify} messages.
+                         * @param message SummarizationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SummarizationConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.verify|verify} messages.
+                         * @param message SummarizationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SummarizationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SummarizationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig;
+
+                        /**
+                         * Decodes a SummarizationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SummarizationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig;
+
+                        /**
+                         * Verifies a SummarizationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SummarizationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SummarizationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig;
+
+                        /**
+                         * Creates a plain object from a SummarizationConfig message. Also converts values to other types if specified.
+                         * @param message SummarizationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SummarizationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SummarizationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SummarizationConfig {
+
+                        /** SummarizationModel enum. */
+                        enum SummarizationModel {
+                            SUMMARIZATION_MODEL_UNSPECIFIED = 0,
+                            BASELINE_MODEL = 1
+                        }
+                    }
                 }
             }
         }

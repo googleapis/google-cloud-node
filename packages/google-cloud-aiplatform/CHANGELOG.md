@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.10.0...aiplatform-v2.11.0) (2023-05-02)
+
+
+### Features
+
+* Add experiment and experiment_run to CustomJobSpec ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add GENIE to ModelSourceType ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add MutateDeployedModel RPC to endpoint_service ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add NVIDIA_L4 to AcceleratorType ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add NVIDIA_L4 to AcceleratorType ([#4216](https://github.com/googleapis/google-cloud-node/issues/4216)) ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add offline_storage_ttl_days to EntityType ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+* Add online_storage_ttl_days to FeatureStore ([20eafa1](https://github.com/googleapis/google-cloud-node/commit/20eafa1b79ca8f255400d4eb00fb6d398d3a3980))
+
 ## [2.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.9.0...aiplatform-v2.10.0) (2023-04-24)
 
 

@@ -11,9 +11,9 @@ jobs:
         node: [14]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: ${{ matrix.node }}
+          version: 7.32.2
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Check lint
@@ -24,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [14]
+        node: [12, 14, 16, 18]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: ${{ matrix.node }}
+          version: ^6.24.1
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests

@@ -1926,6 +1926,15 @@
                     },
                     "ReportResponse": {
                       "fields": {}
+                    },
+                    "ResourceInfoList": {
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "ResourceInfo",
+                          "id": 1
+                        }
+                      }
                     }
                   }
                 }
