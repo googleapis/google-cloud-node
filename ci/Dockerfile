@@ -31,8 +31,6 @@ RUN curl https://github.com/googleapis/repo-automation-bots/releases/download/fl
     -o /bin/flakybot -s -L \
     && chmod +x /bin/flakybot
 
-# RUN mkdir -p /usr/local/pnpm
-# RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=6.34.0 sh -
 ENV PNPM_VERSION=7.32.2
 RUN curl https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 
@@ -47,6 +45,5 @@ COPY --from=build /root/.local/share/pnpm /root/.local/share/pnpm
 
 RUN apk add --no-cache git bash python3
 
-# ENV PATH=$PATH:/usr/local/gcloud/google-cloud-sdk/bin
 ENV PNPM_HOME=/root/.local/share/pnpm
 ENV PATH=$PNPM_HOME:$PATH
