@@ -1070,6 +1070,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public importDocuments(request: google.cloud.discoveryengine.v1beta.IImportDocumentsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PurgeDocuments.
+                     * @param request PurgeDocumentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public purgeDocuments(request: google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest, callback: google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocumentsCallback): void;
+
+                    /**
+                     * Calls PurgeDocuments.
+                     * @param request PurgeDocumentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public purgeDocuments(request: google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DocumentService {
@@ -1115,6 +1129,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ImportDocumentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.DocumentService|purgeDocuments}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type PurgeDocumentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a GetDocumentRequest. */
@@ -3987,6 +4008,333 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MediaInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PurgeDocumentsRequest. */
+                interface IPurgeDocumentsRequest {
+
+                    /** PurgeDocumentsRequest parent */
+                    parent?: (string|null);
+
+                    /** PurgeDocumentsRequest filter */
+                    filter?: (string|null);
+
+                    /** PurgeDocumentsRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a PurgeDocumentsRequest. */
+                class PurgeDocumentsRequest implements IPurgeDocumentsRequest {
+
+                    /**
+                     * Constructs a new PurgeDocumentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest);
+
+                    /** PurgeDocumentsRequest parent. */
+                    public parent: string;
+
+                    /** PurgeDocumentsRequest filter. */
+                    public filter: string;
+
+                    /** PurgeDocumentsRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new PurgeDocumentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PurgeDocumentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest): google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest;
+
+                    /**
+                     * Encodes the specified PurgeDocumentsRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.verify|verify} messages.
+                     * @param message PurgeDocumentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PurgeDocumentsRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.verify|verify} messages.
+                     * @param message PurgeDocumentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PurgeDocumentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PurgeDocumentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest;
+
+                    /**
+                     * Decodes a PurgeDocumentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PurgeDocumentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest;
+
+                    /**
+                     * Verifies a PurgeDocumentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PurgeDocumentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PurgeDocumentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest;
+
+                    /**
+                     * Creates a plain object from a PurgeDocumentsRequest message. Also converts values to other types if specified.
+                     * @param message PurgeDocumentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PurgeDocumentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PurgeDocumentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PurgeDocumentsResponse. */
+                interface IPurgeDocumentsResponse {
+
+                    /** PurgeDocumentsResponse purgeCount */
+                    purgeCount?: (number|Long|string|null);
+
+                    /** PurgeDocumentsResponse purgeSample */
+                    purgeSample?: (string[]|null);
+                }
+
+                /** Represents a PurgeDocumentsResponse. */
+                class PurgeDocumentsResponse implements IPurgeDocumentsResponse {
+
+                    /**
+                     * Constructs a new PurgeDocumentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse);
+
+                    /** PurgeDocumentsResponse purgeCount. */
+                    public purgeCount: (number|Long|string);
+
+                    /** PurgeDocumentsResponse purgeSample. */
+                    public purgeSample: string[];
+
+                    /**
+                     * Creates a new PurgeDocumentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PurgeDocumentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse): google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse;
+
+                    /**
+                     * Encodes the specified PurgeDocumentsResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.verify|verify} messages.
+                     * @param message PurgeDocumentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PurgeDocumentsResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.verify|verify} messages.
+                     * @param message PurgeDocumentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PurgeDocumentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PurgeDocumentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse;
+
+                    /**
+                     * Decodes a PurgeDocumentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PurgeDocumentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse;
+
+                    /**
+                     * Verifies a PurgeDocumentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PurgeDocumentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PurgeDocumentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse;
+
+                    /**
+                     * Creates a plain object from a PurgeDocumentsResponse message. Also converts values to other types if specified.
+                     * @param message PurgeDocumentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PurgeDocumentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PurgeDocumentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PurgeDocumentsMetadata. */
+                interface IPurgeDocumentsMetadata {
+
+                    /** PurgeDocumentsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PurgeDocumentsMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PurgeDocumentsMetadata successCount */
+                    successCount?: (number|Long|string|null);
+
+                    /** PurgeDocumentsMetadata failureCount */
+                    failureCount?: (number|Long|string|null);
+                }
+
+                /** Represents a PurgeDocumentsMetadata. */
+                class PurgeDocumentsMetadata implements IPurgeDocumentsMetadata {
+
+                    /**
+                     * Constructs a new PurgeDocumentsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata);
+
+                    /** PurgeDocumentsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PurgeDocumentsMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PurgeDocumentsMetadata successCount. */
+                    public successCount: (number|Long|string);
+
+                    /** PurgeDocumentsMetadata failureCount. */
+                    public failureCount: (number|Long|string);
+
+                    /**
+                     * Creates a new PurgeDocumentsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PurgeDocumentsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata): google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata;
+
+                    /**
+                     * Encodes the specified PurgeDocumentsMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.verify|verify} messages.
+                     * @param message PurgeDocumentsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PurgeDocumentsMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.verify|verify} messages.
+                     * @param message PurgeDocumentsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PurgeDocumentsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PurgeDocumentsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata;
+
+                    /**
+                     * Decodes a PurgeDocumentsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PurgeDocumentsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata;
+
+                    /**
+                     * Verifies a PurgeDocumentsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PurgeDocumentsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PurgeDocumentsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata;
+
+                    /**
+                     * Creates a plain object from a PurgeDocumentsMetadata message. Also converts values to other types if specified.
+                     * @param message PurgeDocumentsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PurgeDocumentsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PurgeDocumentsMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -59,6 +59,11 @@
                 "importDocuments"
               ]
             },
+            "PurgeDocuments": {
+              "methods": [
+                "purgeDocuments"
+              ]
+            },
             "ListDocuments": {
               "methods": [
                 "listDocuments",
@@ -94,6 +99,11 @@
             "ImportDocuments": {
               "methods": [
                 "importDocuments"
+              ]
+            },
+            "PurgeDocuments": {
+              "methods": [
+                "purgeDocuments"
               ]
             },
             "ListDocuments": {

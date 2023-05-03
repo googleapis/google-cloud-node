@@ -384,6 +384,36 @@
                               }
                             }
                           ]
+                        },
+                        "PurgeDocuments": {
+                          "requestType": "PurgeDocumentsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents:purge",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents:purge",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents:purge",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents:purge",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse",
+                                "metadata_type": "google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1067,6 +1097,65 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "PurgeDocumentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Branch"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PurgeDocumentsResponse": {
+                      "fields": {
+                        "purgeCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "purgeSample": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                          }
+                        }
+                      }
+                    },
+                    "PurgeDocumentsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "successCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "failureCount": {
+                          "type": "int64",
+                          "id": 4
                         }
                       }
                     },

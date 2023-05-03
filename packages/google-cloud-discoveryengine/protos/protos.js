@@ -2558,6 +2558,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.discoveryengine.v1beta.DocumentService|purgeDocuments}.
+                         * @memberof google.cloud.discoveryengine.v1beta.DocumentService
+                         * @typedef PurgeDocumentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls PurgeDocuments.
+                         * @function purgeDocuments
+                         * @memberof google.cloud.discoveryengine.v1beta.DocumentService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} request PurgeDocumentsRequest message or plain object
+                         * @param {google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocumentsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DocumentService.prototype.purgeDocuments = function purgeDocuments(request, callback) {
+                            return this.rpcCall(purgeDocuments, $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "PurgeDocuments" });
+    
+                        /**
+                         * Calls PurgeDocuments.
+                         * @function purgeDocuments
+                         * @memberof google.cloud.discoveryengine.v1beta.DocumentService
+                         * @instance
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} request PurgeDocumentsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return DocumentService;
                     })();
     
@@ -9942,6 +9975,824 @@
                         };
     
                         return MediaInfo;
+                    })();
+    
+                    v1beta.PurgeDocumentsRequest = (function() {
+    
+                        /**
+                         * Properties of a PurgeDocumentsRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IPurgeDocumentsRequest
+                         * @property {string|null} [parent] PurgeDocumentsRequest parent
+                         * @property {string|null} [filter] PurgeDocumentsRequest filter
+                         * @property {boolean|null} [force] PurgeDocumentsRequest force
+                         */
+    
+                        /**
+                         * Constructs a new PurgeDocumentsRequest.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a PurgeDocumentsRequest.
+                         * @implements IPurgeDocumentsRequest
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest=} [properties] Properties to set
+                         */
+                        function PurgeDocumentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PurgeDocumentsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         */
+                        PurgeDocumentsRequest.prototype.parent = "";
+    
+                        /**
+                         * PurgeDocumentsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         */
+                        PurgeDocumentsRequest.prototype.filter = "";
+    
+                        /**
+                         * PurgeDocumentsRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         */
+                        PurgeDocumentsRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new PurgeDocumentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest instance
+                         */
+                        PurgeDocumentsRequest.create = function create(properties) {
+                            return new PurgeDocumentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} message PurgeDocumentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsRequest} message PurgeDocumentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PurgeDocumentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PurgeDocumentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PurgeDocumentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} PurgeDocumentsRequest
+                         */
+                        PurgeDocumentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PurgeDocumentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest} message PurgeDocumentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PurgeDocumentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.force = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PurgeDocumentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PurgeDocumentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PurgeDocumentsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PurgeDocumentsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest";
+                        };
+    
+                        return PurgeDocumentsRequest;
+                    })();
+    
+                    v1beta.PurgeDocumentsResponse = (function() {
+    
+                        /**
+                         * Properties of a PurgeDocumentsResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IPurgeDocumentsResponse
+                         * @property {number|Long|null} [purgeCount] PurgeDocumentsResponse purgeCount
+                         * @property {Array.<string>|null} [purgeSample] PurgeDocumentsResponse purgeSample
+                         */
+    
+                        /**
+                         * Constructs a new PurgeDocumentsResponse.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a PurgeDocumentsResponse.
+                         * @implements IPurgeDocumentsResponse
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse=} [properties] Properties to set
+                         */
+                        function PurgeDocumentsResponse(properties) {
+                            this.purgeSample = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PurgeDocumentsResponse purgeCount.
+                         * @member {number|Long} purgeCount
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @instance
+                         */
+                        PurgeDocumentsResponse.prototype.purgeCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PurgeDocumentsResponse purgeSample.
+                         * @member {Array.<string>} purgeSample
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @instance
+                         */
+                        PurgeDocumentsResponse.prototype.purgeSample = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PurgeDocumentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse instance
+                         */
+                        PurgeDocumentsResponse.create = function create(properties) {
+                            return new PurgeDocumentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse} message PurgeDocumentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.purgeCount != null && Object.hasOwnProperty.call(message, "purgeCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.purgeCount);
+                            if (message.purgeSample != null && message.purgeSample.length)
+                                for (var i = 0; i < message.purgeSample.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.purgeSample[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsResponse} message PurgeDocumentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.purgeCount = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.purgeSample && message.purgeSample.length))
+                                            message.purgeSample = [];
+                                        message.purgeSample.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PurgeDocumentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PurgeDocumentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.purgeCount != null && message.hasOwnProperty("purgeCount"))
+                                if (!$util.isInteger(message.purgeCount) && !(message.purgeCount && $util.isInteger(message.purgeCount.low) && $util.isInteger(message.purgeCount.high)))
+                                    return "purgeCount: integer|Long expected";
+                            if (message.purgeSample != null && message.hasOwnProperty("purgeSample")) {
+                                if (!Array.isArray(message.purgeSample))
+                                    return "purgeSample: array expected";
+                                for (var i = 0; i < message.purgeSample.length; ++i)
+                                    if (!$util.isString(message.purgeSample[i]))
+                                        return "purgeSample: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PurgeDocumentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} PurgeDocumentsResponse
+                         */
+                        PurgeDocumentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse();
+                            if (object.purgeCount != null)
+                                if ($util.Long)
+                                    (message.purgeCount = $util.Long.fromValue(object.purgeCount)).unsigned = false;
+                                else if (typeof object.purgeCount === "string")
+                                    message.purgeCount = parseInt(object.purgeCount, 10);
+                                else if (typeof object.purgeCount === "number")
+                                    message.purgeCount = object.purgeCount;
+                                else if (typeof object.purgeCount === "object")
+                                    message.purgeCount = new $util.LongBits(object.purgeCount.low >>> 0, object.purgeCount.high >>> 0).toNumber();
+                            if (object.purgeSample) {
+                                if (!Array.isArray(object.purgeSample))
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse.purgeSample: array expected");
+                                message.purgeSample = [];
+                                for (var i = 0; i < object.purgeSample.length; ++i)
+                                    message.purgeSample[i] = String(object.purgeSample[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PurgeDocumentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse} message PurgeDocumentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PurgeDocumentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.purgeSample = [];
+                            if (options.defaults)
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.purgeCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.purgeCount = options.longs === String ? "0" : 0;
+                            if (message.purgeCount != null && message.hasOwnProperty("purgeCount"))
+                                if (typeof message.purgeCount === "number")
+                                    object.purgeCount = options.longs === String ? String(message.purgeCount) : message.purgeCount;
+                                else
+                                    object.purgeCount = options.longs === String ? $util.Long.prototype.toString.call(message.purgeCount) : options.longs === Number ? new $util.LongBits(message.purgeCount.low >>> 0, message.purgeCount.high >>> 0).toNumber() : message.purgeCount;
+                            if (message.purgeSample && message.purgeSample.length) {
+                                object.purgeSample = [];
+                                for (var j = 0; j < message.purgeSample.length; ++j)
+                                    object.purgeSample[j] = message.purgeSample[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PurgeDocumentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PurgeDocumentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PurgeDocumentsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PurgeDocumentsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.PurgeDocumentsResponse";
+                        };
+    
+                        return PurgeDocumentsResponse;
+                    })();
+    
+                    v1beta.PurgeDocumentsMetadata = (function() {
+    
+                        /**
+                         * Properties of a PurgeDocumentsMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @interface IPurgeDocumentsMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] PurgeDocumentsMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] PurgeDocumentsMetadata updateTime
+                         * @property {number|Long|null} [successCount] PurgeDocumentsMetadata successCount
+                         * @property {number|Long|null} [failureCount] PurgeDocumentsMetadata failureCount
+                         */
+    
+                        /**
+                         * Constructs a new PurgeDocumentsMetadata.
+                         * @memberof google.cloud.discoveryengine.v1beta
+                         * @classdesc Represents a PurgeDocumentsMetadata.
+                         * @implements IPurgeDocumentsMetadata
+                         * @constructor
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata=} [properties] Properties to set
+                         */
+                        function PurgeDocumentsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PurgeDocumentsMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.createTime = null;
+    
+                        /**
+                         * PurgeDocumentsMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * PurgeDocumentsMetadata successCount.
+                         * @member {number|Long} successCount
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.successCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PurgeDocumentsMetadata failureCount.
+                         * @member {number|Long} failureCount
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         */
+                        PurgeDocumentsMetadata.prototype.failureCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new PurgeDocumentsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata instance
+                         */
+                        PurgeDocumentsMetadata.create = function create(properties) {
+                            return new PurgeDocumentsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata} message PurgeDocumentsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.successCount != null && Object.hasOwnProperty.call(message, "successCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.successCount);
+                            if (message.failureCount != null && Object.hasOwnProperty.call(message, "failureCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.failureCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PurgeDocumentsMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.IPurgeDocumentsMetadata} message PurgeDocumentsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PurgeDocumentsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.successCount = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.failureCount = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PurgeDocumentsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PurgeDocumentsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PurgeDocumentsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PurgeDocumentsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.successCount != null && message.hasOwnProperty("successCount"))
+                                if (!$util.isInteger(message.successCount) && !(message.successCount && $util.isInteger(message.successCount.low) && $util.isInteger(message.successCount.high)))
+                                    return "successCount: integer|Long expected";
+                            if (message.failureCount != null && message.hasOwnProperty("failureCount"))
+                                if (!$util.isInteger(message.failureCount) && !(message.failureCount && $util.isInteger(message.failureCount.low) && $util.isInteger(message.failureCount.high)))
+                                    return "failureCount: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PurgeDocumentsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} PurgeDocumentsMetadata
+                         */
+                        PurgeDocumentsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.successCount != null)
+                                if ($util.Long)
+                                    (message.successCount = $util.Long.fromValue(object.successCount)).unsigned = false;
+                                else if (typeof object.successCount === "string")
+                                    message.successCount = parseInt(object.successCount, 10);
+                                else if (typeof object.successCount === "number")
+                                    message.successCount = object.successCount;
+                                else if (typeof object.successCount === "object")
+                                    message.successCount = new $util.LongBits(object.successCount.low >>> 0, object.successCount.high >>> 0).toNumber();
+                            if (object.failureCount != null)
+                                if ($util.Long)
+                                    (message.failureCount = $util.Long.fromValue(object.failureCount)).unsigned = false;
+                                else if (typeof object.failureCount === "string")
+                                    message.failureCount = parseInt(object.failureCount, 10);
+                                else if (typeof object.failureCount === "number")
+                                    message.failureCount = object.failureCount;
+                                else if (typeof object.failureCount === "object")
+                                    message.failureCount = new $util.LongBits(object.failureCount.low >>> 0, object.failureCount.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PurgeDocumentsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata} message PurgeDocumentsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PurgeDocumentsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.successCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.successCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failureCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failureCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.successCount != null && message.hasOwnProperty("successCount"))
+                                if (typeof message.successCount === "number")
+                                    object.successCount = options.longs === String ? String(message.successCount) : message.successCount;
+                                else
+                                    object.successCount = options.longs === String ? $util.Long.prototype.toString.call(message.successCount) : options.longs === Number ? new $util.LongBits(message.successCount.low >>> 0, message.successCount.high >>> 0).toNumber() : message.successCount;
+                            if (message.failureCount != null && message.hasOwnProperty("failureCount"))
+                                if (typeof message.failureCount === "number")
+                                    object.failureCount = options.longs === String ? String(message.failureCount) : message.failureCount;
+                                else
+                                    object.failureCount = options.longs === String ? $util.Long.prototype.toString.call(message.failureCount) : options.longs === Number ? new $util.LongBits(message.failureCount.low >>> 0, message.failureCount.high >>> 0).toNumber() : message.failureCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PurgeDocumentsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PurgeDocumentsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PurgeDocumentsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PurgeDocumentsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.discoveryengine.v1beta.PurgeDocumentsMetadata";
+                        };
+    
+                        return PurgeDocumentsMetadata;
                     })();
     
                     v1beta.RecommendationService = (function() {
