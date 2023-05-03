@@ -980,8 +980,8 @@ export class ServicesClient {
    *   populated, without persisting the request or updating any resources.
    * @param {boolean} request.allowMissing
    *   If set to true, and if the Service does not exist, it will create a new
-   *   one. Caller must have both create and update permissions for this call if
-   *   this is set to true.
+   *   one. The caller must have 'run.services.create' permissions if this is set
+   *   to true and the Service does not exist.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

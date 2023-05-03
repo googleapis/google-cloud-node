@@ -10958,6 +10958,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             }
@@ -11188,6 +11189,10 @@
                             case 3:
                                 message.executionReason = 3;
                                 break;
+                            case "CANCELLING":
+                            case 4:
+                                message.executionReason = 4;
+                                break;
                             }
                             return message;
                         };
@@ -11388,6 +11393,7 @@
                          * @property {number} JOB_STATUS_SERVICE_POLLING_ERROR=1 JOB_STATUS_SERVICE_POLLING_ERROR value
                          * @property {number} NON_ZERO_EXIT_CODE=2 NON_ZERO_EXIT_CODE value
                          * @property {number} CANCELLED=3 CANCELLED value
+                         * @property {number} CANCELLING=4 CANCELLING value
                          */
                         Condition.ExecutionReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11395,6 +11401,7 @@
                             values[valuesById[1] = "JOB_STATUS_SERVICE_POLLING_ERROR"] = 1;
                             values[valuesById[2] = "NON_ZERO_EXIT_CODE"] = 2;
                             values[valuesById[3] = "CANCELLED"] = 3;
+                            values[valuesById[4] = "CANCELLING"] = 4;
                             return values;
                         })();
     
@@ -12540,6 +12547,7 @@
                          * @property {number|null} [cancelledCount] Execution cancelledCount
                          * @property {number|null} [retriedCount] Execution retriedCount
                          * @property {string|null} [logUri] Execution logUri
+                         * @property {boolean|null} [satisfiesPzs] Execution satisfiesPzs
                          * @property {string|null} [etag] Execution etag
                          */
     
@@ -12762,6 +12770,14 @@
                         Execution.prototype.logUri = "";
     
                         /**
+                         * Execution satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.run.v2.Execution
+                         * @instance
+                         */
+                        Execution.prototype.satisfiesPzs = false;
+    
+                        /**
                          * Execution etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Execution
@@ -12846,6 +12862,8 @@
                                 writer.uint32(/* id 25, wireType 0 =*/200).int32(message.retriedCount);
                             if (message.logUri != null && Object.hasOwnProperty.call(message, "logUri"))
                                 writer.uint32(/* id 26, wireType 2 =*/210).string(message.logUri);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzs);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -13022,6 +13040,10 @@
                                         message.logUri = reader.string();
                                         break;
                                     }
+                                case 27: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -13177,6 +13199,9 @@
                             if (message.logUri != null && message.hasOwnProperty("logUri"))
                                 if (!$util.isString(message.logUri))
                                     return "logUri: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -13336,6 +13361,8 @@
                                 message.retriedCount = object.retriedCount | 0;
                             if (object.logUri != null)
                                 message.logUri = String(object.logUri);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -13391,6 +13418,7 @@
                                 object.cancelledCount = 0;
                                 object.retriedCount = 0;
                                 object.logUri = "";
+                                object.satisfiesPzs = false;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -13459,6 +13487,8 @@
                                 object.retriedCount = message.retriedCount;
                             if (message.logUri != null && message.hasOwnProperty("logUri"))
                                 object.logUri = message.logUri;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -14509,6 +14539,7 @@
                          * @interface IResourceRequirements
                          * @property {Object.<string,string>|null} [limits] ResourceRequirements limits
                          * @property {boolean|null} [cpuIdle] ResourceRequirements cpuIdle
+                         * @property {boolean|null} [startupCpuBoost] ResourceRequirements startupCpuBoost
                          */
     
                         /**
@@ -14544,6 +14575,14 @@
                         ResourceRequirements.prototype.cpuIdle = false;
     
                         /**
+                         * ResourceRequirements startupCpuBoost.
+                         * @member {boolean} startupCpuBoost
+                         * @memberof google.cloud.run.v2.ResourceRequirements
+                         * @instance
+                         */
+                        ResourceRequirements.prototype.startupCpuBoost = false;
+    
+                        /**
                          * Creates a new ResourceRequirements instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.ResourceRequirements
@@ -14572,6 +14611,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.limits[keys[i]]).ldelim();
                             if (message.cpuIdle != null && Object.hasOwnProperty.call(message, "cpuIdle"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.cpuIdle);
+                            if (message.startupCpuBoost != null && Object.hasOwnProperty.call(message, "startupCpuBoost"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.startupCpuBoost);
                             return writer;
                         };
     
@@ -14633,6 +14674,10 @@
                                         message.cpuIdle = reader.bool();
                                         break;
                                     }
+                                case 3: {
+                                        message.startupCpuBoost = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14679,6 +14724,9 @@
                             if (message.cpuIdle != null && message.hasOwnProperty("cpuIdle"))
                                 if (typeof message.cpuIdle !== "boolean")
                                     return "cpuIdle: boolean expected";
+                            if (message.startupCpuBoost != null && message.hasOwnProperty("startupCpuBoost"))
+                                if (typeof message.startupCpuBoost !== "boolean")
+                                    return "startupCpuBoost: boolean expected";
                             return null;
                         };
     
@@ -14703,6 +14751,8 @@
                             }
                             if (object.cpuIdle != null)
                                 message.cpuIdle = Boolean(object.cpuIdle);
+                            if (object.startupCpuBoost != null)
+                                message.startupCpuBoost = Boolean(object.startupCpuBoost);
                             return message;
                         };
     
@@ -14721,8 +14771,10 @@
                             var object = {};
                             if (options.objects || options.defaults)
                                 object.limits = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.cpuIdle = false;
+                                object.startupCpuBoost = false;
+                            }
                             var keys2;
                             if (message.limits && (keys2 = Object.keys(message.limits)).length) {
                                 object.limits = {};
@@ -14731,6 +14783,8 @@
                             }
                             if (message.cpuIdle != null && message.hasOwnProperty("cpuIdle"))
                                 object.cpuIdle = message.cpuIdle;
+                            if (message.startupCpuBoost != null && message.hasOwnProperty("startupCpuBoost"))
+                                object.startupCpuBoost = message.startupCpuBoost;
                             return object;
                         };
     
@@ -17358,6 +17412,7 @@
                          * @interface IHTTPGetAction
                          * @property {string|null} [path] HTTPGetAction path
                          * @property {Array.<google.cloud.run.v2.IHTTPHeader>|null} [httpHeaders] HTTPGetAction httpHeaders
+                         * @property {number|null} [port] HTTPGetAction port
                          */
     
                         /**
@@ -17393,6 +17448,14 @@
                         HTTPGetAction.prototype.httpHeaders = $util.emptyArray;
     
                         /**
+                         * HTTPGetAction port.
+                         * @member {number} port
+                         * @memberof google.cloud.run.v2.HTTPGetAction
+                         * @instance
+                         */
+                        HTTPGetAction.prototype.port = 0;
+    
+                        /**
                          * Creates a new HTTPGetAction instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.HTTPGetAction
@@ -17421,6 +17484,8 @@
                             if (message.httpHeaders != null && message.httpHeaders.length)
                                 for (var i = 0; i < message.httpHeaders.length; ++i)
                                     $root.google.cloud.run.v2.HTTPHeader.encode(message.httpHeaders[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.port);
                             return writer;
                         };
     
@@ -17463,6 +17528,10 @@
                                         if (!(message.httpHeaders && message.httpHeaders.length))
                                             message.httpHeaders = [];
                                         message.httpHeaders.push($root.google.cloud.run.v2.HTTPHeader.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.port = reader.int32();
                                         break;
                                     }
                                 default:
@@ -17512,6 +17581,9 @@
                                         return "httpHeaders." + error;
                                 }
                             }
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
                             return null;
                         };
     
@@ -17539,6 +17611,8 @@
                                     message.httpHeaders[i] = $root.google.cloud.run.v2.HTTPHeader.fromObject(object.httpHeaders[i]);
                                 }
                             }
+                            if (object.port != null)
+                                message.port = object.port | 0;
                             return message;
                         };
     
@@ -17557,8 +17631,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.httpHeaders = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.path = "";
+                                object.port = 0;
+                            }
                             if (message.path != null && message.hasOwnProperty("path"))
                                 object.path = message.path;
                             if (message.httpHeaders && message.httpHeaders.length) {
@@ -17566,6 +17642,8 @@
                                 for (var j = 0; j < message.httpHeaders.length; ++j)
                                     object.httpHeaders[j] = $root.google.cloud.run.v2.HTTPHeader.toObject(message.httpHeaders[j], options);
                             }
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                object.port = message.port;
                             return object;
                         };
     
@@ -21533,6 +21611,7 @@
                          * @property {number|null} [executionCount] Job executionCount
                          * @property {google.cloud.run.v2.IExecutionReference|null} [latestCreatedExecution] Job latestCreatedExecution
                          * @property {boolean|null} [reconciling] Job reconciling
+                         * @property {boolean|null} [satisfiesPzs] Job satisfiesPzs
                          * @property {string|null} [etag] Job etag
                          */
     
@@ -21731,6 +21810,14 @@
                         Job.prototype.reconciling = false;
     
                         /**
+                         * Job satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.run.v2.Job
+                         * @instance
+                         */
+                        Job.prototype.satisfiesPzs = false;
+    
+                        /**
                          * Job etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Job
@@ -21809,6 +21896,8 @@
                                 $root.google.cloud.run.v2.ExecutionReference.encode(message.latestCreatedExecution, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
                                 writer.uint32(/* id 23, wireType 0 =*/184).bool(message.reconciling);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).bool(message.satisfiesPzs);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -21973,6 +22062,10 @@
                                         message.reconciling = reader.bool();
                                         break;
                                     }
+                                case 25: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -22121,6 +22214,9 @@
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 if (typeof message.reconciling !== "boolean")
                                     return "reconciling: boolean expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -22277,6 +22373,8 @@
                             }
                             if (object.reconciling != null)
                                 message.reconciling = Boolean(object.reconciling);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -22329,6 +22427,7 @@
                                 object.executionCount = 0;
                                 object.latestCreatedExecution = null;
                                 object.reconciling = false;
+                                object.satisfiesPzs = false;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -22391,6 +22490,8 @@
                                 object.latestCreatedExecution = $root.google.cloud.run.v2.ExecutionReference.toObject(message.latestCreatedExecution, options);
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 object.reconciling = message.reconciling;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -23825,6 +23926,8 @@
                          * @property {Array.<google.cloud.run.v2.ICondition>|null} [conditions] Revision conditions
                          * @property {number|Long|null} [observedGeneration] Revision observedGeneration
                          * @property {string|null} [logUri] Revision logUri
+                         * @property {boolean|null} [satisfiesPzs] Revision satisfiesPzs
+                         * @property {boolean|null} [sessionAffinity] Revision sessionAffinity
                          * @property {string|null} [etag] Revision etag
                          */
     
@@ -24057,6 +24160,22 @@
                         Revision.prototype.logUri = "";
     
                         /**
+                         * Revision satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Revision.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * Revision sessionAffinity.
+                         * @member {boolean} sessionAffinity
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Revision.prototype.sessionAffinity = false;
+    
+                        /**
                          * Revision etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Revision
@@ -24145,6 +24264,10 @@
                                 writer.uint32(/* id 33, wireType 2 =*/266).string(message.logUri);
                             if (message.maxInstanceRequestConcurrency != null && Object.hasOwnProperty.call(message, "maxInstanceRequestConcurrency"))
                                 writer.uint32(/* id 34, wireType 0 =*/272).int32(message.maxInstanceRequestConcurrency);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 37, wireType 0 =*/296).bool(message.satisfiesPzs);
+                            if (message.sessionAffinity != null && Object.hasOwnProperty.call(message, "sessionAffinity"))
+                                writer.uint32(/* id 38, wireType 0 =*/304).bool(message.sessionAffinity);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -24327,6 +24450,14 @@
                                     }
                                 case 33: {
                                         message.logUri = reader.string();
+                                        break;
+                                    }
+                                case 37: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 38: {
+                                        message.sessionAffinity = reader.bool();
                                         break;
                                     }
                                 case 99: {
@@ -24513,6 +24644,12 @@
                             if (message.logUri != null && message.hasOwnProperty("logUri"))
                                 if (!$util.isString(message.logUri))
                                     return "logUri: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            if (message.sessionAffinity != null && message.hasOwnProperty("sessionAffinity"))
+                                if (typeof message.sessionAffinity !== "boolean")
+                                    return "sessionAffinity: boolean expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -24729,6 +24866,10 @@
                                     message.observedGeneration = new $util.LongBits(object.observedGeneration.low >>> 0, object.observedGeneration.high >>> 0).toNumber();
                             if (object.logUri != null)
                                 message.logUri = String(object.logUri);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.sessionAffinity != null)
+                                message.sessionAffinity = Boolean(object.sessionAffinity);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -24786,6 +24927,8 @@
                                     object.observedGeneration = options.longs === String ? "0" : 0;
                                 object.logUri = "";
                                 object.maxInstanceRequestConcurrency = 0;
+                                object.satisfiesPzs = false;
+                                object.sessionAffinity = false;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -24862,6 +25005,10 @@
                                 object.logUri = message.logUri;
                             if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
                                 object.maxInstanceRequestConcurrency = message.maxInstanceRequestConcurrency;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.sessionAffinity != null && message.hasOwnProperty("sessionAffinity"))
+                                object.sessionAffinity = message.sessionAffinity;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -24914,6 +25061,7 @@
                          * @property {google.cloud.run.v2.ExecutionEnvironment|null} [executionEnvironment] RevisionTemplate executionEnvironment
                          * @property {string|null} [encryptionKey] RevisionTemplate encryptionKey
                          * @property {number|null} [maxInstanceRequestConcurrency] RevisionTemplate maxInstanceRequestConcurrency
+                         * @property {boolean|null} [sessionAffinity] RevisionTemplate sessionAffinity
                          */
     
                         /**
@@ -25032,6 +25180,14 @@
                         RevisionTemplate.prototype.maxInstanceRequestConcurrency = 0;
     
                         /**
+                         * RevisionTemplate sessionAffinity.
+                         * @member {boolean} sessionAffinity
+                         * @memberof google.cloud.run.v2.RevisionTemplate
+                         * @instance
+                         */
+                        RevisionTemplate.prototype.sessionAffinity = false;
+    
+                        /**
                          * Creates a new RevisionTemplate instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.RevisionTemplate
@@ -25083,6 +25239,8 @@
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.encryptionKey);
                             if (message.maxInstanceRequestConcurrency != null && Object.hasOwnProperty.call(message, "maxInstanceRequestConcurrency"))
                                 writer.uint32(/* id 15, wireType 0 =*/120).int32(message.maxInstanceRequestConcurrency);
+                            if (message.sessionAffinity != null && Object.hasOwnProperty.call(message, "sessionAffinity"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.sessionAffinity);
                             return writer;
                         };
     
@@ -25207,6 +25365,10 @@
                                         message.maxInstanceRequestConcurrency = reader.int32();
                                         break;
                                     }
+                                case 19: {
+                                        message.sessionAffinity = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25312,6 +25474,9 @@
                             if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
                                 if (!$util.isInteger(message.maxInstanceRequestConcurrency))
                                     return "maxInstanceRequestConcurrency: integer expected";
+                            if (message.sessionAffinity != null && message.hasOwnProperty("sessionAffinity"))
+                                if (typeof message.sessionAffinity !== "boolean")
+                                    return "sessionAffinity: boolean expected";
                             return null;
                         };
     
@@ -25404,6 +25569,8 @@
                                 message.encryptionKey = String(object.encryptionKey);
                             if (object.maxInstanceRequestConcurrency != null)
                                 message.maxInstanceRequestConcurrency = object.maxInstanceRequestConcurrency | 0;
+                            if (object.sessionAffinity != null)
+                                message.sessionAffinity = Boolean(object.sessionAffinity);
                             return message;
                         };
     
@@ -25437,6 +25604,7 @@
                                 object.executionEnvironment = options.enums === String ? "EXECUTION_ENVIRONMENT_UNSPECIFIED" : 0;
                                 object.encryptionKey = "";
                                 object.maxInstanceRequestConcurrency = 0;
+                                object.sessionAffinity = false;
                             }
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 object.revision = message.revision;
@@ -25475,6 +25643,8 @@
                                 object.encryptionKey = message.encryptionKey;
                             if (message.maxInstanceRequestConcurrency != null && message.hasOwnProperty("maxInstanceRequestConcurrency"))
                                 object.maxInstanceRequestConcurrency = message.maxInstanceRequestConcurrency;
+                            if (message.sessionAffinity != null && message.hasOwnProperty("sessionAffinity"))
+                                object.sessionAffinity = message.sessionAffinity;
                             return object;
                         };
     
@@ -27345,6 +27515,7 @@
                          * @property {string|null} [latestCreatedRevision] Service latestCreatedRevision
                          * @property {Array.<google.cloud.run.v2.ITrafficTargetStatus>|null} [trafficStatuses] Service trafficStatuses
                          * @property {string|null} [uri] Service uri
+                         * @property {boolean|null} [satisfiesPzs] Service satisfiesPzs
                          * @property {boolean|null} [reconciling] Service reconciling
                          * @property {string|null} [etag] Service etag
                          */
@@ -27578,6 +27749,14 @@
                         Service.prototype.uri = "";
     
                         /**
+                         * Service satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.run.v2.Service
+                         * @instance
+                         */
+                        Service.prototype.satisfiesPzs = false;
+    
+                        /**
                          * Service reconciling.
                          * @member {boolean} reconciling
                          * @memberof google.cloud.run.v2.Service
@@ -27674,6 +27853,8 @@
                                     $root.google.cloud.run.v2.TrafficTargetStatus.encode(message.trafficStatuses[i], writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                 writer.uint32(/* id 36, wireType 2 =*/290).string(message.uri);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 38, wireType 0 =*/304).bool(message.satisfiesPzs);
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
                                 writer.uint32(/* id 98, wireType 0 =*/784).bool(message.reconciling);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
@@ -27860,6 +28041,10 @@
                                         message.uri = reader.string();
                                         break;
                                     }
+                                case 38: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
                                 case 98: {
                                         message.reconciling = reader.bool();
                                         break;
@@ -28041,6 +28226,9 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 if (typeof message.reconciling !== "boolean")
                                     return "reconciling: boolean expected";
@@ -28243,6 +28431,8 @@
                             }
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.reconciling != null)
                                 message.reconciling = Boolean(object.reconciling);
                             if (object.etag != null)
@@ -28302,6 +28492,7 @@
                                 object.latestReadyRevision = "";
                                 object.latestCreatedRevision = "";
                                 object.uri = "";
+                                object.satisfiesPzs = false;
                                 object.reconciling = false;
                                 object.etag = "";
                             }
@@ -28379,6 +28570,8 @@
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 object.reconciling = message.reconciling;
                             if (message.etag != null && message.hasOwnProperty("etag"))
@@ -29907,6 +30100,7 @@
                          * @property {string|null} [encryptionKey] Task encryptionKey
                          * @property {google.cloud.run.v2.IVpcAccess|null} [vpcAccess] Task vpcAccess
                          * @property {string|null} [logUri] Task logUri
+                         * @property {boolean|null} [satisfiesPzs] Task satisfiesPzs
                          * @property {string|null} [etag] Task etag
                          */
     
@@ -30155,6 +30349,14 @@
                         Task.prototype.logUri = "";
     
                         /**
+                         * Task satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.run.v2.Task
+                         * @instance
+                         */
+                        Task.prototype.satisfiesPzs = false;
+    
+                        /**
                          * Task etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Task
@@ -30247,6 +30449,8 @@
                                 $root.google.cloud.run.v2.VpcAccess.encode(message.vpcAccess, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                             if (message.logUri != null && Object.hasOwnProperty.call(message, "logUri"))
                                 writer.uint32(/* id 32, wireType 2 =*/258).string(message.logUri);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 33, wireType 0 =*/264).bool(message.satisfiesPzs);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -30439,6 +30643,10 @@
                                         message.logUri = reader.string();
                                         break;
                                     }
+                                case 33: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -30614,6 +30822,9 @@
                             if (message.logUri != null && message.hasOwnProperty("logUri"))
                                 if (!$util.isString(message.logUri))
                                     return "logUri: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -30781,6 +30992,8 @@
                             }
                             if (object.logUri != null)
                                 message.logUri = String(object.logUri);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -30840,6 +31053,7 @@
                                 object.encryptionKey = "";
                                 object.vpcAccess = null;
                                 object.logUri = "";
+                                object.satisfiesPzs = false;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -30920,6 +31134,8 @@
                                 object.vpcAccess = $root.google.cloud.run.v2.VpcAccess.toObject(message.vpcAccess, options);
                             if (message.logUri != null && message.hasOwnProperty("logUri"))
                                 object.logUri = message.logUri;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
