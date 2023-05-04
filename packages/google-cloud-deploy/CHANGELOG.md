@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.4.1...deploy-v2.5.0) (2023-05-04)
+
+
+### Features
+
+* [deploy] added support for DeployArtifacts ([#4222](https://github.com/googleapis/google-cloud-node/issues/4222)) ([840390b](https://github.com/googleapis/google-cloud-node/commit/840390b4fdad779617572db6ce54922cb894e667))
+
 ## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v2.4.0...deploy-v2.4.1) (2023-04-13)
 
 

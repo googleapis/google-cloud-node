@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.5.0...discoveryengine-v0.6.0) (2023-05-04)
+
+
+### Features
+
+* [discoveryengine] add document purge API ([#4219](https://github.com/googleapis/google-cloud-node/issues/4219)) ([454fa79](https://github.com/googleapis/google-cloud-node/commit/454fa7943ddf664bc54a67e654d7e8a39ea55fed))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.4.1...discoveryengine-v0.5.0) (2023-04-24)
 
 
