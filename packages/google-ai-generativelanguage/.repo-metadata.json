@@ -2,7 +2,7 @@
   "name": "generativelanguage",
   "name_pretty": "Generative Language API",
   "product_documentation": "https://developers.generativeai.google/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/generativelanguage/latest",
+  "client_documentation": "https://developers.generativeai.google/guide/palm_api_overview#node.js",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "preview",
   "language": "nodejs",
@@ -14,4 +14,3 @@
   "library_type": "GAPIC_AUTO",
   "api_shortname": "generativelanguage"
 }
-

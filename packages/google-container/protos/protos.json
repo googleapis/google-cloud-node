@@ -2240,6 +2240,10 @@
                       "type": "NodePoolLoggingConfig",
                       "id": 116
                     },
+                    "desiredFleet": {
+                      "type": "Fleet",
+                      "id": 117
+                    },
                     "desiredStackType": {
                       "type": "StackType",
                       "id": 119

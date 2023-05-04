@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [5.1.3](https://github.com/googleapis/google-cloud-node/compare/talent-v5.1.2...talent-v5.1.3) (2023-05-04)
+
+
+### Bug Fixes
+
+* [talent] change timeout settings for SearchJobsForAlert ([#4227](https://github.com/googleapis/google-cloud-node/issues/4227)) ([cfaa053](https://github.com/googleapis/google-cloud-node/commit/cfaa0530fdb35bdbcd52a04b4b9fb30946572449))
+
 ## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/talent-v5.1.1...talent-v5.1.2) (2023-04-13)
 
 

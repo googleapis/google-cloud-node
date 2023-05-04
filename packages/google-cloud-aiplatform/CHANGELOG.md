@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.11.0...aiplatform-v2.12.0) (2023-05-04)
+
+
+### Features
+
+* Add model_garden_service.proto and publisher_model.proto to BUILD.bazel ([#4225](https://github.com/googleapis/google-cloud-node/issues/4225)) ([5367d25](https://github.com/googleapis/google-cloud-node/commit/5367d25cdaa4e935e5c1e345622bf4cbd7131e1a))
+
 ## [2.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.10.0...aiplatform-v2.11.0) (2023-05-02)
 
 

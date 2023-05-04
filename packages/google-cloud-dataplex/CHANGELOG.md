@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.3.2...dataplex-v2.4.0) (2023-05-04)
+
+
+### Features
+
+* [dataplex] added new Dataplex APIs and new features for existing APIs (e.g. DataScans) ([#4230](https://github.com/googleapis/google-cloud-node/issues/4230)) ([5268d24](https://github.com/googleapis/google-cloud-node/commit/5268d24478595c01fe04215f50ece5558cfcdc46))
+
 ## [2.3.2](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.3.1...dataplex-v2.3.2) (2023-04-13)
 
 
