@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataplex",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "dataplex client for Node.js",
   "repository": {
     "type": "git",
