@@ -75,11 +75,6 @@
                 "deleteQueuedResource"
               ]
             },
-            "ResetQueuedResource": {
-              "methods": [
-                "resetQueuedResource"
-              ]
-            },
             "SimulateMaintenanceEvent": {
               "methods": [
                 "simulateMaintenanceEvent"
@@ -181,11 +176,6 @@
             "DeleteQueuedResource": {
               "methods": [
                 "deleteQueuedResource"
-              ]
-            },
-            "ResetQueuedResource": {
-              "methods": [
-                "resetQueuedResource"
               ]
             },
             "SimulateMaintenanceEvent": {
