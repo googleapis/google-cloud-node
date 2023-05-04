@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Discuss_service.count_message_tokens
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Discuss_service.generate_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Model_service.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Model_service.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Text_service.embed_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Text_service.generate_text
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-ai-generativelanguage/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/quickstart.js,samples/README.md)
 

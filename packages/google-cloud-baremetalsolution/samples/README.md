@@ -33,7 +33,6 @@
   * [Bare_metal_solution.update_nfs_share](#bare_metal_solution.update_nfs_share)
   * [Bare_metal_solution.update_volume](#bare_metal_solution.update_volume)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -52,7 +51,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Bare_metal_solution.detach_lun
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.detach_lun.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.detach_lun.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.detach_lun.js,samples/README.md)
 
@@ -69,7 +68,7 @@ __Usage:__
 
 ### Bare_metal_solution.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_instance.js,samples/README.md)
 
@@ -86,7 +85,7 @@ __Usage:__
 
 ### Bare_metal_solution.get_lun
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_lun.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_lun.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_lun.js,samples/README.md)
 
@@ -103,7 +102,7 @@ __Usage:__
 
 ### Bare_metal_solution.get_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_network.js,samples/README.md)
 
@@ -120,7 +119,7 @@ __Usage:__
 
 ### Bare_metal_solution.get_nfs_share
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_nfs_share.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_nfs_share.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_nfs_share.js,samples/README.md)
 
@@ -137,7 +136,7 @@ __Usage:__
 
 ### Bare_metal_solution.get_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.get_volume.js,samples/README.md)
 
@@ -154,7 +153,7 @@ __Usage:__
 
 ### Bare_metal_solution.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_instances.js,samples/README.md)
 
@@ -171,7 +170,7 @@ __Usage:__
 
 ### Bare_metal_solution.list_luns
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_luns.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_luns.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_luns.js,samples/README.md)
 
@@ -188,7 +187,7 @@ __Usage:__
 
 ### Bare_metal_solution.list_network_usage
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_network_usage.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_network_usage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_network_usage.js,samples/README.md)
 
@@ -205,7 +204,7 @@ __Usage:__
 
 ### Bare_metal_solution.list_networks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_networks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_networks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_networks.js,samples/README.md)
 
@@ -222,7 +221,7 @@ __Usage:__
 
 ### Bare_metal_solution.list_nfs_shares
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_nfs_shares.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_nfs_shares.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_nfs_shares.js,samples/README.md)
 
@@ -239,7 +238,7 @@ __Usage:__
 
 ### Bare_metal_solution.list_volumes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_volumes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_volumes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.list_volumes.js,samples/README.md)
 
@@ -256,7 +255,7 @@ __Usage:__
 
 ### Bare_metal_solution.reset_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.reset_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.reset_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.reset_instance.js,samples/README.md)
 
@@ -273,7 +272,7 @@ __Usage:__
 
 ### Bare_metal_solution.resize_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.resize_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.resize_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.resize_volume.js,samples/README.md)
 
@@ -290,7 +289,7 @@ __Usage:__
 
 ### Bare_metal_solution.start_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.start_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.start_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.start_instance.js,samples/README.md)
 
@@ -307,7 +306,7 @@ __Usage:__
 
 ### Bare_metal_solution.stop_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.stop_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.stop_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.stop_instance.js,samples/README.md)
 
@@ -324,7 +323,7 @@ __Usage:__
 
 ### Bare_metal_solution.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_instance.js,samples/README.md)
 
@@ -341,7 +340,7 @@ __Usage:__
 
 ### Bare_metal_solution.update_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_network.js,samples/README.md)
 
@@ -358,7 +357,7 @@ __Usage:__
 
 ### Bare_metal_solution.update_nfs_share
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_nfs_share.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_nfs_share.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_nfs_share.js,samples/README.md)
 
@@ -375,7 +374,7 @@ __Usage:__
 
 ### Bare_metal_solution.update_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/generated/v2/bare_metal_solution.update_volume.js,samples/README.md)
 
@@ -392,7 +391,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-baremetalsolution/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/quickstart.js,samples/README.md)
 
@@ -400,23 +399,6 @@ __Usage:__
 
 
 `node packages/google-cloud-baremetalsolution/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-baremetalsolution/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-baremetalsolution/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-baremetalsolution/samples/test/quickstart.js`
 
 
 

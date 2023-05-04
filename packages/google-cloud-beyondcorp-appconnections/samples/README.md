@@ -19,7 +19,6 @@
   * [App_connections_service.resolve_app_connections](#app_connections_service.resolve_app_connections)
   * [App_connections_service.update_app_connection](#app_connections_service.update_app_connection)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -38,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### App_connections_service.create_app_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.create_app_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.create_app_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.create_app_connection.js,samples/README.md)
 
@@ -55,7 +54,7 @@ __Usage:__
 
 ### App_connections_service.delete_app_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.delete_app_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.delete_app_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.delete_app_connection.js,samples/README.md)
 
@@ -72,7 +71,7 @@ __Usage:__
 
 ### App_connections_service.get_app_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.get_app_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.get_app_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.get_app_connection.js,samples/README.md)
 
@@ -89,7 +88,7 @@ __Usage:__
 
 ### App_connections_service.list_app_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.list_app_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.list_app_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.list_app_connections.js,samples/README.md)
 
@@ -106,7 +105,7 @@ __Usage:__
 
 ### App_connections_service.resolve_app_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.resolve_app_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.resolve_app_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.resolve_app_connections.js,samples/README.md)
 
@@ -123,7 +122,7 @@ __Usage:__
 
 ### App_connections_service.update_app_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.update_app_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.update_app_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.update_app_connection.js,samples/README.md)
 
@@ -140,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js,samples/README.md)
 
@@ -148,23 +147,6 @@ __Usage:__
 
 
 `node packages/google-cloud-beyondcorp-appconnections/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-appconnections/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-beyondcorp-appconnections/samples/test/quickstart.js`
 
 
 

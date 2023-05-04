@@ -15,7 +15,6 @@
   * [Connection_service.list_connections](#connection_service.list_connections)
   * [Tether.egress](#tether.egress)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -34,7 +33,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Connection_service.list_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeconnect/samples/generated/v1/connection_service.list_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeconnect/samples/generated/v1/connection_service.list_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeconnect/samples/generated/v1/connection_service.list_connections.js,samples/README.md)
 
@@ -51,7 +50,7 @@ __Usage:__
 
 ### Tether.egress
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeconnect/samples/generated/v1/tether.egress.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeconnect/samples/generated/v1/tether.egress.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeconnect/samples/generated/v1/tether.egress.js,samples/README.md)
 
@@ -68,7 +67,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeconnect/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeconnect/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeconnect/samples/quickstart.js,samples/README.md)
 
@@ -76,23 +75,6 @@ __Usage:__
 
 
 `node packages/google-cloud-apigeeconnect/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeconnect/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeconnect/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-apigeeconnect/samples/test/quickstart.js`
 
 
 
