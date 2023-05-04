@@ -65,7 +65,6 @@
   * [Tag_values.test_iam_permissions](#tag_values.test_iam_permissions)
   * [Tag_values.update_tag_value](#tag_values.update_tag_value)
   * [Quickstart](#quickstart)
-  * [Sample.test](#sample.test)
 
 ## Before you begin
 
@@ -976,23 +975,6 @@ __Usage:__
 
 
 `node packages/google-cloud-resourcemanager/samples/quickstart.js`
-
-
------
-
-
-
-
-### Sample.test
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/test/sample.test.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-resourcemanager/samples/test/sample.test.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-resourcemanager/samples/test/sample.test.js`
 
 
 
