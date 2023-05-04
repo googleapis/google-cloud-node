@@ -4,6 +4,40 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "869218ffb438d90c3d6cb5e4566d7ad2d201020e",
+          "message": "[container] support fleet registration via cluster update",
+          "issues": [
+            "4235"
+          ]
+        }
+      ],
+      "version": "4.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "cf2e1f61-c0e0-4cbf-a2be-bfc9bc26a072",
+      "createTime": "2023-05-04T19:02:19.519Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2421e933f19af7edd6d250a5e30f75b832029cd2",
+          "message": "[tpu] restrict the visibility of an API",
+          "issues": [
+            "4234"
+          ]
+        }
+      ],
+      "version": "2.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "c92dcbc7-78be-4a55-a464-6dc166121a28",
+      "createTime": "2023-05-04T19:02:19.515Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "d8520421c0d4c306d8a0d2cf8bf94186d6a27a6b",
           "message": "Fix sample links in README",
@@ -9236,5 +9270,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-04T18:01:19.725Z"
+  "updateTime": "2023-05-04T19:02:19.519Z"
 }
