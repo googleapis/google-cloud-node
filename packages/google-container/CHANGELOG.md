@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.9.0...container-v4.10.0) (2023-05-04)
+
+
+### Features
+
+* [container] support fleet registration via cluster update ([#4235](https://github.com/googleapis/google-cloud-node/issues/4235)) ([869218f](https://github.com/googleapis/google-cloud-node/commit/869218ffb438d90c3d6cb5e4566d7ad2d201020e))
+
 ## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v4.8.0...container-v4.9.0) (2023-04-24)
 
 
