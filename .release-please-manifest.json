@@ -137,5 +137,5 @@
   "packages/google-cloud-alloydb": "0.1.1",
   "packages/google-cloud-workstations": "0.1.1",
   "packages/google-cloud-confidentialcomputing": "0.1.0",
-  "packages/google-ai-generativelanguage": "0.1.0"
+  "packages/google-ai-generativelanguage": "0.1.1"
 }
