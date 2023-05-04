@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START dataplex_v1_generated_DataScanService_GetDataScanJob_async]
+  // [START dataplex_v1_generated_DataplexService_RunTask_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the DataScanJob:
-   *  `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
-   *  where `project` refers to a *project_id* or *project_number* and
-   *  `location_id` refers to a GCP region.
+   *  Required. The resource name of the task:
+   *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
-   */
-  // const view = {}
 
   // Imports the Dataplex library
-  const {DataScanServiceClient} = require('@google-cloud/dataplex').v1;
+  const {DataplexServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new DataScanServiceClient();
+  const dataplexClient = new DataplexServiceClient();
 
-  async function callGetDataScanJob() {
+  async function callRunTask() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataplexClient.getDataScanJob(request);
+    const response = await dataplexClient.runTask(request);
     console.log(response);
   }
 
-  callGetDataScanJob();
-  // [END dataplex_v1_generated_DataScanService_GetDataScanJob_async]
+  callRunTask();
+  // [END dataplex_v1_generated_DataplexService_RunTask_async]
 }
 
 process.on('unhandledRejection', err => {

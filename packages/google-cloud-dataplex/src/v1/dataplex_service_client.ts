@@ -692,6 +692,7 @@ export class DataplexServiceClient {
       'listTasks',
       'getTask',
       'listJobs',
+      'runTask',
       'getJob',
       'cancelJob',
       'createEnvironment',
@@ -1121,6 +1122,90 @@ export class DataplexServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getTask(request, options, callback);
+  }
+  /**
+   * Run an on demand execution of a Task.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the task:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.RunTaskResponse | RunTaskResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.run_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_RunTask_async
+   */
+  runTask(
+    request?: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  runTask(
+    request: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runTask(
+    request: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runTask(
+    request?: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IRunTaskResponse,
+          protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.runTask(request, options, callback);
   }
   /**
    * Get job resource.
