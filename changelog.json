@@ -4,6 +4,108 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "cfaa0530fdb35bdbcd52a04b4b9fb30946572449",
+          "message": "[talent] change timeout settings for SearchJobsForAlert",
+          "issues": [
+            "4227"
+          ]
+        }
+      ],
+      "version": "5.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "8c707900-dd74-492e-b6db-81ad442ef6e4",
+      "createTime": "2023-05-04T06:19:34.845Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b1b4e29f09759a8161c4e26473333ec729fa5165",
+          "message": "[run] Adds support for Startup CPU Boost (GA)",
+          "issues": [
+            "4220"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "10a34898-3bee-46d2-b1b0-764b4b469dba",
+      "createTime": "2023-05-04T06:19:34.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "454fa7943ddf664bc54a67e654d7e8a39ea55fed",
+          "message": "[discoveryengine] add document purge API",
+          "issues": [
+            "4219"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "2d5225d6-5b5f-489a-a9eb-7d40d6c1c904",
+      "createTime": "2023-05-04T06:19:34.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "840390b4fdad779617572db6ce54922cb894e667",
+          "message": "[deploy] added support for DeployArtifacts",
+          "issues": [
+            "4222"
+          ]
+        }
+      ],
+      "version": "2.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "d1ef1774-76ab-485b-995e-c4d8e9364926",
+      "createTime": "2023-05-04T06:19:34.834Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5268d24478595c01fe04215f50ece5558cfcdc46",
+          "message": "[dataplex] added new Dataplex APIs and new features for existing APIs (e.g. DataScans)",
+          "issues": [
+            "4230"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "5791d5d5-e1ec-41e8-8f48-e50d47d56142",
+      "createTime": "2023-05-04T06:19:34.829Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5367d25cdaa4e935e5c1e345622bf4cbd7131e1a",
+          "message": "Add model_garden_service.proto and publisher_model.proto to BUILD.bazel",
+          "issues": [
+            "4225"
+          ]
+        }
+      ],
+      "version": "2.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "745eabb6-4f17-4e93-b9e9-6d171ef21a52",
+      "createTime": "2023-05-04T06:19:34.822Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "8db807ae80a695bb1ad4fa290bc9a50ce29a8365",
           "message": "Add initial files for google.ai.generativelanguage.v1beta2",
@@ -9116,5 +9218,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-02T17:44:53.222Z"
+  "updateTime": "2023-05-04T06:19:34.845Z"
 }
