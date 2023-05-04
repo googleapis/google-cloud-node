@@ -64,54 +64,72 @@ npm install @google-ai/generativelanguage
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. The name of the model to use.
- *  Format: `name=models/{model}`.
+ *  Required. The model name to use with the format name=models/{model}.
  */
 // const model = 'abc123'
 /**
- *  Required. The structured textual input given to the model as a prompt.
- *  Given a
- *  prompt, the model will return what it predicts is the next message in the
- *  discussion.
+ *  Required. The free-form input text given to the model as a prompt.
+ *  Given a prompt, the model will generate a TextCompletion response it
+ *  predicts as the completion of the input text.
  */
-// const prompt = {}
+// const prompt = {
+//  text: 'abc123'
+// }
 /**
- *  Optional. Controls the randomness of the output.
- *  Values can range over `[0.0,1.0]`,
- *  inclusive. A value closer to `1.0` will produce responses that are more
- *  varied, while a value closer to `0.0` will typically result in
- *  less surprising responses from the model.
+ *  Controls the randomness of the output.
+ *  Note: The default value varies by model, see the `Model.temperature`
+ *  attribute of the `Model` returned the `getModel` function.
+ *  Values can range from 0.0,1.0,
+ *  inclusive. A value closer to 1.0 will produce responses that are more
+ *  varied and creative, while a value closer to 0.0 will typically result in
+ *  more straightforward responses from the model.
  */
 // const temperature = 1234
 /**
- *  Optional. The number of generated response messages to return.
- *  This value must be between
- *  `[1, 8]`, inclusive. If unset, this will default to `1`.
+ *  Number of generated responses to return.
+ *  This value must be between 1, 8, inclusive. If unset, this will default
+ *  to 1.
  */
 // const candidateCount = 1234
 /**
- *  Optional. The maximum cumulative probability of tokens to consider when
- *  sampling.
+ *  The maximum number of tokens to include in a candidate.
+ *  If unset, this will default to 64.
+ */
+// const maxOutputTokens = 1234
+/**
+ *  The maximum cumulative probability of tokens to consider when sampling.
  *  The model uses combined Top-k and nucleus sampling.
- *  Nucleus sampling considers the smallest set of tokens whose probability
- *  sum is at least `top_p`.
+ *  Tokens are sorted based on their assigned probabilities so that only the
+ *  most liekly tokens are considered. Top-k sampling directly limits the
+ *  maximum number of tokens to consider, while Nucleus sampling limits number
+ *  of tokens based on the cumulative probability.
+ *  Note: The default value varies by model, see the `Model.top_p`
+ *  attribute of the `Model` returned the `getModel` function.
  */
 // const topP = 1234
 /**
- *  Optional. The maximum number of tokens to consider when sampling.
+ *  The maximum number of tokens to consider when sampling.
  *  The model uses combined Top-k and nucleus sampling.
  *  Top-k sampling considers the set of `top_k` most probable tokens.
+ *  Defaults to 40.
+ *  Note: The default value varies by model, see the `Model.top_k`
+ *  attribute of the `Model` returned the `getModel` function.
  */
 // const topK = 1234
+/**
+ *  The set of character sequences (up to 5) that will stop output generation.
+ *  If specified, the API will stop at the first appearance of a stop
+ *  sequence. The stop sequence will not be included as part of the response.
+ */
+// const stopSequences = 'abc123'
 
 // Imports the Generativelanguage library
-const {DiscussServiceClient} =
-  require('@google-ai/generativelanguage').v1beta2;
+const {TextServiceClient} = require('@google-ai/generativelanguage').v1beta2;
 
 // Instantiates a client
-const generativelanguageClient = new DiscussServiceClient();
+const generativelanguageClient = new TextServiceClient();
 
-async function callGenerateMessage() {
+async function callGenerateText() {
   // Construct request
   const request = {
     model,
@@ -119,11 +137,11 @@ async function callGenerateMessage() {
   };
 
   // Run request
-  const response = await generativelanguageClient.generateMessage(request);
+  const response = await generativelanguageClient.generateText(request);
   console.log(response);
 }
 
-callGenerateMessage();
+callGenerateText();
 
 ```
 
@@ -135,14 +153,13 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Discuss_service.count_message_tokens | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Discuss_service.generate_message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Model_service.get_model | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Model_service.list_models | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Text_service.embed_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Text_service.generate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/quickstart.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/test/quickstart.js,googleapis/google-cloud-node/packages/google-ai-generativelanguage/samples/README.md) |
+| Discuss_service.count_message_tokens | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.count_message_tokens.js,packages/google-ai-generativelanguage/samples/README.md) |
+| Discuss_service.generate_message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/discuss_service.generate_message.js,packages/google-ai-generativelanguage/samples/README.md) |
+| Model_service.get_model | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.get_model.js,packages/google-ai-generativelanguage/samples/README.md) |
+| Model_service.list_models | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/model_service.list_models.js,packages/google-ai-generativelanguage/samples/README.md) |
+| Text_service.embed_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.embed_text.js,packages/google-ai-generativelanguage/samples/README.md) |
+| Text_service.generate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta2/text_service.generate_text.js,packages/google-ai-generativelanguage/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/quickstart.js,packages/google-ai-generativelanguage/samples/README.md) |
 
 
 
