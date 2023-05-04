@@ -6097,6 +6097,9 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
+                /** ClusterUpdate desiredFleet */
+                desiredFleet?: (google.container.v1.IFleet|null);
+
                 /** ClusterUpdate desiredStackType */
                 desiredStackType?: (google.container.v1.StackType|keyof typeof google.container.v1.StackType|null);
 
@@ -6232,6 +6235,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate desiredFleet. */
+                public desiredFleet?: (google.container.v1.IFleet|null);
 
                 /** ClusterUpdate desiredStackType. */
                 public desiredStackType: (google.container.v1.StackType|keyof typeof google.container.v1.StackType);
