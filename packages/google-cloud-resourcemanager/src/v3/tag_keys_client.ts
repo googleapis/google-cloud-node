@@ -1334,8 +1334,9 @@ export class TagKeysClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the new TagKey's parent.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The resource name of the TagKey's parent.
+   *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+   *   `projects/{project_number}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of TagKeys to return in the response. The
    *   server allows a maximum of 300 TagKeys to return. If unspecified, the
@@ -1432,8 +1433,9 @@ export class TagKeysClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the new TagKey's parent.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The resource name of the TagKey's parent.
+   *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+   *   `projects/{project_number}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of TagKeys to return in the response. The
    *   server allows a maximum of 300 TagKeys to return. If unspecified, the
@@ -1478,8 +1480,9 @@ export class TagKeysClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the new TagKey's parent.
-   *   Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+   *   Required. The resource name of the TagKey's parent.
+   *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+   *   `projects/{project_number}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of TagKeys to return in the response. The
    *   server allows a maximum of 300 TagKeys to return. If unspecified, the
