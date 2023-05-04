@@ -19,7 +19,6 @@
   * [Text_service.embed_text](#text_service.embed_text)
   * [Text_service.generate_text](#text_service.generate_text)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -148,23 +147,6 @@ __Usage:__
 
 
 `node packages/google-ai-generativelanguage/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-ai-generativelanguage/samples/test/quickstart.js`
 
 
 
