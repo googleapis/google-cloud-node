@@ -16,7 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const storageinsights = require('@google-cloud/storageinsights');
 
-module.exports = {
-  ...require('gts/.prettierrc.json')
+function main() {
+  const storageInsightsClient = new storageinsights.StorageInsightsClient();
 }
+
+main();
