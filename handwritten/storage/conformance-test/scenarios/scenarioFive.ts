@@ -18,8 +18,9 @@ import {executeScenario, RetryTestCase} from '../conformanceCommon';
 import * as assert from 'assert';
 
 const SCENARIO_NUMBER_TO_TEST = 5;
-const retryTestCase: RetryTestCase | undefined =
-  testFile.retryStrategyTests.find(test => test.id === SCENARIO_NUMBER_TO_TEST);
+const retryTestCase: RetryTestCase | undefined = testFile.retryTests.find(
+  test => test.id === SCENARIO_NUMBER_TO_TEST
+);
 
 describe(`Scenario ${SCENARIO_NUMBER_TO_TEST}`, () => {
   assert(retryTestCase);

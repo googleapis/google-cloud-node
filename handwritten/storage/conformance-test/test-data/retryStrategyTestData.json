@@ -1,5 +1,5 @@
 {
-  "retryStrategyTests": [
+  "retryTests": [
     {
       "id": 1,
       "description": "always_idempotent",
@@ -130,7 +130,7 @@
     },
     {
       "id": 5,
-      "description": "non_retryable_errors",
+      "description": "non-retryable errors",
       "cases": [
         {
           "instructions": ["return-400"]
@@ -246,6 +246,9 @@
       "cases": [
         {
           "instructions": ["return-reset-connection", "return-503"]
+        },
+        {
+          "instructions": ["return-408"]
         },
         {
           "instructions": ["return-503-after-256K"]
