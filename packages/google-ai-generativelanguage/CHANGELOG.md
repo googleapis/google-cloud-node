@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v0.1.0...generativelanguage-v0.1.1) (2023-05-04)
+
+
+### Bug Fixes
+
+* **docs:** Fix sample links in README ([#4236](https://github.com/googleapis/google-cloud-node/issues/4236)) ([d852042](https://github.com/googleapis/google-cloud-node/commit/d8520421c0d4c306d8a0d2cf8bf94186d6a27a6b))
+
 ## 0.1.0 (2023-05-02)
 
 

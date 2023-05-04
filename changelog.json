@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "d8520421c0d4c306d8a0d2cf8bf94186d6a27a6b",
+          "message": "Fix sample links in README",
+          "issues": [
+            "4236"
+          ],
+          "scope": "docs"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "b92dca26-b078-416d-90f9-e2b524246061",
+      "createTime": "2023-05-04T18:01:19.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "cfaa0530fdb35bdbcd52a04b4b9fb30946572449",
           "message": "[talent] change timeout settings for SearchJobsForAlert",
           "issues": [
@@ -9218,5 +9236,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-04T06:19:34.845Z"
+  "updateTime": "2023-05-04T18:01:19.725Z"
 }
