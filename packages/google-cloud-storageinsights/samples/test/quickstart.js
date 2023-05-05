@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/storageinsights').v1;
-const storageinsightsClient = new Client();
+const {StorageInsightsClient} = require('@google-cloud/storageinsights').v1;
+const storageinsightsClient = new StorageInsightsClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
