@@ -20104,6 +20104,11 @@
                     },
                     "Examples": {
                       "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "exampleGcsSource"
+                          ]
+                        },
                         "config": {
                           "oneof": [
                             "nearestNeighborSearchConfig",
@@ -20112,6 +20117,10 @@
                         }
                       },
                       "fields": {
+                        "exampleGcsSource": {
+                          "type": "ExampleGcsSource",
+                          "id": 5
+                        },
                         "nearestNeighborSearchConfig": {
                           "type": "google.protobuf.Value",
                           "id": 2
@@ -20127,6 +20136,28 @@
                         "neighborCount": {
                           "type": "int32",
                           "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ExampleGcsSource": {
+                          "fields": {
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 1
+                            },
+                            "gcsSource": {
+                              "type": "GcsSource",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "JSONL": 1
+                              }
+                            }
+                          }
                         }
                       }
                     },
