@@ -6500,6 +6500,10 @@
                     "gkeBackupAgentConfig": {
                       "type": "GkeBackupAgentConfig",
                       "id": 16
+                    },
+                    "gcsFuseCsiDriverConfig": {
+                      "type": "GcsFuseCsiDriverConfig",
+                      "id": 17
                     }
                   }
                 },
@@ -6579,6 +6583,14 @@
                   }
                 },
                 "GcpFilestoreCsiDriverConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "GcsFuseCsiDriverConfig": {
                   "fields": {
                     "enabled": {
                       "type": "bool",
@@ -7604,6 +7616,10 @@
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 116
+                    },
+                    "desiredFleet": {
+                      "type": "Fleet",
+                      "id": 117
                     },
                     "desiredStackType": {
                       "type": "StackType",
