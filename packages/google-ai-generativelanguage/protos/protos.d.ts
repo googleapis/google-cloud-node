@@ -463,6 +463,9 @@ export namespace google {
 
                     /** GenerateMessageResponse messages */
                     messages?: (google.ai.generativelanguage.v1beta2.IMessage[]|null);
+
+                    /** GenerateMessageResponse filters */
+                    filters?: (google.ai.generativelanguage.v1beta2.IContentFilter[]|null);
                 }
 
                 /** Represents a GenerateMessageResponse. */
@@ -479,6 +482,9 @@ export namespace google {
 
                     /** GenerateMessageResponse messages. */
                     public messages: google.ai.generativelanguage.v1beta2.IMessage[];
+
+                    /** GenerateMessageResponse filters. */
+                    public filters: google.ai.generativelanguage.v1beta2.IContentFilter[];
 
                     /**
                      * Creates a new GenerateMessageResponse instance using the specified properties.
@@ -1080,6 +1086,466 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** HarmCategory enum. */
+                enum HarmCategory {
+                    HARM_CATEGORY_UNSPECIFIED = 0,
+                    HARM_CATEGORY_DEROGATORY = 1,
+                    HARM_CATEGORY_TOXICITY = 2,
+                    HARM_CATEGORY_VIOLENCE = 3,
+                    HARM_CATEGORY_SEXUAL = 4,
+                    HARM_CATEGORY_MEDICAL = 5,
+                    HARM_CATEGORY_DANGEROUS = 6
+                }
+
+                /** Properties of a ContentFilter. */
+                interface IContentFilter {
+
+                    /** ContentFilter reason */
+                    reason?: (google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason|keyof typeof google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason|null);
+
+                    /** ContentFilter message */
+                    message?: (string|null);
+                }
+
+                /** Represents a ContentFilter. */
+                class ContentFilter implements IContentFilter {
+
+                    /**
+                     * Constructs a new ContentFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta2.IContentFilter);
+
+                    /** ContentFilter reason. */
+                    public reason: (google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason|keyof typeof google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason);
+
+                    /** ContentFilter message. */
+                    public message?: (string|null);
+
+                    /** ContentFilter _message. */
+                    public _message?: "message";
+
+                    /**
+                     * Creates a new ContentFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContentFilter instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta2.IContentFilter): google.ai.generativelanguage.v1beta2.ContentFilter;
+
+                    /**
+                     * Encodes the specified ContentFilter message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.ContentFilter.verify|verify} messages.
+                     * @param message ContentFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta2.IContentFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContentFilter message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.ContentFilter.verify|verify} messages.
+                     * @param message ContentFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta2.IContentFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContentFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContentFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta2.ContentFilter;
+
+                    /**
+                     * Decodes a ContentFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContentFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta2.ContentFilter;
+
+                    /**
+                     * Verifies a ContentFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContentFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContentFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta2.ContentFilter;
+
+                    /**
+                     * Creates a plain object from a ContentFilter message. Also converts values to other types if specified.
+                     * @param message ContentFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta2.ContentFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContentFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContentFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ContentFilter {
+
+                    /** BlockedReason enum. */
+                    enum BlockedReason {
+                        BLOCKED_REASON_UNSPECIFIED = 0,
+                        SAFETY = 1,
+                        OTHER = 2
+                    }
+                }
+
+                /** Properties of a SafetyFeedback. */
+                interface ISafetyFeedback {
+
+                    /** SafetyFeedback rating */
+                    rating?: (google.ai.generativelanguage.v1beta2.ISafetyRating|null);
+
+                    /** SafetyFeedback setting */
+                    setting?: (google.ai.generativelanguage.v1beta2.ISafetySetting|null);
+                }
+
+                /** Represents a SafetyFeedback. */
+                class SafetyFeedback implements ISafetyFeedback {
+
+                    /**
+                     * Constructs a new SafetyFeedback.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta2.ISafetyFeedback);
+
+                    /** SafetyFeedback rating. */
+                    public rating?: (google.ai.generativelanguage.v1beta2.ISafetyRating|null);
+
+                    /** SafetyFeedback setting. */
+                    public setting?: (google.ai.generativelanguage.v1beta2.ISafetySetting|null);
+
+                    /**
+                     * Creates a new SafetyFeedback instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SafetyFeedback instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta2.ISafetyFeedback): google.ai.generativelanguage.v1beta2.SafetyFeedback;
+
+                    /**
+                     * Encodes the specified SafetyFeedback message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyFeedback.verify|verify} messages.
+                     * @param message SafetyFeedback message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta2.ISafetyFeedback, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SafetyFeedback message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyFeedback.verify|verify} messages.
+                     * @param message SafetyFeedback message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta2.ISafetyFeedback, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SafetyFeedback message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SafetyFeedback
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta2.SafetyFeedback;
+
+                    /**
+                     * Decodes a SafetyFeedback message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SafetyFeedback
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta2.SafetyFeedback;
+
+                    /**
+                     * Verifies a SafetyFeedback message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SafetyFeedback message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SafetyFeedback
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta2.SafetyFeedback;
+
+                    /**
+                     * Creates a plain object from a SafetyFeedback message. Also converts values to other types if specified.
+                     * @param message SafetyFeedback
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta2.SafetyFeedback, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SafetyFeedback to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SafetyFeedback
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SafetyRating. */
+                interface ISafetyRating {
+
+                    /** SafetyRating category */
+                    category?: (google.ai.generativelanguage.v1beta2.HarmCategory|keyof typeof google.ai.generativelanguage.v1beta2.HarmCategory|null);
+
+                    /** SafetyRating probability */
+                    probability?: (google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability|keyof typeof google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability|null);
+                }
+
+                /** Represents a SafetyRating. */
+                class SafetyRating implements ISafetyRating {
+
+                    /**
+                     * Constructs a new SafetyRating.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta2.ISafetyRating);
+
+                    /** SafetyRating category. */
+                    public category: (google.ai.generativelanguage.v1beta2.HarmCategory|keyof typeof google.ai.generativelanguage.v1beta2.HarmCategory);
+
+                    /** SafetyRating probability. */
+                    public probability: (google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability|keyof typeof google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability);
+
+                    /**
+                     * Creates a new SafetyRating instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SafetyRating instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta2.ISafetyRating): google.ai.generativelanguage.v1beta2.SafetyRating;
+
+                    /**
+                     * Encodes the specified SafetyRating message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyRating.verify|verify} messages.
+                     * @param message SafetyRating message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta2.ISafetyRating, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SafetyRating message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyRating.verify|verify} messages.
+                     * @param message SafetyRating message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta2.ISafetyRating, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SafetyRating message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SafetyRating
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta2.SafetyRating;
+
+                    /**
+                     * Decodes a SafetyRating message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SafetyRating
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta2.SafetyRating;
+
+                    /**
+                     * Verifies a SafetyRating message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SafetyRating message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SafetyRating
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta2.SafetyRating;
+
+                    /**
+                     * Creates a plain object from a SafetyRating message. Also converts values to other types if specified.
+                     * @param message SafetyRating
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta2.SafetyRating, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SafetyRating to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SafetyRating
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SafetyRating {
+
+                    /** HarmProbability enum. */
+                    enum HarmProbability {
+                        HARM_PROBABILITY_UNSPECIFIED = 0,
+                        NEGLIGIBLE = 1,
+                        LOW = 2,
+                        MEDIUM = 3,
+                        HIGH = 4
+                    }
+                }
+
+                /** Properties of a SafetySetting. */
+                interface ISafetySetting {
+
+                    /** SafetySetting category */
+                    category?: (google.ai.generativelanguage.v1beta2.HarmCategory|keyof typeof google.ai.generativelanguage.v1beta2.HarmCategory|null);
+
+                    /** SafetySetting threshold */
+                    threshold?: (google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold|keyof typeof google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold|null);
+                }
+
+                /** Represents a SafetySetting. */
+                class SafetySetting implements ISafetySetting {
+
+                    /**
+                     * Constructs a new SafetySetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta2.ISafetySetting);
+
+                    /** SafetySetting category. */
+                    public category: (google.ai.generativelanguage.v1beta2.HarmCategory|keyof typeof google.ai.generativelanguage.v1beta2.HarmCategory);
+
+                    /** SafetySetting threshold. */
+                    public threshold: (google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold|keyof typeof google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold);
+
+                    /**
+                     * Creates a new SafetySetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SafetySetting instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta2.ISafetySetting): google.ai.generativelanguage.v1beta2.SafetySetting;
+
+                    /**
+                     * Encodes the specified SafetySetting message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta2.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta2.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta2.SafetySetting;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta2.SafetySetting;
+
+                    /**
+                     * Verifies a SafetySetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SafetySetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta2.SafetySetting;
+
+                    /**
+                     * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                     * @param message SafetySetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta2.SafetySetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SafetySetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SafetySetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SafetySetting {
+
+                    /** HarmBlockThreshold enum. */
+                    enum HarmBlockThreshold {
+                        HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 1,
+                        BLOCK_MEDIUM_AND_ABOVE = 2,
+                        BLOCK_ONLY_HIGH = 3,
+                        BLOCK_NONE = 4
+                    }
                 }
 
                 /** Properties of a Model. */
@@ -1707,6 +2173,9 @@ export namespace google {
                     /** GenerateTextRequest topK */
                     topK?: (number|null);
 
+                    /** GenerateTextRequest safetySettings */
+                    safetySettings?: (google.ai.generativelanguage.v1beta2.ISafetySetting[]|null);
+
                     /** GenerateTextRequest stopSequences */
                     stopSequences?: (string[]|null);
                 }
@@ -1740,6 +2209,9 @@ export namespace google {
 
                     /** GenerateTextRequest topK. */
                     public topK?: (number|null);
+
+                    /** GenerateTextRequest safetySettings. */
+                    public safetySettings: google.ai.generativelanguage.v1beta2.ISafetySetting[];
 
                     /** GenerateTextRequest stopSequences. */
                     public stopSequences: string[];
@@ -1842,6 +2314,12 @@ export namespace google {
 
                     /** GenerateTextResponse candidates */
                     candidates?: (google.ai.generativelanguage.v1beta2.ITextCompletion[]|null);
+
+                    /** GenerateTextResponse filters */
+                    filters?: (google.ai.generativelanguage.v1beta2.IContentFilter[]|null);
+
+                    /** GenerateTextResponse safetyFeedback */
+                    safetyFeedback?: (google.ai.generativelanguage.v1beta2.ISafetyFeedback[]|null);
                 }
 
                 /** Represents a GenerateTextResponse. */
@@ -1855,6 +2333,12 @@ export namespace google {
 
                     /** GenerateTextResponse candidates. */
                     public candidates: google.ai.generativelanguage.v1beta2.ITextCompletion[];
+
+                    /** GenerateTextResponse filters. */
+                    public filters: google.ai.generativelanguage.v1beta2.IContentFilter[];
+
+                    /** GenerateTextResponse safetyFeedback. */
+                    public safetyFeedback: google.ai.generativelanguage.v1beta2.ISafetyFeedback[];
 
                     /**
                      * Creates a new GenerateTextResponse instance using the specified properties.
@@ -2036,6 +2520,12 @@ export namespace google {
 
                     /** TextCompletion output */
                     output?: (string|null);
+
+                    /** TextCompletion safetyRatings */
+                    safetyRatings?: (google.ai.generativelanguage.v1beta2.ISafetyRating[]|null);
+
+                    /** TextCompletion citationMetadata */
+                    citationMetadata?: (google.ai.generativelanguage.v1beta2.ICitationMetadata|null);
                 }
 
                 /** Represents a TextCompletion. */
@@ -2049,6 +2539,15 @@ export namespace google {
 
                     /** TextCompletion output. */
                     public output: string;
+
+                    /** TextCompletion safetyRatings. */
+                    public safetyRatings: google.ai.generativelanguage.v1beta2.ISafetyRating[];
+
+                    /** TextCompletion citationMetadata. */
+                    public citationMetadata?: (google.ai.generativelanguage.v1beta2.ICitationMetadata|null);
+
+                    /** TextCompletion _citationMetadata. */
+                    public _citationMetadata?: "citationMetadata";
 
                     /**
                      * Creates a new TextCompletion instance using the specified properties.

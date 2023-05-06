@@ -3,5 +3,6 @@
   "../../protos/google/ai/generativelanguage/v1beta2/discuss_service.proto",
   "../../protos/google/ai/generativelanguage/v1beta2/model.proto",
   "../../protos/google/ai/generativelanguage/v1beta2/model_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta2/safety.proto",
   "../../protos/google/ai/generativelanguage/v1beta2/text_service.proto"
 ]
