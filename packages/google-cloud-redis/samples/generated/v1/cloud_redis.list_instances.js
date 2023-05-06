@@ -45,7 +45,8 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  The `next_page_token` value returned from a previous
-   *  ListInstances google.cloud.redis.v1.CloudRedis.ListInstances  request, if any.
+   *  ListInstances google.cloud.redis.v1.CloudRedis.ListInstances  request, if
+   *  any.
    */
   // const pageToken = 'abc123'
 

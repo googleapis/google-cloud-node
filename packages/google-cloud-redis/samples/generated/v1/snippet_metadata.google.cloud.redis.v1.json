@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-redis",
-        "version": "3.2.0",
+        "version": "3.2.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -458,7 +458,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
