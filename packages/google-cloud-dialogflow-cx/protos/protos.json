@@ -11263,7 +11263,8 @@
                                 "INTENT": 1,
                                 "PAGE": 2,
                                 "PARAMETERS": 3,
-                                "UTTERANCE": 4
+                                "UTTERANCE": 4,
+                                "FLOW": 5
                               }
                             }
                           }
@@ -12372,6 +12373,86 @@
                             "enablePartialResponse": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "enableDebuggingInfo": {
+                              "type": "bool",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "CloudConversationDebuggingInfo": {
+                          "fields": {
+                            "audioDataChunks": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "resultEndTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "firstAudioDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 3
+                            },
+                            "singleUtterance": {
+                              "type": "bool",
+                              "id": 5
+                            },
+                            "speechPartialResultsEndTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 6
+                            },
+                            "speechFinalResultsEndTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 7
+                            },
+                            "partialResponses": {
+                              "type": "int32",
+                              "id": 8
+                            },
+                            "speakerIdPassiveLatencyMsOffset": {
+                              "type": "int32",
+                              "id": 9
+                            },
+                            "bargeinEventTriggered": {
+                              "type": "bool",
+                              "id": 10
+                            },
+                            "speechSingleUtterance": {
+                              "type": "bool",
+                              "id": 11
+                            },
+                            "dtmfPartialResultsTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 12
+                            },
+                            "dtmfFinalResultsTimes": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 13
+                            },
+                            "singleUtteranceEndTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 14
+                            },
+                            "noSpeechTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 15
+                            },
+                            "isInputText": {
+                              "type": "bool",
+                              "id": 16
+                            },
+                            "clientHalfCloseTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 17
+                            },
+                            "clientHalfCloseStreamingTimeOffset": {
+                              "type": "google.protobuf.Duration",
+                              "id": 18
                             }
                           }
                         },
@@ -12392,6 +12473,10 @@
                             "detectIntentResponse": {
                               "type": "DetectIntentResponse",
                               "id": 2
+                            },
+                            "debuggingInfo": {
+                              "type": "CloudConversationDebuggingInfo",
+                              "id": 4
                             }
                           }
                         },
@@ -13643,7 +13728,8 @@
                                 "text",
                                 "triggerIntent",
                                 "transcript",
-                                "triggerEvent"
+                                "triggerEvent",
+                                "dtmfDigits"
                               ]
                             }
                           },
@@ -13670,6 +13756,10 @@
                             "triggerEvent": {
                               "type": "string",
                               "id": 14
+                            },
+                            "dtmfDigits": {
+                              "type": "string",
+                              "id": 17
                             },
                             "languageCode": {
                               "type": "string",
