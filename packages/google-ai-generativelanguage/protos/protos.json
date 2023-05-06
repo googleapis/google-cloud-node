@@ -212,6 +212,11 @@
                           "rule": "repeated",
                           "type": "Message",
                           "id": 2
+                        },
+                        "filters": {
+                          "rule": "repeated",
+                          "type": "ContentFilter",
+                          "id": 3
                         }
                       }
                     },
@@ -311,6 +316,118 @@
                         "tokenCount": {
                           "type": "int32",
                           "id": 1
+                        }
+                      }
+                    },
+                    "HarmCategory": {
+                      "values": {
+                        "HARM_CATEGORY_UNSPECIFIED": 0,
+                        "HARM_CATEGORY_DEROGATORY": 1,
+                        "HARM_CATEGORY_TOXICITY": 2,
+                        "HARM_CATEGORY_VIOLENCE": 3,
+                        "HARM_CATEGORY_SEXUAL": 4,
+                        "HARM_CATEGORY_MEDICAL": 5,
+                        "HARM_CATEGORY_DANGEROUS": 6
+                      }
+                    },
+                    "ContentFilter": {
+                      "oneofs": {
+                        "_message": {
+                          "oneof": [
+                            "message"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "reason": {
+                          "type": "BlockedReason",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BlockedReason": {
+                          "values": {
+                            "BLOCKED_REASON_UNSPECIFIED": 0,
+                            "SAFETY": 1,
+                            "OTHER": 2
+                          }
+                        }
+                      }
+                    },
+                    "SafetyFeedback": {
+                      "fields": {
+                        "rating": {
+                          "type": "SafetyRating",
+                          "id": 1
+                        },
+                        "setting": {
+                          "type": "SafetySetting",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SafetyRating": {
+                      "fields": {
+                        "category": {
+                          "type": "HarmCategory",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "probability": {
+                          "type": "HarmProbability",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HarmProbability": {
+                          "values": {
+                            "HARM_PROBABILITY_UNSPECIFIED": 0,
+                            "NEGLIGIBLE": 1,
+                            "LOW": 2,
+                            "MEDIUM": 3,
+                            "HIGH": 4
+                          }
+                        }
+                      }
+                    },
+                    "SafetySetting": {
+                      "fields": {
+                        "category": {
+                          "type": "HarmCategory",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "threshold": {
+                          "type": "HarmBlockThreshold",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HarmBlockThreshold": {
+                          "values": {
+                            "HARM_BLOCK_THRESHOLD_UNSPECIFIED": 0,
+                            "BLOCK_LOW_AND_ABOVE": 1,
+                            "BLOCK_MEDIUM_AND_ABOVE": 2,
+                            "BLOCK_ONLY_HIGH": 3,
+                            "BLOCK_NONE": 4
+                          }
                         }
                       }
                     },
@@ -608,6 +725,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "safetySettings": {
+                          "rule": "repeated",
+                          "type": "SafetySetting",
+                          "id": 8
+                        },
                         "stopSequences": {
                           "rule": "repeated",
                           "type": "string",
@@ -621,6 +743,16 @@
                           "rule": "repeated",
                           "type": "TextCompletion",
                           "id": 1
+                        },
+                        "filters": {
+                          "rule": "repeated",
+                          "type": "ContentFilter",
+                          "id": 3
+                        },
+                        "safetyFeedback": {
+                          "rule": "repeated",
+                          "type": "SafetyFeedback",
+                          "id": 4
                         }
                       }
                     },
@@ -636,12 +768,32 @@
                       }
                     },
                     "TextCompletion": {
+                      "oneofs": {
+                        "_citationMetadata": {
+                          "oneof": [
+                            "citationMetadata"
+                          ]
+                        }
+                      },
                       "fields": {
                         "output": {
                           "type": "string",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "safetyRatings": {
+                          "rule": "repeated",
+                          "type": "SafetyRating",
+                          "id": 2
+                        },
+                        "citationMetadata": {
+                          "type": "CitationMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
