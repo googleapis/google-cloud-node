@@ -65,6 +65,10 @@ function main(queryInput) {
    *  responses.
    */
   // const enablePartialResponse = true
+  /**
+   *  If true, `StreamingDetectIntentResponse.debugging_info` will get populated.
+   */
+  // const enableDebuggingInfo = true
 
   // Imports the Cx library
   const {SessionsClient} = require('@google-cloud/dialogflow-cx').v3;

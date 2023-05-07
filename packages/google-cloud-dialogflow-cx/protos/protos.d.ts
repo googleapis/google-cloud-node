@@ -13950,7 +13950,8 @@ export namespace google {
                             INTENT = 1,
                             PAGE = 2,
                             PARAMETERS = 3,
-                            UTTERANCE = 4
+                            UTTERANCE = 4,
+                            FLOW = 5
                         }
                     }
 
@@ -19078,6 +19079,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enablePartialResponse */
                         enablePartialResponse?: (boolean|null);
+
+                        /** StreamingDetectIntentRequest enableDebuggingInfo */
+                        enableDebuggingInfo?: (boolean|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -19103,6 +19107,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enablePartialResponse. */
                         public enablePartialResponse: boolean;
+
+                        /** StreamingDetectIntentRequest enableDebuggingInfo. */
+                        public enableDebuggingInfo: boolean;
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -19182,6 +19189,199 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CloudConversationDebuggingInfo. */
+                    interface ICloudConversationDebuggingInfo {
+
+                        /** CloudConversationDebuggingInfo audioDataChunks */
+                        audioDataChunks?: (number|null);
+
+                        /** CloudConversationDebuggingInfo resultEndTimeOffset */
+                        resultEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo firstAudioDuration */
+                        firstAudioDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo singleUtterance */
+                        singleUtterance?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo speechPartialResultsEndTimes */
+                        speechPartialResultsEndTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo speechFinalResultsEndTimes */
+                        speechFinalResultsEndTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo partialResponses */
+                        partialResponses?: (number|null);
+
+                        /** CloudConversationDebuggingInfo speakerIdPassiveLatencyMsOffset */
+                        speakerIdPassiveLatencyMsOffset?: (number|null);
+
+                        /** CloudConversationDebuggingInfo bargeinEventTriggered */
+                        bargeinEventTriggered?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo speechSingleUtterance */
+                        speechSingleUtterance?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo dtmfPartialResultsTimes */
+                        dtmfPartialResultsTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo dtmfFinalResultsTimes */
+                        dtmfFinalResultsTimes?: (google.protobuf.IDuration[]|null);
+
+                        /** CloudConversationDebuggingInfo singleUtteranceEndTimeOffset */
+                        singleUtteranceEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo noSpeechTimeout */
+                        noSpeechTimeout?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo isInputText */
+                        isInputText?: (boolean|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseTimeOffset */
+                        clientHalfCloseTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseStreamingTimeOffset */
+                        clientHalfCloseStreamingTimeOffset?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a CloudConversationDebuggingInfo. */
+                    class CloudConversationDebuggingInfo implements ICloudConversationDebuggingInfo {
+
+                        /**
+                         * Constructs a new CloudConversationDebuggingInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo);
+
+                        /** CloudConversationDebuggingInfo audioDataChunks. */
+                        public audioDataChunks: number;
+
+                        /** CloudConversationDebuggingInfo resultEndTimeOffset. */
+                        public resultEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo firstAudioDuration. */
+                        public firstAudioDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo singleUtterance. */
+                        public singleUtterance: boolean;
+
+                        /** CloudConversationDebuggingInfo speechPartialResultsEndTimes. */
+                        public speechPartialResultsEndTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo speechFinalResultsEndTimes. */
+                        public speechFinalResultsEndTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo partialResponses. */
+                        public partialResponses: number;
+
+                        /** CloudConversationDebuggingInfo speakerIdPassiveLatencyMsOffset. */
+                        public speakerIdPassiveLatencyMsOffset: number;
+
+                        /** CloudConversationDebuggingInfo bargeinEventTriggered. */
+                        public bargeinEventTriggered: boolean;
+
+                        /** CloudConversationDebuggingInfo speechSingleUtterance. */
+                        public speechSingleUtterance: boolean;
+
+                        /** CloudConversationDebuggingInfo dtmfPartialResultsTimes. */
+                        public dtmfPartialResultsTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo dtmfFinalResultsTimes. */
+                        public dtmfFinalResultsTimes: google.protobuf.IDuration[];
+
+                        /** CloudConversationDebuggingInfo singleUtteranceEndTimeOffset. */
+                        public singleUtteranceEndTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo noSpeechTimeout. */
+                        public noSpeechTimeout?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo isInputText. */
+                        public isInputText: boolean;
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseTimeOffset. */
+                        public clientHalfCloseTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /** CloudConversationDebuggingInfo clientHalfCloseStreamingTimeOffset. */
+                        public clientHalfCloseStreamingTimeOffset?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new CloudConversationDebuggingInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudConversationDebuggingInfo instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Encodes the specified CloudConversationDebuggingInfo message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo.verify|verify} messages.
+                         * @param message CloudConversationDebuggingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudConversationDebuggingInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo.verify|verify} messages.
+                         * @param message CloudConversationDebuggingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudConversationDebuggingInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudConversationDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Decodes a CloudConversationDebuggingInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudConversationDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Verifies a CloudConversationDebuggingInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudConversationDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudConversationDebuggingInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo;
+
+                        /**
+                         * Creates a plain object from a CloudConversationDebuggingInfo message. Also converts values to other types if specified.
+                         * @param message CloudConversationDebuggingInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudConversationDebuggingInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudConversationDebuggingInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a StreamingDetectIntentResponse. */
                     interface IStreamingDetectIntentResponse {
 
@@ -19190,6 +19390,9 @@ export namespace google {
 
                         /** StreamingDetectIntentResponse detectIntentResponse */
                         detectIntentResponse?: (google.cloud.dialogflow.cx.v3.IDetectIntentResponse|null);
+
+                        /** StreamingDetectIntentResponse debuggingInfo */
+                        debuggingInfo?: (google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo|null);
                     }
 
                     /** Represents a StreamingDetectIntentResponse. */
@@ -19206,6 +19409,9 @@ export namespace google {
 
                         /** StreamingDetectIntentResponse detectIntentResponse. */
                         public detectIntentResponse?: (google.cloud.dialogflow.cx.v3.IDetectIntentResponse|null);
+
+                        /** StreamingDetectIntentResponse debuggingInfo. */
+                        public debuggingInfo?: (google.cloud.dialogflow.cx.v3.ICloudConversationDebuggingInfo|null);
 
                         /** StreamingDetectIntentResponse response. */
                         public response?: ("recognitionResult"|"detectIntentResponse");
@@ -23986,6 +24192,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent */
                         triggerEvent?: (string|null);
 
+                        /** WebhookRequest dtmfDigits */
+                        dtmfDigits?: (string|null);
+
                         /** WebhookRequest languageCode */
                         languageCode?: (string|null);
 
@@ -24035,6 +24244,9 @@ export namespace google {
                         /** WebhookRequest triggerEvent. */
                         public triggerEvent?: (string|null);
 
+                        /** WebhookRequest dtmfDigits. */
+                        public dtmfDigits?: (string|null);
+
                         /** WebhookRequest languageCode. */
                         public languageCode: string;
 
@@ -24060,7 +24272,7 @@ export namespace google {
                         public sentimentAnalysisResult?: (google.cloud.dialogflow.cx.v3.WebhookRequest.ISentimentAnalysisResult|null);
 
                         /** WebhookRequest query. */
-                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent");
+                        public query?: ("text"|"triggerIntent"|"transcript"|"triggerEvent"|"dtmfDigits");
 
                         /**
                          * Creates a new WebhookRequest instance using the specified properties.

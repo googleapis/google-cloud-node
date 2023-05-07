@@ -2958,7 +2958,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -2985,6 +2985,10 @@
                     },
                     {
                         "name": "enable_partial_response",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "enable_debugging_info",
                         "type": "TYPE_BOOL"
                     }
                 ],
