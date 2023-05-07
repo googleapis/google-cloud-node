@@ -3356,6 +3356,9 @@ export namespace google {
 
                     /** CreatePrivateConnectionRequest requestId */
                     requestId?: (string|null);
+
+                    /** CreatePrivateConnectionRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a CreatePrivateConnectionRequest. */
@@ -3378,6 +3381,9 @@ export namespace google {
 
                     /** CreatePrivateConnectionRequest requestId. */
                     public requestId: string;
+
+                    /** CreatePrivateConnectionRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
@@ -6463,6 +6469,9 @@ export namespace google {
                     /** OracleSourceConfig maxConcurrentCdcTasks */
                     maxConcurrentCdcTasks?: (number|null);
 
+                    /** OracleSourceConfig maxConcurrentBackfillTasks */
+                    maxConcurrentBackfillTasks?: (number|null);
+
                     /** OracleSourceConfig dropLargeObjects */
                     dropLargeObjects?: (google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null);
 
@@ -6487,6 +6496,9 @@ export namespace google {
 
                     /** OracleSourceConfig maxConcurrentCdcTasks. */
                     public maxConcurrentCdcTasks: number;
+
+                    /** OracleSourceConfig maxConcurrentBackfillTasks. */
+                    public maxConcurrentBackfillTasks: number;
 
                     /** OracleSourceConfig dropLargeObjects. */
                     public dropLargeObjects?: (google.cloud.datastream.v1.OracleSourceConfig.IDropLargeObjects|null);
@@ -7216,6 +7228,9 @@ export namespace google {
 
                     /** PostgresqlSourceConfig publication */
                     publication?: (string|null);
+
+                    /** PostgresqlSourceConfig maxConcurrentBackfillTasks */
+                    maxConcurrentBackfillTasks?: (number|null);
                 }
 
                 /** Represents a PostgresqlSourceConfig. */
@@ -7238,6 +7253,9 @@ export namespace google {
 
                     /** PostgresqlSourceConfig publication. */
                     public publication: string;
+
+                    /** PostgresqlSourceConfig maxConcurrentBackfillTasks. */
+                    public maxConcurrentBackfillTasks: number;
 
                     /**
                      * Creates a new PostgresqlSourceConfig instance using the specified properties.
@@ -7764,6 +7782,9 @@ export namespace google {
 
                     /** MysqlSourceConfig maxConcurrentCdcTasks */
                     maxConcurrentCdcTasks?: (number|null);
+
+                    /** MysqlSourceConfig maxConcurrentBackfillTasks */
+                    maxConcurrentBackfillTasks?: (number|null);
                 }
 
                 /** Represents a MysqlSourceConfig. */
@@ -7783,6 +7804,9 @@ export namespace google {
 
                     /** MysqlSourceConfig maxConcurrentCdcTasks. */
                     public maxConcurrentCdcTasks: number;
+
+                    /** MysqlSourceConfig maxConcurrentBackfillTasks. */
+                    public maxConcurrentBackfillTasks: number;
 
                     /**
                      * Creates a new MysqlSourceConfig instance using the specified properties.

@@ -1208,6 +1208,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1968,6 +1975,10 @@
                           "type": "int32",
                           "id": 3
                         },
+                        "maxConcurrentBackfillTasks": {
+                          "type": "int32",
+                          "id": 4
+                        },
                         "dropLargeObjects": {
                           "type": "DropLargeObjects",
                           "id": 100
@@ -2071,7 +2082,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
                         "publication": {
@@ -2080,6 +2091,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "maxConcurrentBackfillTasks": {
+                          "type": "int32",
+                          "id": 5
                         }
                       }
                     },
@@ -2163,6 +2178,10 @@
                         "maxConcurrentCdcTasks": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "maxConcurrentBackfillTasks": {
+                          "type": "int32",
+                          "id": 4
                         }
                       }
                     },
