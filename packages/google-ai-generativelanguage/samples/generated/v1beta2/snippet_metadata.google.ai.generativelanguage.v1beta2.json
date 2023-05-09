@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-generativelanguage",
-        "version": "0.1.1",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -210,7 +210,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 107,
+                    "end": 119,
                     "type": "FULL"
                 }
             ],
@@ -246,6 +246,10 @@
                     {
                         "name": "top_k",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "safety_settings",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "stop_sequences",

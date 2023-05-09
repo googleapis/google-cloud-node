@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v0.1.1...generativelanguage-v0.2.0) (2023-05-06)
+
+
+### Features
+
+* [generativelanguage] Add safety settings ([#4248](https://github.com/googleapis/google-cloud-node/issues/4248)) ([76b2df7](https://github.com/googleapis/google-cloud-node/commit/76b2df71b44de5f1764749f8393f2a2cee68221e))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v0.1.0...generativelanguage-v0.1.1) (2023-05-04)
 
 

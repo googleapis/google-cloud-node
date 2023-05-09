@@ -116,7 +116,7 @@
   "packages/google-cloud-webrisk": "3.2.2",
   "packages/google-cloud-websecurityscanner": "2.1.5",
   "packages/google-cloud-workflows-executions": "2.3.2",
-  "packages/google-container": "4.10.0",
+  "packages/google-container": "4.11.0",
   "packages/google-dataflow": "2.1.2",
   "packages/google-devtools-artifactregistry": "2.2.2",
   "packages/google-devtools-cloudbuild": "3.6.0",
@@ -137,5 +137,5 @@
   "packages/google-cloud-alloydb": "0.1.1",
   "packages/google-cloud-workstations": "0.1.1",
   "packages/google-cloud-confidentialcomputing": "0.1.0",
-  "packages/google-ai-generativelanguage": "0.1.1"
+  "packages/google-ai-generativelanguage": "0.2.0"
 }

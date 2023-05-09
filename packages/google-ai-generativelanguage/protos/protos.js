@@ -1122,6 +1122,7 @@
                          * @interface IGenerateMessageResponse
                          * @property {Array.<google.ai.generativelanguage.v1beta2.IMessage>|null} [candidates] GenerateMessageResponse candidates
                          * @property {Array.<google.ai.generativelanguage.v1beta2.IMessage>|null} [messages] GenerateMessageResponse messages
+                         * @property {Array.<google.ai.generativelanguage.v1beta2.IContentFilter>|null} [filters] GenerateMessageResponse filters
                          */
     
                         /**
@@ -1135,6 +1136,7 @@
                         function GenerateMessageResponse(properties) {
                             this.candidates = [];
                             this.messages = [];
+                            this.filters = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1156,6 +1158,14 @@
                          * @instance
                          */
                         GenerateMessageResponse.prototype.messages = $util.emptyArray;
+    
+                        /**
+                         * GenerateMessageResponse filters.
+                         * @member {Array.<google.ai.generativelanguage.v1beta2.IContentFilter>} filters
+                         * @memberof google.ai.generativelanguage.v1beta2.GenerateMessageResponse
+                         * @instance
+                         */
+                        GenerateMessageResponse.prototype.filters = $util.emptyArray;
     
                         /**
                          * Creates a new GenerateMessageResponse instance using the specified properties.
@@ -1187,6 +1197,9 @@
                             if (message.messages != null && message.messages.length)
                                 for (var i = 0; i < message.messages.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta2.Message.encode(message.messages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.filters != null && message.filters.length)
+                                for (var i = 0; i < message.filters.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta2.ContentFilter.encode(message.filters[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -1231,6 +1244,12 @@
                                         if (!(message.messages && message.messages.length))
                                             message.messages = [];
                                         message.messages.push($root.google.ai.generativelanguage.v1beta2.Message.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.filters && message.filters.length))
+                                            message.filters = [];
+                                        message.filters.push($root.google.ai.generativelanguage.v1beta2.ContentFilter.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -1286,6 +1305,15 @@
                                         return "messages." + error;
                                 }
                             }
+                            if (message.filters != null && message.hasOwnProperty("filters")) {
+                                if (!Array.isArray(message.filters))
+                                    return "filters: array expected";
+                                for (var i = 0; i < message.filters.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta2.ContentFilter.verify(message.filters[i]);
+                                    if (error)
+                                        return "filters." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1321,6 +1349,16 @@
                                     message.messages[i] = $root.google.ai.generativelanguage.v1beta2.Message.fromObject(object.messages[i]);
                                 }
                             }
+                            if (object.filters) {
+                                if (!Array.isArray(object.filters))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateMessageResponse.filters: array expected");
+                                message.filters = [];
+                                for (var i = 0; i < object.filters.length; ++i) {
+                                    if (typeof object.filters[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateMessageResponse.filters: object expected");
+                                    message.filters[i] = $root.google.ai.generativelanguage.v1beta2.ContentFilter.fromObject(object.filters[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -1340,6 +1378,7 @@
                             if (options.arrays || options.defaults) {
                                 object.candidates = [];
                                 object.messages = [];
+                                object.filters = [];
                             }
                             if (message.candidates && message.candidates.length) {
                                 object.candidates = [];
@@ -1350,6 +1389,11 @@
                                 object.messages = [];
                                 for (var j = 0; j < message.messages.length; ++j)
                                     object.messages[j] = $root.google.ai.generativelanguage.v1beta2.Message.toObject(message.messages[j], options);
+                            }
+                            if (message.filters && message.filters.length) {
+                                object.filters = [];
+                                for (var j = 0; j < message.filters.length; ++j)
+                                    object.filters[j] = $root.google.ai.generativelanguage.v1beta2.ContentFilter.toObject(message.filters[j], options);
                             }
                             return object;
                         };
@@ -2621,6 +2665,1202 @@
                         };
     
                         return CountMessageTokensResponse;
+                    })();
+    
+                    /**
+                     * HarmCategory enum.
+                     * @name google.ai.generativelanguage.v1beta2.HarmCategory
+                     * @enum {number}
+                     * @property {number} HARM_CATEGORY_UNSPECIFIED=0 HARM_CATEGORY_UNSPECIFIED value
+                     * @property {number} HARM_CATEGORY_DEROGATORY=1 HARM_CATEGORY_DEROGATORY value
+                     * @property {number} HARM_CATEGORY_TOXICITY=2 HARM_CATEGORY_TOXICITY value
+                     * @property {number} HARM_CATEGORY_VIOLENCE=3 HARM_CATEGORY_VIOLENCE value
+                     * @property {number} HARM_CATEGORY_SEXUAL=4 HARM_CATEGORY_SEXUAL value
+                     * @property {number} HARM_CATEGORY_MEDICAL=5 HARM_CATEGORY_MEDICAL value
+                     * @property {number} HARM_CATEGORY_DANGEROUS=6 HARM_CATEGORY_DANGEROUS value
+                     */
+                    v1beta2.HarmCategory = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HARM_CATEGORY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HARM_CATEGORY_DEROGATORY"] = 1;
+                        values[valuesById[2] = "HARM_CATEGORY_TOXICITY"] = 2;
+                        values[valuesById[3] = "HARM_CATEGORY_VIOLENCE"] = 3;
+                        values[valuesById[4] = "HARM_CATEGORY_SEXUAL"] = 4;
+                        values[valuesById[5] = "HARM_CATEGORY_MEDICAL"] = 5;
+                        values[valuesById[6] = "HARM_CATEGORY_DANGEROUS"] = 6;
+                        return values;
+                    })();
+    
+                    v1beta2.ContentFilter = (function() {
+    
+                        /**
+                         * Properties of a ContentFilter.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @interface IContentFilter
+                         * @property {google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason|null} [reason] ContentFilter reason
+                         * @property {string|null} [message] ContentFilter message
+                         */
+    
+                        /**
+                         * Constructs a new ContentFilter.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @classdesc Represents a ContentFilter.
+                         * @implements IContentFilter
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta2.IContentFilter=} [properties] Properties to set
+                         */
+                        function ContentFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContentFilter reason.
+                         * @member {google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason} reason
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @instance
+                         */
+                        ContentFilter.prototype.reason = 0;
+    
+                        /**
+                         * ContentFilter message.
+                         * @member {string|null|undefined} message
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @instance
+                         */
+                        ContentFilter.prototype.message = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ContentFilter _message.
+                         * @member {"message"|undefined} _message
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @instance
+                         */
+                        Object.defineProperty(ContentFilter.prototype, "_message", {
+                            get: $util.oneOfGetter($oneOfFields = ["message"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ContentFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.IContentFilter=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta2.ContentFilter} ContentFilter instance
+                         */
+                        ContentFilter.create = function create(properties) {
+                            return new ContentFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContentFilter message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.ContentFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.IContentFilter} message ContentFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContentFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContentFilter message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.ContentFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.IContentFilter} message ContentFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContentFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContentFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta2.ContentFilter} ContentFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContentFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.ContentFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContentFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta2.ContentFilter} ContentFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContentFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContentFilter message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContentFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.message != null && message.hasOwnProperty("message")) {
+                                properties._message = 1;
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContentFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta2.ContentFilter} ContentFilter
+                         */
+                        ContentFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta2.ContentFilter)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta2.ContentFilter();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "BLOCKED_REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "SAFETY":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "OTHER":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            }
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContentFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ContentFilter} message ContentFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContentFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.reason = options.enums === String ? "BLOCKED_REASON_UNSPECIFIED" : 0;
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason[message.reason] === undefined ? message.reason : $root.google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason[message.reason] : message.reason;
+                            if (message.message != null && message.hasOwnProperty("message")) {
+                                object.message = message.message;
+                                if (options.oneofs)
+                                    object._message = "message";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContentFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContentFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContentFilter
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta2.ContentFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContentFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta2.ContentFilter";
+                        };
+    
+                        /**
+                         * BlockedReason enum.
+                         * @name google.ai.generativelanguage.v1beta2.ContentFilter.BlockedReason
+                         * @enum {number}
+                         * @property {number} BLOCKED_REASON_UNSPECIFIED=0 BLOCKED_REASON_UNSPECIFIED value
+                         * @property {number} SAFETY=1 SAFETY value
+                         * @property {number} OTHER=2 OTHER value
+                         */
+                        ContentFilter.BlockedReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BLOCKED_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SAFETY"] = 1;
+                            values[valuesById[2] = "OTHER"] = 2;
+                            return values;
+                        })();
+    
+                        return ContentFilter;
+                    })();
+    
+                    v1beta2.SafetyFeedback = (function() {
+    
+                        /**
+                         * Properties of a SafetyFeedback.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @interface ISafetyFeedback
+                         * @property {google.ai.generativelanguage.v1beta2.ISafetyRating|null} [rating] SafetyFeedback rating
+                         * @property {google.ai.generativelanguage.v1beta2.ISafetySetting|null} [setting] SafetyFeedback setting
+                         */
+    
+                        /**
+                         * Constructs a new SafetyFeedback.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @classdesc Represents a SafetyFeedback.
+                         * @implements ISafetyFeedback
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyFeedback=} [properties] Properties to set
+                         */
+                        function SafetyFeedback(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SafetyFeedback rating.
+                         * @member {google.ai.generativelanguage.v1beta2.ISafetyRating|null|undefined} rating
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @instance
+                         */
+                        SafetyFeedback.prototype.rating = null;
+    
+                        /**
+                         * SafetyFeedback setting.
+                         * @member {google.ai.generativelanguage.v1beta2.ISafetySetting|null|undefined} setting
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @instance
+                         */
+                        SafetyFeedback.prototype.setting = null;
+    
+                        /**
+                         * Creates a new SafetyFeedback instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyFeedback=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyFeedback} SafetyFeedback instance
+                         */
+                        SafetyFeedback.create = function create(properties) {
+                            return new SafetyFeedback(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SafetyFeedback message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyFeedback.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyFeedback} message SafetyFeedback message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetyFeedback.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rating != null && Object.hasOwnProperty.call(message, "rating"))
+                                $root.google.ai.generativelanguage.v1beta2.SafetyRating.encode(message.rating, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.setting != null && Object.hasOwnProperty.call(message, "setting"))
+                                $root.google.ai.generativelanguage.v1beta2.SafetySetting.encode(message.setting, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SafetyFeedback message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyFeedback.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyFeedback} message SafetyFeedback message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetyFeedback.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SafetyFeedback message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyFeedback} SafetyFeedback
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetyFeedback.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.SafetyFeedback();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.rating = $root.google.ai.generativelanguage.v1beta2.SafetyRating.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.setting = $root.google.ai.generativelanguage.v1beta2.SafetySetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SafetyFeedback message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyFeedback} SafetyFeedback
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetyFeedback.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SafetyFeedback message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SafetyFeedback.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rating != null && message.hasOwnProperty("rating")) {
+                                var error = $root.google.ai.generativelanguage.v1beta2.SafetyRating.verify(message.rating);
+                                if (error)
+                                    return "rating." + error;
+                            }
+                            if (message.setting != null && message.hasOwnProperty("setting")) {
+                                var error = $root.google.ai.generativelanguage.v1beta2.SafetySetting.verify(message.setting);
+                                if (error)
+                                    return "setting." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SafetyFeedback message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyFeedback} SafetyFeedback
+                         */
+                        SafetyFeedback.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta2.SafetyFeedback)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta2.SafetyFeedback();
+                            if (object.rating != null) {
+                                if (typeof object.rating !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.SafetyFeedback.rating: object expected");
+                                message.rating = $root.google.ai.generativelanguage.v1beta2.SafetyRating.fromObject(object.rating);
+                            }
+                            if (object.setting != null) {
+                                if (typeof object.setting !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.SafetyFeedback.setting: object expected");
+                                message.setting = $root.google.ai.generativelanguage.v1beta2.SafetySetting.fromObject(object.setting);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SafetyFeedback message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.SafetyFeedback} message SafetyFeedback
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SafetyFeedback.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.rating = null;
+                                object.setting = null;
+                            }
+                            if (message.rating != null && message.hasOwnProperty("rating"))
+                                object.rating = $root.google.ai.generativelanguage.v1beta2.SafetyRating.toObject(message.rating, options);
+                            if (message.setting != null && message.hasOwnProperty("setting"))
+                                object.setting = $root.google.ai.generativelanguage.v1beta2.SafetySetting.toObject(message.setting, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SafetyFeedback to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SafetyFeedback.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SafetyFeedback
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyFeedback
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SafetyFeedback.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta2.SafetyFeedback";
+                        };
+    
+                        return SafetyFeedback;
+                    })();
+    
+                    v1beta2.SafetyRating = (function() {
+    
+                        /**
+                         * Properties of a SafetyRating.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @interface ISafetyRating
+                         * @property {google.ai.generativelanguage.v1beta2.HarmCategory|null} [category] SafetyRating category
+                         * @property {google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability|null} [probability] SafetyRating probability
+                         */
+    
+                        /**
+                         * Constructs a new SafetyRating.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @classdesc Represents a SafetyRating.
+                         * @implements ISafetyRating
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyRating=} [properties] Properties to set
+                         */
+                        function SafetyRating(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SafetyRating category.
+                         * @member {google.ai.generativelanguage.v1beta2.HarmCategory} category
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @instance
+                         */
+                        SafetyRating.prototype.category = 0;
+    
+                        /**
+                         * SafetyRating probability.
+                         * @member {google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability} probability
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @instance
+                         */
+                        SafetyRating.prototype.probability = 0;
+    
+                        /**
+                         * Creates a new SafetyRating instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyRating=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyRating} SafetyRating instance
+                         */
+                        SafetyRating.create = function create(properties) {
+                            return new SafetyRating(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SafetyRating message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyRating.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyRating} message SafetyRating message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetyRating.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.category);
+                            if (message.probability != null && Object.hasOwnProperty.call(message, "probability"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.probability);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SafetyRating message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetyRating.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetyRating} message SafetyRating message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetyRating.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SafetyRating message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyRating} SafetyRating
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetyRating.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.SafetyRating();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.probability = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SafetyRating message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyRating} SafetyRating
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetyRating.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SafetyRating message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SafetyRating.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.probability != null && message.hasOwnProperty("probability"))
+                                switch (message.probability) {
+                                default:
+                                    return "probability: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SafetyRating message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetyRating} SafetyRating
+                         */
+                        SafetyRating.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta2.SafetyRating)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta2.SafetyRating();
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "HARM_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "HARM_CATEGORY_DEROGATORY":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "HARM_CATEGORY_TOXICITY":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            case "HARM_CATEGORY_VIOLENCE":
+                            case 3:
+                                message.category = 3;
+                                break;
+                            case "HARM_CATEGORY_SEXUAL":
+                            case 4:
+                                message.category = 4;
+                                break;
+                            case "HARM_CATEGORY_MEDICAL":
+                            case 5:
+                                message.category = 5;
+                                break;
+                            case "HARM_CATEGORY_DANGEROUS":
+                            case 6:
+                                message.category = 6;
+                                break;
+                            }
+                            switch (object.probability) {
+                            default:
+                                if (typeof object.probability === "number") {
+                                    message.probability = object.probability;
+                                    break;
+                                }
+                                break;
+                            case "HARM_PROBABILITY_UNSPECIFIED":
+                            case 0:
+                                message.probability = 0;
+                                break;
+                            case "NEGLIGIBLE":
+                            case 1:
+                                message.probability = 1;
+                                break;
+                            case "LOW":
+                            case 2:
+                                message.probability = 2;
+                                break;
+                            case "MEDIUM":
+                            case 3:
+                                message.probability = 3;
+                                break;
+                            case "HIGH":
+                            case 4:
+                                message.probability = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SafetyRating message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.SafetyRating} message SafetyRating
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SafetyRating.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.category = options.enums === String ? "HARM_CATEGORY_UNSPECIFIED" : 0;
+                                object.probability = options.enums === String ? "HARM_PROBABILITY_UNSPECIFIED" : 0;
+                            }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.ai.generativelanguage.v1beta2.HarmCategory[message.category] === undefined ? message.category : $root.google.ai.generativelanguage.v1beta2.HarmCategory[message.category] : message.category;
+                            if (message.probability != null && message.hasOwnProperty("probability"))
+                                object.probability = options.enums === String ? $root.google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability[message.probability] === undefined ? message.probability : $root.google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability[message.probability] : message.probability;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SafetyRating to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SafetyRating.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SafetyRating
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetyRating
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SafetyRating.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta2.SafetyRating";
+                        };
+    
+                        /**
+                         * HarmProbability enum.
+                         * @name google.ai.generativelanguage.v1beta2.SafetyRating.HarmProbability
+                         * @enum {number}
+                         * @property {number} HARM_PROBABILITY_UNSPECIFIED=0 HARM_PROBABILITY_UNSPECIFIED value
+                         * @property {number} NEGLIGIBLE=1 NEGLIGIBLE value
+                         * @property {number} LOW=2 LOW value
+                         * @property {number} MEDIUM=3 MEDIUM value
+                         * @property {number} HIGH=4 HIGH value
+                         */
+                        SafetyRating.HarmProbability = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_PROBABILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NEGLIGIBLE"] = 1;
+                            values[valuesById[2] = "LOW"] = 2;
+                            values[valuesById[3] = "MEDIUM"] = 3;
+                            values[valuesById[4] = "HIGH"] = 4;
+                            return values;
+                        })();
+    
+                        return SafetyRating;
+                    })();
+    
+                    v1beta2.SafetySetting = (function() {
+    
+                        /**
+                         * Properties of a SafetySetting.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @interface ISafetySetting
+                         * @property {google.ai.generativelanguage.v1beta2.HarmCategory|null} [category] SafetySetting category
+                         * @property {google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold|null} [threshold] SafetySetting threshold
+                         */
+    
+                        /**
+                         * Constructs a new SafetySetting.
+                         * @memberof google.ai.generativelanguage.v1beta2
+                         * @classdesc Represents a SafetySetting.
+                         * @implements ISafetySetting
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetySetting=} [properties] Properties to set
+                         */
+                        function SafetySetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SafetySetting category.
+                         * @member {google.ai.generativelanguage.v1beta2.HarmCategory} category
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.category = 0;
+    
+                        /**
+                         * SafetySetting threshold.
+                         * @member {google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold} threshold
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.threshold = 0;
+    
+                        /**
+                         * Creates a new SafetySetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetySetting=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetySetting} SafetySetting instance
+                         */
+                        SafetySetting.create = function create(properties) {
+                            return new SafetySetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SafetySetting message. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetySetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetySetting} message SafetySetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetySetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.category);
+                            if (message.threshold != null && Object.hasOwnProperty.call(message, "threshold"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.threshold);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta2.SafetySetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.ISafetySetting} message SafetySetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetySetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetySetting} SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetySetting.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta2.SafetySetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.threshold = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetySetting} SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetySetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SafetySetting message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SafetySetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                switch (message.threshold) {
+                                default:
+                                    return "threshold: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta2.SafetySetting} SafetySetting
+                         */
+                        SafetySetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta2.SafetySetting)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta2.SafetySetting();
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "HARM_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "HARM_CATEGORY_DEROGATORY":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "HARM_CATEGORY_TOXICITY":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            case "HARM_CATEGORY_VIOLENCE":
+                            case 3:
+                                message.category = 3;
+                                break;
+                            case "HARM_CATEGORY_SEXUAL":
+                            case 4:
+                                message.category = 4;
+                                break;
+                            case "HARM_CATEGORY_MEDICAL":
+                            case 5:
+                                message.category = 5;
+                                break;
+                            case "HARM_CATEGORY_DANGEROUS":
+                            case 6:
+                                message.category = 6;
+                                break;
+                            }
+                            switch (object.threshold) {
+                            default:
+                                if (typeof object.threshold === "number") {
+                                    message.threshold = object.threshold;
+                                    break;
+                                }
+                                break;
+                            case "HARM_BLOCK_THRESHOLD_UNSPECIFIED":
+                            case 0:
+                                message.threshold = 0;
+                                break;
+                            case "BLOCK_LOW_AND_ABOVE":
+                            case 1:
+                                message.threshold = 1;
+                                break;
+                            case "BLOCK_MEDIUM_AND_ABOVE":
+                            case 2:
+                                message.threshold = 2;
+                                break;
+                            case "BLOCK_ONLY_HIGH":
+                            case 3:
+                                message.threshold = 3;
+                                break;
+                            case "BLOCK_NONE":
+                            case 4:
+                                message.threshold = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta2.SafetySetting} message SafetySetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SafetySetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.category = options.enums === String ? "HARM_CATEGORY_UNSPECIFIED" : 0;
+                                object.threshold = options.enums === String ? "HARM_BLOCK_THRESHOLD_UNSPECIFIED" : 0;
+                            }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.ai.generativelanguage.v1beta2.HarmCategory[message.category] === undefined ? message.category : $root.google.ai.generativelanguage.v1beta2.HarmCategory[message.category] : message.category;
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                object.threshold = options.enums === String ? $root.google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold[message.threshold] === undefined ? message.threshold : $root.google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold[message.threshold] : message.threshold;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SafetySetting to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SafetySetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SafetySetting
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta2.SafetySetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SafetySetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta2.SafetySetting";
+                        };
+    
+                        /**
+                         * HarmBlockThreshold enum.
+                         * @name google.ai.generativelanguage.v1beta2.SafetySetting.HarmBlockThreshold
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_THRESHOLD_UNSPECIFIED=0 HARM_BLOCK_THRESHOLD_UNSPECIFIED value
+                         * @property {number} BLOCK_LOW_AND_ABOVE=1 BLOCK_LOW_AND_ABOVE value
+                         * @property {number} BLOCK_MEDIUM_AND_ABOVE=2 BLOCK_MEDIUM_AND_ABOVE value
+                         * @property {number} BLOCK_ONLY_HIGH=3 BLOCK_ONLY_HIGH value
+                         * @property {number} BLOCK_NONE=4 BLOCK_NONE value
+                         */
+                        SafetySetting.HarmBlockThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLOCK_LOW_AND_ABOVE"] = 1;
+                            values[valuesById[2] = "BLOCK_MEDIUM_AND_ABOVE"] = 2;
+                            values[valuesById[3] = "BLOCK_ONLY_HIGH"] = 3;
+                            values[valuesById[4] = "BLOCK_NONE"] = 4;
+                            return values;
+                        })();
+    
+                        return SafetySetting;
                     })();
     
                     v1beta2.Model = (function() {
@@ -4016,6 +5256,7 @@
                          * @property {number|null} [maxOutputTokens] GenerateTextRequest maxOutputTokens
                          * @property {number|null} [topP] GenerateTextRequest topP
                          * @property {number|null} [topK] GenerateTextRequest topK
+                         * @property {Array.<google.ai.generativelanguage.v1beta2.ISafetySetting>|null} [safetySettings] GenerateTextRequest safetySettings
                          * @property {Array.<string>|null} [stopSequences] GenerateTextRequest stopSequences
                          */
     
@@ -4028,6 +5269,7 @@
                          * @param {google.ai.generativelanguage.v1beta2.IGenerateTextRequest=} [properties] Properties to set
                          */
                         function GenerateTextRequest(properties) {
+                            this.safetySettings = [];
                             this.stopSequences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -4090,6 +5332,14 @@
                          * @instance
                          */
                         GenerateTextRequest.prototype.topK = null;
+    
+                        /**
+                         * GenerateTextRequest safetySettings.
+                         * @member {Array.<google.ai.generativelanguage.v1beta2.ISafetySetting>} safetySettings
+                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextRequest
+                         * @instance
+                         */
+                        GenerateTextRequest.prototype.safetySettings = $util.emptyArray;
     
                         /**
                          * GenerateTextRequest stopSequences.
@@ -4195,6 +5445,9 @@
                                 writer.uint32(/* id 6, wireType 5 =*/53).float(message.topP);
                             if (message.topK != null && Object.hasOwnProperty.call(message, "topK"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.topK);
+                            if (message.safetySettings != null && message.safetySettings.length)
+                                for (var i = 0; i < message.safetySettings.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta2.SafetySetting.encode(message.safetySettings[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.stopSequences != null && message.stopSequences.length)
                                 for (var i = 0; i < message.stopSequences.length; ++i)
                                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.stopSequences[i]);
@@ -4258,6 +5511,12 @@
                                     }
                                 case 7: {
                                         message.topK = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.safetySettings && message.safetySettings.length))
+                                            message.safetySettings = [];
+                                        message.safetySettings.push($root.google.ai.generativelanguage.v1beta2.SafetySetting.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 9: {
@@ -4335,6 +5594,15 @@
                                 if (!$util.isInteger(message.topK))
                                     return "topK: integer expected";
                             }
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings")) {
+                                if (!Array.isArray(message.safetySettings))
+                                    return "safetySettings: array expected";
+                                for (var i = 0; i < message.safetySettings.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta2.SafetySetting.verify(message.safetySettings[i]);
+                                    if (error)
+                                        return "safetySettings." + error;
+                                }
+                            }
                             if (message.stopSequences != null && message.hasOwnProperty("stopSequences")) {
                                 if (!Array.isArray(message.stopSequences))
                                     return "stopSequences: array expected";
@@ -4374,6 +5642,16 @@
                                 message.topP = Number(object.topP);
                             if (object.topK != null)
                                 message.topK = object.topK | 0;
+                            if (object.safetySettings) {
+                                if (!Array.isArray(object.safetySettings))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextRequest.safetySettings: array expected");
+                                message.safetySettings = [];
+                                for (var i = 0; i < object.safetySettings.length; ++i) {
+                                    if (typeof object.safetySettings[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextRequest.safetySettings: object expected");
+                                    message.safetySettings[i] = $root.google.ai.generativelanguage.v1beta2.SafetySetting.fromObject(object.safetySettings[i]);
+                                }
+                            }
                             if (object.stopSequences) {
                                 if (!Array.isArray(object.stopSequences))
                                     throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextRequest.stopSequences: array expected");
@@ -4397,8 +5675,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
+                                object.safetySettings = [];
                                 object.stopSequences = [];
+                            }
                             if (options.defaults) {
                                 object.model = "";
                                 object.prompt = null;
@@ -4431,6 +5711,11 @@
                                 object.topK = message.topK;
                                 if (options.oneofs)
                                     object._topK = "topK";
+                            }
+                            if (message.safetySettings && message.safetySettings.length) {
+                                object.safetySettings = [];
+                                for (var j = 0; j < message.safetySettings.length; ++j)
+                                    object.safetySettings[j] = $root.google.ai.generativelanguage.v1beta2.SafetySetting.toObject(message.safetySettings[j], options);
                             }
                             if (message.stopSequences && message.stopSequences.length) {
                                 object.stopSequences = [];
@@ -4476,6 +5761,8 @@
                          * @memberof google.ai.generativelanguage.v1beta2
                          * @interface IGenerateTextResponse
                          * @property {Array.<google.ai.generativelanguage.v1beta2.ITextCompletion>|null} [candidates] GenerateTextResponse candidates
+                         * @property {Array.<google.ai.generativelanguage.v1beta2.IContentFilter>|null} [filters] GenerateTextResponse filters
+                         * @property {Array.<google.ai.generativelanguage.v1beta2.ISafetyFeedback>|null} [safetyFeedback] GenerateTextResponse safetyFeedback
                          */
     
                         /**
@@ -4488,6 +5775,8 @@
                          */
                         function GenerateTextResponse(properties) {
                             this.candidates = [];
+                            this.filters = [];
+                            this.safetyFeedback = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4501,6 +5790,22 @@
                          * @instance
                          */
                         GenerateTextResponse.prototype.candidates = $util.emptyArray;
+    
+                        /**
+                         * GenerateTextResponse filters.
+                         * @member {Array.<google.ai.generativelanguage.v1beta2.IContentFilter>} filters
+                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextResponse
+                         * @instance
+                         */
+                        GenerateTextResponse.prototype.filters = $util.emptyArray;
+    
+                        /**
+                         * GenerateTextResponse safetyFeedback.
+                         * @member {Array.<google.ai.generativelanguage.v1beta2.ISafetyFeedback>} safetyFeedback
+                         * @memberof google.ai.generativelanguage.v1beta2.GenerateTextResponse
+                         * @instance
+                         */
+                        GenerateTextResponse.prototype.safetyFeedback = $util.emptyArray;
     
                         /**
                          * Creates a new GenerateTextResponse instance using the specified properties.
@@ -4529,6 +5834,12 @@
                             if (message.candidates != null && message.candidates.length)
                                 for (var i = 0; i < message.candidates.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta2.TextCompletion.encode(message.candidates[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.filters != null && message.filters.length)
+                                for (var i = 0; i < message.filters.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta2.ContentFilter.encode(message.filters[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.safetyFeedback != null && message.safetyFeedback.length)
+                                for (var i = 0; i < message.safetyFeedback.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta2.SafetyFeedback.encode(message.safetyFeedback[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -4567,6 +5878,18 @@
                                         if (!(message.candidates && message.candidates.length))
                                             message.candidates = [];
                                         message.candidates.push($root.google.ai.generativelanguage.v1beta2.TextCompletion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.filters && message.filters.length))
+                                            message.filters = [];
+                                        message.filters.push($root.google.ai.generativelanguage.v1beta2.ContentFilter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.safetyFeedback && message.safetyFeedback.length))
+                                            message.safetyFeedback = [];
+                                        message.safetyFeedback.push($root.google.ai.generativelanguage.v1beta2.SafetyFeedback.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -4613,6 +5936,24 @@
                                         return "candidates." + error;
                                 }
                             }
+                            if (message.filters != null && message.hasOwnProperty("filters")) {
+                                if (!Array.isArray(message.filters))
+                                    return "filters: array expected";
+                                for (var i = 0; i < message.filters.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta2.ContentFilter.verify(message.filters[i]);
+                                    if (error)
+                                        return "filters." + error;
+                                }
+                            }
+                            if (message.safetyFeedback != null && message.hasOwnProperty("safetyFeedback")) {
+                                if (!Array.isArray(message.safetyFeedback))
+                                    return "safetyFeedback: array expected";
+                                for (var i = 0; i < message.safetyFeedback.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta2.SafetyFeedback.verify(message.safetyFeedback[i]);
+                                    if (error)
+                                        return "safetyFeedback." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4638,6 +5979,26 @@
                                     message.candidates[i] = $root.google.ai.generativelanguage.v1beta2.TextCompletion.fromObject(object.candidates[i]);
                                 }
                             }
+                            if (object.filters) {
+                                if (!Array.isArray(object.filters))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextResponse.filters: array expected");
+                                message.filters = [];
+                                for (var i = 0; i < object.filters.length; ++i) {
+                                    if (typeof object.filters[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextResponse.filters: object expected");
+                                    message.filters[i] = $root.google.ai.generativelanguage.v1beta2.ContentFilter.fromObject(object.filters[i]);
+                                }
+                            }
+                            if (object.safetyFeedback) {
+                                if (!Array.isArray(object.safetyFeedback))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextResponse.safetyFeedback: array expected");
+                                message.safetyFeedback = [];
+                                for (var i = 0; i < object.safetyFeedback.length; ++i) {
+                                    if (typeof object.safetyFeedback[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta2.GenerateTextResponse.safetyFeedback: object expected");
+                                    message.safetyFeedback[i] = $root.google.ai.generativelanguage.v1beta2.SafetyFeedback.fromObject(object.safetyFeedback[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -4654,12 +6015,25 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.candidates = [];
+                                object.filters = [];
+                                object.safetyFeedback = [];
+                            }
                             if (message.candidates && message.candidates.length) {
                                 object.candidates = [];
                                 for (var j = 0; j < message.candidates.length; ++j)
                                     object.candidates[j] = $root.google.ai.generativelanguage.v1beta2.TextCompletion.toObject(message.candidates[j], options);
+                            }
+                            if (message.filters && message.filters.length) {
+                                object.filters = [];
+                                for (var j = 0; j < message.filters.length; ++j)
+                                    object.filters[j] = $root.google.ai.generativelanguage.v1beta2.ContentFilter.toObject(message.filters[j], options);
+                            }
+                            if (message.safetyFeedback && message.safetyFeedback.length) {
+                                object.safetyFeedback = [];
+                                for (var j = 0; j < message.safetyFeedback.length; ++j)
+                                    object.safetyFeedback[j] = $root.google.ai.generativelanguage.v1beta2.SafetyFeedback.toObject(message.safetyFeedback[j], options);
                             }
                             return object;
                         };
@@ -4903,6 +6277,8 @@
                          * @memberof google.ai.generativelanguage.v1beta2
                          * @interface ITextCompletion
                          * @property {string|null} [output] TextCompletion output
+                         * @property {Array.<google.ai.generativelanguage.v1beta2.ISafetyRating>|null} [safetyRatings] TextCompletion safetyRatings
+                         * @property {google.ai.generativelanguage.v1beta2.ICitationMetadata|null} [citationMetadata] TextCompletion citationMetadata
                          */
     
                         /**
@@ -4914,6 +6290,7 @@
                          * @param {google.ai.generativelanguage.v1beta2.ITextCompletion=} [properties] Properties to set
                          */
                         function TextCompletion(properties) {
+                            this.safetyRatings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4927,6 +6304,36 @@
                          * @instance
                          */
                         TextCompletion.prototype.output = "";
+    
+                        /**
+                         * TextCompletion safetyRatings.
+                         * @member {Array.<google.ai.generativelanguage.v1beta2.ISafetyRating>} safetyRatings
+                         * @memberof google.ai.generativelanguage.v1beta2.TextCompletion
+                         * @instance
+                         */
+                        TextCompletion.prototype.safetyRatings = $util.emptyArray;
+    
+                        /**
+                         * TextCompletion citationMetadata.
+                         * @member {google.ai.generativelanguage.v1beta2.ICitationMetadata|null|undefined} citationMetadata
+                         * @memberof google.ai.generativelanguage.v1beta2.TextCompletion
+                         * @instance
+                         */
+                        TextCompletion.prototype.citationMetadata = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TextCompletion _citationMetadata.
+                         * @member {"citationMetadata"|undefined} _citationMetadata
+                         * @memberof google.ai.generativelanguage.v1beta2.TextCompletion
+                         * @instance
+                         */
+                        Object.defineProperty(TextCompletion.prototype, "_citationMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["citationMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new TextCompletion instance using the specified properties.
@@ -4954,6 +6361,11 @@
                                 writer = $Writer.create();
                             if (message.output != null && Object.hasOwnProperty.call(message, "output"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.output);
+                            if (message.safetyRatings != null && message.safetyRatings.length)
+                                for (var i = 0; i < message.safetyRatings.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta2.SafetyRating.encode(message.safetyRatings[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.citationMetadata != null && Object.hasOwnProperty.call(message, "citationMetadata"))
+                                $root.google.ai.generativelanguage.v1beta2.CitationMetadata.encode(message.citationMetadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -4992,6 +6404,16 @@
                                         message.output = reader.string();
                                         break;
                                     }
+                                case 2: {
+                                        if (!(message.safetyRatings && message.safetyRatings.length))
+                                            message.safetyRatings = [];
+                                        message.safetyRatings.push($root.google.ai.generativelanguage.v1beta2.SafetyRating.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.citationMetadata = $root.google.ai.generativelanguage.v1beta2.CitationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5027,9 +6449,27 @@
                         TextCompletion.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.output != null && message.hasOwnProperty("output"))
                                 if (!$util.isString(message.output))
                                     return "output: string expected";
+                            if (message.safetyRatings != null && message.hasOwnProperty("safetyRatings")) {
+                                if (!Array.isArray(message.safetyRatings))
+                                    return "safetyRatings: array expected";
+                                for (var i = 0; i < message.safetyRatings.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta2.SafetyRating.verify(message.safetyRatings[i]);
+                                    if (error)
+                                        return "safetyRatings." + error;
+                                }
+                            }
+                            if (message.citationMetadata != null && message.hasOwnProperty("citationMetadata")) {
+                                properties._citationMetadata = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta2.CitationMetadata.verify(message.citationMetadata);
+                                    if (error)
+                                        return "citationMetadata." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -5047,6 +6487,21 @@
                             var message = new $root.google.ai.generativelanguage.v1beta2.TextCompletion();
                             if (object.output != null)
                                 message.output = String(object.output);
+                            if (object.safetyRatings) {
+                                if (!Array.isArray(object.safetyRatings))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.TextCompletion.safetyRatings: array expected");
+                                message.safetyRatings = [];
+                                for (var i = 0; i < object.safetyRatings.length; ++i) {
+                                    if (typeof object.safetyRatings[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta2.TextCompletion.safetyRatings: object expected");
+                                    message.safetyRatings[i] = $root.google.ai.generativelanguage.v1beta2.SafetyRating.fromObject(object.safetyRatings[i]);
+                                }
+                            }
+                            if (object.citationMetadata != null) {
+                                if (typeof object.citationMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta2.TextCompletion.citationMetadata: object expected");
+                                message.citationMetadata = $root.google.ai.generativelanguage.v1beta2.CitationMetadata.fromObject(object.citationMetadata);
+                            }
                             return message;
                         };
     
@@ -5063,10 +6518,22 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.safetyRatings = [];
                             if (options.defaults)
                                 object.output = "";
                             if (message.output != null && message.hasOwnProperty("output"))
                                 object.output = message.output;
+                            if (message.safetyRatings && message.safetyRatings.length) {
+                                object.safetyRatings = [];
+                                for (var j = 0; j < message.safetyRatings.length; ++j)
+                                    object.safetyRatings[j] = $root.google.ai.generativelanguage.v1beta2.SafetyRating.toObject(message.safetyRatings[j], options);
+                            }
+                            if (message.citationMetadata != null && message.hasOwnProperty("citationMetadata")) {
+                                object.citationMetadata = $root.google.ai.generativelanguage.v1beta2.CitationMetadata.toObject(message.citationMetadata, options);
+                                if (options.oneofs)
+                                    object._citationMetadata = "citationMetadata";
+                            }
                             return object;
                         };
     

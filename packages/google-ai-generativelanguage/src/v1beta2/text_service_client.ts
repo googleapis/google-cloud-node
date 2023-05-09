@@ -367,6 +367,17 @@ export class TextServiceClient {
    *
    *   Note: The default value varies by model, see the `Model.top_k`
    *   attribute of the `Model` returned the `getModel` function.
+   * @param {number[]} request.safetySettings
+   *   A list of unique `SafetySetting` instances for blocking unsafe content.
+   *
+   *   that will be enforced on the `GenerateTextRequest.prompt` and
+   *   `GenerateTextResponse.candidates`. There should not be more than one
+   *   setting for each `SafetyCategory` type. The API will block any prompts and
+   *   responses that fail to meet the thresholds set by these settings. This list
+   *   overrides the default settings for each `SafetyCategory` specified in the
+   *   safety_settings. If there is no `SafetySetting` for a given
+   *   `SafetyCategory` provided in the list, the API will use the default safety
+   *   setting for that category.
    * @param {string[]} request.stopSequences
    *   The set of character sequences (up to 5) that will stop output generation.
    *   If specified, the API will stop at the first appearance of a stop
