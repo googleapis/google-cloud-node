@@ -3580,6 +3580,7 @@
                          * @property {google.cloud.channel.v1.ITrialSettings|null} [trialSettings] Entitlement trialSettings
                          * @property {google.cloud.channel.v1.IAssociationInfo|null} [associationInfo] Entitlement associationInfo
                          * @property {Array.<google.cloud.channel.v1.IParameter>|null} [parameters] Entitlement parameters
+                         * @property {string|null} [billingAccount] Entitlement billingAccount
                          */
     
                         /**
@@ -3696,6 +3697,14 @@
                         Entitlement.prototype.parameters = $util.emptyArray;
     
                         /**
+                         * Entitlement billingAccount.
+                         * @member {string} billingAccount
+                         * @memberof google.cloud.channel.v1.Entitlement
+                         * @instance
+                         */
+                        Entitlement.prototype.billingAccount = "";
+    
+                        /**
                          * Creates a new Entitlement instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.Entitlement
@@ -3748,6 +3757,8 @@
                             if (message.parameters != null && message.parameters.length)
                                 for (var i = 0; i < message.parameters.length; ++i)
                                     $root.google.cloud.channel.v1.Parameter.encode(message.parameters[i], writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                writer.uint32(/* id 28, wireType 2 =*/226).string(message.billingAccount);
                             return writer;
                         };
     
@@ -3837,6 +3848,10 @@
                                         if (!(message.parameters && message.parameters.length))
                                             message.parameters = [];
                                         message.parameters.push($root.google.cloud.channel.v1.Parameter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 28: {
+                                        message.billingAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -3947,6 +3962,9 @@
                                         return "parameters." + error;
                                 }
                             }
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                if (!$util.isString(message.billingAccount))
+                                    return "billingAccount: string expected";
                             return null;
                         };
     
@@ -4065,6 +4083,8 @@
                                     message.parameters[i] = $root.google.cloud.channel.v1.Parameter.fromObject(object.parameters[i]);
                                 }
                             }
+                            if (object.billingAccount != null)
+                                message.billingAccount = String(object.billingAccount);
                             return message;
                         };
     
@@ -4096,6 +4116,7 @@
                                 object.purchaseOrderId = "";
                                 object.trialSettings = null;
                                 object.associationInfo = null;
+                                object.billingAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4127,6 +4148,8 @@
                                 for (var j = 0; j < message.parameters.length; ++j)
                                     object.parameters[j] = $root.google.cloud.channel.v1.Parameter.toObject(message.parameters[j], options);
                             }
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                object.billingAccount = message.billingAccount;
                             return object;
                         };
     
