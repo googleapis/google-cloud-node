@@ -9,7 +9,7 @@
   "packages/google-appengine": "2.2.2",
   "packages/google-area120-tables": "2.2.2",
   "packages/google-cloud-accessapproval": "2.2.2",
-  "packages/google-cloud-aiplatform": "2.12.0",
+  "packages/google-cloud-aiplatform": "2.13.0",
   "packages/google-cloud-apigateway": "2.2.2",
   "packages/google-cloud-apigeeconnect": "2.2.2",
   "packages/google-cloud-asset": "4.6.3",
@@ -31,7 +31,7 @@
   "packages/google-cloud-billing-budgets": "4.2.2",
   "packages/google-cloud-binaryauthorization": "2.5.0",
   "packages/google-cloud-certificatemanager": "0.7.2",
-  "packages/google-cloud-channel": "2.5.1",
+  "packages/google-cloud-channel": "2.6.0",
   "packages/google-cloud-clouddms": "2.2.2",
   "packages/google-cloud-compute": "3.9.1",
   "packages/google-cloud-contactcenterinsights": "2.7.0",
@@ -137,5 +137,6 @@
   "packages/google-cloud-alloydb": "0.1.1",
   "packages/google-cloud-workstations": "0.1.1",
   "packages/google-cloud-confidentialcomputing": "0.1.0",
-  "packages/google-ai-generativelanguage": "0.2.0"
+  "packages/google-ai-generativelanguage": "0.2.0",
+  "packages/google-cloud-storageinsights": "0.1.0"
 }
