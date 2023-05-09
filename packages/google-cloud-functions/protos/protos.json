@@ -4963,15 +4963,6 @@
                 }
               }
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -4981,6 +4972,27 @@
                 "value": {
                   "type": "bytes",
                   "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             },
@@ -4998,18 +5010,6 @@
             },
             "Empty": {
               "fields": {}
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
             }
           }
         },
