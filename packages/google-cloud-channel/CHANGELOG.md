@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.5.1...channel-v2.6.0) (2023-05-09)
+
+
+### Features
+
+* [channel] Add billing account to entitlement definitions for Cloud Channel API ([#4250](https://github.com/googleapis/google-cloud-node/issues/4250)) ([0d4c47e](https://github.com/googleapis/google-cloud-node/commit/0d4c47eb5d884e3cb760941e616e03769a1e8733))
+
 ## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/channel-v2.5.0...channel-v2.5.1) (2023-04-13)
 
 
