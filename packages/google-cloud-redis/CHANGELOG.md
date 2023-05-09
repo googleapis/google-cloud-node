@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/redis-v3.2.2...redis-v3.3.0) (2023-05-09)
+
+
+### Features
+
+* [redis] [Cloud Memorystore for Redis] Add CMEK key field ([#4251](https://github.com/googleapis/google-cloud-node/issues/4251)) ([1427b2b](https://github.com/googleapis/google-cloud-node/commit/1427b2bf0cac31a3fbd10f607b2a5d9803f3a18f))
+
 ## [3.2.2](https://github.com/googleapis/google-cloud-node/compare/redis-v3.2.1...redis-v3.2.2) (2023-04-13)
 
 
