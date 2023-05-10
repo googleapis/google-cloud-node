@@ -566,6 +566,13 @@
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
+                        "controlPlaneIp": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "privateClusterConfig": {
                           "type": "PrivateClusterConfig",
                           "id": 12
@@ -706,7 +713,10 @@
                         },
                         "encryptionKey": {
                           "type": "CustomerEncryptionKey",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "degraded": {
                           "type": "bool",
@@ -758,6 +768,13 @@
                                 "poolSize": {
                                   "type": "int32",
                                   "id": 5
+                                },
+                                "pooledInstances": {
+                                  "type": "int32",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "disablePublicIpAddresses": {
                                   "type": "bool",
@@ -898,11 +915,17 @@
                           "fields": {
                             "kmsKey": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             },
                             "kmsKeyServiceAccount": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             }
                           }
                         }

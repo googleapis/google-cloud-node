@@ -779,6 +779,7 @@
                          * @property {string|null} [etag] WorkstationCluster etag
                          * @property {string|null} [network] WorkstationCluster network
                          * @property {string|null} [subnetwork] WorkstationCluster subnetwork
+                         * @property {string|null} [controlPlaneIp] WorkstationCluster controlPlaneIp
                          * @property {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null} [privateClusterConfig] WorkstationCluster privateClusterConfig
                          * @property {boolean|null} [degraded] WorkstationCluster degraded
                          * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationCluster conditions
@@ -899,6 +900,14 @@
                         WorkstationCluster.prototype.subnetwork = "";
     
                         /**
+                         * WorkstationCluster controlPlaneIp.
+                         * @member {string} controlPlaneIp
+                         * @memberof google.cloud.workstations.v1.WorkstationCluster
+                         * @instance
+                         */
+                        WorkstationCluster.prototype.controlPlaneIp = "";
+    
+                        /**
                          * WorkstationCluster privateClusterConfig.
                          * @member {google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null|undefined} privateClusterConfig
                          * @memberof google.cloud.workstations.v1.WorkstationCluster
@@ -979,6 +988,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.controlPlaneIp != null && Object.hasOwnProperty.call(message, "controlPlaneIp"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.controlPlaneIp);
                             return writer;
                         };
     
@@ -1099,6 +1110,10 @@
                                         message.subnetwork = reader.string();
                                         break;
                                     }
+                                case 16: {
+                                        message.controlPlaneIp = reader.string();
+                                        break;
+                                    }
                                 case 12: {
                                         message.privateClusterConfig = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.decode(reader, reader.uint32());
                                         break;
@@ -1200,6 +1215,9 @@
                             if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
                                 if (!$util.isString(message.subnetwork))
                                     return "subnetwork: string expected";
+                            if (message.controlPlaneIp != null && message.hasOwnProperty("controlPlaneIp"))
+                                if (!$util.isString(message.controlPlaneIp))
+                                    return "controlPlaneIp: string expected";
                             if (message.privateClusterConfig != null && message.hasOwnProperty("privateClusterConfig")) {
                                 var error = $root.google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig.verify(message.privateClusterConfig);
                                 if (error)
@@ -1275,6 +1293,8 @@
                                 message.network = String(object.network);
                             if (object.subnetwork != null)
                                 message.subnetwork = String(object.subnetwork);
+                            if (object.controlPlaneIp != null)
+                                message.controlPlaneIp = String(object.controlPlaneIp);
                             if (object.privateClusterConfig != null) {
                                 if (typeof object.privateClusterConfig !== "object")
                                     throw TypeError(".google.cloud.workstations.v1.WorkstationCluster.privateClusterConfig: object expected");
@@ -1327,6 +1347,7 @@
                                 object.subnetwork = "";
                                 object.privateClusterConfig = null;
                                 object.degraded = false;
+                                object.controlPlaneIp = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1368,6 +1389,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.controlPlaneIp != null && message.hasOwnProperty("controlPlaneIp"))
+                                object.controlPlaneIp = message.controlPlaneIp;
                             return object;
                         };
     
@@ -2671,6 +2694,7 @@
                                  * @property {string|null} [serviceAccount] GceInstance serviceAccount
                                  * @property {Array.<string>|null} [tags] GceInstance tags
                                  * @property {number|null} [poolSize] GceInstance poolSize
+                                 * @property {number|null} [pooledInstances] GceInstance pooledInstances
                                  * @property {boolean|null} [disablePublicIpAddresses] GceInstance disablePublicIpAddresses
                                  * @property {boolean|null} [enableNestedVirtualization] GceInstance enableNestedVirtualization
                                  * @property {google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null} [shieldedInstanceConfig] GceInstance shieldedInstanceConfig
@@ -2725,6 +2749,14 @@
                                  * @instance
                                  */
                                 GceInstance.prototype.poolSize = 0;
+    
+                                /**
+                                 * GceInstance pooledInstances.
+                                 * @member {number} pooledInstances
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.pooledInstances = 0;
     
                                 /**
                                  * GceInstance disablePublicIpAddresses.
@@ -2809,6 +2841,8 @@
                                         writer.uint32(/* id 9, wireType 0 =*/72).int32(message.bootDiskSizeGb);
                                     if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
                                         $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                    if (message.pooledInstances != null && Object.hasOwnProperty.call(message, "pooledInstances"))
+                                        writer.uint32(/* id 12, wireType 0 =*/96).int32(message.pooledInstances);
                                     return writer;
                                 };
     
@@ -2859,6 +2893,10 @@
                                             }
                                         case 5: {
                                                 message.poolSize = reader.int32();
+                                                break;
+                                            }
+                                        case 12: {
+                                                message.pooledInstances = reader.int32();
                                                 break;
                                             }
                                         case 6: {
@@ -2932,6 +2970,9 @@
                                     if (message.poolSize != null && message.hasOwnProperty("poolSize"))
                                         if (!$util.isInteger(message.poolSize))
                                             return "poolSize: integer expected";
+                                    if (message.pooledInstances != null && message.hasOwnProperty("pooledInstances"))
+                                        if (!$util.isInteger(message.pooledInstances))
+                                            return "pooledInstances: integer expected";
                                     if (message.disablePublicIpAddresses != null && message.hasOwnProperty("disablePublicIpAddresses"))
                                         if (typeof message.disablePublicIpAddresses !== "boolean")
                                             return "disablePublicIpAddresses: boolean expected";
@@ -2979,6 +3020,8 @@
                                     }
                                     if (object.poolSize != null)
                                         message.poolSize = object.poolSize | 0;
+                                    if (object.pooledInstances != null)
+                                        message.pooledInstances = object.pooledInstances | 0;
                                     if (object.disablePublicIpAddresses != null)
                                         message.disablePublicIpAddresses = Boolean(object.disablePublicIpAddresses);
                                     if (object.enableNestedVirtualization != null)
@@ -3022,6 +3065,7 @@
                                         object.shieldedInstanceConfig = null;
                                         object.bootDiskSizeGb = 0;
                                         object.confidentialInstanceConfig = null;
+                                        object.pooledInstances = 0;
                                     }
                                     if (message.machineType != null && message.hasOwnProperty("machineType"))
                                         object.machineType = message.machineType;
@@ -3044,6 +3088,8 @@
                                         object.bootDiskSizeGb = message.bootDiskSizeGb;
                                     if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
                                         object.confidentialInstanceConfig = $root.google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.GceConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
+                                    if (message.pooledInstances != null && message.hasOwnProperty("pooledInstances"))
+                                        object.pooledInstances = message.pooledInstances;
                                     return object;
                                 };
     

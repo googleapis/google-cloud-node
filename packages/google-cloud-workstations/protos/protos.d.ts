@@ -509,6 +509,9 @@ export namespace google {
                     /** WorkstationCluster subnetwork */
                     subnetwork?: (string|null);
 
+                    /** WorkstationCluster controlPlaneIp */
+                    controlPlaneIp?: (string|null);
+
                     /** WorkstationCluster privateClusterConfig */
                     privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
 
@@ -563,6 +566,9 @@ export namespace google {
 
                     /** WorkstationCluster subnetwork. */
                     public subnetwork: string;
+
+                    /** WorkstationCluster controlPlaneIp. */
+                    public controlPlaneIp: string;
 
                     /** WorkstationCluster privateClusterConfig. */
                     public privateClusterConfig?: (google.cloud.workstations.v1.WorkstationCluster.IPrivateClusterConfig|null);
@@ -1087,6 +1093,9 @@ export namespace google {
                             /** GceInstance poolSize */
                             poolSize?: (number|null);
 
+                            /** GceInstance pooledInstances */
+                            pooledInstances?: (number|null);
+
                             /** GceInstance disablePublicIpAddresses */
                             disablePublicIpAddresses?: (boolean|null);
 
@@ -1123,6 +1132,9 @@ export namespace google {
 
                             /** GceInstance poolSize. */
                             public poolSize: number;
+
+                            /** GceInstance pooledInstances. */
+                            public pooledInstances: number;
 
                             /** GceInstance disablePublicIpAddresses. */
                             public disablePublicIpAddresses: boolean;
