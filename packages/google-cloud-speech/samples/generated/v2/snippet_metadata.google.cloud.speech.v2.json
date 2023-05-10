@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-speech",
-        "version": "5.4.0",
+        "version": "5.4.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -418,7 +418,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -446,6 +446,10 @@
                     {
                         "name": "recognition_output_config",
                         "type": ".google.cloud.speech.v2.RecognitionOutputConfig"
+                    },
+                    {
+                        "name": "processing_strategy",
+                        "type": ".google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
