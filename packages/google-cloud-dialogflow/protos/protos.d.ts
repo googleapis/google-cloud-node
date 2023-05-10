@@ -21869,6 +21869,9 @@ export namespace google {
 
                         /** ConversationModelConfig model */
                         model?: (string|null);
+
+                        /** ConversationModelConfig baselineModelVersion */
+                        baselineModelVersion?: (string|null);
                     }
 
                     /** Represents a ConversationModelConfig. */
@@ -21882,6 +21885,9 @@ export namespace google {
 
                         /** ConversationModelConfig model. */
                         public model: string;
+
+                        /** ConversationModelConfig baselineModelVersion. */
+                        public baselineModelVersion: string;
 
                         /**
                          * Creates a new ConversationModelConfig instance using the specified properties.
