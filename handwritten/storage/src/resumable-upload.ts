@@ -23,7 +23,7 @@ import {
 } from 'gaxios';
 import * as gaxios from 'gaxios';
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {Readable, Writable} from 'stream';
+import {Readable, Writable, WritableOptions} from 'stream';
 import retry = require('async-retry');
 import {RetryOptions, PreconditionOptions} from './storage';
 import * as uuid from 'uuid';
@@ -62,7 +62,7 @@ export interface QueryParameters extends PreconditionOptions {
   userProject?: string;
 }
 
-export interface UploadConfig {
+export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
   /**
    * The API endpoint used for the request.
    * Defaults to `storage.googleapis.com`.
@@ -260,20 +260,22 @@ export class Upload extends Writable {
     uri: uuid.v4(),
     offset: uuid.v4(),
   };
-  private upstreamChunkBuffer: Buffer = Buffer.alloc(0);
-  private chunkBufferEncoding?: BufferEncoding = undefined;
+  /**
+   * A cache of buffers written to this instance, ready for consuming
+   */
+  private writeBuffers: Buffer[] = [];
   private numChunksReadInRequest = 0;
   /**
-   * A chunk used for caching the most recent upload chunk.
+   * An array of buffers used for caching the most recent upload chunk.
    * We should not assume that the server received all bytes sent in the request.
    *  - https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload
    */
-  private lastChunkSent = Buffer.alloc(0);
+  private localWriteCache: Buffer[] = [];
+  private localWriteCacheByteLength = 0;
   private upstreamEnded = false;
 
   constructor(cfg: UploadConfig) {
-    super();
-
+    super(cfg);
     cfg = cfg || {};
 
     if (!cfg.bucket || !cfg.file) {
@@ -391,24 +393,73 @@ export class Upload extends Writable {
     // Backwards-compatible event
     this.emit('writing');
 
-    this.upstreamChunkBuffer = Buffer.concat([
-      this.upstreamChunkBuffer,
-      typeof chunk === 'string' ? Buffer.from(chunk, encoding) : chunk,
-    ]);
-    this.chunkBufferEncoding = encoding;
+    this.writeBuffers.push(
+      typeof chunk === 'string' ? Buffer.from(chunk, encoding) : chunk
+    );
 
     this.once('readFromChunkBuffer', readCallback);
 
     process.nextTick(() => this.emit('wroteToChunkBuffer'));
   }
 
+  #resetLocalBuffersCache() {
+    this.localWriteCache = [];
+    this.localWriteCacheByteLength = 0;
+  }
+
+  #addLocalBufferCache(buf: Buffer) {
+    this.localWriteCache.push(buf);
+    this.localWriteCacheByteLength += buf.byteLength;
+  }
+
   /**
-   * Prepends data back to the upstream chunk buffer.
+   * Prepends the local buffer to write buffer and resets it.
    *
-   * @param chunk The data to prepend
+   * @param keepLastBytes number of bytes to keep from the end of the local buffer.
    */
-  private unshiftChunkBuffer(chunk: Buffer) {
-    this.upstreamChunkBuffer = Buffer.concat([chunk, this.upstreamChunkBuffer]);
+  private prependLocalBufferToUpstream(keepLastBytes?: number) {
+    // Typically, the upstream write buffers should be smaller than the local
+    // cache, so we can save time by setting the local cache as the new
+    // upstream write buffer array and appending the old array to it
+    let initialBuffers: Buffer[] = [];
+
+    if (keepLastBytes) {
+      // we only want the last X bytes
+      let bytesKept = 0;
+
+      while (keepLastBytes > bytesKept) {
+        // load backwards because we want the last X bytes
+        // note: `localWriteCacheByteLength` is reset below
+        let buf = this.localWriteCache.pop();
+        if (!buf) break;
+
+        bytesKept += buf.byteLength;
+
+        if (bytesKept > keepLastBytes) {
+          // we have gone over the amount desired, let's keep the last X bytes
+          // of this buffer
+          const diff = bytesKept - keepLastBytes;
+          buf = buf.subarray(diff);
+          bytesKept -= diff;
+        }
+
+        initialBuffers.unshift(buf);
+      }
+    } else {
+      // we're keeping all of the local cache, simply use it as the initial buffer
+      initialBuffers = this.localWriteCache;
+    }
+
+    // Append the old upstream to the new
+    const append = this.writeBuffers;
+    this.writeBuffers = initialBuffers;
+
+    for (const buf of append) {
+      this.writeBuffers.push(buf);
+    }
+
+    // reset last buffers sent
+    this.#resetLocalBuffersCache();
   }
 
   /**
@@ -417,15 +468,28 @@ export class Upload extends Writable {
    * @param limit The maximum amount to return from the buffer.
    * @returns The data requested.
    */
-  private pullFromChunkBuffer(limit: number) {
-    const chunk = this.upstreamChunkBuffer.slice(0, limit);
-    this.upstreamChunkBuffer = this.upstreamChunkBuffer.slice(limit);
+  private *pullFromChunkBuffer(limit: number) {
+    while (limit) {
+      const buf = this.writeBuffers.shift();
+      if (!buf) break;
 
-    // notify upstream we've read from the buffer so it can potentially
-    // send more data down.
-    process.nextTick(() => this.emit('readFromChunkBuffer'));
+      let bufToYield = buf;
 
-    return chunk;
+      if (buf.byteLength > limit) {
+        bufToYield = buf.subarray(0, limit);
+        this.writeBuffers.unshift(buf.subarray(limit));
+        limit = 0;
+      } else {
+        limit -= buf.byteLength;
+      }
+
+      yield bufToYield;
+
+      // Notify upstream we've read from the buffer and we're able to consume
+      // more. It can also potentially send more data down as we're currently
+      // iterating.
+      this.emit('readFromChunkBuffer');
+    }
   }
 
   /**
@@ -436,7 +500,7 @@ export class Upload extends Writable {
   private async waitForNextChunk(): Promise<boolean> {
     const willBeMoreChunks = await new Promise<boolean>(resolve => {
       // There's data available - it should be digested
-      if (this.upstreamChunkBuffer.byteLength) {
+      if (this.writeBuffers.length) {
         return resolve(true);
       }
 
@@ -457,7 +521,7 @@ export class Upload extends Writable {
         removeListeners();
 
         // this should be the last chunk, if there's anything there
-        if (this.upstreamChunkBuffer.length) return resolve(true);
+        if (this.writeBuffers.length) return resolve(true);
 
         return resolve(false);
       };
@@ -483,34 +547,15 @@ export class Upload extends Writable {
    * Ends when the limit has reached or no data is expected to be pushed from upstream.
    *
    * @param limit The most amount of data this iterator should return. `Infinity` by default.
-   * @param oneChunkMode Determines if one, exhaustive chunk is yielded for the iterator
    */
-  private async *upstreamIterator(limit = Infinity, oneChunkMode?: boolean) {
-    let completeChunk = Buffer.alloc(0);
-
+  private async *upstreamIterator(limit = Infinity) {
     // read from upstream chunk buffer
     while (limit && (await this.waitForNextChunk())) {
       // read until end or limit has been reached
-      const chunk = this.pullFromChunkBuffer(limit);
-
-      limit -= chunk.byteLength;
-      if (oneChunkMode) {
-        // return 1 chunk at the end of iteration
-        completeChunk = Buffer.concat([completeChunk, chunk]);
-      } else {
-        // return many chunks throughout iteration
-        yield {
-          chunk,
-          encoding: this.chunkBufferEncoding,
-        };
+      for (const chunk of this.pullFromChunkBuffer(limit)) {
+        limit -= chunk.byteLength;
+        yield chunk;
       }
-    }
-
-    if (oneChunkMode) {
-      yield {
-        chunk: completeChunk,
-        encoding: this.chunkBufferEncoding,
-      };
     }
   }
 
@@ -680,10 +725,7 @@ export class Upload extends Writable {
     }
 
     // A queue for the upstream data
-    const upstreamQueue = this.upstreamIterator(
-      expectedUploadSize,
-      multiChunkMode // multi-chunk mode should return 1 chunk per request
-    );
+    const upstreamQueue = this.upstreamIterator(expectedUploadSize);
 
     // The primary read stream for this request. This stream retrieves no more
     // than the exact requested amount from upstream.
@@ -696,15 +738,23 @@ export class Upload extends Writable {
 
         if (result.value) {
           this.numChunksReadInRequest++;
-          this.lastChunkSent = result.value.chunk;
-          this.numBytesWritten += result.value.chunk.byteLength;
+
+          if (multiChunkMode) {
+            // save ever buffer used in the request in multi-chunk mode
+            this.#addLocalBufferCache(result.value);
+          } else {
+            this.#resetLocalBuffersCache();
+            this.#addLocalBufferCache(result.value);
+          }
+
+          this.numBytesWritten += result.value.byteLength;
 
           this.emit('progress', {
             bytesWritten: this.numBytesWritten,
             contentLength: this.contentLength,
           });
 
-          requestStream.push(result.value.chunk, result.value.encoding);
+          requestStream.push(result.value);
         }
 
         if (result.done) {
@@ -720,17 +770,21 @@ export class Upload extends Writable {
     // If using multiple chunk upload, set appropriate header
     if (multiChunkMode) {
       // We need to know how much data is available upstream to set the `Content-Range` header.
-      const oneChunkIterator = this.upstreamIterator(expectedUploadSize, true);
-      const {value} = await oneChunkIterator.next();
+      // https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload
+      for await (const chunk of this.upstreamIterator(expectedUploadSize)) {
+        // This will conveniently track and keep the size of the buffers
+        this.#addLocalBufferCache(chunk);
+      }
 
-      const bytesToUpload = value!.chunk.byteLength;
+      // We hit either the expected upload size or the remainder
+      const bytesToUpload = this.localWriteCacheByteLength;
 
       // Important: we want to know if the upstream has ended and the queue is empty before
       // unshifting data back into the queue. This way we will know if this is the last request or not.
       const isLastChunkOfUpload = !(await this.waitForNextChunk());
 
-      // Important: put the data back in the queue for the actual upload iterator
-      this.unshiftChunkBuffer(value!.chunk);
+      // Important: put the data back in the queue for the actual upload
+      this.prependLocalBufferToUpstream();
 
       let totalObjectSize = this.contentLength;
 
@@ -808,15 +862,14 @@ export class Upload extends Writable {
       // - https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload
       const missingBytes = this.numBytesWritten - this.offset;
       if (missingBytes) {
-        const dataToPrependForResending = this.lastChunkSent.slice(
-          -missingBytes
-        );
         // As multi-chunk uploads send one chunk per request and pulls one
         // chunk into the pipeline, prepending the missing bytes back should
         // be fine for the next request.
-        this.unshiftChunkBuffer(dataToPrependForResending);
+        this.prependLocalBufferToUpstream(missingBytes);
         this.numBytesWritten -= missingBytes;
-        this.lastChunkSent = Buffer.alloc(0);
+      } else {
+        // No bytes missing - no need to keep the local cache
+        this.#resetLocalBuffersCache();
       }
 
       // continue uploading next chunk
@@ -831,8 +884,8 @@ export class Upload extends Writable {
 
       this.destroy(err);
     } else {
-      // remove the last chunk sent to free memory
-      this.lastChunkSent = Buffer.alloc(0);
+      // no need to keep the cache
+      this.#resetLocalBuffersCache();
 
       if (resp && resp.data) {
         resp.data.size = Number(resp.data.size);
@@ -983,11 +1036,9 @@ export class Upload extends Writable {
           return;
         }
 
-        // Unshift the most recent chunk back in case it's needed for the next
-        // request.
-        this.numBytesWritten -= this.lastChunkSent.byteLength;
-        this.unshiftChunkBuffer(this.lastChunkSent);
-        this.lastChunkSent = Buffer.alloc(0);
+        // Unshift the local cache back in case it's needed for the next request.
+        this.numBytesWritten -= this.localWriteCacheByteLength;
+        this.prependLocalBufferToUpstream();
 
         // We don't know how much data has been received by the server.
         // `continueUploading` will recheck the offset via `getAndSetOffset`.

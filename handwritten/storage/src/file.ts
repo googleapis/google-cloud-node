@@ -199,6 +199,7 @@ export type PredefinedAcl =
 
 export interface CreateResumableUploadOptions {
   chunkSize?: number;
+  highWaterMark?: number;
   metadata?: Metadata;
   origin?: string;
   offset?: number;
@@ -3853,6 +3854,7 @@ class File extends ServiceObject<File> {
       retryOptions: {...retryOptions},
       params: options?.preconditionOpts || this.instancePreconditionOpts,
       chunkSize: options?.chunkSize,
+      highWaterMark: options?.highWaterMark,
     });
 
     uploadStream
