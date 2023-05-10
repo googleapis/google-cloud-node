@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.10.1](https://github.com/googleapis/nodejs-storage/compare/v6.10.0...v6.10.1) (2023-05-10)
+
+
+### Performance Improvements
+
+* Improve Multiple Chunk Upload Performance ([#2185](https://github.com/googleapis/nodejs-storage/issues/2185)) ([3b2b877](https://github.com/googleapis/nodejs-storage/commit/3b2b87707072e5dc9221a5ba3c727c70db13a593))
+
 ## [6.10.0](https://github.com/googleapis/nodejs-storage/compare/v6.9.5...v6.10.0) (2023-05-02)
 
 
