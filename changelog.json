@@ -4,6 +4,56 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "405cbe236171808ca3b49faa933c2078bebd09d6",
+          "message": "Address typo in package.json",
+          "issues": [],
+          "scope": "build"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "9da03a8c-e1c1-40cf-a217-f9518a09ca2e",
+      "createTime": "2023-05-09T22:01:41.602Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1427b2bf0cac31a3fbd10f607b2a5d9803f3a18f",
+          "message": "[redis] [Cloud Memorystore for Redis] Add CMEK key field",
+          "issues": [
+            "4251"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "80002c20-6d9e-454a-86a6-942c36563fac",
+      "createTime": "2023-05-09T22:01:41.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ebb81915abb57c6ce48614e8d39cc1fea84bdc",
+          "message": "[servicecontrol] Log Analytics features of the Cloud Logging API",
+          "issues": [
+            "4252"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "b66cfec7-ca60-444f-a93b-5d43783e9a3c",
+      "createTime": "2023-05-09T22:01:41.507Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "871c86f8524d9afc6aec29dbc00f2cd3eaf0445b",
           "message": "Add initial files for google.cloud.storageinsights.v1",
@@ -9355,5 +9405,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-05-09T16:59:05.869Z"
+  "updateTime": "2023-05-09T22:01:41.602Z"
 }
