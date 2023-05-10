@@ -1242,6 +1242,9 @@ export namespace google {
 
                     /** Entitlement parameters */
                     parameters?: (google.cloud.channel.v1.IParameter[]|null);
+
+                    /** Entitlement billingAccount */
+                    billingAccount?: (string|null);
                 }
 
                 /** Represents an Entitlement. */
@@ -1288,6 +1291,9 @@ export namespace google {
 
                     /** Entitlement parameters. */
                     public parameters: google.cloud.channel.v1.IParameter[];
+
+                    /** Entitlement billingAccount. */
+                    public billingAccount: string;
 
                     /**
                      * Creates a new Entitlement instance using the specified properties.

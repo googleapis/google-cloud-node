@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v2.2.0...service-control-v2.3.0) (2023-05-09)
+
+
+### Features
+
+* [servicecontrol] Log Analytics features of the Cloud Logging API ([#4252](https://github.com/googleapis/google-cloud-node/issues/4252)) ([07ebb81](https://github.com/googleapis/google-cloud-node/commit/07ebb81915abb57c6ce48614e8d39cc1fea84bdc))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v2.1.2...service-control-v2.2.0) (2023-05-02)
 
 
