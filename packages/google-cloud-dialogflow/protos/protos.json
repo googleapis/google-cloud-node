@@ -6569,6 +6569,10 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
                               }
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 8
                             }
                           }
                         },
