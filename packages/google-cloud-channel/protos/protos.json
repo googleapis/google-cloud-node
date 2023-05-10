@@ -561,6 +561,13 @@
                           "rule": "repeated",
                           "type": "Parameter",
                           "id": 26
+                        },
+                        "billingAccount": {
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {

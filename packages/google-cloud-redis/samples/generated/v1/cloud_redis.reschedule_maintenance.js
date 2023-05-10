@@ -35,7 +35,8 @@ function main(name, rescheduleType) {
    */
   // const name = 'abc123'
   /**
-   *  Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+   *  Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+   *  well.
    */
   // const rescheduleType = {}
   /**
