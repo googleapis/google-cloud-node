@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.12.0...aiplatform-v2.13.0) (2023-05-09)
+
+
+### Features
+
+* Add example_gcs_source to Examples in aiplatform v1beta1 explanation.proto ([#4249](https://github.com/googleapis/google-cloud-node/issues/4249)) ([4af8ae2](https://github.com/googleapis/google-cloud-node/commit/4af8ae27af952194885939a3e8014089bf7fc01e))
+
 ## [2.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v2.11.0...aiplatform-v2.12.0) (2023-05-04)
 
 

@@ -6360,7 +6360,8 @@ export class CloudChannelServiceClient {
    * {@link google.cloud.channel.v1.CustomerRepricingConfig|CustomerRepricingConfig}
    * resources. The data for each resource is displayed in the ascending order
    * of:
-   * * customer ID
+   *
+   * * Customer ID
    * * {@link google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
    * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * * {@link google.cloud.channel.v1.CustomerRepricingConfig.update_time|CustomerRepricingConfig.update_time}
@@ -6630,7 +6631,8 @@ export class CloudChannelServiceClient {
    * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig|ChannelPartnerRepricingConfig}
    * resources. The data for each resource is displayed in the ascending order
    * of:
-   * * channel partner ID
+   *
+   * * Channel Partner ID
    * * {@link google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}
    * * {@link google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time|ChannelPartnerRepricingConfig.update_time}
    *
