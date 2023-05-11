@@ -206,12 +206,23 @@ describe('command line option', () => {
       await assert.rejects(stat(antiTarget));
     } finally {
       targets.forEach(t => {
-        rm(path.join(fixturePath, t)).catch(() => {});
+        rm(t).catch(() => {});
       });
     }
   });
-});
 
+  it('does not exit with 0 when run on empty folder', async () => {
+    const cmdline = [
+      'node',
+      'index.ts',
+      '--recursive',
+      '--targets',
+      path.join(fixturePath, 'empty-folder'),
+    ];
+    const retcode = await main.main(cmdline);
+    assert.strictEqual(retcode, 0);
+  });
+});
 /*
 
 More test ideas:
