@@ -1409,6 +1409,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "pageSize": {
                           "type": "int32",
                           "id": 2
@@ -1450,6 +1454,10 @@
                         "filter": {
                           "type": "string",
                           "id": 2
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         },
                         "pageSize": {
                           "type": "int32",

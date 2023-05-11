@@ -5796,6 +5796,9 @@ export namespace google {
                     /** ListJobsRequest filter */
                     filter?: (string|null);
 
+                    /** ListJobsRequest orderBy */
+                    orderBy?: (string|null);
+
                     /** ListJobsRequest pageSize */
                     pageSize?: (number|null);
 
@@ -5817,6 +5820,9 @@ export namespace google {
 
                     /** ListJobsRequest filter. */
                     public filter: string;
+
+                    /** ListJobsRequest orderBy. */
+                    public orderBy: string;
 
                     /** ListJobsRequest pageSize. */
                     public pageSize: number;
@@ -6020,6 +6026,9 @@ export namespace google {
                     /** ListTasksRequest filter */
                     filter?: (string|null);
 
+                    /** ListTasksRequest orderBy */
+                    orderBy?: (string|null);
+
                     /** ListTasksRequest pageSize */
                     pageSize?: (number|null);
 
@@ -6041,6 +6050,9 @@ export namespace google {
 
                     /** ListTasksRequest filter. */
                     public filter: string;
+
+                    /** ListTasksRequest orderBy. */
+                    public orderBy: string;
 
                     /** ListTasksRequest pageSize. */
                     public pageSize: number;
