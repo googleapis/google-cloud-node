@@ -35,6 +35,11 @@
                 "updateEkmConfig"
               ]
             },
+            "VerifyConnectivity": {
+              "methods": [
+                "verifyConnectivity"
+              ]
+            },
             "ListEkmConnections": {
               "methods": [
                 "listEkmConnections",
@@ -70,6 +75,11 @@
             "UpdateEkmConfig": {
               "methods": [
                 "updateEkmConfig"
+              ]
+            },
+            "VerifyConnectivity": {
+              "methods": [
+                "verifyConnectivity"
               ]
             },
             "ListEkmConnections": {
