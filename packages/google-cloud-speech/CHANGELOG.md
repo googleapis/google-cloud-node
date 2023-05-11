@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v5.4.1...speech-v5.5.0) (2023-05-11)
+
+
+### Features
+
+* Add processing strategy to batch recognition requests ([#4268](https://github.com/googleapis/google-cloud-node/issues/4268)) ([8b5caeb](https://github.com/googleapis/google-cloud-node/commit/8b5caebc2569c715a4fee03e6bcc5e5cd2ca5150))
+
 ## [5.4.1](https://github.com/googleapis/google-cloud-node/compare/speech-v5.4.0...speech-v5.4.1) (2023-04-13)
 
 
