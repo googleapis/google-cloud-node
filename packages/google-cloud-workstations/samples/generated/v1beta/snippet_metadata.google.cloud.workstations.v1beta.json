@@ -454,7 +454,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -506,7 +506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -591,7 +591,7 @@
             "regionTag": "workstations_v1beta_generated_Workstations_ListWorkstations_async",
             "title": "Workstations listWorkstations Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns all Workstations using the specified config.",
+            "description": " Returns all Workstations using the specified workstation configuration.",
             "canonical": true,
             "file": "workstations.list_workstations.js",
             "language": "JAVASCRIPT",
@@ -639,7 +639,7 @@
             "regionTag": "workstations_v1beta_generated_Workstations_ListUsableWorkstations_async",
             "title": "Workstations listUsableWorkstations Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns all Workstations using the specified config on which the caller has the \"workstations.workstations.use\" permission.",
+            "description": " Returns all workstations using the specified workstation configuration on which the caller has the \"workstations.workstations.use\" permission.",
             "canonical": true,
             "file": "workstations.list_usable_workstations.js",
             "language": "JAVASCRIPT",
@@ -746,7 +746,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],

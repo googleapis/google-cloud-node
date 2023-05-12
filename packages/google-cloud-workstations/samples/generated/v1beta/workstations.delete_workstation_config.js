@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the config to delete.
+   *  Required. Name of the workstation configuration to delete.
    */
   // const name = 'abc123'
   /**
@@ -38,13 +38,14 @@ function main(name) {
    */
   // const validateOnly = true
   /**
-   *  If set, the request will be rejected if the latest version of the config on
-   *  the server does not have this etag.
+   *  If set, the request is rejected if the latest version of the
+   *  workstation configuration on the server does not have this ETag.
    */
   // const etag = 'abc123'
   /**
-   *  If set, any Workstations in the config will also be deleted. Otherwise,
-   *  the request will work only if the config has no workstations.
+   *  If set, any workstations in the workstation configuration are also deleted.
+   *  Otherwise, the request works only if the workstation configuration has
+   *  no workstations.
    */
   // const force = true
 
