@@ -576,10 +576,6 @@
                         "network": {
                           "type": "NetworkPolicy",
                           "id": 7
-                        },
-                        "placement": {
-                          "type": "PlacementPolicy",
-                          "id": 10
                         }
                       },
                       "nested": {
@@ -746,18 +742,6 @@
                             }
                           }
                         },
-                        "PlacementPolicy": {
-                          "fields": {
-                            "collocation": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "maxDistance": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        },
                         "ProvisioningModel": {
                           "values": {
                             "PROVISIONING_MODEL_UNSPECIFIED": 0,
@@ -896,8 +880,7 @@
                             "ASSIGNED": 2,
                             "RUNNING": 3,
                             "FAILED": 4,
-                            "SUCCEEDED": 5,
-                            "UNEXECUTED": 6
+                            "SUCCEEDED": 5
                           }
                         }
                       }
@@ -944,11 +927,6 @@
                         "timeout": {
                           "type": "google.protobuf.Duration",
                           "id": 8
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 9
                         }
                       },
                       "nested": {
