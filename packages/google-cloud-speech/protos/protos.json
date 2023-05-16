@@ -3705,6 +3705,18 @@
                         "recognitionOutputConfig": {
                           "type": "RecognitionOutputConfig",
                           "id": 6
+                        },
+                        "processingStrategy": {
+                          "type": "ProcessingStrategy",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "ProcessingStrategy": {
+                          "values": {
+                            "PROCESSING_STRATEGY_UNSPECIFIED": 0,
+                            "DYNAMIC_BATCHING": 1
+                          }
                         }
                       }
                     },
